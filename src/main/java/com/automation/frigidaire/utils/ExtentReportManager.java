@@ -27,6 +27,9 @@ public class ExtentReportManager {
     }
 
     public static void createTest(String testName) {
+        if (extent == null) {
+            setupExtentReport();
+        }
         test = extent.createTest(testName);
     }
 

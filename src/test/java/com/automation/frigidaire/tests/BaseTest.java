@@ -17,10 +17,10 @@ public class BaseTest {
         ExtentReportManager.setupExtentReport();
     }
 
-    @BeforeMethod
-    public void setUpMethod(ITestResult result) throws Exception {
-        ExtentReportManager.createTest(result.getMethod().getMethodName());
-        VideoRecorder.startRecording(result.getMethod().getMethodName());
+    @BeforeMethod(alwaysRun = true)
+    public void setUpMethod(java.lang.reflect.Method method) throws Exception {
+        ExtentReportManager.createTest(method.getName());
+        VideoRecorder.startRecording(method.getName());
         DriverManager.getDriver(); // Initialize driver
     }
 

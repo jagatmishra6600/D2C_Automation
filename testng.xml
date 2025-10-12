@@ -8,7 +8,7 @@
             </run>
         </groups>
         <classes>
-            <class name="com.automation.frigidaire.tests.FrigidaireWebsiteTest"/>
+            <class name="com.automation.frigidaire.tests.EPIC_02_HomePage.FrigidaireWebsiteTest"/>
         </classes>
     </test>
 </suite>
