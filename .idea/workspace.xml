@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="40704c6d-babe-4e0d-8abe-445f1f125703" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="33qFhLOt5U379uT4oaExJl1a1H2" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Maven.frigidaire-automation [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.frigidaire-automation [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.frigidaire-automation [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.frigidaire-automation [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.frigidaire-automation [org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.frigidaire-automation [test].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.frigidaire-automation [validate].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;TestNG.C:/Users/JagatM/Documents/frigidaire-automation/TestRunners/smoke.xml.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.C:/Users/JagatM/Documents/frigidaire-automation/testng.xml.executor&quot;: &quot;Run&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/JagatM/Documents/frigidaire-automation&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/JagatM/Documents/frigidaire-automation/src/main/java/org/example/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\JagatM\Documents\frigidaire-automation" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\JagatM\Documents\frigidaire-automation\TestRunners" />
+    </key>
+  </component>
+  <component name="RunManager" selected="TestNG.C:/Users/JagatM/Documents/frigidaire-automation/testng.xml">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="frigidaire-automation" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="frigidaire-automation" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+    <configuration name="C:/Users/JagatM/Documents/frigidaire-automation/TestRunners/smoke.xml" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="frigidaire-automation" />
+      <option name="SUITE_NAME" value="$PROJECT_DIR$/TestRunners/smoke.xml" />
+      <option name="TEST_OBJECT" value="SUITE" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="C:/Users/JagatM/Documents/frigidaire-automation/testng.xml" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="frigidaire-automation" />
+      <option name="SUITE_NAME" value="$PROJECT_DIR$/testng.xml" />
+      <option name="TEST_OBJECT" value="SUITE" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="TestNG.C:/Users/JagatM/Documents/frigidaire-automation/testng.xml" />
+        <item itemvalue="TestNG.C:/Users/JagatM/Documents/frigidaire-automation/TestRunners/smoke.xml" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="40704c6d-babe-4e0d-8abe-445f1f125703" name="Changes" comment="" />
+      <created>1760036817190</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1760036817190</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/Main.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
