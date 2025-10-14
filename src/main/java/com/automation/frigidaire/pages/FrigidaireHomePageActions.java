@@ -13,10 +13,12 @@ public class FrigidaireHomePageActions {
     //************************** Main Menu Bar Locators **************************
     private final By mainMenu_FrigidaireSite = By.cssSelector("img[alt='Frigidaire Brand Site']");
     private final By mainMenu_ElectroluxSite = By.cssSelector("img[alt='Electrolux Brand Site']");
-    private final By mainMenu_Login_OrderStatus = By.xpath("//*[@id=\"dropdown\"]/a/text()");
+    private final By mainMenu_Login_OrderStatus = By.xpath("//*[@id='dropdown']/a");
     private final By mainMenu_Contact = By.xpath("//a[contains(text(),'Contact us')]");
     private final By mainMenu_DeliverTo = By.xpath("//div[@class='pdp-hide-header-visible']//span[@class='Set-delivery-area']");
     private final By mainMenu_Cart = By.xpath("//img[@alt='Your Shopping Cart']");
+    private final By mainMenu_WelcomeNameDropdown = By.cssSelector("app-elux-login a[title]");
+    private final By mainMenu_Login_CreateAccount = By.xpath("//*[@id=\"dropdown\"]//a[contains(@href,'login')]");
     //************************** Header Menu Bar Locators **************************
     private final By headerMenu_Kitchen = By.cssSelector("h5[aria-label='Kitchen']");
     private final By headerMenu_AirConditioners = By.cssSelector("h5[aria-label='Air Conditioners']");
@@ -131,5 +133,9 @@ public class FrigidaireHomePageActions {
     public ProductCategoryPageActions clickProductsLink() {
         WebElementUtil.clickElement(productsLink);
         return new ProductCategoryPageActions();
+    }
+    
+    public String getWelcomeNameText() {
+    	return WebElementUtil.getText(mainMenu_WelcomeNameDropdown);
     }
 }
