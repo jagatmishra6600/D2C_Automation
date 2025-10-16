@@ -8,7 +8,7 @@ import com.automation.frigidaire.utils.ExtentReportManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TC_02_AQA_Homepage_Header{
+public class TC_02_AQA_Homepage_Header extends com.automation.frigidaire.tests.BaseTest {
 
     FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
     LoginPageActions loginScreen = new LoginPageActions();
@@ -88,3 +88,4 @@ public class TC_02_AQA_Homepage_Header{
         ExtentReportManager.getTest().pass("Mini cart click functionality verified");
     }
 }
+

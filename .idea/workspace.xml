@@ -5,18 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40704c6d-babe-4e0d-8abe-445f1f125703" name="Changes" comment="TC_02_AQA_Homepage_Header">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/automation/frigidaire/pages/ContactPageActions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/automation/frigidaire/pages/LoginPageActions.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestRunners/testng.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TestRunners/testng.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/automation/frigidaire/pages/FrigidaireHomePageActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/automation/frigidaire/pages/FrigidaireHomePageActions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/automation/frigidaire/utils/WebElementUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/automation/frigidaire/utils/WebElementUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/automation/frigidaire/utils/ExtentReportManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/automation/frigidaire/utils/ExtentReportManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/automation/frigidaire/tests/EPIC_02_HomePage/FrigidaireWebsiteTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/automation/frigidaire/tests/EPIC_02_HomePage/FrigidaireWebsiteTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/automation/frigidaire/tests/EPIC_02_HomePage/TC_02_AQA_Homepage_Header.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/automation/frigidaire/tests/EPIC_02_HomePage/TC_02_AQA_Homepage_Header.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-output/ExtentReport.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testng.xml" beforeDir="false" afterPath="$PROJECT_DIR$/testng.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/automation/frigidaire/tests/BaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/automation/frigidaire/tests/BaseTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +25,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="git-push" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -50,6 +42,9 @@
     &quot;accountId&quot;: &quot;2a9f6bee-3e9d-40fb-be86-e9d673b99ab5&quot;
   }
 }</component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -61,42 +56,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Maven.frigidaire-automation [clean].executor": "Run",
-    "Maven.frigidaire-automation [compile].executor": "Run",
-    "Maven.frigidaire-automation [install].executor": "Run",
-    "Maven.frigidaire-automation [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor": "Run",
-    "Maven.frigidaire-automation [org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile].executor": "Run",
-    "Maven.frigidaire-automation [test].executor": "Run",
-    "Maven.frigidaire-automation [validate].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "TestNG.C:/Users/JagatM/Documents/GitHubProject/D2C_Automation/testng.xml.executor": "Run",
-    "TestNG.C:/Users/JagatM/Documents/frigidaire-automation/TestRunners/smoke.xml.executor": "Run",
-    "TestNG.C:/Users/JagatM/Documents/frigidaire-automation/testng.xml.executor": "Run",
-    "TestNG.TC_02_AQA_Homepage_Header.TC_01_S1_VerifyBandLogoDisplayed.executor": "Run",
-    "TestNG.TC_02_AQA_Homepage_Header.TC_01_S2_ClickBandLogoHeader.executor": "Debug",
-    "TestNG.TC_02_AQA_Homepage_Header.TC_02_S1_VerifyBandLogoDisplayed.executor": "Run",
-    "TestNG.TC_02_AQA_Homepage_Header.TC_02_S3_VerifyHearForLoggedInUser.executor": "Run",
-    "TestNG.TC_02_AQA_Homepage_Header.TC_02_S4_VerifyContactUsLink.executor": "Run",
-    "TestNG.TC_02_AQA_Homepage_Header.TC_02_S8_VerifyMINICart.executor": "Run",
-    "TestNG.TC_02_AQA_Homepage_Header.TC_02_S9_VerifyMINICartOnclick.executor": "Run",
-    "TestNG.TC_02_AQA_Homepage_Header.executor": "Run",
-    "git-widget-placeholder": "TC__02__AQA__HomePage__Header",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/JagatM/Documents/GitHubProject/D2C_Automation",
-    "onboarding.tips.debug.path": "C:/Users/JagatM/Documents/frigidaire-automation/src/main/java/org/example/Main.java",
-    "project.structure.last.edited": "SDKs",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Maven.frigidaire-automation [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.frigidaire-automation [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.frigidaire-automation [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.frigidaire-automation [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.frigidaire-automation [org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.frigidaire-automation [test].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.frigidaire-automation [validate].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;TestNG.C:/Users/JagatM/Documents/GitHubProject/D2C_Automation/testng.xml.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.C:/Users/JagatM/Documents/frigidaire-automation/TestRunners/smoke.xml.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.C:/Users/JagatM/Documents/frigidaire-automation/testng.xml.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_02_AQA_Homepage_Header.TC_01_S1_VerifyBandLogoDisplayed.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_02_AQA_Homepage_Header.TC_01_S2_ClickBandLogoHeader.executor&quot;: &quot;Debug&quot;,
+    &quot;TestNG.TC_02_AQA_Homepage_Header.TC_02_S1_VerifyBandLogoDisplayed.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_02_AQA_Homepage_Header.TC_02_S3_VerifyHearForLoggedInUser.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_02_AQA_Homepage_Header.TC_02_S4_VerifyContactUsLink.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_02_AQA_Homepage_Header.TC_02_S8_VerifyMINICart.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_02_AQA_Homepage_Header.TC_02_S9_VerifyMINICartOnclick.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_02_AQA_Homepage_Header.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;TC__02__AQA__HomePage__Header&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/JagatM/Documents/GitHubProject/D2C_Automation&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/JagatM/Documents/frigidaire-automation/src/main/java/org/example/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\JagatM\Documents\frigidaire-automation" />
@@ -200,6 +195,7 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="40704c6d-babe-4e0d-8abe-445f1f125703" name="Changes" comment="" />
