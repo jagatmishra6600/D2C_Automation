@@ -3,10 +3,12 @@ package com.automation.frigidaire.utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+
 
 public class WebElementUtil {
 
@@ -127,5 +129,13 @@ public class WebElementUtil {
      */
     public static String getCurrentUrl() {
         return DriverManager.getDriver().getCurrentUrl();
+    }
+
+    public static void hoverOverElement(By locator) {
+        retryOnFailure(() -> {
+            WebElement element = waitForElementToBeVisible(locator);
+            Actions actions = new Actions(DriverManager.getDriver());
+            actions.moveToElement(element).perform();
+        }, 3, 1000);
     }
 }

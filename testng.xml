@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Frigidaire Automation Suite">
-    <test name="Frigidaire Regression Tests">
+    <test name="Frigidaire Smoke Tests">
+        <parameter name="browser" value="chrome"/>
         <groups>
             <run>
-                <include name="regression"/>
+                <include name="TC_02"/>
             </run>
         </groups>
         <classes>

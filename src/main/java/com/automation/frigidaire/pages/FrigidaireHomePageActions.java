@@ -13,11 +13,14 @@ public class FrigidaireHomePageActions {
     //************************** Main Menu Bar Locators **************************
     private final By mainMenu_FrigidaireSite = By.cssSelector("img[alt='Frigidaire Brand Site']");
     private final By mainMenu_ElectroluxSite = By.cssSelector("img[alt='Electrolux Brand Site']");
-    private final By mainMenu_Login_OrderStatus = By.xpath("//*[@id=\"dropdown\"]/a/text()");
+    private final By mainMenu_Login_OrderStatus = By.xpath("//a[@class='header-navigation-icon mr-4']");
     private final By mainMenu_Contact = By.xpath("//a[contains(text(),'Contact us')]");
     private final By mainMenu_DeliverTo = By.xpath("//div[@class='pdp-hide-header-visible']//span[@class='Set-delivery-area']");
     private final By mainMenu_Cart = By.xpath("//img[@alt='Your Shopping Cart']");
+    private final By mainMenu_CartCount = By.xpath("//span[@class='count']");
+    private final By mainMenu_Login = By.cssSelector("a[role='link']");
     //************************** Header Menu Bar Locators **************************
+    private final By mainMenu_Logo = By.xpath("//img[@alt='Frigidaire Company Logo']");
     private final By headerMenu_Kitchen = By.cssSelector("h5[aria-label='Kitchen']");
     private final By headerMenu_AirConditioners = By.cssSelector("h5[aria-label='Air Conditioners']");
     private final By headerMenu_AirCare = By.cssSelector("h5[aria-label='Air Care']");
@@ -87,12 +90,13 @@ public class FrigidaireHomePageActions {
     private final By pre_Footer_FirstToKnow_PrivacyPolicy = By.xpath("//u[normalize-space()='Privacy Policy']");
 
 
-
-    private final By searchInput = By.cssSelector("input[type='search']");
-    private final By searchButton = By.cssSelector("button[aria-label='Search']");
-    private final By productsLink = By.linkText("Products");
+    private final By searchInput = By.cssSelector("input[placeholder='Search...']");
+    private final By searchButton = By.cssSelector("img[aria-label='search']");
+    private final By productAddToCart = By.cssSelector("button[aria-label='Add to cart']");
     private final By frigidaireLogo = By.cssSelector("img[alt='Frigidaire Company Logo']");
     private final By acceptButtonLocator = By.xpath("//button[@id='onetrust-accept-btn-handler']");
+    private final By closeButtonLocator = By.cssSelector("img[alt='Close'][src='/assets/icons/frg-icons-close-d-7-CartModal.webp']");
+
 
     public FrigidaireHomePageActions navigateToHomePage() {
         WebElementUtil.navigateTo(ConfigReader.getProperty("app.url"));
@@ -112,24 +116,93 @@ public class FrigidaireHomePageActions {
         return WebElementUtil.isDisplayed(frigidaireLogo);
     }
 
-    public FrigidaireHomePageActions enterSearchTerm(String searchTerm) {
-        // sendKeys now handles the wait and clear internally
-        WebElementUtil.sendKeys(searchInput, searchTerm);
-        return this;
+    public boolean isBrancdLogoLoaded() {
+        return WebElementUtil.isDisplayed(frigidaireLogo);
     }
 
-    public SearchResultsPageActions clickSearchButton() {
-        // clickElement now handles the wait internally
+    public void navigateToLoginPage() {
+        WebElementUtil.hoverOverElement(mainMenu_Login_OrderStatus);
+        WebElementUtil.clickElement(mainMenu_Login);
+    }
+
+    public boolean validateUserNavigateBackToHomepage() {
+        WebElementUtil.clickElement(mainMenu_Contact);
+        WebElementUtil.clickElement(mainMenu_Logo);
+        return WebElementUtil.isDisplayed(mainMenu_Logo);
+    }
+
+    public void navigateToProductsPage() {
+        WebElementUtil.clickElement(mainMenu_Contact);
+    }
+
+    public boolean isContactUsLinkDisplayed() {
+        return WebElementUtil.isDisplayed(mainMenu_Contact);
+    }
+
+    public void clickContactUsLink() {
+        WebElementUtil.clickElement(mainMenu_Contact);
+    }
+
+    public boolean isZipCodeDisplayed() {
+        return WebElementUtil.isDisplayed(mainMenu_DeliverTo);
+    }
+
+    public String getDefaultZipCode() {
+        return WebElementUtil.getText(mainMenu_DeliverTo);
+    }
+
+    public void clickZipCodeArea() {
+        WebElementUtil.clickElement(mainMenu_DeliverTo);
+    }
+
+    public boolean isMiniCartDisplayed() {
+        return WebElementUtil.isDisplayed(mainMenu_Cart);
+    }
+
+    public void clickMiniCart() {
+        WebElementUtil.clickElement(mainMenu_Cart);
+    }
+
+    public boolean isLoginDisplayed() {
+        return WebElementUtil.isDisplayed(mainMenu_Login_OrderStatus);
+    }
+
+    //Methods for Header
+    public boolean validateInvalidZIPWhenBlank() {
+        WebElementUtil.clickElement(mainMenu_DeliverTo);
+        WebElement zipInput = WebElementUtil.waitForElementToBeVisible(By.id("zipCodeInput"));
+        zipInput.clear();
+        WebElement errorMessage = WebElementUtil.waitForElementToBeVisible(By.id("zipCodeError"));
+        return errorMessage.getText().contains("Invalid Zip Code");
+    }
+
+    public boolean validateInvalidZIPWhenLessThan5Digits() {
+        WebElementUtil.clickElement(mainMenu_DeliverTo);
+        WebElement zipInput = WebElementUtil.waitForElementToBeVisible(By.id("zipCodeInput"));
+        zipInput.clear();
+        zipInput.sendKeys("123");
+        WebElement errorMessage = WebElementUtil.waitForElementToBeVisible(By.id("zipCodeError"));
+        return errorMessage.getText().contains("Invalid Zip Code");
+    }
+
+    public void enterZipCode(String zip) {
+        WebElementUtil.clickElement(mainMenu_DeliverTo);
+        WebElement zipInput = WebElementUtil.waitForElementToBeVisible(By.id("zipCodeInput"));
+        zipInput.clear();
+        zipInput.sendKeys(zip);
+        WebElementUtil.clickElement(By.id("setZipCodeButton"));
+    }
+    public boolean isMiniCartCountUpdated() {
+        WebElement cartIcon = WebElementUtil.waitForElementToBeVisible(mainMenu_Cart);
+        String ariaLabel = WebElementUtil.getText(mainMenu_CartCount);
+        return ariaLabel != null && ariaLabel.contains("1");
+    }
+
+    public void addIteamToCart(String itemName) {
+        WebElementUtil.sendKeys(searchInput, itemName);
         WebElementUtil.clickElement(searchButton);
-        return new SearchResultsPageActions();
-    }
-
-    public SearchResultsPageActions searchForProduct(String searchTerm) {
-        return this.enterSearchTerm(searchTerm).clickSearchButton();
-    }
-
-    public ProductCategoryPageActions clickProductsLink() {
-        WebElementUtil.clickElement(productsLink);
-        return new ProductCategoryPageActions();
+        WebElementUtil.clickElement(productAddToCart);
+        WebElementUtil.clickElement(closeButtonLocator);
+        WebElementUtil.clickElement(mainMenu_Logo);
     }
 }
