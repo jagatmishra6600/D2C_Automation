@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.JavascriptExecutor;
 
 import java.time.Duration;
 
@@ -127,5 +128,24 @@ public class WebElementUtil {
      */
     public static String getCurrentUrl() {
         return DriverManager.getDriver().getCurrentUrl();
+    }
+
+    /**
+     * Scrolls the element into view using JavaScript and waits until it is clickable.
+     * @param locator The By locator of the element to scroll into view.
+     */
+
+    public static void scrollIntoView(By locator) {
+        WebElement element = waitForElementToBeVisible(locator);
+        ((JavascriptExecutor) DriverManager.getDriver()).executeScript(
+                "const element = arguments[0];" +
+                        "const rect = element.getBoundingClientRect();" +
+                        "const absoluteElementTop = rect.top + window.pageYOffset;" +
+                        "const offset = 100;" + // adjust offset as per sticky header height
+                        "window.scrollTo({top: absoluteElementTop - offset, behavior: 'instant'});",
+                element
+        );
+
+        waitForElementToBeClickable(locator);
     }
 }

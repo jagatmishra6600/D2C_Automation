@@ -93,6 +93,10 @@ public class FrigidaireHomePageActions {
     private final By productsLink = By.linkText("Products");
     private final By frigidaireLogo = By.cssSelector("img[alt='Frigidaire Company Logo']");
     private final By acceptButtonLocator = By.xpath("//button[@id='onetrust-accept-btn-handler']");
+    private final By navigationBarAirConditioners = By.xpath("//h5[@aria-label='Air Conditioners']");
+    private final By windowMounted = By.xpath("//h5[contains(text(), 'Window Mounted')]");
+    private final By navigationBarKitchen = By.xpath("//h5[@aria-label='Kitchen']");
+    private final By frenchDoor = By.xpath("//h5[contains(text(), 'French Door')]");
 
     public FrigidaireHomePageActions navigateToHomePage() {
         WebElementUtil.navigateTo(ConfigReader.getProperty("app.url"));
@@ -131,5 +135,17 @@ public class FrigidaireHomePageActions {
     public ProductCategoryPageActions clickProductsLink() {
         WebElementUtil.clickElement(productsLink);
         return new ProductCategoryPageActions();
+    }
+
+    public FrigidairePlpPageActions clickWindowMounted() {
+        WebElementUtil.clickElement(navigationBarAirConditioners);
+        WebElementUtil.clickElement(windowMounted);
+        return new FrigidairePlpPageActions();
+    }
+
+    public FrigidairePlpPageActions clickFrenchDoor() {
+        WebElementUtil.clickElement(navigationBarKitchen);
+        WebElementUtil.clickElement(frenchDoor);
+        return new FrigidairePlpPageActions();
     }
 }
