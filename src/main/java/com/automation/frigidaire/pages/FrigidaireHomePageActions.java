@@ -13,7 +13,7 @@ public class FrigidaireHomePageActions {
     //************************** Main Menu Bar Locators **************************
     private final By mainMenu_FrigidaireSite = By.cssSelector("img[alt='Frigidaire Brand Site']");
     private final By mainMenu_ElectroluxSite = By.cssSelector("img[alt='Electrolux Brand Site']");
-    private final By mainMenu_Login_OrderStatus = By.xpath("//a[@class='header-navigation-icon mr-4']");
+    private final By mainMenu_Login_OrderStatus = By.xpath("//*[@id=\"dropdown\"]/a/text()");
     private final By mainMenu_Contact = By.xpath("//a[contains(text(),'Contact us')]");
     private final By mainMenu_DeliverTo = By.xpath("//div[@class='pdp-hide-header-visible']//span[@class='Set-delivery-area']");
     private final By mainMenu_Cart = By.xpath("//img[@alt='Your Shopping Cart']");
@@ -90,13 +90,12 @@ public class FrigidaireHomePageActions {
     private final By pre_Footer_FirstToKnow_PrivacyPolicy = By.xpath("//u[normalize-space()='Privacy Policy']");
 
 
-    private final By searchInput = By.cssSelector("input[placeholder='Search...']");
-    private final By searchButton = By.cssSelector("img[aria-label='search']");
-    private final By productAddToCart = By.cssSelector("button[aria-label='Add to cart']");
+
+    private final By searchInput = By.cssSelector("input[type='search']");
+    private final By searchButton = By.cssSelector("button[aria-label='Search']");
+    private final By productsLink = By.linkText("Products");
     private final By frigidaireLogo = By.cssSelector("img[alt='Frigidaire Company Logo']");
     private final By acceptButtonLocator = By.xpath("//button[@id='onetrust-accept-btn-handler']");
-    private final By closeButtonLocator = By.cssSelector("img[alt='Close'][src='/assets/icons/frg-icons-close-d-7-CartModal.webp']");
-
 
     public FrigidaireHomePageActions navigateToHomePage() {
         WebElementUtil.navigateTo(ConfigReader.getProperty("app.url"));
@@ -204,5 +203,17 @@ public class FrigidaireHomePageActions {
         WebElementUtil.clickElement(productAddToCart);
         WebElementUtil.clickElement(closeButtonLocator);
         WebElementUtil.clickElement(mainMenu_Logo);
+    }
+
+    public FrigidairePlpPageActions clickWindowMounted() {
+        WebElementUtil.clickElement(navigationBarAirConditioners);
+        WebElementUtil.clickElement(windowMounted);
+        return new FrigidairePlpPageActions();
+    }
+
+    public FrigidairePlpPageActions clickFrenchDoor() {
+        WebElementUtil.clickElement(navigationBarKitchen);
+        WebElementUtil.clickElement(frenchDoor);
+        return new FrigidairePlpPageActions();
     }
 }
