@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.Random;
+import java.util.function.Supplier;
 
 public class WebElementUtil {
 
@@ -127,5 +129,43 @@ public class WebElementUtil {
      */
     public static String getCurrentUrl() {
         return DriverManager.getDriver().getCurrentUrl();
+    }
+    
+    /**
+     * Switches the Driver focus to Frame
+     * @param frameId you want to switch the focus to
+     */
+    public static void switchToFrame(String frameId) {
+    	DriverManager.getDriver().switchTo().frame(frameId);
+    }
+    
+    /**
+     * Switches the Driver focus to Back to the Default
+     */
+    public static void switchToDefaultContent() {
+    	DriverManager.getDriver().switchTo().defaultContent();
+    }
+    
+    /**
+     * Generates the random number
+     * @param range - length of the int we want to generate
+     * @return the random number in int
+     */
+    public static int getRandomNumber(int range) {
+    	return new Random().nextInt(range);
+    }
+    
+    /**
+     * Switch to Frame and perform the Action and then Switches back to Default Content
+     * @param frameNameOrId - to swithch to the frame, action- Action we want to perform Ex: getText(), isDisplayed()
+     * @return it return the output value of action (Ex: boolean, String, int)
+     */
+    public static <T> T performInFrame(String frameNameOrId, Supplier<T> action) {
+        try {
+            switchToFrame(frameNameOrId);
+            return action.get();
+        } finally {
+            switchToDefaultContent();
+        }
     }
 }

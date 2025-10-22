@@ -30,8 +30,8 @@ public class FrigidaireCreateAccountPageActions {
 	 private final By signInWithGoogleButton = By.id("Google_btn");
 	 private final By verificationEmailSentMessage = By.cssSelector("#gigya-verification-sent-screen label");
 	 private final By hereToHelpBanner = By.cssSelector("app-elux-question-banner");
-	 private final By helpBannerPhoneSection = By.cssSelector("app-elux-question-banner .phoneSection");
-	 private final By helpBannerChatSection = By.cssSelector("app-elux-question-banner .chatSection");
+	 private final By hereToHelpBannerPhoneSection = By.cssSelector("app-elux-question-banner .phoneSection");
+	 private final By hereToHelpBannerChatSection = By.cssSelector("app-elux-question-banner .chatSection");
 	 
 	 public FrigidaireCreateAccountPageActions navigateToCreateAccountPage() {
 		WebElementUtil.navigateTo(ConfigReader.getProperty("app.url")+"createAccount");
@@ -169,12 +169,12 @@ public class FrigidaireCreateAccountPageActions {
 		 return WebElementUtil.isDisplayed(hereToHelpBanner);
 	 }
 	 
-	 public boolean isHelpBannerPhoneSectionDisplayed() {
-		 return WebElementUtil.isDisplayed(helpBannerPhoneSection);
+	 public boolean isHereToHelpBannerPhoneSectionDisplayed() {
+		 return WebElementUtil.isDisplayed(hereToHelpBannerPhoneSection);
 	 }
 	 
-	 public boolean isHelpBannerChatSectionDisplayed() {
-		 return WebElementUtil.isDisplayed(helpBannerChatSection);
+	 public boolean isHereToHelpBannerChatSectionDisplayed() {
+		 return WebElementUtil.isDisplayed(hereToHelpBannerChatSection);
 	 }
 	 
 	 
