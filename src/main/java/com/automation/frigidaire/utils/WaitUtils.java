@@ -41,6 +41,9 @@ public final class WaitUtils {
     public static WebElement untilVisible(WebElement element, long timeoutSeconds) {
         return wait(Duration.ofSeconds(timeoutSeconds)).until(ExpectedConditions.visibilityOf(element));
     }
+    public static WebElement untilVisible(WebElement element, int timeoutSeconds) {
+        return wait(Duration.ofSeconds(timeoutSeconds)).until(ExpectedConditions.visibilityOf(element));
+    }
 
     // Clickable
     public static WebElement untilClickable(By locator) {
