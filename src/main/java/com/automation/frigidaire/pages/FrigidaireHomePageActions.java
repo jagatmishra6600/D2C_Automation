@@ -13,10 +13,13 @@ public class FrigidaireHomePageActions {
     //************************** Main Menu Bar Locators **************************
     private final By mainMenu_FrigidaireSite = By.cssSelector("img[alt='Frigidaire Brand Site']");
     private final By mainMenu_ElectroluxSite = By.cssSelector("img[alt='Electrolux Brand Site']");
-    private final By mainMenu_Login_OrderStatus = By.xpath("//*[@id=\"dropdown\"]/a/text()");
+    private final By mainMenu_Login_OrderStatus = By.xpath("//*[@id='dropdown']/a");
     private final By mainMenu_Contact = By.xpath("//a[contains(text(),'Contact us')]");
     private final By mainMenu_DeliverTo = By.xpath("//div[@class='pdp-hide-header-visible']//span[@class='Set-delivery-area']");
     private final By mainMenu_Cart = By.xpath("//img[@alt='Your Shopping Cart']");
+    private final By mainMenu_Login_OrderStatus_Login = By.xpath("//*[@id='dropdown']//button[contains(.,'Log in')]");
+    private final By mainMenu_Login_OrderStatus_CreateAccount = By.xpath("//*[@id='dropdown']//button[contains(.,'Create an account')]");
+    
     //************************** Header Menu Bar Locators **************************
     private final By headerMenu_Kitchen = By.cssSelector("h5[aria-label='Kitchen']");
     private final By headerMenu_AirConditioners = By.cssSelector("h5[aria-label='Air Conditioners']");
@@ -136,6 +139,25 @@ public class FrigidaireHomePageActions {
         WebElementUtil.clickElement(productsLink);
         return new ProductCategoryPageActions();
     }
+    
+    public FrigidaireHomePageActions clickLoginOrderStatusLink() {
+    	WebElementUtil.clickElement(mainMenu_Login_OrderStatus);
+    	if(!WebElementUtil.isDisplayed(mainMenu_Login_OrderStatus_CreateAccount)) {
+    		WebElementUtil.clickElement(mainMenu_Login_OrderStatus);
+    	}
+    	return this;
+    }
+    
+    public FrigidaireCreateAccountPageActions navigateToCreateAccountPage() {
+    	clickLoginOrderStatusLink();
+    	WebElementUtil.clickElement(mainMenu_Login_OrderStatus_CreateAccount);
+    	return new FrigidaireCreateAccountPageActions();
+    }
+    
+    public FrigidaireLoginPageActions navigateToLoginPage() {
+    	clickLoginOrderStatusLink();
+    	WebElementUtil.clickElement(mainMenu_Login_OrderStatus_Login);
+    	return new FrigidaireLoginPageActions();
 
     public FrigidairePlpPageActions clickWindowMounted() {
         WebElementUtil.clickElement(navigationBarAirConditioners);
