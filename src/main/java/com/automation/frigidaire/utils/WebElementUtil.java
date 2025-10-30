@@ -1,8 +1,6 @@
 package com.automation.frigidaire.utils;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.JavascriptExecutor;
@@ -64,6 +62,17 @@ public class WebElementUtil {
         }, 3, 1000);
     }
 
+
+    public static void zoomInOrOut(int zoomPercentage) {
+
+        if (zoomPercentage < 10 || zoomPercentage > 200) {
+            System.out.println("Zoom percentage out of range. Please provide a value between 10 and 200.");
+            return;
+        }
+        ((JavascriptExecutor) DriverManager.getDriver())
+                .executeScript("document.body.style.zoom='" + zoomPercentage + "%'");
+    }
+
     /**
      * Waits for an element to be visible and returns its text.
      * Retries up to 3 times if interaction fails.
@@ -95,7 +104,7 @@ public class WebElementUtil {
      * @return The WebElement once it is visible.
      */
     public static WebElement waitForElementToBeVisible(By locator) {
-        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(15));
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
@@ -132,6 +141,33 @@ public class WebElementUtil {
     public static String getCurrentUrl() {
         return DriverManager.getDriver().getCurrentUrl();
     }
+
+    public static void scrollAndClickUsingJSE(WebDriver driver, WebElement element) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+
+            // Scroll element into view
+            ((JavascriptExecutor) driver).executeScript(
+                    "arguments[0].scrollIntoView({behavior: 'smooth' ,block: 'center'});", element);
+            Thread.sleep(500); // small pause
+
+            // Perform JavaScript click
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+
+            System.out.println("Clicked successfully on: " + element);
+        } catch (Exception e) {
+            System.out.println("Failed to click element: " + e.getMessage());
+        }
+    }
+
+    public static boolean isElementPresent(By locator) {
+        WebDriver driver = DriverManager.getDriver();
+        try {
+            driver.findElement(locator);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
     
     /**
      * Switches the Driver focus to Frame
