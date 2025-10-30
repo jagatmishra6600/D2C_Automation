@@ -2,6 +2,7 @@ package com.automation.frigidaire.pages;
 
 import com.automation.frigidaire.utils.WebElementUtil;
 import org.openqa.selenium.By;
+import org.testng.Assert;
 
 public class ProductCategoryPageActions {
 
