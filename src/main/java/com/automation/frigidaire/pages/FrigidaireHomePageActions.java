@@ -171,6 +171,7 @@ public class FrigidaireHomePageActions {
         WebElementUtil.clickElement(frenchDoor);
         return new FrigidairePlpPageActions();
     }
+    
     public FrigidaireForgotPasswordPageActions navigateToResetPasswordPage() {
     	return navigateToHomePage().navigateToLoginPage().clickForgotPasswordLink();
     }
