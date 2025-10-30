@@ -1,14 +1,17 @@
 package com.automation.frigidaire.pages;
 
+
+import com.automation.frigidaire.enums.FrigidaireConstants;
 import com.automation.frigidaire.utils.DriverManager;
 import com.automation.frigidaire.utils.WaitUtils;
 import com.automation.frigidaire.utils.WebElementUtil;
 import org.openqa.selenium.*;
+import org.testng.Assert;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
-import com.automation.frigidaire.enums.FrigidaireConstants;
+
+
 import java.util.NoSuchElementException;
 
 import java.time.Duration;
@@ -17,6 +20,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class ProductItemsPageActions {
+
     WebDriver driver = DriverManager.getDriver();
 
     private final By emailPopUp = By.xpath("//span[@id=\"close-modal123\"]");
@@ -68,9 +72,6 @@ public class ProductItemsPageActions {
         return By.xpath("//span[@class='border border-light p-2 m-2 Body-MediumBody_Medium' and normalize-space(text())='" + filterName + "']//i");
     }
 
-
-
-
     public boolean productIsInStock(String productName) {
         WebElementUtil.zoomInOrOut(10);
         boolean isAvailable = false;
@@ -86,6 +87,14 @@ public class ProductItemsPageActions {
         return isAvailable;
     }
 
+    public void closeEmailPopUp() {
+        WaitUtils.untilVisible(emailPopUp, 60);
+        Assert.assertTrue(WebElementUtil.isDisplayed(emailPopUp), "Email popup should be displayed before closing.");
+        WebElementUtil.clickElement(emailPopUp);
+        Assert.assertFalse(WebElementUtil.isDisplayed(emailPopUp), "Email popup should not be displayed after closing.");
+
+
+    }
     public void clickOnProductMenu(String text) {
         By locator = By.xpath("//h5[normalize-space(text())='" + text + "']");
         WebElementUtil.waitForElementToBeVisible(locator);
@@ -212,10 +221,6 @@ public class ProductItemsPageActions {
     }
 
 
-
-
-
-
     public WebElement verifyFiltersInPLP(String text) {
         WebDriver driver = DriverManager.getDriver();
         String dynamicXpath = "//b[contains(text(),'" + text + "')]";
@@ -316,14 +321,7 @@ public class ProductItemsPageActions {
     }
 
 
-    public void closeEmailPopUp() {
-        WaitUtils.untilVisible(emailPopUp, 60);
-        Assert.assertTrue(WebElementUtil.isDisplayed(emailPopUp), "Email popup should be displayed before closing.");
-        WebElementUtil.clickElement(emailPopUp);
-        Assert.assertFalse(WebElementUtil.isDisplayed(emailPopUp), "Email popup should not be displayed after closing.");
 
-
-    }
 
     public void standardWidthClick() throws InterruptedException {
         WaitUtils.untilVisible(standardWidth, 60);

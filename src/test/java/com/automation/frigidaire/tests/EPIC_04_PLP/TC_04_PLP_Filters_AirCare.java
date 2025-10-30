@@ -62,7 +62,7 @@ public class TC_04_PLP_Filters_AirCare {
 
     }
 
-    @Test(groups = {"regression"}, description = "Verify expand and collapse of filter sections")
+    @Test(groups = {"regression"}, description = "Verify all product using Features filter")
     public void verifyPLPUpdatesWhenSingleFilterSelected() throws InterruptedException {
         navigateToAirCare("Air Care","Window Mounted AC");
         productItemsPageActions.verifyProductItemPage("Window Mounted Air Conditioners","Window Mounted Air Conditioners");
@@ -73,7 +73,7 @@ public class TC_04_PLP_Filters_AirCare {
 
     }
 
-    @Test(groups = {"regression"}, description = "Verify expand and collapse of filter sections")
+    @Test(groups = {"regression"}, description = "Verify all product using BTU filter")
     public void verifyPLPUpdatesForBTUFilter() throws InterruptedException {
         navigateToAirCare("Air Care","Window Mounted AC");
         productItemsPageActions.verifyProductItemPage("Window Mounted Air Conditioners","Window Mounted Air Conditioners");
@@ -84,7 +84,7 @@ public class TC_04_PLP_Filters_AirCare {
 
     }
 
-    @Test(groups = {"regression"}, description = "Verify expand and collapse of filter sections")
+    @Test(groups = {"regression"}, description = "Verify all product using Voltage Rating filter")
     public void verifyPLPUpdatesForVoltageRatingFilter() throws InterruptedException {
         navigateToAirCare("Air Care","Window Mounted AC");
         productItemsPageActions.verifyProductItemPage("Window Mounted Air Conditioners","Window Mounted Air Conditioners");
@@ -95,7 +95,7 @@ public class TC_04_PLP_Filters_AirCare {
 
     }
 
-    @Test(groups = {"regression"}, description = "Verify expand and collapse of filter sections")
+    @Test(groups = {"regression"}, description = "Verify all product using Min Window Opening Width filter")
     public void verifyPLPUpdatesForMinWindowOpeningWidthFilter() throws InterruptedException {
         navigateToAirCare("Air Care","Window Mounted AC");
         productItemsPageActions.verifyProductItemPage("Window Mounted Air Conditioners","Window Mounted Air Conditioners");
@@ -106,7 +106,7 @@ public class TC_04_PLP_Filters_AirCare {
 
     }
 
-    @Test(groups = {"regression"}, description = "Verify expand and collapse of filter sections")
+    @Test(groups = {"regression"}, description = "Verify all product using Max Window Opening Width filter")
     public void verifyPLPUpdatesForMaxWindowOpeningWidthFilter() throws InterruptedException {
         navigateToAirCare("Air Care","Window Mounted AC");
         productItemsPageActions.verifyProductItemPage("Window Mounted Air Conditioners","Window Mounted Air Conditioners");
