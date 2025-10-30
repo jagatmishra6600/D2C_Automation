@@ -31,6 +31,7 @@ public class FrigidaireResetPasswordPageActions {
 	        return this;
 	 }
 	 
+	 
 	 public boolean isResetPasswordButtonDisplayed() {
 		 return WebElementUtil.isDisplayed(submitButton);			 
 	 }
