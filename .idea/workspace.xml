@@ -5,14 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40704c6d-babe-4e0d-8abe-445f1f125703" name="Changes" comment="&quot;Code for Kitchen Products&quot;">
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/automation/frigidaire/tests/EPIC_04_PLP/TC_04_PLP_Filters_AirCare.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/automation/frigidaire/tests/EPIC_04_PLP/TC_05_PLP_Sort_By_for_Air_Care.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/automation/frigidaire/enums/FrigidaireConstants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/automation/frigidaire/pages/ProductItemsPageActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/automation/frigidaire/pages/ProductItemsPageActions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/automation/frigidaire/tests/EPIC_02_HomePage/TC_NAGDTOPS_15689_PLP_Filters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/automation/frigidaire/tests/EPIC_02_HomePage/TC_NAGDTOPS_15689_PLP_Filters.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/automation/frigidaire/tests/EPIC_04_PLP/TC_NAGDTOPS_15689_PLP_Filters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/automation/frigidaire/tests/EPIC_04_PLP/TC_NAGDTOPS_15689_PLP_Filters.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-output/ExtentReport.html" beforeDir="false" afterPath="$PROJECT_DIR$/test-output/ExtentReport.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testng.xml" beforeDir="false" afterPath="$PROJECT_DIR$/testng.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/automation/frigidaire/tests/EPIC_02_HomePage/TC_NAGDTOPS_15689_PLP_Filters.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +31,18 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;vedantshukla-oss&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/jagatmishra6600/D2C_Automation.git",
+    "accountId": "cb959a6a-67b7-4dea-a935-67b27a3bd345"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -43,74 +51,74 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Maven.frigidaire-automation [clean].executor": "Run",
-    "Maven.frigidaire-automation [compile].executor": "Run",
-    "Maven.frigidaire-automation [install].executor": "Run",
-    "Maven.frigidaire-automation [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor": "Run",
-    "Maven.frigidaire-automation [org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile].executor": "Run",
-    "Maven.frigidaire-automation [test].executor": "Run",
-    "Maven.frigidaire-automation [validate].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "TestNG.C:/Users/JagatM/Documents/frigidaire-automation/TestRunners/smoke.xml.executor": "Run",
-    "TestNG.C:/Users/JagatM/Documents/frigidaire-automation/testng.xml.executor": "Run",
-    "TestNG.C:/Users/VedantS/IdeaProjects/D2C_Automation/testng.xml.executor": "Run",
-    "TestNG.TC_04_PLP_Filters_AirCare.testExpandAndCollapseFilter.executor": "Run",
-    "TestNG.TC_04_PLP_Filters_AirCare.testFeatureFilters.executor": "Run",
-    "TestNG.TC_04_PLP_Filters_AirCare.testHideShowFilters.executor": "Run",
-    "TestNG.TC_04_PLP_Filters_AirCare.testResetAll.executor": "Run",
-    "TestNG.TC_04_PLP_Filters_AirCare.testStandardWidthDimensions.executor": "Run",
-    "TestNG.TC_04_PLP_Filters_AirCare.verifyPLPUpdatesForMinWindowOpeningWidthFilter.executor": "Run",
-    "TestNG.TC_04_PLP_Filters_AirCare.verifyPLPUpdatesForVoltageRatingFilter.executor": "Run",
-    "TestNG.TC_04_PLP_Filters_AirCare.verifyPLPUpdatesForWaterDispenserFeature.executor": "Run",
-    "TestNG.TC_04_PLP_Filters_AirCare.verifyPLPUpdatesWhenSingleFilterSelected.executor": "Run",
-    "TestNG.TC_05_PLP_Sort_By_for_Air_Care.testSortByBiggestSavings.executor": "Run",
-    "TestNG.TC_05_PLP_Sort_By_for_Air_Care.testSortByPriceHighToLow.executor": "Run",
-    "TestNG.TC_05_PLP_Sort_By_for_Air_Care.testSortByPriceLowToHigh.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters (1).executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.resetAll.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.testExpandAndCollapseFilter.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.testFeatureFilters.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.testHideShowFilters.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.testHomePageLoad (1).executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.testHomePageLoad.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.testResetAll.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.testStandardWidthDimensions.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verifyFiltersInProductItems.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verifyFrigidaireGalleryAndProfessionalProductsInPLP.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verifyFrigidaireProfessionalProductInPLP.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verifyPLPUpdatesForADAComplaintFeature.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verifyPLPUpdatesForEnergyStarCertifiedFeature.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verifyPLPUpdatesForWaterDispenserFeature.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verifyPLPUpdatesWhenSingleFilterSelected.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verifyPopularFiltersInPLP.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verifyVisibilityOfFiltersInPLP.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Availaibility_In_PLP.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_CrossBtn_In_PLP.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Popular_Filters_Is_Checked_On_Clicling_the_RelatedFilter1InPLP.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Popular_Filters_Is_Checked_On_Clicling_the_RelatedFilter2InPLP.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Popular_Filters_Is_Checked_On_Clicling_the_RelatedFilter3InPLP.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Popular_Filters_Is_Checked_On_Clicling_the_RelatedFilterInPLP.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Popular_Filters_Is_Checked_On_Clicling_the_RelatedFiltersInPLP.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Related_Filter_Is_Checked_On_Clicling_Popular_filter1_In_PLP.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Related_Filter_Is_Checked_On_Clicling_Popular_filter2_In_PLP.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Related_Filter_Is_Checked_On_Clicling_Popular_filter3_In_PLP.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Related_Filter_Is_Checked_On_Clicling_Popular_filter_In_PLP.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15695_PLP_SORT_BY.testHomePageLoad.executor": "Run",
-    "git-widget-placeholder": "TC__NAGDTOPS-15689__PLP__Filters",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/JagatM/Documents/frigidaire-automation",
-    "onboarding.tips.debug.path": "C:/Users/JagatM/Documents/frigidaire-automation/src/main/java/org/example/Main.java",
-    "project.structure.last.edited": "SDKs",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Maven.frigidaire-automation [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.frigidaire-automation [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.frigidaire-automation [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.frigidaire-automation [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.frigidaire-automation [org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.frigidaire-automation [test].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.frigidaire-automation [validate].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;TestNG.C:/Users/JagatM/Documents/frigidaire-automation/TestRunners/smoke.xml.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.C:/Users/JagatM/Documents/frigidaire-automation/testng.xml.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.C:/Users/VedantS/IdeaProjects/D2C_Automation/testng.xml.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_04_PLP_Filters_AirCare.testExpandAndCollapseFilter.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_04_PLP_Filters_AirCare.testFeatureFilters.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_04_PLP_Filters_AirCare.testHideShowFilters.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_04_PLP_Filters_AirCare.testResetAll.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_04_PLP_Filters_AirCare.testStandardWidthDimensions.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_04_PLP_Filters_AirCare.verifyPLPUpdatesForMinWindowOpeningWidthFilter.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_04_PLP_Filters_AirCare.verifyPLPUpdatesForVoltageRatingFilter.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_04_PLP_Filters_AirCare.verifyPLPUpdatesForWaterDispenserFeature.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_04_PLP_Filters_AirCare.verifyPLPUpdatesWhenSingleFilterSelected.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_05_PLP_Sort_By_for_Air_Care.testSortByBiggestSavings.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_05_PLP_Sort_By_for_Air_Care.testSortByPriceHighToLow.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_05_PLP_Sort_By_for_Air_Care.testSortByPriceLowToHigh.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15689_PLP_Filters (1).executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15689_PLP_Filters.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15689_PLP_Filters.resetAll.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15689_PLP_Filters.testExpandAndCollapseFilter.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15689_PLP_Filters.testFeatureFilters.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15689_PLP_Filters.testHideShowFilters.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15689_PLP_Filters.testHomePageLoad (1).executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15689_PLP_Filters.testHomePageLoad.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15689_PLP_Filters.testResetAll.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15689_PLP_Filters.testStandardWidthDimensions.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15689_PLP_Filters.verifyFiltersInProductItems.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15689_PLP_Filters.verifyFrigidaireGalleryAndProfessionalProductsInPLP.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15689_PLP_Filters.verifyFrigidaireProfessionalProductInPLP.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15689_PLP_Filters.verifyPLPUpdatesForADAComplaintFeature.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15689_PLP_Filters.verifyPLPUpdatesForEnergyStarCertifiedFeature.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15689_PLP_Filters.verifyPLPUpdatesForWaterDispenserFeature.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15689_PLP_Filters.verifyPLPUpdatesWhenSingleFilterSelected.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15689_PLP_Filters.verifyPopularFiltersInPLP.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15689_PLP_Filters.verifyVisibilityOfFiltersInPLP.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Availaibility_In_PLP.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_CrossBtn_In_PLP.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Popular_Filters_Is_Checked_On_Clicling_the_RelatedFilter1InPLP.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Popular_Filters_Is_Checked_On_Clicling_the_RelatedFilter2InPLP.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Popular_Filters_Is_Checked_On_Clicling_the_RelatedFilter3InPLP.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Popular_Filters_Is_Checked_On_Clicling_the_RelatedFilterInPLP.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Popular_Filters_Is_Checked_On_Clicling_the_RelatedFiltersInPLP.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Related_Filter_Is_Checked_On_Clicling_Popular_filter1_In_PLP.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Related_Filter_Is_Checked_On_Clicling_Popular_filter2_In_PLP.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Related_Filter_Is_Checked_On_Clicling_Popular_filter3_In_PLP.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Related_Filter_Is_Checked_On_Clicling_Popular_filter_In_PLP.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_NAGDTOPS_15695_PLP_SORT_BY.testHomePageLoad.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;TC__NAGDTOPS-15689__PLP__Filters&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/JagatM/Documents/frigidaire-automation&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/JagatM/Documents/frigidaire-automation/src/main/java/org/example/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\JagatM\Documents\frigidaire-automation" />
@@ -122,7 +130,7 @@
       <recent name="com.automation.frigidaire.tests.EPIC_04_PLP" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.C:/Users/VedantS/IdeaProjects/D2C_Automation/testng.xml">
+  <component name="RunManager" selected="TestNG.TC_05_PLP_Sort_By_for_Air_Care.testSortByPriceLowToHigh">
     <configuration name="C:/Users/VedantS/IdeaProjects/D2C_Automation/testng.xml" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="frigidaire-automation" />
       <option name="SUITE_NAME" value="$PROJECT_DIR$/testng.xml" />
@@ -187,7 +195,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TC_04_PLP_Filters_AirCare.verifyPLPUpdatesWhenSingleFilterSelected" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="TC_05_PLP_Sort_By_for_Air_Care.testSortByPriceLowToHigh" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="frigidaire-automation" />
       <extension name="coverage">
         <pattern>
@@ -196,8 +204,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.automation.frigidaire.tests.EPIC_04_PLP" />
-      <option name="MAIN_CLASS_NAME" value="com.automation.frigidaire.tests.EPIC_04_PLP.TC_04_PLP_Filters_AirCare" />
-      <option name="METHOD_NAME" value="verifyPLPUpdatesWhenSingleFilterSelected" />
+      <option name="MAIN_CLASS_NAME" value="com.automation.frigidaire.tests.EPIC_04_PLP.TC_05_PLP_Sort_By_for_Air_Care" />
+      <option name="METHOD_NAME" value="testSortByPriceLowToHigh" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -207,11 +215,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.TC_05_PLP_Sort_By_for_Air_Care.testSortByPriceLowToHigh" />
         <item itemvalue="TestNG.C:/Users/VedantS/IdeaProjects/D2C_Automation/testng.xml" />
         <item itemvalue="TestNG.TC_04_PLP_Filters_AirCare.verifyPLPUpdatesForMinWindowOpeningWidthFilter" />
         <item itemvalue="TestNG.TC_04_PLP_Filters_AirCare.verifyPLPUpdatesForVoltageRatingFilter" />
         <item itemvalue="TestNG.TC_04_PLP_Filters_AirCare.verifyPLPUpdatesForWaterDispenserFeature" />
-        <item itemvalue="TestNG.TC_04_PLP_Filters_AirCare.verifyPLPUpdatesWhenSingleFilterSelected" />
       </list>
     </recent_temporary>
   </component>
@@ -233,6 +241,17 @@
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="&quot;Code for Kitchen Products&quot;" />
