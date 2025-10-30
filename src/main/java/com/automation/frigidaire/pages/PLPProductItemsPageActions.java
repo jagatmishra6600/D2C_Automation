@@ -12,14 +12,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
-import java.util.NoSuchElementException;
-
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class ProductItemsPageActions {
+public class PLPProductItemsPageActions {
 
     WebDriver driver = DriverManager.getDriver();
 
@@ -284,7 +282,7 @@ public class ProductItemsPageActions {
     }
 
 
-    public ProductItemsPageActions clickOnProductMenuItem(String text) {
+    public PLPProductItemsPageActions clickOnProductMenuItem(String text) {
         By locator = By.xpath("//h5[normalize-space(text())='" + text + "']");
         WebElementUtil.waitForElementToBeVisible(locator);
         WebElementUtil.clickElement(locator);

@@ -2,7 +2,7 @@ package com.automation.frigidaire.tests.EPIC_04_PLP;
 
 import com.automation.frigidaire.pages.FrigidaireHomePageActions;
 import com.automation.frigidaire.pages.ProductCategoryPageActions;
-import com.automation.frigidaire.pages.ProductItemsPageActions;
+import com.automation.frigidaire.pages.PLPProductItemsPageActions;
 import com.automation.frigidaire.tests.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
     FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
     ProductCategoryPageActions productCategoryPageActions=new ProductCategoryPageActions();
-    ProductItemsPageActions productItemsPageActions =new ProductItemsPageActions();
+    PLPProductItemsPageActions PLPProductItemsPageActions =new PLPProductItemsPageActions();
 
     public void navigateToFrenchDoorRefrigerators(String prodCategory , String subProdCategory ) throws InterruptedException {
         homePage.navigateToHomePage();
@@ -25,21 +25,21 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
     @Test(groups = {"smoke", "regression"}, description = "Verify hide/show filters functionality")
     public void testHideShowFilters() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("Kitchen","French Door");
-        productItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
-        productItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
-        productItemsPageActions.verifyHideAndShowAllFilters("Hide filters");
-        productItemsPageActions.verifyHideAndShowAllFilters("Show all filters");
-        productItemsPageActions.verifyHideFilters("Hide filters");
+        PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
+        PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
+        PLPProductItemsPageActions.verifyHideAndShowAllFilters("Hide filters");
+        PLPProductItemsPageActions.verifyHideAndShowAllFilters("Show all filters");
+        PLPProductItemsPageActions.verifyHideFilters("Hide filters");
     }
 
 
     @Test(groups = {"smoke", "regression"}, description = "Verify product dimensions for standard width")
     public void testStandardWidthDimensions() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("Kitchen","French Door");
-        productItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
-        productItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
-        productItemsPageActions.standardWidthClick();
-        productItemsPageActions.verifyProductWidthHeightAndDepth();
+        PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
+        PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
+        PLPProductItemsPageActions.standardWidthClick();
+        PLPProductItemsPageActions.verifyProductWidthHeightAndDepth();
     }
 
 
@@ -48,15 +48,15 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
     @Test(groups = {"regression"}, description = "Verify expand and collapse of filter sections")
     public void testExpandAndCollapseFilter() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("Kitchen","French Door");
-        productItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
-        productItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
-        productItemsPageActions.verifyExpandAndCollapseFilter("Series", "Frigidaire");
-        productItemsPageActions.verifyExpandAndCollapseFilter("color", "Stainless Steel");
-        productItemsPageActions.verifyExpandAndCollapseFilter("Depth Type", "Counter-Depth");
-        productItemsPageActions.verifyExpandAndCollapseFilter("Features", "Ice Maker");
-        productItemsPageActions.verifyExpandAndCollapseFilter("Standard Width", "30\"");
-        productItemsPageActions.verifyExpandAndCollapseFilter("Height", "70\"");
-        productItemsPageActions.verifyExpandAndCollapseFilter("Price", "$1,000-$1,499");
+        PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
+        PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
+        PLPProductItemsPageActions.verifyExpandAndCollapseFilter("Series", "Frigidaire");
+        PLPProductItemsPageActions.verifyExpandAndCollapseFilter("color", "Stainless Steel");
+        PLPProductItemsPageActions.verifyExpandAndCollapseFilter("Depth Type", "Counter-Depth");
+        PLPProductItemsPageActions.verifyExpandAndCollapseFilter("Features", "Ice Maker");
+        PLPProductItemsPageActions.verifyExpandAndCollapseFilter("Standard Width", "30\"");
+        PLPProductItemsPageActions.verifyExpandAndCollapseFilter("Height", "70\"");
+        PLPProductItemsPageActions.verifyExpandAndCollapseFilter("Price", "$1,000-$1,499");
 
     }
 
@@ -64,20 +64,20 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
     @Test(groups = {"regression"}, description = "Verify reset all filter")
     public void testResetAll() throws InterruptedException  {
         navigateToFrenchDoorRefrigerators("Kitchen","French Door");
-        productItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
-        productItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
-        productItemsPageActions.featureFilter("Series ", " Frigidaire Gallery ");
-        productItemsPageActions.verifySelectedFilters("Frigidaire Gallery ");
+        PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
+        PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
+        PLPProductItemsPageActions.featureFilter("Series ", " Frigidaire Gallery ");
+        PLPProductItemsPageActions.verifySelectedFilters("Frigidaire Gallery ");
 
     }
 
     @Test(groups = {"regression"}, description = "Verify expand and collapse of filter sections")
     public void verifyPLPUpdatesWhenSingleFilterSelected() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("Kitchen","French Door");
-        productItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
-        productItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
-        productItemsPageActions.featureFilter("Features ", " Ice Maker ");
-        productItemsPageActions.openAllProductsAndValidate("Ice Maker","Ice Maker","Yes");
+        PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
+        PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
+        PLPProductItemsPageActions.featureFilter("Features ", " Ice Maker ");
+        PLPProductItemsPageActions.openAllProductsAndValidate("Ice Maker","Ice Maker","Yes");
 
 
     }
@@ -85,10 +85,10 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
     @Test(groups = {"regression"}, description = "Verify expand and collapse of filter sections")
     public void verifyPLPUpdatesForWaterDispenserFeature() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("Kitchen","French Door");
-        productItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
-        productItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
-        productItemsPageActions.featureFilter("Features ", " Water Dispenser ");
-        productItemsPageActions.openAllProductsAndValidate("Dispenser","Water Dispenser","Yes");
+        PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
+        PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
+        PLPProductItemsPageActions.featureFilter("Features ", " Water Dispenser ");
+        PLPProductItemsPageActions.openAllProductsAndValidate("Dispenser","Water Dispenser","Yes");
 
 
     }
@@ -96,10 +96,10 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
     @Test(groups = {"regression"}, description = "Verify expand and collapse of filter sections")
     public void verifyPLPUpdatesForADAComplaintFeature() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("Kitchen","French Door");
-        productItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
-        productItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
-        productItemsPageActions.featureFilter("Features ", " ADA Compliant ");
-        productItemsPageActions.openAllProductsAndValidate("Certifications and Approvals","ADA Compliant","Yes");
+        PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
+        PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
+        PLPProductItemsPageActions.featureFilter("Features ", " ADA Compliant ");
+        PLPProductItemsPageActions.openAllProductsAndValidate("Certifications and Approvals","ADA Compliant","Yes");
 
 
     }
@@ -108,10 +108,10 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
     @Test(groups = {"regression"}, description = "Verify expand and collapse of filter sections")
     public void verifyPLPUpdatesForEnergyStarCertifiedFeature() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("Kitchen","French Door");
-        productItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
-        productItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
-        productItemsPageActions.featureFilter("Features ", " ENERGY STAR Certified ");
-        productItemsPageActions.openAllProductsAndValidate("Certifications and Approvals","ENERGY STAR Certified","Yes");
+        PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
+        PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
+        PLPProductItemsPageActions.featureFilter("Features ", " ENERGY STAR Certified ");
+        PLPProductItemsPageActions.openAllProductsAndValidate("Certifications and Approvals","ENERGY STAR Certified","Yes");
 
 
     }
@@ -119,16 +119,16 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
     @Test(groups = {"regression"}, description = "Verify Visibility of every filters in PLP")
     public void verifyVisibilityOfFiltersInPLP() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("Kitchen","French Door");
-        productItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
-        productItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
-        productItemsPageActions.verifyFiltersInPLP("Availability");
-        productItemsPageActions.verifyFiltersInPLP("Series");
-        productItemsPageActions.verifyFiltersInPLP("color");
-        productItemsPageActions.verifyFiltersInPLP("Depth Type");
-        productItemsPageActions.verifyFiltersInPLP("Features");
-        productItemsPageActions.verifyFiltersInPLP("Standard Width");
-        productItemsPageActions.verifyFiltersInPLP("Height");
-        productItemsPageActions.verifyFiltersInPLP("Price");
+        PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
+        PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
+        PLPProductItemsPageActions.verifyFiltersInPLP("Availability");
+        PLPProductItemsPageActions.verifyFiltersInPLP("Series");
+        PLPProductItemsPageActions.verifyFiltersInPLP("color");
+        PLPProductItemsPageActions.verifyFiltersInPLP("Depth Type");
+        PLPProductItemsPageActions.verifyFiltersInPLP("Features");
+        PLPProductItemsPageActions.verifyFiltersInPLP("Standard Width");
+        PLPProductItemsPageActions.verifyFiltersInPLP("Height");
+        PLPProductItemsPageActions.verifyFiltersInPLP("Price");
 
 
 
@@ -138,22 +138,22 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
     @Test(groups = {"regression"}, description = "Verify Visibility of every filters in PLP")
     public void verifyFrigidaireGalleryProductInPLP() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("Kitchen","French Door");
-        productItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
-        productItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
-        productItemsPageActions.verifyFiltersInPLP("Availability");
-        productItemsPageActions.featureFilter("Series ", " Frigidaire Gallery ");
-        productItemsPageActions.validateFrigidaireGalleryAndProfessionalProducts("Frigidaire Gallery","Frigidaire Gallery");
+        PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
+        PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
+        PLPProductItemsPageActions.verifyFiltersInPLP("Availability");
+        PLPProductItemsPageActions.featureFilter("Series ", " Frigidaire Gallery ");
+        PLPProductItemsPageActions.validateFrigidaireGalleryAndProfessionalProducts("Frigidaire Gallery","Frigidaire Gallery");
 
     }
 
     @Test(groups = {"regression"}, description = "Verify Visibility of every filters in PLP")
     public void verifyFrigidaireProfessionalProductInPLP() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("Kitchen","French Door");
-        productItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
-        productItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
-        productItemsPageActions.verifyFiltersInPLP("Availability");
-        productItemsPageActions.featureFilter("Series ", " Frigidaire Professional ");
-        productItemsPageActions.validateFrigidaireGalleryAndProfessionalProducts("Frigidaire Professional","Frigidaire Professional");
+        PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
+        PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
+        PLPProductItemsPageActions.verifyFiltersInPLP("Availability");
+        PLPProductItemsPageActions.featureFilter("Series ", " Frigidaire Professional ");
+        PLPProductItemsPageActions.validateFrigidaireGalleryAndProfessionalProducts("Frigidaire Professional","Frigidaire Professional");
 
     }
 
@@ -166,12 +166,12 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
         productCategoryPageActions.clickOnProductMenu("Kitchen");
         productCategoryPageActions.clickOnProductMenu("French Door");
         //productItemsPageActions.closeEmailPopUp();
-        productItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
-        productItemsPageActions.verifyFiltersInProductItems("Availability",60,"Availability");
-       productItemsPageActions.validatePopularFiltersInPLP("Water Disp.","Water Disp.");
-       productItemsPageActions.validatePopularFiltersInPLP("Counter Depth","Counter Depth");
-       productItemsPageActions.validatePopularFiltersInPLP("Std. Depth","Std. Depth");
-        productItemsPageActions.validatePopularFiltersInPLP("Ice Maker","Ice Maker");
+        PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
+        PLPProductItemsPageActions.verifyFiltersInProductItems("Availability",60,"Availability");
+       PLPProductItemsPageActions.validatePopularFiltersInPLP("Water Disp.","Water Disp.");
+       PLPProductItemsPageActions.validatePopularFiltersInPLP("Counter Depth","Counter Depth");
+       PLPProductItemsPageActions.validatePopularFiltersInPLP("Std. Depth","Std. Depth");
+        PLPProductItemsPageActions.validatePopularFiltersInPLP("Ice Maker","Ice Maker");
 
     }
 
@@ -183,10 +183,10 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
         productCategoryPageActions.clickOnProductMenu("Kitchen");
         productCategoryPageActions.clickOnProductMenu("French Door");
         //productItemsPageActions.closeEmailPopUp();
-        productItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
-        productItemsPageActions.verifyFiltersInProductItems("Availability",60,"Availability");
-        productItemsPageActions.featureFilter("Depth Type ", " Counter-Depth ");
-        productItemsPageActions.validatePopularFilterTurnsRed("Counter Depth");
+        PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
+        PLPProductItemsPageActions.verifyFiltersInProductItems("Availability",60,"Availability");
+        PLPProductItemsPageActions.featureFilter("Depth Type ", " Counter-Depth ");
+        PLPProductItemsPageActions.validatePopularFilterTurnsRed("Counter Depth");
 
 
     }
@@ -201,10 +201,10 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
         productCategoryPageActions.clickOnProductMenu("Kitchen");
         productCategoryPageActions.clickOnProductMenu("French Door");
 //        productItemsPageActions.closeEmailPopUp();
-        productItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
-        productItemsPageActions.verifyFiltersInProductItems("Availability",60,"Availability");
-        productItemsPageActions.featureFilter("Depth Type ", " Counter-Depth ");
-        productItemsPageActions.validateCheckboxCheckedWhenPopularFilterClicked("Counter Depth","Depth Type", "Counter-Depth");
+        PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
+        PLPProductItemsPageActions.verifyFiltersInProductItems("Availability",60,"Availability");
+        PLPProductItemsPageActions.featureFilter("Depth Type ", " Counter-Depth ");
+        PLPProductItemsPageActions.validateCheckboxCheckedWhenPopularFilterClicked("Counter Depth","Depth Type", "Counter-Depth");
 
     }
 
@@ -216,10 +216,10 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
         productCategoryPageActions.clickOnProductMenu("Kitchen");
         productCategoryPageActions.clickOnProductMenu("French Door");
 //        productItemsPageActions.closeEmailPopUp();
-        productItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
-        productItemsPageActions.verifyFiltersInProductItems("Availability",60,"Availability");
-        productItemsPageActions.featureFilter("Features ", " Standard-Depth ");
-        productItemsPageActions.validatePopularFilterTurnsRed(" Std. Depth ");
+        PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
+        PLPProductItemsPageActions.verifyFiltersInProductItems("Availability",60,"Availability");
+        PLPProductItemsPageActions.featureFilter("Features ", " Standard-Depth ");
+        PLPProductItemsPageActions.validatePopularFilterTurnsRed(" Std. Depth ");
 
 
     }
@@ -233,10 +233,10 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
         productCategoryPageActions.clickOnProductMenu("Kitchen");
         productCategoryPageActions.clickOnProductMenu("French Door");
 //        productItemsPageActions.closeEmailPopUp();
-        productItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
-        productItemsPageActions.verifyFiltersInProductItems("Availability",60,"Availability");
-        productItemsPageActions.featureFilter("Depth Type ", " Standard-Depth ");
-        productItemsPageActions.validateCheckboxCheckedWhenPopularFilterClicked("Std. Depth","Depth Type", "Standard-Depth");
+        PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
+        PLPProductItemsPageActions.verifyFiltersInProductItems("Availability",60,"Availability");
+        PLPProductItemsPageActions.featureFilter("Depth Type ", " Standard-Depth ");
+        PLPProductItemsPageActions.validateCheckboxCheckedWhenPopularFilterClicked("Std. Depth","Depth Type", "Standard-Depth");
 
     }
 
@@ -249,10 +249,10 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
         productCategoryPageActions.clickOnProductMenu("Kitchen");
         productCategoryPageActions.clickOnProductMenu("French Door");
 //        productItemsPageActions.closeEmailPopUp();
-        productItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
-        productItemsPageActions.verifyFiltersInProductItems("Availability",60,"Availability");
-        productItemsPageActions.featureFilter("Features ", " Ice Maker ");
-        productItemsPageActions.validatePopularFilterTurnsRed("Ice Maker");
+        PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
+        PLPProductItemsPageActions.verifyFiltersInProductItems("Availability",60,"Availability");
+        PLPProductItemsPageActions.featureFilter("Features ", " Ice Maker ");
+        PLPProductItemsPageActions.validatePopularFilterTurnsRed("Ice Maker");
 
 
     }
@@ -267,10 +267,10 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
         productCategoryPageActions.clickOnProductMenu("Kitchen");
         productCategoryPageActions.clickOnProductMenu("French Door");
 //        productItemsPageActions.closeEmailPopUp();
-        productItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
-        productItemsPageActions.verifyFiltersInProductItems("Availability",60,"Availability");
-        productItemsPageActions.featureFilter("Depth Type ", " Ice Maker ");
-        productItemsPageActions.validateCheckboxCheckedWhenPopularFilterClicked("Ice Maker","Features", "Ice Maker");
+        PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
+        PLPProductItemsPageActions.verifyFiltersInProductItems("Availability",60,"Availability");
+        PLPProductItemsPageActions.featureFilter("Depth Type ", " Ice Maker ");
+        PLPProductItemsPageActions.validateCheckboxCheckedWhenPopularFilterClicked("Ice Maker","Features", "Ice Maker");
 
     }
 
@@ -286,10 +286,10 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
         productCategoryPageActions.clickOnProductMenu("Kitchen");
         productCategoryPageActions.clickOnProductMenu("French Door");
 //        productItemsPageActions.closeEmailPopUp();
-        productItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
-        productItemsPageActions.verifyFiltersInProductItems("Availability",60,"Availability");
-        productItemsPageActions.featureFilter("Features ", " Water Dispenser ");
-        productItemsPageActions.validatePopularFilterTurnsRed("Water Disp.");
+        PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
+        PLPProductItemsPageActions.verifyFiltersInProductItems("Availability",60,"Availability");
+        PLPProductItemsPageActions.featureFilter("Features ", " Water Dispenser ");
+        PLPProductItemsPageActions.validatePopularFilterTurnsRed("Water Disp.");
 
 
     }
@@ -303,10 +303,10 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
         productCategoryPageActions.clickOnProductMenu("Kitchen");
         productCategoryPageActions.clickOnProductMenu("French Door");
 //        productItemsPageActions.closeEmailPopUp();
-        productItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
-        productItemsPageActions.verifyFiltersInProductItems("Availability",60,"Availability");
-        productItemsPageActions.featureFilter("Depth Type ", " Water Dispenser ");
-        productItemsPageActions.validateCheckboxCheckedWhenPopularFilterClicked("Water Disp.","Features", "Water Dispenser");
+        PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
+        PLPProductItemsPageActions.verifyFiltersInProductItems("Availability",60,"Availability");
+        PLPProductItemsPageActions.featureFilter("Depth Type ", " Water Dispenser ");
+        PLPProductItemsPageActions.validateCheckboxCheckedWhenPopularFilterClicked("Water Disp.","Features", "Water Dispenser");
 
     }
 
@@ -320,9 +320,9 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
         productCategoryPageActions.clickOnProductMenu("Kitchen");
         productCategoryPageActions.clickOnProductMenu("French Door");
        // productItemsPageActions.closeEmailPopUp();
-        productItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
-        productItemsPageActions.verifyFiltersInProductItems("Availability",60,"Availability");
-        productItemsPageActions.validateAvailabilityOfProductsInPLP();
+        PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
+        PLPProductItemsPageActions.verifyFiltersInProductItems("Availability",60,"Availability");
+        PLPProductItemsPageActions.validateAvailabilityOfProductsInPLP();
 
     }
 
@@ -334,14 +334,14 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
         productCategoryPageActions.clickOnProductMenu("Kitchen");
         productCategoryPageActions.clickOnProductMenu("French Door");
 //        productItemsPageActions.closeEmailPopUp();
-        productItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
-        productItemsPageActions.verifyFiltersInProductItems("Availability",60,"Availability");
+        PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
+        PLPProductItemsPageActions.verifyFiltersInProductItems("Availability",60,"Availability");
 
-        productItemsPageActions.validateCheckboxUncheckedAfterCrossClick("Series", "Frigidaire Gallery","Frigidaire Gallery");
+        PLPProductItemsPageActions.validateCheckboxUncheckedAfterCrossClick("Series", "Frigidaire Gallery","Frigidaire Gallery");
 
-        productItemsPageActions.validateCheckboxUncheckedAfterCrossClick("Series", "Frigidaire Professional","Frigidaire Professional");
+        PLPProductItemsPageActions.validateCheckboxUncheckedAfterCrossClick("Series", "Frigidaire Professional","Frigidaire Professional");
 
-        productItemsPageActions.validateCheckboxUncheckedAfterCrossClick("Series", "Frigidaire","Frigidaire");
+        PLPProductItemsPageActions.validateCheckboxUncheckedAfterCrossClick("Series", "Frigidaire","Frigidaire");
 
     }
 
