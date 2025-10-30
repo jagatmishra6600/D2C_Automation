@@ -4,10 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40704c6d-babe-4e0d-8abe-445f1f125703" name="Changes" comment="&quot;update code!!&quot;">
+    <list default="true" id="40704c6d-babe-4e0d-8abe-445f1f125703" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/automation/frigidaire/enums/FrigidaireConstants.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/automation/frigidaire/pages/FAQPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/automation/frigidaire/pages/ProductItemsPageActions.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/automation/frigidaire/pages/ProductListingPageActions.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/automation/frigidaire/utils/DataProviders.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/automation/frigidaire/tests/EPIC_03_PDP/TC_NAGDTOPS_15684_AQA_PDP_Out_Of_Stock.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/automation/frigidaire/tests/EPIC_03_PDP/TC_NAGDTOPS_15700_AQA_Frigidaire_PDP_FAQ.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/automation/frigidaire/tests/EPIC_04_PLP/TC_NAGDTOPS_15687_AQA_PLP_Product_Cards.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/automation/frigidaire/pages/ProductItemsPageActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/automation/frigidaire/pages/ProductItemsPageActions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/automation/frigidaire/tests/EPIC_04_PLP/TC_04_PLP_Filters_AirCare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/automation/frigidaire/tests/EPIC_04_PLP/TC_04_PLP_Filters_AirCare.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestRunners/regression.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TestRunners/regression.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/automation/frigidaire/pages/ProductCategoryPageActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/automation/frigidaire/pages/ProductCategoryPageActions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/automation/frigidaire/utils/WebElementUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/automation/frigidaire/utils/WebElementUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-output/ExtentReport.html" beforeDir="false" afterPath="$PROJECT_DIR$/test-output/ExtentReport.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testng.xml" beforeDir="false" afterPath="$PROJECT_DIR$/testng.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,33 +35,11 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="main" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;history&quot;: [
-    {
-      &quot;state&quot;: &quot;OPEN&quot;,
-      &quot;assignee&quot;: &quot;vedantshukla-oss&quot;,
-      &quot;sort&quot;: &quot;RECENTLY_UPDATED&quot;
-    }
-  ],
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;vedantshukla-oss&quot;,
-    &quot;sort&quot;: &quot;RECENTLY_UPDATED&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/jagatmishra6600/D2C_Automation.git&quot;,
-    &quot;accountId&quot;: &quot;cb959a6a-67b7-4dea-a935-67b27a3bd345&quot;
-  }
-}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$MAVEN_REPOSITORY$/org/seleniumhq/selenium/selenium-api/4.21.0/selenium-api-4.21.0.jar!/org/openqa/selenium/WebElement.class" root0="SKIP_INSPECTION" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -73,51 +63,34 @@
     "RunOnceActivity.git.unshallow": "true",
     "TestNG.C:/Users/JagatM/Documents/frigidaire-automation/TestRunners/smoke.xml.executor": "Run",
     "TestNG.C:/Users/JagatM/Documents/frigidaire-automation/testng.xml.executor": "Run",
-    "TestNG.C:/Users/VedantS/IdeaProjects/D2C_Automation/testng.xml.executor": "Run",
-    "TestNG.TC_04_PLP_Filters_AirCare.testExpandAndCollapseFilter.executor": "Run",
-    "TestNG.TC_04_PLP_Filters_AirCare.testFeatureFilters.executor": "Run",
-    "TestNG.TC_04_PLP_Filters_AirCare.testHideShowFilters.executor": "Run",
-    "TestNG.TC_04_PLP_Filters_AirCare.testResetAll.executor": "Run",
-    "TestNG.TC_04_PLP_Filters_AirCare.testStandardWidthDimensions.executor": "Run",
-    "TestNG.TC_04_PLP_Filters_AirCare.verifyPLPUpdatesForMinWindowOpeningWidthFilter.executor": "Run",
-    "TestNG.TC_04_PLP_Filters_AirCare.verifyPLPUpdatesForVoltageRatingFilter.executor": "Run",
-    "TestNG.TC_04_PLP_Filters_AirCare.verifyPLPUpdatesForWaterDispenserFeature.executor": "Run",
-    "TestNG.TC_04_PLP_Filters_AirCare.verifyPLPUpdatesWhenSingleFilterSelected.executor": "Run",
-    "TestNG.TC_05_PLP_Sort_By_for_Air_Care.testSortByBiggestSavings.executor": "Run",
-    "TestNG.TC_05_PLP_Sort_By_for_Air_Care.testSortByPriceHighToLow.executor": "Run",
-    "TestNG.TC_05_PLP_Sort_By_for_Air_Care.testSortByPriceLowToHigh.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters (1).executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.resetAll.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.testExpandAndCollapseFilter.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.testFeatureFilters.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.testHideShowFilters.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.testHomePageLoad (1).executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.testHomePageLoad.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.testResetAll.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.testStandardWidthDimensions.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verifyFiltersInProductItems.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verifyFrigidaireGalleryAndProfessionalProductsInPLP.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verifyFrigidaireProfessionalProductInPLP.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verifyPLPUpdatesForADAComplaintFeature.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verifyPLPUpdatesForEnergyStarCertifiedFeature.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verifyPLPUpdatesForWaterDispenserFeature.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verifyPLPUpdatesWhenSingleFilterSelected.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verifyPopularFiltersInPLP.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verifyVisibilityOfFiltersInPLP.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Availaibility_In_PLP.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_CrossBtn_In_PLP.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Popular_Filters_Is_Checked_On_Clicling_the_RelatedFilter1InPLP.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Popular_Filters_Is_Checked_On_Clicling_the_RelatedFilter2InPLP.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Popular_Filters_Is_Checked_On_Clicling_the_RelatedFilter3InPLP.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Popular_Filters_Is_Checked_On_Clicling_the_RelatedFilterInPLP.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Popular_Filters_Is_Checked_On_Clicling_the_RelatedFiltersInPLP.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Related_Filter_Is_Checked_On_Clicling_Popular_filter1_In_PLP.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Related_Filter_Is_Checked_On_Clicling_Popular_filter2_In_PLP.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Related_Filter_Is_Checked_On_Clicling_Popular_filter3_In_PLP.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Related_Filter_Is_Checked_On_Clicling_Popular_filter_In_PLP.executor": "Run",
-    "TestNG.TC_NAGDTOPS_15695_PLP_SORT_BY.testHomePageLoad.executor": "Run",
-    "git-widget-placeholder": "#8 on TC__NAGDTOPS-15689__PLP__Filters",
+    "TestNG.C:/Users/RajatV/IdeaProjects/D2C_Automation/TestRunners/regression.xml.executor": "Run",
+    "TestNG.C:/Users/RajatV/IdeaProjects/D2C_Automation/testng.xml.executor": "Run",
+    "TestNG.TC_NAGDTOPS_15684_AQA_PDP_Out_Of_Stock.executor": "Run",
+    "TestNG.TC_NAGDTOPS_15684_AQA_PDP_Out_Of_Stock.testHomePageLoad (1).executor": "Run",
+    "TestNG.TC_NAGDTOPS_15684_AQA_PDP_Out_Of_Stock.testHomePageLoad.executor": "Run",
+    "TestNG.TC_NAGDTOPS_15684_AQA_PDP_Out_Of_Stock.testHomePageLoadForAirConditioners.executor": "Run",
+    "TestNG.TC_NAGDTOPS_15684_AQA_PDP_Out_Of_Stock.testHomePageLoadForKitchen.executor": "Run",
+    "TestNG.TC_NAGDTOPS_15684_AQA_PDP_Out_Of_Stock.testProductInStock (1).executor": "Run",
+    "TestNG.TC_NAGDTOPS_15684_AQA_PDP_Out_Of_Stock.testProductInStock.executor": "Run",
+    "TestNG.TC_NAGDTOPS_15684_AQA_PDP_Out_Of_Stock.testProductOutOfStock.executor": "Run",
+    "TestNG.TC_NAGDTOPS_15684_AQA_PDP_Out_Of_Stock.testStockForKitchen.executor": "Run",
+    "TestNG.TC_NAGDTOPS_15687_AQA_PLP_Product_Cards.executor": "Run",
+    "TestNG.TC_NAGDTOPS_15687_AQA_PLP_Product_Cards.testForAirCare.executor": "Run",
+    "TestNG.TC_NAGDTOPS_15687_AQA_PLP_Product_Cards.testForKitchen.executor": "Run",
+    "TestNG.TC_NAGDTOPS_15687_AQA_PLP_Product_Cards.testHomePageLoad.executor": "Run",
+    "TestNG.TC_NAGDTOPS_15687_AQA_PLP_Product_Cards.testHomePageLoads.executor": "Run",
+    "TestNG.TC_NAGDTOPS_15687_AQA_PLP_Product_Cards.testHomePageLoadsss.executor": "Run",
+    "TestNG.TC_NAGDTOPS_15700_AQA_Frigidaire_PDP_FAQ.executor": "Run",
+    "TestNG.TC_NAGDTOPS_15700_AQA_Frigidaire_PDP_FAQ.testFAQSecond.executor": "Run",
+    "TestNG.TC_NAGDTOPS_15700_AQA_Frigidaire_PDP_FAQ.testForFAQForAirCare.executor": "Run",
+    "TestNG.TC_NAGDTOPS_15700_AQA_Frigidaire_PDP_FAQ.testForFAQForKitchen.executor": "Run",
+    "TestNG.TC_NAGDTOPS_15700_AQA_Frigidaire_PDP_FAQ.testHomePageLoad.executor": "Run",
+    "TestNG.TC_NAGDTOPS_15700_AQA_Frigidaire_PDP_FAQ.testHomePageLoad12.executor": "Run",
+    "TestNG.TC_NAGDTOPS_15700_AQA_Frigidaire_PDP_FAQ.testHomePageLoadForKitchen.executor": "Run",
+    "TestNG.TC_NAGDTOPS_15700_AQA_Frigidaire_PDP_FAQ.testHomePageLoadForKitchen11.executor": "Run",
+    "TestNG.TC_NAGDTOPS_15700_AQA_Frigidaire_PDP_FAQ.testHomePageLoads.executor": "Run",
+    "TestNG.TC_NAGDTOPS_15700_AQA_Frigidaire_PDP_FAQ.testHomePageLoads13.executor": "Run",
+    "git-widget-placeholder": "TC__NAGDTOPS__15684__AQA__PDP__Out__Of__Stock",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/JagatM/Documents/frigidaire-automation",
     "onboarding.tips.debug.path": "C:/Users/JagatM/Documents/frigidaire-automation/src/main/java/org/example/Main.java",
@@ -135,12 +108,13 @@
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.automation.frigidaire.tests.EPIC_04_PLP" />
+      <recent name="com.automation.frigidaire.tests.EPIC_03_PDP" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.TC_04_PLP_Filters_AirCare.verifyPLPUpdatesForMinWindowOpeningWidthFilter">
-    <configuration name="C:/Users/VedantS/IdeaProjects/D2C_Automation/testng.xml" type="TestNG" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="TestNG.C:/Users/RajatV/IdeaProjects/D2C_Automation/TestRunners/regression.xml">
+    <configuration name="C:/Users/RajatV/IdeaProjects/D2C_Automation/TestRunners/regression.xml" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="frigidaire-automation" />
-      <option name="SUITE_NAME" value="$PROJECT_DIR$/testng.xml" />
+      <option name="SUITE_NAME" value="$PROJECT_DIR$/TestRunners/regression.xml" />
       <option name="TEST_OBJECT" value="SUITE" />
       <properties />
       <listeners />
@@ -148,7 +122,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TC_04_PLP_Filters_AirCare.verifyPLPUpdatesForMinWindowOpeningWidthFilter" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="TC_NAGDTOPS_15687_AQA_PLP_Product_Cards.testForKitchen" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="frigidaire-automation" />
       <extension name="coverage">
         <pattern>
@@ -195,6 +169,17 @@
       <option name="PACKAGE_NAME" value="com.automation.frigidaire.tests.EPIC_04_PLP" />
       <option name="MAIN_CLASS_NAME" value="com.automation.frigidaire.tests.EPIC_04_PLP.TC_04_PLP_Filters_AirCare" />
       <option name="METHOD_NAME" value="verifyPLPUpdatesForWaterDispenserFeature" />
+    <configuration name="TC_NAGDTOPS_15700_AQA_Frigidaire_PDP_FAQ.testForFAQForAirCare" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="frigidaire-automation" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.automation.frigidaire.tests.EPIC_03_PDP.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.automation.frigidaire.tests.EPIC_03_PDP" />
+      <option name="MAIN_CLASS_NAME" value="com.automation.frigidaire.tests.EPIC_03_PDP.TC_NAGDTOPS_15700_AQA_Frigidaire_PDP_FAQ" />
+      <option name="METHOD_NAME" value="testForFAQForAirCare" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -213,6 +198,17 @@
       <option name="PACKAGE_NAME" value="com.automation.frigidaire.tests.EPIC_04_PLP" />
       <option name="MAIN_CLASS_NAME" value="com.automation.frigidaire.tests.EPIC_04_PLP.TC_05_PLP_Sort_By_for_Air_Care" />
       <option name="METHOD_NAME" value="testSortByPriceLowToHigh" />
+    <configuration name="TC_NAGDTOPS_15700_AQA_Frigidaire_PDP_FAQ.testForFAQForKitchen" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="frigidaire-automation" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.automation.frigidaire.tests.EPIC_03_PDP.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.automation.frigidaire.tests.EPIC_03_PDP" />
+      <option name="MAIN_CLASS_NAME" value="com.automation.frigidaire.tests.EPIC_03_PDP.TC_NAGDTOPS_15700_AQA_Frigidaire_PDP_FAQ" />
+      <option name="METHOD_NAME" value="testForFAQForKitchen" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -227,6 +223,11 @@
         <item itemvalue="TestNG.C:/Users/VedantS/IdeaProjects/D2C_Automation/testng.xml" />
         <item itemvalue="TestNG.TC_04_PLP_Filters_AirCare.verifyPLPUpdatesForVoltageRatingFilter" />
         <item itemvalue="TestNG.TC_04_PLP_Filters_AirCare.verifyPLPUpdatesForWaterDispenserFeature" />
+        <item itemvalue="TestNG.C:/Users/RajatV/IdeaProjects/D2C_Automation/TestRunners/regression.xml" />
+        <item itemvalue="TestNG.TC_NAGDTOPS_15700_AQA_Frigidaire_PDP_FAQ.testForFAQForAirCare" />
+        <item itemvalue="TestNG.TC_NAGDTOPS_15700_AQA_Frigidaire_PDP_FAQ.testForFAQForKitchen" />
+        <item itemvalue="TestNG.TC_NAGDTOPS_15700_AQA_Frigidaire_PDP_FAQ" />
+        <item itemvalue="TestNG.TC_NAGDTOPS_15687_AQA_PLP_Product_Cards.testForKitchen" />
       </list>
     </recent_temporary>
   </component>
@@ -316,6 +317,28 @@
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="10" />
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/automation/frigidaire/tests/BaseTest.java</url>
+          <line>32</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/test/java/com/automation/frigidaire/tests/EPIC_03_PDP/TC_NAGDTOPS_15684_AQA_PDP_Out_Of_Stock.java</url>
+          <line>16</line>
+          <properties class="com.automation.frigidaire.tests.EPIC_03_PDP.TC_NAGDTOPS_15684_AQA_PDP_Out_Of_Stock" method="testStockForKitchen">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/test/java/com/automation/frigidaire/tests/EPIC_03_PDP/TC_NAGDTOPS_15684_AQA_PDP_Out_Of_Stock.java</url>
+          <line>31</line>
+          <properties class="com.automation.frigidaire.tests.EPIC_03_PDP.TC_NAGDTOPS_15684_AQA_PDP_Out_Of_Stock" method="testStockForAirConditioners">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

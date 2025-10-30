@@ -3,7 +3,8 @@ package com.automation.frigidaire.enums;
 import java.util.Arrays;
 import java.util.List;
 
-public class FrigidaireConstants { public static final String ADD_TO_CART="Add to cart";
+public class FrigidaireConstants {
+    public static final String ADD_TO_CART="Add to cart";
     public static final String EARLIEST_DATE="Earliest delivery:";
     public static final String IN_STOCK="In stock";
     public static final String TEMPORARILY="Temporarily Out of Stock";

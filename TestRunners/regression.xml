@@ -8,7 +8,10 @@
             </run>
         </groups>
         <classes>
-            <class name="com.automation.frigidaire.tests.EPIC_02_HomePage.FrigidaireWebsiteTest"/>
-        </classes>
-    </test>
+           <!-- <class name="com.automation.frigidaire.tests.EPIC_02_HomePage.FrigidaireWebsiteTest"/> !-->
+            <class name="com.automation.frigidaire.tests.EPIC_03_PDP.TC_NAGDTOPS_15700_AQA_Frigidaire_PDP_FAQ"/>
+            <class name="com.automation.frigidaire.tests.EPIC_03_PDP.TC_NAGDTOPS_15684_AQA_PDP_Out_Of_Stock"/>
+
+</classes>
+</test>
 </suite>

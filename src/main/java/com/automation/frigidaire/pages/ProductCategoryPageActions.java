@@ -20,16 +20,15 @@ public class ProductCategoryPageActions {
 
 
 
-
-
-
     public ProductCategoryPageActions  clickOnProductMenu(String text) {
         By locator = By.xpath("//h5[normalize-space(text())='" + text + "']");
         WaitUtils.untilClickable(locator,60);
         Assert.assertTrue(WebElementUtil.isDisplayed(locator), "Product menu '" + text + "' should be displayed before clicking.");
         System.out.println("Product menu " + text +" displayed before clicking.");
-//        WebElementUtil.waitForElementToBeVisible(locator);
+//       WebElementUtil.waitForElementToBeVisible(locator);
         WebElementUtil.clickElement(locator);
         return this;
-    }
+}
+  
+  
 }

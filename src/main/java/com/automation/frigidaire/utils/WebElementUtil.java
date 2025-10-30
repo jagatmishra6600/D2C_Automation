@@ -1,13 +1,21 @@
 package com.automation.frigidaire.utils;
 
-import org.openqa.selenium.*;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 
 import java.time.Duration;
-import java.util.List;
 import java.util.Set;
+import java.util.Random;
+import java.util.function.Supplier;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WebElementUtil {
 
@@ -64,6 +72,17 @@ public class WebElementUtil {
         }, 3, 1000);
     }
 
+
+    public static void zoomInOrOut(int zoomPercentage) {
+
+        if (zoomPercentage < 10 || zoomPercentage > 200) {
+            System.out.println("Zoom percentage out of range. Please provide a value between 10 and 200.");
+            return;
+        }
+        ((JavascriptExecutor) DriverManager.getDriver())
+                .executeScript("document.body.style.zoom='" + zoomPercentage + "%'");
+    }
+
     /**
      * Waits for an element to be visible and returns its text.
      * Retries up to 3 times if interaction fails.
@@ -98,7 +117,7 @@ public class WebElementUtil {
      * @return The WebElement once it is visible.
      */
     public static WebElement waitForElementToBeVisible(By locator) {
-        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(15));
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
@@ -155,16 +174,7 @@ public class WebElementUtil {
         }
     }
 
-    public static void zoomInOrOut(int zoomPercentage) {
-
-        if (zoomPercentage < 10 || zoomPercentage > 200) {
-            System.out.println("Zoom percentage out of range. Please provide a value between 10 and 200.");
-            return;
-        }
-        ((JavascriptExecutor) DriverManager.getDriver())
-                .executeScript("document.body.style.zoom='" + zoomPercentage + "%'");
-    }
-
+   
     public static void scrollAndClickUsingJSE(WebDriver driver, WebElement element) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
@@ -273,5 +283,175 @@ public class WebElementUtil {
                 break;
             }
         }
+    public static boolean isElementPresent(By locator) {
+        WebDriver driver = DriverManager.getDriver();
+        try {
+            driver.findElement(locator);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+    
+    /**
+     * Switches the Driver focus to Frame
+     * @param frameId you want to switch the focus to
+     */
+    public static void switchToFrame(String frameId) {
+    	DriverManager.getDriver().switchTo().frame(frameId);
+    }
+    
+    /**
+     * Switches the Driver focus to Back to the Default
+     */
+    public static void switchToDefaultContent() {
+    	DriverManager.getDriver().switchTo().defaultContent();
+    }
+    
+    /**
+     * Generates the random number
+     * @param range - length of the int we want to generate
+     * @return the random number in int
+     */
+    public static int getRandomNumber(int range) {
+    	return new Random().nextInt(range);
+    }
+    
+    /**
+     * Switch to Frame and perform the Action and then Switches back to Default Content
+     * @param frameNameOrId - to swithch to the frame, action- Action we want to perform Ex: getText(), isDisplayed()
+     * @return it return the output value of action (Ex: boolean, String, int)
+     */
+    public static <T> T performInFrame(String frameNameOrId, Supplier<T> action) {
+        try {
+            switchToFrame(frameNameOrId);
+            return action.get();
+        } finally {
+            switchToDefaultContent();
+        }
+    }
+
+    /**
+     * Scrolls the element into view using JavaScript and waits until it is clickable.
+     * @param locator The By locator of the element to scroll into view.
+     */
+
+    public static void scrollIntoView(By locator) {
+        WebElement element = waitForElementToBeVisible(locator);
+        ((JavascriptExecutor) DriverManager.getDriver()).executeScript(
+                "const element = arguments[0];" +
+                        "const rect = element.getBoundingClientRect();" +
+                        "const absoluteElementTop = rect.top + window.pageYOffset;" +
+                        "const offset = 100;" + // adjust offset as per sticky header height
+                        "window.scrollTo({top: absoluteElementTop - offset, behavior: 'instant'});",
+                element
+        );
+
+        waitForElementToBeClickable(locator);
+    }
+
+
+    public static void scrollIntoView(By locator, int stickyHeaderHeight) {
+        WebElement element = waitForElementToBeVisible(locator);
+        ((JavascriptExecutor) DriverManager.getDriver()).executeScript(
+                "const element = arguments[0];" +
+                        "const rect = element.getBoundingClientRect();" +
+                        "const absoluteElementTop = rect.top + window.pageYOffset;" +
+                        "const offset = " + stickyHeaderHeight + ";" + // adjust offset as per sticky header height
+                        "window.scrollTo({top: absoluteElementTop - offset, behavior: 'instant'});",
+                element
+        );
+
+        waitForElementToBeClickable(locator);
+    }
+
+    /**
+     * Finds all elements matching the given locator using the current WebDriver.
+     * @param locator The By locator to search for.
+     * @return List of WebElements matching the locator.
+     */
+    public static List<WebElement> findElements(By locator) {
+        if (DriverManager.getDriver() == null) {
+            throw new IllegalStateException("WebDriver is not initialized. Ensure DriverManager.getDriver() is called before using findElements.");
+        }
+        List<WebElement> elements = DriverManager.getDriver().findElements(locator);
+        if (elements.isEmpty()) {
+            System.err.println("No elements found for locator: " + locator);
+        }
+        return elements;
+    }
+
+    public static String getExactText(By locator) {
+        WebElement element = waitForElementToBeVisible(locator);
+        JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
+        return (String) js.executeScript("return arguments[0].textContent;", element);
+    }
+
+    /**
+     * Waits for a specific attribute of an element to contain a given value.
+     * @param locator The By locator of the element.
+     * @param attribute The attribute to check (e.g., "class", "value", "style").
+     * @param value The value that the attribute should contain.
+     * @param timeoutInSeconds The maximum time to wait in seconds.
+     */
+    public static void waitForAttributeToContain(By locator, String attribute, String value, int timeoutInSeconds) {
+        if (timeoutInSeconds <= 0) {
+            throw new IllegalArgumentException("Timeout must be greater than 0 seconds");
+        }
+        WebDriver driver = DriverManager.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
+        try {
+            wait.until(ExpectedConditions.attributeContains(locator, attribute, value));
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to wait for attribute '" + attribute + "' to contain value '" + value + "'", e);
+        }
+    }
+    
+    /**
+     * Switch to Frame and perform the Action and then Switches back to Default Content
+     * @param frameNameLocator - to switch to the frame, action- Action we want to perform Ex: getText(), isDisplayed()
+     * @return it return the output value of action (Ex: boolean, String, int)
+     */   
+    public static <T> T performInFrame(By frameElementLocator, Supplier<T> action) {
+        try {
+            switchToFrame(frameElementLocator);
+            return action.get();
+        } finally {
+            switchToDefaultContent();
+        }
+    }
+
+    /**
+     * Switches the Driver focus to Frame
+     * @param frameElement By locator to which user wants to switch the reference to
+     */
+    public static void switchToFrame(By  frameElementLocator) {	
+    	var frameElement = DriverManager.getDriver().findElement(frameElementLocator);
+    	DriverManager.getDriver().switchTo().frame(frameElement);
+    }   
+    
+    /**
+     * Switches the Driver focus to Latest Tab and closes the current tab
+     */
+    public static void switchToLatestTabAndClosePrevious() {
+        var tabs = new ArrayList<>(DriverManager.getDriver().getWindowHandles());
+        if (tabs.size() < 2) return;
+
+        DriverManager.getDriver().switchTo().window(tabs.get(tabs.size() - 2)).close();
+        DriverManager.getDriver().switchTo().window(tabs.get(tabs.size() - 1));
+    }
+    
+    /**
+     * Performs Control + Click action on a Element to open it into a new Tab
+     * @param By locator of the Element we want perform Control + Click
+     */
+    public static void ctrlClick(By locator) {
+        retryOnFailure(() -> {
+            WebElement element = waitForElementToBeClickable(locator);
+            new Actions(DriverManager.getDriver())
+                .keyDown(Keys.CONTROL)
+                .click(element)
+                .keyUp(Keys.CONTROL)
+                .build()
+                .perform();
+        }, 3, 1000);
     }
 }
