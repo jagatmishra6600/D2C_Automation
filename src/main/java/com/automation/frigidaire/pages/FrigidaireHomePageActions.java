@@ -1,6 +1,7 @@
 package com.automation.frigidaire.pages;
 
 import com.automation.frigidaire.utils.ConfigReader;
+import com.automation.frigidaire.utils.WaitUtils;
 import com.automation.frigidaire.utils.WebElementUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -96,6 +97,7 @@ public class FrigidaireHomePageActions {
     private final By productsLink = By.linkText("Products");
     private final By frigidaireLogo = By.cssSelector("img[alt='Frigidaire Company Logo']");
     private final By acceptButtonLocator = By.xpath("//button[@id='onetrust-accept-btn-handler']");
+    private final By emailPopUp=By.xpath("//span[@id=\"close-modal123\"]");
     private final By navigationBarAirConditioners = By.xpath("//h5[@aria-label='Air Conditioners']");
     private final By windowMounted = By.xpath("//h5[contains(text(), 'Window Mounted')]");
     private final By navigationBarKitchen = By.xpath("//h5[@aria-label='Kitchen']");
@@ -134,6 +136,7 @@ public class FrigidaireHomePageActions {
     public SearchResultsPageActions searchForProduct(String searchTerm) {
         return this.enterSearchTerm(searchTerm).clickSearchButton();
     }
+
 
     public ProductCategoryPageActions clickProductsLink() {
         WebElementUtil.clickElement(productsLink);
