@@ -172,6 +172,7 @@ public class FrigidaireHomePageActions {
         return new FrigidairePlpPageActions();
     }
     
+    
     public FrigidaireForgotPasswordPageActions navigateToResetPasswordPage() {
     	return navigateToHomePage().navigateToLoginPage().clickForgotPasswordLink();
     }
