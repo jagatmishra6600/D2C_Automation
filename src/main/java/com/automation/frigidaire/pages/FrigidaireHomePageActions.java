@@ -13,7 +13,7 @@ public class FrigidaireHomePageActions {
     //************************** Main Menu Bar Locators **************************
     private final By mainMenu_FrigidaireSite = By.cssSelector("img[alt='Frigidaire Brand Site']");
     private final By mainMenu_ElectroluxSite = By.cssSelector("img[alt='Electrolux Brand Site']");
-    private final By mainMenu_Login_OrderStatus = By.xpath("//*[@id='dropdown']/a");
+    private final By mainMenu_Login_OrderStatus = By.xpath("(//div[contains(.,'Log in / Order status')])[1]");
     private final By mainMenu_Contact = By.xpath("//a[contains(text(),'Contact us')]");
     private final By mainMenu_DeliverTo = By.xpath("//div[@class='pdp-hide-header-visible']//span[@class='Set-delivery-area']");
     private final By mainMenu_Cart = By.xpath("//img[@alt='Your Shopping Cart']");
@@ -158,6 +158,7 @@ public class FrigidaireHomePageActions {
     	clickLoginOrderStatusLink();
     	WebElementUtil.clickElement(mainMenu_Login_OrderStatus_Login);
     	return new FrigidaireLoginPageActions();
+    }
 
     public FrigidairePlpPageActions clickWindowMounted() {
         WebElementUtil.clickElement(navigationBarAirConditioners);
@@ -169,5 +170,8 @@ public class FrigidaireHomePageActions {
         WebElementUtil.clickElement(navigationBarKitchen);
         WebElementUtil.clickElement(frenchDoor);
         return new FrigidairePlpPageActions();
+    }
+    public FrigidaireForgotPasswordPageActions navigateToResetPasswordPage() {
+    	return navigateToHomePage().navigateToLoginPage().clickForgotPasswordLink();
     }
 }

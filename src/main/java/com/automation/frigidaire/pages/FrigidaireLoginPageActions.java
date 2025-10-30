@@ -125,4 +125,9 @@ public class FrigidaireLoginPageActions {
 		return new FrigidaireCreateAccountPageActions();
 	}
 	
+	public FrigidaireForgotPasswordPageActions clickForgotPasswordLink() {
+		WebElementUtil.clickElement(forgotPasswordLink);
+		return new FrigidaireForgotPasswordPageActions();
+	}
+	
 }
