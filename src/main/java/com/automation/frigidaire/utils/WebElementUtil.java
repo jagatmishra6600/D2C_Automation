@@ -1,13 +1,18 @@
 package com.automation.frigidaire.utils;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 
 import java.time.Duration;
 import java.util.Random;
 import java.util.function.Supplier;
+import java.util.ArrayList;
 import java.util.List;
 
 public class WebElementUtil {
@@ -204,6 +209,8 @@ public class WebElementUtil {
             return action.get();
         } finally {
             switchToDefaultContent();
+        }
+    }
 
     /**
      * Scrolls the element into view using JavaScript and waits until it is clickable.
@@ -279,5 +286,55 @@ public class WebElementUtil {
         } catch (Exception e) {
             throw new RuntimeException("Failed to wait for attribute '" + attribute + "' to contain value '" + value + "'", e);
         }
+    }
+    
+    /**
+     * Switch to Frame and perform the Action and then Switches back to Default Content
+     * @param frameNameLocator - to switch to the frame, action- Action we want to perform Ex: getText(), isDisplayed()
+     * @return it return the output value of action (Ex: boolean, String, int)
+     */   
+    public static <T> T performInFrame(By frameElementLocator, Supplier<T> action) {
+        try {
+            switchToFrame(frameElementLocator);
+            return action.get();
+        } finally {
+            switchToDefaultContent();
+        }
+    }
+
+    /**
+     * Switches the Driver focus to Frame
+     * @param frameElement By locator to which user wants to switch the reference to
+     */
+    public static void switchToFrame(By  frameElementLocator) {	
+    	var frameElement = DriverManager.getDriver().findElement(frameElementLocator);
+    	DriverManager.getDriver().switchTo().frame(frameElement);
+    }   
+    
+    /**
+     * Switches the Driver focus to Latest Tab and closes the current tab
+     */
+    public static void switchToLatestTabAndClosePrevious() {
+        var tabs = new ArrayList<>(DriverManager.getDriver().getWindowHandles());
+        if (tabs.size() < 2) return;
+
+        DriverManager.getDriver().switchTo().window(tabs.get(tabs.size() - 2)).close();
+        DriverManager.getDriver().switchTo().window(tabs.get(tabs.size() - 1));
+    }
+    
+    /**
+     * Performs Control + Click action on a Element to open it into a new Tab
+     * @param By locator of the Element we want perform Control + Click
+     */
+    public static void ctrlClick(By locator) {
+        retryOnFailure(() -> {
+            WebElement element = waitForElementToBeClickable(locator);
+            new Actions(DriverManager.getDriver())
+                .keyDown(Keys.CONTROL)
+                .click(element)
+                .keyUp(Keys.CONTROL)
+                .build()
+                .perform();
+        }, 3, 1000);
     }
 }
