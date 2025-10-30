@@ -12,6 +12,8 @@ public class TC_NAGDTOPS_15695_PLP_SORT_BY {
     ProductCategoryPageActions productCategoryPageActions=new ProductCategoryPageActions();
     ProductItemsPageActions productItemsPageActions =new ProductItemsPageActions();
 
+
+
     public void navigateToFrenchDoorRefrigerators() throws InterruptedException {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isHomePageLoaded(), "The Frigidaire home page did not load correctly.");
