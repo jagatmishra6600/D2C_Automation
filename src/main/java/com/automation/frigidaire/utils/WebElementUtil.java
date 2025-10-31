@@ -1,21 +1,15 @@
 package com.automation.frigidaire.utils;
 
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 
 import java.time.Duration;
-import java.util.Set;
-import java.util.Random;
+import java.util.*;
+import java.util.NoSuchElementException;
 import java.util.function.Supplier;
-import java.util.ArrayList;
-import java.util.List;
 
 public class WebElementUtil {
 
@@ -261,7 +255,7 @@ public class WebElementUtil {
      * @param locator The By locator of the element to check.
      * @return true if the element exists in the DOM, false otherwise.
      */
-    public static boolean isElementPresent(By locator) {
+    public static boolean isElementPresented(By locator) {
         WebDriver driver = DriverManager.getDriver();
         try {
             List<WebElement> elements = driver.findElements(locator);
@@ -283,13 +277,16 @@ public class WebElementUtil {
                 break;
             }
         }
-    public static boolean isElementPresent(By locator) {
-        WebDriver driver = DriverManager.getDriver();
-        try {
-            driver.findElement(locator);
-            return true;
-        } catch (NoSuchElementException e) {
-            return false;
+    }
+    public static boolean isElementPresent(By locator){
+            WebDriver driver = DriverManager.getDriver();
+            try {
+                driver.findElement(locator);
+                return true;
+            } catch (NoSuchElementException e) {
+                return false;
+            }
+        }
     
     /**
      * Switches the Driver focus to Frame
@@ -407,7 +404,7 @@ public class WebElementUtil {
     
     /**
      * Switch to Frame and perform the Action and then Switches back to Default Content
-     * @param frameNameLocator - to switch to the frame, action- Action we want to perform Ex: getText(), isDisplayed()
+     * @param - to switch to the frame, action- Action we want to perform Ex: getText(), isDisplayed()
      * @return it return the output value of action (Ex: boolean, String, int)
      */   
     public static <T> T performInFrame(By frameElementLocator, Supplier<T> action) {
@@ -421,7 +418,7 @@ public class WebElementUtil {
 
     /**
      * Switches the Driver focus to Frame
-     * @param frameElement By locator to which user wants to switch the reference to
+     * @paramlocator to which user wants to switch the reference to
      */
     public static void switchToFrame(By  frameElementLocator) {	
     	var frameElement = DriverManager.getDriver().findElement(frameElementLocator);
@@ -441,7 +438,7 @@ public class WebElementUtil {
     
     /**
      * Performs Control + Click action on a Element to open it into a new Tab
-     * @param By locator of the Element we want perform Control + Click
+     * @param  locator of the Element we want perform Control + Click
      */
     public static void ctrlClick(By locator) {
         retryOnFailure(() -> {
