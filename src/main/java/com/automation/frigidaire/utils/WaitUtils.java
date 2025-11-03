@@ -129,6 +129,11 @@ public final class WaitUtils {
         return untilPageLoadComplete(DEFAULT_TIMEOUT_SECONDS);
     }
 
+    // Page load helpers
+    public static void waitForPageLoad() {
+        WaitUtils.untilPageLoadComplete();
+    }
+
     public static boolean untilPageLoadComplete(long timeoutSeconds) {
         WebDriver driver = DriverManager.getDriver();
         WebDriverWait w = wait(Duration.ofSeconds(timeoutSeconds));

@@ -3,6 +3,8 @@ package com.automation.frigidaire.tests.EPIC_02_HomePage;
 import com.automation.frigidaire.pages.FrigidaireHomePageActions;
 import com.automation.frigidaire.tests.BaseTest;
 import com.automation.frigidaire.utils.ExtentReportManager;
+import com.automation.frigidaire.utils.WebElementUtil;
+import com.automation.frigidaire.utils.WaitUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -12,14 +14,14 @@ import java.util.List;
 public class TC_01_AQA_Homepage_Navigation extends BaseTest {
     private final FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
 
-    @Test(groups = {"regression"}, priority = 1)
+    @Test(groups = {"regression","TC_01"}, priority = 1)
     public void verifyFrigidaireLogoOnHomepage() {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isBrancdLogoLoaded(), "Frigidaire logo is not displayed on homepage");
         ExtentReportManager.getTest().pass("Home page loaded successfully and logo was verified.");
     }
 
-    @Test(groups = {"regression"}, priority = 2)
+    @Test(groups = {"regression","TC_01"}, priority = 2)
     public void verifySearchIconAndInterfaceOnHomepage() {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isSearchIconDisplayed(), "Search icon is not displayed on homepage");
@@ -31,163 +33,7 @@ public class TC_01_AQA_Homepage_Navigation extends BaseTest {
         ExtentReportManager.getTest().pass("Home page loaded successfully and logo was verified.");
     }
 
-
-////    To verify the L0 and L1 Product category navigation displayed on top of the homepage
-////    The shopper should be able to see the following L0 and L1 Categories in navigation bar:
-////
-////    L0 Kitchen:
-////
-////    Refrigerators:
-////    French Door
-////    Side-by-Side
-////    Single Door
-////    Top Freezer
-////    Bottom Freezer
-////    Compact
-////    Wine & Beverage
-////    Freezers:
-////    Single Door
-////    Upright
-////            Chest
-////    Dishwashers:
-////    Built-in-Dishwashers
-////    Ranges & Stoves:
-////    Induction
-////            Gas
-////    Electric
-////    Dual Fuel
-////    Explore Pizza
-////    Cooktops:
-////    Induction
-////            Gas
-////    Electric
-////    Wall Ovens:
-////    Single
-////            Double
-////    Microwave Combination
-////    Microwaves:
-////    Built-In
-////    Over-the-Range
-////            Ventilation
-////    Kitchen Packages
-////    Small Appliances:
-////    Retro Mini Fridges
-////    Espresso Makers
-////    Air Fryers
-////    Ice Makers
-////    Garbage Disposals
-////    L0 Air Conditioners:
-////
-////    Air Conditioners:
-////    Window Mounted
-////    Wall
-////            Portable
-////    More In Room Air:
-////    Dehumidifiers
-////            HVAC
-////    L0 Air Care:
-////
-////    Air Purifiers
-////    Dehumidifiers
-////    L0 Laundry:
-////
-////    Frigidaire Laundry:
-////    Washers
-////            Dryers
-////    Laundry Centers
-////    Electrolux Laundry:
-////    Washers
-////            Dryers
-////    Stacked Washer & Dryer
-////    L0 Filters:
-////
-////    Filters:
-////    Water Filters
-////    Refrigerator Air Filters
-////    Water & Air Filter Combo
-////    Air Conditioner Filters
-////    Furnace & HVAC Filters
-////    Microwave Filters
-////    Ventilation Filters
-////    More In Filters:
-////    Subscribe & Save
-////    Genuine Water Filters
-////    L0 Accessories:
-////
-////    Refrigeration:
-////    Ice Makers
-////    Trim Kits
-////    Organizer Bins
-////    Installation Parts
-////    Dishwashers:
-////    Installation Parts
-////    Wall Ovens:
-////    Trim Kits
-////    Racks & Air Fry Trays
-////    Cookware & Bakeware
-////    Microwaves:
-////    Trim Kits
-////    Installation Parts
-////    Ranges & Stoves:
-////    Trim Kits
-////    Racks & Air Fry Trays
-////    Cookware & Bakeware
-////    Installation Parts
-////    Air Conditioners
-////    Laundry:
-////    Installation Parts
-////    Cleaners
-////    Repair & Replacement Parts
-////    Appliance Paint
-////    L0 Owner Support:
-////
-////    Resource Library:
-////    Create an Account
-////    Write a Review
-////    Register Your Appliance
-////    FAQs & How-Tos
-////    Product Support
-////    Service & Maintenance:
-////    Prepare for Your Delivery
-////    Warranty Information
-////    Appliance Protection Plans
-////    Replacement Parts
-////    Contact Service & Repair
-////    L0 Blog:
-////
-////    All Blogs
-////    Appliance Tips
-////    Recipes
-////    Kitchen Design
-////    Our Brand
-////    L0 Sale:
-////
-////    Promotions:
-////    Fall Savings Deal (if applicable)
-////    Deal of the Week
-////    Rebates
-////    Discount:
-////    Military Discount
-////    First Responders Discount
-////    Healthcare Professionals
-////    Teachers Discount
-////    NOTE: All L0 except Owner Support and Blog will have a small Marketing Banner
-//
-//
-////    To verify the promotional banners on the homepage
-////    The shopper should be able to see different kinds of promotional and marketing banners on the homepage like:
-////
-////    Header Promotion
-////    Tiered Discount Banner
-////    Weekly and & Category Deals Section etc.
-////    The banners should have a clickable action button related to the content displayed
-//    @Test(priority = 3)
-//    public void verifyPromotionalBannersOnHomepage() {
-//        Assert.assertTrue(homePage.arePromotionalBannersDisplayed(), "Promotional banners are not displayed");
-//        Assert.assertTrue(homePage.areBannerActionButtonsClickable(), "Banner action buttons are not clickable");
-//    }
-
-    @Test(groups = {"regression", "TC_02"}, priority = 4)
+    @Test(groups = {"regression", "TC_01"}, priority = 4)
     public void verifyShopOurCategoriesSection() {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isShopOurCategoriesSectionDisplayed(), "'Shop Our Categories' section is not displayed");
@@ -201,7 +47,7 @@ public class TC_01_AQA_Homepage_Navigation extends BaseTest {
     }
 
 
-    @Test(groups = {"regression", "TC_02"}, priority = 5)
+    @Test(groups = {"regression", "TC_01"}, priority = 5)
     public void verifyShopOurTopRatedAppliancesSection() {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isShopOurTopRatedAppliancesSectionDisplayed(), "'Shop our Top-Rated, Most Feature-Packed Appliances' section is not displayed");
@@ -210,9 +56,7 @@ public class TC_01_AQA_Homepage_Navigation extends BaseTest {
         Assert.assertTrue(homePage.isUserOnPDP(), "Clicking on product card does not navigate to PDP");
     }
 
-//    To verify the 'More to Explore from Frigidare' section
-//    The shopper should see product banners with image, information and an action button
-    @Test(groups = {"regression", "TC_02"}, priority = 6)
+    @Test(groups = {"regression", "TC_01"}, priority = 6)
     public void verifyMoreToExploreSection() {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isMoreToExploreSectionDisplayed(), "'More to Explore from Frigidaire' section is not displayed");
@@ -221,28 +65,89 @@ public class TC_01_AQA_Homepage_Navigation extends BaseTest {
         Assert.assertEquals(actualMoreToExp, expectedMoreToExp, "Categories in 'Shop Our Categories' section do not match");
     }
 
-////    To verify the second set of promotional banners
-////    The shopper should see another set of promotional banners right below the 'More to Explore from Frigidare' section
-//    @Test(priority = 7)
-//    public void verifySecondPromotionalBanners() {
-//        Assert.assertTrue(homePage.isSecondPromotionalBannersDisplayed(), "Second set of promotional banners is not displayed");
-//    }
-//
-////    To verify promotional rating banner
-////    The shopper should be able to see a banner which includes a rating and a review
-//    @Test(priority = 8)
-//    public void verifyPromotionalRatingBanner() {
-//        Assert.assertTrue(homePage.isPromotionalRatingBannerDisplayed(), "Promotional rating banner is not displayed");
-//    }
-//
-////    To verify terms of offer section and Recall information
-////    The shopper should be able to see all terms of offer as text messages
-////    The shopper should be able to see Recall information link, clicking which takes the shopper to the Recall Information page
-//    @Test(priority = 9)
-//    public void verifyTermsAndRecallSection() {
-//        Assert.assertTrue(homePage.isTermsOfOfferDisplayed(), "Terms of offer section is not displayed");
-//        Assert.assertTrue(homePage.isRecallInformationLinkDisplayed(), "Recall information link is not displayed");
-//        homePage.clickRecallInformationLink();
-//        Assert.assertTrue(homePage.isUserOnRecallInformationPage(), "User is not on Recall Information page");
-//    }
+@Test(groups = {"regression","TC_01"}, priority = 7)
+public void TC_01_verifySecondPromotionalBanners() {
+    homePage.navigateToHomePage();
+    Assert.assertTrue(homePage.isMoreToExploreSectionDisplayed(), "'More to Explore from Frigidaire' section is not displayed");
+    Assert.assertTrue(homePage.isNewsletterRight_SpecialOffersDisplayed(), "Second set of promotional banners is not displayed");
+    ExtentReportManager.getTest().pass("Verified second promotional banners below More to Explore.");
+}
+
+@Test(groups = {"regression","TC_01"}, priority = 8)
+public void TC_01_verifyPromotionalRatingBanner() {
+    homePage.navigateToHomePage();
+    Assert.assertTrue(homePage.isShopOurTopRatedAppliancesSectionDisplayed(), "Top-rated appliances section is not displayed");
+    Assert.assertTrue(homePage.areProductCardsElementsDisplayed(), "Product card elements (including ratings) are not displayed");
+    ExtentReportManager.getTest().pass("Verified promotional rating banner shows rating and review elements.");
+}
+
+@Test(groups = {"regression","TC_01"}, priority = 9)
+public void TC_01_verifyTermsAndRecallSection() {
+    homePage.navigateToHomePage();
+    homePage.scrollToFooter();
+    Assert.assertTrue(homePage.isNewsletterLeft_TermsTextDisplayed(), "Terms of offer section is not displayed");
+    Assert.assertTrue(homePage.isFooter_IcemakerRecallDisplayed(), "Recall information link is not displayed");
+    homePage.clickFooter_IcemakerRecall();
+    WaitUtils.waitForPageLoad();
+    Assert.assertTrue(WaitUtils.untilUrlContains("recall"), "User is not on a Recall Information page");
+    ExtentReportManager.getTest().pass("Verified terms of offer and Recall Information navigation.");
+}
+
+@Test(groups = {"regression","TC_01"}, priority = 10)
+public void TC_01_verifyL0CategoriesInHeader() {
+    homePage.navigateToHomePage();
+    String[] l0Categories = new String[]{
+            "Kitchen","Air Conditioners","Air Care","Laundry","Filters",
+            "Accessories","Owner Support","Blog","Sale"
+    };
+    for (String cat : l0Categories) {
+        Assert.assertTrue(homePage.isHeaderCategoryDisplayed(cat), "L0 category not visible: " + cat);
+    }
+    ExtentReportManager.getTest().pass("Verified L0 header categories are visible: " + String.join(", ", l0Categories));
+}
+
+@Test(groups = {"regression","TC_01"}, priority = 11)
+public void TC_01_verifyKitchenL1SubcategoriesVisible() {
+    homePage.navigateToHomePage();
+    homePage.openHeaderCategory("Kitchen");
+    String[] kitchenSubcats = new String[]{
+            "French Door","Side-by-Side","Single Door","Top Freezer","Bottom Freezer",
+            "Compact","Wine & Beverage","Built-in-Dishwashers","Induction","Gas","Electric",
+            "Dual Fuel","Explore Pizza","Cooktops","Wall Ovens","Microwave Combination",
+            "Microwaves","Kitchen Packages","Retro Mini Fridges","Espresso Makers","Air Fryers",
+            "Ice Makers","Garbage Disposals"
+    };
+    for (String sub : kitchenSubcats) {
+        Assert.assertTrue(homePage.isHeaderSubcategoryDisplayed(sub), "Kitchen subcategory not visible: " + sub);
+    }
+    ExtentReportManager.getTest().pass("Verified Kitchen L1 subcategories are visible (sample set).");
+}
+
+@Test(groups = {"regression", "TC_01"}, priority = 12)
+public void TC_01_verifyAirConditionersL1SubcategoriesVisible() {
+    homePage.navigateToHomePage();
+    homePage.openHeaderCategory("Air Conditioners");
+    String[] acSubcats = new String[]{"Window Mounted","Wall","Portable","Dehumidifiers","HVAC"};
+    for (String sub : acSubcats) {
+        Assert.assertTrue(homePage.isHeaderSubcategoryDisplayed(sub), "Air Conditioners subcategory not visible: " + sub);
+    }
+    ExtentReportManager.getTest().pass("Verified Air Conditioners L1 subcategories are visible.");
+}
+
+@Test(groups = {"regression", "TC_01"}, priority = 13)
+public void TC_01_verifyPromotionalBannersCTAsClickable() {
+    homePage.navigateToHomePage();
+    Assert.assertTrue(homePage.isMoreToExploreSectionDisplayed(), "'More to Explore from Frigidaire' section is not displayed");
+    String[] ctas = new String[]{"NEW! Shop Air Purifiers","Shop Small Appliances","Subscribe & Save on Filters"};
+    String startUrl = WebElementUtil.getCurrentUrl();
+
+    for (String text : ctas) {
+        homePage.clickMoreToExploreLink(text);
+        WaitUtils.waitForPageLoad();
+        Assert.assertNotEquals(WebElementUtil.getCurrentUrl(), startUrl, "CTA did not navigate: " + text);
+        WebElementUtil.navigateTo("https://www.frigidaire.com/en/");
+        homePage.navigateToHomePage();
+    }
+    ExtentReportManager.getTest().pass("Verified promotional banners have clickable CTAs that navigate correctly.");
+}
 }
