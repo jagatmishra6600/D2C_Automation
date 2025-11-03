@@ -3,185 +3,246 @@ package com.automation.frigidaire.tests.EPIC_02_HomePage;
 import com.automation.frigidaire.pages.FrigidaireHomePageActions;
 import com.automation.frigidaire.tests.BaseTest;
 import com.automation.frigidaire.utils.ExtentReportManager;
-import com.automation.frigidaire.utils.WebElementUtil;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class TC_01_AQA_Homepage_Navigation extends BaseTest {
     private final FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
 
-    // Verify onclick on L0 - "Products", "Owner Resources", "Sustainability", "Better Living", and "Promotions" from the main navigation
-    // 1. Shopper should see a flyout displayed when click on "Products", "Owner Resources" and "Promotions".
-    // 2. Onclick on "Sustainability" and "Better Living"
-
-    @Test(groups = {"smoke", "regression","jagat"}, description = "Verify onclick on L0 - \"Products\", \"Owner Resources\", \"Sustainability\", \"Better Living\", and \"Promotions\" from the main navigation")
-    public void verifyMainNavigationLinksPresent() {
+    @Test(groups = {"regression"}, priority = 1)
+    public void verifyFrigidaireLogoOnHomepage() {
         homePage.navigateToHomePage();
-
-        Assert.assertTrue(WebElementUtil.isDisplayed(By.linkText("Kitchen")), "Products link not visible");
-        Assert.assertTrue(WebElementUtil.isDisplayed(By.linkText("Owner Resources")), "Owner Resources link not visible");
-        Assert.assertTrue(WebElementUtil.isDisplayed(By.linkText("Sustainability")), "Sustainability link not visible");
-        Assert.assertTrue(WebElementUtil.isDisplayed(By.linkText("Better Living")), "Better Living link not visible");
-        Assert.assertTrue(WebElementUtil.isDisplayed(By.linkText("Promotions")), "Promotions link not visible");
-
-        ExtentReportManager.getTest().pass("Verified visibility of main navigation links: Products, Owner Resources, Sustainability, Better Living, Promotions.");
+        Assert.assertTrue(homePage.isBrancdLogoLoaded(), "Frigidaire logo is not displayed on homepage");
+        ExtentReportManager.getTest().pass("Home page loaded successfully and logo was verified.");
     }
 
-    @Test(groups = {"regression"}, description = "Click Sustainability and Better Living should navigate to respective pages")
-    public void verifySustainabilityAndBetterLivingNavigate() {
+    @Test(groups = {"regression"}, priority = 2)
+    public void verifySearchIconAndInterfaceOnHomepage() {
         homePage.navigateToHomePage();
-
-        WebElementUtil.clickElement(By.linkText("Sustainability"));
-        Assert.assertTrue(WebElementUtil.isDisplayed(By.tagName("h1")), "Sustainability page did not load as expected");
-
-        homePage.navigateToHomePage();
-        WebElementUtil.clickElement(By.linkText("Better Living"));
-        Assert.assertTrue(WebElementUtil.isDisplayed(By.tagName("h1")), "Better Living page did not load as expected");
-
-        ExtentReportManager.getTest().pass("Navigated to Sustainability and Better Living pages successfully.");
+        Assert.assertTrue(homePage.isSearchIconDisplayed(), "Search icon is not displayed on homepage");
+        Assert.assertTrue(homePage.isSearchInputFieldDisplayed(), "Search input field is not displayed on homepage");
+        homePage.clickSearchInputAndEnterText("refrigerator");
+        Assert.assertTrue(homePage.areSearchSuggestionsDisplayed(), "Search suggestions are not displayed");
+        homePage.selectFirstSuggestion();
+        Assert.assertTrue(homePage.isUserOnSearchResultsPage(), "User is not on search results page");
+        ExtentReportManager.getTest().pass("Home page loaded successfully and logo was verified.");
     }
 
-    @Test(groups = {"regression"}, description = "Click Owner Resources should show flyout or navigate to a page")
-    public void verifyOwnerResourcesAccessible() {
+
+////    To verify the L0 and L1 Product category navigation displayed on top of the homepage
+////    The shopper should be able to see the following L0 and L1 Categories in navigation bar:
+////
+////    L0 Kitchen:
+////
+////    Refrigerators:
+////    French Door
+////    Side-by-Side
+////    Single Door
+////    Top Freezer
+////    Bottom Freezer
+////    Compact
+////    Wine & Beverage
+////    Freezers:
+////    Single Door
+////    Upright
+////            Chest
+////    Dishwashers:
+////    Built-in-Dishwashers
+////    Ranges & Stoves:
+////    Induction
+////            Gas
+////    Electric
+////    Dual Fuel
+////    Explore Pizza
+////    Cooktops:
+////    Induction
+////            Gas
+////    Electric
+////    Wall Ovens:
+////    Single
+////            Double
+////    Microwave Combination
+////    Microwaves:
+////    Built-In
+////    Over-the-Range
+////            Ventilation
+////    Kitchen Packages
+////    Small Appliances:
+////    Retro Mini Fridges
+////    Espresso Makers
+////    Air Fryers
+////    Ice Makers
+////    Garbage Disposals
+////    L0 Air Conditioners:
+////
+////    Air Conditioners:
+////    Window Mounted
+////    Wall
+////            Portable
+////    More In Room Air:
+////    Dehumidifiers
+////            HVAC
+////    L0 Air Care:
+////
+////    Air Purifiers
+////    Dehumidifiers
+////    L0 Laundry:
+////
+////    Frigidaire Laundry:
+////    Washers
+////            Dryers
+////    Laundry Centers
+////    Electrolux Laundry:
+////    Washers
+////            Dryers
+////    Stacked Washer & Dryer
+////    L0 Filters:
+////
+////    Filters:
+////    Water Filters
+////    Refrigerator Air Filters
+////    Water & Air Filter Combo
+////    Air Conditioner Filters
+////    Furnace & HVAC Filters
+////    Microwave Filters
+////    Ventilation Filters
+////    More In Filters:
+////    Subscribe & Save
+////    Genuine Water Filters
+////    L0 Accessories:
+////
+////    Refrigeration:
+////    Ice Makers
+////    Trim Kits
+////    Organizer Bins
+////    Installation Parts
+////    Dishwashers:
+////    Installation Parts
+////    Wall Ovens:
+////    Trim Kits
+////    Racks & Air Fry Trays
+////    Cookware & Bakeware
+////    Microwaves:
+////    Trim Kits
+////    Installation Parts
+////    Ranges & Stoves:
+////    Trim Kits
+////    Racks & Air Fry Trays
+////    Cookware & Bakeware
+////    Installation Parts
+////    Air Conditioners
+////    Laundry:
+////    Installation Parts
+////    Cleaners
+////    Repair & Replacement Parts
+////    Appliance Paint
+////    L0 Owner Support:
+////
+////    Resource Library:
+////    Create an Account
+////    Write a Review
+////    Register Your Appliance
+////    FAQs & How-Tos
+////    Product Support
+////    Service & Maintenance:
+////    Prepare for Your Delivery
+////    Warranty Information
+////    Appliance Protection Plans
+////    Replacement Parts
+////    Contact Service & Repair
+////    L0 Blog:
+////
+////    All Blogs
+////    Appliance Tips
+////    Recipes
+////    Kitchen Design
+////    Our Brand
+////    L0 Sale:
+////
+////    Promotions:
+////    Fall Savings Deal (if applicable)
+////    Deal of the Week
+////    Rebates
+////    Discount:
+////    Military Discount
+////    First Responders Discount
+////    Healthcare Professionals
+////    Teachers Discount
+////    NOTE: All L0 except Owner Support and Blog will have a small Marketing Banner
+//
+//
+////    To verify the promotional banners on the homepage
+////    The shopper should be able to see different kinds of promotional and marketing banners on the homepage like:
+////
+////    Header Promotion
+////    Tiered Discount Banner
+////    Weekly and & Category Deals Section etc.
+////    The banners should have a clickable action button related to the content displayed
+//    @Test(priority = 3)
+//    public void verifyPromotionalBannersOnHomepage() {
+//        Assert.assertTrue(homePage.arePromotionalBannersDisplayed(), "Promotional banners are not displayed");
+//        Assert.assertTrue(homePage.areBannerActionButtonsClickable(), "Banner action buttons are not clickable");
+//    }
+
+    @Test(groups = {"regression", "TC_02"}, priority = 4)
+    public void verifyShopOurCategoriesSection() {
         homePage.navigateToHomePage();
-
-        WebElementUtil.clickElement(By.linkText("Owner Resources"));
-        // As flyout detection can vary, conservatively assert that a page header is visible
-        Assert.assertTrue(WebElementUtil.isDisplayed(By.tagName("h1")), "Owner Resources interaction did not display expected content");
-
-        ExtentReportManager.getTest().pass("Owner Resources is accessible via main navigation.");
+        Assert.assertTrue(homePage.isShopOurCategoriesSectionDisplayed(), "'Shop Our Categories' section is not displayed");
+        List<String> expectedCategories = Arrays.asList(
+            "Refrigerators", "Freezers", "Ranges", "Cooktops", "Wall Ovens",
+            "Dishwashers", "Microwaves", "Window Air Conditioners",
+            "Portable Air Conditioners", "Wall Air Conditioners", "Dehumidifiers", "Air Purifiers"
+        );
+        List<String> actualCategories = homePage.getShopOurCategories();
+        Assert.assertEquals(actualCategories, expectedCategories, "Categories in 'Shop Our Categories' section do not match");
     }
 
-    @Test(groups = {"regression"}, description = "Click Promotions should show flyout or navigate to promotions page")
-    public void verifyPromotionsAccessible() {
+
+    @Test(groups = {"regression", "TC_02"}, priority = 5)
+    public void verifyShopOurTopRatedAppliancesSection() {
         homePage.navigateToHomePage();
-
-        WebElementUtil.clickElement(By.linkText("Promotions"));
-        Assert.assertTrue(WebElementUtil.isDisplayed(By.tagName("h1")), "Promotions interaction did not display expected content");
-
-        ExtentReportManager.getTest().pass("Promotions is accessible via main navigation.");
+        Assert.assertTrue(homePage.isShopOurTopRatedAppliancesSectionDisplayed(), "'Shop our Top-Rated, Most Feature-Packed Appliances' section is not displayed");
+        Assert.assertTrue(homePage.areProductCardsElementsDisplayed(), "Elements on product cards are not displayed correctly");
+        homePage.clickFirstProductCard();
+        Assert.assertTrue(homePage.isUserOnPDP(), "Clicking on product card does not navigate to PDP");
     }
-    //Verify onclick on L0 - "Products", "Owner Resources", "Sustainability", "Better Living", and "Promotions" from the main navigation
-            //1. Shopper should see a flyout displayed when click on "Products", "Owner Resources" and "Promotions".
-            //2. Onclick on "Sustainability" and "Better Living"
 
-    //Verify the L2 categories visibility by clicking on L1 Category
-            //    Shopper should display following L0 and L1 Categories in navigation bar
-            //
-            //    L0 - Products :
-            //    L1 - Vacuum Cleaners
-            //1. Explore Vacuums
-            //2. Vacuums
-            //
-            //    L1 - Front Load Laundry
-            //1. Explore Washers & Dryers
-            //2. Washers & Dryer Sets
-            //3. Washers
-            //4. Dryers
-            //5. Stacked Washer & Dryer Units
-            //6. Pedestal Drawers
-            //
-            //    L1 - Kitchen:
-            //            1. Ranges
-            //2. Cooktops
-            //3. Microwaves
-            //4. Dishwashers
-            //5. Wall Ovens
-            //6. Refrigerators
-            //7. Wine & Beverages
-            //8. Ice Makers
-            //9. Ventilation
-            //10. Kitchen Appliance Packages
-            //
-            //    L1 - Filters & Purifiers:
-            //            1. Water Filters
-            //2. Air Filters
-            //3. Vacuum Filters & Bags
-            //4. Air Purifiers
-            //
-            //    L1 - Accessories & More :
-            //            1.Laundry
-            //2. Refrigeration
-            //3. Cooking
-            //4. Dishwasher
-            //5. Vacuum
-            //6. Washer Cleaners
-            //7. Touch Up Paint
-            //8. Ventilation
-            //
-            //    L0 - Owner Resources:
-            //    L1 - Owner Support
-            //1. Resource Library
-            //2. Product Support
-            //3. Google Assistant
-            //4. Alexa Assistant
-            //
-            //    L1 - Appliance Care
-            //1. Replacement Parts
-            //2. Service Locator
-            //3. Product Registration
-            //4. Appliance Protection Plans
-            //
-            //    L1 - Customer Support
-            //1. Contact Us
-            //
-            //    L0 - Promotions
-            //    L1 - Promotions
-            //1. All Promotions
-            //2. Rebates
+//    To verify the 'More to Explore from Frigidare' section
+//    The shopper should see product banners with image, information and an action button
+    @Test(groups = {"regression", "TC_02"}, priority = 6)
+    public void verifyMoreToExploreSection() {
+        homePage.navigateToHomePage();
+        Assert.assertTrue(homePage.isMoreToExploreSectionDisplayed(), "'More to Explore from Frigidaire' section is not displayed");
+        List<String> expectedMoreToExp = Arrays.asList("NEW! Shop Air Purifiers", "Shop Small Appliances", "Subscribe & Save on Filters");
+        List<String> actualMoreToExp = homePage.getMoreToExp();
+        Assert.assertEquals(actualMoreToExp, expectedMoreToExp, "Categories in 'Shop Our Categories' section do not match");
+    }
 
-
-    //Verify search icon in the header
-            //    1. Shopper should see "Search" icon in the header
-            //2. Onclick on the icon, shopper should see an interface to type search bar
-
-    //Verify search interface in the header
-            //    Shopper should see:
-            // 1. After typing 4 letters in the search interface, search suggestions should be displayed
-            //2. Shopper can continue typing search keyword or select from the suggestions list.
-            //3. Suggestions list results reduces based on the search keyword entered.
-            //  4. On hit on enter, first suggestion from the list should get selected. Shopper should be navigated to search results page..
-
-    // Verify onclick on "Owner Resources" CTA from the main navigation
-            //Shopper should be displayed with flyout along with the below:
-            //    L0 - Owner Resources:
-            //    L1 - Owner Support
-            //1. Resource Library
-            //2. Product Support
-            //3. Google Assistant
-            //4. Alexa Assistant
-            //
-            //    L1 - Appliance Care
-            //1. Replacement Parts
-            //2. Service Locator
-            //3. Product Registration
-            //4. Appliance Protection Plans
-            //
-            //    L1 - Customer Support
-            //1. Contact Us
-
-    //    Verify onclick on each L1 / L2 link present in flyout
-                //    Shopper should be navigated to respective page.
-                //1. Internal URLs should open in the same page
-                //2. External URLs should open in a new tab
-
-
-    //Verify onclick on "Promotions" CTA from the main navigation
-            //Shopper should be displayed with flyout along with the below:
-            //    L0 - Promotions
-            //    L1 - Promotions
-            //1. All Promotions
-            //2. Rebates
-
-    //Verify onclick on each L1 / L2 link present in flyout
-            //    Shopper should be navigated to respective page.
-            //1. Internal URLs should open in the same page
-            //2. External URLs should open in a new tab
-
-    //Verify onclick on "Sustainability" CTA from the main navigation
-            //    Shopper should be navigated to respective page.
-            //1. Internal URLs should open in the same page
-            //2. External URLs should open in a new tab
-
+////    To verify the second set of promotional banners
+////    The shopper should see another set of promotional banners right below the 'More to Explore from Frigidare' section
+//    @Test(priority = 7)
+//    public void verifySecondPromotionalBanners() {
+//        Assert.assertTrue(homePage.isSecondPromotionalBannersDisplayed(), "Second set of promotional banners is not displayed");
+//    }
+//
+////    To verify promotional rating banner
+////    The shopper should be able to see a banner which includes a rating and a review
+//    @Test(priority = 8)
+//    public void verifyPromotionalRatingBanner() {
+//        Assert.assertTrue(homePage.isPromotionalRatingBannerDisplayed(), "Promotional rating banner is not displayed");
+//    }
+//
+////    To verify terms of offer section and Recall information
+////    The shopper should be able to see all terms of offer as text messages
+////    The shopper should be able to see Recall information link, clicking which takes the shopper to the Recall Information page
+//    @Test(priority = 9)
+//    public void verifyTermsAndRecallSection() {
+//        Assert.assertTrue(homePage.isTermsOfOfferDisplayed(), "Terms of offer section is not displayed");
+//        Assert.assertTrue(homePage.isRecallInformationLinkDisplayed(), "Recall information link is not displayed");
+//        homePage.clickRecallInformationLink();
+//        Assert.assertTrue(homePage.isUserOnRecallInformationPage(), "User is not on Recall Information page");
+//    }
 }

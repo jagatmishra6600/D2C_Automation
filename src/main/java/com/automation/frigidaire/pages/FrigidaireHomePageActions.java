@@ -1,10 +1,14 @@
 package com.automation.frigidaire.pages;
 
 import com.automation.frigidaire.utils.ConfigReader;
+import com.automation.frigidaire.utils.WaitUtils;
 import com.automation.frigidaire.utils.WebElementUtil;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
+import java.util.List;
 import static com.automation.frigidaire.utils.WaitUtils.untilClickable;
 
 public class FrigidaireHomePageActions {
@@ -19,6 +23,11 @@ public class FrigidaireHomePageActions {
     private final By mainMenu_Cart = By.xpath("//img[@alt='Your Shopping Cart']");
     private final By mainMenu_CartCount = By.xpath("//span[@class='count']");
     private final By mainMenu_Login = By.cssSelector("a[role='link']");
+    private final By mainMenu_searchInput = By.cssSelector("input[placeholder='Search...']");
+    private final By mainMenu_searchButton = By.cssSelector("button[aria-label='Search']");
+    private final By mainMenu_searchSuggestions = By.xpath("//*[@class='suggestions font-weight-bold']");
+    private final By mainMenu_searchSuggestions_FirstElement = By.xpath("//*[@class='suggestions font-weight-bold']/a[1]");
+    private final By mainMenu_searchSuggestions_Landing = By.cssSelector("div[class='title mb-1'] h1 p");
     //************************** Header Menu Bar Locators **************************
     private final By mainMenu_Logo = By.xpath("//img[@alt='Frigidaire Company Logo']");
     private final By headerMenu_Kitchen = By.cssSelector("h5[aria-label='Kitchen']");
@@ -33,6 +42,16 @@ public class FrigidaireHomePageActions {
     //************************** Message and Feedback *******************************
     private final By message_CTA = By.xpath("//u[normalize-space()='Privacy Policy']");
     private final By Feedback_CTA = By.xpath("//img[contains(@alt,'Feedback Button')]");
+
+    //************************** Body Locators ************************************
+    private By body_shopOurCategoriesHeading = By.xpath("//h2[contains(text(), 'Shop Our Categories')]");
+    private By body_category_item = By.xpath("//*[@class=\"row six_items standard-category-list\"]/div/div[2]/cx-generic-link/a");
+    private By body_ShopOurTopRatedAppliancesSection = By.xpath("//h2[contains(text(), 'Shop our Top-Rated, Most Feature-Packed Appliances')]");
+    private By body_ShopOurTopRatedAppliancesCard = By.xpath("//*[@class=\"carousel-tracks\"]");
+    private By body_firstProductCard = By.xpath("//*[@class=\"carousel-tracks\"]/div[1]");
+    private By body_firstProductSku = By.xpath("(//*[@class=\"prodSku\"]/span)[1]");
+    private By body_PDPfirstProductSku = By.xpath("//h2[@class='prod_id Utility-TextProduct-SKU-Sm ng-star-inserted']");
+    private By body_MoretoExpHeading = By.xpath("//h2[contains(text(), 'More to Explore from Frigidaire')]");
 
     //************************** Footer Locators ************************************
     //Featured
@@ -90,12 +109,13 @@ public class FrigidaireHomePageActions {
     private final By pre_Footer_FirstToKnow_PrivacyPolicy = By.xpath("//u[normalize-space()='Privacy Policy']");
 
 
-
-    private final By searchInput = By.cssSelector("input[type='search']");
-    private final By searchButton = By.cssSelector("button[aria-label='Search']");
     private final By productsLink = By.linkText("Products");
     private final By frigidaireLogo = By.cssSelector("img[alt='Frigidaire Company Logo']");
     private final By acceptButtonLocator = By.xpath("//button[@id='onetrust-accept-btn-handler']");
+    private final By navigationBarAirConditioners = By.xpath("//h5[@aria-label='Air Conditioners']");
+    private final By windowMounted = By.xpath("//h5[contains(text(), 'Window Mounted')]");
+    private final By navigationBarKitchen = By.xpath("//h5[@aria-label='Kitchen']");
+    private final By frenchDoor = By.xpath("//h5[contains(text(), 'French Door')]");
 
     public FrigidaireHomePageActions navigateToHomePage() {
         WebElementUtil.navigateTo(ConfigReader.getProperty("app.url"));
@@ -191,6 +211,7 @@ public class FrigidaireHomePageActions {
         zipInput.sendKeys(zip);
         WebElementUtil.clickElement(By.id("setZipCodeButton"));
     }
+
     public boolean isMiniCartCountUpdated() {
         WebElement cartIcon = WebElementUtil.waitForElementToBeVisible(mainMenu_Cart);
         String ariaLabel = WebElementUtil.getText(mainMenu_CartCount);
@@ -198,10 +219,8 @@ public class FrigidaireHomePageActions {
     }
 
     public void addIteamToCart(String itemName) {
-        WebElementUtil.sendKeys(searchInput, itemName);
-        WebElementUtil.clickElement(searchButton);
-        WebElementUtil.clickElement(productAddToCart);
-        WebElementUtil.clickElement(closeButtonLocator);
+        WebElementUtil.sendKeys(mainMenu_searchInput, itemName);
+        WebElementUtil.clickElement(mainMenu_searchButton);
         WebElementUtil.clickElement(mainMenu_Logo);
     }
 
@@ -215,5 +234,131 @@ public class FrigidaireHomePageActions {
         WebElementUtil.clickElement(navigationBarKitchen);
         WebElementUtil.clickElement(frenchDoor);
         return new FrigidairePlpPageActions();
+    }
+
+    public boolean isSearchIconDisplayed() {
+        return WebElementUtil.isDisplayed(mainMenu_searchInput);
+    }
+
+    public void clickSearchInputAndEnterText(String searchText) {
+        WebElementUtil.clickElement(mainMenu_searchInput);
+        WebElement searchInputElement = WebElementUtil.waitForElementToBeVisible(mainMenu_searchInput);
+        searchInputElement.clear();
+        for (char c : searchText.toCharArray()) {
+            searchInputElement.sendKeys(String.valueOf(c));
+            WaitUtils.sleep(100);
+        }
+        if (searchText.length() >= 4) {
+            WebElementUtil.waitForElementToBeVisible(mainMenu_searchSuggestions);
+        }
+    }
+
+    public List<WebElement> getSearchSuggestionsList() {
+        WaitUtils.untilPresent(mainMenu_searchSuggestions);
+        return WebElementUtil.findElements(mainMenu_searchSuggestions);
+    }
+
+
+    public boolean areSearchSuggestionsDisplayed() {
+        try {
+            WebElement suggestionsElement = WebElementUtil.waitForElementToBeVisible(mainMenu_searchSuggestions);
+            return suggestionsElement.isDisplayed() && !getSearchSuggestionsList().isEmpty();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean isSearchInputFieldDisplayed() {
+        try {
+            WebElement searchInputElement = WebElementUtil.waitForElementToBeVisible(mainMenu_searchInput);
+            return searchInputElement.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void selectFirstSuggestion() {
+        WebElementUtil.clickElement(mainMenu_searchSuggestions_FirstElement);
+    }
+
+    public boolean isUserOnSearchResultsPage() {
+        try {
+            WebElement resultsElement = WebElementUtil.waitForElementToBeVisible(mainMenu_searchSuggestions_Landing);
+            return resultsElement.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean isShopOurCategoriesSectionDisplayed() {
+        return WebElementUtil.waitForElementToBeVisible(body_shopOurCategoriesHeading).isDisplayed() ;
+    }
+
+    public List<String> getShopOurCategories() {
+        List<String> categories = new ArrayList<>();
+        try {
+            // Try primary locator first
+            List<WebElement> categoryElements = WebElementUtil.findElements(body_category_item);
+
+            for (WebElement categoryElement : categoryElements) {
+                String categoryName = categoryElement.getText().trim();
+                if (!categoryName.isEmpty() && !categories.contains(categoryName)) {
+                    categories.add(categoryName);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error retrieving categories: " + e.getMessage());
+        }
+        return categories;
+    }
+
+    public boolean isShopOurTopRatedAppliancesSectionDisplayed() {
+        return WebElementUtil.waitForElementToBeVisible(body_ShopOurTopRatedAppliancesSection).isDisplayed() ;
+    }
+
+    public boolean areProductCardsElementsDisplayed() {
+        return WebElementUtil.waitForElementToBeVisible(body_ShopOurTopRatedAppliancesCard).isDisplayed() ;
+    }
+
+    public void clickFirstProductCard() {
+        try {
+            WaitUtils.sleep(1000);
+            WebElementUtil.scrollIntoView(body_firstProductCard);
+            WebElement firstProductCard = WebElementUtil.waitForElementToBeVisible(body_firstProductCard);
+            firstProductCard.click();
+        } catch (Exception e) {
+            System.out.println("Error clicking first product card: " + e.getMessage());
+            throw e;
+        }
+    }
+
+    public boolean isUserOnPDP() {
+        String skuProductTitle = WebElementUtil.getText(body_firstProductSku);
+        WebElementUtil.clickElement(body_firstProductCard);
+        String getSKu = WebElementUtil.getText(body_PDPfirstProductSku);
+        return skuProductTitle.equals(getSKu);
+    }
+
+    public boolean isMoreToExploreSectionDisplayed(){
+        return WebElementUtil.waitForElementToBeVisible(body_MoretoExpHeading).isDisplayed() ;
+    }
+
+    public List<String> getMoreToExp() {
+        List<String> categories = new ArrayList<>();
+        try {
+            // Try primary locator first
+            WebElementUtil.scrollIntoView(body_category_item);
+            List<WebElement> categoryElements = WebElementUtil.findElements(body_category_item);
+
+            for (WebElement categoryElement : categoryElements) {
+                String categoryName = categoryElement.getText().trim();
+                if (!categoryName.isEmpty() && !categories.contains(categoryName)) {
+                    categories.add(categoryName);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error retrieving categories: " + e.getMessage());
+        }
+        return categories;
     }
 }

@@ -3,12 +3,13 @@ package com.automation.frigidaire.tests.EPIC_02_HomePage;
 import com.automation.frigidaire.pages.ContactPageActions;
 import com.automation.frigidaire.pages.FrigidaireHomePageActions;
 import com.automation.frigidaire.pages.LoginPageActions;
+import com.automation.frigidaire.tests.BaseTest;
 import com.automation.frigidaire.utils.ConfigReader;
 import com.automation.frigidaire.utils.ExtentReportManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TC_02_AQA_Homepage_Header extends com.automation.frigidaire.tests.BaseTest {
+public class TC_02_AQA_Homepage_Header extends BaseTest {
 
     FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
     LoginPageActions loginScreen = new LoginPageActions();
@@ -18,7 +19,7 @@ public class TC_02_AQA_Homepage_Header extends com.automation.frigidaire.tests.B
     public void TC_02_S1_VerifyBandLogoDisplayed() {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isBrancdLogoLoaded(), "The Frigidaire Logo did not load correctly.");
-        ExtentReportManager.getTest().pass("Home page loaded successfully and logo was verified.");
+//ExtentReportManager.getTest().pass("Home page loaded successfully and logo was verified.");
     }
 
     @Test(groups = {"regression","TC_02"}, description = "Verify on click on brand logo / icon from the header")
@@ -35,7 +36,7 @@ public class TC_02_AQA_Homepage_Header extends com.automation.frigidaire.tests.B
         Assert.assertTrue(homePage.isHomePageLoaded(), "The Frigidaire home page did not load correctly.");
         homePage.navigateToLoginPage();
         Assert.assertTrue(loginScreen.loginWithCredentials(ConfigReader.getProperty("username"), ConfigReader.getProperty("password")), "Login page did not load correctly and Logo is not displayed");
-        ExtentReportManager.getTest().pass("Home page loaded successfully and logo was verified.");
+        //ExtentReportManager.getTest().pass("Home page loaded successfully and logo was verified.");
     }
 
     @Test(groups = {"regression","TC_02"}, description = "Verify \"Contact us\" link from header")

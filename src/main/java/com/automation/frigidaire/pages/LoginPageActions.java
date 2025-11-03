@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import static com.automation.frigidaire.utils.WaitUtils.untilClickable;
+import static com.automation.frigidaire.utils.WaitUtils.untilVisible;
 
 public class LoginPageActions {
 
@@ -53,6 +54,7 @@ public class LoginPageActions {
             WebElementUtil.sendKeys(txt_Email, username);
             WebElementUtil.sendKeys(txt_Password, password);
             WebElementUtil.clickElement(btn_Login);
+            untilVisible(login_HomeLogo,20);
             return WebElementUtil.isDisplayed(login_HomeLogo);
         } catch (Exception e) {
             return false;
