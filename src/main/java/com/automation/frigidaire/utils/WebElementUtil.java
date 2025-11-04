@@ -126,6 +126,23 @@ public class WebElementUtil {
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
+    public static void hoverElement(By locator) {
+        WebElement element = waitForElementToBeVisible(locator);
+        Actions actions = new Actions(DriverManager.getDriver());
+        actions.moveToElement(element).perform();
+    }
+
+    public static WebElement waitForElementToBeVisible(By locator, int seconds) {
+        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(seconds));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+
+    public static WebElement waitForElementToBeClickable(By locator, int seconds) {
+        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(seconds));
+        return wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
     /**
      * Navigates the browser to the specified URL.
      *
