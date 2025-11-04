@@ -41,6 +41,8 @@ public class TC_04_PLP_ELECTROLUX_SORT_BY  extends BaseTest {
         ExtentReportManager.getTest().pass("Successfully sort products by Price Low to High");
     }
 
+
+
     @Test(groups = {"smoke", "regression"}, description = "Should sort products by Price High to Low")
     public void testSortByPriceHighToLow() throws InterruptedException {
         navigateToVacuumsProducts("electrolux","Vacuums","Shop All Vacuums");
