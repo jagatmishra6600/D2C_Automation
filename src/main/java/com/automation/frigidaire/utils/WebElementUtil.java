@@ -468,4 +468,24 @@ public class WebElementUtil {
                 .perform();
         }, 3, 1000);
     }
+
+
+
+
+    public static WebElement findElementIfPresent(By locator) {
+        try {
+            List<WebElement> elements = DriverManager.getDriver().findElements(locator);
+            if (!elements.isEmpty()) {
+                return elements.get(0);
+            }
+        } catch (Exception ignored) {}
+        return null;
+    }
+
+
+
+    public static WebElement waitForElementToBeVisible(By locator, int time ) {
+        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(time));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
 }

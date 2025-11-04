@@ -14,20 +14,25 @@ public class ProductCategoryPageActions {
         return WebElementUtil.isDisplayed(pageHeader);
     }
 
-    public void clickRefrigeratorsCategory() {
-        WebElementUtil.clickElement(refrigeratorsCategoryLink);
+
+public ProductCategoryPageActions clickOnProductMenu(String website, String text) {
+    By locator;
+
+    if (website.equalsIgnoreCase("frigidaire")) {
+        locator = By.xpath("//h5[normalize-space(text())='" + text + "']");
+    } else if (website.equalsIgnoreCase("electrolux")) {
+        locator = By.xpath("//h5[normalize-space(text())='" + text + "']");
+    } else {
+        throw new IllegalArgumentException("Unknown website: " + website);
     }
 
+    WaitUtils.untilClickable(locator, 60);
+    Assert.assertTrue(WebElementUtil.isDisplayed(locator),
+            "Product menu '" + text + "' should be displayed before clicking.");
+    System.out.println("Product menu " + text + " displayed before clicking.");
+    WebElementUtil.clickElement(locator);
 
-
-    public ProductCategoryPageActions  clickOnProductMenu(String text) {
-        By locator = By.xpath("//h5[normalize-space(text())='" + text + "']");
-        WaitUtils.untilClickable(locator,60);
-        Assert.assertTrue(WebElementUtil.isDisplayed(locator), "Product menu '" + text + "' should be displayed before clicking.");
-        System.out.println("Product menu " + text +" displayed before clicking.");
-//       WebElementUtil.waitForElementToBeVisible(locator);
-        WebElementUtil.clickElement(locator);
-        return this;
+    return this;
 }
   
   
