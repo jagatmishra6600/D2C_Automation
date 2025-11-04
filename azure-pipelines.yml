@@ -14,7 +14,6 @@ schedules:
   branches:
     include:
     - main
-    - TC_02_AQA_HomePage_Header
   always: true
 
 pool:
