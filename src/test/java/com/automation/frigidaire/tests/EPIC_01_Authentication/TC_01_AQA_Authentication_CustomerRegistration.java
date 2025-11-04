@@ -20,7 +20,7 @@ public class TC_01_AQA_Authentication_CustomerRegistration extends BaseTest {
 	 
 	 @Test(groups = {"smoke", "regression"}, description = "Verify LoginPage Fields and Messages")
 	    public void TC_01_S1_VerifyLoginPageFields() {
-	    	var loginPage = homePage.navigateToHomePage().navigateToLoginPage();
+	    	var loginPage = homePage.navigateToLoginPage();
 	    	
 	    	Assert.assertTrue(loginPage.isLoginPageLoaded(),"User is not navigated to LoginPage");
 	    	Assert.assertTrue(loginPage.isLoginToFrigidaireTitleDisplayed(),"'Log in to Frigidaire' title is not present");
@@ -41,8 +41,8 @@ public class TC_01_AQA_Authentication_CustomerRegistration extends BaseTest {
 	 
 	 @Test(groups = {"smoke", "regression"}, description = "Verify Navigation to Customer Registration Page after Click On Create Account Link")
 	    public void TC_01_S1_VerifyNavigationToCustomerRegistrationPage() {
-		 	var createAccountPage = loginPage.navigateToLoginPage()
-		 				                      	.clickCreateAccountLink();
+		 	var createAccountPage = loginPage.navigateToCreateAccountPage();
+		 				                      
 		 	Assert.assertTrue(createAccountPage.isCreateAccountPageLoaded(),"User is not navigated to Customer Registration Page");
 	    	
 		 	ExtentReportManager.getTest().pass("User Successfully Navigated to Customer Registration Page After Click on Create Account Link in Login Page");  	    			 	  	    
