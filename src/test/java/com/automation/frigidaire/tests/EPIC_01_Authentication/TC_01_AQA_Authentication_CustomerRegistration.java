@@ -8,6 +8,7 @@ import com.automation.frigidaire.pages.FrigidaireHomePageActions;
 import com.automation.frigidaire.pages.FrigidaireLoginPageActions;
 import com.automation.frigidaire.pages.YopmailPageActions;
 import com.automation.frigidaire.tests.BaseTest;
+import com.automation.frigidaire.utils.ConfigReader;
 import com.automation.frigidaire.utils.ExtentReportManager;
 import com.automation.frigidaire.utils.WebElementUtil;
 
@@ -74,33 +75,20 @@ public class TC_01_AQA_Authentication_CustomerRegistration extends BaseTest {
 		 	ExtentReportManager.getTest().pass("Verified Succesfully the Fields and Messages on Customer Registration Page");  	    			 	  	    
 	 }
 	 
-	 @Test(groups = {"smoke", "regression"}, description = "Verify the Message Received After Submitting Create Account Details")
-	    public void TC_01_S3_S4_VerifyMessageAfterRegistrationProcess() {
-		 	var number = WebElementUtil.getRandomNumber(10000);
-		 	var emailAddress = "automationTestEngineer8899+"+number+"@yopmail.com";
-		 	var firstName = "FirstName_"+number;
-		 	var lastName = "LastName_"+number;
-		 	var password = "Test@1234";
-		 	createAccountPage.navigateToCreateAccountPage()
-		 					.createAccount(emailAddress,password,firstName, lastName);
-		 	Assert.assertEquals(createAccountPage.getVerificationEmailSentMessage(),"A verification email with a link to verify your account has been sent to you."
-		 							,"'A verification email with a link to verify your account has been sent to you.' message is not displayed");
-		 	
-		 	ExtentReportManager.getTest().pass("Verified Succesfully the Message Displayed for Verification Email Sent on the Create Account Page");  	    			 	  	    
-			 
-	 }
-	 
-	 @Test(groups = {"smoke", "regression"}, description = "Verify that Email is received after creating an account through Create Account Page")
-	    public void TC_01_S5_VerifyEmailIsReceivedOnCreatingNewAccount() {
+	 @Test(groups = {"smoke", "regression"}, description = "Verify verification email message and email receipt after account creation.")
+	    public void TC_01_S3_S4_S5_VerifyVerificationEmailReceivedAfterAccountCreation() {
 
 		 	var number = WebElementUtil.getRandomNumber(10000);
-		 	var emailAddress = "automationTestEngineer8899+"+number+"@yopmail.com";
-		 	var firstName = "FirstName_"+number;
-		 	var lastName = "LastName_"+number;
-		 	var password = "Test@1234";
+		 	var emailAddress = "automationTestEngineer+"+number+"@yopmail.com";
+		 	var firstName = "TestFirstName";
+		 	var lastName = "TestLastName";
+		 	var password = ConfigReader.getProperty("user.password");
 		 	createAccountPage.navigateToCreateAccountPage()
 		 					.createAccount(emailAddress,password,firstName, lastName);
 		 	
+		 	Assert.assertEquals(createAccountPage.getVerificationEmailSentMessage(),"A verification email with a link to verify your account has been sent to you."
+						,"'A verification email with a link to verify your account has been sent to you.' message is not displayed");
+
 		 	yopmailPage.openFirstMailInInbox(emailAddress);
 		 	Assert.assertTrue(yopmailPage.isClickHereToActivateAccountLinkDisplayed(),"Click Here to Activate Your Account link is not present in the mail"); 	
 		 	Assert.assertEquals(yopmailPage.getMailGreetingMessage(), "Dear "+firstName+" "+lastName+",","Greeting Text does not contain First Name and Last Name");
@@ -111,7 +99,7 @@ public class TC_01_AQA_Authentication_CustomerRegistration extends BaseTest {
 		 									,"'If you are not intended recipient of this email' text is not present in the mail");
 		 	Assert.assertTrue(yopmailPage.isMailFooterSocialMediaLinksDisplayed(),"Social Media Links are present in the mail footer section");
 		 	
-		 	ExtentReportManager.getTest().pass("Verified Succesfully that an Email with correct text and Link is received on the email Id after creating an account through Create Account Page");  	    			 	  	    
+		 	ExtentReportManager.getTest().pass("Verified that the 'Verification Email Sent' message is displayed on UI and the corresponding verification email with correct content and activation link is received.");	  	    
 	 }
 
 }
