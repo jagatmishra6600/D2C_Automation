@@ -157,6 +157,7 @@ public class FrigidaireCreateAccountPageActions {
 	 }
 	 
 	 public FrigidaireCreateAccountPageActions clickSubmitButton() {
+		 WebElementUtil.scrollIntoView(submitButton);
 		 WebElementUtil.clickElement(submitButton);
 		 return this;
 	 }

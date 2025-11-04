@@ -11,6 +11,8 @@ screenshots/
 !**/src/main/**/target/
 !**/src/test/**/target/
 .kotlin
+videos/
+screenshots/
 
 ### IntelliJ IDEA ###
 .idea/
@@ -21,6 +23,7 @@ screenshots/
 *.iws
 *.iml
 *.ipr
+.idea/workspace.xml
 
 ### Eclipse ###
 .apt_generated
@@ -47,3 +50,17 @@ build/
 ### Mac OS ###
 .DS_Store
 Thumbs.db
+
+# Ignore screenshots and videos
+screenshots/
+videos/
+
+# Ignore IntelliJ workspace and shelf files
+.idea/workspace.xml
+.idea/shelf/
+
+# Ignore resource files if you don't want to push them
+src/main/resources/
+
+# Ignore test reports and output folders
+test-output/

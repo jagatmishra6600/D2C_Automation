@@ -98,10 +98,10 @@ public class FrigidaireHomePageActions {
     private final By frigidaireLogo = By.cssSelector("img[alt='Frigidaire Company Logo']");
     private final By acceptButtonLocator = By.xpath("//button[@id='onetrust-accept-btn-handler']");
     private final By emailPopUp=By.xpath("//span[@id=\"close-modal123\"]");
-    private final By navigationBarAirConditioners = By.xpath("//h5[@aria-label='Air Conditioners']");
-    private final By windowMounted = By.xpath("//h5[contains(text(), 'Window Mounted')]");
-    private final By navigationBarKitchen = By.xpath("//h5[@aria-label='Kitchen']");
-    private final By frenchDoor = By.xpath("//h5[contains(text(), 'French Door')]");
+    private final By navigationBarAirConditioners = By.xpath("//h5[@aria-label='Air Care'] | //h5[@aria-label='Vacuums']");
+    private final By windowMounted = By.xpath("//h5[contains(text(), 'Window Mounted AC')] | (//a[contains(@href, 'vacuum-cleaners')]//div[contains(@class, 'second-level-nav') and contains(text(), 'Vacuums')])[1]");
+    private final By navigationBarKitchen = By.xpath("//h5[@aria-label='Kitchen'] | (//h5[@aria-label='Laundry'])[1]");
+    private final By frenchDoor = By.xpath("//h5[contains(text(), 'French Door')] | (//h5[contains(text(), 'Washers')])[1]");
 
     public FrigidaireHomePageActions navigateToHomePage() {
         WebElementUtil.navigateTo(ConfigReader.getProperty("app.url"));
@@ -158,7 +158,7 @@ public class FrigidaireHomePageActions {
     }
     
     public FrigidaireLoginPageActions navigateToLoginPage() {
-    	clickLoginOrderStatusLink();
+    	navigateToHomePage().clickLoginOrderStatusLink();
     	WebElementUtil.clickElement(mainMenu_Login_OrderStatus_Login);
     	return new FrigidaireLoginPageActions();
     }
