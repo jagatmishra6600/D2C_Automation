@@ -27,6 +27,53 @@ public class WebElementUtil {
         throw new IllegalStateException("Utility class");
     }
 
+    public static void scrollToElementByXPath(String xpath) {
+        try {
+            WebElement element = DriverManager.getDriver().findElement(By.xpath(xpath));
+            ((JavascriptExecutor) DriverManager.getDriver())
+                    .executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", element);
+        } catch (NoSuchElementException e) {
+            System.out.println("Element not found with XPath: " + xpath);
+            // Fallback to scroll to bottom if element not found
+            ((JavascriptExecutor) DriverManager.getDriver())
+                    .executeScript("window.scrollTo(0, document.body.scrollHeight);");
+        } catch (Exception e) {
+            System.out.println("Error scrolling to element: " + e.getMessage());
+        }
+    }
+
+    public static void closeNewTabIfOpened(Set<String> beforeHandles) {
+        WebDriver driver = DriverManager.getDriver();
+        Set<String> afterHandles = driver.getWindowHandles();
+        if (afterHandles.size() > beforeHandles.size()) {
+            afterHandles.removeAll(beforeHandles);
+            if (!afterHandles.isEmpty()) {
+                String newHandle = afterHandles.iterator().next();
+                String original = driver.getWindowHandle();
+                driver.switchTo().window(newHandle);
+                driver.close();
+                driver.switchTo().window(original);
+            }
+        }
+    }
+
+    public static void hoverOverElement(By locator) {
+        retryOnFailure(() -> {
+            WebElement element = waitForElementToBeVisible(locator);
+            Actions actions = new Actions(DriverManager.getDriver());
+            actions.moveToElement(element).perform();
+        }, 3, 1000);
+    }
+
+
+    public static Set<String> getWindowHandles() {
+        return DriverManager.getDriver().getWindowHandles();
+    }
+
+    public static String getWindowHandle() {
+        return DriverManager.getDriver().getWindowHandle();
+    }
+
     // Retry mechanism for flaky interactions
     private static void retryOnFailure(Runnable action, int maxRetries, long delayMillis) {
         int attempts = 0;
@@ -152,32 +199,7 @@ public class WebElementUtil {
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
-    /**
-     * Navigates the browser to the specified URL.
-     *
-     * @param url The URL to navigate to.
-     */
-    public static void navigateTo(String url) {
-        DriverManager.getDriver().get(url);
-    }
 
-    /**
-     * Gets the title of the current page.
-     *
-     * @return The title of the page.
-     */
-    public static String getPageTitle() {
-        return DriverManager.getDriver().getTitle();
-    }
-
-    /**
-     * Gets the current URL of the page.
-     *
-     * @return The current URL.
-     */
-    public static String getCurrentUrl() {
-        return DriverManager.getDriver().getCurrentUrl();
-    }
 
 
     public static void scrollToElement(WebDriver driver, WebElement element) {
@@ -381,38 +403,6 @@ public class WebElementUtil {
         waitForElementToBeVisible(locator);
     }
 
-
-    // Utility: wait for attribute to contain a value with custom timeout (milliseconds)
-    public static boolean waitForAttributeToContain(By locator, String attribute, String value, int timeoutMillis) {
-        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofMillis(timeoutMillis));
-        return wait.until(driver -> {
-            try {
-                WebElement el = driver.findElement(locator);
-                String attr = el.getAttribute(attribute);
-                return attr != null && attr.contains(value);
-            } catch (Exception e) {
-                return false;
-            }
-        });
-    }
-
-    // Utility: wrapper for findElements
-    public static List<WebElement> findElements(By locator) {
-        return DriverManager.getDriver().findElements(locator);
-    }
-
-    // Utility: get exact visible text (fallback to textContent)
-    public static String getExactText(By locator) {
-        WebElement el = waitForElementToBeVisible(locator);
-        String text = el.getText();
-        if (text == null || text.trim().isEmpty()) {
-            try {
-                text = (String) ((JavascriptExecutor) DriverManager.getDriver())
-                        .executeScript("return arguments[0].textContent.trim();", el);
-            } catch (Exception ignored) {}
-        }
-        return text != null ? text.trim() : "";
-    }
 
     /**
      * Scrolls the element into view using JavaScript with adjustable sticky header height offset.

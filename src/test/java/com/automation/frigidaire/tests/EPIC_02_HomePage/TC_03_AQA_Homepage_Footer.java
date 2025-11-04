@@ -16,7 +16,7 @@ public class TC_03_AQA_Homepage_Footer extends BaseTest {
 
     private final FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
 
-    @Test(groups = {"regression","TC_03"})
+    @Test(groups = {"regression", "TC_03"})
     public void TC_03_verifyFooterSectionVisible() {
         homePage.navigateToHomePage();
         homePage.scrollToFooter();
@@ -24,7 +24,7 @@ public class TC_03_AQA_Homepage_Footer extends BaseTest {
         ExtentReportManager.getTest().pass("Footer is visible at the bottom of the page");
     }
 
-    @Test(groups = {"regression","TC_03"})
+    @Test(groups = {"regression", "TC_03"})
     public void TC_03_verifyFooterLinksDisplayed() {
         homePage.navigateToHomePage();
         homePage.scrollToFooter();
@@ -66,7 +66,7 @@ public class TC_03_AQA_Homepage_Footer extends BaseTest {
         ExtentReportManager.getTest().pass("All required footer sections and links are displayed");
     }
 
-    @Test(groups = {"regression","TC_03"}, description = "Verify external vs internal link behaviors from footer")
+    @Test(groups = {"regression", "TC_03"}, description = "Verify external vs internal link behaviors from footer")
     public void TC_03_verifyFooterLinksFunctionality() {
         homePage.navigateToHomePage();
         homePage.scrollToFooter();
@@ -98,7 +98,7 @@ public class TC_03_AQA_Homepage_Footer extends BaseTest {
         ExtentReportManager.getTest().pass("Closed newly opened tab and returned to original window");
     }
 
-    @Test(groups = {"regression","TC_03"}, description = "Verify Live Chat Icon opens chat interface")
+    @Test(groups = {"regression", "TC_03"}, description = "Verify Live Chat Icon opens chat interface")
     public void TC_03_verifyLiveChatIconShowsInterface() {
         homePage.navigateToHomePage();
         homePage.scrollToFooter();
@@ -109,7 +109,7 @@ public class TC_03_AQA_Homepage_Footer extends BaseTest {
         ExtentReportManager.getTest().pass("Live Chat icon opens chat interface successfully");
     }
 
-    @Test(groups = {"regression","TC_03"}, description = "Verify Left Footer Newsletter content and controls")
+    @Test(groups = {"regression", "TC_03"}, description = "Verify Left Footer Newsletter content and controls")
     public void TC_03_verifyLeftNewsletterSection() {
         homePage.navigateToHomePage();
         homePage.scrollToFooter();
@@ -121,7 +121,7 @@ public class TC_03_AQA_Homepage_Footer extends BaseTest {
         ExtentReportManager.getTest().pass("Left footer newsletter content and controls are visible");
     }
 
-    @Test(groups = {"regression","TC_03"}, description = "Verify Sign Up CTA triggers submission flow")
+    @Test(groups = {"regression", "TC_03"}, description = "Verify Sign Up CTA triggers submission flow")
     public void TC_03_verifySignUpCTAFunctionality() {
         homePage.navigateToHomePage();
         homePage.scrollToFooter();
@@ -135,21 +135,23 @@ public class TC_03_AQA_Homepage_Footer extends BaseTest {
         ExtentReportManager.getTest().pass("Sign Up CTA triggered and form remained stable after submission");
     }
 
-    @Test(groups = {"regression","TC_03"}, description = "Verify Right Footer Newsletter section visibility")
+    @Test(groups = {"regression", "TC_03"}, description = "Verify Right Footer Newsletter section visibility")
     public void TC_03_verifyRightNewsletterSection() {
         homePage.navigateToHomePage();
         homePage.scrollToFooter();
-        Assert.assertTrue(homePage.isNewsletterRight_HeadingDisplayed(), "Right newsletter heading visible");
+        Assert.assertTrue(homePage.isNewsletterRight_HeadingDisplayed(), "Be the first to know");
         Assert.assertTrue(homePage.isNewsletterRight_SpecialOffersDisplayed(), "Special Offers/Promotions link visible");
         Assert.assertTrue(homePage.isNewsletterRight_SupportDisplayed(), "Support link visible");
         Assert.assertTrue(homePage.isNewsletterRight_ProductRegistrationDisplayed(), "Product Registration link visible");
         ExtentReportManager.getTest().pass("Right footer newsletter section and links are visible");
     }
 
-    @Test(groups = {"regression","TC_03"}, description = "Verify Right Footer Newsletter links navigate to pages")
+    @Test(groups = {"regression", "TC_03"}, description = "Verify Right Footer Newsletter links navigate to pages")
     public void TC_03_verifyRightNewsletterLinksNavigation() {
         homePage.navigateToHomePage();
         homePage.scrollToFooter();
+
+        WebElementUtil.scrollToElementByXPath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'special offers') or contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'promotions')]");
         String startUrl = WebElementUtil.getCurrentUrl();
 
         // Special Offers/Promotions

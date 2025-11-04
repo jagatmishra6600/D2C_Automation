@@ -97,6 +97,90 @@ public class FrigidaireHomePageActions {
     private final By liveChat_Interface = By.xpath("//*[contains(@class,'chat') or contains(@id,'chat') or contains(@title,'Chat')]");
     private final By chatIcon_Global = By.xpath("//*[contains(translate(@aria-label,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'chat') or contains(translate(@id,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'chat') or contains(translate(@class,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'chat')][not(self::script)]");
 
+    // Deduplicated wrappers handled above with scroll and overlay suppression
+    // Other footer locators and visibility helpers for the sections listed in the TC_03 comments.
+    // Connect with us
+    private final By footer_Connect_Facebook = By.cssSelector("//li[@role='presentation']//cx-banner[@class='frigfacebook socialIconsClass']//a");
+    private final By footer_Connect_Twitter = By.cssSelector("//li[contains(@role,'presentation')]//cx-banner[contains(@class,'frigtwitter socialIconsClass')]//a");
+    private final By footer_Connect_Youtube = By.cssSelector("//li[contains(@role,'presentation')]//cx-banner[contains(@class,'frigYoutube socialIconsClass')]//a");
+    private final By footer_Connect_Instagram = By.cssSelector("//li[contains(@role,'presentation')]//cx-banner[contains(@class,'frigInstagram socialIconsClass')]//a");
+    private final By footer_Connect_Pinterest = By.cssSelector("//li[contains(@role,'presentation')]//cx-banner[contains(@class,'frigPinterest socialIconsClass')]//a");
+    // Others
+    private final By footer_Other_Privacy = By.cssSelector("a[aria-label='Privacy policy.  of ']");
+    private final By footer_Other_TermAndCondition = By.cssSelector("a[aria-label='Terms & Conditions Node.  of ']");
+    private final By footer_Other_DoNotSell = By.cssSelector("a[aria-label='Do not sell my information.  of ']");
+
+    //==================== TC_03 Comprehensive Footer & Newsletter Locators ====================
+    // Footer root
+    private final By footer_Root = By.xpath("//footer");
+
+    // Footer section headings
+    private final By footer_Heading_ContactSupport = By.xpath("//footer//*[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'contact & support') or contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'support') or contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'contact us')]");
+    private final By footer_Heading_AboutElectrolux = By.xpath("//footer//*[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'about electrolux')]");
+    private final By footer_Heading_TermsConditions = By.xpath("//footer//*[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'terms & conditions')]");
+    private final By footer_Heading_ConnectWithUs = By.xpath("//footer//*[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'connect with us')]");
+
+    // CONTACT & SUPPORT links
+    private final By footer_Link_ContactUs = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'contact us')]");
+    private final By footer_Link_ServiceRepair = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'service & repair')]");
+    private final By footer_Link_ProductRegistration = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'product registration')]");
+    private final By footer_Link_FAQs = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')," +
+            "concat('faq'," +
+            "'s'))]");
+    private final By footer_Link_ReturnExchange = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'return and exchange policy')]");
+    private final By footer_Link_ShippingDeliveryInstall = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'shipping, delivery and install policy')]");
+    private final By footer_Link_Financing = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'financing')]");
+    private final By footer_Link_IcemakerRecall = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'icemaker recall')]");
+
+    // ABOUT ELECTROLUX links
+    private final By footer_Link_ElectroluxGroup = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'electrolux group')]");
+    private final By footer_Link_PressNews = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'press & news')]");
+    private final By footer_Link_FinancialInfo = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'financial information')]");
+    private final By footer_Link_CareerOpportunities = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'career opportunities')]");
+    private final By footer_Link_ElectroluxProfessional = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'electrolux professional')]");
+
+    // TERMS & CONDITIONS links
+    private final By footer_Link_PrivacyPolicy = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'privacy policy')]");
+    private final By footer_Link_DoNotSellInfo = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'do not sell my information')]");
+    private final By footer_Link_TermsConditions = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'terms & conditions')]");
+    private final By footer_Link_TransparencySupplyChains = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'transparency in supply chains')]");
+
+    // Not in USA?
+    private final By footer_Link_NotInUSA = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'not in usa')]");
+
+    // Newsletter - Left
+    private final By newsletterLeft_EmailInput = By.xpath("//footer//input[@type='email']");
+    private final By newsletterLeft_SignUpButton = By.xpath("//footer//button[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'sign up')]");
+    private final By newsletterLeft_TermsText = By.xpath("//footer//*[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'by submitting this form')]");
+    private final By newsletterLeft_Heading = By.xpath("//*[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'first to know') or contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'stay in the know') or contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'sign up for emails')]");
+    private final By newsletterLeft_Description = By.xpath("//*[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'get the latest deals') or contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'exclusive offers') or contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'promotions')]");
+
+    // Newsletter - Right
+    private final By newsletterRight_Heading = By.xpath("//*[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'get more from frigidaire')]");
+    private final By newsletterRight_SpecialOffers = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'special offers') or contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'promotions')]");
+    private final By newsletterRight_Support = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'support')]");
+    private final By newsletterRight_ProductRegistration = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'product registration')]");
+
+    //************************** Pre-Footer Locators **************************
+    // Get More From Frigidaire
+    private final By pre_Footer_GetMoreFromFrigidaire_ProductRegistration = By.xpath("//a[normalize-space()='Product Registration']");
+    private final By pre_Footer_GetMoreFromFrigidaire_Promotions = By.xpath("//cx-page-slot[@class='rightFooternewsletterColumnB has-components']//a[contains(text(),'Promotions')]");
+    private final By pre_Footer_GetMoreFromFrigidaire_ExtendedServiceWarranties = By.xpath("//a[normalize-space()='Extended Service Warranties']");
+    private final By pre_Footer_GetMoreFromFrigidaire_BlogInspiration = By.xpath("//a[normalize-space()='Blog Inspiration']");
+    // First To Know
+    private final By pre_Footer_FirstToKnow_EmailInput = By.xpath("//input[@id='newsletterEmailControl']");
+    private final By pre_Footer_FirstToKnow_SubmitButton = By.xpath("//input[@id='submitBtn']");
+    private final By pre_Footer_FirstToKnow_TermsAndConditions = By.xpath("//u[normalize-space()='Terms and Conditions']");
+    private final By pre_Footer_FirstToKnow_PrivacyPolicy = By.xpath("//u[normalize-space()='Privacy Policy']");
+
+
+    private final By productsLink = By.linkText("Products");
+    private final By frigidaireLogo = By.cssSelector("img[alt='Frigidaire Company Logo']");
+    private final By acceptButtonLocator = By.xpath("//button[@id='onetrust-accept-btn-handler']");
+    private final By navigationBarAirConditioners = By.xpath("//h5[@aria-label='Air Conditioners']");
+    private final By windowMounted = By.xpath("//h5[contains(text(), 'Window Mounted')]");
+    private final By navigationBarKitchen = By.xpath("//h5[@aria-label='Kitchen']");
+    private final By frenchDoor = By.xpath("//h5[contains(text(), 'French Door')]");
     // Footer helpers
     private final By cookie_AcceptButton = By.id("onetrust-accept-btn-handler");
     public void scrollToFooter() {
@@ -213,39 +297,6 @@ public class FrigidaireHomePageActions {
     }
     public boolean isLiveChatInterfaceDisplayed() { return WebElementUtil.isDisplayed(liveChat_Interface); }
 
-    // Deduplicated wrappers handled above with scroll and overlay suppression
-    // Other footer locators and visibility helpers for the sections listed in the TC_03 comments.
-    // Connect with us
-    private final By footer_Connect_Facebook = By.cssSelector("//li[@role='presentation']//cx-banner[@class='frigfacebook socialIconsClass']//a");
-    private final By footer_Connect_Twitter = By.cssSelector("//li[contains(@role,'presentation')]//cx-banner[contains(@class,'frigtwitter socialIconsClass')]//a");
-    private final By footer_Connect_Youtube = By.cssSelector("//li[contains(@role,'presentation')]//cx-banner[contains(@class,'frigYoutube socialIconsClass')]//a");
-    private final By footer_Connect_Instagram = By.cssSelector("//li[contains(@role,'presentation')]//cx-banner[contains(@class,'frigInstagram socialIconsClass')]//a");
-    private final By footer_Connect_Pinterest = By.cssSelector("//li[contains(@role,'presentation')]//cx-banner[contains(@class,'frigPinterest socialIconsClass')]//a");
-    //Others
-    private final By footer_Other_Privacy = By.cssSelector("a[aria-label='Privacy policy.  of ']");
-    private final By footer_Other_TermAndCondition = By.cssSelector("a[aria-label='Terms & Conditions Node.  of ']");
-    private final By footer_Other_DoNotSell = By.cssSelector("a[aria-label='Do not sell my information.  of ']");
-    //************************** Pre-Footer Locators **************************
-    // Get More From Frigidaire
-    private final By pre_Footer_GetMoreFromFrigidaire_ProductRegistration = By.xpath("//a[normalize-space()='Product Registration']");
-    private final By pre_Footer_GetMoreFromFrigidaire_Promotions = By.xpath("//cx-page-slot[@class='rightFooternewsletterColumnB has-components']//a[contains(text(),'Promotions')]");
-    private final By pre_Footer_GetMoreFromFrigidaire_ExtendedServiceWarranties = By.xpath("//a[normalize-space()='Extended Service Warranties']");
-    private final By pre_Footer_GetMoreFromFrigidaire_BlogInspiration = By.xpath("//a[normalize-space()='Blog Inspiration']");
-    // First To Know
-    private final By pre_Footer_FirstToKnow_EmailInput = By.xpath("//input[@id='newsletterEmailControl']");
-    private final By pre_Footer_FirstToKnow_SubmitButton = By.xpath("//input[@id='submitBtn']");
-    private final By pre_Footer_FirstToKnow_TermsAndConditions = By.xpath("//u[normalize-space()='Terms and Conditions']");
-    private final By pre_Footer_FirstToKnow_PrivacyPolicy = By.xpath("//u[normalize-space()='Privacy Policy']");
-
-
-    private final By productsLink = By.linkText("Products");
-    private final By frigidaireLogo = By.cssSelector("img[alt='Frigidaire Company Logo']");
-    private final By acceptButtonLocator = By.xpath("//button[@id='onetrust-accept-btn-handler']");
-    private final By emailPopUp=By.xpath("//span[@id=\"close-modal123\"]");
-    private final By navigationBarAirConditioners = By.xpath("//h5[@aria-label='Air Care'] | //h5[@aria-label='Vacuums']");
-    private final By windowMounted = By.xpath("//h5[contains(text(), 'Window Mounted AC')] | (//a[contains(@href, 'vacuum-cleaners')]//div[contains(@class, 'second-level-nav') and contains(text(), 'Vacuums')])[1]");
-    private final By navigationBarKitchen = By.xpath("//h5[@aria-label='Kitchen'] | (//h5[@aria-label='Laundry'])[1]");
-    private final By frenchDoor = By.xpath("//h5[contains(text(), 'French Door')] | (//h5[contains(text(), 'Washers')])[1]");
 
     public FrigidaireHomePageActions navigateToHomePage() {
         WebElementUtil.navigateTo(ConfigReader.getProperty("app.url"));
@@ -269,10 +320,10 @@ public class FrigidaireHomePageActions {
         return WebElementUtil.isDisplayed(frigidaireLogo);
     }
 
-    public void navigateToLoginPage() {
-        WebElementUtil.hoverOverElement(mainMenu_Login_OrderStatus);
-        WebElementUtil.clickElement(mainMenu_Login);
-    }
+//    public void navigateToLoginPage() {
+//        WebElementUtil.hoverOverElement(mainMenu_Login_OrderStatus);
+//        WebElementUtil.clickElement(mainMenu_Login);
+//    }
 
     public boolean validateUserNavigateBackToHomepage() {
         WebElementUtil.clickElement(mainMenu_Contact);
@@ -302,16 +353,6 @@ public class FrigidaireHomePageActions {
 
     public void clickZipCodeArea() {
         WebElementUtil.clickElement(mainMenu_DeliverTo);
-    }
-
-    public SearchResultsPageActions clickSearchButton() {
-        // clickElement now handles the wait internally
-        WebElementUtil.clickElement(searchButton);
-        return new SearchResultsPageActions();
-    }
-
-    public SearchResultsPageActions searchForProduct(String searchTerm) {
-        return this.enterSearchTerm(searchTerm).clickSearchButton();
     }
 
     public boolean isMiniCartDisplayed() {
