@@ -20,8 +20,8 @@ public class TC_03_AQA_Authentication_Password_Reset_Success extends BaseTest{
 	 
 	 @Test(groups = {"smoke", "regression"}, description = "Verify that a user can successfully reset their password through the Frigidaire website and that the corresponding password reset and confirmation emails are received and validated.")
 	    public void TC_03_VerifyPasswordResetFlowAndEmailNotifications() {
-		 	var emailAddress = "automationTestEngineer@maildrop.cc";
-		 	var newPassword = "Test@1234";
+		 	var emailAddress = ConfigReader.getProperty("user.email");
+		 	var newPassword = ConfigReader.getProperty("user.password");
 	    	var expectedMailTitle = "Password Reset";
 		
 	    	homePage.navigateToResetPasswordPage().resetPassword(emailAddress);
