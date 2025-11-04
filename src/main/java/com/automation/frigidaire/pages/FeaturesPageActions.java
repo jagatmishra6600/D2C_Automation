@@ -2,6 +2,7 @@ package com.automation.frigidaire.pages;
 
 import com.automation.frigidaire.utils.WebElementUtil;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
@@ -9,13 +10,13 @@ import java.util.List;
 
 public class FeaturesPageActions {
 
+    private final By searchButton = By.cssSelector(".searchClose");
+    private final By productPDP = By.xpath("//div[contains(@class,'Appliance-Card')] | //div[contains(@class,'accessories-product')]");
     private final By featureHeading = By.xpath("//strong[text()='Overview & Features']//parent::h4//parent::span");
     private final By viewAll = By.xpath("//p[text()='View all']");
     private final By featureBanner = By.cssSelector(".featureBanner");
     private final By viewMoreButton = By.xpath("//button[contains(text(),' View more')]");
     private final By searchBox = By.xpath("//input[@aria-label=\"search\"]");
-    private final By searchButton = By.cssSelector(".searchIconHeader");
-    private final By productPDP = By.cssSelector(".plp-item");
     private final By viewMoreFeatures = By.cssSelector(".viewMoreFeatures");
     private final By featureListItems = By.cssSelector(".featureList .cursor-pointer");
     private final By featureDescription = By.cssSelector(".pdp_description");
@@ -24,6 +25,7 @@ public class FeaturesPageActions {
     private final By ownerTitle = By.xpath("//h3[text()='Guides & Manuals']");
     private final By languageTabs = By.xpath("//span[contains(@class,'Body-MediumBody_Medium_Centered')]");
     private final By documentLinks = By.xpath("//div[contains(@class,'Body-MediumBody_Medium-Link')]//a");
+    private final By singleLangDocuments = By.xpath("//div[contains(@class,'Card-Title')]//a");
 
     // Locators for Service & Parts section
     private final By replacementPartsTile = By.xpath("//h4[text()='Replacement Parts']");
@@ -31,11 +33,139 @@ public class FeaturesPageActions {
     private final By repairsServiceTile = By.xpath("//h4[text()='Repairs & Service']");
     private final By repairsServiceButton = By.xpath("//h4[text()='Repairs & Service']//parent::p//parent::cx-paragraph//following-sibling::cx-link//a");
 
+    // Locator for Add to cart button (handles <a> or <button> with inner span text)
+    private final By addToCartButton = By.xpath("//span[normalize-space()='Add to cart']/ancestor::a | //button[normalize-space()='Add to cart']");
+
+    // Locators for Delivery & Installation and Save & view cart
+    private final By deliveryInstallationRadio = By.id("Refrigerators_Large_WaterLine_Install");
+    private final By saveAndViewCartButton = By.xpath("//button[normalize-space()='Save and view cart']");
+    // Locator for Proceed to checkout button on the Cart/Order Summary
+    private final By proceedToCheckoutButton = By.xpath("//button[normalize-space()='Proceed to checkout']");
+    // Locator for Continue to delivery button on the shipping/address step
+    private final By continueToDeliveryButton = By.id("continueToDeliveryButton");
+
+    // Shipping address fields (used on checkout shipping step)
+    private final By shippingEmail = By.id("email");
+    private final By shippingFirstName = By.id("firstName");
+    private final By shippingLastName = By.id("lastName");
+    private final By shippingAddressLine1 = By.xpath("//input[@formcontrolname='line1' or @id='address-1' or contains(@placeholder,'Address')]");
+    private final By shippingPhone = By.id("phone");
+    private final By addressSuggestionOption = By.xpath("//ngb-typeahead-window//button[@role='option'] | //div[contains(@class,'dropdown-menu')]//button[@role='option']");
+
+    // Delivery date selection elements
+    private final By deliveryCalendarHeader = By.xpath("//h2[contains(text(),'Delivery date')]");
+    private final By deliveryAvailableInputs = By.xpath("//input[@type='radio' and @formcontrolname='selectedSlot' and not(@disabled)]");
+    private final By deliveryAvailableLabels = By.xpath("//label[contains(@class,'cx-delivery-label') and not(contains(@class,'disabled'))]");
+
+    // --- Login locators (added) ---
+    private final By loginLink = By.xpath("//a[text()='Log in / Order status ']");
+    private final By loginBtn = By.xpath("//button[text()='Log in']");
+    private final By loginEmailInput = By.xpath("//input[@aria-label='Email address']");
+    private final By loginPasswordInput = By.xpath("//*[@id=\"gigya-login-form\"]/div[2]/div[3]/div[2]/div/input");
+    private final By loginButton = By.xpath("//button[normalize-space()='Log in'] | //input[@type='submit' and (translate(@value,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='log in' or contains(translate(@value,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'log in'))] | //button[@type='submit' and contains(translate(.,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'log in')]");
+
+
     public void searchProduct(String productName) {
         WebElementUtil.waitForElementToBeVisible(searchBox);
-        WebElementUtil.sendKeys(searchBox, productName);
-        WebElementUtil.waitForElementToBeClickable(searchButton);
-        WebElementUtil.clickElement(searchButton);
+        WebElementUtil.sendKeys(searchBox, productName + Keys.ENTER);
+    }
+
+    /**
+     * Clicks the Add to cart button on the PDP. Waits for visibility and clickability first.
+     * Returns true if click succeeded, false otherwise.
+     */
+    public void clickAddToCart() {
+        // Ensure the button is in viewport first (covers sticky headers/overlays)
+        WebElementUtil.scrollIntoView(addToCartButton, 200);
+        WebElementUtil.waitForElementToBeVisible(addToCartButton);
+        WebElementUtil.waitForElementToBeClickable(addToCartButton);
+        WebElementUtil.clickElement(addToCartButton);
+    }
+
+    /**
+     * Selects the Delivery & Installation option and then clicks Save and view cart.
+     * Returns true on successful click of the Save and view cart button; false otherwise.
+     */
+    public void selectDeliveryAndSaveAndViewCart() {
+        // Select delivery & installation radio
+        WebElementUtil.scrollIntoView(deliveryInstallationRadio, 200);
+        WebElementUtil.waitForElementToBeClickable(deliveryInstallationRadio);
+        WebElementUtil.clickElement(deliveryInstallationRadio);
+
+        // Click Save and view cart
+        WebElementUtil.scrollIntoView(saveAndViewCartButton, 200);
+        WebElementUtil.waitForElementToBeClickable(saveAndViewCartButton, 20);
+        WebElementUtil.clickElement(saveAndViewCartButton);
+    }
+
+    /**
+     * Clicks the "Proceed to checkout" button in the cart/order summary area.
+     * Returns true if the click succeeded, false otherwise.
+     */
+    public void clickProceedToCheckout() {
+        WebElementUtil.waitForElementToBeVisible(proceedToCheckoutButton, 20);
+        WebElementUtil.waitForElementToBeClickable(proceedToCheckoutButton);
+        WebElementUtil.clickElement(proceedToCheckoutButton);
+    }
+
+    /**
+     * Clicks the "Continue to delivery" button after shipping details are entered.
+     * Returns true if the click succeeded, false otherwise.
+     */
+    public boolean clickContinueToDelivery() {
+        // default test data (can be overridden by the overloaded method below)
+        return clickContinueToDelivery(
+                "pandey.devishankar@knacksystems.com",
+                "Bhavani",
+                "Pandey",
+                "969 Cox Rd Gastonia",
+                "9427876292"
+        );
+    }
+
+    /**
+     * Fills shipping form fields then clicks Continue to delivery.
+     * Returns true if the click succeeded and no exception was thrown.
+     */
+    public boolean clickContinueToDelivery(String email, String firstName, String lastName, String addressLine1, String phone) {
+        try {
+            // Fill email
+            WebElementUtil.scrollIntoView(shippingEmail, 200);
+            WebElementUtil.waitForElementToBeVisible(shippingEmail);
+            WebElementUtil.sendKeys(shippingEmail, email);
+
+            // Fill first name and last name
+            WebElementUtil.scrollIntoView(shippingFirstName, 200);
+            WebElementUtil.waitForElementToBeVisible(shippingFirstName);
+            WebElementUtil.sendKeys(shippingFirstName, firstName);
+
+            WebElementUtil.waitForElementToBeVisible(shippingLastName);
+            WebElementUtil.sendKeys(shippingLastName, lastName);
+
+            // Fill address line (autocomplete fields sometimes require typing then selecting; we type then select suggestion if present)
+            WebElementUtil.scrollIntoView(shippingAddressLine1, 200);
+            WebElementUtil.waitForElementToBeVisible(shippingAddressLine1);
+            WebElementUtil.sendKeys(shippingAddressLine1, addressLine1);
+
+
+            WebElementUtil.waitForElementToBeVisible(addressSuggestionOption);
+            WebElementUtil.clickElement(addressSuggestionOption);
+
+            // Fill phone
+            WebElementUtil.scrollIntoView(shippingPhone, 200);
+            WebElementUtil.waitForElementToBeVisible(shippingPhone);
+            WebElementUtil.sendKeys(shippingPhone, phone);
+
+            // Click continue button
+            WebElementUtil.scrollIntoView(continueToDeliveryButton, 200);
+            WebElementUtil.waitForElementToBeClickable(continueToDeliveryButton);
+            WebElementUtil.clickElement(continueToDeliveryButton);
+
+            return true;
+        } catch (Exception e) {
+            System.err.println("Failed to fill shipping form and click Continue to delivery: " + e.getMessage());
+            return false;
+        }
     }
 
     public void selectProductFromPLP() {
@@ -174,6 +304,30 @@ public class FeaturesPageActions {
         return true;
     }
 
+    public boolean validateDownloadableDocuments() {
+        // Validate document links
+        List<WebElement> docs = WebElementUtil.findElements(singleLangDocuments);
+
+        if (docs.isEmpty()) {
+            System.err.println("No documents found: ");
+            return false;
+        }
+
+        for (WebElement doc : docs) {
+            String docName = doc.getText().trim();
+            String href = doc.getAttribute("href");
+            if (!doc.isDisplayed() || !doc.isEnabled()) {
+                System.err.println("Document not visible/enabled: " + docName );
+                return false;
+            }
+            if (href == null || !href.toLowerCase().contains(".pdf")) {
+                System.err.println("Document not a PDF: " + docName + "href=" + href);
+                return false;
+            }
+        }
+        return true;
+    }
+
     public boolean validateReplacementPartsTile() {
         WebElementUtil.scrollIntoView(replacementPartsTile, 200);
         if (!WebElementUtil.isDisplayed(replacementPartsTile)) {
@@ -199,4 +353,72 @@ public class FeaturesPageActions {
         }
         return true;
     }
+
+    /**
+     * Single unified helper that returns true if any delivery date is enabled/available and clickable.
+     * It will try radio inputs first, then label->input fallback. It clicks the first available slot and
+     * verifies the slot becomes selected.
+     */
+    public boolean validateDeliveryDateEnabledAndClickable() {
+        // Best-effort wait for delivery calendar to appear
+        try {
+            WebElementUtil.waitForElementToBeVisible(deliveryCalendarHeader);
+        } catch (Exception ignored) {
+            // continue if header isn't present
+        }
+
+        int attempts = 0;
+        while (attempts < 3) {
+            try {
+                // Try radio inputs first
+                List<WebElement> inputs = WebElementUtil.findElements(deliveryAvailableInputs);
+                if (!inputs.isEmpty()) {
+                    WebElement first = inputs.get(0);
+                    String id = first.getAttribute("id");
+                    if (id != null && !id.trim().isEmpty()) {
+                        By inputBy = By.id(id);
+                        WebElementUtil.scrollIntoView(inputBy, 200);
+                        WebElementUtil.waitForElementToBeClickable(inputBy);
+                        WebElementUtil.clickElement(inputBy);
+                        WebElement clicked = WebElementUtil.waitForElementToBeClickable(inputBy);
+                        return clicked.isSelected();
+                    }
+                }
+
+                // Fallback: try label elements which are not disabled
+                List<WebElement> labels = WebElementUtil.findElements(deliveryAvailableLabels);
+                if (!labels.isEmpty()) {
+                    WebElement firstLabel = labels.get(0);
+                    String forAttr = firstLabel.getAttribute("for");
+                    if (forAttr != null && !forAttr.trim().isEmpty()) {
+                        By inputBy = By.id(forAttr);
+                        WebElementUtil.scrollIntoView(inputBy, 200);
+                        WebElementUtil.waitForElementToBeClickable(inputBy);
+                        WebElementUtil.clickElement(inputBy);
+                        WebElement clicked = WebElementUtil.waitForElementToBeClickable(inputBy);
+                        return clicked.isSelected();
+                    } else {
+                        // If label has no 'for', try clicking the label itself and then check the nested input
+                        WebElementUtil.scrollIntoView(By.xpath("(//label[contains(@class,'cx-delivery-label') and not(contains(@class,'disabled'))])[1]"), 200);
+                        WebElementUtil.clickElement(By.xpath("(//label[contains(@class,'cx-delivery-label') and not(contains(@class,'disabled'))])[1]"));
+                        // After clicking label try to find any enabled input
+                        List<WebElement> postInputs = WebElementUtil.findElements(deliveryAvailableInputs);
+                        if (!postInputs.isEmpty()) {
+                            return postInputs.get(0).isSelected();
+                        }
+                    }
+                }
+
+                // nothing found; wait a bit and retry
+                attempts++;
+                try { Thread.sleep(500); } catch (InterruptedException ie) { Thread.currentThread().interrupt(); }
+            } catch (Exception e) {
+                attempts++;
+                try { Thread.sleep(500); } catch (InterruptedException ie) { Thread.currentThread().interrupt(); }
+            }
+        }
+
+        return false;
+    }
+
 }

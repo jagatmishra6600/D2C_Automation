@@ -56,43 +56,7 @@ public class WebElementUtil {
      * @param locator The By locator of the element.
      */
     public static void clickElement(By locator) {
-        retryOnFailure(() -> {
-            try {
-                scrollIntoView(locator);
-            } catch (Exception ignored) {}
-            // Try to suppress common overlays globally before interacting
-            try {
-                ((JavascriptExecutor) DriverManager.getDriver()).executeScript(
-                        "document.querySelectorAll('[style*=\\'position:fixed\\'],#onetrust-banner-sdk,#onetrust-pc-sdk,[id*=onetrust],.ot-sdk-container,iframe[src*=\\'chat\\'],iframe[src*=\\'livechat\\']')"
-                                + ".forEach(el=>{try{el.style.pointerEvents='none';el.style.visibility='hidden';el.style.zIndex='0';}catch(e){}});");
-            } catch (Exception ignored) {}
-
-            WebElement element = waitForElementToBeClickable(locator);
-            try {
-                // Nudge pointer to element to reduce interception
-                Actions actions = new Actions(DriverManager.getDriver());
-                actions.moveToElement(element).pause(Duration.ofMillis(100)).perform();
-                element.click();
-            } catch (Exception clickEx) {
-                // Fallback to JS click in case of interception or other click issues
-                WebElement visible = waitForElementToBeVisible(locator);
-                try {
-                    ((JavascriptExecutor) DriverManager.getDriver()).executeScript("arguments[0].click();", visible);
-                } catch (Exception jsEx) {
-                    // Secondary fallback: navigate via href if it is an anchor
-                    try {
-                        String href = visible.getAttribute("href");
-                        if (href != null && !href.isEmpty()) {
-                            ((JavascriptExecutor) DriverManager.getDriver()).executeScript("window.location.href = arguments[0];", href);
-                        } else {
-                            throw jsEx;
-                        }
-                    } catch (Exception navEx) {
-                        throw navEx;
-                    }
-                }
-            }
-        }, 3, 1000);
+        retryOnFailure(() -> waitForElementToBeClickable(locator).click(), 3, 1000);
     }
 
 
@@ -171,6 +135,23 @@ public class WebElementUtil {
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
+    public static void hoverElement(By locator) {
+        WebElement element = waitForElementToBeVisible(locator);
+        Actions actions = new Actions(DriverManager.getDriver());
+        actions.moveToElement(element).perform();
+    }
+
+    public static WebElement waitForElementToBeVisible(By locator, int seconds) {
+        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(seconds));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+
+    public static WebElement waitForElementToBeClickable(By locator, int seconds) {
+        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(seconds));
+        return wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
     /**
      * Navigates the browser to the specified URL.
      *
@@ -213,7 +194,7 @@ public class WebElementUtil {
         }
     }
 
-
+   
     public static void scrollAndClickUsingJSE(WebDriver driver, WebElement element) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
@@ -332,7 +313,7 @@ public class WebElementUtil {
                 return false;
             }
         }
-
+    
     /**
      * Switches the Driver focus to Frame
      * @param frameId you want to switch the focus to
@@ -340,14 +321,14 @@ public class WebElementUtil {
     public static void switchToFrame(String frameId) {
     	DriverManager.getDriver().switchTo().frame(frameId);
     }
-
+    
     /**
      * Switches the Driver focus to Back to the Default
      */
     public static void switchToDefaultContent() {
     	DriverManager.getDriver().switchTo().defaultContent();
     }
-
+    
     /**
      * Generates the random number
      * @param range - length of the int we want to generate
@@ -356,7 +337,7 @@ public class WebElementUtil {
     public static int getRandomNumber(int range) {
     	return new Random().nextInt(range);
     }
-
+    
     /**
      * Switch to Frame and perform the Action and then Switches back to Default Content
      * @param frameNameOrId - to swithch to the frame, action- Action we want to perform Ex: getText(), isDisplayed()
@@ -439,81 +420,66 @@ public class WebElementUtil {
      * @param stickyHeaderHeight The height of the sticky header to offset.
      */
     public static void scrollIntoView(By locator, int stickyHeaderHeight) {
-        int attempts = 0;
-        while (attempts < 2) {
-            try {
-                WebElement element = waitForElementToBeVisible(locator);
-                ((JavascriptExecutor) DriverManager.getDriver()).executeScript(
-                        "const element = arguments[0];" +
-                                "const rect = element.getBoundingClientRect();" +
-                                "const absoluteElementTop = rect.top + window.pageYOffset;" +
-                                "const offset = arguments[1];" +
-                                "window.scrollTo({top: absoluteElementTop - offset, behavior: 'instant'});",
-                        element, stickyHeaderHeight
-                );
+        WebElement element = waitForElementToBeVisible(locator);
+        ((JavascriptExecutor) DriverManager.getDriver()).executeScript(
+                "const element = arguments[0];" +
+                        "const rect = element.getBoundingClientRect();" +
+                        "const absoluteElementTop = rect.top + window.pageYOffset;" +
+                        "const offset = " + stickyHeaderHeight + ";" + // adjust offset as per sticky header height
+                        "window.scrollTo({top: absoluteElementTop - offset, behavior: 'instant'});",
+                element
+        );
 
-                waitForElementToBeClickable(locator);
-                return;
-            } catch (StaleElementReferenceException sere) {
-                attempts++;
-            }
+        waitForElementToBeClickable(locator);
+    }
+
+    /**
+     * Finds all elements matching the given locator using the current WebDriver.
+     * @param locator The By locator to search for.
+     * @return List of WebElements matching the locator.
+     */
+    public static List<WebElement> findElements(By locator) {
+        if (DriverManager.getDriver() == null) {
+            throw new IllegalStateException("WebDriver is not initialized. Ensure DriverManager.getDriver() is called before using findElements.");
         }
-        // Fallback: ensure element is visible without JS scroll
-        waitForElementToBeVisible(locator);
+        List<WebElement> elements = DriverManager.getDriver().findElements(locator);
+        if (elements.isEmpty()) {
+            System.err.println("No elements found for locator: " + locator);
+        }
+        return elements;
     }
 
-    public static void hoverOverElement(By locator) {
-        retryOnFailure(() -> {
-            WebElement element = waitForElementToBeVisible(locator);
-            Actions actions = new Actions(DriverManager.getDriver());
-            actions.moveToElement(element).perform();
-        }, 3, 1000);
+    public static String getExactText(By locator) {
+        WebElement element = waitForElementToBeVisible(locator);
+        JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
+        return (String) js.executeScript("return arguments[0].textContent;", element);
     }
 
-    //==================== Window/Tab Helpers ====================
-    public static Set<String> getWindowHandles() {
-        return DriverManager.getDriver().getWindowHandles();
-    }
-
-    public static String getWindowHandle() {
-        return DriverManager.getDriver().getWindowHandle();
-    }
-
-    public static void closeNewTabIfOpened(Set<String> beforeHandles) {
+    /**
+     * Waits for a specific attribute of an element to contain a given value.
+     * @param locator The By locator of the element.
+     * @param attribute The attribute to check (e.g., "class", "value", "style").
+     * @param value The value that the attribute should contain.
+     * @param timeoutInSeconds The maximum time to wait in seconds.
+     */
+    public static void waitForAttributeToContain(By locator, String attribute, String value, int timeoutInSeconds) {
+        if (timeoutInSeconds <= 0) {
+            throw new IllegalArgumentException("Timeout must be greater than 0 seconds");
+        }
         WebDriver driver = DriverManager.getDriver();
-        Set<String> afterHandles = driver.getWindowHandles();
-        if (afterHandles.size() > beforeHandles.size()) {
-            afterHandles.removeAll(beforeHandles);
-            if (!afterHandles.isEmpty()) {
-                String newHandle = afterHandles.iterator().next();
-                String original = driver.getWindowHandle();
-                driver.switchTo().window(newHandle);
-                driver.close();
-                driver.switchTo().window(original);
-            }
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
+        try {
+            wait.until(ExpectedConditions.attributeContains(locator, attribute, value));
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to wait for attribute '" + attribute + "' to contain value '" + value + "'", e);
         }
     }
-
-    public static void closeNewTabIfOpened(Set<String> beforeHandles) {
-        WebDriver driver = DriverManager.getDriver();
-        Set<String> afterHandles = driver.getWindowHandles();
-        if (afterHandles.size() > beforeHandles.size()) {
-            afterHandles.removeAll(beforeHandles);
-            if (!afterHandles.isEmpty()) {
-                String newHandle = afterHandles.iterator().next();
-                String original = driver.getWindowHandle();
-                driver.switchTo().window(newHandle);
-                driver.close();
-                driver.switchTo().window(original);
-            }
-        }
-    }
-
+    
     /**
      * Switch to Frame and perform the Action and then Switches back to Default Content
      * @param - to switch to the frame, action- Action we want to perform Ex: getText(), isDisplayed()
      * @return it return the output value of action (Ex: boolean, String, int)
-     */
+     */   
     public static <T> T performInFrame(By frameElementLocator, Supplier<T> action) {
         try {
             switchToFrame(frameElementLocator);
@@ -527,11 +493,11 @@ public class WebElementUtil {
      * Switches the Driver focus to Frame
      * @paramlocator to which user wants to switch the reference to
      */
-    public static void switchToFrame(By  frameElementLocator) {
+    public static void switchToFrame(By  frameElementLocator) {	
     	var frameElement = DriverManager.getDriver().findElement(frameElementLocator);
     	DriverManager.getDriver().switchTo().frame(frameElement);
-    }
-
+    }   
+    
     /**
      * Switches the Driver focus to Latest Tab and closes the current tab
      */
@@ -542,7 +508,7 @@ public class WebElementUtil {
         DriverManager.getDriver().switchTo().window(tabs.get(tabs.size() - 2)).close();
         DriverManager.getDriver().switchTo().window(tabs.get(tabs.size() - 1));
     }
-
+    
     /**
      * Performs Control + Click action on a Element to open it into a new Tab
      * @param  locator of the Element we want perform Control + Click
@@ -558,6 +524,23 @@ public class WebElementUtil {
                 .perform();
         }, 3, 1000);
     }
+
+
+
+
+    public static WebElement findElementIfPresent(By locator) {
+        try {
+            List<WebElement> elements = DriverManager.getDriver().findElements(locator);
+            if (!elements.isEmpty()) {
+                return elements.get(0);
+            }
+        } catch (Exception ignored) {}
+        return null;
+    }
+
+
+
+
 
     /**
      * Navigates the browser to the specified URL.

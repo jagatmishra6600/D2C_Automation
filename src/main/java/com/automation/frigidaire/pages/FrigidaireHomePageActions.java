@@ -384,7 +384,7 @@ public class FrigidaireHomePageActions {
     }
 
     public FrigidaireLoginPageActions navigateToLoginPage() {
-    	clickLoginOrderStatusLink();
+    	navigateToHomePage().clickLoginOrderStatusLink();
     	WebElementUtil.clickElement(mainMenu_Login_OrderStatus_Login);
     	return new FrigidaireLoginPageActions();
     }
