@@ -4,142 +4,41 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40704c6d-babe-4e0d-8abe-445f1f125703" name="Changes" comment="">
+    <list default="true" id="542be280-0012-4266-b75b-b7f7a86b9bc8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/automation/frigidaire/utils/WebElementUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/automation/frigidaire/utils/WebElementUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/automation/frigidaire/tests/EPIC_03_PDPPage/TC_02_AQA_Pdppage_Product_Specs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/automation/frigidaire/tests/EPIC_03_PDPPage/TC_02_AQA_Pdppage_Product_Specs.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="git-push" />
-      </map>
-    </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="SIGN_OFF_COMMIT" value="true" />
-  </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;jagatmishra6600&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/jagatmishra6600/D2C_Automation.git&quot;,
-    &quot;accountId&quot;: &quot;2a9f6bee-3e9d-40fb-be86-e9d673b99ab5&quot;
-  }
-}</component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 5
-}</component>
-  <component name="ProjectId" id="33qFhLOt5U379uT4oaExJl1a1H2" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Maven.frigidaire-automation [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.frigidaire-automation [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.frigidaire-automation [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.frigidaire-automation [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.frigidaire-automation [org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.frigidaire-automation [test].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.frigidaire-automation [validate].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;TestNG.C:/Users/JagatM/Documents/GitHubProject/D2C_Automation/testng.xml.executor&quot;: &quot;Run&quot;,
-    &quot;TestNG.C:/Users/JagatM/Documents/frigidaire-automation/TestRunners/smoke.xml.executor&quot;: &quot;Run&quot;,
-    &quot;TestNG.C:/Users/JagatM/Documents/frigidaire-automation/testng.xml.executor&quot;: &quot;Run&quot;,
-    &quot;TestNG.TC_02_AQA_Homepage_Header.TC_01_S1_VerifyBandLogoDisplayed.executor&quot;: &quot;Run&quot;,
-    &quot;TestNG.TC_02_AQA_Homepage_Header.TC_01_S2_ClickBandLogoHeader.executor&quot;: &quot;Debug&quot;,
-    &quot;TestNG.TC_02_AQA_Homepage_Header.TC_02_S1_VerifyBandLogoDisplayed.executor&quot;: &quot;Run&quot;,
-    &quot;TestNG.TC_02_AQA_Homepage_Header.TC_02_S3_VerifyHearForLoggedInUser.executor&quot;: &quot;Run&quot;,
-    &quot;TestNG.TC_02_AQA_Homepage_Header.TC_02_S4_VerifyContactUsLink.executor&quot;: &quot;Run&quot;,
-    &quot;TestNG.TC_02_AQA_Homepage_Header.TC_02_S8_VerifyMINICart.executor&quot;: &quot;Run&quot;,
-    &quot;TestNG.TC_02_AQA_Homepage_Header.TC_02_S9_VerifyMINICartOnclick.executor&quot;: &quot;Run&quot;,
-    &quot;TestNG.TC_02_AQA_Homepage_Header.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;TC__02__AQA__HomePage__Header&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/JagatM/Documents/GitHubProject/D2C_Automation&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/JagatM/Documents/frigidaire-automation/src/main/java/org/example/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "TestNG.TC_04_AQA_PDP_Features.verifyViewMoreFunctionalityInFeaturesSectionOnPDP.executor": "Run",
+    "TestNG.TC_04_PLP_Filters_AirCare.verifyPLPUpdatesForBTUFilter.executor": "Run",
+    "TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Popular_Filters_Is_Checked_On_Clicling_the_RelatedFilterInPLP.executor": "Run",
+    "TestNG.TC_NAGDTOPS_15695_PLP_SORT_BY.testSortByPriceLowToHigh.executor": "Run",
+    "git-widget-placeholder": "TC__Electrolux__PLP"
   }
-}</component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\JagatM\Documents\frigidaire-automation" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\JagatM\Documents\frigidaire-automation\TestRunners" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.automation.frigidaire.pages" />
-    </key>
-  </component>
-  <component name="RunManager" selected="TestNG.C:/Users/JagatM/Documents/GitHubProject/D2C_Automation/testng.xml">
-    <configuration name="C:/Users/JagatM/Documents/GitHubProject/D2C_Automation/testng.xml" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="frigidaire-automation" />
-      <option name="SUITE_NAME" value="$PROJECT_DIR$/testng.xml" />
-      <option name="TEST_OBJECT" value="SUITE" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TC_02_AQA_Homepage_Header" type="TestNG" temporary="true" nameIsGenerated="true">
+}]]></component>
+  <component name="RunManager" selected="TestNG.TC_04_AQA_PDP_Features.verifyViewMoreFunctionalityInFeaturesSectionOnPDP">
+    <configuration name="TC_04_AQA_PDP_Features.verifyViewMoreFunctionalityInFeaturesSectionOnPDP" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="frigidaire-automation" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.automation.frigidaire.tests.EPIC_02_HomePage.*" />
+          <option name="PATTERN" value="com.automation.frigidaire.tests.EPIC_03_PDPPage.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.automation.frigidaire.tests.EPIC_02_HomePage" />
-      <option name="MAIN_CLASS_NAME" value="com.automation.frigidaire.tests.EPIC_02_HomePage.TC_02_AQA_Homepage_Header" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TC_02_AQA_Homepage_Header.TC_02_S4_VerifyContactUsLink" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="frigidaire-automation" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.automation.frigidaire.tests.EPIC_02_HomePage.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.automation.frigidaire.tests.EPIC_02_HomePage" />
-      <option name="MAIN_CLASS_NAME" value="com.automation.frigidaire.tests.EPIC_02_HomePage.TC_02_AQA_Homepage_Header" />
-      <option name="METHOD_NAME" value="TC_02_S4_VerifyContactUsLink" />
+      <option name="PACKAGE_NAME" value="com.automation.frigidaire.tests.EPIC_03_PDPPage" />
+      <option name="MAIN_CLASS_NAME" value="com.automation.frigidaire.tests.EPIC_03_PDPPage.TC_04_AQA_PDP_Features" />
+      <option name="METHOD_NAME" value="verifyViewMoreFunctionalityInFeaturesSectionOnPDP" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -147,17 +46,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TC_02_AQA_Homepage_Header.TC_02_S8_VerifyMINICart" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="TC_04_PLP_Filters_AirCare.verifyPLPUpdatesForBTUFilter" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="frigidaire-automation" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.automation.frigidaire.tests.EPIC_02_HomePage.*" />
+          <option name="PATTERN" value="com.automation.frigidaire.tests.EPIC_04_PLP.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.automation.frigidaire.tests.EPIC_02_HomePage" />
-      <option name="MAIN_CLASS_NAME" value="com.automation.frigidaire.tests.EPIC_02_HomePage.TC_02_AQA_Homepage_Header" />
-      <option name="METHOD_NAME" value="TC_02_S8_VerifyMINICart" />
+      <option name="PACKAGE_NAME" value="com.automation.frigidaire.tests.EPIC_04_PLP" />
+      <option name="MAIN_CLASS_NAME" value="com.automation.frigidaire.tests.EPIC_04_PLP.TC_04_PLP_Filters_AirCare" />
+      <option name="METHOD_NAME" value="verifyPLPUpdatesForBTUFilter" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -165,17 +64,35 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TC_02_AQA_Homepage_Header.TC_02_S9_VerifyMINICartOnclick" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="TC_NAGDTOPS_15689_PLP_Filters.verify_Popular_Filters_Is_Checked_On_Clicling_the_RelatedFilterInPLP" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="frigidaire-automation" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.automation.frigidaire.tests.EPIC_02_HomePage.*" />
+          <option name="PATTERN" value="com.automation.frigidaire.tests.EPIC_04_PLP.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.automation.frigidaire.tests.EPIC_02_HomePage" />
-      <option name="MAIN_CLASS_NAME" value="com.automation.frigidaire.tests.EPIC_02_HomePage.TC_02_AQA_Homepage_Header" />
-      <option name="METHOD_NAME" value="TC_02_S9_VerifyMINICartOnclick" />
+      <option name="PACKAGE_NAME" value="com.automation.frigidaire.tests.EPIC_04_PLP" />
+      <option name="MAIN_CLASS_NAME" value="com.automation.frigidaire.tests.EPIC_04_PLP.TC_NAGDTOPS_15689_PLP_Filters" />
+      <option name="METHOD_NAME" value="verify_Popular_Filters_Is_Checked_On_Clicling_the_RelatedFilterInPLP" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TC_NAGDTOPS_15695_PLP_SORT_BY.testSortByPriceLowToHigh" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="frigidaire-automation" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.automation.frigidaire.tests.EPIC_04_PLP.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.automation.frigidaire.tests.EPIC_04_PLP" />
+      <option name="MAIN_CLASS_NAME" value="com.automation.frigidaire.tests.EPIC_04_PLP.TC_NAGDTOPS_15695_PLP_SORT_BY" />
+      <option name="METHOD_NAME" value="testSortByPriceLowToHigh" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -185,66 +102,14 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.C:/Users/JagatM/Documents/GitHubProject/D2C_Automation/testng.xml" />
-        <item itemvalue="TestNG.TC_02_AQA_Homepage_Header" />
-        <item itemvalue="TestNG.TC_02_AQA_Homepage_Header.TC_02_S9_VerifyMINICartOnclick" />
-        <item itemvalue="TestNG.TC_02_AQA_Homepage_Header.TC_02_S8_VerifyMINICart" />
-        <item itemvalue="TestNG.TC_02_AQA_Homepage_Header.TC_02_S4_VerifyContactUsLink" />
+        <item itemvalue="TestNG.TC_04_AQA_PDP_Features.verifyViewMoreFunctionalityInFeaturesSectionOnPDP" />
+        <item itemvalue="TestNG.TC_04_PLP_Filters_AirCare.verifyPLPUpdatesForBTUFilter" />
+        <item itemvalue="TestNG.TC_NAGDTOPS_15695_PLP_SORT_BY.testSortByPriceLowToHigh" />
+        <item itemvalue="TestNG.TC_NAGDTOPS_15689_PLP_Filters.verify_Popular_Filters_Is_Checked_On_Clicling_the_RelatedFilterInPLP" />
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="40704c6d-babe-4e0d-8abe-445f1f125703" name="Changes" comment="" />
-      <created>1760036817190</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1760036817190</updated>
-    </task>
-    <task id="LOCAL-00001" summary="TC_02_AQA_Homepage_Header">
-      <option name="closed" value="true" />
-      <created>1760428475643</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1760428475643</updated>
-    </task>
-    <task id="LOCAL-00002" summary="chnage">
-      <created>1760634147965</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1760634147965</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
     <servers />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="TC_02_AQA_Homepage_Header" />
-    <MESSAGE value="chnage" />
-    <option name="LAST_COMMIT_MESSAGE" value="chnage" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/Main.java</url>
-          <line>13</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

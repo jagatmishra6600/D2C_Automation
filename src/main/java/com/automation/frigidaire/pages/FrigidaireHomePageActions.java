@@ -3,6 +3,7 @@ package com.automation.frigidaire.pages;
 import com.automation.frigidaire.utils.ConfigReader;
 import com.automation.frigidaire.utils.DriverManager;
 import com.automation.frigidaire.utils.WaitUtils;
+import com.automation.frigidaire.utils.WaitUtils;
 import com.automation.frigidaire.utils.WebElementUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -23,6 +24,9 @@ public class FrigidaireHomePageActions {
     private final By mainMenu_Contact = By.xpath("//a[contains(text(),'Contact us')]");
     private final By mainMenu_DeliverTo = By.xpath("//div[@class='pdp-hide-header-visible']//span[@class='Set-delivery-area']");
     private final By mainMenu_Cart = By.xpath("//img[@alt='Your Shopping Cart']");
+    private final By mainMenu_Login_OrderStatus_Login = By.xpath("//*[@id='dropdown']//button[contains(.,'Log in')]");
+    private final By mainMenu_Login_OrderStatus_CreateAccount = By.xpath("//*[@id='dropdown']//button[contains(.,'Create an account')]");
+
     private final By mainMenu_CartCount = By.xpath("//span[@class='count']");
     private final By mainMenu_Login = By.cssSelector("a[role='link']");
     private final By mainMenu_searchInput = By.cssSelector("input[placeholder='Search...']");
@@ -182,7 +186,7 @@ public class FrigidaireHomePageActions {
     // TERMS & CONDITIONS visibility
     public boolean isFooterPrivacyPolicyDisplayed() { return WebElementUtil.isDisplayed(footer_Terms_PrivacyPolicy); }
     public boolean isFooterDoNotSellDisplayed() { return WebElementUtil.isDisplayed(footer_Terms_DoNotSell); }
-  
+
     // CONNECT WITH US visibility
     public boolean isFooterFacebookIconDisplayed() { return WebElementUtil.isDisplayed(footer_Connect_Facebook_Anchor); }
     public boolean isFooterYoutubeIconDisplayed() { return WebElementUtil.isDisplayed(footer_Connect_Youtube_Anchor); }
@@ -196,7 +200,7 @@ public class FrigidaireHomePageActions {
         try { WaitUtils.untilPresent(chatIcon_Global, 10); } catch (Exception ignored) {}
         return WebElementUtil.isDisplayed(footer_LiveChatIcon) || WebElementUtil.isDisplayed(chatIcon_Global);
     }
-    public void clickLiveChatIcon() { 
+    public void clickLiveChatIcon() {
         scrollToFooter();
         suppressObstructingOverlays();
         if (WebElementUtil.isDisplayed(footer_LiveChatIcon)) {
@@ -208,7 +212,7 @@ public class FrigidaireHomePageActions {
         }
     }
     public boolean isLiveChatInterfaceDisplayed() { return WebElementUtil.isDisplayed(liveChat_Interface); }
-    
+
     // Deduplicated wrappers handled above with scroll and overlay suppression
     // Other footer locators and visibility helpers for the sections listed in the TC_03 comments.
     // Connect with us
@@ -217,62 +221,10 @@ public class FrigidaireHomePageActions {
     private final By footer_Connect_Youtube = By.cssSelector("//li[contains(@role,'presentation')]//cx-banner[contains(@class,'frigYoutube socialIconsClass')]//a");
     private final By footer_Connect_Instagram = By.cssSelector("//li[contains(@role,'presentation')]//cx-banner[contains(@class,'frigInstagram socialIconsClass')]//a");
     private final By footer_Connect_Pinterest = By.cssSelector("//li[contains(@role,'presentation')]//cx-banner[contains(@class,'frigPinterest socialIconsClass')]//a");
-    // Others
+    //Others
     private final By footer_Other_Privacy = By.cssSelector("a[aria-label='Privacy policy.  of ']");
     private final By footer_Other_TermAndCondition = By.cssSelector("a[aria-label='Terms & Conditions Node.  of ']");
     private final By footer_Other_DoNotSell = By.cssSelector("a[aria-label='Do not sell my information.  of ']");
-
-    //==================== TC_03 Comprehensive Footer & Newsletter Locators ====================
-    // Footer root
-    private final By footer_Root = By.xpath("//footer");
-
-    // Footer section headings
-    private final By footer_Heading_ContactSupport = By.xpath("//footer//*[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'contact & support') or contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'support') or contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'contact us')]");
-    private final By footer_Heading_AboutElectrolux = By.xpath("//footer//*[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'about electrolux')]");
-    private final By footer_Heading_TermsConditions = By.xpath("//footer//*[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'terms & conditions')]");
-    private final By footer_Heading_ConnectWithUs = By.xpath("//footer//*[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'connect with us')]");
-
-    // CONTACT & SUPPORT links
-    private final By footer_Link_ContactUs = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'contact us')]");
-    private final By footer_Link_ServiceRepair = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'service & repair')]");
-    private final By footer_Link_ProductRegistration = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'product registration')]");
-    private final By footer_Link_FAQs = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')," +
-            "concat('faq'," +
-            "'s'))]");
-    private final By footer_Link_ReturnExchange = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'return and exchange policy')]");
-    private final By footer_Link_ShippingDeliveryInstall = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'shipping, delivery and install policy')]");
-    private final By footer_Link_Financing = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'financing')]");
-    private final By footer_Link_IcemakerRecall = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'icemaker recall')]");
-
-    // ABOUT ELECTROLUX links
-    private final By footer_Link_ElectroluxGroup = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'electrolux group')]");
-    private final By footer_Link_PressNews = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'press & news')]");
-    private final By footer_Link_FinancialInfo = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'financial information')]");
-    private final By footer_Link_CareerOpportunities = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'career opportunities')]");
-    private final By footer_Link_ElectroluxProfessional = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'electrolux professional')]");
-
-    // TERMS & CONDITIONS links
-    private final By footer_Link_PrivacyPolicy = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'privacy policy')]");
-    private final By footer_Link_DoNotSellInfo = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'do not sell my information')]");
-    private final By footer_Link_TermsConditions = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'terms & conditions')]");
-    private final By footer_Link_TransparencySupplyChains = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'transparency in supply chains')]");
-
-    // Not in USA?
-    private final By footer_Link_NotInUSA = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'not in usa')]");
-
-    // Newsletter - Left
-    private final By newsletterLeft_EmailInput = By.xpath("//footer//input[@type='email']");
-    private final By newsletterLeft_SignUpButton = By.xpath("//footer//button[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'sign up')]");
-    private final By newsletterLeft_TermsText = By.xpath("//footer//*[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'by submitting this form')]");
-    private final By newsletterLeft_Heading = By.xpath("//*[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'first to know') or contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'stay in the know') or contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'sign up for emails')]");
-    private final By newsletterLeft_Description = By.xpath("//*[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'get the latest deals') or contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'exclusive offers') or contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'promotions')]");
-
-    // Newsletter - Right
-    private final By newsletterRight_Heading = By.xpath("//*[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'get more from frigidaire')]");
-    private final By newsletterRight_SpecialOffers = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'special offers') or contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'promotions')]");
-    private final By newsletterRight_Support = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'support')]");
-    private final By newsletterRight_ProductRegistration = By.xpath("//footer//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'product registration')]");
-
     //************************** Pre-Footer Locators **************************
     // Get More From Frigidaire
     private final By pre_Footer_GetMoreFromFrigidaire_ProductRegistration = By.xpath("//a[normalize-space()='Product Registration']");
@@ -289,10 +241,11 @@ public class FrigidaireHomePageActions {
     private final By productsLink = By.linkText("Products");
     private final By frigidaireLogo = By.cssSelector("img[alt='Frigidaire Company Logo']");
     private final By acceptButtonLocator = By.xpath("//button[@id='onetrust-accept-btn-handler']");
-    private final By navigationBarAirConditioners = By.xpath("//h5[@aria-label='Air Conditioners']");
-    private final By windowMounted = By.xpath("//h5[contains(text(), 'Window Mounted')]");
-    private final By navigationBarKitchen = By.xpath("//h5[@aria-label='Kitchen']");
-    private final By frenchDoor = By.xpath("//h5[contains(text(), 'French Door')]");
+    private final By emailPopUp=By.xpath("//span[@id=\"close-modal123\"]");
+    private final By navigationBarAirConditioners = By.xpath("//h5[@aria-label='Air Care'] | //h5[@aria-label='Vacuums']");
+    private final By windowMounted = By.xpath("//h5[contains(text(), 'Window Mounted AC')] | (//a[contains(@href, 'vacuum-cleaners')]//div[contains(@class, 'second-level-nav') and contains(text(), 'Vacuums')])[1]");
+    private final By navigationBarKitchen = By.xpath("//h5[@aria-label='Kitchen'] | (//h5[@aria-label='Laundry'])[1]");
+    private final By frenchDoor = By.xpath("//h5[contains(text(), 'French Door')] | (//h5[contains(text(), 'Washers')])[1]");
 
     public FrigidaireHomePageActions navigateToHomePage() {
         WebElementUtil.navigateTo(ConfigReader.getProperty("app.url"));
@@ -351,6 +304,16 @@ public class FrigidaireHomePageActions {
         WebElementUtil.clickElement(mainMenu_DeliverTo);
     }
 
+    public SearchResultsPageActions clickSearchButton() {
+        // clickElement now handles the wait internally
+        WebElementUtil.clickElement(searchButton);
+        return new SearchResultsPageActions();
+    }
+
+    public SearchResultsPageActions searchForProduct(String searchTerm) {
+        return this.enterSearchTerm(searchTerm).clickSearchButton();
+    }
+
     public boolean isMiniCartDisplayed() {
         return WebElementUtil.isDisplayed(mainMenu_Cart);
     }
@@ -359,6 +322,11 @@ public class FrigidaireHomePageActions {
         WebElementUtil.clickElement(mainMenu_Cart);
     }
 
+
+    public ProductCategoryPageActions clickProductsLink() {
+        WebElementUtil.clickElement(productsLink);
+        return new ProductCategoryPageActions();
+    }
     public boolean isLoginDisplayed() {
         return WebElementUtil.isDisplayed(mainMenu_Login_OrderStatus);
     }
@@ -401,6 +369,26 @@ public class FrigidaireHomePageActions {
         WebElementUtil.clickElement(mainMenu_Logo);
     }
 
+    public FrigidaireHomePageActions clickLoginOrderStatusLink() {
+    	WebElementUtil.clickElement(mainMenu_Login_OrderStatus);
+    	if(!WebElementUtil.isDisplayed(mainMenu_Login_OrderStatus_CreateAccount)) {
+    		WebElementUtil.clickElement(mainMenu_Login_OrderStatus);
+    	}
+    	return this;
+    }
+
+    public FrigidaireCreateAccountPageActions navigateToCreateAccountPage() {
+    	clickLoginOrderStatusLink();
+    	WebElementUtil.clickElement(mainMenu_Login_OrderStatus_CreateAccount);
+    	return new FrigidaireCreateAccountPageActions();
+    }
+
+    public FrigidaireLoginPageActions navigateToLoginPage() {
+    	clickLoginOrderStatusLink();
+    	WebElementUtil.clickElement(mainMenu_Login_OrderStatus_Login);
+    	return new FrigidaireLoginPageActions();
+    }
+
     public FrigidairePlpPageActions clickWindowMounted() {
         WebElementUtil.clickElement(navigationBarAirConditioners);
         WebElementUtil.clickElement(windowMounted);
@@ -411,6 +399,11 @@ public class FrigidaireHomePageActions {
         WebElementUtil.clickElement(navigationBarKitchen);
         WebElementUtil.clickElement(frenchDoor);
         return new FrigidairePlpPageActions();
+    }
+
+
+    public FrigidaireForgotPasswordPageActions navigateToResetPasswordPage() {
+    	return navigateToHomePage().navigateToLoginPage().clickForgotPasswordLink();
     }
 
     public boolean isSearchIconDisplayed() {
@@ -599,13 +592,13 @@ public boolean isBlogInspirationPageLoaded() {
 public boolean isFooterDisplayed() { return WebElementUtil.isDisplayed(footer_Root); }
 
 // Footer section headings visibility
-public boolean isContactSupportSectionVisible(){ 
+public boolean isContactSupportSectionVisible(){
     return WebElementUtil.isDisplayed(footer_Heading_ContactSupport)
             || WebElementUtil.isDisplayed(footer_ContactUs)
             || WebElementUtil.isDisplayed(footer_ServiceAndRepair)
             || WebElementUtil.isDisplayed(footer_FAQs);
 }
-public boolean isAboutElectroluxSectionVisible(){ 
+public boolean isAboutElectroluxSectionVisible(){
     scrollToFooter();
     try { WaitUtils.untilPresent(footer_Heading_AboutElectrolux, 10); } catch (Exception ignored) {}
     return WebElementUtil.isDisplayed(footer_Heading_AboutElectrolux)
@@ -618,14 +611,14 @@ public boolean isAboutElectroluxSectionVisible(){
             || WebElementUtil.isDisplayed(By.xpath("//footer//a[contains(@href,'careers.electroluxgroup')]"))
             || WebElementUtil.isDisplayed(By.xpath("//footer//a[contains(@href,'electroluxprofessional')]"));
 }
-public boolean isTermsConditionsSectionVisible(){ 
+public boolean isTermsConditionsSectionVisible(){
     return WebElementUtil.isDisplayed(footer_Heading_TermsConditions)
             || WebElementUtil.isDisplayed(footer_Terms_PrivacyPolicy)
             || WebElementUtil.isDisplayed(footer_Terms_DoNotSell)
             || WebElementUtil.isDisplayed(footer_Terms_TermsAndConditions)
             || WebElementUtil.isDisplayed(footer_Terms_TransparencySupplyChains);
 }
-public boolean isConnectWithUsSectionVisible(){ 
+public boolean isConnectWithUsSectionVisible(){
     return WebElementUtil.isDisplayed(footer_Heading_ConnectWithUs)
             || WebElementUtil.isDisplayed(footer_Connect_Facebook_Anchor)
             || WebElementUtil.isDisplayed(footer_Connect_Youtube_Anchor)
@@ -688,61 +681,61 @@ public void clickMoreToExploreLink(String linkText) {
 }
 
 // Newsletter left visibility and actions
-public boolean isNewsletterLeft_HeadingDisplayed(){ 
+public boolean isNewsletterLeft_HeadingDisplayed(){
     return WebElementUtil.isDisplayed(newsletterLeft_Heading)
             || WebElementUtil.isDisplayed(pre_Footer_FirstToKnow_EmailInput)
             || WebElementUtil.isDisplayed(pre_Footer_FirstToKnow_SubmitButton);
 }
-public boolean isNewsletterLeft_DescriptionDisplayed(){ 
+public boolean isNewsletterLeft_DescriptionDisplayed(){
     return WebElementUtil.isDisplayed(newsletterLeft_Description)
             || WebElementUtil.isDisplayed(pre_Footer_FirstToKnow_TermsAndConditions)
             || WebElementUtil.isDisplayed(pre_Footer_FirstToKnow_PrivacyPolicy);
 }
-public boolean isNewsletterLeft_EmailInputDisplayed(){ 
+public boolean isNewsletterLeft_EmailInputDisplayed(){
     if (WebElementUtil.isDisplayed(By.xpath("//input[@id='newsletterEmailControl']"))) {
         return true;
     }
     return WebElementUtil.isDisplayed(newsletterLeft_EmailInput);
 }
-public boolean isNewsletterLeft_SignUpDisplayed(){ 
+public boolean isNewsletterLeft_SignUpDisplayed(){
     if (WebElementUtil.isDisplayed(By.xpath("//input[@id='submitBtn']"))) {
         return true;
     }
     return WebElementUtil.isDisplayed(newsletterLeft_SignUpButton);
 }
-public boolean isNewsletterLeft_TermsTextDisplayed(){ 
-    if (WebElementUtil.isDisplayed(By.xpath("//u[normalize-space()='Terms and Conditions']")) 
+public boolean isNewsletterLeft_TermsTextDisplayed(){
+    if (WebElementUtil.isDisplayed(By.xpath("//u[normalize-space()='Terms and Conditions']"))
             || WebElementUtil.isDisplayed(By.xpath("//u[normalize-space()='Privacy Policy']"))){
         return true;
     }
     return WebElementUtil.isDisplayed(newsletterLeft_TermsText);
 }
-public void newsletterLeft_EnterEmail(String email){ 
+public void newsletterLeft_EnterEmail(String email){
     if (WebElementUtil.isDisplayed(By.xpath("//input[@id='newsletterEmailControl']"))) {
         WebElementUtil.sendKeys(By.xpath("//input[@id='newsletterEmailControl']"), email);
         return;
     }
-    WebElementUtil.sendKeys(newsletterLeft_EmailInput, email); 
+    WebElementUtil.sendKeys(newsletterLeft_EmailInput, email);
 }
-public void newsletterLeft_ClickSignUp(){ 
+public void newsletterLeft_ClickSignUp(){
     if (WebElementUtil.isDisplayed(By.xpath("//input[@id='submitBtn']"))) {
         WebElementUtil.clickElement(By.xpath("//input[@id='submitBtn']"));
         return;
     }
-    WebElementUtil.clickElement(newsletterLeft_SignUpButton); 
+    WebElementUtil.clickElement(newsletterLeft_SignUpButton);
 }
 
 // Newsletter Right visibility
-public boolean isNewsletterRight_HeadingDisplayed(){ 
+public boolean isNewsletterRight_HeadingDisplayed(){
     return WebElementUtil.isDisplayed(newsletterRight_Heading);
 }
-public boolean isNewsletterRight_SpecialOffersDisplayed(){ 
-    return WebElementUtil.isDisplayed(newsletterRight_SpecialOffers); 
+public boolean isNewsletterRight_SpecialOffersDisplayed(){
+    return WebElementUtil.isDisplayed(newsletterRight_SpecialOffers);
 }
-public boolean isNewsletterRight_SupportDisplayed(){ 
-    return WebElementUtil.isDisplayed(newsletterRight_Support); 
+public boolean isNewsletterRight_SupportDisplayed(){
+    return WebElementUtil.isDisplayed(newsletterRight_Support);
 }
-public boolean isNewsletterRight_ProductRegistrationDisplayed(){ 
-    return WebElementUtil.isDisplayed(newsletterRight_ProductRegistration); 
+public boolean isNewsletterRight_ProductRegistrationDisplayed(){
+    return WebElementUtil.isDisplayed(newsletterRight_ProductRegistration);
 }
 }

@@ -10,10 +10,10 @@ import static com.automation.frigidaire.utils.WaitUtils.untilClickable;
 public class FrigidairePlpPageActions {
 
     private final By closePopupButton = By.xpath("//span[contains(@id, 'close-modal')]");
-    private final By plpProductId = By.xpath("(//div[@id='ReviewsPLPItemComponent']/preceding-sibling::div)[1]");
-    private final By plpProductTitle = By.xpath("(//div[@id='ReviewsPLPItemComponent']/../following-sibling::div/a)[1]");
-    private final By plpProductPrice = By.xpath("(//div[contains(@class, 'container price')]//span[contains(@class, 'H3H3_Desktop')])[1]");
-    private final By plpProductReview = By.xpath("(//div[@id='ReviewsPLPItemComponent'])[1]");
+    private final By plpProductId = By.xpath("(//div[@id='ReviewsPLPItemComponent']/preceding-sibling::div)[1] | (//div[@id='BvProductRating']/../preceding-sibling::div)[1]");
+    private final By plpProductTitle = By.xpath("(//div[@id='ReviewsPLPItemComponent']/../following-sibling::div/a)[1] | (//div[@id='BvProductRating']/../../../../following-sibling::div/a)[1]");
+    private final By plpProductPrice = By.xpath("(//div[contains(@class, 'container price')]//span[contains(@class, 'H3H3_Desktop')])[1] | (//span[contains(@class, 'H3H3_Desktop')])[1]");
+    private final By plpProductReview = By.xpath("(//div[@id='ReviewsPLPItemComponent'])[1] | (//div[@id='BvProductRating'])[1]");
     private final By plpProductReviewNumber = By.xpath("(//div[contains(@class, 'numReviews')]/div)[1]");
     private final By plpHeight = By.xpath("(//span[contains(text(), 'H:')]/following-sibling::span)[1]");
     private final By plpWidth = By.xpath("(//span[contains(text(), 'W:')]/following-sibling::span)[1]");

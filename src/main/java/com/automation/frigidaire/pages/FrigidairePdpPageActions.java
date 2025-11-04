@@ -6,11 +6,11 @@ import org.openqa.selenium.By;
 
 public class FrigidairePdpPageActions {
 
-    private final By productIdOnPDP = By.xpath("//h2[contains(@class, 'prod_id')]");
-    private final By productTitleOnPDP = By.xpath("//h2[contains(@class, 'prod_id')]/preceding-sibling::h1");
-    private final By productPriceOnPDP = By.xpath("//span[contains(@class, 'Utility-TextPrice-Sale-Lrg')]");
+    private final By productIdOnPDP = By.xpath("//h2[contains(@class, 'prod_id')] | //p[contains(@class, 'prod_id')]");
+    private final By productTitleOnPDP = By.xpath("//h2[contains(@class, 'prod_id')]/preceding-sibling::h1 | //p[contains(@class, 'prod_name Product-title')]");
+    private final By productPriceOnPDP = By.xpath("//span[contains(@class, 'Utility-TextPrice-Sale-Lrg')] | //span[contains(@class, 'H3H3_Desktop ')]");
     private final By productReviewNumberOnPDP = By.xpath("(//div[contains(@class, 'numReviews')]/div)[1]");
-    private final By productColorOnPDP = By.xpath("//div[@id='color']");
+    private final By productColorOnPDP = By.xpath("//div[@id='color'] | //span[@class='colorHeading']");
     private final By pdpHeight = By.xpath("//p[contains(text(),'Height')]/span[2]");
     private final By pdpWidth = By.xpath("//p[contains(text(),'Width')]/span[2]");
     private final By pdpDepth = By.xpath("//p[contains(text(),'Depth')]/span[2]");
@@ -21,9 +21,9 @@ public class FrigidairePdpPageActions {
 
     public boolean isProductIdMatchingWithPLP() {
         WaitUtils.untilVisible(productIdOnPDP);
-        String actualTitle = WebElementUtil.getText(productIdOnPDP).trim();
-        String expectedTitle = FrigidairePlpPageActions.getSelectedProductId().trim();
-        return actualTitle.equalsIgnoreCase(expectedTitle);
+        String actualId = WebElementUtil.getText(productIdOnPDP).trim();
+        String expectedId = FrigidairePlpPageActions.getSelectedProductId().trim();
+        return actualId.equalsIgnoreCase(expectedId);
     }
 
     public boolean isProductTitleMatchingWithPLP() {
@@ -35,16 +35,18 @@ public class FrigidairePdpPageActions {
 
     public boolean isProductPriceMatchingWithPLP() {
         WaitUtils.untilVisible(productPriceOnPDP);
-        String actualTitle = WebElementUtil.getText(productPriceOnPDP).trim();
-        String expectedTitle = FrigidairePlpPageActions.getSelectedProductPrice().trim();
-        return actualTitle.equalsIgnoreCase(expectedTitle);
+        String actualPrice = WebElementUtil.getText(productPriceOnPDP).trim();
+        actualPrice = actualPrice.replaceAll("\\.\\d+$", "");
+        String expectedPrice = FrigidairePlpPageActions.getSelectedProductPrice().trim();
+        expectedPrice = expectedPrice.replaceAll("(\\.00|00)$", "");
+        return actualPrice.equalsIgnoreCase(expectedPrice);
     }
 
     public boolean isProductReviewMatchingWithPLP() {
         WaitUtils.untilVisible(productReviewNumberOnPDP);
-        String actualTitle = WebElementUtil.getText(productReviewNumberOnPDP).trim();
-        String expectedTitle = FrigidairePlpPageActions.getSelectedProductReviewNumber().trim();
-        return actualTitle.equalsIgnoreCase(expectedTitle);
+        String actualReview = WebElementUtil.getText(productReviewNumberOnPDP).trim();
+        String expectedReview = FrigidairePlpPageActions.getSelectedProductReviewNumber().trim();
+        return actualReview.equalsIgnoreCase(expectedReview);
     }
 
     public boolean isProductColorVisibleOnPDP() {

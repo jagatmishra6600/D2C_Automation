@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Frigidaire Automation Suite">
-    <test name="Frigidaire Smoke Tests">
-        <parameter name="browser" value="chrome"/>
+    <test name="Frigidaire Regression Tests">
         <groups>
             <run>
-                <include name="TC_02"/>
+                <include name="regression"/>
+                <include name="smoke"/>
             </run>
         </groups>
         <classes>
-            <class name="com.automation.frigidaire.tests.EPIC_02_HomePage.FrigidaireWebsiteTest"/>
+            <class name="com.automation.frigidaire.tests.EPIC_04_PLP.TC_04_PLP_Filters_AirCare"/>
+            <class name="com.automation.frigidaire.tests.EPIC_04_PLP.TC_05_PLP_Sort_By_for_Air_Care"/>
+            <class name="com.automation.frigidaire.tests.EPIC_04_PLP.TC_NAGDTOPS_15689_PLP_Filters"/>
+            <class name="com.automation.frigidaire.tests.EPIC_04_PLP.TC_NAGDTOPS_15695_PLP_SORT_BY"/>
+
         </classes>
     </test>
 </suite>
