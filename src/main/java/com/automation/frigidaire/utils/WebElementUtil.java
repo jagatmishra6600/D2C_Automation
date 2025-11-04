@@ -468,4 +468,21 @@ public class WebElementUtil {
                 .perform();
         }, 3, 1000);
     }
+
+
+
+
+    public static WebElement findElementIfPresent(By locator) {
+        try {
+            List<WebElement> elements = DriverManager.getDriver().findElements(locator);
+            if (!elements.isEmpty()) {
+                return elements.get(0);
+            }
+        } catch (Exception ignored) {}
+        return null;
+    }
+
+
+
+
 }
