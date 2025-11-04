@@ -1,4 +1,12 @@
 target/
+test-output/
+*.log
+
+# Media and large files
+videos/
+screenshots/
+
+
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -7,6 +15,7 @@ videos/
 screenshots/
 
 ### IntelliJ IDEA ###
+.idea/
 .idea/modules.xml
 .idea/jarRepositories.xml
 .idea/compiler.xml
@@ -40,6 +49,7 @@ build/
 
 ### Mac OS ###
 .DS_Store
+Thumbs.db
 
 # Ignore screenshots and videos
 screenshots/

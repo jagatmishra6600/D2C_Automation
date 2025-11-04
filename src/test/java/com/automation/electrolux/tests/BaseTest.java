@@ -1,4 +1,4 @@
-package com.automation.electrolux.tests;
+package com.automation.frigidaire.tests;
 
 
 import com.automation.frigidaire.utils.DriverManager;
@@ -8,10 +8,7 @@ import com.automation.frigidaire.utils.VideoRecorder;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 
 public class BaseTest {
 
