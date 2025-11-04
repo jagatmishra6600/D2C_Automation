@@ -484,8 +484,5 @@ public class WebElementUtil {
 
 
 
-    public static WebElement waitForElementToBeVisible(By locator, int time ) {
-        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(time));
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-    }
+
 }
