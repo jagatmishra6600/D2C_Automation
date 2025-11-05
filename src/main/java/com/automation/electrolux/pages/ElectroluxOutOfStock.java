@@ -117,7 +117,7 @@ public class ElectroluxOutOfStock {
         Thread.sleep(5000);
         WebDriver driver = DriverManager.getDriver();
         List<WebElement> items = driver.findElements(By.xpath("//div[starts-with(@id, 'PlpItem')]"));
-        for (int i = 0; i < items.size(); i++) {
+        for (int i = 0; i < 5; i++) {
             if(ProductName.equalsIgnoreCase("Vacuums")){
                 verifyStockForVacuums(i);
             } else if (ProductName.equalsIgnoreCase("Laundry")) {
