@@ -6,7 +6,7 @@ import com.automation.frigidaire.utils.DriverManager;
 import com.automation.frigidaire.utils.ExtentReportManager;
 import org.testng.annotations.Test;
 
-public class TC_01_PLP_Product_Cards extends BaseTest {
+public class TC_01_PLP_Product_Cards  {
 
     ElectroluxProductCards electroluxProductCards =new ElectroluxProductCards();
 

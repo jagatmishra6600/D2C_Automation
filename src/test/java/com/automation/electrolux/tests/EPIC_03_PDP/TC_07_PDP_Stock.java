@@ -10,7 +10,7 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TC_07_PDP_Stock extends BaseTest {
+public class TC_07_PDP_Stock {
     ElectroluxProductCards electroluxProductCards = new ElectroluxProductCards();
     ElectroluxOutOfStock electroluxOutOfStock = new ElectroluxOutOfStock();
 

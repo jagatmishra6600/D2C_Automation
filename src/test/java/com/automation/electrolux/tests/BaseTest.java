@@ -1,4 +1,4 @@
-package com.automation.frigidaire.tests;
+package com.automation.electrolux.tests;
 
 
 import com.automation.frigidaire.utils.DriverManager;

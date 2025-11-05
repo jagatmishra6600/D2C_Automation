@@ -10,7 +10,7 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TC_08_PDP_FAQ extends BaseTest {
+public class TC_08_PDP_FAQ  {
     ElectroluxProductCards electroluxProductCards=new ElectroluxProductCards();
     ElectroluxFAQ electroluxFAQ=new ElectroluxFAQ();
 
