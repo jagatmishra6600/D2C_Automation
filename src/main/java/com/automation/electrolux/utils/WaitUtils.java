@@ -1,4 +1,4 @@
-package com.automation.frigidaire.utils;
+package com.automation.electrolux.utils;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -130,11 +130,6 @@ public final class WaitUtils {
     // Page load
     public static boolean untilPageLoadComplete() {
         return untilPageLoadComplete(DEFAULT_TIMEOUT_SECONDS);
-    }
-
-    // Page load helpers
-    public static void waitForPageLoad() {
-        WaitUtils.untilPageLoadComplete();
     }
 
     public static boolean untilPageLoadComplete(long timeoutSeconds) {

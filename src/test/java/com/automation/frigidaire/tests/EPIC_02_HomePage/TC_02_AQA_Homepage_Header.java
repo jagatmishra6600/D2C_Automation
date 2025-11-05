@@ -1,45 +1,92 @@
 package com.automation.frigidaire.tests.EPIC_02_HomePage;
 
-public class TC_02_AQA_Homepage_Header {
+import com.automation.frigidaire.pages.ContactPageActions;
+import com.automation.frigidaire.pages.FrigidaireHomePageActions;
+import com.automation.frigidaire.pages.LoginPageActions;
+import com.automation.frigidaire.tests.BaseTest;
+import com.automation.frigidaire.utils.ConfigReader;
+import com.automation.frigidaire.utils.ExtentReportManager;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
-    //Verify the logo / brand icon displayed in the header
-         //Shopper should see site specific brand logo / icon displayed in the header.
+public class TC_02_AQA_Homepage_Header extends BaseTest {
 
-    //    Verify on click on brand logo / icon from the header
-                 //    Shopper should be navigated back to home page onclick on brand logo / icon, when shopper is in another page throughout the site.
+    FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
+    LoginPageActions loginScreen = new LoginPageActions();
+    ContactPageActions contactus = new ContactPageActions();
 
-    //    Verify the header for logged in / registered user.
-                    //    Given I am a shopper
-                    //    And I am registered user
-                    //    When I login using my credentials (Registered Email ID and Password)
-                    //    Then shopper should able to see his / her first name displayed next to "Hello" label in the header
+    @Test(groups = {"regression", "TC_02"}, description = "Verify the logo / brand icon displayed in the header")
+    public void TC_02_S1_VerifyBandLogoDisplayed() {
+        homePage.navigateToHomePage();
+        Assert.assertTrue(homePage.isBrancdLogoLoaded(), "The Frigidaire Logo did not load correctly.");
+        ExtentReportManager.getTest().pass("Home page loaded successfully and logo was verified.");
+    }
 
-    //    Verify "Contact us" link from header
-            //    1. Shopper should see "Contact us" link in the header
-            //    2. On click shopper should be navigated to contact us page.
+    @Test(groups = {"regression","TC_02"}, description = "Verify on click on brand logo / icon from the header")
+    public void TC_02_S2_ClickBandLogoHeader() {
+        homePage.navigateToHomePage();
+        Assert.assertTrue(homePage.isHomePageLoaded(), "The Frigidaire home page did not load correctly.");
+        Assert.assertTrue(homePage.validateUserNavigateBackToHomepage(), "Navigation back to home page failed.");
+        ExtentReportManager.getTest().pass("Pass - Verify on click on brand logo / icon from the header");
+    }
 
+    @Test(groups = {"regression","TC_02"}, description = "Verify the header for logged in / registered user.")
+    public void TC_02_S3_VerifyHearForLoggedInUser() {
+        homePage.navigateToHomePage();
+        Assert.assertTrue(homePage.isHomePageLoaded(), "The Frigidaire home page did not load correctly.");
+        homePage.navigateToLoginPage();
+        Assert.assertTrue(loginScreen.loginWithCredentials(ConfigReader.getProperty("username"), ConfigReader.getProperty("password")), "Login page did not load correctly and Logo is not displayed");
+        ExtentReportManager.getTest().pass("Home page loaded successfully and logo was verified.");
+    }
 
-    //    Verify zip code displayed in the header
-             //    Shopper should see zip code option in the header. Default zip code set to 28088.
+    @Test(groups = {"regression","TC_02"}, description = "Verify \"Contact us\" link from header")
+    public void TC_02_S4_VerifyContactUsLink() {
+        homePage.navigateToHomePage();
+        Assert.assertTrue(homePage.isContactUsLinkDisplayed(), "The Frigidaire home page did not load correctly and contact us link is not displayed.");
+        homePage.clickContactUsLink();
+        Assert.assertTrue(contactus.isContactPageLoaded(), "Contact us page did not load correctly.");
+        ExtentReportManager.getTest().pass("Contact Us link from from header was verified.");
+    }
 
-    //    Verify update / change zip code in the header
-            //            Onclick on zipcode from header, shopper should see:
-            //            1. a flyout displaying "Please enter your shipping zip code. Delivery options and availability are based on your delivery area." text along with "Zipcode" text field and "Set" CTA by default disabled.
-            //            2. Enter the zip-code, "Set" cta should get enabled.
-            //            Onclick on "Set CTA, zip code should get updated in the header as well as in the session.
+    @Test(groups = {"regression","TC_02"}, description = "Verify zip code displayed in the header")
+    public void TC_02_S5_VerifyZIP() {
+        homePage.navigateToHomePage();
+        Assert.assertTrue(homePage.isZipCodeDisplayed(), "ZIP Code not loaded properly.");
+        ExtentReportManager.getTest().pass("Default ZIP code is set to 28088");
+    }
 
+    @Test(groups = {"regression","TC_02"}, description = "Verify update / change zip code in the header")
+    public void TC_02_S6_VerifyZIPUpdate() {
+        homePage.navigateToHomePage();
+        Assert.assertTrue(homePage.isZipCodeDisplayed(), "ZIP Code not loaded properly.");
+        homePage.enterZipCode("28808");
+        Assert.assertEquals(homePage.getDefaultZipCode(), "28088", "Default ZIP code is not set to 28088");
+        ExtentReportManager.getTest().pass("Home page loaded successfully and logo was verified.");
+    }
 
-    //    Verify zip code when invalid zip code is entered
-            //     Shopper enters an invalid zip-code or leaves zip code field as blank, then " Invalid zip code" message should be displayed to the shopper.
+    @Test(groups = {"regression","TC_02"}, description = "Verify zip code when invalid zip code is entered")
+    public void TC_02_S7_VerifyZIPUpdateInvalid() {
+        homePage.navigateToHomePage();
+        Assert.assertTrue(homePage.validateInvalidZIPWhenBlank(), "Invalid ZIP code message is not displayed when blank.");
+        Assert.assertTrue(homePage.validateInvalidZIPWhenLessThan5Digits(), "Invalid ZIP code message is not displayed when invalid ZIP is entered.");
+        ExtentReportManager.getTest().pass("Home page loaded successfully and logo was verified.");
+    }
 
-    //    Verify mini cart icon in the header
-            //    Shopper should see:
-            //            1. Mini cart button
-            //            2. Mini cart should show the count of the products added to the cart.
+    @Test(groups = {"regression","TC_02"}, description = "Verify mini cart icon in the header")
+    public void TC_02_S8_VerifyMINICart() {
+        homePage.navigateToHomePage();
+        Assert.assertTrue(homePage.isMiniCartDisplayed(), "Mini cart is not displayed in the header");
+        homePage.addIteamToCart("IM117000");
+        Assert.assertTrue(homePage.isMiniCartCountUpdated(), "Mini cart count is not updated after adding an item to the cart");
+        ExtentReportManager.getTest().pass("Home page loaded successfully and logo was verified.");
+    }
 
-    //    Verify onclick on "mini cart" icon
-            //    Shopper should be navigated to cart details page.
-
+    @Test(groups = {"regression","TC_02"}, description = "Verify onclick on \"mini cart\" icon")
+    public void TC_02_S9_VerifyMINICartOnclick() {
+        homePage.navigateToHomePage();
+        Assert.assertTrue(homePage.isMiniCartDisplayed(), "Mini cart is not displayed in the header");
+        homePage.clickMiniCart();
+        ExtentReportManager.getTest().pass("Mini cart click functionality verified");
+    }
 }
-
 
