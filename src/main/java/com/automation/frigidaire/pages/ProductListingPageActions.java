@@ -71,7 +71,7 @@ public class ProductListingPageActions {
         Thread.sleep(5000);
         WebDriver driver = DriverManager.getDriver();
         List<WebElement> items = driver.findElements(By.xpath("//div[starts-with(@id, 'PlpItem')]"));
-        for (int i = 0; i <=0; i++) {
+        for (int i = 0; i <=2; i++) {
             if(ProductName.equalsIgnoreCase("Kitchen")){
                 checkProductDetail(i);
                 verifyKitchenDetails(i);
