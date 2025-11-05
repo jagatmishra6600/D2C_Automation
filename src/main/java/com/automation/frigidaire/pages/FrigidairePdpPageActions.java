@@ -140,7 +140,7 @@ public class FrigidairePdpPageActions {
     }
 
     public FrigidairePdpPageActions clickViewFullSpecButton() {
-        WebElementUtil.scrollIntoView(viewFullSpecBtn);
+        WebElementUtil.scrollIntoView(generalSpecText, 100);
         WebElementUtil.clickElement(viewFullSpecBtn);
         return this;
     }
