@@ -216,22 +216,6 @@ public class MailDropPageActions {
 	    return false;
 	}
 	
-//	public boolean isFrigidairePasswordResetMailCorrect() {	
-//		return getMailTitle().equals("Password Reset") &&
-//		           isMailResetYourPasswordLinkDisplayed() &&
-//		           getMailText().contains("If you did not make this request, please ignore this email. If you don't use this link within 24 hours, it will expire.") &&
-//		           isBrandLogoDisplayed();
-//	}
-	
-//	public boolean isFrigidairePasswordResetSuccessMailCorrect() {
-//	    return getMailTitle().equalsIgnoreCase("Frigidaire password changed") &&
-//	    			isMailContactUsLinkDisplayed() &&
-//    				getMailText().contains("Your password was successfully reset.") &&
-//    				getMailText().contains("Frigidaire team") &&
-//    				isMailConnectSocialMediaLinksDisplayed() &&
-//    				isMailFooterLinksDisplayed();
-//	}
-	
 	public boolean isFrigidairePasswordResetMailCorrect() {	
 		var mailTitle =getMailTitle().equalsIgnoreCase("Password Reset");
 		var resetYourPasswordLink =isMailResetYourPasswordLinkDisplayed();

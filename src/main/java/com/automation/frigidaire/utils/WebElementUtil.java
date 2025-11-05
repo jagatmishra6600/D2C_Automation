@@ -1,12 +1,21 @@
 package com.automation.frigidaire.utils;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.JavascriptExecutor;
 
 import java.time.Duration;
+import java.util.List;
+import java.util.Set;
 import java.util.*;
 import java.util.NoSuchElementException;
 import java.util.function.Supplier;
@@ -16,6 +25,53 @@ public class WebElementUtil {
     // Private constructor to prevent instantiation of this utility class
     private WebElementUtil() {
         throw new IllegalStateException("Utility class");
+    }
+
+    public static void scrollToElementByXPath(String xpath) {
+        try {
+            WebElement element = DriverManager.getDriver().findElement(By.xpath(xpath));
+            ((JavascriptExecutor) DriverManager.getDriver())
+                    .executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", element);
+        } catch (NoSuchElementException e) {
+            System.out.println("Element not found with XPath: " + xpath);
+            // Fallback to scroll to bottom if element not found
+            ((JavascriptExecutor) DriverManager.getDriver())
+                    .executeScript("window.scrollTo(0, document.body.scrollHeight);");
+        } catch (Exception e) {
+            System.out.println("Error scrolling to element: " + e.getMessage());
+        }
+    }
+
+    public static void closeNewTabIfOpened(Set<String> beforeHandles) {
+        WebDriver driver = DriverManager.getDriver();
+        Set<String> afterHandles = driver.getWindowHandles();
+        if (afterHandles.size() > beforeHandles.size()) {
+            afterHandles.removeAll(beforeHandles);
+            if (!afterHandles.isEmpty()) {
+                String newHandle = afterHandles.iterator().next();
+                String original = driver.getWindowHandle();
+                driver.switchTo().window(newHandle);
+                driver.close();
+                driver.switchTo().window(original);
+            }
+        }
+    }
+
+    public static void hoverOverElement(By locator) {
+        retryOnFailure(() -> {
+            WebElement element = waitForElementToBeVisible(locator);
+            Actions actions = new Actions(DriverManager.getDriver());
+            actions.moveToElement(element).perform();
+        }, 3, 1000);
+    }
+
+
+    public static Set<String> getWindowHandles() {
+        return DriverManager.getDriver().getWindowHandles();
+    }
+
+    public static String getWindowHandle() {
+        return DriverManager.getDriver().getWindowHandle();
     }
 
     // Retry mechanism for flaky interactions
@@ -122,36 +178,28 @@ public class WebElementUtil {
      * @return The WebElement once it is clickable.
      */
     public static WebElement waitForElementToBeClickable(By locator) {
-        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(30));
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
-    /**
-     * Navigates the browser to the specified URL.
-     *
-     * @param url The URL to navigate to.
-     */
-    public static void navigateTo(String url) {
-        DriverManager.getDriver().get(url);
+    public static void hoverElement(By locator) {
+        WebElement element = waitForElementToBeVisible(locator);
+        Actions actions = new Actions(DriverManager.getDriver());
+        actions.moveToElement(element).perform();
     }
 
-    /**
-     * Gets the title of the current page.
-     *
-     * @return The title of the page.
-     */
-    public static String getPageTitle() {
-        return DriverManager.getDriver().getTitle();
+    public static WebElement waitForElementToBeVisible(By locator, int seconds) {
+        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(seconds));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
-    /**
-     * Gets the current URL of the page.
-     *
-     * @return The current URL.
-     */
-    public static String getCurrentUrl() {
-        return DriverManager.getDriver().getCurrentUrl();
+
+    public static WebElement waitForElementToBeClickable(By locator, int seconds) {
+        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(seconds));
+        return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
+
+
 
 
     public static void scrollToElement(WebDriver driver, WebElement element) {
@@ -333,6 +381,7 @@ public class WebElementUtil {
      * @return
      */
 
+
     public static WebElement scrollIntoView(By locator) {
         WebDriver driver = DriverManager.getDriver();
         WebElement element = new WebDriverWait(driver, Duration.ofSeconds(15))
@@ -350,6 +399,11 @@ public class WebElementUtil {
     }
 
 
+    /**
+     * Scrolls the element into view using JavaScript with adjustable sticky header height offset.
+     * @param locator The By locator of the element.
+     * @param stickyHeaderHeight The height of the sticky header to offset.
+     */
     public static void scrollIntoView(By locator, int stickyHeaderHeight) {
         WebElement element = waitForElementToBeVisible(locator);
         ((JavascriptExecutor) DriverManager.getDriver()).executeScript(
@@ -454,5 +508,46 @@ public class WebElementUtil {
                 .build()
                 .perform();
         }, 3, 1000);
+    }
+
+
+
+
+    public static WebElement findElementIfPresent(By locator) {
+        try {
+            List<WebElement> elements = DriverManager.getDriver().findElements(locator);
+            if (!elements.isEmpty()) {
+                return elements.get(0);
+            }
+        } catch (Exception ignored) {}
+        return null;
+    }
+
+
+
+
+
+    /**
+     * Navigates the browser to the specified URL.
+     * @param url The URL to navigate to.
+     */
+    public static void navigateTo(String url) {
+        DriverManager.getDriver().get(url);
+    }
+
+    /**
+     * Gets the title of the current page.
+     * @return The title of the page.
+     */
+    public static String getPageTitle() {
+        return DriverManager.getDriver().getTitle();
+    }
+
+    /**
+     * Gets the current URL of the page.
+     * @return The current URL.
+     */
+    public static String getCurrentUrl() {
+        return DriverManager.getDriver().getCurrentUrl();
     }
 }

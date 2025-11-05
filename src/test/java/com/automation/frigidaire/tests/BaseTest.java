@@ -2,6 +2,7 @@ package com.automation.frigidaire.tests;
 
 
 import com.automation.frigidaire.utils.DriverManager;
+import com.automation.frigidaire.utils.ConfigReader;
 import com.automation.frigidaire.utils.ExtentReportManager;
 import com.automation.frigidaire.utils.ScreenshotUtility;
 import com.automation.frigidaire.utils.VideoRecorder;
@@ -20,7 +21,10 @@ public class BaseTest {
     @BeforeMethod(alwaysRun = true)
     public void setUpMethod(java.lang.reflect.Method method) throws Exception {
         ExtentReportManager.createTest(method.getName());
-        VideoRecorder.startRecording(method.getName());
+        String videoEnabled = ConfigReader.getProperty("video.enabled");
+        if (videoEnabled != null && videoEnabled.equalsIgnoreCase("true")) {
+            VideoRecorder.startRecording(method.getName());
+        }
         DriverManager.getDriver(); // Initialize driver
     }
 
@@ -45,6 +49,12 @@ public class BaseTest {
         }
 
         DriverManager.quitDriver();
+
+        // Flush report incrementally to ensure the HTML file is generated even if the suite aborts
+        try {
+            ExtentReportManager.flushReport();
+        } catch (Exception ignored) {
+        }
     }
 
     @AfterSuite

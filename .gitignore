@@ -1,4 +1,12 @@
 target/
+test-output/
+*.log
+
+# Media and large files
+videos/
+screenshots/
+
+
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -7,6 +15,7 @@ videos/
 screenshots/
 
 ### IntelliJ IDEA ###
+.idea/
 .idea/modules.xml
 .idea/jarRepositories.xml
 .idea/compiler.xml
@@ -40,3 +49,18 @@ build/
 
 ### Mac OS ###
 .DS_Store
+Thumbs.db
+
+# Ignore screenshots and videos
+screenshots/
+videos/
+
+# Ignore IntelliJ workspace and shelf files
+.idea/workspace.xml
+.idea/shelf/
+
+# Ignore resource files if you don't want to push them
+src/main/resources/
+
+# Ignore test reports and output folders
+test-output/

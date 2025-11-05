@@ -60,7 +60,6 @@ public class ProductItemsPageActions {
 
     public void checkAndHandleNotifyMeForKitchen(String productName, String email) {
         boolean inStock = productIsInStock(productName);
-
         if (inStock) {
                 verifyProductInOutStockAndNotifyForKitchen(email);
         } else {

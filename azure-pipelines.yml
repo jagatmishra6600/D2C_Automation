@@ -1,0 +1,76 @@
+# Azure Pipelines configuration for D2C_Automation
+# Runs every 2 hours via scheduled trigger and executes Maven tests.
+
+name: $(Date:yyyyMMdd-HHmm)
+
+# Disable CI triggers if you only want scheduled runs.
+# Remove or adjust this section if you also want runs on pushes/PRs.
+trigger: none
+pr: none
+
+schedules:
+- cron: "0 */2 * * *"   # Every 2 hours at minute 0 (UTC)
+  displayName: "Every 2 hours"
+  branches:
+    include:
+    - main
+  always: true
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  projectDir: 'D2C_Automation'
+
+steps:
+- task: JavaToolInstaller@0
+  displayName: 'Use Java 17'
+  inputs:
+    versionSpec: '17'
+    jdkArchitectureOption: 'x64'
+    jdkSourceOption: 'PreInstalled'
+
+- task: Maven@3
+  displayName: 'Build and Test (Maven)'
+  inputs:
+    mavenPomFile: '$(projectDir)/pom.xml'
+    goals: 'clean test'
+    options: '-B'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/*.xml'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.17'
+    jdkArchitectureOption: 'x64'
+
+- task: PublishTestResults@2
+  displayName: 'Publish Test Results'
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '$(projectDir)/target/surefire-reports/TEST-*.xml'
+    testRunTitle: 'Maven Tests'
+    mergeTestResults: true
+  condition: succeededOrFailed()
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Surefire Reports Artifact'
+  inputs:
+    PathtoPublish: '$(projectDir)/target/surefire-reports'
+    ArtifactName: 'surefire-reports'
+    publishLocation: 'Container'
+  condition: succeededOrFailed()
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Extent Report Artifact'
+  inputs:
+    PathtoPublish: '$(projectDir)/test-output'
+    ArtifactName: 'extent-report'
+    publishLocation: 'Container'
+  condition: succeededOrFailed()
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Screenshots Artifact'
+  inputs:
+    PathtoPublish: '$(projectDir)/screenshots'
+    ArtifactName: 'screenshots'
+    publishLocation: 'Container'
+  condition: succeededOrFailed()

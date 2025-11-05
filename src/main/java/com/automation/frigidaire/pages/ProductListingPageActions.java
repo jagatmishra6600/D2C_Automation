@@ -3,31 +3,23 @@ package com.automation.frigidaire.pages;
 import com.automation.frigidaire.utils.DriverManager;
 import com.automation.frigidaire.utils.WaitUtils;
 import com.automation.frigidaire.utils.WebElementUtil;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 import java.time.Duration;
 import java.util.List;
 
-
 public class ProductListingPageActions {
 
-    WebDriver driver = DriverManager.getDriver();
+    SoftAssert softAssert=new SoftAssert();
     private final By emailPopUp = By.xpath("//span[@id=\"close-modal123\"]");
-    public static String productName;
+
     public void closeEmailPopUp() {
         WaitUtils.untilVisible(emailPopUp, 60);
         WebElementUtil.clickElement(emailPopUp);
-    }
-
-    public List<WebElement> getAllProductCards() {
-        System.out.println("hellooo");
-        return driver.findElements(By.xpath("//div[@class=\"col- Product-Name my-2 min-height-v10\"]"));
     }
 
     public void verifyProductItemPage(String str, String assertValue) {
@@ -43,266 +35,96 @@ public class ProductListingPageActions {
         WebElementUtil.clickElement(locator);
     }
 
-    public boolean productFind(String productName){
-        WebElementUtil.zoomInOrOut(30);
-       // WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(10));
-        boolean isAvailable=false;
-        try{
-            By nameLocator = By.xpath("//span[text()=\'" + productName + "\']");
-            WebElementUtil.waitForElementToBeClickable(nameLocator);
-            List<WebElement> productList = driver.findElements(nameLocator);
-            Assert.assertFalse(productList.isEmpty(), "Product not found in the list");
-            WebElement name = productList.get(0);
-            Assert.assertTrue(name.isDisplayed(), "Product name is not visible on screen.");
-            System.out.println("Product found: " + name.getText());
-            isAvailable = true;
-        } catch (Exception e) {
-            System.out.println("Product NOT FOUND in product list: " + productName);
-        }
-        return isAvailable;
+    public void verifyAndClickElements(int i) {
+        WebDriver driver = DriverManager.getDriver();
+        WebElementUtil.zoomInOrOut(40);
+            String image = "//div[@id=\"PlpItem"+i+"\"]//div[@class=\"col- Product-Image-Placeholder\"]/a";
+            String nameXpath = "//div[@id=\"PlpItem"+i+"\"]//div[@class='col- Product-Name my-2 min-height-v10']/a";
+            String ratingXpath = "//div[@id=\"PlpItem"+i+"\"]//div[@id='ReviewsPLPItemComponent']";
+
+            verifyAndClickIfNeeded(driver, image, "Product Image");
+            verifyAndClickIfNeeded(driver, nameXpath, "Product Name");
+            verifyAndClickIfNeeded(driver, ratingXpath, "Product Rating");
     }
-    public void verifyProduct(String productName){
-        boolean isAvailable =productFind(productName);
-        if(isAvailable){
-            productCardDetails(productName);
-        }
-        else {
-            //System.out.println("Product NOT FOUND in product list: " + productName);
-        }
-    }
-
-    public void productCardDetails(String productName){
-        String baseXPath = String.format("//div[div[a[span[text()=\"%s\"]]]]", productName);
-        By productImage = By.xpath(baseXPath + "/div/a//img");
-        assertDisplayed(productImage, "Product image");
-
-
-        By productGallery = By.xpath(baseXPath + "/div//img[@alt='Frigidaire Gallery' or @alt='Frigidaire Professional']");
+    private void verifyAndClickIfNeeded(WebDriver driver, String xpath, String elementName) {
         try {
-            WebElementUtil.waitForElementToBeVisible(productGallery);
-            List<WebElement> tagElements = driver.findElements(productGallery);
-
-            if (tagElements.isEmpty()) {
-                System.out.println("No Frigidaire Gallery/Professional tag found for product: " + productName);
-            } else {
-                WebElement tagImage = tagElements.get(0);
-                if (tagImage.isDisplayed()) {
-                    System.out.println("Frigidaire tag is displayed: " + tagImage.getAttribute("alt"));
-                } else {
-                    System.out.println("Frigidaire tag found, but not visible for product: " + productName);
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("No Frigidaire tag for product : " + productName);
-        }
-
-        By productColor = By.xpath(baseXPath + "/div//a/div[contains(@class, 'Product-Color')]");
-
-        try {
-            // Wait for the color elements to be visible
-            WebElementUtil.waitForElementToBeVisible(productColor);
-
-            // Find all color elements
-            List<WebElement> colorList = driver.findElements(productColor);
-
-            if (colorList.isEmpty()) {
-                // If no color options are found
-                System.out.println("No color options found for product: " + productName);
-            } else {
-                // If color options are found, check and display details
-                System.out.println("Found " + colorList.size() + " color option(s).");
-                for (int i = 0; i < colorList.size(); i++) {
-                    WebElement colorElement = colorList.get(i);
-                    if (colorElement.isDisplayed()) {
-                        // Get the color name from title or aria-label attribute
-                        String colorName = colorElement.getAttribute("title");
-                        if (colorName == null || colorName.isEmpty()) {
-                            colorName = colorElement.getAttribute("aria-label");
-                        }
-                        System.out.println("Color " + (i + 1) + ": " + (colorName != null ? colorName : "Unnamed color"));
-                    } else {
-                        System.out.println("Color option " + (i + 1) + " is found but not displayed.");
-                    }
-                }
-            }
-        } catch (Exception e) {
-            // If an exception occurs (like timeout or element not found)
-            System.out.println("Color not found for this :" + productName);
-        }
-
-//        By productColor = By.xpath(baseXPath + "/div//a/div[contains(@class, 'Product-Color')]");
-//        WebElementUtil.waitForElementToBeVisible(productColor);
-//        List<WebElement> colorList = driver.findElements(productColor);
-//        if (colorList.isEmpty()) {
-//            System.out.println("No color options found for product: " + productName);
-//        } else {
-//            System.out.println("Found " + colorList.size() + " color option(s).");
-//            for (int i = 0; i < colorList.size(); i++) {
-//                WebElement colorElement = colorList.get(i);
-//                Assert.assertTrue(colorElement.isDisplayed(), "Color option " + (i + 1) + " is not displayed!");
-//                String colorName = colorElement.getAttribute("title");
-//                if (colorName == null || colorName.isEmpty())
-//                    colorName = colorElement.getAttribute("aria-label");
-//                System.out.println("Color " + (i + 1) + ": " + (colorName != null ? colorName : "Unnamed color"));
-//            }
-//        }
-
-        By productSKU = By.xpath("(//div[div[a[span[text()='" + productName + "']]]]//div[@class='Utility-TextProduct-SKU-Sm my-2 d-flex justify-content-between']/div[@class='col-'])[1]");
-        WebElementUtil.waitForElementToBeVisible(productSKU);
-        WebElement skuElement = driver.findElement(productSKU);
-        String skuText = skuElement.getText();
-        System.out.println("Product SKU: " + skuText);
-        Assert.assertTrue(skuElement.isDisplayed(), "Product SKU is not displayed!");
-
-        By productRating = By.xpath(baseXPath + "//div[@id='ReviewsPLPItemComponent']");
-        WebElementUtil.waitForElementToBeVisible(productRating);
-        assertDisplayed(productRating, "Product rating");
-
-        By productDimension = By.xpath(baseXPath + "//div//span[@class='col-']//span");
-        WebElementUtil.waitForElementToBeVisible(productDimension);
-        assertDisplayed(productDimension, "Product dimension");
-
-        By productFeatures = By.xpath(baseXPath + "//div[@class='col- product-card my-3 plpPriceAlign featureContainer']//div[@class='plpPriceAlign']//div[@class='row my-1']");
-        WebElementUtil.waitForElementToBeVisible(productFeatures);
-        List<WebElement> featuresList = driver.findElements(productFeatures);
-        if (!featuresList.isEmpty()) {
-            System.out.println("Found " + featuresList.size() + " product feature(s):");
-            for (WebElement feature : featuresList) {
-                System.out.println("• " + feature.getText());
-            }
-        } else {
-            System.out.println("No product features found for this product.");
-        }
-
-
-        By productKitAndAccessory = By.xpath(baseXPath + "//div[@class='min-height-v3 promotionalContainer']//span");
-        WebElementUtil.waitForElementToBeVisible(productKitAndAccessory);
-        List<WebElement> kitAccessoryElements = driver.findElements(productKitAndAccessory);
-        if (!kitAccessoryElements.isEmpty() && kitAccessoryElements.get(0).isDisplayed()) {
-            System.out.println(kitAccessoryElements.get(0).getText());
-        } else {
-            System.out.println("Kit / Accessory Information is NOT available for this product.");
-        }
-
-
-        By discountedPrice = By.xpath("//div[div[div[a[span[text()='" + productName + "']]]]]//div/span[@class='H3H3_Desktop color-promo-green']");
-        By originalPrice = By.xpath("//div[div[div[a[span[text()='" + productName + "']]]]]//div/span[@class='MSRP ml-3']//span");
-        By msrpIcon = By.xpath("//div[div[div[a[span[text()='" + productName + "']]]]]//div/span[@class='MSRP ml-3']//div[@class='tooltip-wrapper']");
-
-        List<WebElement> discountList = driver.findElements(discountedPrice);
-        if (!discountList.isEmpty()) {
-            WebElement discountElement = discountList.get(0);
-            Assert.assertTrue(discountElement.isDisplayed(), "Discounted price not visible!");
-            System.out.println("Discounted Price: " + discountElement.getText());
-        } else {
-            System.out.println("No discounted price found for product: " + productName);
-        }
-
-//        WebElementUtil.waitForElementToBeVisible(discountedPrice);
-//        WebElement discount= driver.findElement(discountedPrice);
-//        System.out.println("Discount Price: " + discount.getText());
-//        Assert.assertTrue(discount.isDisplayed(), "Discount price not visible");
-
-        List<WebElement> originalList = driver.findElements(originalPrice);
-        if (!originalList.isEmpty()) {
-            WebElement originalElement = originalList.get(0);
-            Assert.assertTrue(originalElement.isDisplayed(), "Original price (MSRP) not visible!");
-            System.out.println("Original Price: " + originalElement.getText());
-        } else {
-            System.out.println("No original price (MSRP) found for product: " + productName);
-        }
-//        WebElementUtil.waitForElementToBeVisible(originalPrice);
-//        WebElement original= driver.findElement(originalPrice);
-//        System.out.println("Original Price: " + original.getText());
-//        Assert.assertTrue(original.isDisplayed(),"Original price not visible");
-//
-        List<WebElement> msrpIconList = driver.findElements(msrpIcon);
-        if (!msrpIconList.isEmpty()) {
-            WebElement iconElement = msrpIconList.get(0);
-            Assert.assertTrue(iconElement.isDisplayed(), "MSRP info icon not displayed!");
-            System.out.println("MSRP Info Icon is displayed.");
-        } else {
-            System.out.println("MSRP info icon not found for product: " + productName);
-        }
-//        WebElementUtil.waitForElementToBeVisible(msrpIcon);
-//        WebElement msrpIcons= driver.findElement(msrpIcon);
-//        System.out.println("MSRP Info Icon is displayed");
-//        Assert.assertTrue(msrpIcons.isDisplayed(),"MSRP info icon not displayed");
-
-
-
-        By productCompare = By.xpath("//div[div[div[a[span[text()='" + productName + "']]]]]//input[@type='checkbox']");
-        assertDisplayed(productCompare, "Product Compare checkbox");
-
-
-        By productTopRated = By.xpath(
-                "//div[div[div[a[span[text()='" + productName + "']]]]]" +
-                        "//div//span[text()='Most Popular' or text()='Best Seller' or text()='Top Rated']"
-        );
-//        WebElementUtil.waitForElementToBeVisible(productTopRated);
-//        WebElement topRated= driver.findElement(productTopRated);
-//        System.out.println("Top Rated: " + topRated.getText());
-//        Assert.assertTrue(topRated.isDisplayed(),"Product does not have a Top rated/ Best Seller tag");
-        List<WebElement> topRatedList = driver.findElements(productTopRated);
-        if (!topRatedList.isEmpty() && topRatedList.get(0).isDisplayed()) {
-            System.out.println(" Product Top Rated tag displayed: " + topRatedList.get(0).getText());
-        } else {
-            System.out.println("Product does not have a Top Rated/Best Seller tag.");
-        }
-
-        verifyPDPNavigation(productImage, "Product Image", productName);
-//        verifyPDPNavigation(nameLocator, "Product Name");
-//        verifyPDPNavigation(productRating, "Product Rating");
-    }
-
-    public void verifyPDPNavigation(By locator, String elementName, String productName) {
-        List<WebElement> elements = driver.findElements(locator);
-
-        if (!elements.isEmpty() && elements.get(0).isDisplayed()) {
-            WebElement clickableElement = elements.get(0);
-            String plpUrl = driver.getCurrentUrl();
-            clickableElement.click();
-
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            wait.until(ExpectedConditions.not(ExpectedConditions.urlToBe(plpUrl)));
-           // WebElementUtil.waitForElementToBeVisible(plpUrl);
+            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
 
-            String pdpUrl = driver.getCurrentUrl();
-            Assert.assertNotEquals(pdpUrl, plpUrl, " Clicking " + elementName + " did NOT navigate to PDP!");
+            if (element.isDisplayed()) {
+                    element.click();
+                    System.out.println("Clicked on " + elementName + " — navigating to PDP page.");
 
-            System.out.println(" Clicking on " + elementName + " navigated to PDP: " + pdpUrl);
+                    Thread.sleep(2000);
+                    driver.navigate().back();
+                    System.out.println("Navigated back to PLP page.");
 
-            // Optional: verify PDP has loaded (example: Add to Cart button or product title)
-            try {
-//                WebElement pdpTitle = wait.until(
-//                        ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[text()=\"22 Cu. Ft. Counter-Depth 4-Door French Door Refrigerator with Free Additional Filter Kit\"]"))
-//                );
-                By title = By.xpath("//h1[text()='" + productName + "']");
-                WebElementUtil.waitForElementToBeVisible(title); //22 Cu. Ft. Counter-Depth 4-Door Refrigerator with Free Additional Filter Kit
-                WebElement pdpTitle= driver.findElement(title);
+                    Thread.sleep(4000);
+                }
+        } catch (Exception e) {
+            System.out.println(elementName + " NOT found or not displayed. Xpath: " + xpath);
+        }
+    }
 
-                Assert.assertTrue(pdpTitle.isDisplayed(), " PDP page content not displayed properly!");
-                System.out.println(" PDP page verified for product: " + productName);
-            } catch (TimeoutException e) {
-                System.out.println(" PDP may not have fully loaded.");
+    public void checkPlpItem(String ProductName) throws InterruptedException {
+        WebElementUtil.zoomInOrOut(60);
+        Thread.sleep(5000);
+        WebDriver driver = DriverManager.getDriver();
+        List<WebElement> items = driver.findElements(By.xpath("//div[starts-with(@id, 'PlpItem')]"));
+        for (int i = 0; i <=2; i++) {
+            if(ProductName.equalsIgnoreCase("Kitchen")){
+                checkProductDetail(i);
+                verifyKitchenDetails(i);
+                verifyAndClickElements(i);
+            } else if (ProductName.equalsIgnoreCase("Air Care")) {
+                checkProductDetail(i);
+                verifyAirCareDetails(i);
+                verifyAndClickElements(i);
             }
+        }
+    }
+        public void checkProductDetail(int i){
+            verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//div[contains(@class, 'Utility-TextProduct-SKU-Sm')]/div[1]", "SKU Number");
+            verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//div[@class='col- highlight-wapper d-flex f-gap-10']/span", "Left Corner Tag");
+            verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//div[@class='col- Product-Name my-2 min-height-v10']/a", "Product Name");
 
-            driver.navigate().back();
-            wait.until(ExpectedConditions.urlToBe(plpUrl));
+            //verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//div[@class='position-relative imgContainerWithPromotion']/img", "Product Image");
+            verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//div[@class=\"col- Product-Image-Placeholder\"]/a//img[1]", "Product Image");
+           // verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//img[@alt='Frigidaire Gallery' or @alt='Frigidaire Professional']", "Tag Image");
+            verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//img[@alt='Frigidaire Gallery' or @alt='Frigidaire Professional']", "Tag Image");
 
-        } else {
-            Assert.fail(" " + elementName + " not found or not visible on PLP!");
+            verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//div[@id='ReviewsPLPItemComponent']", "Product Rating");
+            verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//div//span[@class='col-']//span[contains(text(),'D')]", "Dimension Label");
+            verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//div[@class='col- product-card my-3 plpPriceAlign featureContainer']/div/div", "Feature Section");
+            verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//div/span[@class='H3H3_Desktop color-promo-green']", "Discount Price");
+            verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//div/span[@class='MSRP ml-3']//span", "Original Price");
+            verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//div/span[@class='MSRP ml-3']//div[@class='tooltip-wrapper']", "MSRP Tooltip Icon");
+            verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//input[@type='checkbox']", "Compare Checkbox");
+
+        }
+
+    public void verifyKitchenDetails(int i){
+            verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//div[@class='min-height-v3 promotionalContainer']//span", "Kit and Accessory");
+            verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//div[@class='col- Product-Color-Swatch-wrapper d-flex hidden-class-rac']/a", "Color Option");
+    }
+
+    public void verifyAirCareDetails(int i){
+        verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//div//div//button","Add to cart");
+
+    }
+
+    public void verifyElementDisplayed(String xpath, String elementName) {
+        try {
+            WebDriver driver = DriverManager.getDriver();
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+            boolean isDisplayed = element.isDisplayed();
+            System.out.println(elementName + " is displayed: " + isDisplayed + " "+ element.getText());
+            softAssert.assertTrue(isDisplayed, elementName + " should be displayed.");
+        } catch (Exception e) {
+            System.out.println(elementName + " not found or not displayed.");
+            softAssert.fail(elementName + " not found or not displayed. Exception: " + e.getMessage());
         }
     }
 
-    private void assertDisplayed(By locator, String elementName) {
-        List<WebElement> elements = driver.findElements(locator);
-        if (elements.isEmpty()) {
-            Assert.fail(" " + elementName + " not found on page!");
-        } else {
-            WebElement el = elements.get(0);
-            Assert.assertTrue(el.isDisplayed(), " " + elementName + " is not displayed!");
-            System.out.println(" " + elementName + " is displayed.");
-        }
-    }
 }

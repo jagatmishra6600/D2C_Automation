@@ -130,4 +130,8 @@ public class FrigidaireLoginPageActions {
 		return new FrigidaireForgotPasswordPageActions();
 	}
 	
+	public FrigidaireCreateAccountPageActions navigateToCreateAccountPage() {
+		return navigateToLoginPage().clickCreateAccountLink();
+	}
+	
 }
