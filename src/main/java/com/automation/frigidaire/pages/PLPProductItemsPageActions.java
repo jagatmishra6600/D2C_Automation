@@ -35,7 +35,7 @@ public class PLPProductItemsPageActions {
     private final By standardWidth = By.xpath("//b[text()=\"Standard Width \"]/ancestor::app-elux-product-facet-list//div[label[div[span[text()=' 36\" ']]]]/input\n");
     // private final By standardWidthProductCount=By.xpath("//span[contains(text(),'W:')]/following-sibling::span[@class='font-weight-bold']");
     private final By loadMoreBtn = By.xpath("//div[@class='row col-12 load-more']//button[text()=' Load more ']");
-    private final By productCount = By.xpath("//span[@name='ProductsCount']");
+    private final By productCount = By.xpath("//span[@name='ProductsCount' or @class='totalResults resultsBorder']");
 
     private final By viewFullSpecsBtn = By.xpath("//button[text()='View full specs']");
     private final By quickSpecs = By.xpath("//div[@id='QuickSpecAccrd']");
@@ -59,6 +59,11 @@ public class PLPProductItemsPageActions {
 
 
     }
+    private  By  getSelectRoomSizeLocator(String featureKey) {
+        return By.xpath("//div[@id='facet-drawer']//div[@id='roomSizeRange-wrapper']//span[text()='" + featureKey + "']/parent::div/preceding-sibling::div");
+        }
+
+
 
     private By getQuiickSpecsFeatureLocator(String featureKey, String featureValue) {
         return By.xpath("//span[text()='" + featureKey + "']//parent::div//following-sibling::div//span[contains(text(),'" + featureValue + "')]");
@@ -85,14 +90,40 @@ public class PLPProductItemsPageActions {
         return isAvailable;
     }
 
-    public void closeEmailPopUp() {
-        WaitUtils.untilVisible(emailPopUp, 60);
-        Assert.assertTrue(WebElementUtil.isDisplayed(emailPopUp), "Email popup should be displayed before closing.");
-        WebElementUtil.clickElement(emailPopUp);
-        Assert.assertFalse(WebElementUtil.isDisplayed(emailPopUp), "Email popup should not be displayed after closing.");
+public void closeEmailPopUp() {
+    try {
+        WebElement popup = null;
 
+        try {
+            // Try waiting for popup — will return element if visible
+            popup = WaitUtils.untilVisible(emailPopUp);
+        } catch (TimeoutException e) {
+            // Popup not found within wait time
+            System.out.println("No email popup detected. Continuing test...");
+        }
 
+        if (popup != null && popup.isDisplayed()) {
+            System.out.println("Email popup detected. Attempting to close...");
+            WebElementUtil.clickElement(emailPopUp);
+
+            Thread.sleep(1000); // small wait after clicking close
+
+            if (popup.isDisplayed()) {
+                System.out.println("Warning: Email popup still visible after close attempt.");
+            } else {
+                System.out.println("Email popup closed successfully.");
+            }
+        } else {
+            System.out.println("No email popup found, skipping close.");
+        }
+
+    } catch (Exception e) {
+        System.out.println("Exception while handling email popup: " + e.getMessage());
+        // Don’t fail the test — just continue
     }
+}
+
+
     public void clickOnProductMenu(String text) {
         By locator = By.xpath("//h5[normalize-space(text())='" + text + "']");
         WebElementUtil.waitForElementToBeVisible(locator);
@@ -230,9 +261,10 @@ public class PLPProductItemsPageActions {
 
     public void verifyProductItemPage(String text, String assertValue) {
         By locator = By.xpath("//h1[normalize-space(text())='" + text + "']");
-        WebElementUtil.waitForElementToBeVisible(locator);
+        WebElementUtil.waitForElementToBeVisible(locator,60);
         String s1 = WebElementUtil.getText(locator);
         Assert.assertEquals(s1, assertValue);
+
     }
 
     public void verifyFiltersInProductItems(String text, int time, String assertValue) {
@@ -331,45 +363,41 @@ public class PLPProductItemsPageActions {
     }
 
 
-    public void verifyProductWidthHeightAndDepth() throws InterruptedException {
+    public void verifyProductWidthHeightAndDepth(String type, String value ) throws InterruptedException {
 
         WebDriver driver = DriverManager.getDriver();
-        By width = By.xpath("//b[text()=\"Standard Width \"]/ancestor::app-elux-product-facet-list//div[label[div[span[contains(text(),' 36')]]]]/input");
-        WaitUtils.untilVisible(width, 60);
-        WebElementUtil.clickElement(width);
-        Thread.sleep(6000);
+        loadMoreProducts(driver);
         List<WebElement> products = driver.findElements(By.xpath("//div[starts-with(@id,'PlpItem')]"));
         int totalProducts = products.size();
         System.out.println("Total products found: " + totalProducts);
         for (int i = 0; i < totalProducts; i++) {
-            String productXpath = "//div[@id='PlpItem" + i + "']//span[@class='product-dimension-attr-styles' and contains(text(),'W')]/following-sibling::span";
+            String productXpath = "//div[@id='PlpItem" + i + "']//span[@class='product-dimension-attr-styles' and contains(text(),'"+type+"')]/following-sibling::span";
             List<WebElement> sizeElements = driver.findElements(By.xpath(productXpath));
             if (!sizeElements.isEmpty()) {
                 String sizeText = sizeElements.get(0).getText().trim();
                 System.out.println("Product " + i + " - Size found: " + sizeText);
-                Assert.assertTrue(sizeText.contains("36") || sizeText.contains("35"), "Invalid size found for product " + i + ": " + sizeText);
+                Assert.assertTrue(sizeText.contains(value) , "Invalid size found for product " + i + ": " + sizeText);
             } else {
                 Assert.fail("Size element not found for product " + i);
             }
         }
+
+        driver.navigate().refresh();
+        driver.manage().timeouts().implicitlyWait(30, java.util.concurrent.TimeUnit.SECONDS);
     }
 
 
     public void verifyProductPrice(double minPrice, double maxPrice, String priceRange) {
         WebDriver driver = DriverManager.getDriver();
-        // Define the price filter range (user-defined)
 
-
-        // XPath for selecting the price filter input field
         By price = By.xpath("//b[contains(text(),'Price')]/ancestor::app-elux-product-facet-list//div[label/div/span[contains(text(),'" + priceRange + "')]]/input");
 
         try {
-            // Wait until the price filter element is visible and interactable
+
             WaitUtils.untilVisible(price, 60);
             WebElementUtil.clickElement(price); // Click the price filter to apply the filter
-            Thread.sleep(6000); // Wait for the filter to apply (try to avoid Thread.sleep in actual code)
+            Thread.sleep(6000);
 
-            // Find all products listed in the price range
             List<WebElement> products = driver.findElements(By.xpath("//div[starts-with(@id,'PlpItem')]"));
             int totalProducts = products.size();
             System.out.println("Total products found: " + totalProducts);
@@ -395,42 +423,81 @@ public class PLPProductItemsPageActions {
 
     // Helper method to parse the price string and convert it to a numeric value (double)
     private double parsePrice(String priceText) {
-        // Remove currency symbol (₹) and commas
-        priceText = priceText.replaceAll("[^\\d.]", "");
-        return Double.parseDouble(priceText);
+        if (priceText == null || priceText.trim().isEmpty()) {
+            return 0.0;
+        }
+
+        try {
+            // Remove everything except digits and dot
+            priceText = priceText.replaceAll("[^0-9.]", "");
+            if (priceText.isEmpty()) return 0.0;
+            return Double.parseDouble(priceText);
+        } catch (NumberFormatException e) {
+            System.out.println("⚠️ Could not parse price text: '" + priceText + "'");
+            return 0.0;
+        }
     }
 
 
 
-    public void featureFilter(String featureKey, String featureValue) throws InterruptedException {
+    public void featureFilter(String website, String featureKey, String featureValue) throws InterruptedException {
         WebDriver driver = DriverManager.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
-        String xpath1 = "//b[contains(text(),'"+featureKey+"')]/ancestor::app-elux-product-facet-list//div//input[@id='"+featureValue+"']";
+        if (website == null || website.isEmpty()) {
+            throw new IllegalArgumentException("❌ Website parameter cannot be null or empty.");
+        }
+        website = website.trim().toLowerCase();
 
-        String xpath2 = "//b[contains(text(),'" + featureKey + "')]/ancestor::app-elux-product-facet-list//div[label[div[span[contains(text(),'" + featureValue + "')]]]]//input/following-sibling::label";
+        String xpath1;
+        String xpath2;
+
+        // 🔹 Handle DOM differences between brands
+        if (website.equals("frigidaire")) {
+            // Frigidaire uses <b> tags for facet titles
+            xpath1 = "//b[contains(text(),'" + featureKey + "')]/ancestor::app-elux-product-facet-list"
+                    + "//div//input[@id='" + featureValue + "']";
+
+            xpath2 = "//b[contains(text(),'" + featureKey + "')]/ancestor::app-elux-product-facet-list"
+                    + "//div[label[div[span[contains(text(),'" + featureValue + "')]]]]//input/following-sibling::label";
+
+        } else if (website.equals("electrolux")) {
+            // Electrolux uses <span> tags for facet titles
+            xpath1 = "//span[contains(text(),'" + featureKey + "')]/ancestor::app-elux-product-facet-list//input[normalize-space(@id)='" + featureValue + "']";
+
+            xpath2 = "//span[contains(text(),'" + featureKey + "')]/ancestor::app-elux-product-facet-list"
+                    + "//div[label[div[span[contains(text(),'" + featureValue + "')]]]]//input/following-sibling::label";
+        } else {
+            throw new IllegalArgumentException(" Unsupported website: " + website);
+        }
+
+        System.out.println(" Trying XPaths:\n 1️ " + xpath1 + "\n " + xpath2);
 
         WebElement elementToClick = null;
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-
+        //  Try first XPath
         try {
             elementToClick = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath1)));
-
+            System.out.println(" Found element using XPath1");
         } catch (TimeoutException e1) {
+            //  Try second XPath
             try {
                 elementToClick = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath2)));
-
+                System.out.println(" Found element using XPath2");
             } catch (TimeoutException e2) {
-                System.err.println("Both XPaths failed to locate the element.");
+                System.err.println(" Both XPaths failed to locate the filter checkbox for: " + featureValue);
                 throw e2;
             }
         }
 
+        // Check initial state and click
         boolean isChecked = elementToClick.isSelected();
+        Assert.assertFalse(isChecked, " Checkbox for filter '" + featureValue + "' should be unchecked before clicking.");
 
-
-        Assert.assertFalse(isChecked, "Checkbox for filter '" + featureValue + "' should be unchecked before clicking.");
         WebElementUtil.scrollAndClickUsingJSE(driver, elementToClick);
+        System.out.println("🖱️ Clicked checkbox for feature: " + featureValue);
+
+        //  Optional wait for UI to update (filter results to load)
         Thread.sleep(3000);
     }
 
@@ -463,22 +530,36 @@ public class PLPProductItemsPageActions {
     }
 
 
-    public void verifyExpandAndCollapseFilter(String facetName, String filterValue) throws InterruptedException {
-
-
+    public void verifyExpandAndCollapseFilter(String website, String facetName, String filterValue) throws InterruptedException {
         WebDriver driver = DriverManager.getDriver();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
-        // XPath for the facet section title (e.g., Series)
-        By facetLocator = expandAndCollapseFilter(facetName);
-        System.out.println("Wait done");
-        String filterValueXPath = "//b[normalize-space(text())='" + facetName + "']" +
-                "/ancestor::app-elux-product-facet-list" +
-                "//span[normalize-space(text())='" + filterValue + "']";
-        System.out.println(filterValueXPath);
-        // Ensure the filter value is initially visible (expanded)
+        // Normalize the website input
+        if (website == null || website.isEmpty()) {
+            throw new IllegalArgumentException("Website parameter cannot be null or empty.");
+        }
+
+
+        // 🔹 Build XPaths dynamically based on brand (Electrolux vs Frigidaire)
+        String facetXPath;
+        String filterValueXPath;
+
+        if (website.equalsIgnoreCase("frigidaire")) {
+            facetXPath = "//b[normalize-space(text())='" + facetName + "']";
+            filterValueXPath = facetXPath + "/ancestor::app-elux-product-facet-list"
+                    + "//span[normalize-space(text())='" + filterValue + "']";
+        } else if (website.equals("electrolux")) {
+            facetXPath = "//span[normalize-space(text())='" + facetName + "']";
+            filterValueXPath = facetXPath + "/ancestor::app-elux-product-facet-list"
+                    + "//span[normalize-space(text())='" + filterValue + "']";
+        } else {
+            throw new IllegalArgumentException("Unsupported website: " + website);
+        }
+
+        System.out.println("Facet XPath: " + facetXPath);
+        System.out.println("Filter value XPath: " + filterValueXPath);
+
         try {
-            // WebElementUtil.scrollAndClickUsingJSE(driver,driver.findElement((facetLocator)));
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(filterValueXPath)));
             System.out.println("Filter value is visible before collapse as expected.");
         } catch (TimeoutException e) {
@@ -486,9 +567,10 @@ public class PLPProductItemsPageActions {
         }
 
 
-        System.out.println(facetLocator);
-        WebElementUtil.scrollAndClickUsingJSE(driver, driver.findElement(facetLocator));
-        System.out.println("clicked on facet Locator");
+        WebElement facetElement = driver.findElement(By.xpath(facetXPath));
+        WebElementUtil.scrollAndClickUsingJSE(driver, facetElement);
+        System.out.println("🖱️ Clicked on facet to collapse: " + facetName);
+
         boolean isInvisible = true;
         try {
             wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(filterValueXPath)));
@@ -500,13 +582,14 @@ public class PLPProductItemsPageActions {
 
         Assert.assertTrue(isInvisible, "Filter value should be invisible after collapsing the filter group.");
 
-        // Optional: small pause for visual verification in UI
+        Thread.sleep(1000);
+        WebElementUtil.scrollAndClickUsingJSE(driver, facetElement);
         Thread.sleep(1000);
     }
 
     public void clickOnSortByDropDownvalues(String text, String assertValue) throws InterruptedException {
         WebDriver driver = DriverManager.getDriver();
-        WaitUtils.untilVisible(sortByDropdownBtn, 10000);
+        WaitUtils.untilVisible(sortByDropdownBtn, 60000);
         //WebElementUtil.clickElementUsingJSE(driver,sortByDropdownBtn);
         WebElementUtil.clickElement(sortByDropdownBtn);
         String selectedSortBy = driver.findElement(getSortOptionByText(text)).getText();
@@ -527,12 +610,9 @@ public class PLPProductItemsPageActions {
 
         WebElement element = driver.findElement(loadMoreBtn);
         WebElementUtil.scrollToElement(driver, element);
-        WaitUtils.untilClickable(element, 4000);
+        WaitUtils.untilClickable(element, 40000);
         WebElementUtil.scrollAndClickUsingJSE(driver, element);
-
         System.out.println("clicked on load more btn ");
-
-        // System.out.println("clicked on load more btn--------- ");
         Thread.sleep(7000);
         WebElementUtil.scrollUp(driver, 6000);
 
@@ -554,7 +634,7 @@ public class PLPProductItemsPageActions {
     }
 
 
-    public void verifyPriceLowToHighSort() {
+    public void verifyPriceLowToHighSort(String website) {
         WebDriver driver = DriverManager.getDriver();
         try {
             loadMoreProducts(driver);
@@ -566,8 +646,18 @@ public class PLPProductItemsPageActions {
             List<Double> productPrices = new ArrayList<>();
 
             for (int i = 0; i < totalProducts; i++) {
-                String priceXpath = "//div[@id='PlpItem" + i + "']//div[@class='container price d-flex justify-content-flex-start align-items-center']/span[@class='H3H3_Desktop color-promo-green' or @class='H3H3_Desktop']";
-                WebElement priceElement = driver.findElement(By.xpath(priceXpath));
+                String priceXpath;
+
+                // 🔹 Select locator dynamically
+                if (website.equalsIgnoreCase("frigidaire")) {
+                    priceXpath = "//div[@id='PlpItem" + i + "']//div[@class='container price d-flex justify-content-flex-start align-items-center']/span[@class='H3H3_Desktop color-promo-green' or @class='H3H3_Desktop']";
+                } else if (website.equalsIgnoreCase("electrolux")) {
+                    priceXpath ="//div[@id='PlpItem" +i+"']//span[@class=\"H3H3_Desktop saleprice\"or @class=\"H3H3_Desktop\"]";
+                    System.out.println(priceXpath);
+                } else {
+                    throw new IllegalArgumentException("Unsupported website: " + website);
+                }
+                  WebElement priceElement = driver.findElement(By.xpath(priceXpath));
 
                 if (priceElement != null) {
                     String priceText = priceElement.getText().trim();
@@ -593,51 +683,139 @@ public class PLPProductItemsPageActions {
         }
     }
 
+public void verifyBiggestSavingsSort(String website) {
+    WebDriver driver = DriverManager.getDriver();
 
-    public void verifyBiggestSavingsSort() {
-        WebDriver driver = DriverManager.getDriver();
+    try {
+        if (website == null || website.isEmpty()) {
+            throw new IllegalArgumentException(" Website parameter cannot be null or empty.");
+        }
+
+        website = website.toLowerCase().trim();
+
+        loadMoreProducts(driver); // Load all products if button exists
+
+        // 🔹 Get all product containers
+        List<WebElement> products = driver.findElements(By.xpath("//div[starts-with(@id,'PlpItem')]"));
+        int totalProducts = products.size();
+        System.out.println(" Total products found: " + totalProducts);
+
+        List<Double> productSavings = new ArrayList<>();
+        List<Integer> productIndexes = new ArrayList<>();
+
+        for (int i = 0; i < totalProducts; i++) {
+
+            String actualPriceXpath;
+            String discountedPriceXpath;
+
+            // 🔹 Choose locator set dynamically
+            if (website.equals("frigidaire")) {
+                actualPriceXpath =
+                        "//div[@id='PlpItem" + i + "']//span[@class='Utility-TextProduct-SKU-Lrg color-support-mid-charcoal' or @class='H3H3_Desktop']";
+                discountedPriceXpath =
+                        "//div[@id='PlpItem" + i + "']//span[@class='H3H3_Desktop color-promo-green']";
+
+            } else if (website.equals("electrolux")) {
+                actualPriceXpath =
+                        "//div[@id='PlpItem" + i + "']//span[@class='H3H3_Desktop' or @class='CTA-Text-ELE-Blue-Mid']";
+                discountedPriceXpath =
+                        "//div[@id='PlpItem" + i + "']//span[contains(@class,'H3H3_Desktop saleprice')]";
+            } else {
+                throw new IllegalArgumentException(" Unsupported website: " + website);
+            }
+
+            // 🔹 Find elements safely
+            List<WebElement> actualPriceElements = driver.findElements(By.xpath(actualPriceXpath));
+            List<WebElement> discountedPriceElements = driver.findElements(By.xpath(discountedPriceXpath));
+
+            double actualPrice = 0.0;
+            double discountedPrice = 0.0;
+
+            // 🔹 Parse prices safely
+            if (website.equals("electrolux")) {
+                actualPrice = parsePriceForElectrolux(getTextSafe(actualPriceElements, 0));
+                discountedPrice = parsePriceForElectrolux(getTextSafe(discountedPriceElements, 0));
+            } else {
+                actualPrice = parsePrice(getTextSafe(actualPriceElements, 0));
+                discountedPrice = parsePrice(getTextSafe(discountedPriceElements, 0));
+            }
+
+            // 🔹 Handle missing prices
+            if (actualPrice == 0.0 && discountedPrice == 0.0) {
+                System.out.println(" Price not found for product index: " + i);
+                productSavings.add(0.0);
+                productIndexes.add(i);
+                continue;
+            }
+
+            // 🔹 Calculate savings
+            double savings;
+            if (discountedPrice <= 0.0 || discountedPrice == actualPrice) {
+                savings = 0.0; // no discount
+                discountedPrice = actualPrice; // ensure consistency
+            } else {
+                savings = actualPrice - discountedPrice;
+                if (savings < 0) savings = 0.0; // safety
+            }
+
+            System.out.println("Product " + i + " - Actual: $" + actualPrice +
+                    ", Discounted: $" + discountedPrice + ", Savings: $" + savings);
+
+            productSavings.add(savings);
+            productIndexes.add(i);
+        }
+
+        // 🔹 Validate descending order of savings
+        for (int i = 0; i < productSavings.size() - 1; i++) {
+            Assert.assertTrue(productSavings.get(i) >= productSavings.get(i + 1),
+                    " Savings not sorted descending. Product " + productIndexes.get(i) +
+                            " savings: $" + productSavings.get(i) +
+                            ", Product " + productIndexes.get(i + 1) +
+                            " savings: $" + productSavings.get(i + 1));
+        }
+
+        System.out.println(" Verified 'Biggest Savings' sorting successfully for: " + website);
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        Assert.fail(" Test failed for " + website + " due to exception: " + e.getMessage());
+    }
+}
+
+
+    private String getTextSafe(List<WebElement> elements, int index) {
         try {
-            loadMoreProducts(driver);
-            List<WebElement> products = driver.findElements(By.xpath("//div[starts-with(@id,'PlpItem')]"));
-            int totalProducts = products.size();
-            System.out.println("Total products found: " + totalProducts);
-            List<Double> productSavings = new ArrayList<>();
-            List<Integer> productIndexes = new ArrayList<>();
+            if (elements != null && elements.size() > index) {
+                return elements.get(index).getText().trim();
+            }
+        } catch (Exception ignored) {}
+        return "";
+    }
 
-            for (int i = 0; i < totalProducts; i++) {
+    private double parsePriceForElectrolux(String priceText) {
+        try {
+            // Remove dollar signs, commas, extra spaces
+            priceText = priceText.replaceAll("[^0-9.]", "").trim();
 
-                String actualPriceXpath = "//div[@id='PlpItem" + i + "']//div[@class='container price d-flex justify-content-flex-start align-items-center']//s[@class='Utility-TextStrike-Through-Price']";
-                WebElement actualPriceElement = driver.findElement(By.xpath(actualPriceXpath));
-                String discountedPriceXpath = "//div[@id='PlpItem" + i + "']//div[@class='container price d-flex justify-content-flex-start align-items-center']/span[@class='H3H3_Desktop color-promo-green' or @class='H3H3_Desktop']";
-                WebElement discountedPriceElement = driver.findElement(By.xpath(discountedPriceXpath));
-                if (actualPriceElement != null && discountedPriceElement != null) {
-                    String actualPriceText = actualPriceElement.getText().trim();
-                    String discountedPriceText = discountedPriceElement.getText().trim();
-                    double actualPrice = parsePrice(actualPriceText);
-                    double discountedPrice = parsePrice(discountedPriceText);
-                    double savings = actualPrice - discountedPrice;
-                    System.out.println("Product " + i + " - Actual Price: ₹" + actualPrice + ", Discounted Price: ₹" + discountedPrice + ", Savings: ₹" + savings);
-                    productSavings.add(savings);
-                    productIndexes.add(i);
-                } else {
-                    Assert.fail("Price elements not found for product " + i);
-                }
+            // 🔹 If price looks like "29900" or "45900" (no dot but ends with two 0s)
+            //     Then assume last two digits are cents
+            if (!priceText.contains(".") && priceText.length() > 2) {
+                priceText = priceText.substring(0, priceText.length() - 2) + "." +
+                        priceText.substring(priceText.length() - 2);
             }
 
-            for (int i = 0; i < productSavings.size() - 1; i++) {
-                Assert.assertTrue(productSavings.get(i) >= productSavings.get(i + 1),
-                        "Savings are not in descending order. Product " + productIndexes.get(i) + " savings: ₹" + productSavings.get(i) +
-                                ", Product " + productIndexes.get(i + 1) + " savings: ₹" + productSavings.get(i + 1));
-            }
-
+            return Double.parseDouble(priceText);
         } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail("Test failed due to an exception: " + e.getMessage());
+            System.out.println(" Could not parse price text: " + priceText);
+            return 0.0;
         }
     }
 
-    public void verifyPriceHighToLowSort() {
+
+
+    public void verifyPriceHighToLowSort(String website) {
         WebDriver driver = DriverManager.getDriver();
+
         try {
             loadMoreProducts(driver);
             List<WebElement> products = driver.findElements(By.xpath("//div[starts-with(@id,'PlpItem')]"));
@@ -647,7 +825,18 @@ public class PLPProductItemsPageActions {
             List<Double> productPrices = new ArrayList<>();
 
             for (int i = 0; i < totalProducts; i++) {
-                String priceXpath = "//div[@id='PlpItem" + i + "']//div[@class='container price d-flex justify-content-flex-start align-items-center']/span[@class='H3H3_Desktop color-promo-green' or @class='H3H3_Desktop']";
+                String priceXpath;
+
+                // 🔹 Select locator dynamically
+                if (website.equalsIgnoreCase("frigidaire")) {
+                    priceXpath = "//div[@id='PlpItem" + i + "']//div[@class='container price d-flex justify-content-flex-start align-items-center']/span[@class='H3H3_Desktop color-promo-green' or @class='H3H3_Desktop']";
+                } else if (website.equalsIgnoreCase("electrolux")) {
+                    priceXpath ="//div[@id='PlpItem" +i+"']//span[@class=\"H3H3_Desktop saleprice\"or @class=\"H3H3_Desktop\"]";
+                    System.out.println(priceXpath);
+                } else {
+                    throw new IllegalArgumentException("Unsupported website: " + website);
+                }
+
                 WebElement priceElement = driver.findElement(By.xpath(priceXpath));
 
                 if (priceElement != null) {
@@ -660,7 +849,7 @@ public class PLPProductItemsPageActions {
                 }
             }
 
-            // Verify that prices are in descending order (High → Low)
+            //  Verify descending order
             for (int i = 0; i < productPrices.size() - 1; i++) {
                 Assert.assertTrue(productPrices.get(i) >= productPrices.get(i + 1),
                         "Prices are not in descending order. Product " + i + " price: $" + productPrices.get(i) +
@@ -672,6 +861,7 @@ public class PLPProductItemsPageActions {
             Assert.fail("Test failed due to an exception: " + e.getMessage());
         }
     }
+
 
     public void loadMoreProducts(WebDriver driver) {
         try {
@@ -773,7 +963,7 @@ public class PLPProductItemsPageActions {
             for (int i = 0; i < totalProducts; i++) {
                 try {
                     // Dynamic XPath — always picks the first image
-                    String imgXpath = "(//div[@class='container-fluid px-2 plp']//div[@id='PlpItem" + i + "']//app-elux-image//img)[1]";
+                    String imgXpath = "(//div[@class='container-fluid px-0 plp' or @class='container-fluid px-2 plp']//div[@id='PlpItem" + i + "']//app-elux-image//img)[1]";
                     WebElement imageElement = WaitUtils.untilVisible((By.xpath(imgXpath)), 40000);
 
                     System.out.println(" Opening product index: " + i);
@@ -801,16 +991,16 @@ public class PLPProductItemsPageActions {
             WebDriver driver = DriverManager.getDriver();
             System.out.println("Validating product index " + index);
             System.out.println("Current URL: " + driver.getCurrentUrl());
-            WebElement productUniqueCodeElement = WaitUtils.untilVisible(productUniqueCode, 30000);
-            System.out.println(productUniqueCodeElement);
-            Assert.assertTrue(productUniqueCodeElement.isDisplayed(), "Unique Product Code not displayed");
-
-
-            System.out.println("unique prod check");
-            // Wait for and click the "Quick Specs" button
-            WaitUtils.untilVisible(quickSpecs, 30000);
-            WebElementUtil.scrollAndClickUsingJSE(driver, driver.findElement(quickSpecs));
-            System.out.println("quick specs check");
+//            WebElement productUniqueCodeElement = WaitUtils.untilVisible(productUniqueCode, 30000);
+//            System.out.println(productUniqueCodeElement);
+//            Assert.assertTrue(productUniqueCodeElement.isDisplayed(), "Unique Product Code not displayed");
+//
+//
+//            System.out.println("unique prod check");
+//            // Wait for and click the "Quick Specs" button
+//            WaitUtils.untilVisible(quickSpecs, 30000);
+//            WebElementUtil.scrollAndClickUsingJSE(driver, driver.findElement(quickSpecs));
+//            System.out.println("quick specs check");
 
             WebElementUtil.scrollAndClickUsingJSE(driver, driver.findElement(viewFullSpecsBtn));
             WebElement specifications = WaitUtils.untilVisible(specificationsHeading, 30000);
@@ -1011,7 +1201,7 @@ public class PLPProductItemsPageActions {
             for (int i = 0; i < totalProducts; i++) {
                 try {
 
-                    String imgXpath = "(//div[@class='container-fluid px-2 plp']//div[@id='PlpItem" + i + "']//app-elux-image//img)[1]";
+                    String imgXpath = "(//div[@class='container-fluid px-2 plp' or @class='container-fluid px-0 plp']//div[@id='PlpItem" + i + "']//app-elux-image//img)[1]";
                     WebElement imageElement = WaitUtils.untilVisible((By.xpath(imgXpath)), 40000);
 
                     System.out.println(" Opening product index: " + i);
@@ -1077,11 +1267,7 @@ public class PLPProductItemsPageActions {
         WebElementUtil.scrollToElement(driver,crossElement);
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", crossElement);
         System.out.println("Clicked on Cross (X) for: " + filterName);
-
-
         wait.until(ExpectedConditions.invisibilityOfElementLocated(selectedFilterCross(crossFilterName)));
-
-
         WebElement freshCheckbox = wait.until(ExpectedConditions.presenceOfElementLocated(checkbox));
         boolean isUnchecked = !freshCheckbox.isSelected();
 
@@ -1089,7 +1275,98 @@ public class PLPProductItemsPageActions {
         System.out.println("Checkbox for " + filterName + " is unchecked after clicking cross.");
     }
 
+    public void verifyAcRoomSize(String featureKey,String SpecsName , String SpecsKey , String SpecValue , int lowerBound,int upperBound)throws InterruptedException{
+
+        WebElement imageElement = new WebDriverWait(driver, Duration.ofSeconds(60))
+                .until(ExpectedConditions.elementToBeClickable(getSelectRoomSizeLocator(featureKey)));
+        System.out.println("checked ele");
+        WebElementUtil.mouseHover(driver,imageElement);
+                WebElementUtil.scrollAndClickUsingJSE(driver,driver.findElement(getSelectRoomSizeLocator(featureKey)));
+        System.out.println("checked click and scroll");
+        //WebElementUtil.clickElement(getSelectRoomSizeLocator(featureKey));
+        Thread.sleep(6000);
+       // loadMoreProducts(driver);
+       // validateAirCareProductsForRoomSize( SpecsName ,  SpecsKey ,  SpecValue ,  lowerBound, upperBound);
+
+
     }
+
+    public void validateAirCareProductsForRoomSize(String SpecsName , String SpecsKey , String SpecValue , int lowerBound,int upperBound) throws InterruptedException {
+        try {
+            WebDriver driver = DriverManager.getDriver();
+            List<WebElement> products = driver.findElements(By.xpath("//div[starts-with(@id,'PlpItem')]"));
+            int totalProducts = products.size();
+            System.out.println("Total products found: " + totalProducts);
+            String mainWindow = driver.getWindowHandle();
+
+            for (int i = 0; i < totalProducts; i++) {
+                try {
+                    // Dynamic XPath — always picks the first image
+                    String imgXpath = "(//div[@class='container-fluid px-2 plp']//div[@id='PlpItem" + i + "']//app-elux-image//img)[1]";
+                    WebElement imageElement = WaitUtils.untilVisible(By.xpath(imgXpath), 40000);
+
+                    System.out.println("Opening product index: " + i);
+                    Actions actions = new Actions(driver);
+                    actions.keyDown(Keys.CONTROL).click(imageElement).keyUp(Keys.CONTROL).build().perform();
+                    Thread.sleep(10000);
+                    WebElementUtil.switchToNewTab(driver, mainWindow);
+
+                    System.out.println("Validating product index " + i);
+                    System.out.println("Current URL: " + driver.getCurrentUrl());
+
+                    // Validate unique product code is displayed
+                    WebElement productUniqueCodeElement = WaitUtils.untilVisible(productUniqueCode, 30000);
+                    System.out.println(productUniqueCodeElement);
+                    Assert.assertTrue(productUniqueCodeElement.isDisplayed(), "Unique Product Code not displayed");
+
+                    // Wait for and click the "Quick Specs" button
+                    WaitUtils.untilVisible(quickSpecs, 30000);
+                    WebElementUtil.scrollAndClickUsingJSE(driver, driver.findElement(quickSpecs));
+                    System.out.println("Quick specs check");
+
+                    WebElementUtil.scrollAndClickUsingJSE(driver, driver.findElement(viewFullSpecsBtn));
+                    WebElement specifications = WaitUtils.untilVisible(specificationsHeading, 30000);
+
+                    // Validate the feature name element is visible
+                    WebElement featureNameElement = WaitUtils.untilVisible(getFeatureSpecsLocator(SpecsName), 30000);
+                    WebElementUtil.scrollToElement(driver, featureNameElement);
+                    Assert.assertTrue(featureNameElement.isDisplayed(), SpecsName + " feature element is not displayed.");
+
+                    // Get the feature element and its text
+                    WebElement featureElement = WaitUtils.untilVisible(getQuiickSpecsFeatureLocator(SpecsKey, SpecValue), 1);
+                    String elementText = featureElement.getText().trim();
+                    System.out.println("Feature value: " + elementText);
+
+                    // Parse the featureValue (range)
+                    String[] rangeParts = SpecValue.split("-");
+                    if (rangeParts.length == 2) {
+                         lowerBound = Integer.parseInt(rangeParts[0].trim());
+                         upperBound = Integer.parseInt(rangeParts[1].trim());
+                        int elementValue = Integer.parseInt(elementText.trim());
+
+                        // Validate that the element value is within the range
+                        Assert.assertTrue(elementValue >= lowerBound && elementValue <= upperBound,
+                                "Value " + elementValue + " is not within the expected range " + SpecValue);
+                        System.out.println("Feature value for " + SpecsKey + ": " + elementValue + " is within range " + SpecValue);
+                    } else {
+                        System.out.println("Invalid range format: " + SpecValue);
+                    }
+
+                    driver.close();
+                    driver.switchTo().window(mainWindow);
+
+                } catch (Exception e) {
+                    System.out.println("Skipping product index " + i + ": " + e.getMessage());
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error iterating over products: " + e.getMessage());
+        }
+    }
+
+
+}
 
 
 

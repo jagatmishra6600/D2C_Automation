@@ -9,6 +9,10 @@ public class FrigidaireConstants {
     public static final String IN_STOCK="In stock";
     public static final String TEMPORARILY="Temporarily Out of Stock";
     public static final String TEMPORARILY_AIR="Temporarily out of stock in your area.";
+    public static final String  electroxWeb="electrolux";
+    public static final String  frigidaireWeb="frigidaire";
+
+
 
     public static List<String>storeFAQRoomAC(){
         return Arrays.asList(
