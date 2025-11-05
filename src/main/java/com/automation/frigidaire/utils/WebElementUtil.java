@@ -376,31 +376,26 @@ public class WebElementUtil {
 
     /**
      * Scrolls the element into view using JavaScript and waits until it is clickable.
+     *
      * @param locator The By locator of the element to scroll into view.
+     * @return
      */
 
-    public static void scrollIntoView(By locator) {
-        int attempts = 0;
-        while (attempts < 2) {
-            try {
-                WebElement element = waitForElementToBeVisible(locator);
-                ((JavascriptExecutor) DriverManager.getDriver()).executeScript(
-                        "const element = arguments[0];" +
-                                "const rect = element.getBoundingClientRect();" +
-                                "const absoluteElementTop = rect.top + window.pageYOffset;" +
-                                "const offset = 100;" +
-                                "window.scrollTo({top: absoluteElementTop - offset, behavior: 'instant'});",
-                        element
-                );
 
-                waitForElementToBeClickable(locator);
-                return;
-            } catch (StaleElementReferenceException sere) {
-                attempts++;
-            }
-        }
-        // Fallback: ensure element is visible without JS scroll
-        waitForElementToBeVisible(locator);
+    public static WebElement scrollIntoView(By locator) {
+        WebDriver driver = DriverManager.getDriver();
+        WebElement element = new WebDriverWait(driver, Duration.ofSeconds(15))
+                .until(ExpectedConditions.presenceOfElementLocated(locator));
+
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].scrollIntoView({block:'center', inline:'nearest', behavior:'smooth'});",
+                element);
+
+        try { Thread.sleep(200); } catch (InterruptedException ignored) {}
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.visibilityOf(element));
+
+        return element;
     }
 
 
