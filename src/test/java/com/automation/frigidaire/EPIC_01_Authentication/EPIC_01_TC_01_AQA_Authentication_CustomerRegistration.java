@@ -32,7 +32,7 @@ public class EPIC_01_TC_01_AQA_Authentication_CustomerRegistration extends BaseT
         Assert.assertTrue(loginPage.isCreateAccountLinkDisplayed(), "Create an Account Link is not displayed");
         Assert.assertEquals(loginPage.getElectroluxLinkedAccountMessage(), "Frigidaire is part of the Electrolux Group. If you already have an account with Electrolux.com, you can use those details to log in.");
         Assert.assertTrue(loginPage.isAlternateLoginOptionsDisplayed(), "Sign in Options with Google or Apple is not Displayed");
-
+        
         ExtentReportManager.getTest().pass("Login Page loaded Successfully and its Fields and Messages are verified");
     }
 
