@@ -33,8 +33,7 @@ public class TC_02_AQA_Pdppage_Product_Specs extends BaseTest {
             Assert.assertTrue(pdpPage.iswidthMatchingWithPLP(), "Product width on PDP does not match the selected product from PLP.");
             Assert.assertTrue(pdpPage.isDepthMatchingWithPLP(), "Product depth on PDP does not match the selected product from PLP.");
             Assert.assertTrue(pdpPage.isSeeAllVisibleInQuickSpec(), "See all does not visible under Quick Specs");
-        }
-        else if (currentUrl.contains("electrolux")){
+        } else if (currentUrl.contains("electrolux")) {
             WaitUtils.untilPageLoadComplete();
             homePage.clickWindowMounted();
             plpPage.closePopupModel();
@@ -74,8 +73,7 @@ public class TC_02_AQA_Pdppage_Product_Specs extends BaseTest {
             Assert.assertTrue(pdpPage.iswidthMatchingWithPLP(), "Product width on PDP does not match the selected product from PLP.");
             Assert.assertTrue(pdpPage.isDepthMatchingWithPLP(), "Product depth on PDP does not match the selected product from PLP.");
             Assert.assertTrue(pdpPage.isSeeAllVisibleInQuickSpec(), "See all does not visible under Quick Specs");
-        }
-        else if (currentUrl.contains("electrolux")){
+        } else if (currentUrl.contains("electrolux")) {
             WaitUtils.untilPageLoadComplete();
             homePage.clickFrenchDoor();
             plpPage.closePopupModel();

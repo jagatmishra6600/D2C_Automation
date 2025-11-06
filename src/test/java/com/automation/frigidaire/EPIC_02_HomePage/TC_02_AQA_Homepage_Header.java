@@ -22,7 +22,7 @@ public class TC_02_AQA_Homepage_Header extends BaseTest {
         ExtentReportManager.getTest().pass("Home page loaded successfully and logo was verified.");
     }
 
-    @Test(groups = {"regression","TC_02"}, description = "Verify on click on brand logo / icon from the header")
+    @Test(groups = {"regression", "TC_02"}, description = "Verify on click on brand logo / icon from the header")
     public void TC_02_S2_ClickBandLogoHeader() {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isHomePageLoaded(), "The Frigidaire home page did not load correctly.");
@@ -30,7 +30,7 @@ public class TC_02_AQA_Homepage_Header extends BaseTest {
         ExtentReportManager.getTest().pass("Pass - Verify on click on brand logo / icon from the header");
     }
 
-    @Test(groups = {"regression","TC_02"}, description = "Verify the header for logged in / registered user.")
+    @Test(groups = {"regression", "TC_02"}, description = "Verify the header for logged in / registered user.")
     public void TC_02_S3_VerifyHearForLoggedInUser() {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isHomePageLoaded(), "The Frigidaire home page did not load correctly.");
@@ -39,7 +39,7 @@ public class TC_02_AQA_Homepage_Header extends BaseTest {
         ExtentReportManager.getTest().pass("Home page loaded successfully and logo was verified.");
     }
 
-    @Test(groups = {"regression","TC_02"}, description = "Verify \"Contact us\" link from header")
+    @Test(groups = {"regression", "TC_02"}, description = "Verify \"Contact us\" link from header")
     public void TC_02_S4_VerifyContactUsLink() {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isContactUsLinkDisplayed(), "The Frigidaire home page did not load correctly and contact us link is not displayed.");
@@ -48,14 +48,14 @@ public class TC_02_AQA_Homepage_Header extends BaseTest {
         ExtentReportManager.getTest().pass("Contact Us link from from header was verified.");
     }
 
-    @Test(groups = {"regression","TC_02"}, description = "Verify zip code displayed in the header")
+    @Test(groups = {"regression", "TC_02"}, description = "Verify zip code displayed in the header")
     public void TC_02_S5_VerifyZIP() {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isZipCodeDisplayed(), "ZIP Code not loaded properly.");
         ExtentReportManager.getTest().pass("Default ZIP code is set to 28088");
     }
 
-    @Test(groups = {"regression","TC_02"}, description = "Verify update / change zip code in the header")
+    @Test(groups = {"regression", "TC_02"}, description = "Verify update / change zip code in the header")
     public void TC_02_S6_VerifyZIPUpdate() {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isZipCodeDisplayed(), "ZIP Code not loaded properly.");
@@ -64,7 +64,7 @@ public class TC_02_AQA_Homepage_Header extends BaseTest {
         ExtentReportManager.getTest().pass("Home page loaded successfully and logo was verified.");
     }
 
-    @Test(groups = {"regression","TC_02"}, description = "Verify zip code when invalid zip code is entered")
+    @Test(groups = {"regression", "TC_02"}, description = "Verify zip code when invalid zip code is entered")
     public void TC_02_S7_VerifyZIPUpdateInvalid() {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.validateInvalidZIPWhenBlank(), "Invalid ZIP code message is not displayed when blank.");
@@ -72,7 +72,7 @@ public class TC_02_AQA_Homepage_Header extends BaseTest {
         ExtentReportManager.getTest().pass("Home page loaded successfully and logo was verified.");
     }
 
-    @Test(groups = {"regression","TC_02"}, description = "Verify mini cart icon in the header")
+    @Test(groups = {"regression", "TC_02"}, description = "Verify mini cart icon in the header")
     public void TC_02_S8_VerifyMINICart() {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isMiniCartDisplayed(), "Mini cart is not displayed in the header");
@@ -81,7 +81,7 @@ public class TC_02_AQA_Homepage_Header extends BaseTest {
         ExtentReportManager.getTest().pass("Home page loaded successfully and logo was verified.");
     }
 
-    @Test(groups = {"regression","TC_02"}, description = "Verify onclick on \"mini cart\" icon")
+    @Test(groups = {"regression", "TC_02"}, description = "Verify onclick on \"mini cart\" icon")
     public void TC_02_S9_VerifyMINICartOnclick() {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isMiniCartDisplayed(), "Mini cart is not displayed in the header");

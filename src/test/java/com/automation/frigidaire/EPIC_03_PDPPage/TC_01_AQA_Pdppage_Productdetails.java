@@ -36,8 +36,7 @@ public class TC_01_AQA_Pdppage_Productdetails extends BaseTest {
             Assert.assertTrue(pdpPage.isProductPriceMatchingWithPLP(), "Product Price on PDP does not match the selected product from PLP.");
             Assert.assertTrue(pdpPage.isProductReviewMatchingWithPLP(), "Product Review Number on PDP does not match the selected product from PLP.");
             Assert.assertTrue(pdpPage.isProductColorVisibleOnPDP(), "Product Color on PDP does not visible.");
-        }
-        else if (currentUrl.contains("electrolux")){
+        } else if (currentUrl.contains("electrolux")) {
             homePage.clickWindowMounted();
             plpPage.closePopupModel();
             plpPage.storeSelectedProductId();
@@ -73,8 +72,7 @@ public class TC_01_AQA_Pdppage_Productdetails extends BaseTest {
             Assert.assertTrue(pdpPage.isProductPriceMatchingWithPLP(), "Product Price on PDP does not match the selected product from PLP.");
             Assert.assertTrue(pdpPage.isProductReviewMatchingWithPLP(), "Product Review Number on PDP does not match the selected product from PLP.");
             Assert.assertTrue(pdpPage.isProductColorVisibleOnPDP(), "Product Color on PDP does not visible.");
-        }
-        else if (currentUrl.contains("electrolux")){
+        } else if (currentUrl.contains("electrolux")) {
             homePage.clickFrenchDoor();
             plpPage.closePopupModel();
             plpPage.storeSelectedProductId();

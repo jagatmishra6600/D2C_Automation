@@ -19,7 +19,7 @@ public class TC_05_AQA_PDP_Owners extends BaseTest {
     public void verifyFeaturesSectionOnPDP() {
         homePage.navigateToHomePage();
         currentUrl = WebElementUtil.getCurrentUrl();
-        if (currentUrl.contains("frigidaire")){
+        if (currentUrl.contains("frigidaire")) {
             pdpPage.searchProduct("GRMC2273CF-C1");
             pdpPage.selectProductFromPLP();
             plpPage.closePopupModel();
@@ -37,9 +37,9 @@ public class TC_05_AQA_PDP_Owners extends BaseTest {
 
     @Test(groups = {"regression"}, description = "Verify Service and Parts section")
     public void verifyServiceAndPartsSectionOnPDP() {
-            homePage.navigateToHomePage();
-            currentUrl = WebElementUtil.getCurrentUrl();
-        if (currentUrl.contains("frigidaire")){
+        homePage.navigateToHomePage();
+        currentUrl = WebElementUtil.getCurrentUrl();
+        if (currentUrl.contains("frigidaire")) {
             pdpPage.searchProduct("EHVS2510AW-C1");
             pdpPage.selectProductFromPLP();
             plpPage.closePopupModel();

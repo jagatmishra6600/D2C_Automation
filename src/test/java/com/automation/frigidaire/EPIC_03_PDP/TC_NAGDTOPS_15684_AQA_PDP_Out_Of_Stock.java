@@ -13,7 +13,7 @@ public class TC_NAGDTOPS_15684_AQA_PDP_Out_Of_Stock extends BaseTest {
     FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
     ProductItemsPageActions productItems = new ProductItemsPageActions();
 
-    @Test(dataProvider = "kitchenProductData",dataProviderClass = DataProviders.class, groups = {"regression", "smoke"})
+    @Test(dataProvider = "kitchenProductData", dataProviderClass = DataProviders.class, groups = {"regression", "smoke"})
     public void testStockForKitchen(String productMenu, String subProduct, String productName, String expectedPageTitle) {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isHomePageLoaded(), "The Frigidaire home page did not load correctly.");
@@ -22,13 +22,11 @@ public class TC_NAGDTOPS_15684_AQA_PDP_Out_Of_Stock extends BaseTest {
         // productItems.closeEmailPopUp();
         productItems.verifyProductItemPage(expectedPageTitle, expectedPageTitle);
         productItems.checkAndHandleNotifyMeForKitchen(productName, "boxifid681@dwakm.com");
-        ExtentReportManager.getTest().pass("Verified that the Product displays stock availability " +
-                " either 'Add to Cart' with earliest delivery date when in stock, or 'Temporarily out of stock in " +
-                "your area' message with email notification option when unavailable.");
+        ExtentReportManager.getTest().pass("Verified that the Product displays stock availability " + " either 'Add to Cart' with earliest delivery date when in stock, or 'Temporarily out of stock in " + "your area' message with email notification option when unavailable.");
 
     }
 
-    @Test(dataProvider = "airConditionersProductData",dataProviderClass = DataProviders.class, groups = {"regression", "smoke"})
+    @Test(dataProvider = "airConditionersProductData", dataProviderClass = DataProviders.class, groups = {"regression", "smoke"})
     public void testStockForAirConditioners(String productMenu, String subProduct, String productName, String expectedPageTitle) {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isHomePageLoaded(), "The Frigidaire home page did not load correctly.");
@@ -38,8 +36,6 @@ public class TC_NAGDTOPS_15684_AQA_PDP_Out_Of_Stock extends BaseTest {
         productItems.verifyProductItemPage(expectedPageTitle, expectedPageTitle);
         productItems.checkAndHandleNotifyMeForAirConditioners(productName, "boxifid681@dwakm.com");
 
-        ExtentReportManager.getTest().pass("Verified that the Product displays stock availability " +
-                "either 'Add to Cart' with earliest delivery date when in stock, or 'Temporarily out of stock in " +
-                "your area' message with email notification option when unavailable.");
+        ExtentReportManager.getTest().pass("Verified that the Product displays stock availability " + "either 'Add to Cart' with earliest delivery date when in stock, or 'Temporarily out of stock in " + "your area' message with email notification option when unavailable.");
     }
 }

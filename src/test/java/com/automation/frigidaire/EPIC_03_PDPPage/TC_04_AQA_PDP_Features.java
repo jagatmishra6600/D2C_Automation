@@ -1,4 +1,3 @@
-
 package com.automation.frigidaire.EPIC_03_PDPPage;
 
 import com.automation.frigidaire.pages.FrigidaireHomePageActions;
@@ -21,7 +20,7 @@ public class TC_04_AQA_PDP_Features extends BaseTest {
     public void verifyFeaturesSectionOnPDP() {
         homePage.navigateToHomePage();
         currentUrl = WebElementUtil.getCurrentUrl();
-        if (currentUrl.contains("frigidaire")){
+        if (currentUrl.contains("frigidaire")) {
             pdpPage.searchProduct("GRMC2273CF-C1");
             pdpPage.selectProductFromPLP();
             plpPage.closePopupModel();
@@ -44,7 +43,7 @@ public class TC_04_AQA_PDP_Features extends BaseTest {
     public void verifyViewMoreFunctionalityInFeaturesSectionOnPDP() {
         homePage.navigateToHomePage();
         currentUrl = WebElementUtil.getCurrentUrl();
-        if (currentUrl.contains("frigidaire")){
+        if (currentUrl.contains("frigidaire")) {
             pdpPage.searchProduct("GRMC2273CF-C1");
             pdpPage.selectProductFromPLP();
             plpPage.closePopupModel();

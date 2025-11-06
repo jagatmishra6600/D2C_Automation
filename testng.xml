@@ -9,8 +9,10 @@
             </run>
         </groups>
         <packages>
-            <package name="com.automation.frigidaire"/>
-            <!-- <package name="com.automation.electrolux"/> -->
+            <package name="com.automation.frigidaire.EPIC_01_Authentication"/>
+            <package name="com.automation.frigidaire.EPIC_02_HomePage"/>
+            <package name="com.automation.frigidaire.EPIC_03_PDP"/>
+            <package name="com.automation.frigidaire.EPIC_04_PLP"/>
         </packages>
     </test>
 </suite>

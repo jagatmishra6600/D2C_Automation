@@ -550,4 +550,6 @@ public class WebElementUtil {
     public static String getCurrentUrl() {
         return DriverManager.getDriver().getCurrentUrl();
     }
+
+
 }
