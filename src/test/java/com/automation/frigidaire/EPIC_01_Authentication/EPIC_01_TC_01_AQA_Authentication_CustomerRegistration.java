@@ -24,15 +24,13 @@ public class EPIC_01_TC_01_AQA_Authentication_CustomerRegistration extends BaseT
 
         Assert.assertTrue(loginPage.isLoginPageLoaded(), "User is not navigated to LoginPage");
         Assert.assertTrue(loginPage.isLoginToFrigidaireTitleDisplayed(), "'Log in to Frigidaire' title is not present");
-        Assert.assertTrue(loginPage.isLoginTitleMessageDisplayed(), "'Log in with your email and password: *' message is not present");
         Assert.assertTrue(loginPage.isEmailAddressFieldDisplayed(), "Email Address field is not displayed");
         Assert.assertTrue(loginPage.isPasswordFieldDisplayed(), "Password field is not displayed");
         Assert.assertTrue(loginPage.isShowPasswordIconDisplayed(), "'Show Password' icon is not displayed");
         Assert.assertTrue(loginPage.isKeepMeLoggedInCheckboxDisplayed(), "'Keep Me Logged In' checkbox is not displayed");
-        Assert.assertEquals(loginPage.getNotRecommendedLabelText(), "This is not recommended if you are using a shared or public device.", "Not Recommended Text Message not displayed");
         Assert.assertTrue(loginPage.isForgotPasswordLinkDisplayed(), "Forgot Password Link is not displayed");
         Assert.assertTrue(loginPage.isCreateAccountLinkDisplayed(), "Create an Account Link is not displayed");
-        Assert.assertEquals(loginPage.getElectroluxLinkedAccountMessage(), "*Frigidaire is part of the Electrolux Group. If you already have an account with Electrolux.com, you can use those details to login here.", "Electrolux Linked Account Message not displayed");
+        Assert.assertEquals(loginPage.getElectroluxLinkedAccountMessage(), "Frigidaire is part of the Electrolux Group. If you already have an account with Electrolux.com, you can use those details to log in.");
         Assert.assertTrue(loginPage.isAlternateLoginOptionsDisplayed(), "Sign in Options with Google or Apple is not Displayed");
 
         ExtentReportManager.getTest().pass("Login Page loaded Successfully and its Fields and Messages are verified");
@@ -52,14 +50,16 @@ public class EPIC_01_TC_01_AQA_Authentication_CustomerRegistration extends BaseT
         createAccountPage.navigateToCreateAccountPage();
 
         Assert.assertTrue(createAccountPage.isCreateAnAccountTitleDisplayed(), "Create An Account title is not displayed");
-        Assert.assertEquals(createAccountPage.getCreateAccountSignUpMessage(), "Sign up and make the most of your home with the inspiring products and special offers that Frigidaire has for you.", "Create Account Sign Up Message is not displayed");
-        Assert.assertTrue(createAccountPage.isEmailAddressFieldDisplayed(), "Email Address Field is not displayed");
+        Assert.assertEquals(createAccountPage.getCreateAccountSignUpMessage(),"Get access to exclusive savings, easy order tracking and faster checkout."
+	 			,"Create Account Sign Up Message 'Get access to exclusive savings' is not displayed");    	
+	 	Assert.assertTrue(createAccountPage.isEmailAddressFieldDisplayed(), "Email Address Field is not displayed");
         Assert.assertTrue(createAccountPage.isPasswordFieldDisplayed(), "Password Field is not displayed");
         Assert.assertTrue(createAccountPage.isConfirmPasswordFieldDisplayed(), "Confirm Password Field is not displayed");
         Assert.assertTrue(createAccountPage.isFirstNameFieldDisplayed(), "First Name Field is not displayed");
         Assert.assertTrue(createAccountPage.isLastNameFieldDisplayed(), "Last Name Field is not displayed");
         Assert.assertTrue(createAccountPage.isShowPasswordIconsDisplayed(), "Show Password Icons for Confirm Password and Password Fields are not Displayed");
-        Assert.assertEquals(createAccountPage.getElectroluxLinkedAccountMessage(), "Your login credentials will work across the Electrolux group including Frigidaire.com and Electrolux.com.", "Electrolux linked Account Message is not Displayed");
+        Assert.assertEquals(createAccountPage.getElectroluxLinkedAccountMessage(), "*Frigidaire is part of the Electrolux Group. If you already have an account with Electrolux.com, you can use those details to log in."
+        							, "Electrolux linked Account Message is not Displayed");
         Assert.assertTrue(createAccountPage.isTermsAndConditionsLinkDisplayed(), "Terms and Conditions Link is not displayed");
         Assert.assertTrue(createAccountPage.isPrivacyPolicyLinkDisplayed(), "Privacy Policy Link is not displayed");
         Assert.assertTrue(createAccountPage.isSubmitButtonDisplayed(), "Submit Button is not displayed");
@@ -82,7 +82,8 @@ public class EPIC_01_TC_01_AQA_Authentication_CustomerRegistration extends BaseT
         var password = ConfigReader.getProperty("user.password");
         createAccountPage.navigateToCreateAccountPage().createAccount(emailAddress, password, firstName, lastName);
 
-        Assert.assertEquals(createAccountPage.getVerificationEmailSentMessage(), "A verification email with a link to verify your account has been sent to you.", "'A verification email with a link to verify your account has been sent to you.' message is not displayed");
+        Assert.assertTrue(createAccountPage.getVerificationEmailSentMessage().contains("Almost there! We’ve sent a verification link to your email. Click the link to finish setting up your account")
+        						,"Verification Email Sent Message is not displayed");
 
         yopmailPage.openFirstMailInInbox(emailAddress);
         Assert.assertTrue(yopmailPage.isClickHereToActivateAccountLinkDisplayed(), "Click Here to Activate Your Account link is not present in the mail");

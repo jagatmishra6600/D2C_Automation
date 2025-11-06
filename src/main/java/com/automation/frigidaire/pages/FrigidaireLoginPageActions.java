@@ -13,18 +13,17 @@ public class FrigidaireLoginPageActions {
 
 	 private final By acceptButtonLocator = By.xpath("//button[@id='onetrust-accept-btn-handler']");
 
-	 private final By emailAddressInput = By.cssSelector("input[placeholder='Email address *']");
-	 private final By passwordInput = By.cssSelector("input[placeholder='Password *']");
-//	 private final By passwordInput = By.cssSelector("input[id*='gigya-password']");
+	 private final By emailAddressInput = By.xpath("//input[@placeholder='Email address *' or @placeholder='jane.doe@company.com *']");
+	 private final By passwordInput = By.xpath("//input[@placeholder='Password *' or contains(@id,'gigya-password')]");
 	 private final By loginButton = By.cssSelector("input[value='Log in']");
-	 private final By loginToFrigidaireTitle = By.xpath("//h2[normalize-space()='Log in to Frigidaire']");
+	 private final By loginToStoreTitle = By.xpath("//h2[normalize-space()='Log in to Frigidaire' or normalize-space()='Log in to Electrolux']");
 	 private final By loginTitleMessage = By.xpath("//label[normalize-space()='Log in with your email and password: *']");
 	 private final By showPasswordIcon = By.cssSelector("button[title='Show Password'] i");
-	 private final By keepMeLoggedInCheckbox = By.id("gigya-checkbox-remember");
+	 private final By keepMeLoggedInCheckbox = By.xpath("//input[@id='gigya-checkbox-remember']");
 	 private final By notRecommendedMessage = By.xpath("//label[contains(.,'shared or public device')]");
-	 private final By forgotPasswordLink = By.id("login-forgot-password-link");
-	 private final By createAccountLink = By.id("login-create-account-link");
-	 private final By electroluxLinkedAccountMessage = By.xpath("//label[contains(.,'*Frigidaire is part of the Electrolux Group')]");
+	 private final By forgotPasswordLink = By.xpath("//a[@id='login-forgot-password-link']");
+	 private final By createAccountLink = By.xpath("//a[@id='createAccButton']");
+	 private final By electroluxLinkedAccountMessage = By.xpath("//label[contains(.,'part of the Electrolux Group')]");
 	 private final By signInWithAppleButton = By.id("Apple_btn");
 	 private final By signInWithGoogleButton = By.id("Google_btn");
 	 
@@ -69,7 +68,7 @@ public class FrigidaireLoginPageActions {
 	}
 	
 	public boolean isLoginToFrigidaireTitleDisplayed() {
-		return WebElementUtil.isDisplayed(loginToFrigidaireTitle);
+		return WebElementUtil.isDisplayed(loginToStoreTitle);
 	}
 	
 	public boolean isLoginTitleMessageDisplayed() {
@@ -121,6 +120,7 @@ public class FrigidaireLoginPageActions {
 	}
 	
 	public FrigidaireCreateAccountPageActions clickCreateAccountLink() {
+		WebElementUtil.scrollIntoView(createAccountLink);
 		WebElementUtil.clickElement(createAccountLink);
 		return new FrigidaireCreateAccountPageActions();
 	}
@@ -130,6 +130,10 @@ public class FrigidaireLoginPageActions {
 		return new FrigidaireForgotPasswordPageActions();
 	}
 	
+	public boolean isLoginToStoreTitleDisplayed() {
+		return WebElementUtil.isDisplayed(loginToStoreTitle);
+	}
+
 	public FrigidaireCreateAccountPageActions navigateToCreateAccountPage() {
 		return navigateToLoginPage().clickCreateAccountLink();
 	}

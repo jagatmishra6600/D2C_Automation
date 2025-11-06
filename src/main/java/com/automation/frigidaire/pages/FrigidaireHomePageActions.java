@@ -20,7 +20,7 @@ public class FrigidaireHomePageActions {
     //************************** Main Menu Bar Locators **************************
     private final By mainMenu_FrigidaireSite = By.cssSelector("img[alt='Frigidaire Brand Site']");
     private final By mainMenu_ElectroluxSite = By.cssSelector("img[alt='Electrolux Brand Site']");
-    private final By mainMenu_Login_OrderStatus = By.xpath("//*[@id=\"dropdown\"]/a/text()");
+    private final By mainMenu_Login_OrderStatus = By.xpath("(//div[contains(.,'Log in / Order status')])[1]");
     private final By mainMenu_Contact = By.xpath("//a[contains(text(),'Contact us')]");
     private final By mainMenu_DeliverTo = By.xpath("//div[@class='pdp-hide-header-visible']//span[@class='Set-delivery-area']");
     private final By mainMenu_Cart = By.xpath("//img[@alt='Your Shopping Cart']");
