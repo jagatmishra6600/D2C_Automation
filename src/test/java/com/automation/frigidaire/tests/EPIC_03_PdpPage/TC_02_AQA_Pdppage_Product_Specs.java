@@ -1,4 +1,4 @@
-package com.automation.frigidaire.tests.EPIC_03_PdpPage;
+package com.automation.frigidaire.tests.EPIC_03_PDPPage;
 
 import com.automation.frigidaire.pages.FrigidaireHomePageActions;
 import com.automation.frigidaire.pages.FrigidairePdpPageActions;

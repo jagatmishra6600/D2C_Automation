@@ -13,8 +13,8 @@
     <description>Automation test framework for Frigidaire applications</description>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -55,7 +55,7 @@
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>${testng.version}</version>
-            <scope>test</scope>
+            <scope>compile</scope>
         </dependency>
 
         <!-- Extent Reports -->
@@ -78,12 +78,7 @@
             <artifactId>monte-screen-recorder</artifactId>
             <version>${monte.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.10.2</version>
-            <scope>compile</scope>
-        </dependency>
+        
     </dependencies>
 
     <build>
@@ -97,8 +92,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
+                    <source>17</source>
+                    <target>17</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
