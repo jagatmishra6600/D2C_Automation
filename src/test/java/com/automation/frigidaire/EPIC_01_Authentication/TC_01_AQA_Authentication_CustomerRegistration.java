@@ -19,7 +19,7 @@ public class TC_01_AQA_Authentication_CustomerRegistration extends BaseTest {
     YopmailPageActions yopmailPage = new YopmailPageActions();
 
     @Test(groups = {"smoke", "regression"}, description = "Verify LoginPage Fields and Messages")
-    public void TC_01_S1_VerifyLoginPageFields() {
+    public void EPIC_01_Authentication_TC_01_S1_VerifyLoginPageFields() {
         var loginPage = homePage.navigateToLoginPage();
 
         Assert.assertTrue(loginPage.isLoginPageLoaded(), "User is not navigated to LoginPage");
@@ -39,7 +39,7 @@ public class TC_01_AQA_Authentication_CustomerRegistration extends BaseTest {
     }
 
     @Test(groups = {"smoke", "regression"}, description = "Verify Navigation to Customer Registration Page after Click On Create Account Link")
-    public void TC_01_S1_VerifyNavigationToCustomerRegistrationPage() {
+    public void EPIC_01_Authentication_TC_01_S1_VerifyNavigationToCustomerRegistrationPage() {
         var createAccountPage = loginPage.navigateToCreateAccountPage();
 
         Assert.assertTrue(createAccountPage.isCreateAccountPageLoaded(), "User is not navigated to Customer Registration Page");
@@ -48,7 +48,7 @@ public class TC_01_AQA_Authentication_CustomerRegistration extends BaseTest {
     }
 
     @Test(groups = {"smoke", "regression"}, description = "Verify Customer Registration Page Fields And Messages")
-    public void TC_01_S2_VerifyCustomerRegistrationPage() {
+    public void EPIC_01_Authentication_TC_01_S2_VerifyCustomerRegistrationPage() {
         createAccountPage.navigateToCreateAccountPage();
 
         Assert.assertTrue(createAccountPage.isCreateAnAccountTitleDisplayed(), "Create An Account title is not displayed");
@@ -73,7 +73,7 @@ public class TC_01_AQA_Authentication_CustomerRegistration extends BaseTest {
     }
 
     @Test(groups = {"smoke", "regression"}, description = "Verify verification email message and email receipt after account creation.")
-    public void TC_01_S3_S4_S5_VerifyVerificationEmailReceivedAfterAccountCreation() {
+    public void EPIC_01_Authentication_TC_01_S3_S4_S5_VerifyVerificationEmailReceivedAfterAccountCreation() {
 
         var number = WebElementUtil.getRandomNumber(10000);
         var emailAddress = "automationTestEngineer+" + number + "@yopmail.com";

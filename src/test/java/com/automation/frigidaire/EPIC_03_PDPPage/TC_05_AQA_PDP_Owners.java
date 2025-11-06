@@ -16,7 +16,7 @@ public class TC_05_AQA_PDP_Owners extends BaseTest {
     String currentUrl;
 
     @Test(groups = {"regression"}, description = "Verify My Owners section on PDP page")
-    public void verifyFeaturesSectionOnPDP() {
+    public void EPIC_03_PDPPage_TC_05_verifyFeaturesSectionOnPDP() {
         homePage.navigateToHomePage();
         currentUrl = WebElementUtil.getCurrentUrl();
         if (currentUrl.contains("frigidaire")) {
@@ -36,7 +36,7 @@ public class TC_05_AQA_PDP_Owners extends BaseTest {
     }
 
     @Test(groups = {"regression"}, description = "Verify Service and Parts section")
-    public void verifyServiceAndPartsSectionOnPDP() {
+    public void EPIC_03_PDPPage_TC_05_verifyServiceAndPartsSectionOnPDP() {
         homePage.navigateToHomePage();
         currentUrl = WebElementUtil.getCurrentUrl();
         if (currentUrl.contains("frigidaire")) {

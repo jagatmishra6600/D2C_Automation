@@ -19,7 +19,7 @@ public class TC_02_AQA_Pdppage_Product_Specs extends BaseTest {
 
 
     @Test(groups = {"smoke", "regression"}, description = "Verify product quick specification on PDP page for window mounted AC and Vacuums")
-    public void verifyProductSpecificationOnPdpPageForWindowMountedACAndVacuums() {
+    public void EPIC_03_PDPPage_TC_02_verifyProductSpecificationOnPdpPageForWindowMountedACAndVacuums() {
         homePage.navigateToHomePage();
         currentUrl = WebElementUtil.getCurrentUrl();
         if (currentUrl.contains("frigidaire")) {
@@ -59,7 +59,7 @@ public class TC_02_AQA_Pdppage_Product_Specs extends BaseTest {
     }
 
     @Test(groups = {"smoke", "regression"}, description = "Verify product quick specification on PDP page for french door refrigerator and Washers")
-    public void verifyProductSpecificationOnPdpPageForFrenchDoorFridgeAndWashers() {
+    public void EPIC_03_PDPPage_TC_02_verifyProductSpecificationOnPdpPageForFrenchDoorFridgeAndWashers() {
         homePage.navigateToHomePage();
         currentUrl = WebElementUtil.getCurrentUrl();
         if (currentUrl.contains("frigidaire")) {

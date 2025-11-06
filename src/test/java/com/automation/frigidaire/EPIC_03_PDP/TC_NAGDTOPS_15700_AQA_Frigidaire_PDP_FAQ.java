@@ -14,7 +14,7 @@ public class TC_NAGDTOPS_15700_AQA_Frigidaire_PDP_FAQ extends BaseTest {
     FAQPage faqPage = new FAQPage();
 
     @Test(groups = {"regression", "smoke"}, priority = 1)
-    public void testForFrigidaireFAQ() {
+    public void EPIC_03_PDP_TC_02_testForFrigidaireFAQ() {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isHomePageLoaded(), "The Frigidaire home page did not load correctly.");
         faqPage.clickOnProductMenu("Owner Support");
@@ -26,7 +26,7 @@ public class TC_NAGDTOPS_15700_AQA_Frigidaire_PDP_FAQ extends BaseTest {
     }
 
     @Test(groups = {"regression", "smoke"}, priority = 2)
-    public void testForFAQForKitchen() {
+    public void EPIC_03_PDP_TC_02_testForFAQForKitchen() {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isHomePageLoaded(), "The Frigidaire home page did not load correctly.");
         faqPage.clickOnProductMenu("Owner Support");
@@ -38,7 +38,7 @@ public class TC_NAGDTOPS_15700_AQA_Frigidaire_PDP_FAQ extends BaseTest {
     }
 
     @Test(groups = {"regression", "smoke"}, priority = 3)
-    public void testForFAQForAirCare() {
+    public void EPIC_03_PDP_TC_02_testForFAQForAirCare() {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isHomePageLoaded(), "The Frigidaire home page did not load correctly.");
         faqPage.clickOnProductMenu("Owner Support");

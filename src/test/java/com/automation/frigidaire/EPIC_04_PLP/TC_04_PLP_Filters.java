@@ -9,7 +9,7 @@ import com.automation.frigidaire.utils.ExtentReportManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
+public class TC_04_PLP_Filters extends BaseTest {
     FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
     ProductCategoryPageActions productCategoryPageActions = new ProductCategoryPageActions();
     PLPProductItemsPageActions PLPProductItemsPageActions = new PLPProductItemsPageActions();
@@ -25,7 +25,7 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
 
 
     @Test(groups = {"smoke", "regression"}, description = "Verify hide/show filters functionality")
-    public void testHideShowFilters() throws InterruptedException {
+    public void EPIC_04_PLP_TC_04_testHideShowFilters() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
@@ -37,7 +37,7 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
 
 
     @Test(groups = {"smoke", "regression"}, description = "Verify product dimensions for height")
-    public void testForHeightDimensions() throws InterruptedException {
+    public void EPIC_04_PLP_TC_04_testForHeightDimensions() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
@@ -48,7 +48,7 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
     }
 
     @Test(groups = {"smoke", "regression"}, description = "Verify product dimensions for height")
-    public void testForHeightWithRatioDimensions() throws InterruptedException {
+    public void EPIC_04_PLP_TC_04_testForHeightWithRatioDimensions() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
@@ -60,7 +60,7 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
 
 
     @Test(groups = {"regression"}, description = "Verify every filter is with its sub-filter")
-    public void testExpandAndCollapseFilter() throws InterruptedException {
+    public void EPIC_04_PLP_TC_04_testExpandAndCollapseFilter() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
@@ -77,7 +77,7 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
 
 
     @Test(groups = {"regression"}, description = "Verify reset all filter")
-    public void testResetAll() throws InterruptedException {
+    public void EPIC_04_PLP_TC_04_testResetAll() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
@@ -88,7 +88,7 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
     }
 
     @Test(groups = {"regression"}, description = "Verify Ice maker filter with its functionality")
-    public void verifyPLPUpdatesWhenSingleFilterSelected() throws InterruptedException {
+    public void EPIC_04_PLP_TC_04_verifyPLPUpdatesWhenSingleFilterSelected() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
@@ -100,7 +100,7 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
     }
 
     @Test(groups = {"regression"}, description = "Verify water dispenser filter with its functionality")
-    public void verifyPLPUpdatesForWaterDispenserFeature() throws InterruptedException {
+    public void EPIC_04_PLP_TC_04_verifyPLPUpdatesForWaterDispenserFeature() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
@@ -112,7 +112,7 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
     }
 
     @Test(groups = {"regression"}, description = "Verify ADA Complaint filter with its functionality")
-    public void verifyPLPUpdatesForADAComplaintFeature() throws InterruptedException {
+    public void EPIC_04_PLP_TC_04_verifyPLPUpdatesForADAComplaintFeature() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
@@ -125,7 +125,7 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
 
 
     @Test(groups = {"regression"}, description = "Verify ENERGY STAR Certified filter with its functionality")
-    public void verifyPLPUpdatesForEnergyStarCertifiedFeature() throws InterruptedException {
+    public void EPIC_04_PLP_TC_04_verifyPLPUpdatesForEnergyStarCertifiedFeature() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
@@ -137,7 +137,7 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
     }
 
     @Test(groups = {"regression"}, description = "Verify filter with its functionality")
-    public void verifyVisibilityOfFiltersInPLP() throws InterruptedException {
+    public void EPIC_04_PLP_TC_04_verifyVisibilityOfFiltersInPLP() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
@@ -155,7 +155,7 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
     }
 
     @Test(groups = {"regression"}, description = "Verify Visibility of frigidaire gallery filters in PLP")
-    public void verifyFrigidaireGalleryProductInPLP() throws InterruptedException {
+    public void EPIC_04_PLP_TC_04_verifyFrigidaireGalleryProductInPLP() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
@@ -167,7 +167,7 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
     }
 
     @Test(groups = {"regression"}, description = "Verify Visibility of frigidaire professional filters in PLP")
-    public void verifyFrigidaireProfessionalProductInPLP() throws InterruptedException {
+    public void EPIC_04_PLP_TC_04_verifyFrigidaireProfessionalProductInPLP() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
@@ -180,7 +180,7 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
 
 
     @Test(groups = {"smoke", "regression"}, description = "verify Popular filters in PLP")
-    public void verifyPopularFiltersInPLP() throws InterruptedException {
+    public void EPIC_04_PLP_TC_04_verifyPopularFiltersInPLP() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
 
         PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
@@ -194,7 +194,7 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
     }
 
     @Test(groups = {"smoke", "regression"}, description = "verify Popular Filters Is Checked On Clicking the Related Filter In PLP")
-    public void verify_Popular_Filters_Is_Checked_On_Clicling_the_RelatedFilterInPLP() throws InterruptedException {
+    public void EPIC_04_PLP_TC_04_verify_Popular_Filters_Is_Checked_On_Clicling_the_RelatedFilterInPLP() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
@@ -207,7 +207,7 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
 
 
     @Test(groups = {"smoke", "regression"}, description = "verify counter depth filter is checked when counter depth in popular filter is selected")
-    public void verify_Related_Filter_Is_Checked_On_Clicling_Popular_filter_In_PLP() throws InterruptedException {
+    public void EPIC_04_PLP_TC_04_verify_Related_Filter_Is_Checked_On_Clicling_Popular_filter_In_PLP() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
@@ -218,7 +218,7 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
     }
 
     @Test(groups = {"smoke", "regression"}, description = "verify popular filter turrns red in PLP")
-    public void verify_Popular_Filters_Is_Checked_On_Clicling_the_RelatedFilter1InPLP() throws InterruptedException {
+    public void EPIC_04_PLP_TC_04_verify_Popular_Filters_Is_Checked_On_Clicling_the_RelatedFilter1InPLP() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
@@ -232,7 +232,7 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
 
 
     @Test(groups = {"smoke", "regression"}, description = "verify cross button (Below Hide Filters) when User clicks on particular filters in PLP")
-    public void verify_Related_Filter_Is_Checked_On_Clicling_Popular_filter1_In_PLP() throws InterruptedException {
+    public void EPIC_04_PLP_TC_04_verify_Related_Filter_Is_Checked_On_Clicling_Popular_filter1_In_PLP() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
@@ -244,7 +244,7 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
 
 
     @Test(groups = {"smoke", "regression"}, description = "verify Popular filter 'Ice Maker' successfully turned red in PLP")
-    public void verify_Popular_Filters_Is_Checked_On_Clicling_the_RelatedFilter2InPLP() throws InterruptedException {
+    public void EPIC_04_PLP_TC_04_verify_Popular_Filters_Is_Checked_On_Clicling_the_RelatedFilter2InPLP() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
@@ -257,7 +257,7 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
 
 
     @Test(groups = {"smoke", "regression"}, description = "verify Checkbox for 'Ice Maker' is now checked after Popular Filter click")
-    public void verify_Related_Filter_Is_Checked_On_Clicling_Popular_filter2_In_PLP() throws InterruptedException {
+    public void EPIC_04_PLP_TC_04_verify_Related_Filter_Is_Checked_On_Clicling_Popular_filter2_In_PLP() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
@@ -269,7 +269,7 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
 
 
     @Test(groups = {"smoke", "regression"}, description = "verify Popular filter 'Water Disp.' successfully turned red")
-    public void verify_Popular_Filters_Is_Checked_On_Clicling_the_RelatedFilter3InPLP() throws InterruptedException {
+    public void EPIC_04_PLP_TC_04_verify_Popular_Filters_Is_Checked_On_Clicling_the_RelatedFilter3InPLP() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
@@ -282,7 +282,7 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
 
 
     @Test(groups = {"smoke", "regression"}, description = "Checkbox for 'Water Dispenser' is now checked after Popular Filter click")
-    public void verify_Related_Filter_Is_Checked_On_Clicling_Popular_filter3_In_PLP() throws InterruptedException {
+    public void EPIC_04_PLP_TC_04_verify_Related_Filter_Is_Checked_On_Clicling_Popular_filter3_In_PLP() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
@@ -294,7 +294,7 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
 
 
     @Test(groups = {"smoke", "regression"}, description = "verify Availability of products in PLP")
-    public void verify_Availaibility_In_PLP() throws InterruptedException {
+    public void EPIC_04_PLP_TC_04_verify_Availaibility_In_PLP() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
@@ -304,7 +304,7 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
     }
 
     @Test(groups = {"smoke", "regression"}, description = "verify Checkbox Unchecked After Cross Click")
-    public void verify_CrossBtn_In_PLP() throws InterruptedException {
+    public void EPIC_04_PLP_TC_04_verify_CrossBtn_In_PLP() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");

@@ -9,12 +9,12 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
-public class TC_NAGDTOPS_15687_AQA_PLP_Product_Cards extends BaseTest {
+public class TC_03_AQA_PLP_Product_Cards extends BaseTest {
     FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
     ProductListingPageActions productListingPageActions = new ProductListingPageActions();
 
     @Test(groups = {"smoke", "regression"}, description = "Verify Kitchen Product Details in Product listing page", priority = 1)
-    public void testForKitchen() throws InterruptedException {
+    public void  EPIC_04_PLP_TC_03_testForKitchen() throws InterruptedException {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isHomePageLoaded(), "The Frigidaire home page did not load correctly.");
         productListingPageActions.clickOnProductMenu("Kitchen");
@@ -27,7 +27,7 @@ public class TC_NAGDTOPS_15687_AQA_PLP_Product_Cards extends BaseTest {
     }
 
     @Test(groups = {"smoke", "regression"}, description = "Verify Air care Product Details in Product listing page", priority = 2)
-    public void testForAirCare() throws InterruptedException {
+    public void EPIC_04_PLP_TC_03_testForAirCare() throws InterruptedException {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isHomePageLoaded(), "The Frigidaire home page did not load correctly.");
         productListingPageActions.clickOnProductMenu("Air Care");

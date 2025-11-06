@@ -14,7 +14,7 @@ public class TC_NAGDTOPS_15684_AQA_PDP_Out_Of_Stock extends BaseTest {
     ProductItemsPageActions productItems = new ProductItemsPageActions();
 
     @Test(dataProvider = "kitchenProductData", dataProviderClass = DataProviders.class, groups = {"regression", "smoke"})
-    public void testStockForKitchen(String productMenu, String subProduct, String productName, String expectedPageTitle) {
+    public void EPIC_03_PDP_TC_01_testStockForKitchen(String productMenu, String subProduct, String productName, String expectedPageTitle) {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isHomePageLoaded(), "The Frigidaire home page did not load correctly.");
         productItems.clickOnProductMenu(productMenu);
@@ -27,7 +27,7 @@ public class TC_NAGDTOPS_15684_AQA_PDP_Out_Of_Stock extends BaseTest {
     }
 
     @Test(dataProvider = "airConditionersProductData", dataProviderClass = DataProviders.class, groups = {"regression", "smoke"})
-    public void testStockForAirConditioners(String productMenu, String subProduct, String productName, String expectedPageTitle) {
+    public void EPIC_03_PDP_TC_01_testStockForAirConditioners(String productMenu, String subProduct, String productName, String expectedPageTitle) {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isHomePageLoaded(), "The Frigidaire home page did not load correctly.");
         productItems.clickOnProductMenu(productMenu);

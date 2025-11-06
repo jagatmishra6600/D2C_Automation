@@ -17,7 +17,7 @@ public class TC_04_AQA_PDP_Features extends BaseTest {
 
 
     @Test(groups = {"regression"}, description = "Verify features in the Overview & Features section with description and links")
-    public void verifyFeaturesSectionOnPDP() {
+    public void EPIC_03_PDPPage_TC_04_verifyFeaturesSectionOnPDP() {
         homePage.navigateToHomePage();
         currentUrl = WebElementUtil.getCurrentUrl();
         if (currentUrl.contains("frigidaire")) {
@@ -40,7 +40,7 @@ public class TC_04_AQA_PDP_Features extends BaseTest {
     }
 
     @Test(groups = {"regression"}, description = "Verify View All functionality and Show More button to reveal more banners")
-    public void verifyViewMoreFunctionalityInFeaturesSectionOnPDP() {
+    public void EPIC_03_PDPPage_TC_05_verifyViewMoreFunctionalityInFeaturesSectionOnPDP() {
         homePage.navigateToHomePage();
         currentUrl = WebElementUtil.getCurrentUrl();
         if (currentUrl.contains("frigidaire")) {

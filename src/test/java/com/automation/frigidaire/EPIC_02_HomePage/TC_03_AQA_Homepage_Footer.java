@@ -17,7 +17,7 @@ public class TC_03_AQA_Homepage_Footer extends BaseTest {
     private final FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
 
     @Test(groups = {"regression", "TC_03"})
-    public void TC_03_verifyFooterSectionVisible() {
+    public void EPIC_02_HomePage_TC_03_verifyFooterSectionVisible() {
         homePage.navigateToHomePage();
         homePage.scrollToFooter();
         Assert.assertTrue(homePage.isFooterDisplayed(), "Footer should be visible.");
@@ -25,7 +25,7 @@ public class TC_03_AQA_Homepage_Footer extends BaseTest {
     }
 
     @Test(groups = {"regression", "TC_03"})
-    public void TC_03_verifyFooterLinksDisplayed() {
+    public void EPIC_02_HomePage_TC_03_verifyFooterLinksDisplayed() {
         homePage.navigateToHomePage();
         homePage.scrollToFooter();
         // Section headings
@@ -67,7 +67,7 @@ public class TC_03_AQA_Homepage_Footer extends BaseTest {
     }
 
     @Test(groups = {"regression", "TC_03"}, description = "Verify external vs internal link behaviors from footer")
-    public void TC_03_verifyFooterLinksFunctionality() {
+    public void EPIC_02_HomePage_TC_03_verifyFooterLinksFunctionality() {
         homePage.navigateToHomePage();
         homePage.scrollToFooter();
         ExtentReportManager.getTest().pass("Navigated to home page and scrolled to footer");
@@ -99,7 +99,7 @@ public class TC_03_AQA_Homepage_Footer extends BaseTest {
     }
 
     @Test(groups = {"regression", "TC_03"}, description = "Verify Live Chat Icon opens chat interface")
-    public void TC_03_verifyLiveChatIconShowsInterface() {
+    public void EPIC_02_HomePage_TC_03_verifyLiveChatIconShowsInterface() {
         homePage.navigateToHomePage();
         homePage.scrollToFooter();
         Assert.assertTrue(homePage.isLiveChatIconDisplayed(), "Live Chat icon should be visible");
@@ -110,7 +110,7 @@ public class TC_03_AQA_Homepage_Footer extends BaseTest {
     }
 
     @Test(groups = {"regression", "TC_03"}, description = "Verify Left Footer Newsletter content and controls")
-    public void TC_03_verifyLeftNewsletterSection() {
+    public void EPIC_02_HomePage_TC_03_verifyLeftNewsletterSection() {
         homePage.navigateToHomePage();
         homePage.scrollToFooter();
         Assert.assertTrue(homePage.isNewsletterLeft_HeadingDisplayed(), "Left newsletter heading visible");
@@ -122,7 +122,7 @@ public class TC_03_AQA_Homepage_Footer extends BaseTest {
     }
 
     @Test(groups = {"regression", "TC_03"}, description = "Verify Sign Up CTA triggers submission flow")
-    public void TC_03_verifySignUpCTAFunctionality() {
+    public void EPIC_02_HomePage_TC_03_verifySignUpCTAFunctionality() {
         homePage.navigateToHomePage();
         homePage.scrollToFooter();
         if (!homePage.isNewsletterLeft_EmailInputDisplayed() || !homePage.isNewsletterLeft_SignUpDisplayed()) {
@@ -136,7 +136,7 @@ public class TC_03_AQA_Homepage_Footer extends BaseTest {
     }
 
     @Test(groups = {"regression", "TC_03"}, description = "Verify Right Footer Newsletter section visibility")
-    public void TC_03_verifyRightNewsletterSection() {
+    public void EPIC_02_HomePage_TC_03_verifyRightNewsletterSection() {
         homePage.navigateToHomePage();
         homePage.scrollToFooter();
         Assert.assertTrue(homePage.isNewsletterRight_HeadingDisplayed(), "Be the first to know");
@@ -147,7 +147,7 @@ public class TC_03_AQA_Homepage_Footer extends BaseTest {
     }
 
     @Test(groups = {"regression", "TC_03"}, description = "Verify Right Footer Newsletter links navigate to pages")
-    public void TC_03_verifyRightNewsletterLinksNavigation() {
+    public void EPIC_02_HomePage_TC_03_verifyRightNewsletterLinksNavigation() {
         homePage.navigateToHomePage();
         homePage.scrollToFooter();
 

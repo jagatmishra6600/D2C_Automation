@@ -15,14 +15,14 @@ public class TC_01_AQA_Homepage_Navigation extends BaseTest {
     private final FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
 
     @Test(groups = {"regression", "TC_01"}, priority = 1)
-    public void verifyFrigidaireLogoOnHomepage() {
+    public void EPIC_02_HomePage_TC_01_verifyFrigidaireLogoOnHomepage() {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isBrancdLogoLoaded(), "Frigidaire logo is not displayed on homepage");
         ExtentReportManager.getTest().pass("Home page loaded successfully and logo was verified.");
     }
 
     @Test(groups = {"regression", "TC_01"}, priority = 2)
-    public void verifySearchIconAndInterfaceOnHomepage() {
+    public void EPIC_02_HomePage_TC_01_verifySearchIconAndInterfaceOnHomepage() {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isSearchIconDisplayed(), "Search icon is not displayed on homepage");
         Assert.assertTrue(homePage.isSearchInputFieldDisplayed(), "Search input field is not displayed on homepage");
@@ -34,7 +34,7 @@ public class TC_01_AQA_Homepage_Navigation extends BaseTest {
     }
 
     @Test(groups = {"regression", "TC_01"}, priority = 4)
-    public void verifyShopOurCategoriesSection() {
+    public void EPIC_02_HomePage_TC_01_verifyShopOurCategoriesSection() {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isShopOurCategoriesSectionDisplayed(), "'Shop Our Categories' section is not displayed");
         List<String> expectedCategories = Arrays.asList("Refrigerators", "Freezers", "Ranges", "Cooktops", "Wall Ovens", "Dishwashers", "Microwaves", "Window Air Conditioners", "Portable Air Conditioners", "Wall Air Conditioners", "Dehumidifiers", "Air Purifiers");
@@ -44,7 +44,7 @@ public class TC_01_AQA_Homepage_Navigation extends BaseTest {
 
 
     @Test(groups = {"regression", "TC_01"}, priority = 5)
-    public void verifyShopOurTopRatedAppliancesSection() {
+    public void EPIC_02_HomePage_TC_01_verifyShopOurTopRatedAppliancesSection() {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isShopOurTopRatedAppliancesSectionDisplayed(), "'Shop our Top-Rated, Most Feature-Packed Appliances' section is not displayed");
         Assert.assertTrue(homePage.areProductCardsElementsDisplayed(), "Elements on product cards are not displayed correctly");
@@ -53,7 +53,7 @@ public class TC_01_AQA_Homepage_Navigation extends BaseTest {
     }
 
     @Test(groups = {"regression", "TC_01"}, priority = 6)
-    public void verifyMoreToExploreSection() {
+    public void EPIC_02_HomePage_TC_01_verifyMoreToExploreSection() {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isMoreToExploreSectionDisplayed(), "'More to Explore from Frigidaire' section is not displayed");
         List<String> expectedMoreToExp = Arrays.asList("NEW! Shop Air Purifiers", "Shop Small Appliances", "Subscribe & Save on Filters");
@@ -62,7 +62,7 @@ public class TC_01_AQA_Homepage_Navigation extends BaseTest {
     }
 
     @Test(groups = {"regression", "TC_01"}, priority = 7)
-    public void TC_01_verifySecondPromotionalBanners() {
+    public void EPIC_02_HomePage_TC_01_verifySecondPromotionalBanners() {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isMoreToExploreSectionDisplayed(), "'More to Explore from Frigidaire' section is not displayed");
         Assert.assertTrue(homePage.isNewsletterRight_SpecialOffersDisplayed(), "Second set of promotional banners is not displayed");
@@ -70,7 +70,7 @@ public class TC_01_AQA_Homepage_Navigation extends BaseTest {
     }
 
     @Test(groups = {"regression", "TC_01"}, priority = 8)
-    public void TC_01_verifyPromotionalRatingBanner() {
+    public void EPIC_02_HomePage_TC_01_verifyPromotionalRatingBanner() {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isShopOurTopRatedAppliancesSectionDisplayed(), "Top-rated appliances section is not displayed");
         Assert.assertTrue(homePage.areProductCardsElementsDisplayed(), "Product card elements (including ratings) are not displayed");
@@ -78,7 +78,7 @@ public class TC_01_AQA_Homepage_Navigation extends BaseTest {
     }
 
     @Test(groups = {"regression", "TC_01"}, priority = 9)
-    public void TC_01_verifyTermsAndRecallSection() {
+    public void EPIC_02_HomePage_TC_01_verifyTermsAndRecallSection() {
         homePage.navigateToHomePage();
         homePage.scrollToFooter();
         Assert.assertTrue(homePage.isNewsletterLeft_TermsTextDisplayed(), "Terms of offer section is not displayed");
@@ -90,7 +90,7 @@ public class TC_01_AQA_Homepage_Navigation extends BaseTest {
     }
 
     @Test(groups = {"regression", "TC_01"}, priority = 10)
-    public void TC_01_verifyL0CategoriesInHeader() {
+    public void EPIC_02_HomePage_TC_01_verifyL0CategoriesInHeader() {
         homePage.navigateToHomePage();
         String[] l0Categories = new String[]{"Kitchen", "Air Conditioners", "Air Care", "Laundry", "Filters", "Accessories", "Owner Support", "Blog", "Sale"};
         for (String cat : l0Categories) {
@@ -100,7 +100,7 @@ public class TC_01_AQA_Homepage_Navigation extends BaseTest {
     }
 
     @Test(groups = {"regression", "TC_01"}, priority = 11)
-    public void TC_01_verifyKitchenL1SubcategoriesVisible() {
+    public void EPIC_02_HomePage_TC_01_TCverifyKitchenL1SubcategoriesVisible() {
         homePage.navigateToHomePage();
         homePage.openHeaderCategory("Kitchen");
         String[] kitchenSubcats = new String[]{"French Door", "Side-by-Side", "Single Door", "Top Freezer", "Bottom Freezer", "Compact", "Wine & Beverage", "Built-in-Dishwashers", "Induction", "Gas", "Electric", "Dual Fuel", "Explore Pizza", "Cooktops", "Wall Ovens", "Microwave Combination", "Microwaves", "Kitchen Packages", "Retro Mini Fridges", "Espresso Makers", "Air Fryers", "Ice Makers", "Garbage Disposals"};
@@ -111,7 +111,7 @@ public class TC_01_AQA_Homepage_Navigation extends BaseTest {
     }
 
     @Test(groups = {"regression", "TC_01"}, priority = 12)
-    public void TC_01_verifyAirConditionersL1SubcategoriesVisible() {
+    public void EPIC_02_HomePage_TC_01_verifyAirConditionersL1SubcategoriesVisible() {
         homePage.navigateToHomePage();
         homePage.openHeaderCategory("Air Conditioners");
         String[] acSubcats = new String[]{"Window Mounted", "Wall", "Portable", "Dehumidifiers", "HVAC"};
@@ -122,7 +122,7 @@ public class TC_01_AQA_Homepage_Navigation extends BaseTest {
     }
 
     @Test(groups = {"regression", "TC_01"}, priority = 13)
-    public void TC_01_verifyPromotionalBannersCTAsClickable() {
+    public void EPIC_02_HomePage_TC_01_verifyPromotionalBannersCTAsClickable() {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isMoreToExploreSectionDisplayed(), "'More to Explore from Frigidaire' section is not displayed");
         String[] ctas = new String[]{"NEW! Shop Air Purifiers", "Shop Small Appliances", "Subscribe & Save on Filters"};

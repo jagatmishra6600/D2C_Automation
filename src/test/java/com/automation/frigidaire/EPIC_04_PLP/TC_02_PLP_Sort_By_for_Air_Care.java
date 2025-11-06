@@ -9,7 +9,7 @@ import com.automation.frigidaire.utils.ExtentReportManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TC_05_PLP_Sort_By_for_Air_Care extends BaseTest {
+public class TC_02_PLP_Sort_By_for_Air_Care extends BaseTest {
 
 
     FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
@@ -28,7 +28,7 @@ public class TC_05_PLP_Sort_By_for_Air_Care extends BaseTest {
 
 
     @Test(groups = {"smoke", "regression"}, description = "Should sort products by Price Low to High")
-    public void testSortByPriceLowToHigh() throws InterruptedException {
+    public void  EPIC_04_PLP_TC_02_testSortByPriceLowToHigh() throws InterruptedException {
         navigateToAirCare("frigidaire", "Air Care", "Window Mounted AC");
         PLPProductItemsPageActions.verifyProductItemPage("Window Mounted Air Conditioners", "Window Mounted Air Conditioners");
         PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
@@ -38,7 +38,7 @@ public class TC_05_PLP_Sort_By_for_Air_Care extends BaseTest {
     }
 
     @Test(groups = {"smoke", "regression"}, description = "Should sort products by Price High to Low")
-    public void testSortByPriceHighToLow() throws InterruptedException {
+    public void  EPIC_04_PLP_TC_02_testSortByPriceHighToLow() throws InterruptedException {
         navigateToAirCare("frigidaire", "Air Care", "Window Mounted AC");
         PLPProductItemsPageActions.verifyProductItemPage("Window Mounted Air Conditioners", "Window Mounted Air Conditioners");
         PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
@@ -48,7 +48,7 @@ public class TC_05_PLP_Sort_By_for_Air_Care extends BaseTest {
     }
 
     @Test(groups = {"smoke", "regression"}, description = "Should sort products by Biggest Savings")
-    public void testSortByBiggestSavings() throws InterruptedException {
+    public void EPIC_04_PLP_TC_02_testSortByBiggestSavings() throws InterruptedException {
         navigateToAirCare("frigidaire", "Air Care", "Window Mounted AC");
         PLPProductItemsPageActions.verifyProductItemPage("Window Mounted Air Conditioners", "Window Mounted Air Conditioners");
         PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
