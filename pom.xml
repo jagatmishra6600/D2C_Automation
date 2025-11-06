@@ -58,6 +58,13 @@
             <scope>compile</scope>
         </dependency>
 
+        <!-- TestNG requires JCommander at runtime; add explicitly for IDE runners -->
+        <dependency>
+            <groupId>com.beust</groupId>
+            <artifactId>jcommander</artifactId>
+            <version>1.82</version>
+        </dependency>
+
         <!-- Extent Reports -->
         <dependency>
             <groupId>com.aventstack</groupId>

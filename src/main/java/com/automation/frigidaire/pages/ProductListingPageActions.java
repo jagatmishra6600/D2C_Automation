@@ -17,6 +17,7 @@ public class ProductListingPageActions {
     SoftAssert softAssert=new SoftAssert();
     private final By emailPopUp = By.xpath("//span[@id=\"close-modal123\"]");
 
+
     public void closeEmailPopUp() {
         WaitUtils.untilVisible(emailPopUp, 60);
         WebElementUtil.clickElement(emailPopUp);
@@ -56,7 +57,7 @@ public class ProductListingPageActions {
                     System.out.println("Clicked on " + elementName + " — navigating to PDP page.");
 
                     Thread.sleep(2000);
-                    driver.navigate().back();
+                    DriverManager.getDriver().navigate().back();
                     System.out.println("Navigated back to PLP page.");
 
                     Thread.sleep(4000);
@@ -70,7 +71,7 @@ public class ProductListingPageActions {
         WebElementUtil.zoomInOrOut(60);
         Thread.sleep(5000);
         WebDriver driver = DriverManager.getDriver();
-        List<WebElement> items = driver.findElements(By.xpath("//div[starts-with(@id, 'PlpItem')]"));
+        List<WebElement> items = WebElementUtil.findElements(By.xpath("//div[starts-with(@id, 'PlpItem')]"));
         for (int i = 0; i <=2; i++) {
             if(ProductName.equalsIgnoreCase("Kitchen")){
                 checkProductDetail(i);

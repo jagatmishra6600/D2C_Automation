@@ -216,6 +216,20 @@ public class WebElementUtil {
         }
     }
 
+    public static WebElement findElement(By locator) {
+        if (DriverManager.getDriver() == null) {
+            throw new IllegalStateException("WebDriver is not initialized. Ensure DriverManager.getDriver() is called before using findElement.");
+        }
+        try {
+            return DriverManager.getDriver().findElement(locator);
+        } catch (NoSuchElementException e) {
+            System.err.println("Element not found for locator: " + locator);
+            return null;
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to find element: " + locator, e);
+        }
+    }
+
    
     public static void scrollAndClickUsingJSE(WebDriver driver, WebElement element) {
         try {

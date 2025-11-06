@@ -16,9 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FAQPage {
-
-    WebDriver driver = DriverManager.getDriver();
-
+    // Defer WebDriver access to runtime to avoid early initialization during test class construction
     By headerLocator = By.xpath("//h1[normalize-space(text())='Owner Center Resource Library']");
     By searchBox = By.xpath("//input[@name=\"queryString\"]");
     By homeComfort=By.xpath("//h3[text()=\"Home Comfort\"]");
@@ -34,13 +32,14 @@ public class FAQPage {
     public void verifyFAQHeaderText() {
         String expectedText = "Owner Center Resource Library";
         WebElementUtil.waitForElementToBeVisible(headerLocator);
-        WebElement headerElement = driver.findElement(headerLocator);
+
+        WebElement headerElement = WebElementUtil.findElement(headerLocator);
         String actualText = headerElement.getText();
         Assert.assertTrue(actualText.equals(expectedText),
                 " Header text mismatch! Expected: '" + expectedText + "' but found: '" + actualText + "'");
     }
     public void verifyFAQSecond(){
-        WebElement searchElement = driver.findElement(searchBox);
+        WebElement searchElement = WebElementUtil.findElement(searchBox);
         Assert.assertTrue(searchElement.isDisplayed());
     }
 
@@ -58,7 +57,7 @@ public class FAQPage {
         By tileLocator = By.xpath("//a[@class='group']//h3[text()='" + category + "']");
 
         WebElementUtil.waitForElementToBeVisible(tileLocator);
-        WebElement tileElement = driver.findElement(tileLocator);
+        WebElement tileElement = WebElementUtil.findElement(tileLocator);
         Assert.assertTrue(tileElement.isDisplayed(), " Category tile not visible: " + category);
 
         WebElementUtil.clickElement(tileLocator);
@@ -66,13 +65,13 @@ public class FAQPage {
 
         By subcategoryHeader = By.xpath("//h1[contains(normalize-space(text()), 'Support for')]");
         WebElementUtil.waitForElementToBeVisible(subcategoryHeader);
-        WebElement se= driver.findElement(subcategoryHeader);
+        WebElement se= WebElementUtil.findElement(subcategoryHeader);
         String actual= se.getText();
 
         Assert.assertTrue(actual.contains("Support for "+category));
         WebElementUtil.waitForElementToBeVisible(subcategoryHeader);
 
-        driver.navigate().back();
+        DriverManager.getDriver().navigate().back();
     }
     public void verifySearchBoxVisible(){
 
@@ -83,8 +82,7 @@ public class FAQPage {
         WebElementUtil.waitForElementToBeClickable(refrigeratorsLocators);
         WebElementUtil.clickElement(refrigeratorsLocators);
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name='queryString']")));
+       WebElement element = WaitUtils.untilVisible(By.xpath("//input[@name='queryString']"));
        // element.sendKeys("Test");
         boolean visible = element.isDisplayed();
         System.out.println("Search box visibility: " + visible);
@@ -98,9 +96,9 @@ public class FAQPage {
         WebElementUtil.clickElement(homeComfort);
         WebElementUtil.waitForElementToBeClickable(roomAC);
         WebElementUtil.clickElement(roomAC);
+        WebElement searchBox = WaitUtils.untilVisible(By.xpath("//input[@name='queryString']"));
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement searchBox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name='queryString']")));
+
 
         //WaitUtils.untilVisible(searchBox, 10);
         boolean visible = searchBox.isDisplayed();
@@ -114,7 +112,7 @@ public class FAQPage {
         WebElementUtil.waitForElementToBeVisible(articleLocator);
         WebElementUtil.clickElement(articleLocator);
 
-        WebElement articleLocatorValue= driver.findElement(articleLocator);
+        WebElement articleLocatorValue= WebElementUtil.findElement(articleLocator);
         String actual=articleLocatorValue.getText();
         System.out.println(actual);
         WaitUtils.untilVisible(articleLocatorValue);
@@ -126,7 +124,7 @@ public class FAQPage {
         WebElementUtil.waitForElementToBeVisible(articleLocator);
         WebElementUtil.clickElement(articleLocator);
 
-        WebElement articleLocatorValue= driver.findElement(articleLocator);
+        WebElement articleLocatorValue= WebElementUtil.findElement(articleLocator);
         WaitUtils.untilVisible(articleLocatorValue);
         String actual=articleLocatorValue.getText();
         System.out.println(actual);
