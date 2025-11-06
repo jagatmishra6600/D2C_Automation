@@ -41,7 +41,6 @@ public class EPIC_01_TC_01_AQA_Authentication_CustomerRegistration extends BaseT
         var createAccountPage = loginPage.navigateToCreateAccountPage();
 
         Assert.assertTrue(createAccountPage.isCreateAccountPageLoaded(), "User is not navigated to Customer Registration Page");
-
         ExtentReportManager.getTest().pass("User Successfully Navigated to Customer Registration Page After Click on Create Account Link in Login Page");
     }
 
