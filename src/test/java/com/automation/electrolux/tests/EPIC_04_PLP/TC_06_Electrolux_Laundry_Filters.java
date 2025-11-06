@@ -1,5 +1,6 @@
 package com.automation.electrolux.tests.EPIC_04_PLP;
 
+import com.automation.frigidaire.enums.FrigidaireConstants;
 import com.automation.frigidaire.pages.FrigidaireHomePageActions;
 import com.automation.frigidaire.pages.PLPProductItemsPageActions;
 import com.automation.frigidaire.pages.ProductCategoryPageActions;
@@ -9,6 +10,7 @@ import com.automation.frigidaire.utils.WebElementUtil;
 import org.testng.annotations.Test;
 
 import static com.automation.frigidaire.enums.FrigidaireConstants.electroxWeb;
+import static com.automation.frigidaire.enums.FrigidaireConstants.frigidaireWeb;
 
 public class TC_06_Electrolux_Laundry_Filters extends BaseTest {
 
@@ -87,6 +89,31 @@ public class TC_06_Electrolux_Laundry_Filters extends BaseTest {
         PLPProductItemsPageActions.featureFilter("electrolux", "In stock", "Yes");
         PLPProductItemsPageActions.validateAvailabilityOfProductsInPLP();
         ExtentReportManager.getTest().pass("Successfully verify Availability of products in PLP");
+
+    }
+
+    @Test(groups = {"smoke", "regression"}, description = "verify Color of products in PLP")
+    public void verifyColorFilter() throws InterruptedException
+    {
+        navigateToLaundryProducts("electrolux", "Laundry", "Washers");
+        PLPProductItemsPageActions.clickOnProductMenu("White");
+        PLPProductItemsPageActions.openAllProductsAndValidateColor(frigidaireWeb,"White");
+        ExtentReportManager.getTest().pass("Successfully verify Color of products in PLP");
+
+    }
+
+
+    @Test(groups = {"smoke", "regression"}, description = "verify Checkbox Unchecked After Cross Click")
+    public void verify_CrossBtn_In_PLP() throws InterruptedException
+    {
+        navigateToLaundryProducts("electrolux", "Laundry", "Washers");
+
+
+        PLPProductItemsPageActions.validateCheckboxUncheckedAfterCrossClick(electroxWeb,"Features", "High Efficiency","High Efficiency");
+        PLPProductItemsPageActions.validateCheckboxUncheckedAfterCrossClick(electroxWeb,"Model", "700 Series","700 Series");
+        PLPProductItemsPageActions.validateCheckboxUncheckedAfterCrossClick(electroxWeb,"In stock", "Yes","Yes");
+        PLPProductItemsPageActions.validateCheckboxUncheckedAfterCrossClick(electroxWeb,"Color", "Alpine","Alpine");
+        ExtentReportManager.getTest().pass("Successfully verify Checkbox Unchecked After Cross Click");
 
     }
 }

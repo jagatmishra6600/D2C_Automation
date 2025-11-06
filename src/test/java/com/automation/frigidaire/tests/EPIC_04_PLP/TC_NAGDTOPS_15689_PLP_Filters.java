@@ -9,6 +9,8 @@ import com.automation.frigidaire.utils.ExtentReportManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import static com.automation.frigidaire.enums.FrigidaireConstants.frigidaireWeb;
+
 public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
     FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
     ProductCategoryPageActions productCategoryPageActions=new ProductCategoryPageActions();
@@ -329,10 +331,23 @@ public class TC_NAGDTOPS_15689_PLP_Filters extends BaseTest {
         navigateToFrenchDoorRefrigerators("frigidaire","Kitchen","French Door");
         PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
         PLPProductItemsPageActions.verifyFiltersInProductItems("Availability",60,"Availability");
-        PLPProductItemsPageActions.validateCheckboxUncheckedAfterCrossClick("Series", "Frigidaire Gallery","Frigidaire Gallery");
-        PLPProductItemsPageActions.validateCheckboxUncheckedAfterCrossClick("Series", "Frigidaire Professional","Frigidaire Professional");
-        PLPProductItemsPageActions.validateCheckboxUncheckedAfterCrossClick("Series", "Frigidaire","Frigidaire");
+        PLPProductItemsPageActions.validateCheckboxUncheckedAfterCrossClick(frigidaireWeb,"Series", "Frigidaire Gallery","Frigidaire Gallery");
+        PLPProductItemsPageActions.validateCheckboxUncheckedAfterCrossClick(frigidaireWeb,"Series", "Frigidaire Professional","Frigidaire Professional");
+        PLPProductItemsPageActions.validateCheckboxUncheckedAfterCrossClick(frigidaireWeb,"Series", "Frigidaire","Frigidaire");
         ExtentReportManager.getTest().pass("Successfully verify Checkbox Unchecked After Cross Click");
+
+    }
+
+
+    @Test(groups = {"smoke", "regression"}, description = "verify Color of products in PLP")
+    public void verifyColorFilter() throws InterruptedException
+    {
+        navigateToFrenchDoorRefrigerators("frigidaire","Kitchen","French Door");
+        PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators","French Door Refrigerators");
+        PLPProductItemsPageActions.verifyFiltersInProductItems("Availability",60,"Availability");
+        PLPProductItemsPageActions.clickOnProductMenu("White");
+        PLPProductItemsPageActions.openAllProductsAndValidateColor(FrigidaireConstants.electroxWeb,"White");
+        ExtentReportManager.getTest().pass("Successfully verify Color of products in PLP");
 
     }
 

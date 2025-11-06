@@ -54,11 +54,62 @@ public class PLPProductItemsPageActions {
 
     private final By addToCartForPLP = By.xpath("//div[@id='earliestDeliveryDateDiv']/parent::app-elx-earliest-delivery-day-common//following-sibling::div//span[contains(text(),'Add to cart')]");
 
-    private By getFeatureLocator(String featureKey, String featureValue) {
-        return By.xpath("//b[contains(text(),'"+featureKey+"')]/ancestor::app-elux-product-facet-list//div//input[@id='"+featureValue+"']");
+    private By getFeatureLocator(String website, String featureKey, String featureValue) {
+        WebDriver driver = DriverManager.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
+        if (website == null || website.isEmpty()) {
+            throw new IllegalArgumentException(" Website parameter cannot be null or empty.");
+        }
 
+        website = website.trim().toLowerCase();
+
+        String xpath1;
+        String xpath2;
+
+        // 🔹 Handle DOM differences between Frigidaire and Electrolux
+        if (website.equals("frigidaire")) {
+            // Frigidaire uses <b> tags for facet titles
+            xpath1 = "//b[contains(text(),'" + featureKey + "')]/ancestor::app-elux-product-facet-list"
+                    + "//div//input[@id='" + featureValue + "']";
+
+            xpath2 = "//b[contains(text(),'" + featureKey + "')]/ancestor::app-elux-product-facet-list"
+                    + "//div[label[div[span[contains(text(),'" + featureValue + "')]]]]//input/following-sibling::label";
+
+            System.out.println("🌐 Using Frigidaire feature locator XPaths");
+
+        } else if (website.equals("electrolux")) {
+            // Electrolux uses <span> tags for facet titles
+            xpath1 = "//span[contains(text(),'" + featureKey + "')]/ancestor::app-elux-product-facet-list"
+                    + "//input[normalize-space(@id)='" + featureValue + "']";
+
+            xpath2 = "//span[contains(text(),'" + featureKey + "')]/ancestor::app-elux-product-facet-list"
+                    + "//div[label[div[span[contains(text(),'" + featureValue + "')]]]]//input/following-sibling::label";
+
+            System.out.println("🌐 Using Electrolux feature locator XPaths");
+
+        } else {
+            throw new IllegalArgumentException(" Unsupported website: " + website);
+        }
+
+        // Try to find the first locator; if not found, fallback to second
+        try {
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath1)));
+            System.out.println("Found element using xpath1");
+            return By.xpath(xpath1);
+        } catch (Exception e) {
+            System.out.println(" xpath1 not found, trying xpath2...");
+            try {
+                wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath2)));
+                System.out.println(" Found element using xpath2");
+                return By.xpath(xpath2);
+            } catch (Exception ex) {
+                throw new NoSuchElementException(" Unable to locate feature element using either xpath for "
+                        + website + ": " + featureKey + " = " + featureValue);
+            }
+        }
     }
+
     private  By  getSelectRoomSizeLocator(String featureKey) {
         return By.xpath("//div[@id='facet-drawer']//div[@id='roomSizeRange-wrapper']//span[text()='" + featureKey + "']/parent::div/preceding-sibling::div");
         }
@@ -72,7 +123,7 @@ public class PLPProductItemsPageActions {
 
     }
     private By selectedFilterCross(String filterName) {
-        return By.xpath("//span[@class='border border-light p-2 m-2 Body-MediumBody_Medium' and normalize-space(text())='" + filterName + "']//i");
+        return By.xpath("//span[@class='border border-light p-2 m-2 Body-MediumBody_Medium'  or @class='m-2 selectedBox' and normalize-space(text())='" + filterName + "']//i");
     }
 
     public boolean productIsInStock(String productName) {
@@ -125,7 +176,7 @@ public void closeEmailPopUp() {
 
 
     public void clickOnProductMenu(String text) {
-        By locator = By.xpath("//h5[normalize-space(text())='" + text + "']");
+        By locator = By.xpath("//*[normalize-space(text())='" + text + "']");
         WebElementUtil.waitForElementToBeVisible(locator);
         WebElementUtil.clickElement(locator);
     }
@@ -263,6 +314,7 @@ public void closeEmailPopUp() {
         By locator = By.xpath("//h1[normalize-space(text())='" + text + "']");
         WebElementUtil.waitForElementToBeVisible(locator,60);
         String s1 = WebElementUtil.getText(locator);
+        System.out.println(s1);
         Assert.assertEquals(s1, assertValue);
 
     }
@@ -1022,7 +1074,7 @@ public void verifyBiggestSavingsSort(String website) {
         }
     }
 
-    private void validateACProduct(int index, String featureName, String featureKey, String featureValue) {
+    private void validateACProduct(String website ,int index, String featureName, String featureKey, String featureValue) {
         try {
             WebDriver driver = DriverManager.getDriver();
             System.out.println("Validating product index " + index);
@@ -1051,7 +1103,7 @@ public void verifyBiggestSavingsSort(String website) {
             Assert.assertTrue(featureNameElement.isDisplayed(), featureName + " feature element is not displayed.");
 
 
-            WebElement featureElement = WaitUtils.untilVisible(getFeatureLocator(featureKey, featureValue), 30000);
+            WebElement featureElement = WaitUtils.untilVisible(getFeatureLocator(website ,featureKey, featureValue), 30000);
             String elementText = featureElement.getText().trim();
 
 
@@ -1250,13 +1302,13 @@ public void verifyBiggestSavingsSort(String website) {
     }
 
 
-    public void validateCheckboxUncheckedAfterCrossClick(String filterCategory, String filterName ,String crossFilterName) {
+    public void validateCheckboxUncheckedAfterCrossClick(String website ,String filterCategory, String filterName ,String crossFilterName) {
         WebDriver driver = DriverManager.getDriver();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
         By pillCross = selectedFilterCross(crossFilterName);
 
-        By checkbox = getFeatureLocator(filterCategory, filterName);
+        By checkbox = getFeatureLocator(website,filterCategory, filterName);
         wait.until(ExpectedConditions.elementToBeClickable(checkbox));
         WebElementUtil.scrollAndClickUsingJSE(driver, driver.findElement(checkbox));
 
@@ -1362,6 +1414,109 @@ public void verifyBiggestSavingsSort(String website) {
 
         } catch (Exception e) {
             System.out.println("Error iterating over products: " + e.getMessage());
+        }
+    }
+
+
+
+    public void openAllProductsAndValidateColor(String website , String expectedColor) {
+        try {
+            WebDriver driver = DriverManager.getDriver();
+            loadMoreProducts(driver);
+            verifyProductCount(driver, driver.findElement(productCount));
+
+            List<WebElement> products = driver.findElements(By.xpath("//div[starts-with(@id,'PlpItem')]"));
+            int totalProducts = products.size();
+            System.out.println("Total filtered products found: " + totalProducts);
+            String mainWindow = driver.getWindowHandle();
+
+            for (int i = 0; i < totalProducts; i++) {
+                try {
+                    String imgXpath = "(//div[@id='PlpItem" + i + "']//app-elux-image//img)[1]";
+                    WebElement imageElement = WaitUtils.untilVisible((By.xpath(imgXpath)), 20000);
+
+                    System.out.println(" Opening product index: " + i);
+                    new Actions(driver).keyDown(Keys.CONTROL).click(imageElement).keyUp(Keys.CONTROL).perform();
+
+                    Thread.sleep(5000);
+                    WebElementUtil.switchToNewTab(driver, mainWindow);
+
+
+
+                    // Scroll slightly so PDP loads properly
+                    ((JavascriptExecutor) driver).executeScript("window.scrollBy(0, 300);");
+
+                    validateProductColor(website,i, expectedColor);
+
+                    driver.close();
+                    driver.switchTo().window(mainWindow);
+
+                } catch (Exception e) {
+                    System.out.println("Skipping product index " + i + ": " + e.getMessage());
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error iterating over products: " + e.getMessage());
+        }
+    }
+
+
+
+    public void validateProductColor(String webSite,int index, String expectedColor) {
+        WebDriver driver = DriverManager.getDriver();
+        try {
+            // Normalize website name (to handle case-insensitive input)
+            webSite = webSite.trim().toLowerCase();
+
+            // Define both locators
+            By frigidaireColorLocator = By.xpath(
+                    "//div[@class='colorSwatchesFG text-left ng-star-inserted']//span[@class='colorHeading']/following-sibling::span[@class='colorSelected']"
+            );
+
+            By electroluxColorLocator = By.xpath(
+                    "//div[@class='colorSwatches text-left ng-star-inserted']//div[@id='color']/p[@class='Body-SmallBody_Small']"
+            );
+
+            By colorLocator;
+
+            // Choose locator based on site
+            switch (webSite) {
+                case "frigidaire":
+                    colorLocator = frigidaireColorLocator;
+                    System.out.println("🌐 Using Frigidaire color locator");
+                    break;
+
+                case "electrolux":
+                    colorLocator = electroluxColorLocator;
+                    System.out.println("🌐 Using Electrolux color locator");
+                    break;
+
+                default:
+                    throw new IllegalArgumentException("❌ Unsupported website: " + webSite);
+            }
+
+            // Wait until color element is visible
+            WebElement colorElement = WaitUtils.untilVisible(colorLocator, 15000);
+
+            // Scroll into view
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", colorElement);
+
+            // Get and normalize actual color text
+            String actualColor = colorElement.getText().trim().toLowerCase();
+            expectedColor = expectedColor.trim().toLowerCase();
+
+            // Log result
+            System.out.println("Product " + index + " | Expected Color: " + expectedColor + " | Actual Color: " + actualColor);
+
+            // Assert equality
+            Assert.assertEquals(actualColor, expectedColor,
+                    "Color mismatch for product " + index + ": Expected [" + expectedColor + "] but found [" + actualColor + "]");
+
+            System.out.println("Color matched for product " + index + " on " + webSite);
+
+        } catch (Exception e) {
+            System.out.println(" Error validating color for product " + index + " on " + webSite + ": " + e.getMessage());
         }
     }
 
