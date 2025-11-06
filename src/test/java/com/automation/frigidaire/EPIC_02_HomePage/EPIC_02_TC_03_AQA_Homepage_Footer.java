@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 
 import java.util.Set;
 
-public class TC_03_AQA_Homepage_Footer extends BaseTest {
+public class EPIC_02_TC_03_AQA_Homepage_Footer extends BaseTest {
 
     private final FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
 

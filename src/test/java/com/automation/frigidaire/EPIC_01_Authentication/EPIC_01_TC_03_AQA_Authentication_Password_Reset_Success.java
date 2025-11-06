@@ -11,7 +11,7 @@ import com.automation.frigidaire.pages.MailDropPageActions;
 import com.automation.frigidaire.utils.ConfigReader;
 import com.automation.frigidaire.utils.ExtentReportManager;
 
-public class TC_03_AQA_Authentication_Password_Reset_Success extends BaseTest {
+public class EPIC_01_TC_03_AQA_Authentication_Password_Reset_Success extends BaseTest {
     FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
     FrigidaireForgotPasswordPageActions forgotPasswordPage = new FrigidaireForgotPasswordPageActions();
     MailDropPageActions mailDropPage = new MailDropPageActions();

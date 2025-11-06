@@ -8,7 +8,7 @@ import com.automation.frigidaire.utils.ExtentReportManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TC_NAGDTOPS_15700_AQA_Frigidaire_PDP_FAQ extends BaseTest {
+public class EPIC_03_TC_NAGDTOPS_15700_AQA_Frigidaire_PDP_FAQ extends BaseTest {
 
     FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
     FAQPage faqPage = new FAQPage();

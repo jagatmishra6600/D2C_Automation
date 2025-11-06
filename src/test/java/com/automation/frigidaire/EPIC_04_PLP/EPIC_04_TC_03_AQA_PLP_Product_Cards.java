@@ -9,7 +9,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
-public class TC_03_AQA_PLP_Product_Cards extends BaseTest {
+public class EPIC_04_TC_03_AQA_PLP_Product_Cards extends BaseTest {
     FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
     ProductListingPageActions productListingPageActions = new ProductListingPageActions();
 

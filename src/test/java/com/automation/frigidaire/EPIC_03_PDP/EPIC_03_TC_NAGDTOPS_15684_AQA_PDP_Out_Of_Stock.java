@@ -8,7 +8,7 @@ import com.automation.frigidaire.utils.ExtentReportManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TC_NAGDTOPS_15684_AQA_PDP_Out_Of_Stock extends BaseTest {
+public class EPIC_03_TC_NAGDTOPS_15684_AQA_PDP_Out_Of_Stock extends BaseTest {
 
     FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
     ProductItemsPageActions productItems = new ProductItemsPageActions();

@@ -10,7 +10,7 @@ import com.automation.frigidaire.utils.WebElementUtil;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TC_02_AQA_Pdppage_Product_Specs extends BaseTest {
+public class EPIC_03_TC_02_AQA_Pdppage_Product_Specs extends BaseTest {
 
     private final FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
     private final FrigidairePdpPageActions pdpPage = new FrigidairePdpPageActions();

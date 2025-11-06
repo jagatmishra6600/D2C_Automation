@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
-public class TC_01_AQA_Homepage_Navigation extends BaseTest {
+public class EPIC_02_TC_01_AQA_Homepage_Navigation extends BaseTest {
     private final FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
 
     @Test(groups = {"regression", "TC_01"}, priority = 1)

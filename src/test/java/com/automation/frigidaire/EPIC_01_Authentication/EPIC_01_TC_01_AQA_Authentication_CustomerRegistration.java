@@ -12,7 +12,7 @@ import com.automation.frigidaire.utils.ConfigReader;
 import com.automation.frigidaire.utils.ExtentReportManager;
 import com.automation.frigidaire.utils.WebElementUtil;
 
-public class TC_01_AQA_Authentication_CustomerRegistration extends BaseTest {
+public class EPIC_01_TC_01_AQA_Authentication_CustomerRegistration extends BaseTest {
     FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
     FrigidaireLoginPageActions loginPage = new FrigidaireLoginPageActions();
     FrigidaireCreateAccountPageActions createAccountPage = new FrigidaireCreateAccountPageActions();

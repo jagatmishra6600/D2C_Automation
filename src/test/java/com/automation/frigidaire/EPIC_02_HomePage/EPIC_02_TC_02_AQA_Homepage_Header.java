@@ -9,7 +9,7 @@ import com.automation.frigidaire.utils.ExtentReportManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TC_02_AQA_Homepage_Header extends BaseTest {
+public class EPIC_02_TC_02_AQA_Homepage_Header extends BaseTest {
 
     FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
     LoginPageActions loginScreen = new LoginPageActions();

@@ -9,7 +9,7 @@ import com.automation.frigidaire.utils.ExtentReportManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TC_02_PLP_Sort_By_for_Air_Care extends BaseTest {
+public class EPIC_04_TC_02_PLP_Sort_By_for_Air_Care extends BaseTest {
 
 
     FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
