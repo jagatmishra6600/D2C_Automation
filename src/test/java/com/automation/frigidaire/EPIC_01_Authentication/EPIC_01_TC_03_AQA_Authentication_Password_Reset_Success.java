@@ -16,11 +16,11 @@ public class EPIC_01_TC_03_AQA_Authentication_Password_Reset_Success extends Bas
     FrigidaireForgotPasswordPageActions forgotPasswordPage = new FrigidaireForgotPasswordPageActions();
     MailDropPageActions mailDropPage = new MailDropPageActions();
     FrigidaireResetPasswordPageActions resetPasswordPage = new FrigidaireResetPasswordPageActions();
-
+    String emailAddress = ConfigReader.getProperty("user.email");
+    String newPassword = ConfigReader.getProperty("user.password");
+    
     @Test(groups = {"smoke", "regression"}, description = "Verify that a user can successfully reset their password through the Frigidaire website and that the corresponding password reset and confirmation emails are received and validated.")
     public void EPIC_01_Authentication_TC_03_VerifyPasswordResetFlowAndEmailNotifications() {
-        var emailAddress = ConfigReader.getProperty("user.email");
-        var newPassword = ConfigReader.getProperty("user.password");
         var expectedMailTitle = "Password Reset";
 
         homePage.navigateToResetPasswordPage().resetPassword(emailAddress);

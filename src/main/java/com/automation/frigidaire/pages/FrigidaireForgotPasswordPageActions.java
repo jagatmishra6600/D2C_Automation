@@ -11,22 +11,21 @@ import com.automation.frigidaire.utils.WebElementUtil;
 public class FrigidaireForgotPasswordPageActions {
 
 	 private final By acceptButtonLocator = By.xpath("//button[@id='onetrust-accept-btn-handler']");
-	 private final By resetPasswordButton = By.cssSelector("input[value='Reset Password']");
-	 private final By emailAddressInput = By.cssSelector("input[placeholder='Email address *']");
-	
-	 private final By checkYourEmailMessage = By.xpath("//h2[normalize-space()='Check your email']/parent::div");
+	 private final By resetPasswordButton = By.xpath("//input[@value='Reset Password' or @value='Send reset link']");
+	 private final By emailAddressInput = By.xpath("//input[@placeholder='Email address *' or @placeholder='jane.doe@company.com *']");	
+	 private final By checkYourEmailMessage = By.xpath("//h2[normalize-space()='Check your email' or normalize-space() = 'Check your inbox']//ancestor::div[contains(@id,'forgot-password-success')]");
 	 
 	 public FrigidaireForgotPasswordPageActions navigateToForgotPasswordPage() {
 		WebElementUtil.navigateTo(ConfigReader.getProperty("app.url")+"forgotPassword");
-        try {
-            WebElement acceptBtn = untilClickable(acceptButtonLocator, 15);
-            if (acceptBtn != null) {
-                acceptBtn.click();
-            }
-        } catch (Exception ignored) {
-            // Cookie banner not present or not interactable; continue
-        }
-        return this;
+       try {
+           WebElement acceptBtn = untilClickable(acceptButtonLocator, 15);
+           if (acceptBtn != null) {
+               acceptBtn.click();
+           }
+       } catch (Exception ignored) {
+           // Cookie banner not present or not interactable; continue
+       }
+       return this;
 	}
 	 
 	 public boolean isResetPasswordButtonDisplayed() {
@@ -46,6 +45,10 @@ public class FrigidaireForgotPasswordPageActions {
 		 return WebElementUtil.isDisplayed(checkYourEmailMessage);	
 	 }
 	 
+	 public boolean isCheckYourInboxMessageDisplayed() {
+		 return WebElementUtil.isDisplayed(checkYourEmailMessage);	
+	 }
+	 
 	 public FrigidaireForgotPasswordPageActions clickResetPasswordButton() {
 		 WebElementUtil.clickElement(resetPasswordButton);
 		 return this;
@@ -58,5 +61,5 @@ public class FrigidaireForgotPasswordPageActions {
 	 
 	
 	
-	 
+	 	 
 }
