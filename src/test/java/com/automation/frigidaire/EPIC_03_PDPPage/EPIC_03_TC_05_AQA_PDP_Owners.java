@@ -4,13 +4,8 @@ import com.automation.frigidaire.pages.FrigidaireHomePageActions;
 import com.automation.BaseTest;
 import com.automation.frigidaire.pages.FeaturesPageActions;
 import com.automation.frigidaire.pages.FrigidairePlpPageActions;
-<<<<<<< HEAD
 import com.automation.utils.ExtentReportManager;
 import com.automation.utils.WebElementUtil;
-=======
-import com.automation.frigidaire.utils.ExtentReportManager;
-import com.automation.frigidaire.utils.WebElementUtil;
->>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
