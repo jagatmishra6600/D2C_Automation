@@ -3,11 +3,19 @@ package com.automation.electrolux.EPIC_04_PLP;
 import com.automation.frigidaire.pages.FrigidaireHomePageActions;
 import com.automation.frigidaire.pages.PLPProductItemsPageActions;
 import com.automation.frigidaire.pages.ProductCategoryPageActions;
+<<<<<<< HEAD
 import com.automation.utils.ExtentReportManager;
 import com.automation.utils.WebElementUtil;
 import org.testng.annotations.Test;
 import com.automation.BaseTest;
 import static com.automation.frigidaire.locators.FrigidaireConstants.electroxWeb;
+=======
+import com.automation.frigidaire.utils.ExtentReportManager;
+import com.automation.frigidaire.utils.WebElementUtil;
+import org.testng.annotations.Test;
+import com.automation.BaseTest;
+import static com.automation.frigidaire.enums.FrigidaireConstants.electroxWeb;
+>>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
 
 public class TC_05_PLP_Electrolux_Filter extends BaseTest {
 

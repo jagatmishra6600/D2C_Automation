@@ -10,12 +10,17 @@ import com.automation.utils.WebElementUtil;
 
 public class FrigidaireForgotPasswordPageActions {
 
+<<<<<<< HEAD
 	private final By acceptButtonLocator = By.xpath("//button[@id='onetrust-accept-btn-handler']");
+=======
+	 private final By acceptButtonLocator = By.xpath("//button[@id='onetrust-accept-btn-handler']");
+>>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
 	 private final By resetPasswordButton = By.xpath("//input[@value='Reset Password' or @value='Send reset link']");
 	 private final By emailAddressInput = By.xpath("//input[@placeholder='Email address *' or @placeholder='jane.doe@company.com *']");	
 	 private final By checkYourEmailMessage = By.xpath("//h2[normalize-space()='Check your email' or normalize-space() = 'Check your inbox']//ancestor::div[contains(@id,'forgot-password-success')]");
 	 
 	 public FrigidaireForgotPasswordPageActions navigateToForgotPasswordPage() {
+<<<<<<< HEAD
 		WebElementUtil.navigateTo(ConfigReader.getAppUrl()+"forgotPassword");
       try {
           WebElement acceptBtn = untilClickable(acceptButtonLocator, 15);
@@ -26,6 +31,18 @@ public class FrigidaireForgotPasswordPageActions {
           // Cookie banner not present or not interactable; continue
       }
       return this;
+=======
+		WebElementUtil.navigateTo(ConfigReader.getProperty("app.url")+"forgotPassword");
+       try {
+           WebElement acceptBtn = untilClickable(acceptButtonLocator, 15);
+           if (acceptBtn != null) {
+               acceptBtn.click();
+           }
+       } catch (Exception ignored) {
+           // Cookie banner not present or not interactable; continue
+       }
+       return this;
+>>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
 	}
 	 
 	 public boolean isResetPasswordButtonDisplayed() {
@@ -61,5 +78,5 @@ public class FrigidaireForgotPasswordPageActions {
 	 
 	
 	
-	 
+	 	 
 }

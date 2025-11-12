@@ -4,12 +4,20 @@ import com.automation.frigidaire.pages.ContactPageActions;
 import com.automation.frigidaire.pages.FrigidaireHomePageActions;
 import com.automation.frigidaire.pages.LoginPageActions;
 import com.automation.BaseTest;
+<<<<<<< HEAD
 import com.automation.utils.ConfigReader;
 import com.automation.utils.ExtentReportManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
+=======
+import com.automation.frigidaire.utils.ConfigReader;
+import com.automation.frigidaire.utils.ExtentReportManager;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+>>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
 public class EPIC_02_TC_02_AQA_Homepage_Header extends BaseTest {
 
     FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();

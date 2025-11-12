@@ -78,8 +78,13 @@ public class FAQPage {
         WebElementUtil.waitForElementToBeClickable(refrigeratorsLocators);
         WebElementUtil.clickElement(refrigeratorsLocators);
 
+<<<<<<< HEAD
         WebElement element = WaitUtils.untilVisible(By.xpath("//input[@name='queryString']"));
         // element.sendKeys("Test");
+=======
+       WebElement element = WaitUtils.untilVisible(By.xpath("//input[@name='queryString']"));
+       // element.sendKeys("Test");
+>>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
         boolean visible = element.isDisplayed();
         System.out.println("Search box visibility: " + visible);
         Assert.assertTrue(visible, "Search box should be visible but it is not. ");

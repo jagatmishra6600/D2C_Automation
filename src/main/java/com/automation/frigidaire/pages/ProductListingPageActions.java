@@ -56,9 +56,15 @@ public class ProductListingPageActions {
                 element.click();
                 System.out.println("Clicked on " + elementName + " — navigating to PDP page.");
 
+<<<<<<< HEAD
                 Thread.sleep(2000);
                 DriverManager.getDriver().navigate().back();
                 System.out.println("Navigated back to PLP page.");
+=======
+                    Thread.sleep(2000);
+                    DriverManager.getDriver().navigate().back();
+                    System.out.println("Navigated back to PLP page.");
+>>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
 
                 Thread.sleep(4000);
             }

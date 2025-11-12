@@ -1,8 +1,13 @@
 package com.automation.electrolux.EPIC_04_PLP;
 
 import com.automation.electrolux.pages.ElectroluxProductCards;
+<<<<<<< HEAD
 import com.automation.utils.DriverManager;
 import com.automation.utils.ExtentReportManager;
+=======
+import com.automation.frigidaire.utils.DriverManager;
+import com.automation.frigidaire.utils.ExtentReportManager;
+>>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
 import org.testng.annotations.Test;
 
 public class TC_01_PLP_Product_Cards  {

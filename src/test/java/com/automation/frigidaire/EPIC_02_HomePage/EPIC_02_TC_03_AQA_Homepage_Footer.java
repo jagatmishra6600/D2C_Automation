@@ -2,9 +2,15 @@ package com.automation.frigidaire.EPIC_02_HomePage;
 
 import com.automation.frigidaire.pages.FrigidaireHomePageActions;
 import com.automation.BaseTest;
+<<<<<<< HEAD
 import com.automation.utils.ExtentReportManager;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
+=======
+import com.automation.frigidaire.utils.ExtentReportManager;
+import com.automation.frigidaire.utils.WaitUtils;
+import com.automation.frigidaire.utils.WebElementUtil;
+>>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -12,13 +18,20 @@ import org.testng.annotations.Test;
 
 import java.util.Set;
 
+<<<<<<< HEAD
 @Test(singleThreaded = true)
+=======
+>>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
 public class EPIC_02_TC_03_AQA_Homepage_Footer extends BaseTest {
 
     private final FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
 
     @Test(groups = {"regression", "TC_03"})
+<<<<<<< HEAD
     public void EPIC_02_HomePage_TC_03_verifyFooterSectionVisible() throws InterruptedException {
+=======
+    public void EPIC_02_HomePage_TC_03_verifyFooterSectionVisible() {
+>>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
         homePage.navigateToHomePage();
         homePage.scrollToFooter();
         Assert.assertTrue(homePage.isFooterDisplayed(), "Footer should be visible.");
@@ -26,7 +39,11 @@ public class EPIC_02_TC_03_AQA_Homepage_Footer extends BaseTest {
     }
 
     @Test(groups = {"regression", "TC_03"})
+<<<<<<< HEAD
     public void EPIC_02_HomePage_TC_03_verifyFooterLinksDisplayed() throws InterruptedException {
+=======
+    public void EPIC_02_HomePage_TC_03_verifyFooterLinksDisplayed() {
+>>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
         homePage.navigateToHomePage();
         homePage.scrollToFooter();
         // Section headings
@@ -68,7 +85,11 @@ public class EPIC_02_TC_03_AQA_Homepage_Footer extends BaseTest {
     }
 
     @Test(groups = {"regression", "TC_03"}, description = "Verify external vs internal link behaviors from footer")
+<<<<<<< HEAD
     public void EPIC_02_HomePage_TC_03_verifyFooterLinksFunctionality() throws InterruptedException {
+=======
+    public void EPIC_02_HomePage_TC_03_verifyFooterLinksFunctionality() {
+>>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
         homePage.navigateToHomePage();
         homePage.scrollToFooter();
         ExtentReportManager.getTest().pass("Navigated to home page and scrolled to footer");
@@ -100,7 +121,11 @@ public class EPIC_02_TC_03_AQA_Homepage_Footer extends BaseTest {
     }
 
     @Test(groups = {"regression", "TC_03"}, description = "Verify Live Chat Icon opens chat interface")
+<<<<<<< HEAD
     public void EPIC_02_HomePage_TC_03_verifyLiveChatIconShowsInterface() throws InterruptedException {
+=======
+    public void EPIC_02_HomePage_TC_03_verifyLiveChatIconShowsInterface() {
+>>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
         homePage.navigateToHomePage();
         homePage.scrollToFooter();
         Assert.assertTrue(homePage.isLiveChatIconDisplayed(), "Live Chat icon should be visible");
@@ -111,7 +136,11 @@ public class EPIC_02_TC_03_AQA_Homepage_Footer extends BaseTest {
     }
 
     @Test(groups = {"regression", "TC_03"}, description = "Verify Left Footer Newsletter content and controls")
+<<<<<<< HEAD
     public void EPIC_02_HomePage_TC_03_verifyLeftNewsletterSection() throws InterruptedException {
+=======
+    public void EPIC_02_HomePage_TC_03_verifyLeftNewsletterSection() {
+>>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
         homePage.navigateToHomePage();
         homePage.scrollToFooter();
         Assert.assertTrue(homePage.isNewsletterLeft_HeadingDisplayed(), "Left newsletter heading visible");
@@ -123,7 +152,11 @@ public class EPIC_02_TC_03_AQA_Homepage_Footer extends BaseTest {
     }
 
     @Test(groups = {"regression", "TC_03"}, description = "Verify Sign Up CTA triggers submission flow")
+<<<<<<< HEAD
     public void EPIC_02_HomePage_TC_03_verifySignUpCTAFunctionality() throws InterruptedException {
+=======
+    public void EPIC_02_HomePage_TC_03_verifySignUpCTAFunctionality() {
+>>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
         homePage.navigateToHomePage();
         homePage.scrollToFooter();
         if (!homePage.isNewsletterLeft_EmailInputDisplayed() || !homePage.isNewsletterLeft_SignUpDisplayed()) {
@@ -137,7 +170,11 @@ public class EPIC_02_TC_03_AQA_Homepage_Footer extends BaseTest {
     }
 
     @Test(groups = {"regression", "TC_03"}, description = "Verify Right Footer Newsletter section visibility")
+<<<<<<< HEAD
     public void EPIC_02_HomePage_TC_03_verifyRightNewsletterSection() throws InterruptedException {
+=======
+    public void EPIC_02_HomePage_TC_03_verifyRightNewsletterSection() {
+>>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
         homePage.navigateToHomePage();
         homePage.scrollToFooter();
         Assert.assertTrue(homePage.isNewsletterRight_HeadingDisplayed(), "Be the first to know");
@@ -148,7 +185,11 @@ public class EPIC_02_TC_03_AQA_Homepage_Footer extends BaseTest {
     }
 
     @Test(groups = {"regression", "TC_03"}, description = "Verify Right Footer Newsletter links navigate to pages")
+<<<<<<< HEAD
     public void EPIC_02_HomePage_TC_03_verifyRightNewsletterLinksNavigation() throws InterruptedException {
+=======
+    public void EPIC_02_HomePage_TC_03_verifyRightNewsletterLinksNavigation() {
+>>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
         homePage.navigateToHomePage();
         homePage.scrollToFooter();
 

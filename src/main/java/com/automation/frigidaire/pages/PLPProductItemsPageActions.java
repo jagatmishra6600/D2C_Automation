@@ -123,6 +123,125 @@ public class PLPProductItemsPageActions {
         WebElementUtil.clickElement(locator);
     }
 
+<<<<<<< HEAD
+=======
+
+    public void checkAndHandleNotifyMeForKitchen(String productName, String email) {
+        boolean inStock = productIsInStock(productName);
+
+        if (inStock) {
+            verifyProductInOutStockAndNotifyForKitchen(email);
+        } else {
+            System.out.println("Product '" + productName + "' is not listed (likely out of stock). Skipping Notify Me tests.");
+        }
+    }
+
+    public void verifyProductInOutStockAndNotifyForKitchen(String email) {
+        try {
+            WebElementUtil.waitForElementToBeVisible(addToCart);
+            String button = WebElementUtil.getText(addToCart).trim();
+
+            if (button.equalsIgnoreCase(FrigidaireConstants.ADD_TO_CART)) {
+                WebElementUtil.waitForElementToBeVisible(earliestDelivery);
+                String actual = WebElementUtil.getText(earliestDelivery).trim();
+                String partialText = FrigidaireConstants.EARLIEST_DATE;
+                String partialTextSecond = FrigidaireConstants.IN_STOCK;
+
+                Assert.assertTrue(actual.contains(partialText) || actual.contains(partialTextSecond), "Text does not contain expected substring.");
+                System.out.println(actual);
+
+            }
+        } catch (Exception e) {
+            // Out-of-stock scenario
+            WebElementUtil.waitForElementToBeVisible(temporarilyLocator);
+            String actual = WebElementUtil.getText(temporarilyLocator).trim();
+            String partialText = FrigidaireConstants.TEMPORARILY;
+            System.out.println(actual);
+            Assert.assertTrue(actual.contains(partialText), "Text does not contain expected substring.");
+            try {
+                // Notify Me functionality
+                WebElement emailField = WebElementUtil.findElement(emailFieldLocator);
+                WebElement notifyBtn = WebElementUtil.findElement(notifyBtnLocator);
+                WaitUtils.untilVisible(emailField);
+                emailField.clear();
+                emailField.sendKeys(email);
+                WaitUtils.untilClickable(notifyBtn);
+                notifyBtn.click();
+
+                WebElementUtil.waitForElementToBeVisible(emailValidationLocator);
+                WebElement getEmailValidationLocator = WebElementUtil.findElement(emailValidationLocator);
+                String actualEmailValidationText = getEmailValidationLocator.getText();
+                System.out.println(actualEmailValidationText);
+
+                Assert.assertTrue(actualEmailValidationText.contains("You’re signed up!"));
+                System.out.println(actualEmailValidationText);
+                System.out.println("Message displayed: ");
+
+            } catch (Exception notifyException) {
+                Assert.fail("Notify Me functionality failed due to exception: " + notifyException.getMessage());
+            }
+        }
+    }
+
+    public void checkAndHandleNotifyMeForAirConditioners(String productName, String email) {
+        boolean inStock = productIsInStock(productName);
+        if (inStock) {
+            verifyProductInOutStockAndNotifyForAirConditioners(email);
+        } else {
+            System.out.println("Product '" + productName + "' is not listed (likely out of stock). Skipping Notify Me tests.");
+        }
+    }
+
+    public void verifyProductInOutStockAndNotifyForAirConditioners(String email) {
+
+        try {
+            WebElementUtil.waitForElementToBeVisible(addToCart);
+            String button = WebElementUtil.getText(addToCart).trim();
+
+            // In-stock scenario
+            if (button.equalsIgnoreCase("Add to cart")) {
+                WebElementUtil.waitForElementToBeVisible(earliestDelivery);
+                String actual = WebElementUtil.getText(earliestDelivery).trim();
+                String partialText = "Earliest delivery:";
+                String partialTextSecond = "In stock";
+
+                Assert.assertTrue(actual.contains(partialText) || actual.contains(partialTextSecond), "Text does not contain expected substring.");
+
+                System.out.println(actual);
+
+            }
+        } catch (Exception e) {
+            // Out-of-stock scenario
+            WebElementUtil.waitForElementToBeVisible(temporarilyLocatorAirCare);
+            String actual = WebElementUtil.getText(temporarilyLocatorAirCare).trim();
+            String partialText = FrigidaireConstants.TEMPORARILY_AIR;
+            System.out.println(actual);
+            Assert.assertTrue(actual.contains(partialText), "Text does not contain expected substring.");
+
+            try {
+                // Notify Me functionality
+                WebDriver driver = DriverManager.getDriver();
+                WebElement emailField = WebElementUtil.findElement(emailFieldLocator);
+                WebElement notifyBtn = WebElementUtil.findElement(notifyBtnLocator);
+                WaitUtils.untilVisible(emailField);
+                emailField.clear();
+                emailField.sendKeys(email);
+                WaitUtils.untilClickable(notifyBtn);
+                notifyBtn.click();
+
+                WebElementUtil.waitForElementToBeVisible(emailValidationLocator);
+                WebElement emailValidationLocatorText = WebElementUtil.findElement(emailValidationLocator);
+                String actualEmailValidationText = emailValidationLocatorText.getText();
+                System.out.println(actualEmailValidationText);
+                Assert.assertTrue(actualEmailValidationText.contains("You’re signed up!"));
+
+            } catch (Exception notifyException) {
+                Assert.fail("Notify Me functionality failed due to exception: " + notifyException.getMessage());
+            }
+        }
+    }
+
+>>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
 
     public WebElement verifyFiltersInPLP(String text) {
         WebDriver driver = DriverManager.getDriver();
@@ -148,6 +267,11 @@ public class PLPProductItemsPageActions {
             WebDriver driver = DriverManager.getDriver();
             WebElementUtil.zoomInOrOut(25);
             String actualElement = WebElementUtil.findElement(productFilterItem(text)).getText();
+<<<<<<< HEAD
+=======
+            System.out.println(actualElement);
+            System.out.println(assertValue);
+>>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
             Assert.assertEquals(actualElement, assertValue);
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -161,7 +285,13 @@ public class PLPProductItemsPageActions {
         try {
             WebDriver driver = DriverManager.getDriver();
             WebElementUtil.zoomInOrOut(100);
+<<<<<<< HEAD
             String actualElement = WebElementUtil.findElement(productSortBy(text)).getText();
+=======
+            System.out.println("scrolled successfully");
+            String actualElement = WebElementUtil.findElement(productSortBy(text)).getText();
+
+>>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
             Assert.assertEquals(actualElement, assertValue);
 
 
@@ -220,6 +350,10 @@ public class PLPProductItemsPageActions {
             List<WebElement> sizeElements = WebElementUtil.findElements(By.xpath(productXpath));
             if (!sizeElements.isEmpty()) {
                 String sizeText = sizeElements.get(0).getText().trim();
+<<<<<<< HEAD
+=======
+                System.out.println("Product " + i + " - Size found: " + sizeText);
+>>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
                 Assert.assertTrue(sizeText.contains(value), "Invalid size found for product " + i + ": " + sizeText);
             } else {
                 Assert.fail("Size element not found for product " + i);
@@ -346,7 +480,11 @@ public class PLPProductItemsPageActions {
         try {
             WebElement filterElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
             Assert.assertTrue(filterElement.isDisplayed(), "The filter '" + filterText + "' is not displayed under selected filters.");
+<<<<<<< HEAD
 
+=======
+            System.out.println(" Filter '" + filterText + "' is visible under selected filters.");
+>>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
         } catch (TimeoutException e) {
             Assert.fail("The filter '" + filterText + "' was not found under selected filters.");
         }
@@ -358,7 +496,11 @@ public class PLPProductItemsPageActions {
         Thread.sleep(6000);
         List<WebElement> filtersAfterReset = WebElementUtil.findElements(By.xpath(xpath));
         Assert.assertTrue(filtersAfterReset.isEmpty(), "The filter '" + filterText + "' should NOT be visible after clicking Reset All.");
+<<<<<<< HEAD
 
+=======
+        System.out.println(" Filter '" + filterText + "' is no longer selected after Reset All.");
+>>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
 
     }
 
@@ -421,7 +563,11 @@ public class PLPProductItemsPageActions {
         //WebElementUtil.clickElementUsingJSE(driver,sortByDropdownBtn);
         WebElementUtil.clickElement(sortByDropdownBtn);
         String selectedSortBy = WebElementUtil.findElement(getSortOptionByText(text)).getText();
+<<<<<<< HEAD
 
+=======
+        System.out.println(selectedSortBy);
+>>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
         Thread.sleep(3000);
         WaitUtils.untilVisible(getSortOptionByText(text), 60);
         Assert.assertEquals(selectedSortBy, assertValue);
@@ -521,8 +667,13 @@ public class PLPProductItemsPageActions {
             // 🔹 Get all product containers
             List<WebElement> products = WebElementUtil.findElements(By.xpath("//div[starts-with(@id,'PlpItem')]"));
             int totalProducts = products.size();
+<<<<<<< HEAD
 
 
+=======
+            System.out.println(" Total products found: " + totalProducts);
+
+>>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
             List<Double> productSavings = new ArrayList<>();
             List<Integer> productIndexes = new ArrayList<>();
 
@@ -852,7 +1003,11 @@ public class PLPProductItemsPageActions {
 
 
             WebElementUtil.scrollAndClickUsingJSE(driver, WebElementUtil.findElement(viewFullSpecsBtn));
+<<<<<<< HEAD
             WebElement specifications = WaitUtils.untilVisible(specificationsHeading, 80000);
+=======
+            WebElement specifications = WaitUtils.untilVisible(specificationsHeading, 30000);
+>>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
             WebElementUtil.mouseHover(driver, specifications);
 
             WebElement featureNameElement = WaitUtils.untilVisible(getFeatureSpecsLocator(featureName), 80000);
@@ -920,7 +1075,11 @@ public class PLPProductItemsPageActions {
                 String parentClass = parent != null ? parent.getAttribute("class") : "";
                 return parentClass.contains("popularFilteSelected");
             });
+<<<<<<< HEAD
             ((JavascriptExecutor) driver).executeScript("window.scrollBy(0, -200);");
+=======
+
+>>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
             Assert.assertTrue(isRed, " Popular filter '" + filterName + "' did not turn red/active after clicking checkbox.");
             System.out.println(" Popular filter '" + filterName + "' successfully turned red (#EA1947).");
 
@@ -1076,11 +1235,21 @@ public class PLPProductItemsPageActions {
     }
 
     public void verifyAcRoomSize(String featureKey, String SpecsName, String SpecsKey, String SpecValue, int lowerBound, int upperBound) throws InterruptedException {
+<<<<<<< HEAD
 
         WebElement imageElement = WaitUtils.untilClickable(getSelectRoomSizeLocator(featureKey),60);
         WebElementUtil.mouseHover(DriverManager.getDriver(), imageElement);
         WebElementUtil.scrollAndClickUsingJSE(DriverManager.getDriver(), WebElementUtil.findElement(getSelectRoomSizeLocator(featureKey)));
 
+=======
+
+        WebElement imageElement = WaitUtils.untilClickable(getSelectRoomSizeLocator(featureKey),60);
+        System.out.println("checked ele");
+        WebElementUtil.mouseHover(DriverManager.getDriver(), imageElement);
+
+        WebElementUtil.scrollAndClickUsingJSE(DriverManager.getDriver(), WebElementUtil.findElement(getSelectRoomSizeLocator(featureKey)));
+        System.out.println("checked click and scroll");
+>>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
         //WebElementUtil.clickElement(getSelectRoomSizeLocator(featureKey));
         Thread.sleep(6000);
         // loadMoreProducts(driver);
@@ -1117,8 +1286,13 @@ public class PLPProductItemsPageActions {
                     // Wait for and click the "Quick Specs" button
                     WaitUtils.untilVisible(quickSpecs, 30000);
                     WebElementUtil.scrollAndClickUsingJSE(driver, WebElementUtil.findElement(quickSpecs));
+<<<<<<< HEAD
 
 
+=======
+                    System.out.println("Quick specs check");
+
+>>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
                     WebElementUtil.scrollAndClickUsingJSE(driver, WebElementUtil.findElement(viewFullSpecsBtn));
                     WebElement specifications = WaitUtils.untilVisible(specificationsHeading, 30000);
 
@@ -1140,7 +1314,11 @@ public class PLPProductItemsPageActions {
 
                         // Validate that the element value is within the range
                         Assert.assertTrue(elementValue >= lowerBound && elementValue <= upperBound, "Value " + elementValue + " is not within the expected range " + SpecValue);
+<<<<<<< HEAD
 
+=======
+                        System.out.println("Feature value for " + SpecsKey + ": " + elementValue + " is within range " + SpecValue);
+>>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
                     } else {
                         System.out.println("Invalid range format: " + SpecValue);
                     }
