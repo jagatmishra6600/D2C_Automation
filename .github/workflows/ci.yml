@@ -33,7 +33,7 @@ jobs:
             ${{ runner.os }}-m2-
 
       - name: Prepare CI config (optional)
-        if: secrets.CI_CONFIG != ''
+        if: ${{ secrets.CI_CONFIG && secrets.CI_CONFIG != '' }}
         run: |
           echo "Creating config.properties from CI secret"
           echo "${{ secrets.CI_CONFIG }}" > ci-config.properties
@@ -50,4 +50,3 @@ jobs:
         with:
           name: surefire-reports
           path: target/surefire-reports || target/*/surefire-reports
-
