@@ -56,19 +56,11 @@ public class FrigidaireCreateAccountPageActions {
 	 }
 	 
 	 public String getCreateAccountSignUpMessage() {
-<<<<<<< HEAD
 		 var brand = ConfigReader.getProperty("brand");
 		 if(brand.equalsIgnoreCase("electrolux")) {
 			 return WebElementUtil.getText(createAccountAccessToExclusiveSignUpMessage);
 		 }
 		 else if(brand.equalsIgnoreCase("frigidaire")) {
-=======
-		 var environment = ConfigReader.getProperty("app.url");
-		 if(environment.contains("electrolux")) {
-			 return WebElementUtil.getText(createAccountAccessToExclusiveSignUpMessage);
-		 }
-		 else if(environment.contains("frigidaire")) {
->>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
 			 return WebElementUtil.getText(createAccountAccessToExclusiveSignUpMessage);
 		 }
 		 else {
@@ -182,10 +174,7 @@ public class FrigidaireCreateAccountPageActions {
 	 }
 	 
 	 public String getVerificationEmailSentMessage() {
-<<<<<<< HEAD
 		 WebElementUtil.isDisplayed(verificationEmailSentMessage);
-=======
->>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
 		 WebElementUtil.scrollIntoView(verificationEmailSentMessage);
 		 return WebElementUtil.getText(verificationEmailSentMessage);
 	 }
@@ -223,7 +212,6 @@ public class FrigidaireCreateAccountPageActions {
 		 return WebElementUtil.isDisplayed(electroluxLinkedAccountMessage);
 	 }
 	 
-<<<<<<< HEAD
 	 public void verifyCreateAccountPageFieldAndMessages() {
 		 Assert.assertTrue(isCreateAnAccountTitleDisplayed(), "Create An Account title is not displayed");
          Assert.assertEquals(getCreateAccountSignUpMessage(),"Get access to exclusive savings, easy order tracking and faster checkout."
@@ -245,7 +233,5 @@ public class FrigidaireCreateAccountPageActions {
          Assert.assertTrue(isHereToHelpBannerPhoneSectionDisplayed(), "Help Banner with Phone Section is not displayed");
          Assert.assertTrue(isHereToHelpBannerChatSectionDisplayed(), "Help Banner with Chat Section is not displayed");
 	 }
-=======
->>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
 	 
 }
