@@ -1,52 +1,179 @@
-name: Java CI
+name: D2C Automation CI
 
 on:
-  push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+  schedule:
+    - cron: "0 */2 * * *" # Every 2 hours
+  workflow_dispatch:
 
 jobs:
-  build-and-test:
+  D2C_Automation_Job:
+    name: Run D2C Automation Suite (Ubuntu)
     runs-on: ubuntu-latest
+    timeout-minutes: 180
 
-    strategy:
-      matrix:
-        java: [ '17' ]
+    env:
+      BRAND: frigidaire
+      HEADLESS: true
+      MAVEN_OPTS: "-Djansi.force=true"
+      CI: true
 
     steps:
+      # ----------------------------------------------------------
+      # Checkout repository
+      # ----------------------------------------------------------
       - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up JDK ${{ matrix.java }}
+      # ----------------------------------------------------------
+      # Deep cleanup
+      # ----------------------------------------------------------
+      - name: Deep cleanup before tests
+        run: |
+          echo "🧹 Deep clean: caches, temp, processes, memory"
+          echo "📊 Memory before clean:"
+          free -h || true
+          echo "🔪 Killing stray processes..."
+          pkill -f chrome || true
+          pkill -f chromedriver || true
+          pkill -f java || true
+          pkill -f Xvfb || true
+          echo "🗑️ Cleaning caches and temp..."
+          rm -rf ~/.m2/repository/* || true
+          sudo rm -rf /tmp/* /var/tmp/* || true
+          sudo apt-get clean || true
+          sudo rm -rf /var/lib/apt/lists/* || true
+          echo "🧠 Dropping kernel page caches..."
+          sudo sync || true
+          sudo sh -c 'echo 3 > /proc/sys/vm/drop_caches' || true
+          echo "📈 Memory after clean:"
+          free -h || true
+
+      # ----------------------------------------------------------
+      # Ensure Chrome available
+      # ----------------------------------------------------------
+      - name: Ensure Chrome is available
+        run: |
+          echo "Checking Chrome installation..."
+          if command -v google-chrome >/dev/null 2>&1; then
+            echo "✅ Chrome already installed: $(google-chrome --version)"
+          else
+            echo "🚀 Installing Google Chrome..."
+            wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+            sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
+            sudo apt-get update
+            sudo apt-get install -y google-chrome-stable
+            echo "Installed Chrome version: $(google-chrome --version)"
+          fi
+          echo "Installing auxiliary libraries..."
+          sudo apt-get install -y libnss3 libgconf-2-4 libxi6 libxss1 libappindicator1 libindicator7 libgbm-dev || true
+
+      # ----------------------------------------------------------
+      # CPU monitor background process
+      # ----------------------------------------------------------
+      - name: Start CPU monitor
+        run: |
+          echo "📦 Installing sysstat for CPU monitoring..."
+          sudo apt-get update
+          sudo apt-get install -y sysstat
+          echo "📈 Starting background CPU monitor..."
+          nohup bash -c 'while true; do UTIL=$(mpstat 1 1 | awk "/Average/ && $3 ~ /all/ {print 100 - $NF}"); echo "📊 CPU Utilization: ${UTIL}% at $(date +%T)"; sleep 60; done' > cpu.log 2>&1 &
+
+      # ----------------------------------------------------------
+      # Heartbeat background process
+      # ----------------------------------------------------------
+      - name: Start Heartbeat Logger
+        run: |
+          echo "💓 Starting background heartbeat..."
+          nohup bash -c 'while true; do echo "💓 Heartbeat: Maven tests running at $(date +%T)"; sleep 60; done' > heartbeat.log 2>&1 &
+
+      # ----------------------------------------------------------
+      # Set up Java 17
+      # ----------------------------------------------------------
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          java-version: ${{ matrix.java }}
-          distribution: temurin
+          java-version: '17'
+          distribution: 'temurin'
 
-      - name: Cache Maven local repository
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-m2-
-
-      - name: Prepare CI config (optional)
-        if: ${{ secrets.CI_CONFIG && secrets.CI_CONFIG != '' }}
+      # ----------------------------------------------------------
+      # Build and Test (Maven)
+      # ----------------------------------------------------------
+      - name: Build and Test (Maven)
         run: |
-          echo "Creating config.properties from CI secret"
-          echo "${{ secrets.CI_CONFIG }}" > ci-config.properties
+          mvn clean test \
+            --batch-mode --no-transfer-progress -T1 \
+            -Dmaven.test.redirectTestOutputToFile=false \
+            -Dbrand=${BRAND} \
+            -Dheadless=${HEADLESS} \
+            -Dwebdriver.chrome.verboseLogging=true \
+            -Dwebdriver.chrome.logfile=${{ github.workspace }}/target/chromedriver.log
 
-      - name: Build and run tests
+      # ----------------------------------------------------------
+      # Stop Heartbeat
+      # ----------------------------------------------------------
+      - name: Stop Heartbeat Logger
+        if: always()
         run: |
-          mvn -B -V -Dvideo.enabled=false -Dconfig.file=${{ github.workspace }}/ci-config.properties test
-        env:
-          MAVEN_OPTS: -Xmx2g
+          echo "🛑 Stopping heartbeat..."
+          pkill -f "while true; do echo" || true
+          echo "✅ Heartbeat stopped at $(date +%T)"
 
-      - name: Archive test results
+      # ----------------------------------------------------------
+      # Upload reports (Surefire, Extent, Logs)
+      # ----------------------------------------------------------
+      - name: Upload Surefire Reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: surefire-reports
-          path: target/surefire-reports || target/*/surefire-reports
+          path: target/surefire-reports
+
+      - name: Upload Extent Reports
+        if: always()
+        run: |
+          if [ -d "${{ github.workspace }}/test-output" ]; then
+            echo "✅ Found Extent Reports folder"
+          else
+            echo "⚠️ No test-output folder found, skipping upload"
+            exit 0
+          fi
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: extent-reports
+          path: test-output
+
+      - name: Upload ChromeDriver Logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: chromedriver-log
+          path: target/chromedriver.log
+
+      - name: Upload CPU Monitor Log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cpu-monitor
+          path: cpu.log
+
+      # ----------------------------------------------------------
+      # Diagnostics
+      # ----------------------------------------------------------
+      - name: Agent Diagnostics
+        if: always()
+        run: |
+          echo "Agent Diagnostics:"
+          uname -a
+          lsb_release -a || true
+          echo ""
+          echo "Disk Usage:"
+          df -h /
+          echo ""
+          echo "Memory Usage:"
+          free -h
+          echo ""
+          echo "CPU Snapshot:"
+          mpstat 1 1 || true
+          top -b -n 1 | head -n 20 || true
