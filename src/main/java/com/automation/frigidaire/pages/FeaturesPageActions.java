@@ -57,13 +57,6 @@ public class FeaturesPageActions {
     private final By deliveryAvailableInputs = By.xpath("//input[@type='radio' and @formcontrolname='selectedSlot' and not(@disabled)]");
     private final By deliveryAvailableLabels = By.xpath("//label[contains(@class,'cx-delivery-label') and not(contains(@class,'disabled'))]");
 
-    // --- Login locators (added) ---
-    private final By loginLink = By.xpath("//a[text()='Log in / Order status ']");
-    private final By loginBtn = By.xpath("//button[text()='Log in']");
-    private final By loginEmailInput = By.xpath("//input[@aria-label='Email address']");
-    private final By loginPasswordInput = By.xpath("//*[@id=\"gigya-login-form\"]/div[2]/div[3]/div[2]/div/input");
-    private final By loginButton = By.xpath("//button[normalize-space()='Log in'] | //input[@type='submit' and (translate(@value,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='log in' or contains(translate(@value,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'log in'))] | //button[@type='submit' and contains(translate(.,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'log in')]");
-
 
     public void searchProduct(String productName) {
         WebElementUtil.waitForElementToBeVisible(searchBox);
@@ -200,7 +193,7 @@ public class FeaturesPageActions {
             By featureItemBy = By.xpath("(//div[contains(@class,'featureList')]//span[contains(@class,'cursor-pointer')])[" + (i + 1) + "]");
             String featureText = WebElementUtil.getExactText(featureItemBy);
             System.out.println("🔹 Clicking feature: " + featureText);
-            WebElementUtil.scrollIntoView(featureItemBy, 200);
+            WebElementUtil.scrollIntoView(featureHeading, 200);
             WebElementUtil.waitForElementToBeClickable(featureItemBy);
             WebElementUtil.clickElement(featureItemBy);
             By sectionHeading = getSectionHeadingLocator(featureText);
