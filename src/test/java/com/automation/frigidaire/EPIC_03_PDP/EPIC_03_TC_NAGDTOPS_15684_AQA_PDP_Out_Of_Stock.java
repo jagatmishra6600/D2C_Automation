@@ -3,13 +3,8 @@ package com.automation.frigidaire.EPIC_03_PDP;
 import com.automation.frigidaire.pages.FrigidaireHomePageActions;
 import com.automation.frigidaire.pages.ProductItemsPageActions;
 import com.automation.BaseTest;
-<<<<<<< HEAD
 import com.automation.utils.DataProviders;
 import com.automation.utils.ExtentReportManager;
-=======
-import com.automation.frigidaire.utils.DataProviders;
-import com.automation.frigidaire.utils.ExtentReportManager;
->>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

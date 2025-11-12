@@ -3,13 +3,9 @@ package com.automation.frigidaire.EPIC_04_PLP;
 import com.automation.BaseTest;
 import com.automation.frigidaire.pages.FrigidaireHomePageActions;
 import com.automation.frigidaire.pages.ProductListingPageActions;
-<<<<<<< HEAD
+
 import com.automation.utils.DriverManager;
 import com.automation.utils.ExtentReportManager;
-=======
-import com.automation.frigidaire.utils.DriverManager;
-import com.automation.frigidaire.utils.ExtentReportManager;
->>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

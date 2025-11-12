@@ -1,19 +1,12 @@
 package com.automation.frigidaire.EPIC_04_PLP;
 
 import com.automation.BaseTest;
-<<<<<<< HEAD
+
 import com.automation.frigidaire.locators.FrigidaireConstants;
 import com.automation.frigidaire.pages.FrigidaireHomePageActions;
 import com.automation.frigidaire.pages.ProductCategoryPageActions;
 import com.automation.frigidaire.pages.PLPProductItemsPageActions;
 import com.automation.utils.ExtentReportManager;
-=======
-import com.automation.frigidaire.enums.FrigidaireConstants;
-import com.automation.frigidaire.pages.FrigidaireHomePageActions;
-import com.automation.frigidaire.pages.ProductCategoryPageActions;
-import com.automation.frigidaire.pages.PLPProductItemsPageActions;
-import com.automation.frigidaire.utils.ExtentReportManager;
->>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

@@ -1,5 +1,6 @@
 package com.automation.frigidaire.utils;
 
+import com.automation.utils.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
