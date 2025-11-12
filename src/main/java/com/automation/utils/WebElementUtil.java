@@ -224,7 +224,8 @@ public class WebElementUtil {
     public static String getExactText(By locator) {
         WebElement element = waitForElementToBeVisible(locator);
         ((JavascriptExecutor) DriverManager.getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
-        return element.getText();
+        return (String) ((JavascriptExecutor) DriverManager.getDriver())
+                .executeScript("return arguments[0].textContent;", element);
     }
 
     public static void waitForAttributeToContain(By locator, String attribute, String value, int timeoutInSeconds) {
