@@ -38,7 +38,7 @@ public class ElectroluxFAQ {
             By faqTab=By.xpath("//div[span[text()=\"FAQs\"]]");
             WebElementUtil.waitForElementToBeClickable(faqTab);
             WebElementUtil.clickElement(faqTab);
-            Thread.sleep(1000);
+            WaitUtils.implicitWait(1);
 
             WebElementUtil.zoomInOrOut(40);
             By faqText = By.xpath("//div[@id=\"faqs\"]/h2");
@@ -71,7 +71,7 @@ public class ElectroluxFAQ {
             WebElement viewLessText= driver.findElement(viewLess);
             String viewLessTexts= viewLessText.getText();
             Assert.assertTrue(viewLessTexts.contains("View less FAQs"));
-            Thread.sleep(5000);
+            WaitUtils.implicitWait(5);
 
             WebElementUtil.waitForElementToBeClickable(viewLess);
             WebElementUtil.clickElement(viewLess);

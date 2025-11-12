@@ -2,46 +2,30 @@ package com.automation.frigidaire.EPIC_02_HomePage;
 
 import com.automation.frigidaire.pages.FrigidaireHomePageActions;
 import com.automation.BaseTest;
-<<<<<<< HEAD
 import com.automation.utils.ExtentReportManager;
 import com.automation.utils.WebElementUtil;
 import com.automation.utils.WaitUtils;
-=======
-import com.automation.frigidaire.utils.ExtentReportManager;
-import com.automation.frigidaire.utils.WebElementUtil;
-import com.automation.frigidaire.utils.WaitUtils;
->>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
-<<<<<<< HEAD
 
 public class EPIC_02_TC_01_AQA_Homepage_Navigation extends BaseTest {
     private final FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
 
     @Test(groups = {"regression", "TC_01"})
-=======
-public class EPIC_02_TC_01_AQA_Homepage_Navigation extends BaseTest {
-    private final FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
-
-    @Test(groups = {"regression", "TC_01"}, priority = 1)
->>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
     public void EPIC_02_HomePage_TC_01_verifyFrigidaireLogoOnHomepage() {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isBrancdLogoLoaded(), "Frigidaire logo is not displayed on homepage");
         ExtentReportManager.getTest().pass("Home page loaded successfully and logo was verified.");
     }
 
-<<<<<<< HEAD
+
     @Test(groups = {"regression", "TC_01"})
     public void EPIC_02_HomePage_TC_01_verifySearchIconAndInterfaceOnHomepage() throws InterruptedException {
-=======
-    @Test(groups = {"regression", "TC_01"}, priority = 2)
-    public void EPIC_02_HomePage_TC_01_verifySearchIconAndInterfaceOnHomepage() {
->>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
+
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isSearchIconDisplayed(), "Search icon is not displayed on homepage");
         Assert.assertTrue(homePage.isSearchInputFieldDisplayed(), "Search input field is not displayed on homepage");
@@ -52,31 +36,19 @@ public class EPIC_02_TC_01_AQA_Homepage_Navigation extends BaseTest {
         ExtentReportManager.getTest().pass("Home page loaded successfully and logo was verified.");
     }
 
-<<<<<<< HEAD
     @Test(groups = {"regression", "TC_01"})
     public void EPIC_02_HomePage_TC_01_verifyShopOurCategoriesSection() {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isShopOurCategoriesSectionDisplayed(), "'Shop Our Categories' section is not displayed");
         List<String> expectedCategories = Arrays.asList("Refrigerators", "Ranges", "Dishwashers", "Wall Ovens","Cooktops",  "Microwaves", "Freezers", "Dehumidifiers", "Air Purifiers", "Air Care", "Small Appliances");
-=======
-    @Test(groups = {"regression", "TC_01"}, priority = 4)
-    public void EPIC_02_HomePage_TC_01_verifyShopOurCategoriesSection() {
-        homePage.navigateToHomePage();
-        Assert.assertTrue(homePage.isShopOurCategoriesSectionDisplayed(), "'Shop Our Categories' section is not displayed");
-        List<String> expectedCategories = Arrays.asList("Refrigerators", "Freezers", "Ranges", "Cooktops", "Wall Ovens", "Dishwashers", "Microwaves", "Window Air Conditioners", "Portable Air Conditioners", "Wall Air Conditioners", "Dehumidifiers", "Air Purifiers");
->>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
         List<String> actualCategories = homePage.getShopOurCategories();
         Assert.assertEquals(actualCategories, expectedCategories, "Categories in 'Shop Our Categories' section do not match");
     }
 
 
-<<<<<<< HEAD
+
     @Test(groups = {"regression", "TC_01"})
     public void EPIC_02_HomePage_TC_01_verifyShopOurTopRatedAppliancesSection() throws InterruptedException {
-=======
-    @Test(groups = {"regression", "TC_01"}, priority = 5)
-    public void EPIC_02_HomePage_TC_01_verifyShopOurTopRatedAppliancesSection() {
->>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isShopOurTopRatedAppliancesSectionDisplayed(), "'Shop our Top-Rated, Most Feature-Packed Appliances' section is not displayed");
         Assert.assertTrue(homePage.areProductCardsElementsDisplayed(), "Elements on product cards are not displayed correctly");
@@ -84,20 +56,7 @@ public class EPIC_02_TC_01_AQA_Homepage_Navigation extends BaseTest {
         Assert.assertTrue(homePage.isUserOnPDP(), "Clicking on product card does not navigate to PDP");
     }
 
-<<<<<<< HEAD
-    @Test(groups = {"regression", "TC_01"})
-    public void EPIC_02_HomePage_TC_01_verifyTermsAndConditionSection() throws InterruptedException {
-        homePage.navigateToHomePage();
-        homePage.scrollToFooter();
-        Assert.assertTrue(homePage.isNewsletterLeft_TermsTextDisplayed(), "Terms and section is not displayed");
-        ExtentReportManager.getTest().pass("Verified terms adn condition Information navigation.");
-    }
 
-    @Test(groups = {"regression", "TC_01"})
-    public void EPIC_02_HomePage_TC_01_verifyL0CategoriesInHeader() {
-        homePage.navigateToHomePage();
-        String[] l0Categories = new String[]{"Kitchen", "Air Care","Small Appliances", "Laundry", "Filters", "Accessories", "Owner Support", "Blog", "Sales"};
-=======
     @Test(groups = {"regression", "TC_01"}, priority = 6)
     public void EPIC_02_HomePage_TC_01_verifyMoreToExploreSection() {
         homePage.navigateToHomePage();
@@ -124,7 +83,7 @@ public class EPIC_02_TC_01_AQA_Homepage_Navigation extends BaseTest {
     }
 
     @Test(groups = {"regression", "TC_01"}, priority = 9)
-    public void EPIC_02_HomePage_TC_01_verifyTermsAndRecallSection() {
+    public void EPIC_02_HomePage_TC_01_verifyTermsAndRecallSection() throws InterruptedException {
         homePage.navigateToHomePage();
         homePage.scrollToFooter();
         Assert.assertTrue(homePage.isNewsletterLeft_TermsTextDisplayed(), "Terms of offer section is not displayed");
@@ -139,56 +98,36 @@ public class EPIC_02_TC_01_AQA_Homepage_Navigation extends BaseTest {
     public void EPIC_02_HomePage_TC_01_verifyL0CategoriesInHeader() {
         homePage.navigateToHomePage();
         String[] l0Categories = new String[]{"Kitchen", "Air Conditioners", "Air Care", "Laundry", "Filters", "Accessories", "Owner Support", "Blog", "Sale"};
->>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
         for (String cat : l0Categories) {
             Assert.assertTrue(homePage.isHeaderCategoryDisplayed(cat), "L0 category not visible: " + cat);
         }
         ExtentReportManager.getTest().pass("Verified L0 header categories are visible: " + String.join(", ", l0Categories));
     }
 
-<<<<<<< HEAD
+
     @Test(groups = {"regression", "TC_01"})
     public void EPIC_02_HomePage_TC_01_TCverifyKitchenL1SubcategoriesVisible() {
         homePage.navigateToHomePage();
         homePage.openHeaderCategory("Kitchen");
         String[] kitchenSubcats = new String[]{"French Door", "Side-by-Side", "Single Door", "Top Freezer", "Bottom Freezer", "Compact", "Wine & Beverage", "Built-in-Dishwashers", "Induction", "Gas", "Electric", "Dual Fuel", "Pizza-Mode Ranges", "Cooktops", "Wall Ovens", "Microwave Combination", "Microwaves", "Kitchen Packages"};
-=======
-    @Test(groups = {"regression", "TC_01"}, priority = 11)
-    public void EPIC_02_HomePage_TC_01_TCverifyKitchenL1SubcategoriesVisible() {
-        homePage.navigateToHomePage();
-        homePage.openHeaderCategory("Kitchen");
-        String[] kitchenSubcats = new String[]{"French Door", "Side-by-Side", "Single Door", "Top Freezer", "Bottom Freezer", "Compact", "Wine & Beverage", "Built-in-Dishwashers", "Induction", "Gas", "Electric", "Dual Fuel", "Explore Pizza", "Cooktops", "Wall Ovens", "Microwave Combination", "Microwaves", "Kitchen Packages", "Retro Mini Fridges", "Espresso Makers", "Air Fryers", "Ice Makers", "Garbage Disposals"};
->>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
         for (String sub : kitchenSubcats) {
             Assert.assertTrue(homePage.isHeaderSubcategoryDisplayed(sub), "Kitchen subcategory not visible: " + sub);
         }
         ExtentReportManager.getTest().pass("Verified Kitchen L1 subcategories are visible (sample set).");
     }
 
-<<<<<<< HEAD
     @Test(groups = {"regression", "TC_01"})
     public void EPIC_02_HomePage_TC_01_verifyAirConditionersL1SubcategoriesVisible() {
         homePage.navigateToHomePage();
         homePage.openHeaderCategory("Air Care");
         String[] acSubcats = new String[]{"Window Mounted AC", "Wall AC", "Portable AC", "Dehumidifiers", "HVAC"};
-=======
-    @Test(groups = {"regression", "TC_01"}, priority = 12)
-    public void EPIC_02_HomePage_TC_01_verifyAirConditionersL1SubcategoriesVisible() {
-        homePage.navigateToHomePage();
-        homePage.openHeaderCategory("Air Conditioners");
-        String[] acSubcats = new String[]{"Window Mounted", "Wall", "Portable", "Dehumidifiers", "HVAC"};
->>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
         for (String sub : acSubcats) {
             Assert.assertTrue(homePage.isHeaderSubcategoryDisplayed(sub), "Air Conditioners subcategory not visible: " + sub);
         }
         ExtentReportManager.getTest().pass("Verified Air Conditioners L1 subcategories are visible.");
     }
 
-<<<<<<< HEAD
     @Test(groups = {"TC_01"})
-=======
-    @Test(groups = {"regression", "TC_01"}, priority = 13)
->>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
     public void EPIC_02_HomePage_TC_01_verifyPromotionalBannersCTAsClickable() {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isMoreToExploreSectionDisplayed(), "'More to Explore from Frigidaire' section is not displayed");

@@ -62,9 +62,7 @@ public class WebElementUtil {
             catch (Exception e) {
                 attempts++;
                 if (attempts >= maxRetries) throw e;
-                try { Thread.sleep(delayMillis); } catch (InterruptedException ie) {
-                    Thread.currentThread().interrupt(); throw new RuntimeException("Retry interrupted", ie);
-                }
+                WaitUtils.implicitWait(delayMillis);
             }
         }
     }
@@ -129,7 +127,7 @@ public class WebElementUtil {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
             wait.until(ExpectedConditions.elementToBeClickable(element));
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
-            Thread.sleep(500);
+            WaitUtils.implicitWait(1);
         } catch (Exception e) { throw new RuntimeException(e); }
     }
 

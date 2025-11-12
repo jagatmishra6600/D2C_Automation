@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<<<<<<< HEAD
 <suite name="Frigidaire Automation Suite" parallel="tests" thread-count="5" verbose="5">
     <parameter name="brand" value="frigidaire"/>
     <test name="EPIC_01_Authentication" preserve-order="false">
         <parameter name="browser" value="chrome"/>
         <parameter name="headless" value="false"/>
-=======
-<suite name="Frigidaire Automation Suite" parallel="methods" thread-count="4">
-    <test name="Frigidaire Regression Tests">
-        <parameter name="browser" value="chrome"/>
->>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
         <groups>
             <run>
                 <include name="regression"/>
@@ -18,7 +12,6 @@
         </groups>
         <packages>
             <package name="com.automation.frigidaire.EPIC_01_Authentication"/>
-<<<<<<< HEAD
         </packages>
     </test>
 
@@ -69,10 +62,6 @@
             </run>
         </groups>
         <packages>
-=======
-            <package name="com.automation.frigidaire.EPIC_02_HomePage"/>
-            <package name="com.automation.frigidaire.EPIC_03_PDP"/>
->>>>>>> c6eb8d75fde6b68139cd97bec28b88f0b427ba85
             <package name="com.automation.frigidaire.EPIC_04_PLP"/>
         </packages>
     </test>

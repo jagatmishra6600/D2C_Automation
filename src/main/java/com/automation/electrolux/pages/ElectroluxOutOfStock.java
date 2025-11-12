@@ -58,12 +58,13 @@ public class ElectroluxOutOfStock {
 
         if (result) {
             WebElementUtil.zoomInOrOut(50);
+            WaitUtils.implicitWait(15);
             WebElement freeDeliveryText = wait.until(ExpectedConditions.visibilityOfElementLocated(earliestDelivery));
             Assert.assertTrue(freeDeliveryText.getText().contains("Earliest delivery"));
             System.out.println("Product is in stock. Verifying Add to Cart...");
-            Thread.sleep(2000);
+            WaitUtils.implicitWait(2);
             driver.navigate().back();
-            Thread.sleep(2000);
+            WaitUtils.implicitWait(2);
         } else {
             checkOutOfStock();
         }

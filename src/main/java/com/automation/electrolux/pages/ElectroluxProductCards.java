@@ -104,11 +104,11 @@ public class ElectroluxProductCards {
                 element.click();
                 System.out.println("Clicked on " + elementName + " — navigating to PDP page.");
 
-                Thread.sleep(2000);
+                WaitUtils.implicitWait(2);
                 driver.navigate().back();
                 System.out.println("Navigated back to PLP page.");
 
-                Thread.sleep(4000);
+                WaitUtils.implicitWait(4);
             }
         } catch (Exception e) {
             System.out.println(elementName + " NOT found or not displayed. Xpath: " + xpath);
@@ -117,7 +117,7 @@ public class ElectroluxProductCards {
 
     public void checkPlpItem(String ProductName) throws InterruptedException {
         WebElementUtil.zoomInOrOut(60);
-        Thread.sleep(5000);
+        WaitUtils.implicitWait(5);
         WebDriver driver = DriverManager.getDriver();
         List<WebElement> items = driver.findElements(By.xpath("//div[starts-with(@id, 'PlpItem')]"));
         for (int i = 0; i < 5; i++) {

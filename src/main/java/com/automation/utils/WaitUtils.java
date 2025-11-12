@@ -2,16 +2,13 @@ package com.automation.utils;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.Arrays;
 
 public final class WaitUtils {
 
     private static final long DEFAULT_TIMEOUT_SECONDS = 10;
-    private static final long DEFAULT_POLL_MILLIS = 500;
 
     private WaitUtils() {
         throw new IllegalStateException("Utility class");
@@ -139,9 +136,7 @@ public final class WaitUtils {
     }
 
     public static boolean untilPageLoadComplete(long timeoutSeconds) {
-        WebDriver driver = DriverManager.getDriver();
-        WebDriverWait w = wait(Duration.ofSeconds(timeoutSeconds));
-        return w.until(d -> {
+        return wait(Duration.ofSeconds(timeoutSeconds)).until(d -> {
             try {
                 return "complete".equals(((JavascriptExecutor) d).executeScript("return document.readyState"));
             } catch (JavascriptException e) {
@@ -150,7 +145,11 @@ public final class WaitUtils {
         });
     }
 
-    public static void sleep(int i) throws InterruptedException {
-        Thread.sleep(i);
+    public static void sleep(int seconds) throws InterruptedException {
+       Thread.sleep(seconds);
+    }
+
+    public static void implicitWait(long seconds) {
+        DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(seconds));
     }
 }
