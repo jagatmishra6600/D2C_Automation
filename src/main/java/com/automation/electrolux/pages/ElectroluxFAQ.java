@@ -1,8 +1,8 @@
 package com.automation.electrolux.pages;
 
-import com.automation.frigidaire.utils.DriverManager;
-import com.automation.frigidaire.utils.WaitUtils;
-import com.automation.frigidaire.utils.WebElementUtil;
+import com.automation.utils.DriverManager;
+import com.automation.utils.WaitUtils;
+import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.*;
 import org.testng.Assert;
 

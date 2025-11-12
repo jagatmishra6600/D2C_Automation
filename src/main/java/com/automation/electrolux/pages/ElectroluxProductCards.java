@@ -1,9 +1,9 @@
 package com.automation.electrolux.pages;
 
-import com.automation.frigidaire.utils.ConfigReader;
-import com.automation.frigidaire.utils.DriverManager;
-import com.automation.frigidaire.utils.WaitUtils;
-import com.automation.frigidaire.utils.WebElementUtil;
+import com.automation.utils.ConfigReader;
+import com.automation.utils.DriverManager;
+import com.automation.utils.WaitUtils;
+import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,7 +15,7 @@ import org.testng.asserts.SoftAssert;
 import java.time.Duration;
 import java.util.List;
 
-import static com.automation.frigidaire.utils.WaitUtils.untilClickable;
+import static com.automation.utils.WaitUtils.untilClickable;
 
 public class ElectroluxProductCards {
 
@@ -30,7 +30,7 @@ public class ElectroluxProductCards {
     }
 
     public ElectroluxProductCards navigateToHomePage() {
-        WebElementUtil.navigateTo(ConfigReader.getProperty("app.url"));
+        WebElementUtil.navigateTo(ConfigReader.getAppUrl());
         try {
             WebElement acceptBtn = untilClickable(acceptButtonLocator, 15);
             if (acceptBtn != null) {

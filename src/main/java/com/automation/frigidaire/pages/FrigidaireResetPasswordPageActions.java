@@ -1,12 +1,12 @@
 package com.automation.frigidaire.pages;
 
-import static com.automation.frigidaire.utils.WaitUtils.untilClickable;
+import static com.automation.utils.WaitUtils.untilClickable;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
-import com.automation.frigidaire.utils.ConfigReader;
-import com.automation.frigidaire.utils.WebElementUtil;
+import com.automation.utils.WebElementUtil;
 
 public class FrigidaireResetPasswordPageActions {
 
@@ -82,11 +82,22 @@ public class FrigidaireResetPasswordPageActions {
 	 }
 	 
 	 public boolean isAllResetPasswordFieldsAndButtonsDisplayed() {
+		 
 		 return isChangePasswordTitleDisplayed() &&
 				 isNewPasswordFieldDisplayed() &&
 				 isConfirmPasswordFieldDisplayed() &&
 				 isNewPasswordShowHideIconDisplayed() &&
 				 isConfirmPasswordShowHideIconDisplayed() &&
 				 isSubmitButtonDisplayed();
+		 
+	 } 
+	 
+	 public void verifyResetPasswordPage() {
+		 Assert.assertTrue(isChangePasswordTitleDisplayed(), "'Change Password' Title is not displayed in reset password page");
+		 Assert.assertTrue(isNewPasswordFieldDisplayed(), "New Password field is not displayed in reset password page");
+		 Assert.assertTrue(isConfirmPasswordFieldDisplayed(), "Confirm Password field is not displayed in reset password page");
+		 Assert.assertTrue(isNewPasswordShowHideIconDisplayed(), "New Password Show/Hide Eye Icon is not displayed in reset password page");
+	     Assert.assertTrue(isConfirmPasswordShowHideIconDisplayed(), "Confirm Password Show/Hide Eye Icon is not displayed in reset password page");
+	     Assert.assertTrue(isSubmitButtonDisplayed(), "Submit Button is not displayed in reset password page");            
 	 } 
 }

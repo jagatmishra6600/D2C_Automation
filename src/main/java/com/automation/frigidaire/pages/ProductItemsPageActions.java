@@ -1,20 +1,18 @@
 package com.automation.frigidaire.pages;
 
-import com.automation.frigidaire.enums.FrigidaireConstants;
-import com.automation.frigidaire.utils.DriverManager;
-import com.automation.frigidaire.utils.WaitUtils;
-import com.automation.frigidaire.utils.WebElementUtil;
+import com.automation.frigidaire.locators.FrigidaireConstants;
+import com.automation.utils.DriverManager;
+import com.automation.utils.WaitUtils;
+import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-import java.util.NoSuchElementException;
-
 public class ProductItemsPageActions {
 
-    WebDriver driver = DriverManager.getDriver();
+    // Do not initialize WebDriver at class instantiation time.
+    // Access DriverManager.getDriver() inside methods after BaseTest @BeforeMethod runs.
 
     private final By emailPopUp = By.xpath("//span[@id=\"close-modal123\"]");
     private final By addToCart = By.xpath("//span[text()=\" Add to cart \" and @class=\"ng-star-inserted\"]");
@@ -61,7 +59,7 @@ public class ProductItemsPageActions {
     public void checkAndHandleNotifyMeForKitchen(String productName, String email) {
         boolean inStock = productIsInStock(productName);
         if (inStock) {
-                verifyProductInOutStockAndNotifyForKitchen(email);
+            verifyProductInOutStockAndNotifyForKitchen(email);
         } else {
             System.out.println("Product '" + productName + "' is not listed (likely out of stock). Skipping Notify Me tests.");
         }
@@ -92,6 +90,7 @@ public class ProductItemsPageActions {
             Assert.assertTrue(actual.contains(partialText), "Text does not contain expected substring.");
             try {
                 // Notify Me functionality
+                WebDriver driver = DriverManager.getDriver();
                 WebElement emailField = driver.findElement(emailFieldLocator);
                 WebElement notifyBtn = driver.findElement(notifyBtnLocator);
                 WaitUtils.untilVisible(emailField);
@@ -101,7 +100,8 @@ public class ProductItemsPageActions {
                 notifyBtn.click();
 
                 WebElementUtil.waitForElementToBeVisible(emailValidationLocator);
-                WebElement getEmailValidationLocator= driver.findElement(emailValidationLocator);
+                WebDriver driver2 = DriverManager.getDriver();
+                WebElement getEmailValidationLocator= driver2.findElement(emailValidationLocator);
                 String actualEmailValidationText= getEmailValidationLocator.getText();
                 System.out.println(actualEmailValidationText);
 
@@ -118,7 +118,7 @@ public class ProductItemsPageActions {
     public void checkAndHandleNotifyMeForAirConditioners(String productName, String email) {
         boolean inStock = productIsInStock(productName);
         if (inStock) {
-                verifyProductInOutStockAndNotifyForAirConditioners(email);
+            verifyProductInOutStockAndNotifyForAirConditioners(email);
         } else {
             System.out.println("Product '" + productName + "' is not listed (likely out of stock). Skipping Notify Me tests.");
         }

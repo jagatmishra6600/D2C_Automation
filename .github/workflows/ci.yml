@@ -1,0 +1,53 @@
+name: Java CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        java: [ '17' ]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK ${{ matrix.java }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ matrix.java }}
+          distribution: temurin
+
+      - name: Cache Maven local repository
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-m2-
+
+      - name: Prepare CI config (optional)
+        if: secrets.CI_CONFIG != ''
+        run: |
+          echo "Creating config.properties from CI secret"
+          echo "${{ secrets.CI_CONFIG }}" > ci-config.properties
+
+      - name: Build and run tests
+        run: |
+          mvn -B -V -Dvideo.enabled=false -Dconfig.file=${{ github.workspace }}/ci-config.properties test
+        env:
+          MAVEN_OPTS: -Xmx2g
+
+      - name: Archive test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports
+          path: target/surefire-reports || target/*/surefire-reports
+

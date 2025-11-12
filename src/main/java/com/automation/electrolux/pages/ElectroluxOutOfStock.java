@@ -1,8 +1,8 @@
 package com.automation.electrolux.pages;
 
-import com.automation.frigidaire.utils.DriverManager;
-import com.automation.frigidaire.utils.WaitUtils;
-import com.automation.frigidaire.utils.WebElementUtil;
+import com.automation.utils.DriverManager;
+import com.automation.utils.WaitUtils;
+import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -25,13 +25,13 @@ public class ElectroluxOutOfStock {
 
     public void clickOnProductMenu(String text) {
         By locator = By.xpath("//h5[normalize-space(text())='" + text + "']");
-        com.automation.frigidaire.utils.WebElementUtil.waitForElementToBeVisible(locator);
-        com.automation.frigidaire.utils.WebElementUtil.clickElement(locator);
+        WebElementUtil.waitForElementToBeVisible(locator);
+        WebElementUtil.clickElement(locator);
     }
 
     public void closeEmailPopUp() {
         WaitUtils.untilVisible(emailPopUp, 60);
-        com.automation.frigidaire.utils.WebElementUtil.clickElement(emailPopUp);
+        WebElementUtil.clickElement(emailPopUp);
     }
 
     public void verifyStockForVacuums(int i) throws InterruptedException {

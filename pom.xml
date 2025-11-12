@@ -105,10 +105,10 @@
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <useSystemClassLoader>false</useSystemClassLoader>
-                    <parallel>methods</parallel>
-                    <threadCount>4</threadCount>
+                    <!-- Enable parallel execution at Surefire level to match TestNG suite parallelism -->
+                    <parallel>tests</parallel>
+                    <threadCount>5</threadCount>
                     <testFailureIgnore>false</testFailureIgnore>
-                    <groups>regression</groups>
                     <suiteXmlFiles>
                         <suiteXmlFile>testng.xml</suiteXmlFile>
                     </suiteXmlFiles>

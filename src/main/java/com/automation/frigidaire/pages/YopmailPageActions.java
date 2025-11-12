@@ -1,13 +1,12 @@
 package com.automation.frigidaire.pages;
 
-import java.time.Duration;
 import java.util.stream.Stream;
 
 import org.openqa.selenium.By;
+import org.testng.Assert;
 
-import com.automation.frigidaire.utils.DriverManager;
-import com.automation.frigidaire.utils.WaitUtils;
-import com.automation.frigidaire.utils.WebElementUtil;
+import com.automation.utils.WaitUtils;
+import com.automation.utils.WebElementUtil;
 
 public class YopmailPageActions {
 
@@ -33,7 +32,7 @@ public class YopmailPageActions {
 		return this;
 	}
 	
-	public YopmailPageActions enterEmailAddress(String emailAddress) {
+	public YopmailPageActions enterEmailAddress(String emailAddress) throws InterruptedException {
 		WaitUtils.sleep(2000);
 		WebElementUtil.sendKeys(emailAddressField, emailAddress);
 		return this;
@@ -48,7 +47,7 @@ public class YopmailPageActions {
 		return WebElementUtil.isDisplayed(inboxEmailIdTitle);
 	}
 	
-	public YopmailPageActions login(String emailAddress) {
+	public YopmailPageActions login(String emailAddress) throws InterruptedException {
 		return navigateToYopmailPage()
 					.enterEmailAddress(emailAddress)
 					.clickCheckInboxButton();
@@ -66,7 +65,7 @@ public class YopmailPageActions {
 		return this;
 	}
 	
-	public YopmailPageActions openFirstMailInInbox(String emailAddress) {
+	public YopmailPageActions openFirstMailInInbox(String emailAddress) throws InterruptedException {
 		return login(emailAddress).clickInboxRefresh().clickFirstMailInInbox();
 	}
 	
@@ -110,6 +109,16 @@ public class YopmailPageActions {
 	            mailFooterYoutubeLink
 	        ).allMatch(WebElementUtil::isDisplayed)
 	    );
+	}
+	
+	public void verifyCustomerRegistrationVerificationMail(String firstName, String lastName) {
+		 Assert.assertTrue(isClickHereToActivateAccountLinkDisplayed(), "Click Here to Activate Your Account link is not present in the mail");
+	     Assert.assertEquals(getMailGreetingMessage(), "Dear " + firstName + " " + lastName + ",", "Greeting Text does not contain First Name and Last Name");
+	     Assert.assertEquals(getMailThanksForCreatingAccountMessage(),"Thanks for creating an account with Frigidaire. Please take a second to make sure we have your correct email address so that we can activate your account now. You can always change your password on your profile."
+	    		 	, "Thank you for creating account body text is not present in the mail");
+	     Assert.assertTrue(getLinkExpiresMessage().contains("This link expires in 24 hours."), "Link expires in 24 hours text is not present in the mail");
+	     Assert.assertEquals(getNotIntendedRecipientMessage(), "If you are not the intended recipient of this email, please delete this message and contact us immediately. Thanks for your help.", "'If you are not intended recipient of this email' text is not present in the mail");
+	     Assert.assertTrue(isMailFooterSocialMediaLinksDisplayed(), "Social Media Links are present in the mail footer section");
 	}
 	
 }

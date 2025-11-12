@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Frigidaire Automation Suite">
+<suite name="Frigidaire Automation Suite" parallel="methods" thread-count="4">
     <test name="Frigidaire Regression Tests">
+        <parameter name="browser" value="chrome"/>
         <groups>
             <run>
                 <include name="regression"/>
             </run>
         </groups>
-        <classes>
-           <!-- <class name="com.automation.frigidaire.tests.EPIC_02_HomePage.FrigidaireWebsiteTest"/> !-->
-            <class name="com.automation.frigidaire.tests.EPIC_03_PDP.TC_NAGDTOPS_15700_AQA_Frigidaire_PDP_FAQ"/>
-            <class name="com.automation.frigidaire.tests.EPIC_03_PDP.TC_NAGDTOPS_15684_AQA_PDP_Out_Of_Stock"/>
-
-</classes>
-</test>
+        <packages>
+            <package name="com.automation.frigidaire"/>
+            <package name="com.automation.electrolux"/>
+        </packages>
+    </test>
 </suite>

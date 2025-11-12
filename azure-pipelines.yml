@@ -1,76 +1,237 @@
+# ==========================================
 # Azure Pipelines configuration for D2C_Automation
-# Runs every 2 hours via scheduled trigger and executes Maven tests.
+# Optimized for Linux agent, live logs, smart heartbeat,
+# safe artifact publishing, and Java 17 compatibility
+# ==========================================
 
 name: $(Date:yyyyMMdd-HHmm)
 
-# Disable CI triggers if you only want scheduled runs.
-# Remove or adjust this section if you also want runs on pushes/PRs.
 trigger: none
 pr: none
 
 schedules:
-- cron: "0 */2 * * *"   # Every 2 hours at minute 0 (UTC)
-  displayName: "Every 2 hours"
-  branches:
-    include:
-    - main
-  always: true
+  - cron: "0 */2 * * *"
+    displayName: "Every 2 hours"
+    branches:
+      include:
+        - D2CAutomation
+    always: true
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
 
 variables:
-  projectDir: 'D2C_Automation'
+  projectDir: '.'
+  system.debug: false  # Clean, minimal logs
+  brand: 'frigidaire'   # Default brand; override in pipeline variables if needed
+  headless: 'true'      # Headless by default for CI
 
-steps:
-- task: JavaToolInstaller@0
-  displayName: 'Use Java 17'
-  inputs:
-    versionSpec: '17'
-    jdkArchitectureOption: 'x64'
-    jdkSourceOption: 'PreInstalled'
+jobs:
+  - job: D2C_Automation_Job
+    displayName: "Run D2C Automation Suite (Ubuntu)"
+    timeoutInMinutes: 180
+    cancelTimeoutInMinutes: 5
 
-- task: Maven@3
-  displayName: 'Build and Test (Maven)'
-  inputs:
-    mavenPomFile: '$(projectDir)/pom.xml'
-    goals: 'clean test'
-    options: '-B'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/*.xml'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.17'
-    jdkArchitectureOption: 'x64'
+    steps:
+      # ----------------------------------------------------------
+      # Checkout repository
+      # ----------------------------------------------------------
+      - checkout: self
+        displayName: 'Checkout repository'
 
-- task: PublishTestResults@2
-  displayName: 'Publish Test Results'
-  inputs:
-    testResultsFormat: 'JUnit'
-    testResultsFiles: '$(projectDir)/target/surefire-reports/TEST-*.xml'
-    testRunTitle: 'Maven Tests'
-    mergeTestResults: true
-  condition: succeededOrFailed()
+      # ----------------------------------------------------------
+      # Deep cleanup to free memory and caches before start
+      # ----------------------------------------------------------
+      - script: |
+          echo "🧹 Deep clean: caches, temp, processes, memory"
+          echo "📊 Memory before clean:"
+          free -h || true
+          echo "🔪 Stopping lingering processes (chrome/chromedriver/java/Xvfb)..."
+          pkill -f chrome || true
+          pkill -f chromedriver || true
+          pkill -f java || true
+          pkill -f Xvfb || true
+          echo "🗑️ Cleaning caches and temp..."
+          rm -rf ~/.m2/repository/* || true
+          sudo rm -rf /tmp/* /var/tmp/* || true
+          sudo apt-get clean || true
+          sudo rm -rf /var/lib/apt/lists/* || true
+          echo "🧠 Dropping kernel page caches..."
+          sudo sync || true
+          sudo sh -c 'echo 3 > /proc/sys/vm/drop_caches' || true
+          echo "📈 Memory after clean:"
+          free -h || true
+          echo "✅ Deep cleanup complete."
+        displayName: 'Deep cleanup before tests'
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Surefire Reports Artifact'
-  inputs:
-    PathtoPublish: '$(projectDir)/target/surefire-reports'
-    ArtifactName: 'surefire-reports'
-    publishLocation: 'Container'
-  condition: succeededOrFailed()
+      # ----------------------------------------------------------
+      # Verify Chrome installation (preinstalled on Ubuntu)
+      # ----------------------------------------------------------
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Extent Report Artifact'
-  inputs:
-    PathtoPublish: '$(projectDir)/test-output'
-    ArtifactName: 'extent-report'
-    publishLocation: 'Container'
-  condition: succeededOrFailed()
+      - script: |
+          echo "Checking Chrome installation..."
+          if command -v google-chrome >/dev/null 2>&1; then
+            echo "✅ Chrome already installed: $(google-chrome --version)"
+          else
+            echo "🚀 Installing Google Chrome..."
+            wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+            sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
+            sudo apt-get update
+            sudo apt-get install -y google-chrome-stable
+            echo "Installed Chrome version: $(google-chrome --version)"
+          fi
+          echo "Installing auxiliary libraries..."
+          sudo apt-get install -y libnss3 libgconf-2-4 libxi6 libxss1 libappindicator1 libindicator7 libgbm-dev || true
+        displayName: 'Ensure Chrome is available'
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Screenshots Artifact'
-  inputs:
-    PathtoPublish: '$(projectDir)/screenshots'
-    ArtifactName: 'screenshots'
-    publishLocation: 'Container'
-  condition: succeededOrFailed()
+      # ----------------------------------------------------------
+      # Install sysstat and start CPU monitor in background
+      # ----------------------------------------------------------
+      - script: |
+          echo "📦 Installing sysstat for CPU monitoring..."
+          sudo apt-get update
+          sudo apt-get install -y sysstat
+          echo "📈 Starting background CPU monitor..."
+          nohup bash -c 'while true; do UTIL=$(mpstat 1 1 | awk "/Average/ && $3 ~ /all/ {print 100 - $NF}"); echo "📊 CPU Utilization: ${UTIL}% at $(date +%T)"; sleep 60; done' > cpu.log 2>&1 &
+        displayName: 'Install sysstat and start CPU monitor'
+
+      # ----------------------------------------------------------
+      # Start Heartbeat (background process)
+      # ----------------------------------------------------------
+      - script: |
+          echo "💓 Starting background heartbeat..."
+          nohup bash -c 'while true; do echo "💓 Heartbeat: Maven tests running at $(date +%T)"; sleep 60; done' > heartbeat.log 2>&1 &
+        displayName: 'Start Heartbeat Logger'
+
+      # ----------------------------------------------------------
+      # Maven build and test with live log streaming
+      # ----------------------------------------------------------
+      - task: Maven@4
+        displayName: 'Build and Test (Maven) with Live Logs'
+        timeoutInMinutes: 180
+        inputs:
+          mavenPomFile: 'pom.xml'
+          goals: 'clean test'
+          options: >-
+            --batch-mode --no-transfer-progress -T1
+            -Dmaven.test.redirectTestOutputToFile=false
+            -Dbrand=$(brand)
+            -Dheadless=$(headless)
+            -Dwebdriver.chrome.verboseLogging=true
+            -Dwebdriver.chrome.logfile=$(System.DefaultWorkingDirectory)/target/chromedriver.log
+          publishJUnitResults: true
+          testResultsFiles: 'target/surefire-reports/*.xml'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: '1.17'
+          jdkArchitectureOption: 'x64'
+        env:
+          MAVEN_OPTS: "-Djansi.force=true"
+          CI: 'true'
+
+      # ----------------------------------------------------------
+      # Stop Heartbeat after Maven completes
+      # ----------------------------------------------------------
+      - script: |
+          echo "🛑 Stopping heartbeat..."
+          pkill -f "while true; do echo" || true
+          echo "✅ Heartbeat stopped at $(date +%T)"
+        displayName: 'Stop Heartbeat Logger'
+        condition: always()
+
+      # ----------------------------------------------------------
+      # Publish Code Coverage Results
+      # ----------------------------------------------------------
+      - task: PublishCodeCoverageResults@2
+        displayName: 'Publish Code Coverage Results'
+        inputs:
+          codeCoverageTool: 'JaCoCo'
+          summaryFileLocation: 'target/site/jacoco/jacoco.xml'
+          pathToSources: '$(System.DefaultWorkingDirectory)'
+          failIfCoverageEmpty: false
+
+      # ----------------------------------------------------------
+      # Check for Extent Reports directory before publishing
+      # ----------------------------------------------------------
+      - script: |
+          if [ -d "$(System.DefaultWorkingDirectory)/test-output" ]; then
+            echo "✅ Extent reports folder found (test-output). Proceeding to publish."
+          else
+            echo "⚠️ Extent reports folder not found. Skipping publish."
+            echo "##vso[task.setvariable variable=skipExtentPublish]true"
+          fi
+        displayName: 'Check Extent Reports Folder'
+
+      # ----------------------------------------------------------
+      # Publish Extent Reports Artifact (only if folder exists)
+      # ----------------------------------------------------------
+      - task: PublishBuildArtifacts@1
+        displayName: 'Publish Extent Reports Artifact'
+        inputs:
+          PathtoPublish: '$(System.DefaultWorkingDirectory)/test-output'
+          ArtifactName: 'extent-reports'
+          publishLocation: 'Container'
+        condition: and(succeededOrFailed(), ne(variables.skipExtentPublish, 'true'))
+
+      # ----------------------------------------------------------
+      # Publish ChromeDriver logs for debugging (if present)
+      # ----------------------------------------------------------
+      - task: PublishBuildArtifacts@1
+        displayName: 'Publish ChromeDriver Logs'
+        inputs:
+          PathtoPublish: '$(System.DefaultWorkingDirectory)/target/chromedriver.log'
+          ArtifactName: 'chromedriver-log'
+          publishLocation: 'Container'
+        condition: succeededOrFailed()
+
+      # ----------------------------------------------------------
+      # Publish CPU Monitor Log
+      # ----------------------------------------------------------
+      - task: PublishBuildArtifacts@1
+        displayName: 'Publish CPU Monitor Log'
+        inputs:
+          PathtoPublish: '$(System.DefaultWorkingDirectory)/cpu.log'
+          ArtifactName: 'cpu-monitor'
+          publishLocation: 'Container'
+        condition: succeededOrFailed()
+
+      # ----------------------------------------------------------
+      # Check for Surefire Reports directory before publishing
+      # ----------------------------------------------------------
+      - script: |
+          if [ -d "$(System.DefaultWorkingDirectory)/target/surefire-reports" ]; then
+            echo "✅ Surefire reports folder found. Proceeding to publish."
+          else
+            echo "⚠️ Surefire reports folder not found. Skipping publish."
+            echo "##vso[task.setvariable variable=skipSurefirePublish]true"
+          fi
+        displayName: 'Check Surefire Reports Folder'
+
+      # ----------------------------------------------------------
+      # Publish Surefire Reports Artifact (only if folder exists)
+      # ----------------------------------------------------------
+      - task: PublishBuildArtifacts@1
+        displayName: 'Publish Surefire Reports Artifact'
+        inputs:
+          PathtoPublish: '$(System.DefaultWorkingDirectory)/target/surefire-reports'
+          ArtifactName: 'surefire-reports'
+          publishLocation: 'Container'
+        condition: and(succeededOrFailed(), ne(variables.skipSurefirePublish, 'true'))
+
+      # ----------------------------------------------------------
+      # Agent Diagnostics (for troubleshooting)
+      # ----------------------------------------------------------
+      - script: |
+          echo "Agent Diagnostics:"
+          uname -a
+          lsb_release -a || true
+          echo ""
+          echo "Disk Usage:"
+          df -h /
+          echo ""
+          echo "Memory Usage:"
+          free -h
+          echo ""
+          echo "CPU Snapshot (mpstat/top):"
+          mpstat 1 1 || true
+          top -b -n 1 | head -n 20 || true
+        displayName: 'Agent Diagnostics'

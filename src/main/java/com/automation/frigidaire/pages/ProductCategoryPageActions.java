@@ -1,7 +1,7 @@
 package com.automation.frigidaire.pages;
 
-import com.automation.frigidaire.utils.WaitUtils;
-import com.automation.frigidaire.utils.WebElementUtil;
+import com.automation.utils.WaitUtils;
+import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 

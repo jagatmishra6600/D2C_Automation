@@ -1,12 +1,13 @@
 package com.automation.frigidaire.pages;
 
-import com.automation.frigidaire.utils.ConfigReader;
-import com.automation.frigidaire.utils.WebElementUtil;
+import com.automation.utils.ConfigReader;
+import com.automation.utils.WaitUtils;
+import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import static com.automation.frigidaire.utils.WaitUtils.untilClickable;
-import static com.automation.frigidaire.utils.WaitUtils.untilVisible;
+import static com.automation.utils.WaitUtils.untilClickable;
+import static com.automation.utils.WaitUtils.untilVisible;
 
 public class LoginPageActions {
 

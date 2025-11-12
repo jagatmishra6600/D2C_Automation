@@ -1,6 +1,6 @@
 package com.automation.frigidaire.pages;
 
-import com.automation.frigidaire.utils.WebElementUtil;
+import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.By;
 
 public class ContactPageActions {

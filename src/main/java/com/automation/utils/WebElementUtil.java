@@ -1,0 +1,313 @@
+package com.automation.utils;
+
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+
+import java.time.Duration;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Set;
+import java.util.function.Supplier;
+
+public class WebElementUtil {
+
+    private WebElementUtil() { throw new IllegalStateException("Utility class"); }
+
+    public static void scrollToElementByXPath(String xpath) {
+        try {
+            WebElement element = DriverManager.getDriver().findElement(By.xpath(xpath));
+            ((JavascriptExecutor) DriverManager.getDriver())
+                    .executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", element);
+        } catch (NoSuchElementException e) {
+            ((JavascriptExecutor) DriverManager.getDriver())
+                    .executeScript("window.scrollTo(0, document.body.scrollHeight);");
+        } catch (Exception e) {
+            System.out.println("Error scrolling to element: " + e.getMessage());
+        }
+    }
+
+    public static void closeNewTabIfOpened(Set<String> beforeHandles) {
+        WebDriver driver = DriverManager.getDriver();
+        Set<String> afterHandles = driver.getWindowHandles();
+        if (afterHandles.size() > beforeHandles.size()) {
+            afterHandles.removeAll(beforeHandles);
+            if (!afterHandles.isEmpty()) {
+                String newHandle = afterHandles.iterator().next();
+                String original = driver.getWindowHandle();
+                driver.switchTo().window(newHandle);
+                driver.close();
+                driver.switchTo().window(original);
+            }
+        }
+    }
+
+    public static void hoverOverElement(By locator) {
+        retryOnFailure(() -> {
+            WebElement element = waitForElementToBeVisible(locator);
+            Actions actions = new Actions(DriverManager.getDriver());
+            actions.moveToElement(element).perform();
+        }, 3, 1000);
+    }
+
+    public static Set<String> getWindowHandles() { return DriverManager.getDriver().getWindowHandles(); }
+    public static String getWindowHandle() { return DriverManager.getDriver().getWindowHandle(); }
+
+    private static void retryOnFailure(Runnable action, int maxRetries, long delayMillis) {
+        int attempts = 0;
+        while (attempts < maxRetries) {
+            try { action.run(); return; }
+            catch (Exception e) {
+                attempts++;
+                if (attempts >= maxRetries) throw e;
+                try { Thread.sleep(delayMillis); } catch (InterruptedException ie) {
+                    Thread.currentThread().interrupt(); throw new RuntimeException("Retry interrupted", ie);
+                }
+            }
+        }
+    }
+
+    public static void clickElement(By locator) { retryOnFailure(() -> waitForElementToBeClickable(locator).click(), 3, 1000); }
+
+    public static void sendKeys(By locator, String text) {
+        retryOnFailure(() -> {
+            WebElement element = waitForElementToBeVisible(locator);
+            element.clear();
+            element.sendKeys(text);
+        }, 3, 1000);
+    }
+
+    public static void zoomInOrOut(int zoomPercentage) {
+        if (zoomPercentage < 10 || zoomPercentage > 200) {
+            System.out.println("Zoom percentage out of range. Provide between 10 and 200.");
+            return;
+        }
+        ((JavascriptExecutor) DriverManager.getDriver())
+                .executeScript("document.body.style.zoom='" + zoomPercentage + "%'");
+    }
+
+    public static String getText(By locator) {
+        final String[] text = new String[1];
+        retryOnFailure(() -> text[0] = waitForElementToBeVisible(locator).getText(), 3, 1000);
+        return text[0];
+    }
+
+    public static boolean isDisplayed(By locator) {
+        try { return waitForElementToBeVisible(locator).isDisplayed(); } catch (Exception e) { return false; }
+    }
+
+    public static WebElement waitForElementToBeVisible(By locator) {
+        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(15));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    public static WebElement waitForElementToBeClickable(By locator) {
+        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(15));
+        return wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
+    public static void hoverElement(By locator) {
+        WebElement element = waitForElementToBeVisible(locator);
+        Actions actions = new Actions(DriverManager.getDriver());
+        actions.moveToElement(element).perform();
+    }
+
+    public static WebElement waitForElementToBeVisible(By locator, int seconds) {
+        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(seconds));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    public static WebElement waitForElementToBeClickable(By locator, int seconds) {
+        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(seconds));
+        return wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
+    public static void scrollToElement(WebDriver driver, WebElement element) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
+            Thread.sleep(500);
+        } catch (Exception e) { throw new RuntimeException(e); }
+    }
+
+    public static WebElement findElement(By locator) {
+        try { return DriverManager.getDriver().findElement(locator); }
+        catch (NoSuchElementException e) { return null; }
+    }
+
+    public static void scrollAndClickUsingJSE(WebDriver driver, WebElement element) {
+        try {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+        } catch (Exception e) { throw new RuntimeException(e); }
+    }
+
+    public static void mouseHover(WebDriver driver, WebElement element) {
+        try { new Actions(driver).moveToElement(element).perform(); }
+        catch (Exception e) { throw new RuntimeException("Failed to hover over element", e); }
+    }
+
+    public static void clickElementUsingJSE(WebDriver driver, By locator) {
+        try {
+            WebElement element = driver.findElement(locator);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+        } catch (Exception e) { throw new RuntimeException(e); }
+    }
+
+    public static void scrollUp(WebDriver driver, int pixels) {
+        try { ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-" + pixels + ")"); }
+        catch (Exception e) { throw new RuntimeException(e); }
+    }
+
+    public static boolean isElementPresented(By locator) {
+        WebDriver driver = DriverManager.getDriver();
+        try {
+            List<WebElement> elements = driver.findElements(locator);
+            return !elements.isEmpty();
+        } catch (Exception e) {
+            System.err.println("Error while checking element presence: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public static void switchToNewTab(WebDriver driver, String mainWindow) {
+        for (String handle : driver.getWindowHandles()) {
+            if (!handle.equals(mainWindow)) { driver.switchTo().window(handle); break; }
+        }
+    }
+
+    public static boolean isElementPresent(By locator){
+        WebDriver driver = DriverManager.getDriver();
+        try { driver.findElement(locator); return true; }
+        catch (NoSuchElementException e) { return false; }
+    }
+
+    public static void switchToFrame(String frameId) { DriverManager.getDriver().switchTo().frame(frameId); }
+    public static void switchToDefaultContent() { DriverManager.getDriver().switchTo().defaultContent(); }
+
+    public static int getRandomNumber(int range) { return (int) (Math.random() * range); }
+
+    public static <T> T performInFrame(String frameNameOrId, Supplier<T> action) {
+        WebDriver driver = DriverManager.getDriver();
+        try { driver.switchTo().frame(frameNameOrId); return action.get(); }
+        finally { driver.switchTo().defaultContent(); }
+    }
+
+    public static WebElement scrollIntoView(By locator) {
+        WebElement element = DriverManager.getDriver().findElement(locator);
+        ((JavascriptExecutor) DriverManager.getDriver()).executeScript("arguments[0].scrollIntoView({behavior: 'instant', block: 'center', inline: 'nearest'});", element);
+        return element;
+    }
+
+    public static void scrollIntoView(By locator, int stickyHeaderHeight) {
+        WebElement element = DriverManager.getDriver().findElement(locator);
+        ((JavascriptExecutor) DriverManager.getDriver()).executeScript(
+                "var rect = arguments[0].getBoundingClientRect(); window.scrollTo(0, window.pageYOffset + rect.top - " + stickyHeaderHeight + ");",
+                element);
+    }
+
+    public static List<WebElement> findElements(By locator) {
+        if (DriverManager.getDriver() == null) {
+            throw new IllegalStateException("WebDriver is not initialized. Ensure DriverManager.getDriver() is called before using findElements.");
+        }
+        List<WebElement> elements = DriverManager.getDriver().findElements(locator);
+        if (elements.isEmpty()) {
+            System.err.println("No elements found for locator: " + locator);
+        }
+        return elements;
+    }
+
+    public static String getExactText(By locator) {
+        WebElement element = waitForElementToBeVisible(locator);
+        ((JavascriptExecutor) DriverManager.getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
+        return element.getText();
+    }
+
+    public static void waitForAttributeToContain(By locator, String attribute, String value, int timeoutInSeconds) {
+        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(timeoutInSeconds));
+        wait.until(ExpectedConditions.attributeContains(locator, attribute, value));
+    }
+
+    public static <T> T performInFrame(By frameElementLocator, Supplier<T> action) {
+        WebDriver driver = DriverManager.getDriver();
+        WebElement frameElement = driver.findElement(frameElementLocator);
+        try { driver.switchTo().frame(frameElement); return action.get(); }
+        finally { driver.switchTo().defaultContent(); }
+    }
+
+    public static void switchToFrame(By frameElementLocator) {
+        WebDriver driver = DriverManager.getDriver();
+        WebElement frameElement = driver.findElement(frameElementLocator);
+        driver.switchTo().frame(frameElement);
+    }
+
+    public static void switchToLatestTabAndClosePrevious() {
+        WebDriver driver = DriverManager.getDriver();
+        String currentHandle = driver.getWindowHandle();
+        Set<String> handles = driver.getWindowHandles();
+        if (handles.size() > 1) {
+            for (String handle : handles) { if (!handle.equals(currentHandle)) { driver.switchTo().window(handle); break; } }
+            driver.close();
+            driver.switchTo().window(currentHandle);
+        }
+    }
+
+    public static void ctrlClick(By locator) {
+        WebElement element = DriverManager.getDriver().findElement(locator);
+        new Actions(DriverManager.getDriver())
+                .keyDown(Keys.CONTROL)
+                .click(element)
+                .keyUp(Keys.CONTROL)
+                .perform();
+    }
+
+    public static WebElement findElementIfPresent(By locator) {
+        try {
+            List<WebElement> elements = DriverManager.getDriver().findElements(locator);
+            if (!elements.isEmpty()) { return elements.get(0); }
+        } catch (Exception ignored) {}
+        return null;
+    }
+
+    public static void navigateTo(String url) { DriverManager.getDriver().navigate().to(url); }
+    public static String getPageTitle() { return DriverManager.getDriver().getTitle(); }
+    public static String getCurrentUrl() { return DriverManager.getDriver().getCurrentUrl(); }
+    
+    /**
+     * Performs Control + Click action on a Element to open it into a new Tab using Java Script
+     * @param By locator of the Link Element we want to click and open in new Tab
+     */
+    public static void ctrlClickWithJS(By locator) {
+        retryOnFailure(() -> {
+            var element = DriverManager.getDriver().findElement(locator);
+            scrollIntoView(locator);
+            JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
+        
+            String href = element.getAttribute("href");
+            System.out.println(href);
+
+            if (href != null && !href.isEmpty()) {
+            	js.executeScript("window.open(new URL(arguments[0], window.location.href).href, '_blank');", href);
+            } else {
+                js.executeScript("arguments[0].click();", element);
+            }
+        }, 3, 1000);
+    }
+    
+    public static void openLinkInNewTab(By locator) {
+        scrollIntoView(locator);
+        var element = DriverManager.getDriver().findElement(locator);
+
+        String href = element.getAttribute("href");
+        if (href != null && !href.isBlank()) {
+            WebDriver newTab = DriverManager.getDriver().switchTo().newWindow(WindowType.TAB);
+            newTab.get(href); 
+        } else {
+            ((JavascriptExecutor) DriverManager.getDriver()).executeScript("arguments[0].click();", element);
+        }
+    }
+}

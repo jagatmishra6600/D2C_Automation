@@ -1,19 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Frigidaire Automation Suite">
-    <test name="Frigidaire Regression Tests">
+<suite name="Frigidaire Automation Suite" parallel="tests" thread-count="5" verbose="5">
+    <parameter name="brand" value="frigidaire"/>
+    <test name="EPIC_01_Authentication" preserve-order="false">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="headless" value="false"/>
         <groups>
             <run>
                 <include name="regression"/>
-                <include name="smoke"/>
             </run>
         </groups>
-        <classes>
-            <class name="com.automation.frigidaire.tests.EPIC_04_PLP.TC_04_PLP_Filters_AirCare"/>
-            <class name="com.automation.frigidaire.tests.EPIC_04_PLP.TC_05_PLP_Sort_By_for_Air_Care"/>
-            <class name="com.automation.frigidaire.tests.EPIC_04_PLP.TC_NAGDTOPS_15689_PLP_Filters"/>
-            <class name="com.automation.frigidaire.tests.EPIC_04_PLP.TC_NAGDTOPS_15695_PLP_SORT_BY"/>
+        <packages>
+            <package name="com.automation.frigidaire.EPIC_01_Authentication"/>
+        </packages>
+    </test>
 
-        </classes>
+    <test name="EPIC_02_HomePage" preserve-order="false">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="headless" value="false"/>
+        <groups>
+            <run>
+                <include name="regression"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="com.automation.frigidaire.EPIC_02_HomePage"/>
+        </packages>
+    </test>
+
+    <test name="EPIC_03_PDP" preserve-order="false">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="headless" value="false"/>
+        <groups>
+            <run>
+                <include name="regression"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="com.automation.frigidaire.EPIC_03_PDP"/>
+        </packages>
+    </test>
+
+    <test name="EPIC_03_PDPPage" preserve-order="false">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="headless" value="false"/>
+        <groups>
+            <run>
+                <include name="regression"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="com.automation.frigidaire.EPIC_03_PDPPage"/>
+        </packages>
+    </test>
+
+    <test name="EPIC_04_PLP" preserve-order="false">
+        <parameter name="browser" value="chrome"/>
+        <groups>
+            <run>
+                <include name="regression"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="com.automation.frigidaire.EPIC_04_PLP"/>
+        </packages>
     </test>
 </suite>

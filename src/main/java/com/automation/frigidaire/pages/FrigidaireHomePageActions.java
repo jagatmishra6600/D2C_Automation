@@ -1,10 +1,10 @@
 package com.automation.frigidaire.pages;
 
-import com.automation.frigidaire.utils.ConfigReader;
-import com.automation.frigidaire.utils.DriverManager;
-import com.automation.frigidaire.utils.WaitUtils;
-import com.automation.frigidaire.utils.WaitUtils;
-import com.automation.frigidaire.utils.WebElementUtil;
+import com.automation.utils.ConfigReader;
+import com.automation.utils.DriverManager;
+import com.automation.utils.WaitUtils;
+import com.automation.utils.WaitUtils;
+import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
-import static com.automation.frigidaire.utils.WaitUtils.untilClickable;
+import static com.automation.utils.WaitUtils.untilClickable;
 
 public class FrigidaireHomePageActions {
 
@@ -20,7 +20,7 @@ public class FrigidaireHomePageActions {
     //************************** Main Menu Bar Locators **************************
     private final By mainMenu_FrigidaireSite = By.cssSelector("img[alt='Frigidaire Brand Site']");
     private final By mainMenu_ElectroluxSite = By.cssSelector("img[alt='Electrolux Brand Site']");
-    private final By mainMenu_Login_OrderStatus = By.xpath("//*[@id=\"dropdown\"]/a/text()");
+    private final By mainMenu_Login_OrderStatus = By.xpath("(//div[contains(.,'Log in / Order status')])[1]");
     private final By mainMenu_Contact = By.xpath("//a[contains(text(),'Contact us')]");
     private final By mainMenu_DeliverTo = By.xpath("//div[@class='pdp-hide-header-visible']//span[@class='Set-delivery-area']");
     private final By mainMenu_Cart = By.xpath("//img[@alt='Your Shopping Cart']");
@@ -52,7 +52,7 @@ public class FrigidaireHomePageActions {
     //************************** Body Locators ************************************
     private By body_shopOurCategoriesHeading = By.xpath("//h2[contains(text(), 'Shop Our Categories')]");
     private By body_category_item = By.xpath("//*[@class=\"row six_items standard-category-list\"]/div/div[2]/cx-generic-link/a");
-    private By body_ShopOurTopRatedAppliancesSection = By.xpath("//h2[contains(text(), 'Shop our Top-Rated, Most Feature-Packed Appliances')]");
+    private By body_ShopOurTopRatedAppliancesSection = By.xpath("//h2[contains(text(), 'Shop our Best-Selling Appliances')]");
     private By body_ShopOurTopRatedAppliancesCard = By.xpath("//*[@class=\"carousel-tracks\"]");
     private By body_firstProductCard = By.xpath("//*[@class=\"carousel-tracks\"]/div[1]");
     private By body_firstProductSku = By.xpath("(//*[@class=\"prodSku\"]/span)[1]");
@@ -183,7 +183,7 @@ public class FrigidaireHomePageActions {
     private final By frenchDoor = By.xpath("//h5[contains(text(), 'French Door')]");
     // Footer helpers
     private final By cookie_AcceptButton = By.id("onetrust-accept-btn-handler");
-    public void scrollToFooter() {
+    public void scrollToFooter() throws InterruptedException {
         WaitUtils.waitForPageLoad();
         acceptCookiesIfPresent();
         int attempts = 0;
@@ -234,7 +234,7 @@ public class FrigidaireHomePageActions {
         } catch (Exception ignored) {}
     }
 
-    public void clickFooter_ContactUs(){
+    public void clickFooter_ContactUs() throws InterruptedException {
         scrollToFooter();
         acceptCookiesIfPresent();
         WebElementUtil.scrollIntoView(footer_Link_ContactUs, 150);
@@ -278,13 +278,13 @@ public class FrigidaireHomePageActions {
 
     // Not in USA? and Live Chat
     public boolean isFooterNotInUSADisplayed() { return WebElementUtil.isDisplayed(footer_NotInUSA); }
-    public boolean isLiveChatIconDisplayed() {
+    public boolean isLiveChatIconDisplayed() throws InterruptedException {
         scrollToFooter();
         try { WaitUtils.untilPresent(footer_LiveChatIcon, 10); } catch (Exception ignored) {}
         try { WaitUtils.untilPresent(chatIcon_Global, 10); } catch (Exception ignored) {}
         return WebElementUtil.isDisplayed(footer_LiveChatIcon) || WebElementUtil.isDisplayed(chatIcon_Global);
     }
-    public void clickLiveChatIcon() {
+    public void clickLiveChatIcon() throws InterruptedException {
         scrollToFooter();
         suppressObstructingOverlays();
         if (WebElementUtil.isDisplayed(footer_LiveChatIcon)) {
@@ -299,7 +299,7 @@ public class FrigidaireHomePageActions {
 
 
     public FrigidaireHomePageActions navigateToHomePage() {
-        WebElementUtil.navigateTo(ConfigReader.getProperty("app.url"));
+        WebElementUtil.navigateTo(ConfigReader.getAppUrl());
         try {
             WebElement acceptBtn = untilClickable(acceptButtonLocator, 15);
             if (acceptBtn != null) {
@@ -375,27 +375,27 @@ public class FrigidaireHomePageActions {
     //Methods for Header
     public boolean validateInvalidZIPWhenBlank() {
         WebElementUtil.clickElement(mainMenu_DeliverTo);
-        WebElement zipInput = WebElementUtil.waitForElementToBeVisible(By.id("zipCodeInput"));
+        WebElement zipInput = WebElementUtil.waitForElementToBeVisible(By.xpath("//*[@id=\"ngb-popover-1\"]/div[2]/div/form/div/div/input"));
         zipInput.clear();
-        WebElement errorMessage = WebElementUtil.waitForElementToBeVisible(By.id("zipCodeError"));
+        WebElement errorMessage = WebElementUtil.waitForElementToBeVisible(By.xpath("//*[@id=\"ngb-popover-1\"]/div[2]/div/form/div[2]"));
         return errorMessage.getText().contains("Invalid Zip Code");
     }
 
     public boolean validateInvalidZIPWhenLessThan5Digits() {
         WebElementUtil.clickElement(mainMenu_DeliverTo);
-        WebElement zipInput = WebElementUtil.waitForElementToBeVisible(By.id("zipCodeInput"));
+        WebElement zipInput = WebElementUtil.waitForElementToBeVisible(By.xpath("//*[@id=\"ngb-popover-1\"]/div[2]/div/form/div/div/input"));
         zipInput.clear();
         zipInput.sendKeys("123");
-        WebElement errorMessage = WebElementUtil.waitForElementToBeVisible(By.id("zipCodeError"));
+        WebElement errorMessage = WebElementUtil.waitForElementToBeVisible(By.xpath("//*[@id=\"ngb-popover-1\"]/div[2]/div/form/div[2]"));
         return errorMessage.getText().contains("Invalid Zip Code");
     }
 
     public void enterZipCode(String zip) {
         WebElementUtil.clickElement(mainMenu_DeliverTo);
-        WebElement zipInput = WebElementUtil.waitForElementToBeVisible(By.id("zipCodeInput"));
+        WebElement zipInput = WebElementUtil.waitForElementToBeVisible(By.xpath("//*[@id=\"ngb-popover-1\"]/div[2]/div/form/div/div/input"));
         zipInput.clear();
         zipInput.sendKeys(zip);
-        WebElementUtil.clickElement(By.id("setZipCodeButton"));
+        WebElementUtil.clickElement(By.cssSelector("#deliverToRibbonZipCodeButton"));
     }
 
     public boolean isMiniCartCountUpdated() {
@@ -425,7 +425,8 @@ public class FrigidaireHomePageActions {
     }
 
     public FrigidaireLoginPageActions navigateToLoginPage() {
-    	navigateToHomePage().clickLoginOrderStatusLink();
+    	navigateToHomePage();
+    	WebElementUtil.hoverElement(mainMenu_Login_OrderStatus);
     	WebElementUtil.clickElement(mainMenu_Login_OrderStatus_Login);
     	return new FrigidaireLoginPageActions();
     }
@@ -444,14 +445,14 @@ public class FrigidaireHomePageActions {
 
 
     public FrigidaireForgotPasswordPageActions navigateToResetPasswordPage() {
-    	return navigateToHomePage().navigateToLoginPage().clickForgotPasswordLink();
+    	return navigateToLoginPage().clickForgotPasswordLink();
     }
 
     public boolean isSearchIconDisplayed() {
         return WebElementUtil.isDisplayed(mainMenu_searchInput);
     }
 
-    public void clickSearchInputAndEnterText(String searchText) {
+    public void clickSearchInputAndEnterText(String searchText) throws InterruptedException {
         WebElementUtil.clickElement(mainMenu_searchInput);
         WebElement searchInputElement = WebElementUtil.waitForElementToBeVisible(mainMenu_searchInput);
         searchInputElement.clear();
@@ -531,7 +532,7 @@ public class FrigidaireHomePageActions {
         return WebElementUtil.waitForElementToBeVisible(body_ShopOurTopRatedAppliancesCard).isDisplayed() ;
     }
 
-    public void clickFirstProductCard() {
+    public void clickFirstProductCard() throws InterruptedException {
         try {
             WaitUtils.sleep(1000);
             WebElementUtil.scrollIntoView(body_firstProductCard);
@@ -639,7 +640,7 @@ public boolean isContactSupportSectionVisible(){
             || WebElementUtil.isDisplayed(footer_ServiceAndRepair)
             || WebElementUtil.isDisplayed(footer_FAQs);
 }
-public boolean isAboutElectroluxSectionVisible(){
+public boolean isAboutElectroluxSectionVisible() throws InterruptedException {
     scrollToFooter();
     try { WaitUtils.untilPresent(footer_Heading_AboutElectrolux, 10); } catch (Exception ignored) {}
     return WebElementUtil.isDisplayed(footer_Heading_AboutElectrolux)
@@ -676,7 +677,7 @@ public boolean isFooter_ShippingDeliveryInstallDisplayed(){ return WebElementUti
 public boolean isFooter_FinancingDisplayed(){ return WebElementUtil.isDisplayed(footer_Link_Financing); }
 public boolean isFooter_IcemakerRecallDisplayed(){ return WebElementUtil.isDisplayed(footer_Link_IcemakerRecall); }
 
-public void clickFooter_IcemakerRecall(){
+public void clickFooter_IcemakerRecall() throws InterruptedException {
     scrollToFooter();
     suppressObstructingOverlays();
     WebElementUtil.scrollIntoView(footer_Link_IcemakerRecall, 150);
