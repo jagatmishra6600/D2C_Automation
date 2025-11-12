@@ -279,7 +279,7 @@ public class WebElementUtil {
     
     /**
      * Performs Control + Click action on a Element to open it into a new Tab using Java Script
-     * @param By locator of the Link Element we want to click and open in new Tab
+     * @param -By locator of the Link Element we want to click and open in new Tab
      */
     public static void ctrlClickWithJS(By locator) {
         retryOnFailure(() -> {
@@ -308,6 +308,15 @@ public class WebElementUtil {
             newTab.get(href); 
         } else {
             ((JavascriptExecutor) DriverManager.getDriver()).executeScript("arguments[0].click();", element);
+        }
+    }
+
+
+    public static void scrollByPixels(WebDriver driver, int x, int y) {
+        try {
+            ((JavascriptExecutor) driver).executeScript("window.scrollBy(arguments[0], arguments[1]);", x, y);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to scroll by pixels.", e);
         }
     }
 }
