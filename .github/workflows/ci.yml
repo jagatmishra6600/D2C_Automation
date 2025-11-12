@@ -22,7 +22,7 @@ jobs:
       # Checkout repository
       # ----------------------------------------------------------
       - name: Checkout repository
-      - uses: actions/checkout@v4
+        uses: actions/checkout@v4
 
       # ----------------------------------------------------------
       # Deep cleanup
@@ -138,8 +138,10 @@ jobs:
             exit 0
           fi
         shell: bash
-      - uses: actions/upload-artifact@v4
-        if: success()
+
+      - name: Upload Extent Reports Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
           name: extent-reports
           path: test-output
