@@ -106,7 +106,6 @@ jobs:
             --batch-mode --no-transfer-progress -T1 \
             -Dmaven.test.redirectTestOutputToFile=false \
             -Dbrand=${BRAND} \
-            -Dheadless=${HEADLESS} \
             -Dwebdriver.chrome.verboseLogging=true \
             -Dwebdriver.chrome.logfile=${{ github.workspace }}/target/chromedriver.log
 
