@@ -8,7 +8,7 @@ import com.automation.frigidaire.pages.FrigidaireHomePageActions;
 import com.automation.utils.ConfigReader;
 import com.automation.utils.ExtentReportManager;
 
-public class TC_02_AQA_Authentication_LoginSuccess extends BaseTest{
+public class EPIC_01_TC_02_AQA_Authentication_LoginSuccess extends BaseTest{
 	 FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
 	 String emailAddress = ConfigReader.getProperty("user.email");
  	 String password = ConfigReader.getProperty("user.password");
