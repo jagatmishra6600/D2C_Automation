@@ -143,9 +143,7 @@ public class FrigidaireRefrigeratorPage extends Frigidaire_Refrigerator {
        WebElementUtil.clickElement(refrigeratorimage);
 
     }
-    public void clickOnrefrigeratorproducttext() {
-       WebElementUtil.clickElement(refrigeratorproducttext);
-   }
+    
     public boolean verifyPDProductRating() {
         WebElementUtil.isDisplayed(PDPproductRating);
         return true;
