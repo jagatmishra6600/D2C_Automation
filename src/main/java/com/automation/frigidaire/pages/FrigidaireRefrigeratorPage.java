@@ -8,7 +8,6 @@ public class FrigidaireRefrigeratorPage extends Frigidaire_Refrigerator {
 
     public void clickOnKitchen() {
         WebElementUtil.clickElement(kitchen);
-
     }
 
     public void clickOnRefrigeratorSubcategory() {
@@ -143,7 +142,7 @@ public class FrigidaireRefrigeratorPage extends Frigidaire_Refrigerator {
        WebElementUtil.clickElement(refrigeratorimage);
 
     }
-    
+
     public boolean verifyPDProductRating() {
         WebElementUtil.isDisplayed(PDPproductRating);
         return true;
