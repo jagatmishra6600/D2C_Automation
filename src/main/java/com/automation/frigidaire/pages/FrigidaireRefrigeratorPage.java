@@ -37,14 +37,11 @@ public class FrigidaireRefrigeratorPage {
     private final By frigidaireproffessional = By.xpath("//*[@src=\"/assets/icons/frg-icons-Frigidaire Professional.svg\"]");
     private final By totalRatings = By.xpath("//*[text()='(2962)']");
     private final By Refrigeratorproductname = By.xpath("//a[@href=\"/en/p/kitchen/refrigerators/french-door-refrigerators/GRFC2353AF\" and @class = 'text-decoration-none']");
-   // private final By productfeatureAvancedcrisper = By.xpath("");
-  //  private final By productfeaturedualicemaker = By.xpath("");
     private final By Refproductprices = By.xpath("//*[text()='$2,098']");
-
     private final By morefrenchdooroptions = By.xpath("//div[@class='explore']/a");
     private final By refrigeratorimage = By.xpath("(//div[@id='PlpItem0']//a[@tabindex='-1'])[2]");
     private final By refrigeratorproducttext = By.xpath("(//div[@id='PlpItemundefined'])[1]//a[@class='text-decoration-none']");
-    private final By PDPratingsproduct= By.xpath("//*[text()='4.4']");
+    //private final By PDPratingsproduct= By.xpath("//*[text()='4.4']");
     private final By PDPproduct_image= By.xpath("//div[@id='openInModal']//img[@alt='Main Display 1']");
     private final By PDPproductname= By.xpath("//name //div[@class='pdp_info_wrapper']//h1");
     private final By PDPproductRating= By.xpath("//div[@class='bv_main_container']");
@@ -210,9 +207,7 @@ public class FrigidaireRefrigeratorPage {
         return true;
     }
 
-//    public boolean verifytotalRatings() {
-//        WebElementUtil.scrollIntoView(totalRatings);
- //       return true;
+
 
 
 
