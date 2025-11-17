@@ -2,26 +2,17 @@ package com.automation.frigidaire.pages;
 
 import com.automation.electrolux.locators.Frigidaire_Refrigerator;
 import com.automation.frigidaire.utils.WebElementUtil;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class FrigidaireRefrigeratorPage extends Frigidaire_Refrigerator {
 
 
     public void clickOnKitchen() {
         WebElementUtil.clickElement(kitchen);
-        //return new FrigidairePlpPageActions();
 
     }
 
     public void clickOnRefrigeratorSubcategory() {
         WebElementUtil.clickElement(RefrigeratorSubcategory);
-        //return new FrigidairePlpPageActions();
 
     }
 
