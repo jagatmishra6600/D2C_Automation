@@ -9,12 +9,10 @@ public class FrigidaireRefrigeratorPage extends Frigidaire_Refrigerator {
     public void clickOnKitchen() {
         WebElementUtil.clickElement(kitchen);
     }
-
     public void clickOnRefrigeratorSubcategory() {
         WebElementUtil.clickElement(RefrigeratorSubcategory);
 
     }
-
     public boolean verifyRefigeratorText() {
         WebElementUtil.isDisplayed(Refrigeratorsboldtext);
         return true;
