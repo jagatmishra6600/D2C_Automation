@@ -26,7 +26,7 @@ public class FrigidaireHomePageActions {
     private final By mainMenu_Cart = By.xpath("//img[@alt='Your Shopping Cart']");
     private final By mainMenu_Login_OrderStatus_Login = By.xpath("//*[@id='dropdown']//button[contains(.,'Log in')]");
     private final By mainMenu_Login_OrderStatus_CreateAccount = By.xpath("//*[@id='dropdown']//button[contains(.,'Create an account')]");
-
+    
     private final By mainMenu_CartCount = By.xpath("//span[@class='count']");
     private final By mainMenu_Login = By.cssSelector("a[role='link']");
     private final By mainMenu_searchInput = By.cssSelector("input[placeholder='Search...']");
@@ -181,6 +181,10 @@ public class FrigidaireHomePageActions {
     private final By windowMounted = By.xpath("//h5[contains(text(), 'Window Mounted')]");
     private final By navigationBarKitchen = By.xpath("//h5[@aria-label='Kitchen']");
     private final By frenchDoor = By.xpath("//h5[contains(text(), 'French Door')]");
+    private final By homePageTemplate = By.cssSelector("cx-page-layout.FrigiHomePageTemplate1");
+    private final By userGreetingDropdownButton = By.xpath("//div[@id='dropdown' and contains(.,'Hello')]");
+    
+    
     // Footer helpers
     private final By cookie_AcceptButton = By.id("onetrust-accept-btn-handler");
     public void scrollToFooter() throws InterruptedException {
@@ -313,7 +317,8 @@ public class FrigidaireHomePageActions {
 
     public boolean isHomePageLoaded() {
         // isDisplayed now handles the wait internally
-        return WebElementUtil.isDisplayed(frigidaireLogo);
+        return WebElementUtil.isDisplayed(frigidaireLogo)
+        		&& WebElementUtil.isDisplayed(homePageTemplate);
     }
 
     public boolean isBrancdLogoLoaded() {
@@ -780,4 +785,8 @@ public boolean isNewsletterRight_SupportDisplayed(){
 public boolean isNewsletterRight_ProductRegistrationDisplayed(){
     return WebElementUtil.isDisplayed(newsletterRight_ProductRegistration);
 }
+
+	public boolean isUserGreetingDropdownVisible() {
+		return WebElementUtil.isDisplayed(userGreetingDropdownButton);
+	}
 }
