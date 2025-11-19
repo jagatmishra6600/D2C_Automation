@@ -786,7 +786,7 @@ public class PLPProductItemsPageActions {
             WebDriver driver = DriverManager.getDriver();
             WebElementUtil.zoomInOrOut(25);
             loadMoreProducts(driver);
-            driver.navigate().refresh();
+            //driver.navigate().refresh();
             WebElementUtil.zoomInOrOut(25);
             verifyProductCount(driver, WebElementUtil.findElement(productCount));
 
