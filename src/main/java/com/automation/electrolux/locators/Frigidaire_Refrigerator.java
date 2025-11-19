@@ -37,5 +37,4 @@ public class Frigidaire_Refrigerator {
     protected final By PDPproduct_image= By.xpath("//div[@id='openInModal']//img[@alt='Main Display 1']");
     protected final By PDPproductname= By.xpath("//name //div[@class='pdp_info_wrapper']//h1");
     protected final By PDPproductRating= By.xpath("//div[@class='bv_main_container']");
-
 }
