@@ -34,6 +34,9 @@ public class FrigidaireHomePageActions {
     private final By mainMenu_searchSuggestions = By.xpath("//*[@class='suggestions font-weight-bold']");
     private final By mainMenu_searchSuggestions_FirstElement = By.xpath("//*[@class='suggestions font-weight-bold']/a[1]");
     private final By mainMenu_searchSuggestions_Landing = By.cssSelector("div[class='title mb-1'] h1 p");
+    private final By mainMenu_ProfileDropdown = By.xpath("//a//span[contains(@class,'welcome-name')]"); 
+    private final By mainMenu_ProfileDropdown_MyAccountLink =By.xpath("//a[normalize-space()='My account']");
+    
     //************************** Header Menu Bar Locators **************************
     private final By mainMenu_Logo = By.xpath("//img[@alt='Frigidaire Company Logo']");
     private final By headerMenu_Kitchen = By.cssSelector("h5[aria-label='Kitchen']");
@@ -789,4 +792,33 @@ public boolean isNewsletterRight_ProductRegistrationDisplayed(){
 	public boolean isUserGreetingDropdownVisible() {
 		return WebElementUtil.isDisplayed(userGreetingDropdownButton);
 	}
+	
+	public FrigidaireHomePageActions clickProfileDropdown() {
+    	WebElementUtil.scrollIntoView(mainMenu_ProfileDropdown);
+        WebElementUtil.clickElement(mainMenu_ProfileDropdown);
+        return this;
+    }
+    
+    public FrigidaireHomePageActions clickMyAccountLink() {
+    	WebElementUtil.scrollIntoView(mainMenu_ProfileDropdown_MyAccountLink);
+        WebElementUtil.clickElement(mainMenu_ProfileDropdown_MyAccountLink);
+        return this;
+    }
+	public FrigidaireHomePageActions login(String emailAddress, String password) throws InterruptedException {
+    	return navigateToLoginPage().login(emailAddress, password);
+    }
+	
+	public FrigidaireMyAccount_AccountPreferencesPageActions navigateToAccountPreferencesPage() {
+    	clickProfileDropdown();
+    	var count=0;
+    	while(!WebElementUtil.isDisplayed(mainMenu_ProfileDropdown_MyAccountLink) && count<2) {
+    		clickProfileDropdown();
+    		count++;
+    	}
+    	if (!WebElementUtil.isDisplayed(mainMenu_ProfileDropdown_MyAccountLink)) {
+            throw new RuntimeException("Profile dropdown did not open. 'My Account' not visible.");
+        }
+    	clickMyAccountLink();
+    	return new FrigidaireMyAccount_AccountPreferencesPageActions();
+    }
 }

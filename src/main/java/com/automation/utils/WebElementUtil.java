@@ -2,6 +2,7 @@ package com.automation.utils;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -196,6 +197,7 @@ public class WebElementUtil {
     }
 
     public static WebElement scrollIntoView(By locator) {
+    	isDisplayed(locator);
         WebElement element = DriverManager.getDriver().findElement(locator);
         ((JavascriptExecutor) DriverManager.getDriver()).executeScript("arguments[0].scrollIntoView({behavior: 'instant', block: 'center', inline: 'nearest'});", element);
         return element;
@@ -317,5 +319,15 @@ public class WebElementUtil {
         } catch (Exception e) {
             throw new RuntimeException("Failed to scroll by pixels.", e);
         }
+    }
+    
+    public static void waitForCondition(ExpectedCondition<?> condition) { 
+    	new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(15))
+			.until(condition);
+	}
+    
+    public static String getDomProperty(By locator, String propertyName) {
+        var element = findElement(locator);
+        return element.getDomProperty(propertyName);
     }
 }

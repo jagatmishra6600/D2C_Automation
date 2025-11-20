@@ -14,7 +14,7 @@ public class FrigidaireLoginPageActions {
 
 	 private final By acceptButtonLocator = By.xpath("//button[@id='onetrust-accept-btn-handler']");
 
-	 private final By emailAddressInput = By.xpath("//input[@placeholder='Email address *' or @placeholder='jane.doe@company.com *']");
+	 private final By emailAddressInput = By.xpath("//input[@placeholder='Email address *' or contains(@placeholder,'jane.doe@company.com')]");
 	 private final By passwordInput = By.xpath("//input[@placeholder='Password *' or contains(@id,'gigya-password')]");
 	 private final By loginButton = By.cssSelector("input[value='Log in']");
 	 private final By loginToStoreTitle = By.xpath("//h2[normalize-space()='Log in to Frigidaire' or normalize-space()='Log in to Electrolux']");
