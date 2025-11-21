@@ -2,7 +2,7 @@ package com.automation.electrolux.locators;
 
 import org.openqa.selenium.By;
 
-public class Electrolux_LoginPageLocators {
+public class ELUX_LoginPage {
 
 	 public static final By acceptButtonLocator = By.xpath("//button[@id='onetrust-accept-btn-handler']");
 	 public static final By emailAddressInput = By.xpath("//input[@placeholder='Email address *' or @placeholder='jane.doe@company.com *']");
