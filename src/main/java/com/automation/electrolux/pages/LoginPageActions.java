@@ -5,18 +5,18 @@ import static com.automation.utils.WaitUtils.untilClickable;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-import com.automation.electrolux.locators.Electrolux_LoginPageLocators;
+import com.automation.electrolux.locators.ELUX_LoginPage;
 import com.automation.utils.ConfigReader;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
 
-public class ElectroluxLoginPageActions {
+public class LoginPageActions {
 
 	 
-	 public ElectroluxLoginPageActions navigateToLoginPage() {
+	 public LoginPageActions navigateToLoginPage() {
 		WebElementUtil.navigateTo(ConfigReader.getAppUrl()+"login");
        try {
-           WebElement acceptBtn = untilClickable(Electrolux_LoginPageLocators.acceptButtonLocator, 20);
+           WebElement acceptBtn = untilClickable(ELUX_LoginPage.acceptButtonLocator, 20);
            if (acceptBtn != null) {
                acceptBtn.click();
            }
@@ -26,69 +26,69 @@ public class ElectroluxLoginPageActions {
        return this;
 	}
 	
-	 public ElectroluxHomePageActions login(String emailAddress, String password) throws InterruptedException {
+	 public HomePageActions login(String emailAddress, String password) throws InterruptedException {
 		 enterEmailAddress(emailAddress)
 							 .enterPassword(password);
 		 return clickLoginButton();
 	 }
 	 
-	public ElectroluxLoginPageActions enterEmailAddress(String emailAddress) {
-		WebElementUtil.sendKeys(Electrolux_LoginPageLocators.emailAddressInput, emailAddress);
+	public LoginPageActions enterEmailAddress(String emailAddress) {
+		WebElementUtil.sendKeys(ELUX_LoginPage.emailAddressInput, emailAddress);
 		return this;
 	}
 	
-	public ElectroluxLoginPageActions enterPassword(String password) {
-		WebElementUtil.sendKeys(Electrolux_LoginPageLocators.passwordInput, password);
+	public LoginPageActions enterPassword(String password) {
+		WebElementUtil.sendKeys(ELUX_LoginPage.passwordInput, password);
 		return this;
 	}
 	
-	public ElectroluxHomePageActions clickLoginButton() {
-		WebElementUtil.clickElement(Electrolux_LoginPageLocators.loginButton);
-		return new ElectroluxHomePageActions();
+	public HomePageActions clickLoginButton() {
+		WebElementUtil.clickElement(ELUX_LoginPage.loginButton);
+		return new HomePageActions();
 	}
 	
 	public boolean isLoginPageLoaded() {
-		return WebElementUtil.isDisplayed(Electrolux_LoginPageLocators.loginButton);
+		return WebElementUtil.isDisplayed(ELUX_LoginPage.loginButton);
 	}
 	
 	public boolean isLoginToFrigidaireTitleDisplayed() {
-		return WebElementUtil.isDisplayed(Electrolux_LoginPageLocators.loginToStoreTitle);
+		return WebElementUtil.isDisplayed(ELUX_LoginPage.loginToStoreTitle);
 	}
 	
 	public boolean isLoginTitleMessageDisplayed() {
-		return WebElementUtil.isDisplayed(Electrolux_LoginPageLocators.loginTitleMessage);
+		return WebElementUtil.isDisplayed(ELUX_LoginPage.loginTitleMessage);
 	}
 	
 	public boolean isEmailAddressFieldDisplayed() {
-		return WebElementUtil.isDisplayed(Electrolux_LoginPageLocators.emailAddressInput);
+		return WebElementUtil.isDisplayed(ELUX_LoginPage.emailAddressInput);
 	}
 	
 	public boolean isPasswordFieldDisplayed() {
-		return WebElementUtil.isDisplayed(Electrolux_LoginPageLocators.passwordInput);
+		return WebElementUtil.isDisplayed(ELUX_LoginPage.passwordInput);
 	}
 	
 	public boolean isShowPasswordIconDisplayed() {
-		return WebElementUtil.isDisplayed(Electrolux_LoginPageLocators.showPasswordIcon);
+		return WebElementUtil.isDisplayed(ELUX_LoginPage.showPasswordIcon);
 	}
 	
 	public boolean isKeepMeLoggedInCheckboxDisplayed() {
-		return WebElementUtil.isDisplayed(Electrolux_LoginPageLocators.keepMeLoggedInCheckbox);
+		return WebElementUtil.isDisplayed(ELUX_LoginPage.keepMeLoggedInCheckbox);
 	}
 	
 	public String getNotRecommendedLabelText() {
-		return WebElementUtil.getText(Electrolux_LoginPageLocators.notRecommendedMessage);
+		return WebElementUtil.getText(ELUX_LoginPage.notRecommendedMessage);
 	}
 	
 	public boolean isForgotPasswordLinkDisplayed() {
-		return WebElementUtil.isDisplayed(Electrolux_LoginPageLocators.forgotPasswordLink);
+		return WebElementUtil.isDisplayed(ELUX_LoginPage.forgotPasswordLink);
 	}
 	
 	public boolean isCreateAccountLinkDisplayed() {
-		return WebElementUtil.isDisplayed(Electrolux_LoginPageLocators.createAccountLink);
+		return WebElementUtil.isDisplayed(ELUX_LoginPage.createAccountLink);
 	}
 	
 	public String getElectroluxLinkedAccountMessage() {
-		return WebElementUtil.getText(Electrolux_LoginPageLocators.electroluxLinkedAccountMessage);
+		return WebElementUtil.getText(ELUX_LoginPage.electroluxLinkedAccountMessage);
 	}
 	
 	public boolean isAlternateLoginOptionsDisplayed() {
@@ -96,15 +96,15 @@ public class ElectroluxLoginPageActions {
 	}
 	
 	public boolean isSignInWithAppleButtonDisplayed() {
-		return WebElementUtil.isDisplayed(Electrolux_LoginPageLocators.signInWithAppleButton);
+		return WebElementUtil.isDisplayed(ELUX_LoginPage.signInWithAppleButton);
 	}
 	
 	public boolean isSignInWithGoogleButtonDisplayed() {
-		return WebElementUtil.isDisplayed(Electrolux_LoginPageLocators.signInWithGoogleButton);
+		return WebElementUtil.isDisplayed(ELUX_LoginPage.signInWithGoogleButton);
 	}
 	
 	public boolean isLoginToStoreTitleDisplayed() {
-		return WebElementUtil.isDisplayed(Electrolux_LoginPageLocators.loginToStoreTitle);
+		return WebElementUtil.isDisplayed(ELUX_LoginPage.loginToStoreTitle);
 	}
 	
 	public void verifyLoginPageFieldsAndMessages() {

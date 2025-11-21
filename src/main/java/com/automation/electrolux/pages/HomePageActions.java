@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import static com.automation.utils.WaitUtils.untilClickable;
 
-public class ElectroluxHomePageActions {
+public class HomePageActions {
 
     // Locators remain the same
     //************************** Main Menu Bar Locators **************************
@@ -191,7 +191,7 @@ public class ElectroluxHomePageActions {
         } catch (Exception ignored) {}
     }
 
-    public ElectroluxHomePageActions navigateToHomePage() {
+    public HomePageActions navigateToHomePage() {
         WebElementUtil.navigateTo(ConfigReader.getAppUrl());
         try {
             WebElement acceptBtn = untilClickable(acceptButtonLocator, 25);
@@ -214,7 +214,7 @@ public class ElectroluxHomePageActions {
         return WebElementUtil.isDisplayed(mainMenu_Login_OrderStatus);
     }
 
-    public ElectroluxHomePageActions clickLoginOrderStatusLink() {
+    public HomePageActions clickLoginOrderStatusLink() {
     	WebElementUtil.clickElement(mainMenu_Login_OrderStatus);
     	if(!WebElementUtil.isDisplayed(mainMenu_Login_OrderStatus_CreateAccount)) {
     		WebElementUtil.clickElement(mainMenu_Login_OrderStatus);
@@ -222,11 +222,11 @@ public class ElectroluxHomePageActions {
     	return this;
     }
 
-    public ElectroluxLoginPageActions navigateToLoginPage() {
+    public LoginPageActions navigateToLoginPage() {
     	navigateToHomePage();
     	WebElementUtil.hoverElement(mainMenu_Login_OrderStatus);
     	WebElementUtil.clickElement(mainMenu_Login_OrderStatus_Login);
-    	return new ElectroluxLoginPageActions();
+    	return new LoginPageActions();
     }
 
 
