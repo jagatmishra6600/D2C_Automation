@@ -4,12 +4,12 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.automation.BaseTest;
-import com.automation.electrolux.pages.ElectroluxHomePageActions;
+import com.automation.electrolux.pages.HomePageActions;
 import com.automation.utils.ConfigReader;
 import com.automation.utils.ExtentReportManager;
 
 public class EPIC_01_TC_02_AQA_Authentication_LoginSuccess extends BaseTest{
-	ElectroluxHomePageActions homePage = new ElectroluxHomePageActions();
+	HomePageActions homePage = new HomePageActions();
 	 String emailAddress = ConfigReader.getProperty("user.email");
  	 String password = ConfigReader.getProperty("user.password");
 	 
