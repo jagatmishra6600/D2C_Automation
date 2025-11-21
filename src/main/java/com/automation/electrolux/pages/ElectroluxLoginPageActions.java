@@ -29,7 +29,6 @@ public class ElectroluxLoginPageActions {
 	 public ElectroluxHomePageActions login(String emailAddress, String password) throws InterruptedException {
 		 enterEmailAddress(emailAddress)
 							 .enterPassword(password);
-		 WaitUtils.sleep(4000);
 		 return clickLoginButton();
 	 }
 	 
