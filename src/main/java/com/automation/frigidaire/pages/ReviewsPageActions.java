@@ -2,7 +2,6 @@ package com.automation.frigidaire.pages;
 
 import com.automation.frigidaire.locators.FrigidaireReviewsLocators;
 import com.automation.frigidaire.utils.WebElementUtil;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 
@@ -34,23 +33,8 @@ public class ReviewsPageActions {
         return ele.isDisplayed();
     }
 
-    public void isTotalRatingsVisibleInRS() {
-        WebElementUtil.scrollIntoView(locators.totalRatingsRS);
-        WebElementUtil.waitForElementToBeVisible(locators.totalRatingsRS, 10);
-    }
-
-    public void isOverallRatingVisibleInRS() {
-        WebElementUtil.scrollIntoView(locators.overallRatingRS);
-        WebElementUtil.waitForElementToBeVisible(locators.overallRatingRS, 10);
-    }
-
     public boolean isReviewStarButtonDisplayed() {
        WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.star4);
-        return ele.isDisplayed();
-    }
-
-    public boolean isPopupDisplayed() {
-        WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostPopup, locators.ratingPopup);
         return ele.isDisplayed();
     }
 
