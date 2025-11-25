@@ -318,4 +318,49 @@ public class WebElementUtil {
             throw new RuntimeException("Failed to scroll by pixels.", e);
         }
     }
+
+    public static WebElement scrollToElementCenter(By locator) {
+        WebDriver driver = DriverManager.getDriver();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+        // 1️⃣ wait for element to exist
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+
+        int maxAttempts = 15; // enough retries for unstable pages
+
+        for (int i = 0; i < maxAttempts; i++) {
+
+            // Re-locate element each iteration (React pages re-render!)
+            element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+
+            // Element position relative to viewport
+            Long rectTop = (Long) js.executeScript("return Math.round(arguments[0].getBoundingClientRect().top);", element);
+            Long viewportHeight = (Long) js.executeScript("return window.innerHeight;");
+
+            long desiredPosition = viewportHeight / 2;  // exact center
+            long offset = rectTop - desiredPosition;
+
+            // If element already centered → stop
+            if (Math.abs(offset) < 10) {
+                break;
+            }
+
+            // Perform incremental scroll
+            js.executeScript("window.scrollBy(0, arguments[0]);", offset);
+
+            // Allow page to stabilize after scroll
+            sleep(300);
+        }
+
+        // After loop → ensure element truly visible & interactable
+        element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        wait.until(ExpectedConditions.elementToBeClickable(locator));
+
+        return element;
+    }
+
+    private static void sleep(long ms) {
+        try { Thread.sleep(ms); } catch (Exception ignored) {}
+    }
 }
