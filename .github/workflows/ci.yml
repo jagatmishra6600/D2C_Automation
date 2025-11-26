@@ -1,48 +1,377 @@
-name: D2C Automation CI - Windows
+name: D2C Automation CI
 
 on:
   schedule:
-    - cron: "0 */2 * * *"
+    - cron: "30 2 * * *"  # Daily at 2:30 AM UTC
   workflow_dispatch:
 
 jobs:
   D2C_Automation_Job:
-    name: Run D2C Automation Suite
+    name: Run D2C Automation Suite (Windows)
     runs-on: windows-latest
     timeout-minutes: 180
 
     env:
       BRAND: frigidaire
-      HEADLESS: false  # Windows can run with GUI
-      MAVEN_OPTS: "-Djansi.force=true"
+      HEADLESS: true
+      MAVEN_OPTS: "-Xmx2g -Djansi.force=true -Dorg.slf4j.simpleLogger.defaultLogLevel=DEBUG"
+      CI: true
 
     steps:
-      - name: Checkout code
+      # ----------------------------------------------------------
+      # Checkout repository
+      # ----------------------------------------------------------
+      - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: main
 
-      - name: Setup Java
+      # ----------------------------------------------------------
+      # Initial Setup and Welcome
+      # ----------------------------------------------------------
+      - name: Welcome and Initial Setup
+        run: |
+          Write-Host "================================================" -ForegroundColor Cyan
+          Write-Host "🚀 D2C AUTOMATION SUITE - REAL-TIME EXECUTION" -ForegroundColor Yellow
+          Write-Host "================================================" -ForegroundColor Cyan
+          Write-Host "📅 Date: $(Get-Date -Format 'yyyy-MM-dd')" -ForegroundColor White
+          Write-Host "⏰ Start Time: $(Get-Date -Format 'HH:mm:ss')" -ForegroundColor White
+          Write-Host "🔧 Run ID: ${{ github.run_id }}" -ForegroundColor White
+          Write-Host "🔄 Attempt: ${{ github.run_attempt }}" -ForegroundColor White
+          Write-Host "================================================" -ForegroundColor Cyan
+          Write-Host ""
+
+      # ----------------------------------------------------------
+      # System Information
+      # ----------------------------------------------------------
+      - name: System Diagnostics
+        run: |
+          Write-Host "🖥️ SYSTEM DIAGNOSTICS" -ForegroundColor Green
+          Write-Host "-------------------" -ForegroundColor Green
+          
+          Write-Host "📊 Memory Information:" -ForegroundColor Yellow
+          systeminfo | findstr /C:"Total Physical Memory" /C:"Available Physical Memory"
+          
+          Write-Host "💾 Disk Space:" -ForegroundColor Yellow
+          Get-PSDrive C | Format-Table Name, @{Name="Size(GB)";Expression={[math]::Round($_.Used/1GB,2)}}, @{Name="Free(GB)";Expression={[math]::Round($_.Free/1GB,2)}}, @{Name="Total(GB)";Expression={[math]::Round(($_.Used + $_.Free)/1GB,2)}} -AutoSize
+          
+          Write-Host "⚡ CPU Information:" -ForegroundColor Yellow
+          Get-WmiObject Win32_Processor | Select-Object Name, NumberOfCores, MaxClockSpeed | Format-Table -AutoSize
+          
+          Write-Host ""
+
+      # ----------------------------------------------------------
+      # Deep Cleanup with Real-time Output
+      # ----------------------------------------------------------
+      - name: Deep Cleanup Before Tests
+        run: |
+          Write-Host "🧹 DEEP CLEANUP PROCESS" -ForegroundColor Magenta
+          Write-Host "======================" -ForegroundColor Magenta
+          
+          Write-Host "📊 Memory before cleanup:" -ForegroundColor Cyan
+          $memoryBefore = systeminfo | findstr "Available Physical Memory"
+          Write-Host "   $memoryBefore"
+          
+          Write-Host "🔪 Terminating existing processes..." -ForegroundColor Red
+          $processes = @("chrome", "chromedriver", "java", "msedgedriver", "geckodriver")
+          foreach ($process in $processes) {
+            $killed = taskkill /F /IM "$process.exe" 2>$null
+            if ($LASTEXITCODE -eq 0) {
+              Write-Host "   ✅ Killed $process.exe" -ForegroundColor Green
+            }
+          }
+          
+          Write-Host "🗑️ Cleaning temporary files..." -ForegroundColor Yellow
+          $tempPaths = @("$env:TEMP", "C:\Windows\Temp", "${{ github.workspace }}\target")
+          foreach ($path in $tempPaths) {
+            if (Test-Path $path) {
+              Remove-Item -Path "$path\*" -Recurse -Force -ErrorAction SilentlyContinue
+              Write-Host "   ✅ Cleaned $path" -ForegroundColor Green
+            }
+          }
+          
+          Write-Host "🧹 Clearing Maven cache..." -ForegroundColor Yellow
+          if (Test-Path "~\.m2\repository") {
+            Remove-Item -Path "~\.m2\repository\*" -Recurse -Force -ErrorAction SilentlyContinue
+            Write-Host "   ✅ Maven cache cleared" -ForegroundColor Green
+          }
+          
+          Write-Host "📊 Memory after cleanup:" -ForegroundColor Cyan
+          $memoryAfter = systeminfo | findstr "Available Physical Memory"
+          Write-Host "   $memoryAfter"
+          Write-Host "✅ Cleanup completed successfully!" -ForegroundColor Green
+          Write-Host ""
+
+      # ----------------------------------------------------------
+      # Browser Setup with Detailed Output
+      # ----------------------------------------------------------
+      - name: Browser Environment Setup
+        run: |
+          Write-Host "🌐 BROWSER ENVIRONMENT SETUP" -ForegroundColor Blue
+          Write-Host "==========================" -ForegroundColor Blue
+          
+          Write-Host "🔍 Checking Chrome installation..." -ForegroundColor Cyan
+          $chromePaths = @(
+            "C:\Program Files\Google\Chrome\Application\chrome.exe",
+            "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+          )
+          
+          $chromeInstalled = $false
+          foreach ($path in $chromePaths) {
+            if (Test-Path $path) {
+              $version = & "$path" --version
+              Write-Host "   ✅ Chrome found: $version" -ForegroundColor Green
+              Write-Host "   📍 Location: $path" -ForegroundColor White
+              $chromeInstalled = $true
+              break
+            }
+          }
+          
+          if (-not $chromeInstalled) {
+            Write-Host "   🚀 Installing Google Chrome..." -ForegroundColor Yellow
+            $installer = "chrome_installer.exe"
+            Write-Host "   📥 Downloading Chrome installer..." -ForegroundColor White
+            Invoke-WebRequest "https://dl.google.com/chrome/install/375.126/chrome_installer.exe" -OutFile $installer
+            Write-Host "   🔧 Installing Chrome (silent mode)..." -ForegroundColor White
+            Start-Process -FilePath $installer -Args "/silent /install" -Wait
+            Remove-Item $installer
+            Write-Host "   ✅ Chrome installed successfully" -ForegroundColor Green
+          }
+          Write-Host ""
+
+      # ----------------------------------------------------------
+      # ChromeDriver Setup
+      # ----------------------------------------------------------
+      - name: ChromeDriver Installation
+        run: |
+          Write-Host "🔧 CHROMEDRIVER SETUP" -ForegroundColor Blue
+          Write-Host "====================" -ForegroundColor Blue
+          
+          Write-Host "🔍 Detecting Chrome version..." -ForegroundColor Cyan
+          $chromePath = "C:\Program Files\Google\Chrome\Application\chrome.exe"
+          if (Test-Path $chromePath) {
+            $versionInfo = (Get-Item $chromePath).VersionInfo
+            $chromeVersion = "$($versionInfo.FileMajorPart).$($versionInfo.FileMinorPart).$($versionInfo.FileBuildPart).$($versionInfo.FilePrivatePart)"
+            $majorVersion = $versionInfo.FileMajorPart
+            Write-Host "   📋 Chrome Version: $chromeVersion" -ForegroundColor White
+            Write-Host "   🔢 Major Version: $majorVersion" -ForegroundColor White
+          
+            Write-Host "📥 Downloading matching ChromeDriver..." -ForegroundColor Cyan
+            $chromedriverUrl = "https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/$chromeVersion/win64/chromedriver-win64.zip"
+            Write-Host "   🔗 URL: $chromedriverUrl" -ForegroundColor Gray
+          
+            $zipFile = "chromedriver.zip"
+            try {
+              Invoke-WebRequest $chromedriverUrl -OutFile $zipFile -UserAgent "Mozilla/5.0"
+              Write-Host "   ✅ ChromeDriver downloaded successfully" -ForegroundColor Green
+          
+              Write-Host "📦 Extracting ChromeDriver..." -ForegroundColor Cyan
+              Expand-Archive -Path $zipFile -DestinationPath ".\chromedriver" -Force
+          
+              Write-Host "🔧 Installing ChromeDriver to system path..." -ForegroundColor Cyan
+              Move-Item -Path ".\chromedriver\chromedriver-win64\chromedriver.exe" -Destination "C:\Windows\System32\chromedriver.exe" -Force
+          
+              Write-Host "🧹 Cleaning up temporary files..." -ForegroundColor Yellow
+              Remove-Item $zipFile -Force
+              Remove-Item -Path ".\chromedriver" -Recurse -Force
+          
+              Write-Host "✅ ChromeDriver installation completed!" -ForegroundColor Green
+          
+              # Verify installation
+              $chromedriverVersion = & "chromedriver" --version
+              Write-Host "   🔍 ChromeDriver Version: $chromedriverVersion" -ForegroundColor White
+          
+            } catch {
+              Write-Host "   ❌ Failed to download ChromeDriver: $($_.Exception.Message)" -ForegroundColor Red
+              Write-Host "   🔄 Attempting to use system ChromeDriver..." -ForegroundColor Yellow
+            }
+          } else {
+            Write-Host "   ❌ Chrome not found after installation attempt" -ForegroundColor Red
+          }
+          Write-Host ""
+
+      # ----------------------------------------------------------
+      # Java Setup
+      # ----------------------------------------------------------
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Cache Maven dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository
-          key: maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            maven-
-
-      - name: Run Tests
+      - name: Verify Java Installation
         run: |
-          mvn clean test --batch-mode --no-transfer-progress -Dbrand=%BRAND%
+          Write-Host "☕ JAVA VERIFICATION" -ForegroundColor DarkMagenta
+          Write-Host "==================" -ForegroundColor DarkMagenta
+          Write-Host "🔍 Java Version:" -ForegroundColor Cyan
+          java -version
+          Write-Host "🔍 Java Compiler Version:" -ForegroundColor Cyan
+          javac -version
+          Write-Host "✅ Java environment ready!" -ForegroundColor Green
+          Write-Host ""
 
-      - name: Upload Test Reports
+      # ----------------------------------------------------------
+      # Pre-Test Configuration
+      # ----------------------------------------------------------
+      - name: Pre-Test Configuration
+        run: |
+          Write-Host "⚙️ PRE-TEST CONFIGURATION" -ForegroundColor DarkCyan
+          Write-Host "======================" -ForegroundColor DarkCyan
+          Write-Host "🏷️ Brand: ${{ env.BRAND }}" -ForegroundColor White
+          Write-Host "🌐 Headless Mode: ${{ env.HEADLESS }}" -ForegroundColor White
+          Write-Host "💾 Maven Options: ${{ env.MAVEN_OPTS }}" -ForegroundColor White
+          Write-Host "📁 Workspace: ${{ github.workspace }}" -ForegroundColor White
+          Write-Host "✅ Configuration completed!" -ForegroundColor Green
+          Write-Host ""
+
+      # ----------------------------------------------------------
+      # REAL-TIME TEST EXECUTION
+      # ----------------------------------------------------------
+      - name: Execute Test Suite - Real Time
+        run: |
+          Write-Host "🎯 TEST EXECUTION STARTED" -ForegroundColor Green -BackgroundColor Black
+          Write-Host "================================================" -ForegroundColor Green
+          Write-Host "⏰ Execution Start: $(Get-Date -Format 'HH:mm:ss')" -ForegroundColor Cyan
+          Write-Host "📝 Test Suite: D2C Automation" -ForegroundColor Cyan
+          Write-Host "🏷️ Brand: ${{ env.BRAND }}" -ForegroundColor Cyan
+          Write-Host "================================================" -ForegroundColor Green
+          Write-Host ""
+          Write-Host "📋 MAVEN TEST OUTPUT (REAL-TIME):" -ForegroundColor Yellow
+          Write-Host "----------------------------------------" -ForegroundColor Yellow
+          
+          # Set environment for real-time output
+          $env:MAVEN_OPTS = "${{ env.MAVEN_OPTS }} -Dstyle.color=always"
+          
+          # Execute tests with maximum verbosity and real-time output
+          mvn clean test `
+            --batch-mode `
+            --no-transfer-progress `
+            -T 1 `
+            -e `  # Stack trace on error
+            -X `  # Debug output
+            -Dmaven.test.redirectTestOutputToFile=false `
+            -Dbrand=${{ env.BRAND }} `
+            -Dwebdriver.chrome.verboseLogging=true `
+            -Dwebdriver.chrome.logfile="${{ github.workspace }}\target\chromedriver.log" `
+            -Dmaven.surefire.printSummary=true `
+            -Dmaven.test.force.stdout=true `
+            -Dmaven.test.force.ansi=true `
+            -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer=DEBUG `
+            -Dorg.slf4j.simpleLogger.log.org.apache.maven.lifecycle=DEBUG `
+            -Dsurefire.printSummary=true `
+            -Dsurefire.useFile=false
+          
+          $testExitCode = $LASTEXITCODE
+          Write-Host ""
+          Write-Host "----------------------------------------" -ForegroundColor Yellow
+          Write-Host "⏰ Execution End: $(Get-Date -Format 'HH:mm:ss')" -ForegroundColor Cyan
+          Write-Host "🎯 TEST EXECUTION COMPLETED" -ForegroundColor Green -BackgroundColor Black
+          Write-Host ""
+
+      # ----------------------------------------------------------
+      # Post-Test Analysis
+      # ----------------------------------------------------------
+      - name: Post-Test Analysis
+        if: always()
+        run: |
+          Write-Host "📊 POST-TEST ANALYSIS" -ForegroundColor Magenta
+          Write-Host "===================" -ForegroundColor Magenta
+          
+          # Check for test results
+          $surefirePath = "${{ github.workspace }}\target\surefire-reports"
+          $extentPath = "${{ github.workspace }}\test-output"
+          $chromedriverLogPath = "${{ github.workspace }}\target\chromedriver.log"
+          
+          Write-Host "🔍 Checking generated reports..." -ForegroundColor Cyan
+          
+          if (Test-Path $surefirePath) {
+            $testFiles = Get-ChildItem "$surefirePath\*.txt" | Measure-Object
+            $xmlFiles = Get-ChildItem "$surefirePath\*.xml" | Measure-Object
+            Write-Host "   ✅ Surefire Reports: $($testFiles.Count) text files, $($xmlFiles.Count) XML files" -ForegroundColor Green
+          } else {
+            Write-Host "   ❌ Surefire Reports: Not found" -ForegroundColor Red
+          }
+          
+          if (Test-Path $extentPath) {
+            $extentFiles = Get-ChildItem $extentPath -Recurse | Measure-Object
+            Write-Host "   ✅ Extent Reports: $($extentFiles.Count) files" -ForegroundColor Green
+          } else {
+            Write-Host "   ❌ Extent Reports: Not found" -ForegroundColor Red
+          }
+          
+          if (Test-Path $chromedriverLogPath) {
+            $logSize = (Get-Item $chromedriverLogPath).Length / 1KB
+            Write-Host "   ✅ ChromeDriver Log: $([math]::Round($logSize, 2)) KB" -ForegroundColor Green
+          } else {
+            Write-Host "   ❌ ChromeDriver Log: Not found" -ForegroundColor Red
+          }
+          Write-Host ""
+
+      # ----------------------------------------------------------
+      # Upload Test Reports
+      # ----------------------------------------------------------
+      - name: Upload Surefire Reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-reports
+          name: surefire-reports-${{ github.run_id }}-${{ github.run_attempt }}
+          path: target/surefire-reports
+          retention-days: 30
+
+      - name: Upload Extent Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: extent-reports-${{ github.run_id }}-${{ github.run_attempt }}
+          path: test-output
+          retention-days: 30
+
+      - name: Upload ChromeDriver Logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: chromedriver-logs-${{ github.run_id }}-${{ github.run_attempt }}
+          path: target/chromedriver.log
+          retention-days: 30
+
+      - name: Upload Maven Build Logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: maven-logs-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
-            target/surefire-reports
-            test-output
+            **/maven-*.log
+            **/surefire-*.log
+          retention-days: 30
+
+      # ----------------------------------------------------------
+      # Final Summary
+      # ----------------------------------------------------------
+      - name: Execution Summary
+        if: always()
+        run: |
+          Write-Host "🎉 EXECUTION SUMMARY" -ForegroundColor Cyan
+          Write-Host "==================" -ForegroundColor Cyan
+          Write-Host "📅 Date: $(Get-Date -Format 'yyyy-MM-dd')" -ForegroundColor White
+          Write-Host "⏰ Start Time: ${{ job.steps[1].outputs.start-time }}" -ForegroundColor White
+          Write-Host "⏱️ End Time: $(Get-Date -Format 'HH:mm:ss')" -ForegroundColor White
+          Write-Host "🔧 Run ID: ${{ github.run_id }}" -ForegroundColor White
+          Write-Host "🔄 Attempt: ${{ github.run_attempt }}" -ForegroundColor White
+          Write-Host "📊 Status: ${{ job.status }}" -ForegroundColor $(if (${{ job.status }} -eq 'success') { 'Green' } else { 'Red' })
+          Write-Host "📁 Artifacts: 4 sets uploaded" -ForegroundColor White
+          Write-Host ""
+          
+          if (${{ job.status }} -eq 'success') {
+            Write-Host "✅ 🎉 ALL TESTS COMPLETED SUCCESSFULLY! 🎉 ✅" -ForegroundColor Green -BackgroundColor Black
+          } else {
+            Write-Host "❌ 📝 SOME TESTS FAILED - CHECK REPORTS FOR DETAILS 📝 ❌" -ForegroundColor Red -BackgroundColor Black
+          }
+          
+          Write-Host ""
+          Write-Host "🔍 Next steps:" -ForegroundColor Yellow
+          Write-Host "   1. Download artifacts from the Actions tab" -ForegroundColor White
+          Write-Host "   2. Review test reports in surefire-reports" -ForegroundColor White
+          Write-Host "   3. Check detailed logs in uploaded artifacts" -ForegroundColor White
+          Write-Host "   4. View Extent Reports for visual test results" -ForegroundColor White
+          Write-Host ""
+          Write-Host "================================================" -ForegroundColor Cyan
