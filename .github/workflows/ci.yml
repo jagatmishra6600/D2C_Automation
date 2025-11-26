@@ -24,7 +24,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: main  # Explicitly specify the branch here
+          ref: main
 
       # ----------------------------------------------------------
       # Deep cleanup
@@ -51,23 +51,40 @@ jobs:
           free -h || true
 
       # ----------------------------------------------------------
-      # Ensure Chrome available
+      # Install Chrome and ChromeDriver properly
       # ----------------------------------------------------------
-      - name: Ensure Chrome is available
+      - name: Install Chrome and ChromeDriver
         run: |
-          echo "Checking Chrome installation..."
-          if command -v google-chrome >/dev/null 2>&1; then
-            echo "✅ Chrome already installed: $(google-chrome --version)"
-          else
-            echo "🚀 Installing Google Chrome..."
-            wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-            sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
-            sudo apt-get update
-            sudo apt-get install -y google-chrome-stable
-            echo "Installed Chrome version: $(google-chrome --version)"
-          fi
-          echo "Installing auxiliary libraries..."
-          sudo apt-get install -y libnss3 libgconf-2-4 libxi6 libxss1 libappindicator1 libindicator7 libgbm-dev || true
+          echo "🚀 Installing Google Chrome..."
+          sudo apt-get update
+          sudo apt-get install -y wget unzip
+          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+          
+          echo "🔧 Installing ChromeDriver..."
+          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+\.\d+')
+          echo "Chrome version: $CHROME_VERSION"
+          
+          wget -q "https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/$CHROME_VERSION/linux64/chromedriver-linux64.zip"
+          unzip -q chromedriver-linux64.zip
+          sudo mv chromedriver-linux64/chromedriver /usr/local/bin/
+          sudo chmod +x /usr/local/bin/chromedriver
+          
+          echo "✅ Chrome version: $(google-chrome --version)"
+          echo "✅ ChromeDriver version: $(chromedriver --version)"
+          
+          sudo apt-get install -y libnss3 libgconf-2-4 libxi6 libxss1 libappindicator1 libindicator7 libgbm-dev xvfb
+
+      # ----------------------------------------------------------
+      # Start Virtual Display
+      # ----------------------------------------------------------
+      - name: Start Xvfb
+        run: |
+          echo "🖥️ Starting Xvfb display server..."
+          Xvfb :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
+          echo "DISPLAY=:99" >> $GITHUB_ENV
 
       # ----------------------------------------------------------
       # CPU monitor background process
@@ -75,7 +92,6 @@ jobs:
       - name: Start CPU monitor
         run: |
           echo "📦 Installing sysstat for CPU monitoring..."
-          sudo apt-get update
           sudo apt-get install -y sysstat
           echo "📈 Starting background CPU monitor..."
           nohup bash -c 'while true; do UTIL=$(mpstat 1 1 | awk "/Average/ && $3 ~ /all/ {print 100 - $NF}"); echo "📊 CPU Utilization: ${UTIL}% at $(date +%T)"; sleep 60; done' > cpu.log 2>&1 &
