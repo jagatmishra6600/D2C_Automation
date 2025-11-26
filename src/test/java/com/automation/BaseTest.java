@@ -17,8 +17,11 @@ public class BaseTest {
     @BeforeSuite
     public void setUpSuite(@Optional("frigidaire") String brand,
                            @Optional("false") String headless) {
+
         // Allow TestNG to drive brand selection; can also be overridden by -Dbrand
+        brand = ConfigReader.getProperty("brand", brand);
         ConfigReader.setRuntimeProperty("brand", brand);
+        headless = ConfigReader.getProperty("headless", headless);
         ConfigReader.setRuntimeProperty("headless", headless);
         ExtentReportManager.setupExtentReport();
     }

@@ -5,7 +5,6 @@ import com.automation.BaseTest;
 import com.automation.frigidaire.pages.FeaturesPageActions;
 import com.automation.frigidaire.pages.FrigidairePlpPageActions;
 import com.automation.utils.ExtentReportManager;
-import com.automation.utils.WebElementUtil;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -13,24 +12,15 @@ public class EPIC_03_TC_05_AQA_PDP_Owners extends BaseTest {
     private final FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
     private final FeaturesPageActions pdpPage = new FeaturesPageActions();
     private final FrigidairePlpPageActions plpPage = new FrigidairePlpPageActions();
-    String currentUrl;
 
     @Test(groups = {"regression"}, description = "Verify My Owners section on PDP page")
     public void EPIC_03_PDPPage_TC_05_verifyFeaturesSectionOnPDP() {
         homePage.navigateToHomePage();
-        currentUrl = WebElementUtil.getCurrentUrl();
-        if (currentUrl.contains("frigidaire")) {
-            pdpPage.searchProduct("GRMC2273CF-C1");
-            pdpPage.selectProductFromPLP();
-            plpPage.closePopupModel();
-            Assert.assertTrue(pdpPage.validateGuideAndManualSection(), "Guide & Manual Section is not visible");
-            Assert.assertTrue(pdpPage.validateDownloadableDocumentsForAllLanguages(), "Downloadable documents are not visible or valid for all languages");
-        } else if (currentUrl.contains("electrolux")) {
-            pdpPage.searchProduct("EHVS2510AW-C1");
-            pdpPage.selectProductFromPLP();
-            plpPage.closePopupModel();
-            Assert.assertTrue(pdpPage.validateDownloadableDocuments(), "Downloadable documents are not visible or valid");
-        }
+        pdpPage.searchProduct("GRMC2273CF-C1");
+        pdpPage.selectProductFromPLP();
+        plpPage.closePopupModel();
+        Assert.assertTrue(pdpPage.validateGuideAndManualSection(), "Guide & Manual Section is not visible");
+        Assert.assertTrue(pdpPage.validateDownloadableDocumentsForAllLanguages(), "Downloadable documents are not visible or valid for all languages");
 
         ExtentReportManager.getTest().pass("Verify My Owners section on PDP page");
     }
@@ -38,16 +28,11 @@ public class EPIC_03_TC_05_AQA_PDP_Owners extends BaseTest {
     @Test(groups = {"regression"}, description = "Verify Service and Parts section")
     public void EPIC_03_PDPPage_TC_05_verifyServiceAndPartsSectionOnPDP() {
         homePage.navigateToHomePage();
-        currentUrl = WebElementUtil.getCurrentUrl();
-        if (currentUrl.contains("frigidaire")) {
-            pdpPage.searchProduct("EHVS2510AW-C1");
-            pdpPage.selectProductFromPLP();
-            plpPage.closePopupModel();
-            Assert.assertTrue(pdpPage.validateReplacementPartsTile(), "Replacement Parts tile validation failed.");
-            Assert.assertTrue(pdpPage.validateRepairsServiceTile(), "Repairs & Service tile validation failed.");
-        } else if (currentUrl.contains("electrolux")) {
-
-        }
+        pdpPage.searchProduct("EHVS2510AW-C1");
+        pdpPage.selectProductFromPLP();
+        plpPage.closePopupModel();
+        Assert.assertTrue(pdpPage.validateReplacementPartsTile(), "Replacement Parts tile validation failed.");
+        Assert.assertTrue(pdpPage.validateRepairsServiceTile(), "Repairs & Service tile validation failed.");
 
         ExtentReportManager.getTest().pass("Verify Service and Parts section");
     }
