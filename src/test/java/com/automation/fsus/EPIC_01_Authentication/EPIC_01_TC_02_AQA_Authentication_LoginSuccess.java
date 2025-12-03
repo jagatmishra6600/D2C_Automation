@@ -1,4 +1,4 @@
-package com.automation.fsus.tests.EPIC_01_Authentication;
+package com.automation.fsus.EPIC_01_Authentication;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
