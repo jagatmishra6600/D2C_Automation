@@ -16,6 +16,7 @@ public class ElectroluxFeaturePageActions {
     }
 
     public void selectProductFromPLP() {
+        WebElementUtil.scrollToElementStable(locators.productPDP);
         WebElementUtil.waitForElementToBeVisible(locators.productPDP, 10);
         WebElementUtil.waitForElementToBeClickable(locators.productPDP, 10);
         WebElementUtil.clickElement(locators.productPDP);
