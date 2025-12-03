@@ -1,7 +1,7 @@
 package com.automation.frigidaire.pages;
 
 import com.automation.frigidaire.locators.FrigidaireReviewsLocators;
-import com.automation.frigidaire.utils.WebElementUtil;
+import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.WebElement;
 
 
@@ -28,7 +28,8 @@ public class ReviewsPageActions {
         WebElementUtil.waitForElementToBeVisible(locators.banner, 10);
         WebElementUtil.scrollIntoView(locators.banner);
         WebElementUtil.waitForElementToBeVisible(locators.reviewPage, 10);
-        WebElementUtil.scrollIntoView(locators.reviewPage, 200);
+        WebElementUtil.scrollToElementStable(locators.reviewPage);
+//        WebElementUtil.scrollIntoView(locators.reviewPage, 200);
         WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.ratingSnapshot);
         return ele.isDisplayed();
     }

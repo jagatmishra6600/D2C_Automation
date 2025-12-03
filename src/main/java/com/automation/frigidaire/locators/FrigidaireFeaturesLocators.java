@@ -4,8 +4,7 @@ import org.openqa.selenium.By;
 
 public class FrigidaireFeaturesLocators {
 
-    public final By searchButton = By.cssSelector(".searchIconHeader, .elxIconsSearch");
-    public final By productPDP = By.xpath("//div[contains(@class,'Appliance-Card')] | //div[contains(@class,'accessories-product')]");
+    public final By productPDP = By.xpath("//div[contains(@class,'accessories-product')]");
     public final By featureHeading = By.xpath("//strong[text()='Overview & Features']//parent::h4//parent::span");
     public final By viewAll = By.xpath("//p[text()='View all']");
     public final By featureBanner = By.cssSelector(".featureBanner");
@@ -28,7 +27,7 @@ public class FrigidaireFeaturesLocators {
     public final By repairsServiceButton = By.xpath("//h4[text()='Repairs & Service']//parent::p//parent::cx-paragraph//following-sibling::cx-link//a");
 
     // Locator for Add to cart button (handles <a> or <button> with inner span text)
-    public final By addToCartButton = By.xpath("//span[normalize-space()='Add to cart']/ancestor::a | //button[normalize-space()='Add to cart']");
+    public final By addToCartButton = By.xpath("//span[normalize-space()='Add to cart']/ancestor::a");
 
     // Locators for Delivery & Installation and Save & view cart
     public final By deliveryInstallationRadio = By.id("Refrigerators_Large_WaterLine_Install");
@@ -44,7 +43,7 @@ public class FrigidaireFeaturesLocators {
     public final By shippingLastName = By.id("lastName");
     public final By shippingAddressLine1 = By.xpath("//input[@formcontrolname='line1' or @id='address-1' or contains(@placeholder,'Address')]");
     public final By shippingPhone = By.id("phone");
-    public final By addressSuggestionOption = By.xpath("//ngb-typeahead-window//button[@role='option'] | //div[contains(@class,'dropdown-menu')]//button[@role='option']");
+    public final By addressSuggestionOption = By.xpath("//ngb-typeahead-window//button[@role='option']");
 
     // Delivery date selection elements
     public final By deliveryCalendarHeader = By.xpath("//h2[contains(text(),'Delivery date')]");

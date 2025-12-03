@@ -1,11 +1,12 @@
-package com.automation.electrolux.pages;
+package com.automation.familystore_en.pages;
 
-import com.automation.electrolux.locators.ElectroluxReviewLocators;
+import com.automation.familystore_en.locators.ReviewLocatorsFMEN;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.WebElement;
 
-public class ElectroluxReviewsPageActions {
-    ElectroluxReviewLocators locators = new ElectroluxReviewLocators();
+public class ReviewsPageActionsFMEN {
+
+    ReviewLocatorsFMEN locators = new ReviewLocatorsFMEN();
 
     public boolean isReviewSectionVisible() {
         WebElementUtil.waitForElementToBeVisible(locators.reviewSection, 10);
@@ -87,6 +88,11 @@ public class ElectroluxReviewsPageActions {
 
     public boolean isLoadMoreButtonDisplayed() {
         WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.loadMore);
+        return ele.isDisplayed();
+    }
+
+    public boolean isRatingFilterDisplayed() {
+        WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.ratingFilter);
         return ele.isDisplayed();
     }
 

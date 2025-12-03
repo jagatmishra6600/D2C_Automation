@@ -112,6 +112,8 @@ public class ConfigReader {
         }
         if (brand.equals("electrolux") || brand.equals("elux")) {
             return getProperty("app.elux");
+        }if (brand.equals("fmen")) {
+            return getProperty("app.fmen");
         }
 
         // Fallback to Frigidaire if unknown brand
