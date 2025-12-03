@@ -30,29 +30,26 @@ public class FsusLoginPageActions {
 	 }
 	 
 	 public FsusHomePageActions login(String emailAddress, String password) {
-		 navigateToLoginPage();
-		 var isLoggedIn = enterEmailAddress(emailAddress)
+		 enterEmailAddress(emailAddress)
 							 .enterPassword(password)
 							 .clickTermsAndConditionsCheckbox()
-							 .clickLoginButton()
-							 .isUserGreetingDropdownDisplayed();
- 
-		 if(!isLoggedIn) {
+							 .clickLoginButton();
+							  
+		 if(!isUserLoggedIn()) {
 			 return clickLoginButton();
 		 }
 		 return new FsusHomePageActions();
 	 }
 	 
 	 
-	 public FsusHomePageActions loginWithDefaultCredentials() {
+	 public FsusHomePageActions loginWithDefaultCredentials() throws InterruptedException {
 		 navigateToLoginPage();
-		 var isLoggedIn = enterEmailAddress(UserTestData.FS_USERNAME)
+		 enterEmailAddress(UserTestData.FS_USERNAME)
 							 .enterPassword(UserTestData.PASSWORD)
 							 .clickTermsAndConditionsCheckbox()
-							 .clickLoginButton()
-							 .isUserGreetingDropdownDisplayed();
- 
-		 if(!isLoggedIn) {
+							 .clickLoginButton();
+							  
+		 if(!isUserLoggedIn()) {
 			 return clickLoginButton();
 		 }
 		 return new FsusHomePageActions();
@@ -80,5 +77,14 @@ public class FsusLoginPageActions {
 		 return this;
 	 }
 	 
+	 private boolean isUserLoggedIn() {
+		 try {
+			 WebElementUtil.waitForElementToBeVisible(FSUS_Homepage.userGreetingDropdown,5);
+			 return true;
+		 }
+		 catch(Exception e){
+			 return false;
+		 }
+	 }
 	 
 }
