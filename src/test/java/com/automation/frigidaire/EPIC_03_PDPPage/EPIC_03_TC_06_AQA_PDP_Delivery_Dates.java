@@ -7,7 +7,7 @@ import com.automation.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TC_06_AQA_PDP_Delivery_Dates extends BaseTest {
+public class EPIC_03_TC_06_AQA_PDP_Delivery_Dates extends BaseTest {
     private final FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
     private final FeaturesPageActions pdpPage = new FeaturesPageActions();
     private final FrigidairePlpPageActions plpPage = new FrigidairePlpPageActions();
