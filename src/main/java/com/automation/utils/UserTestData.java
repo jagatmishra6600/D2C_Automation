@@ -8,6 +8,7 @@ public class UserTestData {
     public static final String LAST_NAME = "LastName";
     public static final String USERNAME = ConfigReader.getProperty("user.email");
     public static final String PASSWORD = ConfigReader.getProperty("user.password");
+    public static final String FS_USERNAME = ConfigReader.getProperty("user.emailfamilystore");
 
     // Generate a new email EVERY TIME someone calls the method
     public static String getDisposableYopmailEmailAddress() {
@@ -23,5 +24,21 @@ public class UserTestData {
     public static CreateAccountData getCreateAccountData() {
     	return new CreateAccountData(getDisposableMailDropEmailAddress()
     			,FIRST_NAME,LAST_NAME,PASSWORD);
+    }
+    
+    public static String getUserName() {
+    	var brand = ConfigReader.getBrand();
+    	if(brand.equalsIgnoreCase("elux") || brand.equalsIgnoreCase("electrolux")	
+    			||brand.equalsIgnoreCase("frigidaire")) {
+    		return USERNAME;
+    	}
+    	else if(brand.equalsIgnoreCase("fsus")|| brand.equalsIgnoreCase("familystoreus")) {
+    		return FS_USERNAME;
+    	}
+    	return USERNAME;
+    }
+    
+    public static String getPassword() {
+    	return PASSWORD;
     }
 }
