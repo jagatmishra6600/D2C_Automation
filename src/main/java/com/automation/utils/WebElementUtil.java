@@ -2,6 +2,7 @@ package com.automation.utils;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -393,4 +394,14 @@ public class WebElementUtil {
     private static void sleep(long ms) {
         try { Thread.sleep(ms); } catch (Exception ignored) {}
     }
+    
+    public static void waitForCondition(ExpectedCondition<?> condition) { 
+    	new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(15))
+			.until(condition);
+	}
+    
+    public static void waitForCondition(ExpectedCondition<?> condition, int seconds) { 
+    	new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(seconds))
+			.until(condition);
+	}
 }
