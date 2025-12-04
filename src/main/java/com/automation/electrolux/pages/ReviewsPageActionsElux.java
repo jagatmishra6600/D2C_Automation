@@ -1,11 +1,11 @@
 package com.automation.electrolux.pages;
 
-import com.automation.electrolux.locators.ElectroluxReviewLocators;
+import com.automation.electrolux.locators.ReviewLocatorsElux;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.WebElement;
 
-public class ElectroluxReviewsPageActions {
-    ElectroluxReviewLocators locators = new ElectroluxReviewLocators();
+public class ReviewsPageActionsElux {
+    ReviewLocatorsElux locators = new ReviewLocatorsElux();
 
     public boolean isReviewSectionVisible() {
         WebElementUtil.waitForElementToBeVisible(locators.reviewSection, 10);

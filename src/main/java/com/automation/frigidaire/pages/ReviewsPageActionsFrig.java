@@ -1,12 +1,13 @@
-package com.automation.familystore_en.pages;
+package com.automation.frigidaire.pages;
 
-import com.automation.familystore_en.locators.ReviewLocatorsFMEN;
+import com.automation.frigidaire.locators.ReviewsLocatorsFrig;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.WebElement;
 
-public class ReviewsPageActionsFMEN {
 
-    ReviewLocatorsFMEN locators = new ReviewLocatorsFMEN();
+public class ReviewsPageActionsFrig {
+    ReviewsLocatorsFrig locators = new ReviewsLocatorsFrig();
+
 
     public boolean isReviewSectionVisible() {
         WebElementUtil.waitForElementToBeVisible(locators.reviewSection, 10);
@@ -27,13 +28,13 @@ public class ReviewsPageActionsFMEN {
         WebElementUtil.waitForElementToBeVisible(locators.banner, 10);
         WebElementUtil.scrollIntoView(locators.banner);
         WebElementUtil.waitForElementToBeVisible(locators.reviewPage, 10);
-        WebElementUtil.scrollIntoView(locators.reviewPage);
+        WebElementUtil.scrollToElementStable(locators.reviewPage);
         WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.ratingSnapshot);
         return ele.isDisplayed();
     }
 
     public boolean isReviewStarButtonDisplayed() {
-        WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.star4);
+       WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.star4);
         return ele.isDisplayed();
     }
 
@@ -58,6 +59,11 @@ public class ReviewsPageActionsFMEN {
         close.click();
 
         WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.searchReviewBox);
+        return ele.isDisplayed();
+    }
+
+    public boolean isRatingFilterDisplayed() {
+        WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.ratingFilter);
         return ele.isDisplayed();
     }
 
@@ -91,10 +97,4 @@ public class ReviewsPageActionsFMEN {
         return ele.isDisplayed();
     }
 
-    public boolean isRatingFilterDisplayed() {
-        WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.ratingFilter);
-        return ele.isDisplayed();
-    }
-
 }
-

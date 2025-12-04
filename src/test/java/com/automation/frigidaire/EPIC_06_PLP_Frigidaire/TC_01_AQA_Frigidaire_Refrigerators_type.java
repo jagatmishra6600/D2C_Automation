@@ -1,6 +1,6 @@
 package com.automation.frigidaire.EPIC_06_PLP_Frigidaire;
 
-import com.automation.frigidaire.pages.FeaturesPageActions;
+import com.automation.frigidaire.pages.FeaturesPageActionsFrig;
 import com.automation.frigidaire.pages.FrigidaireHomePageActions;
 import com.automation.frigidaire.pages.FrigidairePlpPageActions;
 import com.automation.frigidaire.pages.FrigidaireRefrigeratorPage;
@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 
 public class TC_01_AQA_Frigidaire_Refrigerators_type extends BaseTest {
     private final FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
-    private final FeaturesPageActions pdpPage = new FeaturesPageActions();
+    private final FeaturesPageActionsFrig pdpPage = new FeaturesPageActionsFrig();
     private final FrigidairePlpPageActions plpPage = new FrigidairePlpPageActions();
     private final FrigidaireRefrigeratorPage frigidairpage = new FrigidaireRefrigeratorPage();
 

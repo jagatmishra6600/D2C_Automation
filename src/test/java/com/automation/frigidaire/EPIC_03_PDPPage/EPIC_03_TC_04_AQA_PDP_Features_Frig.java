@@ -3,15 +3,15 @@ package com.automation.frigidaire.EPIC_03_PDPPage;
 import com.automation.frigidaire.pages.FrigidaireHomePageActions;
 import com.automation.frigidaire.pages.FrigidairePlpPageActions;
 import com.automation.BaseTest;
-import com.automation.frigidaire.pages.FeaturesPageActions;
+import com.automation.frigidaire.pages.FeaturesPageActionsFrig;
 import com.automation.utils.ExtentReportManager;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class EPIC_03_TC_04_AQA_PDP_Features extends BaseTest {
+public class EPIC_03_TC_04_AQA_PDP_Features_Frig extends BaseTest {
     private final FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
-    private final FeaturesPageActions pdpPage = new FeaturesPageActions();
+    private final FeaturesPageActionsFrig pdpPage = new FeaturesPageActionsFrig();
     private final FrigidairePlpPageActions plpPage = new FrigidairePlpPageActions();
 
 

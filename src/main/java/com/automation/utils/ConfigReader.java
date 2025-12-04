@@ -107,13 +107,12 @@ public class ConfigReader {
      */
     public static String getAppUrl() {
         String brand = getBrand();
-        if (brand.equals("frigidaire")) {
-            return getProperty("app.frigidaire");
-        }
-        if (brand.equals("electrolux") || brand.equals("elux")) {
+        if (brand.equals("frig")) {
+            return getProperty("app.frig");
+        }if (brand.equals("elux")) {
             return getProperty("app.elux");
-        }if (brand.equals("fmen")) {
-            return getProperty("app.fmen");
+        }if (brand.equals("fsus")) {
+            return getProperty("app.fsus");
         }
 
         // Fallback to Frigidaire if unknown brand

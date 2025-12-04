@@ -1,16 +1,17 @@
 package com.automation.familystore_en.EPIC_03_PDP;
 
-import com.automation.familystore_en.pages.FeaturesPageActionsFMEN;
+import com.automation.BaseTest;
+import com.automation.familystore_en.pages.FeaturesPageActionsFsus;
 import com.automation.frigidaire.pages.FrigidaireHomePageActions;
 import com.automation.frigidaire.pages.FrigidairePlpPageActions;
 import com.automation.utils.ExtentReportManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class EPIC_03_TC_04_AQA_PDP_Features_FM_EN {
+public class EPIC_03_TC_04_AQA_PDP_Features_Fsus extends BaseTest {
 
     private final FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
-    private final FeaturesPageActionsFMEN pdpPage = new FeaturesPageActionsFMEN();
+    private final FeaturesPageActionsFsus pdpPage = new FeaturesPageActionsFsus();
     private final FrigidairePlpPageActions plpPage = new FrigidairePlpPageActions();
 
 

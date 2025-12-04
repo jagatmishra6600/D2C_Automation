@@ -396,41 +396,47 @@ public class WebElementUtil {
 
     public static WebElement validateInsideShadowDom(By outer, By targetLocator) {
 
-        WebElement target = null;
         WebDriver driver = DriverManager.getDriver();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         try {
-            // Step 1️ - Find the outer shadow host
-            WebElement outerHost = wait.until(ExpectedConditions.presenceOfElementLocated(outer));
+            // Wait for Shadow Host
+            WebElement shadowHost = wait.until(ExpectedConditions.presenceOfElementLocated(outer));
 
-            // Step 2 - Access its shadow root
-            SearchContext shadowRoot = null;
-            try {
-                shadowRoot = outerHost.getShadowRoot();
-                System.out.println("Outer shadow root accessed.");
-            } catch (NoSuchShadowRootException e) {
-                System.out.println("Outer host has no shadow root!");
-            }
-
-            // Step 3 - If an inner shadow host is provided, go one level deeper
-            SearchContext activeRoot = shadowRoot;
-
-            // Step 4 - Find and click the target element
-            target = wait.until(d -> {
-                assert activeRoot != null;
-                return activeRoot.findElement(targetLocator);
+            // Wait until shadowRoot becomes available
+            SearchContext shadowRoot = wait.until(d -> {
+                try {
+                    return shadowHost.getShadowRoot();
+                } catch (Exception e) {
+                    return null; // retry
+                }
             });
 
-            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", target);
+            if (shadowRoot == null) {
+                throw new RuntimeException("Shadow root not found for host: " + outer);
+            }
 
-            System.out.println("Clicked element inside shadow DOM successfully!");
+            // Now wait for element ***inside shadow DOM***
+            WebElement innerElement = wait.until(d -> {
+                try {
+                    WebElement el = shadowRoot.findElement(targetLocator);
+                    return el.isDisplayed() ? el : null;
+                } catch (StaleElementReferenceException | NoSuchElementException ex) {
+                    return null; // retry
+                }
+            });
+
+            // Scroll to center (stable)
+            ((JavascriptExecutor) driver)
+                    .executeScript("arguments[0].scrollIntoView({block: 'center', inline: 'center'});", innerElement);
+
+            return innerElement;
 
         } catch (Exception e) {
-            System.err.println("Failed to click inside shadow DOM.");
+            System.err.println("Failed to locate element inside Shadow DOM → " + targetLocator);
             e.printStackTrace();
+            return null;
         }
-        return target;
     }
 
 }

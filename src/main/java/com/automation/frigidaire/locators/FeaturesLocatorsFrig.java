@@ -2,7 +2,7 @@ package com.automation.frigidaire.locators;
 
 import org.openqa.selenium.By;
 
-public class FrigidaireFeaturesLocators {
+public class FeaturesLocatorsFrig {
 
     public final By productPDP = By.xpath("//div[contains(@class,'accessories-product')]");
     public final By featureHeading = By.xpath("//strong[text()='Overview & Features']//parent::h4//parent::span");
@@ -46,7 +46,7 @@ public class FrigidaireFeaturesLocators {
     public final By addressSuggestionOption = By.xpath("//ngb-typeahead-window//button[@role='option']");
 
     // Delivery date selection elements
-    public final By deliveryCalendarHeader = By.xpath("//h2[contains(text(),'Delivery date')]");
-    public final By deliveryAvailableInputs = By.xpath("//input[@type='radio' and @formcontrolname='selectedSlot' and not(@disabled)]");
+    public final By deliveryCalendarHeader = By.xpath("//p[contains(text(),'Delivery and installation items')]");
+    public final By deliveryDateAvailable = By.cssSelector("cx-delivery-label avaliableDates");
     public final By deliveryAvailableLabels = By.xpath("//label[contains(@class,'cx-delivery-label') and not(contains(@class,'disabled'))]");
 }

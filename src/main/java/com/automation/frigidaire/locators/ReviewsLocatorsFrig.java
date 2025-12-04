@@ -2,7 +2,7 @@ package com.automation.frigidaire.locators;
 
 import org.openqa.selenium.By;
 
-public class FrigidaireReviewsLocators {
+public class ReviewsLocatorsFrig {
     public final By reviewPage = By.xpath("//h2[text()='Reviews']");
     public final By reviewSection = By.xpath("//div[@data-bv-show='rating_summary']");
     public final By productRating = By.xpath("//div[@class='pdp_info_wrapper']//div[@itemprop='ratingValue']");

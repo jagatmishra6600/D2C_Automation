@@ -1,15 +1,15 @@
 package com.automation.frigidaire.EPIC_03_PDPPage;
 
-import com.automation.frigidaire.pages.FeaturesPageActions;
+import com.automation.frigidaire.pages.FeaturesPageActionsFrig;
 import com.automation.frigidaire.pages.FrigidaireHomePageActions;
 import com.automation.frigidaire.pages.FrigidairePlpPageActions;
 import com.automation.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class EPIC_03_TC_06_AQA_PDP_Delivery_Dates extends BaseTest {
+public class EPIC_03_TC_06_AQA_PDP_Delivery_Dates_Frig extends BaseTest {
     private final FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
-    private final FeaturesPageActions pdpPage = new FeaturesPageActions();
+    private final FeaturesPageActionsFrig pdpPage = new FeaturesPageActionsFrig();
     private final FrigidairePlpPageActions plpPage = new FrigidairePlpPageActions();
 
 
@@ -24,7 +24,7 @@ public class EPIC_03_TC_06_AQA_PDP_Delivery_Dates extends BaseTest {
         pdpPage.selectDeliveryAndSaveAndViewCart();
         pdpPage.clickProceedToCheckout();
         pdpPage.clickContinueToDelivery();
-        Assert.assertTrue(pdpPage.validateDeliveryDateEnabledAndClickable(), "Delivery date is not available or not clickable");
+        Assert.assertTrue(pdpPage.validateAllAvailableDeliveryDates(), "Delivery date is not available or not clickable");
     }
 
 }

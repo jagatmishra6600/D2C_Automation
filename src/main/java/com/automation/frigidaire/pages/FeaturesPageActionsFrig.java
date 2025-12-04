@@ -1,16 +1,20 @@
 package com.automation.frigidaire.pages;
 
-import com.automation.frigidaire.locators.FrigidaireFeaturesLocators;
+import com.automation.frigidaire.locators.FeaturesLocatorsFrig;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FeaturesPageActions {
-    FrigidaireFeaturesLocators locators = new FrigidaireFeaturesLocators();
+public class FeaturesPageActionsFrig {
+    FeaturesLocatorsFrig locators = new FeaturesLocatorsFrig();
 
 
     public void searchProduct(String productName) {
@@ -23,9 +27,9 @@ public class FeaturesPageActions {
      * Returns true if click succeeded, false otherwise.
      */
     public void clickAddToCart() {
+        WebElementUtil.waitForElementToBeVisible(locators.addToCartButton, 10);
         WebElementUtil.scrollToElementStable(locators.addToCartButton);
-        WebElementUtil.waitForElementToBeVisible(locators.addToCartButton);
-        WebElementUtil.waitForElementToBeClickable(locators.addToCartButton);
+        WebElementUtil.waitForElementToBeClickable(locators.addToCartButton, 10);
         WebElementUtil.clickElement(locators.addToCartButton);
     }
 
@@ -117,9 +121,9 @@ public class FeaturesPageActions {
     }
 
     public void selectProductFromPLP() {
-        WebElementUtil.scrollToElementStable(locators.productPDP);
         WebElementUtil.waitForElementToBeVisible(locators.productPDP, 10);
         WebElementUtil.waitForElementToBeClickable(locators.productPDP, 10);
+        WebElementUtil.scrollIntoView(locators.productPDP);
         WebElementUtil.clickElement(locators.productPDP);
     }
 
@@ -309,66 +313,79 @@ public class FeaturesPageActions {
      * It will try radio inputs first, then label->input fallback. It clicks the first available slot and
      * verifies the slot becomes selected.
      */
-    public boolean validateDeliveryDateEnabledAndClickable() {
-        // Best-effort wait for delivery calendar to appear
+    public boolean validateAllAvailableDeliveryDates() {
+        WebElementUtil driver = null;
+        WebDriverWait wait = new WebDriverWait((WebDriver) driver, Duration.ofSeconds(10));
+
         try {
+            // Wait for calendar section to be visible
             WebElementUtil.waitForElementToBeVisible(locators.deliveryCalendarHeader);
-        } catch (Exception ignored) {
-            // continue if header isn't present
-        }
 
-        int attempts = 0;
-        while (attempts < 3) {
-            try {
-                // Try radio inputs first
-                List<WebElement> inputs = WebElementUtil.findElements(locators.deliveryAvailableInputs);
-                if (!inputs.isEmpty()) {
-                    WebElement first = inputs.get(0);
-                    String id = first.getAttribute("id");
-                    if (id != null && !id.trim().isEmpty()) {
-                        By inputBy = By.id(id);
-                        WebElementUtil.scrollToElementStable(inputBy);
-                        WebElementUtil.waitForElementToBeClickable(inputBy);
-                        WebElementUtil.clickElement(inputBy);
-                        WebElement clicked = WebElementUtil.waitForElementToBeClickable(inputBy);
-                        return clicked.isSelected();
-                    }
-                }
+            // Get all available date labels
+            List<WebElement> availableDates = WebElementUtil.findElements(locators.deliveryDateAvailable);
 
-                // Fallback: try label elements which are not disabled
-                List<WebElement> labels = WebElementUtil.findElements(locators.deliveryAvailableLabels);
-                if (!labels.isEmpty()) {
-                    WebElement firstLabel = labels.get(0);
-                    String forAttr = firstLabel.getAttribute("for");
-                    if (forAttr != null && !forAttr.trim().isEmpty()) {
-                        By inputBy = By.id(forAttr);
-                        WebElementUtil.scrollToElementStable(inputBy);
-                        WebElementUtil.waitForElementToBeClickable(inputBy);
-                        WebElementUtil.clickElement(inputBy);
-                        WebElement clicked = WebElementUtil.waitForElementToBeClickable(inputBy);
-                        return clicked.isSelected();
-                    } else {
-                        // If label has no 'for', try clicking the label itself and then check the nested input
-                        WebElementUtil.scrollToElementStable(By.xpath("(//label[contains(@class,'cx-delivery-label') and not(contains(@class,'disabled'))])[1]"));
-                        WebElementUtil.clickElement(By.xpath("(//label[contains(@class,'cx-delivery-label') and not(contains(@class,'disabled'))])[1]"));
-                        // After clicking label try to find any enabled input
-                        List<WebElement> postInputs = WebElementUtil.findElements(locators.deliveryAvailableInputs);
-                        if (!postInputs.isEmpty()) {
-                            return postInputs.get(0).isSelected();
-                        }
-                    }
-                }
-
-                // nothing found; wait a bit and retry
-                attempts++;
-                try { Thread.sleep(500); } catch (InterruptedException ie) { Thread.currentThread().interrupt(); }
-            } catch (Exception e) {
-                attempts++;
-                try { Thread.sleep(500); } catch (InterruptedException ie) { Thread.currentThread().interrupt(); }
+            if (availableDates.isEmpty()) {
+                System.out.println("No available delivery dates found.");
+                return false;
             }
-        }
 
-        return false;
+            System.out.println("Found " + availableDates.size() + " available delivery dates.");
+
+            // Iterate through each date
+            for (int i = 0; i < availableDates.size(); i++) {
+
+                WebElement date = availableDates.get(i);
+
+                // Scroll the element into stable center view
+                WebElementUtil.scrollToElementStable((By) date);
+
+                // Wait for label to be clickable
+                wait.until(ExpectedConditions.elementToBeClickable(date));
+
+                String labelText = date.getText().trim();
+                System.out.println("Clicking date: " + labelText);
+
+                // Click date
+                date.click();
+
+                // Identify hidden input: label has "for=xxx"
+                String inputId = date.getAttribute("for");
+
+                // Validate checkbox/radio behind label
+                if (inputId != null && !inputId.isEmpty()) {
+                    By inputLocator = By.id(inputId);
+                    WebElement input = wait.until(ExpectedConditions.presenceOfElementLocated(inputLocator));
+
+                    // Wait until selected
+                    wait.until(d -> input.isSelected() ||
+                            Boolean.parseBoolean(input.getAttribute("checked")));
+
+                    if (!input.isSelected()) {
+                        System.out.println("Date not selected properly: " + labelText);
+                        return false;
+                    }
+
+                } else {
+                    // If input ID missing, fallback check on label
+                    wait.until(d -> date.getAttribute("class").contains("selected") ||
+                            "true".equals(date.getAttribute("aria-checked")));
+                }
+
+                System.out.println("✔ Successfully validated date: " + labelText);
+
+                // Re-fetch available dates after each click because DOM refreshes
+                availableDates = WebElementUtil.findElements(
+                        By.cssSelector("label.cx-delivery-label.avaliableDates")
+                );
+            }
+
+            return true;
+
+        } catch (Exception e) {
+            System.err.println("Failure while validating available delivery dates.");
+            e.printStackTrace();
+            return false;
+        }
     }
 
 }

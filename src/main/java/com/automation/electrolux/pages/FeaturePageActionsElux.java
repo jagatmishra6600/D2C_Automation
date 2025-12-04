@@ -1,14 +1,13 @@
-package com.automation.familystore_en.pages;
+package com.automation.electrolux.pages;
 
-import com.automation.familystore_en.locators.FeaturesLocatorsFMEN;
+import com.automation.electrolux.locators.FeatureLocatorsElux;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import java.util.List;
 
-public class FeaturesPageActionsFMEN {
-
-    FeaturesLocatorsFMEN locators = new FeaturesLocatorsFMEN();
+public class FeaturePageActionsElux {
+    FeatureLocatorsElux locators = new FeatureLocatorsElux();
 
 
     public void searchProduct(String productName) {
@@ -17,9 +16,9 @@ public class FeaturesPageActionsFMEN {
     }
 
     public void selectProductFromPLP() {
-        WebElementUtil.scrollToElementStable(locators.productPDP);
         WebElementUtil.waitForElementToBeVisible(locators.productPDP, 10);
         WebElementUtil.waitForElementToBeClickable(locators.productPDP, 10);
+        WebElementUtil.scrollIntoView(locators.productPDP);
         WebElementUtil.clickElement(locators.productPDP);
     }
 

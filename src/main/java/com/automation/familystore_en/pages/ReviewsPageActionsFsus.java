@@ -1,13 +1,12 @@
-package com.automation.frigidaire.pages;
+package com.automation.familystore_en.pages;
 
-import com.automation.frigidaire.locators.FrigidaireReviewsLocators;
+import com.automation.familystore_en.locators.ReviewLocatorsFsus;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.WebElement;
 
+public class ReviewsPageActionsFsus {
 
-public class ReviewsPageActions {
-    FrigidaireReviewsLocators locators = new FrigidaireReviewsLocators();
-
+    ReviewLocatorsFsus locators = new ReviewLocatorsFsus();
 
     public boolean isReviewSectionVisible() {
         WebElementUtil.waitForElementToBeVisible(locators.reviewSection, 10);
@@ -28,14 +27,13 @@ public class ReviewsPageActions {
         WebElementUtil.waitForElementToBeVisible(locators.banner, 10);
         WebElementUtil.scrollIntoView(locators.banner);
         WebElementUtil.waitForElementToBeVisible(locators.reviewPage, 10);
-        WebElementUtil.scrollToElementStable(locators.reviewPage);
-//        WebElementUtil.scrollIntoView(locators.reviewPage, 200);
+        WebElementUtil.scrollIntoView(locators.reviewPage);
         WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.ratingSnapshot);
         return ele.isDisplayed();
     }
 
     public boolean isReviewStarButtonDisplayed() {
-       WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.star4);
+        WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.star4);
         return ele.isDisplayed();
     }
 
@@ -60,11 +58,6 @@ public class ReviewsPageActions {
         close.click();
 
         WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.searchReviewBox);
-        return ele.isDisplayed();
-    }
-
-    public boolean isRatingFilterDisplayed() {
-        WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.ratingFilter);
         return ele.isDisplayed();
     }
 
@@ -98,4 +91,10 @@ public class ReviewsPageActions {
         return ele.isDisplayed();
     }
 
+    public boolean isRatingFilterDisplayed() {
+        WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.ratingFilter);
+        return ele.isDisplayed();
+    }
+
 }
+

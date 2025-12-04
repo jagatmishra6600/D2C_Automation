@@ -1,20 +1,20 @@
 package com.automation.familystore_en.EPIC_03_PDP;
 
-import com.automation.familystore_en.pages.ReviewsPageActionsFMEN;
-import com.automation.frigidaire.pages.FeaturesPageActions;
+import com.automation.BaseTest;
+import com.automation.familystore_en.pages.ReviewsPageActionsFsus;
+import com.automation.frigidaire.pages.FeaturesPageActionsFrig;
 import com.automation.frigidaire.pages.FrigidaireHomePageActions;
 import com.automation.frigidaire.pages.FrigidairePlpPageActions;
-import com.automation.frigidaire.pages.ReviewsPageActions;
 import com.automation.utils.ExtentReportManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class EPIC_03_TC_03_AQA_PDP_Reviews_FM_EN {
+public class EPIC_03_TC_03_AQA_PDP_Reviews_Fsus extends BaseTest {
 
     private final FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
-    private final FeaturesPageActions pdpPage = new FeaturesPageActions();
+    private final FeaturesPageActionsFrig pdpPage = new FeaturesPageActionsFrig();
     private final FrigidairePlpPageActions plpPage = new FrigidairePlpPageActions();
-    private final ReviewsPageActionsFMEN reviewsPage = new ReviewsPageActionsFMEN();
+    private final ReviewsPageActionsFsus reviewsPage = new ReviewsPageActionsFsus();
 
     @Test(groups = {"smoke", "regression"}, description = "Verify Reviews on PDP page")
     public void testReviewsFunctionality() {
