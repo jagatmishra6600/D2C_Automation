@@ -3,6 +3,7 @@ package com.automation.familystoreus.pages;
 import static com.automation.utils.WaitUtils.untilClickable;
 
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.automation.familystoreus.locators.FSUS_Homepage;
 import com.automation.familystoreus.locators.FSUS_LoginPage;
@@ -34,9 +35,10 @@ public class FsusLoginPageActions {
 							 .enterPassword(password)
 							 .clickTermsAndConditionsCheckbox()
 							 .clickLoginButton();
-							  
-		 if(!isUserLoggedIn()) {
-			 return clickLoginButton();
+		 var count = 0;
+		 while(!waitUntilLoginButtonIsInvisible() && count<2) {
+			 clickLoginButton();
+			 count++;
 		 }
 		 return new FsusHomePageActions();
 	 }
@@ -44,13 +46,14 @@ public class FsusLoginPageActions {
 	 
 	 public FsusHomePageActions loginWithDefaultCredentials() throws InterruptedException {
 		 navigateToLoginPage();
-		 enterEmailAddress(UserTestData.FS_USERNAME)
-							 .enterPassword(UserTestData.PASSWORD)
+		 enterEmailAddress(UserTestData.getUserName())
+							 .enterPassword(UserTestData.getPassword())
 							 .clickTermsAndConditionsCheckbox()
-							 .clickLoginButton();
-							  
-		 if(!isUserLoggedIn()) {
-			 return clickLoginButton();
+							 .clickLoginButton();						  
+		 var count = 0;
+		 while(!waitUntilLoginButtonIsInvisible() && count<2) {
+			 clickLoginButton();
+			 count++;
 		 }
 		 return new FsusHomePageActions();
 	 }
@@ -77,9 +80,9 @@ public class FsusLoginPageActions {
 		 return this;
 	 }
 	 
-	 private boolean isUserLoggedIn() {
+	 private boolean waitUntilLoginButtonIsInvisible() {
 		 try {
-			 WebElementUtil.waitForElementToBeVisible(FSUS_Homepage.userGreetingDropdown,5);
+			 WebElementUtil.waitForCondition(ExpectedConditions.invisibilityOfElementLocated(FSUS_LoginPage.loginButton),5);
 			 return true;
 		 }
 		 catch(Exception e){

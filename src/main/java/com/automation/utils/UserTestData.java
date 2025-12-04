@@ -25,4 +25,20 @@ public class UserTestData {
     	return new CreateAccountData(getDisposableMailDropEmailAddress()
     			,FIRST_NAME,LAST_NAME,PASSWORD);
     }
+    
+    public static String getUserName() {
+    	var brand = ConfigReader.getBrand();
+    	if(brand.equalsIgnoreCase("elux") || brand.equalsIgnoreCase("electrolux")	
+    			||brand.equalsIgnoreCase("frigidaire")) {
+    		return USERNAME;
+    	}
+    	else if(brand.equalsIgnoreCase("fsus")|| brand.equalsIgnoreCase("familystoreus")) {
+    		return FS_USERNAME;
+    	}
+    	return USERNAME;
+    }
+    
+    public static String getPassword() {
+    	return PASSWORD;
+    }
 }
