@@ -74,6 +74,10 @@ public class HomePageActions {
 	
 	public HomePageActions loginWithDefaultCredentials() {
 		return navigateToHomePage().navigateToLoginPage()
-									.login(UserTestData.USERNAME, UserTestData.PASSWORD);
+									.login(UserTestData.getUserName(), UserTestData.getPassword());
 	}
+	
+	public ForgotPasswordPageActions navigateToResetPasswordPage() {
+    	return navigateToHomePage().navigateToLoginPage().clickForgotPasswordLink();
+    }
 }
