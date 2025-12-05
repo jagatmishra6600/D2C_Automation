@@ -1,6 +1,6 @@
-package com.automation.familystore_en.pages;
+package com.automation.familystoreus.pages;
 
-import com.automation.familystore_en.locators.ReviewLocatorsFsus;
+import com.automation.familystoreus.locators.ReviewLocatorsFsus;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.WebElement;
 
@@ -43,13 +43,15 @@ public class ReviewsPageActionsFsus {
     }
 
     public boolean isReviewImagesDisplayed() {
-        WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.reviewImagesSection);
+        WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector,
+                locators.reviewImagesSection);
         ele.isDisplayed();
 
         WebElement image = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.reviewImages);
         image.click();
 
-        WebElement singleImg = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.singleReviewImage);
+        WebElement singleImg = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector,
+                locators.singleReviewImage);
         return singleImg.isDisplayed();
     }
 
@@ -97,4 +99,3 @@ public class ReviewsPageActionsFsus {
     }
 
 }
-

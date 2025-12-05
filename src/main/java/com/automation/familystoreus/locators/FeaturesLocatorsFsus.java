@@ -1,4 +1,4 @@
-package com.automation.familystore_en.locators;
+package com.automation.familystoreus.locators;
 
 import org.openqa.selenium.By;
 

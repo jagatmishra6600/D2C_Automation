@@ -1,6 +1,6 @@
-package com.automation.familystore_en.pages;
+package com.automation.familystoreus.pages;
 
-import com.automation.familystore_en.locators.FeaturesLocatorsFsus;
+import com.automation.familystoreus.locators.FeaturesLocatorsFsus;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -9,7 +9,6 @@ import java.util.List;
 public class FeaturesPageActionsFsus {
 
     FeaturesLocatorsFsus locators = new FeaturesLocatorsFsus();
-
 
     public void searchProduct(String productName) {
         WebElementUtil.waitForElementToBeVisible(locators.searchBox);
@@ -22,7 +21,6 @@ public class FeaturesPageActionsFsus {
         WebElementUtil.scrollIntoView(locators.productPDP);
         WebElementUtil.clickElement(locators.productPDP);
     }
-
 
     public boolean validateFeatureDescription() {
         WebElementUtil.waitForElementToBeVisible(locators.featureDescription);
@@ -54,7 +52,7 @@ public class FeaturesPageActionsFsus {
             String docName = doc.getText().trim();
             String href = doc.getAttribute("href");
             if (!doc.isDisplayed() || !doc.isEnabled()) {
-                System.err.println("Document not visible/enabled: " + docName );
+                System.err.println("Document not visible/enabled: " + docName);
                 return false;
             }
             if (href == null || !href.toLowerCase().contains(".pdf")) {
@@ -64,6 +62,5 @@ public class FeaturesPageActionsFsus {
         }
         return true;
     }
-
 
 }
