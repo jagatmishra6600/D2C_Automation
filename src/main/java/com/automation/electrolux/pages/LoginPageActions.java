@@ -3,6 +3,7 @@ package com.automation.electrolux.pages;
 import static com.automation.utils.WaitUtils.untilClickable;
 
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 import com.automation.electrolux.locators.ELUX_LoginPage;
@@ -26,7 +27,7 @@ public class LoginPageActions {
        return this;
 	}
 	
-	 public HomePageActions login(String emailAddress, String password) throws InterruptedException {
+	 public HomePageActions login(String emailAddress, String password){
 		 enterEmailAddress(emailAddress)
 							 .enterPassword(password);
 		 return clickLoginButton();
@@ -87,8 +88,8 @@ public class LoginPageActions {
 		return WebElementUtil.isDisplayed(ELUX_LoginPage.createAccountLink);
 	}
 	
-	public String getElectroluxLinkedAccountMessage() {
-		return WebElementUtil.getText(ELUX_LoginPage.electroluxLinkedAccountMessage);
+	public String getFrigidaireLinkedAccountMessage() {
+		return WebElementUtil.getText(ELUX_LoginPage.frigidaireLinkedAccountMessage);
 	}
 	
 	public boolean isAlternateLoginOptionsDisplayed() {
@@ -108,7 +109,7 @@ public class LoginPageActions {
 	}
 	
 	public void verifyLoginPageFieldsAndMessages() {
-		Assert.assertTrue(isLoginPageLoaded(),"User is not navigated to LoginPage");
+		Assert.assertTrue(isLoginPageLoaded(),"Login Button is not Present in Login Page");
     	Assert.assertTrue(isLoginToStoreTitleDisplayed(),"'Log in to Electrolux' title is not present");
     	Assert.assertTrue(isEmailAddressFieldDisplayed(),"Email Address field is not displayed");
     	Assert.assertTrue(isPasswordFieldDisplayed(),"Password field is not displayed");
@@ -116,9 +117,30 @@ public class LoginPageActions {
     	Assert.assertTrue(isKeepMeLoggedInCheckboxDisplayed(),"'Keep Me Logged In' checkbox is not displayed");
     	Assert.assertTrue(isForgotPasswordLinkDisplayed(),"Forgot Password Link is not displayed");
     	Assert.assertTrue(isCreateAccountLinkDisplayed(),"Create an Account Link is not displayed");
-    	Assert.assertEquals(getElectroluxLinkedAccountMessage(),"If you already have an account with Frigidaire.com, a part of the Electrolux Group, you can use those details to log in."
+    	Assert.assertTrue(isNewToElectroluxLabelDisplayed(),"'New To Electrolux?' label  is not displayed");	
+    	Assert.assertTrue(isAccountBenefitsLabelsDisplayed(),"Account Benefits are not mentioned in the Login Page");
+    	Assert.assertEquals(getFrigidaireLinkedAccountMessage(),"If you already have an account with Frigidaire.com, a part of the Electrolux Group, you can use those details to log in."
     																,"Frigidaire Linked Account Message not displayed");
     	Assert.assertTrue(isAlternateLoginOptionsDisplayed(),"Sign in Options with Google or Apple is not Displayed");
     	 
+	}
+	
+	public CreateAccountPageActions navigateToCreateAccountPage() {
+		return navigateToLoginPage().clickCreateAccountLink();
+	}
+	
+	public CreateAccountPageActions clickCreateAccountLink() {
+		WebElementUtil.scrollIntoView(ELUX_LoginPage.createAccountLink);
+		WebElementUtil.clickElement(ELUX_LoginPage.createAccountLink);
+		return new CreateAccountPageActions();
+	}
+	
+	public boolean isNewToElectroluxLabelDisplayed() {
+		return WebElementUtil.isDisplayed(ELUX_LoginPage.newToElectroluxLabel);
+	}
+	
+	public boolean isAccountBenefitsLabelsDisplayed() {
+	    return !WebElementUtil.findElements(ELUX_LoginPage.accountBenefitsLabelList)
+	    					.isEmpty();
 	}
 }
