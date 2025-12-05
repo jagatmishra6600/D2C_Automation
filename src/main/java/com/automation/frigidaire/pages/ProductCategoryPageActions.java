@@ -22,7 +22,10 @@ public ProductCategoryPageActions clickOnProductMenu(String website, String text
         locator = By.xpath("//h5[normalize-space(text())='" + text + "']");
     } else if (website.equalsIgnoreCase("electrolux")) {
         locator = By.xpath("//h5[normalize-space(text())='" + text + "']");
-    } else {
+    }else if (website.equalsIgnoreCase("fsus")) {
+        locator = By.xpath("//h5[normalize-space(text())='" + text + "']");
+    }
+    else {
         throw new IllegalArgumentException("Unknown website: " + website);
     }
 

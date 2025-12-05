@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 public class PLPProductItemsPageActions {
 
     private final By emailPopUp = By.xpath("//span[@id=\"close-modal123\"]");
-    private final By addToCart = By.xpath("//span[text()=\" Add to cart \" and @class=\"ng-star-inserted\"]");
+    public static final By addToCart = By.xpath("//span[normalize-space()='Add to cart' and contains(@class,'ng-star-inserted')]");
     private final By earliestDelivery = By.xpath("//span[contains(text(), 'Earliest delivery:') or contains(text(),'In stock!')]");
     private final By temporarilyLocator = By.xpath("//button[span[text()=\"Temporarily Out of Stock\"]]");
     private final By emailFieldLocator = By.xpath("//input[@name=\"Email\" and contains(@placeholder, \"Enter email\")]");
@@ -144,13 +144,14 @@ public class PLPProductItemsPageActions {
 
         try {
             WebDriver driver = DriverManager.getDriver();
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+            WebElementUtil.scrollByPixels(driver,0,350);
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
             // Scroll slightly upward to ensure proper viewport position
             closeEmailPopUp();
-            driver.navigate().refresh();
+            // driver.navigate().refresh();
 
-            WebElementUtil.scrollByPixels(driver,0,300);
+            // WebElementUtil.scrollByPixels(driver,0,250);
             WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(productFilterItem(text)));
             WebElementUtil.scrollToElement(driver, element);
             wait.until(d -> !element.getText().trim().isEmpty());
@@ -158,7 +159,6 @@ public class PLPProductItemsPageActions {
             // Get text and validate
             String actualText = element.getText().trim();
             Assert.assertEquals(actualText, assertValue, "Text of the filter item does not match the expected value.");
-
             System.out.println(" Verified filter text: '" + actualText + "' matches expected value.");
 
         } catch (TimeoutException e) {
@@ -1085,8 +1085,6 @@ public class PLPProductItemsPageActions {
         By checkbox = getFeatureLocator(filterCategory, filterName);
         wait.until(ExpectedConditions.elementToBeClickable(checkbox));
         WebElementUtil.scrollAndClickUsingJSE(driver, WebElementUtil.findElement(checkbox));
-
-
         WebElement crossElement = wait.until(ExpectedConditions.elementToBeClickable(pillCross));
         WebElementUtil.scrollToElement(driver, crossElement);
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", crossElement);
@@ -1100,6 +1098,9 @@ public class PLPProductItemsPageActions {
 
     public void verifyAcRoomSize(String featureKey, String SpecsName, String SpecsKey, String SpecValue, int lowerBound, int upperBound) throws InterruptedException {
 
+
+        WebDriver driver=DriverManager.getDriver();
+        WebElementUtil.scrollByPixels(driver,0,350);
         WebElement imageElement = WaitUtils.untilClickable(getSelectRoomSizeLocator(featureKey),60);
         WebElementUtil.mouseHover(DriverManager.getDriver(), imageElement);
         WebElementUtil.scrollAndClickUsingJSE(DriverManager.getDriver(), WebElementUtil.findElement(getSelectRoomSizeLocator(featureKey)));

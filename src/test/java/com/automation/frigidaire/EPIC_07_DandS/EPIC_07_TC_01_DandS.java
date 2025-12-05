@@ -39,11 +39,8 @@ public class EPIC_07_TC_01_DandS extends BaseTest {
         PLPProductItemsPageActions.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
         DeliveryInstallationPageActions.selectProductAndAddToCart(0);
-        //Assert.assertTrue(DeliveryInstallationPageActions.isSectionVisible("Delivery & installation options"));
-     //   Assert.assertTrue(DeliveryInstallationPageActions.isSectionVisible(FE_DeliveryAndInstallation.getRadioButton("Delivery & installation")));
-      //  DeliveryInstallationPageActions.verifySubLinksinDAndSPage();
-          DeliveryInstallationPageActions.verifyHeadingAndSubLinksinDAndSPage("Delivery & installation");
-       // Assert.assertTrue(DeliveryInstallationPageActions.isSectionVisible(FE_DeliveryAndInstallation.getRadioButton("Delivery & installation")));
+        DeliveryInstallationPageActions.verifyHeadingAndSubLinksinDAndSPage("Delivery & installation");
+        DeliveryInstallationPageActions.verifyPopupTextIsVisible();
         ExtentReportManager.getTest().pass("Successfully hide/show filters functionality for FrenchDoor");
     }
 
@@ -55,6 +52,7 @@ public class EPIC_07_TC_01_DandS extends BaseTest {
         DeliveryInstallationPageActions.selectProductAndAddToCart(0);
         DeliveryInstallationPageActions.verifyHeadingAndSubLinksinDAndSPage("Delivery & installation");
         DeliveryInstallationPageActions.verifyPopupTextIsVisible();
+        DeliveryInstallationPageActions.verifyProtectionPlanSection(" Select a protection plan");
         ExtentReportManager.getTest().pass("Successfully hide/show filters functionality for FrenchDoor");
     }
 
@@ -66,10 +64,22 @@ public class EPIC_07_TC_01_DandS extends BaseTest {
         PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
         DeliveryInstallationPageActions.selectProductAndAddToCart(0);
 //        DeliveryInstallationPageActions.verifyHeadingAndSubLinksinDAndSPage("Delivery & installation");
-        DeliveryInstallationPageActions.verifyProtectionPlanSection(" Select a protection plan");
+        DeliveryInstallationPageActions.verifyProtectionPlanSection("frigidaire");
         ExtentReportManager.getTest().pass("Successfully hide/show filters functionality for FrenchDoor");
     }
 
 
+    @Test(groups = {"smoke", "regression"}, description = "To verify Included Parts section within Delivery & installation section")
+    public void EPIC_05_DandS_TC_02_test_Decline_Protection_Plan() throws InterruptedException {
+        navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
+        DeliveryInstallationPageActions.selectProductAndAddToCart(0);
+        DeliveryInstallationPageActions.verifyHeadingAndSubLinksinDAndSPage("Delivery & installation");
+        DeliveryInstallationPageActions.verifyPopupTextIsVisible();
+        DeliveryInstallationPageActions.verifyProtectionPlanSection("frigidaire");
+        DeliveryInstallationPageActions.validateViewDetailsPopUp();
+        DeliveryInstallationPageActions.isDeclineProtectionVisible();
+        DeliveryInstallationPageActions.validateProtectionPlanPrice("frigidaire","1 year");
+        ExtentReportManager.getTest().pass("Successfully verify the D and S page in Frigidaire");
+    }
 
 }
