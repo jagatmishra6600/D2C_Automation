@@ -35,16 +35,7 @@ public class CreateAccountPageActions {
 	 }
 	 
 	 public String getCreateAccountSignUpMessage() {
-		 var brand = ConfigReader.getProperty("brand");
-		 if(brand.equalsIgnoreCase("electrolux")) {
-			 return WebElementUtil.getText(ELUX_CreateAccountPage.accessToExclusiveSignUpMessage);
-		 }
-		 else if(brand.equalsIgnoreCase("frigidaire")) {
-			 return WebElementUtil.getText(ELUX_CreateAccountPage.accessToExclusiveSignUpMessage);
-		 }
-		 else {
-			 throw new IllegalStateException("Invalid Environment");
-		 }
+		 return WebElementUtil.getText(ELUX_CreateAccountPage.accessToExclusiveSignUpMessage);
 	 }
 	 
 	 public boolean isEmailAddressFieldDisplayed() {
