@@ -1,48 +1,29 @@
 package com.automation.frigidaire.pages;
 
-import com.automation.frigidaire.locators.FrigidaireConstants;
+import com.automation.frigidaire.locators.FrigidairePLPActions;
 import com.automation.utils.DriverManager;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
+import java.time.Duration;
 
 public class ProductItemsPageActions {
 
     // Do not initialize WebDriver at class instantiation time.
     // Access DriverManager.getDriver() inside methods after BaseTest @BeforeMethod runs.
 
-    private final By emailPopUp = By.xpath("//span[@id=\"close-modal123\"]");
-    private final By addToCart = By.xpath("//span[text()=\" Add to cart \" and @class=\"ng-star-inserted\"]");
-    private final By earliestDelivery = By.xpath("//span[contains(text(), 'Earliest delivery:') or contains(text(),'In stock!')]");
-    private final By temporarilyLocator = By.xpath("//button[span[text()=\"Temporarily Out of Stock\"]]");
-    private final By emailFieldLocator = By.xpath("//input[@name=\"Email\" and contains(@placeholder, \"Enter email\")]");
-    private final By notifyBtnLocator = By.xpath("//input[@id=\"submitBtn\" and @name=\"submitBtn\"]");
-    private final By emailValidationLocator = By.xpath("//span[contains(normalize-space(.), \"You’re signed up\")]");
-    private final By temporarilyLocatorAirCare= By.xpath("//span[text()=\"Temporarily out of stock in your area.\"]");
+    FrigidairePLPActions plpAction = new FrigidairePLPActions();
+
 
     public void verifyProductItemPage(String str, String assertValue) {
         By locator = By.xpath("//h1[normalize-space(text())='" + str + "']");
         WebElementUtil.waitForElementToBeVisible(locator);
         String s1 = WebElementUtil.getText(locator);
         Assert.assertEquals(s1, assertValue);
-    }
-
-    public boolean productIsInStock(String productName) {
-        WebElementUtil.zoomInOrOut(10);
-        boolean isAvailable = false;
-        try {
-            By locator = By.xpath("//span[normalize-space(text())='" + productName + "']");
-            WebElementUtil.waitForElementToBeClickable(locator);
-            WebElementUtil.clickElement(locator);
-            isAvailable = true;
-        } catch (Exception e) {
-            System.out.println("Product NOT FOUND in product list: " + productName);
-        }
-        WebElementUtil.zoomInOrOut(60);
-        return isAvailable;
     }
 
     public void clickOnProductMenu(String text) {
@@ -52,126 +33,75 @@ public class ProductItemsPageActions {
     }
 
     public void closeEmailPopUp() {
-        WaitUtils.untilVisible(emailPopUp, 60);
-        WebElementUtil.clickElement(emailPopUp);
-    }
-
-    public void checkAndHandleNotifyMeForKitchen(String productName, String email) {
-        boolean inStock = productIsInStock(productName);
-        if (inStock) {
-            verifyProductInOutStockAndNotifyForKitchen(email);
-        } else {
-            System.out.println("Product '" + productName + "' is not listed (likely out of stock). Skipping Notify Me tests.");
-        }
-    }
-
-    public void verifyProductInOutStockAndNotifyForKitchen(String email) {
         try {
-            WebElementUtil.waitForElementToBeVisible(addToCart);
-            String button = WebElementUtil.getText(addToCart).trim();
-
-            if(button.equalsIgnoreCase(FrigidaireConstants.ADD_TO_CART)){
-                WebElementUtil.waitForElementToBeVisible(earliestDelivery);
-                String actual = WebElementUtil.getText(earliestDelivery).trim();
-                String partialText = FrigidaireConstants.EARLIEST_DATE;
-                String partialTextSecond = FrigidaireConstants.IN_STOCK;
-
-                Assert.assertTrue(actual.contains(partialText) || actual.contains(partialTextSecond),
-                        "Text does not contain expected substring.");
-                System.out.println(actual);
-
-            }
+            WaitUtils.untilVisible(plpAction.emailPopUp, 60);
+            WebElementUtil.clickElement(plpAction.emailPopUp);
         } catch (Exception e) {
-            // Out-of-stock scenario
-            WebElementUtil.waitForElementToBeVisible(temporarilyLocator);
-            String actual = WebElementUtil.getText(temporarilyLocator).trim();
-            String partialText = FrigidaireConstants.TEMPORARILY;
-            System.out.println(actual);
-            Assert.assertTrue(actual.contains(partialText), "Text does not contain expected substring.");
-            try {
-                // Notify Me functionality
-                WebDriver driver = DriverManager.getDriver();
-                WebElement emailField = driver.findElement(emailFieldLocator);
-                WebElement notifyBtn = driver.findElement(notifyBtnLocator);
-                WaitUtils.untilVisible(emailField);
-                emailField.clear();
-                emailField.sendKeys(email);
-                WaitUtils.untilClickable(notifyBtn);
-                notifyBtn.click();
-
-                WebElementUtil.waitForElementToBeVisible(emailValidationLocator);
-                WebDriver driver2 = DriverManager.getDriver();
-                WebElement getEmailValidationLocator= driver2.findElement(emailValidationLocator);
-                String actualEmailValidationText= getEmailValidationLocator.getText();
-                System.out.println(actualEmailValidationText);
-
-                Assert.assertTrue(actualEmailValidationText.contains("You’re signed up!"));
-                System.out.println(actualEmailValidationText);
-                System.out.println("Message displayed: ");
-
-            } catch (Exception notifyException) {
-                Assert.fail("Notify Me functionality failed due to exception: " + notifyException.getMessage());
-            }
+            System.out.println("Email popup is not visible");
         }
     }
 
-    public void checkAndHandleNotifyMeForAirConditioners(String productName, String email) {
-        boolean inStock = productIsInStock(productName);
-        if (inStock) {
-            verifyProductInOutStockAndNotifyForAirConditioners(email);
+    public void clickOnProductName(String sku) throws InterruptedException {
+        WebDriver driver = DriverManager.getDriver();
+        WebElementUtil.zoomInOrOut(75);
+        Thread.sleep(5000);
+        By productNameX = By.xpath("//div[normalize-space(text())='" + sku + "']/parent::div/parent::div//div[@class='col- Product-Name my-2 min-height-v10']//a");
+        WebElement element = driver.findElement(productNameX);
+        WebElementUtil.scrollToElement(driver, element);
+        WebElementUtil.scrollToElementStable(productNameX);
+        WebElementUtil.waitForElementToBeVisible(productNameX);
+        WebElementUtil.waitForElementToBeClickable(productNameX);
+        WebElementUtil.clickElement(productNameX);
+    }
+
+    public void checkStock() throws InterruptedException {
+        Thread.sleep(5000);
+        if (WebElementUtil.isDisplayed(plpAction.addToCart)) {
+            WebElementUtil.waitForElementToBeClickable(plpAction.addToCart);
+            verifyStockForAirCareProduct();
         } else {
-            System.out.println("Product '" + productName + "' is not listed (likely out of stock). Skipping Notify Me tests.");
+            checkOutOfStock();
         }
+
     }
 
-    public void verifyProductInOutStockAndNotifyForAirConditioners(String email) {
+    public void verifyStockForAirCareProduct() {
+        WebDriver driver = DriverManager.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
-        try {
-            WebElementUtil.waitForElementToBeVisible(addToCart);
-            String button = WebElementUtil.getText(addToCart).trim();
+        WebElementUtil.zoomInOrOut(60);
 
-            // In-stock scenario
-            if (button.equalsIgnoreCase("Add to cart")) {
-                WebElementUtil.waitForElementToBeVisible(earliestDelivery);
-                String actual = WebElementUtil.getText(earliestDelivery).trim();
-                String partialText = "Earliest delivery:";
-                String partialTextSecond = "In stock";
+        WebElementUtil.isDisplayed(plpAction.earliestDelivery);
+        WebElement deliveryElement = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(plpAction.earliestDelivery)
 
-                Assert.assertTrue(actual.contains(partialText) || actual.contains(partialTextSecond),
-                        "Text does not contain expected substring.");
+        );
+        String actualText = deliveryElement.getText().trim();
+        Assert.assertTrue(
+                actualText.contains("Earliest delivery") || actualText.contains("In stock"),
+                " Text does not contain 'Earliest delivery' or 'In stock'. Found: " + actualText);
 
-                System.out.println(actual);
+    }
 
-            }
-        } catch (Exception e) {
-            // Out-of-stock scenario
-            WebElementUtil.waitForElementToBeVisible(temporarilyLocatorAirCare);
-            String actual = WebElementUtil.getText(temporarilyLocatorAirCare).trim();
-            String partialText = FrigidaireConstants.TEMPORARILY_AIR;
-            System.out.println(actual);
-            Assert.assertTrue(actual.contains(partialText), "Text does not contain expected substring.");
+    public void checkOutOfStock() {
+        WebElementUtil.zoomInOrOut(75);
+        WebDriver driver = DriverManager.getDriver();
 
-            try {
-                // Notify Me functionality
-                WebDriver driver = DriverManager.getDriver();
-                WebElement emailField = driver.findElement(emailFieldLocator);
-                WebElement notifyBtn = driver.findElement(notifyBtnLocator);
-                WaitUtils.untilVisible(emailField);
-                emailField.clear();
-                emailField.sendKeys(email);
-                WaitUtils.untilClickable(notifyBtn);
-                notifyBtn.click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        WebElement outOfStockText = wait.until(ExpectedConditions.visibilityOfElementLocated(plpAction.outOfStock));
+        WebElementUtil.scrollToElement(driver, outOfStockText);
+        Assert.assertTrue(outOfStockText.getText().contains("Temporarily out of stock in your area."));
 
-                WebElementUtil.waitForElementToBeVisible(emailValidationLocator);
-                WebElement emailValidationLocatorText= driver.findElement(emailValidationLocator);
-                String actualEmailValidationText= emailValidationLocatorText.getText();
-                System.out.println(actualEmailValidationText);
-                Assert.assertTrue(actualEmailValidationText.contains("You’re signed up!"));
+        WebElement emailInput = wait.until(ExpectedConditions.elementToBeClickable(plpAction.emailField));
+        emailInput.clear();
+        emailInput.sendKeys("rajatverma11@gmail.com");
 
-            } catch (Exception notifyException) {
-                Assert.fail("Notify Me functionality failed due to exception: " + notifyException.getMessage());
-            }
-        }
+        WebElement notifyBtn = wait.until(ExpectedConditions.elementToBeClickable(plpAction.notifyButton));
+        notifyBtn.click();
+
+        WebElement verifyText = wait.until(ExpectedConditions.visibilityOfElementLocated(plpAction.notifyVerify));
+        Assert.assertTrue(verifyText.getText().contains("You’re signed up"));
+
     }
 
 

@@ -1,5 +1,6 @@
 package com.automation.electrolux.EPIC_03_PDP;
 
+import com.automation.BaseTest;
 import com.automation.electrolux.pages.ElectroluxFAQ;
 import com.automation.electrolux.pages.ElectroluxProductCards;
 
@@ -11,7 +12,7 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TC_08_PDP_FAQ  {
+public class EPIC_03_TC_08_PDP_FAQ extends BaseTest {
     ElectroluxProductCards electroluxProductCards=new ElectroluxProductCards();
     ElectroluxFAQ electroluxFAQ=new ElectroluxFAQ();
 
@@ -22,7 +23,7 @@ public class TC_08_PDP_FAQ  {
         electroluxProductCards.clickOnProductMenu("Shop All Vacuums");
         Assert.assertTrue(WebElementUtil.isDisplayed(By.xpath("//h1[normalize-space(text())='Vacuums']")),"Vacuums");
         electroluxProductCards.closeEmailPopUp();
-        electroluxFAQ.productNameClick("Ergorapido™ Vacuum with Free Replacement Filters");
+        electroluxFAQ.productNameClick("EHVS65S1AO");
         electroluxFAQ.productFAQsSection();
         ExtentReportManager.getTest().pass("Verify FAQ Section in the PDP");
         DriverManager.quitDriver();

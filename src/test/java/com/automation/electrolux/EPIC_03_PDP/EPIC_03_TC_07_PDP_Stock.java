@@ -1,5 +1,6 @@
 package com.automation.electrolux.EPIC_03_PDP;
 
+import com.automation.BaseTest;
 import com.automation.electrolux.pages.ElectroluxOutOfStock;
 import com.automation.electrolux.pages.ElectroluxProductCards;
 import com.automation.utils.DriverManager;
@@ -9,7 +10,7 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TC_07_PDP_Stock {
+public class EPIC_03_TC_07_PDP_Stock extends BaseTest {
     ElectroluxProductCards electroluxProductCards = new ElectroluxProductCards();
     ElectroluxOutOfStock electroluxOutOfStock = new ElectroluxOutOfStock();
 
@@ -20,7 +21,7 @@ public class TC_07_PDP_Stock {
         electroluxOutOfStock.clickOnProductMenu("Shop All Vacuums");
         Assert.assertTrue(WebElementUtil.isDisplayed(By.xpath("//h1[normalize-space(text())='Vacuums']")),"Vaccums");
         electroluxOutOfStock.closeEmailPopUp();
-        electroluxOutOfStock.checkPlpItem("Vacuums");
+        electroluxOutOfStock.checkPlpItem("Vacuums","EHVS65S1AO");
         ExtentReportManager.getTest().pass("Verify Vacuums Product Details in Product listing page and validation for stock");
         DriverManager.quitDriver();
     }
@@ -31,7 +32,18 @@ public class TC_07_PDP_Stock {
         electroluxOutOfStock.clickOnProductMenu("Laundry");
         electroluxOutOfStock.clickOnProductMenu("Washers");
         Assert.assertTrue(WebElementUtil.isDisplayed(By.xpath("//h1[normalize-space(text())='Washers']")),"Washers");
-        electroluxOutOfStock.checkPlpItem("Laundry");
+        electroluxOutOfStock.checkPlpItem("Laundry", "ELFW7437AG");
+        ExtentReportManager.getTest().pass("Verify Laundry Product Details in Product listing page and validation for stock");
+        DriverManager.quitDriver();
+    }
+
+    @Test(groups = {"smoke", "regression"},description = "Verify Laundry Product Details in Product listing page and validation for stock")
+    public void testForLaundryTemporarily() throws InterruptedException {
+        electroluxProductCards.navigateToHomePage();
+        electroluxOutOfStock.clickOnProductMenu("Laundry");
+        electroluxOutOfStock.clickOnProductMenu("Washers");
+        Assert.assertTrue(WebElementUtil.isDisplayed(By.xpath("//h1[normalize-space(text())='Washers']")),"Washers");
+        electroluxOutOfStock.checkPlpItem("Laundry", "ELFW7537AW");
         ExtentReportManager.getTest().pass("Verify Laundry Product Details in Product listing page and validation for stock");
         DriverManager.quitDriver();
     }

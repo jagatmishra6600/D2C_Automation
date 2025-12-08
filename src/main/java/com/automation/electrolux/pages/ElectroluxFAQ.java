@@ -14,6 +14,10 @@ public class ElectroluxFAQ {
     private final By collapsedButton=By.xpath("//div[@id=\"faqs\"]//div[@class=\"pdp_faq_accordion accordion\"]//span[@class=\"icon-plus\"]");
     private final By viewMore = By.xpath("//button[contains(normalize-space(text()), 'View all FAQs')]\n");
     private final By viewLess = By.xpath("//button[contains(normalize-space(text()), 'View less FAQs')]\n");
+    private final By faqTab = By.xpath("//div[span[text()=\"FAQs\"]]");
+    private final By faqText = By.xpath("//div[@id=\"faqs\"]/h2");
+
+
 
     public void clickOnProductMenu(String text) {
         By locator = By.xpath("//h5[normalize-space(text())='" + text + "']");
@@ -26,24 +30,43 @@ public class ElectroluxFAQ {
         WebElementUtil.clickElement(emailPopUp);
     }
 
-    public void productNameClick(String productName) {
-        WebElementUtil.zoomInOrOut(40);
-        By productXpath = By.xpath("//a[div[contains(text(), '" + productName + "')]]");
+    public void productNameClick(String sku) {
+        WebDriver driver = DriverManager.getDriver();
+        WebElementUtil.zoomInOrOut(75);
+        WaitUtils.implicitWait(5);
+
+        By productXpath = By.xpath(
+                "//div[text()='" + sku + "']/parent::div/parent::div/parent::div/parent::div//div[@class='col- product-card-inner-row kit']//a"
+        );
+
+        WebElement element = driver.findElement(productXpath);
+        WebElementUtil.scrollToElement(driver, element);
+        WebElementUtil.scrollToElementStable(productXpath);
         WebElementUtil.clickElement(productXpath);
         System.out.println("Clicked on product: ");
     }
 
     public void productFAQsSection() {
+        WebDriver driver = DriverManager.getDriver();
+        WaitUtils.implicitWait(5);
+
         try {
-            By faqTab=By.xpath("//div[span[text()=\"FAQs\"]]");
+            WebElement faqTabElement = driver.findElement(faqTab);
+            WebElementUtil.scrollToElement(driver, faqTabElement);
+            WebElementUtil.scrollToElementStable(faqTab);
             WebElementUtil.waitForElementToBeClickable(faqTab);
             WebElementUtil.clickElement(faqTab);
-            WaitUtils.implicitWait(1);
 
-            WebElementUtil.zoomInOrOut(40);
-            By faqText = By.xpath("//div[@id=\"faqs\"]/h2");
+
+            Thread.sleep(5000);
+            WebElementUtil.zoomInOrOut(70);
+            WebElement faqTextElement = driver.findElement(faqText);
+            WebElementUtil.scrollToElement(driver,faqTextElement);
             WebElementUtil.waitForElementToBeVisible(faqText);
 
+            WebElement element = driver.findElement(faqQuestion);
+            WebElementUtil.scrollToElement(driver,element);
+            WebElementUtil.waitForElementToBeVisible(faqQuestion);
             WebElementUtil.waitForElementToBeClickable(faqQuestion);
             WebElementUtil.clickElement(faqQuestion);
 
@@ -66,18 +89,23 @@ public class ElectroluxFAQ {
     public void checkViewMore() {
         try {
             WebDriver driver=DriverManager.getDriver();
+            WebElement viewMoreElement = driver.findElement(viewMore);
+            WebElementUtil.scrollToElement(driver, viewMoreElement);
             WebElementUtil.waitForElementToBeVisible(viewMore);
             WebElementUtil.clickElement(viewMore);
             WebElement viewLessText= driver.findElement(viewLess);
             String viewLessTexts= viewLessText.getText();
+            System.out.println("View less");
             Assert.assertTrue(viewLessTexts.contains("View less FAQs"));
-            WaitUtils.implicitWait(5);
 
+            Thread.sleep(5000);
             WebElementUtil.waitForElementToBeClickable(viewLess);
             WebElementUtil.clickElement(viewLess);
-            WebElement viewMoreText= driver.findElement(viewLess);
+            WebElement viewMoreText= driver.findElement(viewMore);
             String viewMoreTexts= viewMoreText.getText();
+            System.out.println("View more");
             Assert.assertTrue(viewMoreTexts.contains("View all FAQs"));
+
         } catch (Exception e) {
             System.out.println(" View more FAQs button not present — fewer FAQs available.");
         }

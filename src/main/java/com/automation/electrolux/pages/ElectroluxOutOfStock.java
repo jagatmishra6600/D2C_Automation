@@ -9,7 +9,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.time.Duration;
-import java.util.List;
 
 public class ElectroluxOutOfStock {
 
@@ -34,62 +33,50 @@ public class ElectroluxOutOfStock {
         WebElementUtil.clickElement(emailPopUp);
     }
 
-    public void verifyStockForVacuums(int i) throws InterruptedException {
-        boolean result = selectProductAndCheckAddToCart(i);
+    public void verifyStockForVacuums(String sku) throws InterruptedException {
         WebDriver driver = DriverManager.getDriver();
-        if (result) {
+
+        WebElementUtil.zoomInOrOut(75);
+        WaitUtils.implicitWait(10);
+        By productName = By.xpath("//div[normalize-space(text())='" + sku + "']//parent::div//parent::div//parent::div//parent::div//div[@class=\"col- product-card-inner-row kit\"]//a");
+        WebElement element = driver.findElement(productName);
+        WebElementUtil.scrollToElementStable(productName);
+        WebElementUtil.scrollToElement(driver, element);
+        WebElementUtil.waitForElementToBeClickable(productName);
+        WebElementUtil.clickElement(productName);
+
+        if (WebElementUtil.isDisplayed(addToCart)) {
             WebElementUtil.zoomInOrOut(50);
             WebElement freeDeliveryText = driver.findElement(freeDelivery);
             String actual = freeDeliveryText.getText();
             String partialText = "Free delivery";
             Assert.assertTrue(actual.contains(partialText));
-
-            Thread.sleep(2000);
-            driver.navigate().back();
-            Thread.sleep(2000);
         } else {
             checkOutOfStock();
         }
     }
-    public void verifyStockForLaundry(int i) throws InterruptedException {
-        boolean result=selectProductAndCheckAddToCart(i);
+    public void verifyStockForLaundry(String sku) throws InterruptedException {
         WebDriver driver = DriverManager.getDriver();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
-        if (result) {
+        WebElementUtil.zoomInOrOut(75);
+        Thread.sleep(3000);
+        By productName = By.xpath("//div[normalize-space(text())='" + sku + "']//parent::div//parent::div//parent::div//parent::div//div[@class=\"col- product-card-inner-row kit\"]//a");
+        WebElementUtil.scrollToElementStable(productName);
+        WebElementUtil.waitForElementToBeClickable(productName);
+        WebElementUtil.clickElement(productName);
+
+        if (WebElementUtil.isDisplayed(addToCart)) {
             WebElementUtil.zoomInOrOut(50);
             WaitUtils.implicitWait(15);
             WebElement freeDeliveryText = wait.until(ExpectedConditions.visibilityOfElementLocated(earliestDelivery));
             Assert.assertTrue(freeDeliveryText.getText().contains("Earliest delivery"));
-            System.out.println("Product is in stock. Verifying Add to Cart...");
-            WaitUtils.implicitWait(2);
-            driver.navigate().back();
-            WaitUtils.implicitWait(2);
         } else {
             checkOutOfStock();
         }
     }
-    public static boolean selectProductAndCheckAddToCart(int i) {
-        WebElementUtil.zoomInOrOut(35);
-        By productXpath = By.xpath("//div[@id=\"PlpItem"+i+"\"]//div[@class=\"Product-title Body-XLargeBody_XLarge-Title m-auto\"]");
-        WebElementUtil.waitForElementToBeClickable(productXpath);
-        WebElementUtil.clickElement(productXpath);
-        System.out.println("Clicked on product: ");
-        WebDriver driver = DriverManager.getDriver();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        boolean isAddToCartPresent;
-        try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(addToCart));
-            isAddToCartPresent = true;
-            System.out.println("'Add to cart' button is visible for product: ");
-        } catch (TimeoutException e) {
-            isAddToCartPresent = false;
-            System.out.println(" Temporarily out of stock in your area for product: ");
-        }
-        return isAddToCartPresent;
-    }
-    public void checkOutOfStock() throws InterruptedException {
-        WebElementUtil.zoomInOrOut(40);
+    public void checkOutOfStock(){
+        WebElementUtil.zoomInOrOut(70);
         WebDriver driver = DriverManager.getDriver();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
@@ -102,28 +89,19 @@ public class ElectroluxOutOfStock {
 
         WebElement notifyButton = wait.until(ExpectedConditions.elementToBeClickable(notify));
         notifyButton.click();
-        System.out.println("Clicked Notify button.");
 
         WebElement verifyText = wait.until(ExpectedConditions.visibilityOfElementLocated(notifyVerify));
         Assert.assertTrue(verifyText.getText().contains("You’re signed up"));
-        System.out.println("Notification confirmation verified.");
 
-        Thread.sleep(2000);
-        driver.navigate().back();
-        Thread.sleep(2000);
     }
 
-    public void checkPlpItem(String ProductName) throws InterruptedException {
-        WebElementUtil.zoomInOrOut(60);
-        Thread.sleep(5000);
-        WebDriver driver = DriverManager.getDriver();
-        List<WebElement> items = driver.findElements(By.xpath("//div[starts-with(@id, 'PlpItem')]"));
-        for (int i = 0; i < 5; i++) {
-            if(ProductName.equalsIgnoreCase("Vacuums")){
-                verifyStockForVacuums(i);
-            } else if (ProductName.equalsIgnoreCase("Laundry")) {
-                verifyStockForLaundry(i);
-            }
+    public void checkPlpItem(String ProductName, String sku) throws InterruptedException {
+        WebElementUtil.zoomInOrOut(75);
+        Thread.sleep(3000);
+        if(ProductName.equalsIgnoreCase("Vacuums")){
+            verifyStockForVacuums(sku);
+        } else if (ProductName.equalsIgnoreCase("Laundry")) {
+            verifyStockForLaundry(sku);
         }
     }
 }

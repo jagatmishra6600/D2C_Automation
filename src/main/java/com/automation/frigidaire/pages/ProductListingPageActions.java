@@ -1,5 +1,6 @@
 package com.automation.frigidaire.pages;
 
+import com.automation.frigidaire.locators.FrigidaireProductDetails;
 import com.automation.utils.DriverManager;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
@@ -10,18 +11,12 @@ import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 import java.time.Duration;
-import java.util.List;
 
 public class ProductListingPageActions {
 
+    FrigidaireProductDetails productDetails = new FrigidaireProductDetails();
     SoftAssert softAssert=new SoftAssert();
-    private final By emailPopUp = By.xpath("//span[@id=\"close-modal123\"]");
 
-
-    public void closeEmailPopUp() {
-        WaitUtils.untilVisible(emailPopUp, 60);
-        WebElementUtil.clickElement(emailPopUp);
-    }
 
     public void verifyProductItemPage(String str, String assertValue) {
         By locator = By.xpath("//h1[normalize-space(text())='" + str + "']");
@@ -33,96 +28,98 @@ public class ProductListingPageActions {
     public void clickOnProductMenu(String text) {
         By locator = By.xpath("//h5[normalize-space(text())='" + text + "']");
         WebElementUtil.waitForElementToBeVisible(locator);
+        WebElementUtil.waitForElementToBeClickable(locator);
         WebElementUtil.clickElement(locator);
     }
 
-    public void verifyAndClickElements(int i) {
+    public void verifyAndClickElements(int i) throws InterruptedException {
         WebDriver driver = DriverManager.getDriver();
-        WebElementUtil.zoomInOrOut(40);
-        String image = "//div[@id=\"PlpItem"+i+"\"]//div[@class=\"col- Product-Image-Placeholder\"]/a";
-        String nameXpath = "//div[@id=\"PlpItem"+i+"\"]//div[@class='col- Product-Name my-2 min-height-v10']/a";
-        String ratingXpath = "//div[@id=\"PlpItem"+i+"\"]//div[@id='ReviewsPLPItemComponent']";
+        WebElementUtil.zoomInOrOut(70);
 
-        verifyAndClickIfNeeded(driver, image, "Product Image");
-        verifyAndClickIfNeeded(driver, nameXpath, "Product Name");
-        verifyAndClickIfNeeded(driver, ratingXpath, "Product Rating");
+        verifyAndClickIfNeeded(driver, productDetails.productImage(i), "Product Image");
+        verifyAndClickIfNeeded(driver, productDetails.name(i), "Product Name");
+        verifyAndClickIfNeeded(driver, productDetails.productRating(i), "Product Rating");
     }
-    private void verifyAndClickIfNeeded(WebDriver driver, String xpath, String elementName) {
+    private void verifyAndClickIfNeeded(WebDriver driver, By xpath, String elementName) throws InterruptedException {
+        WaitUtils.implicitWait(3);
         try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(xpath));
+
 
             if (element.isDisplayed()) {
                 element.click();
                 System.out.println("Clicked on " + elementName + " — navigating to PDP page.");
+                WebElementUtil.waitForElementToBeVisible(productDetails.skuPDPPage,10);
+                WebElementUtil.isDisplayed(productDetails.skuPDPPage);
 
-                Thread.sleep(2000);
+                WaitUtils.implicitWait(2);
                 DriverManager.getDriver().navigate().back();
                 System.out.println("Navigated back to PLP page.");
-                Thread.sleep(4000);
+                WaitUtils.implicitWait(2);
             }
         } catch (Exception e) {
             System.out.println(elementName + " NOT found or not displayed. Xpath: " + xpath);
         }
     }
 
-    public void checkPlpItem(String ProductName) throws InterruptedException {
-        WebElementUtil.zoomInOrOut(60);
-        Thread.sleep(5000);
+    public void checkPlpItem(String ProductName, int i) throws InterruptedException {
+        WebElementUtil.zoomInOrOut(70);
+        WaitUtils.implicitWait(10);
         WebDriver driver = DriverManager.getDriver();
-        List<WebElement> items = WebElementUtil.findElements(By.xpath("//div[starts-with(@id, 'PlpItem')]"));
-        for (int i = 0; i <=2; i++) {
-            if(ProductName.equalsIgnoreCase("Kitchen")){
-                checkProductDetail(i);
-                verifyKitchenDetails(i);
-                verifyAndClickElements(i);
-            } else if (ProductName.equalsIgnoreCase("Air Care")) {
-                checkProductDetail(i);
-                verifyAirCareDetails(i);
-                verifyAndClickElements(i);
-            }
+        if(ProductName.equalsIgnoreCase("Kitchen")){
+            WebElement nameProduct= driver.findElement(productDetails.name(i));
+            WebElementUtil.scrollToElement(driver,nameProduct);
+            checkProductDetail(i);
+            verifyKitchenDetails(i);
+            verifyAndClickElements(i);
+        } else if (ProductName.equalsIgnoreCase("Air Care")) {
+            WebElement nameProduct= driver.findElement(productDetails.name(i));
+            WebElementUtil.scrollToElement(driver,nameProduct);
+            checkProductDetail(i);
+            verifyAirCareDetails(i);
+            verifyAndClickElements(i);
         }
-    }
-    public void checkProductDetail(int i){
-        verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//div[contains(@class, 'Utility-TextProduct-SKU-Sm')]/div[1]", "SKU Number");
-        verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//div[@class='col- highlight-wapper d-flex f-gap-10']/span", "Left Corner Tag");
-        verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//div[@class='col- Product-Name my-2 min-height-v10']/a", "Product Name");
-
-        //verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//div[@class='position-relative imgContainerWithPromotion']/img", "Product Image");
-        verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//div[@class=\"col- Product-Image-Placeholder\"]/a//img[1]", "Product Image");
-        // verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//img[@alt='Frigidaire Gallery' or @alt='Frigidaire Professional']", "Tag Image");
-        verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//img[@alt='Frigidaire Gallery' or @alt='Frigidaire Professional']", "Tag Image");
-
-        verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//div[@id='ReviewsPLPItemComponent']", "Product Rating");
-        verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//div//span[@class='col-']//span[contains(text(),'D')]", "Dimension Label");
-        verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//div[@class='col- product-card my-3 plpPriceAlign featureContainer']/div/div", "Feature Section");
-        verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//div/span[@class='H3H3_Desktop color-promo-green']", "Discount Price");
-        verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//div/span[@class='MSRP ml-3']//span", "Original Price");
-        verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//div/span[@class='MSRP ml-3']//div[@class='tooltip-wrapper']", "MSRP Tooltip Icon");
-        verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//input[@type='checkbox']", "Compare Checkbox");
 
     }
+    public void checkProductDetail(int i) {
 
-    public void verifyKitchenDetails(int i){
-        verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//div[@class='min-height-v3 promotionalContainer']//span", "Kit and Accessory");
-        verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//div[@class='col- Product-Color-Swatch-wrapper d-flex hidden-class-rac']/a", "Color Option");
+        verifyElementDisplayed(productDetails.skuNumber(i), "SKU Number");
+        verifyElementDisplayed(productDetails.leftCornerTag(i), "Left Corner Tag");
+        verifyElementDisplayed(productDetails.productName(i), "Product Name");
+
+        verifyElementDisplayed(productDetails.productImage(i), "Product Image");
+        verifyElementDisplayed(productDetails.tagImage(i), "Tag Image");
+
+        verifyElementDisplayed(productDetails.productRating(i), "Product Rating");
+        verifyElementDisplayed(productDetails.dimensionLabels(i), "Dimension Label");
+
+        verifyElementDisplayed(productDetails.featureSection(i), "Feature Section");
+        verifyElementDisplayed(productDetails.discountPrice(i), "Discount Price");
+        verifyElementDisplayed(productDetails.originalPrice(i), "Original Price");
+        verifyElementDisplayed(productDetails.msrpTooltipIcon(i), "MSRP Tooltip Icon");
+
+        verifyElementDisplayed(productDetails.compareCheckbox(i), "Compare Checkbox");
     }
 
-    public void verifyAirCareDetails(int i){
-        verifyElementDisplayed("//div[@id=\"PlpItem"+i+"\"]//div//div//button","Add to cart");
-
+    public void verifyKitchenDetails(int i) {
+        verifyElementDisplayed(productDetails.kitAndAccessory(i), "Kit and Accessory");
+        verifyElementDisplayed(productDetails.colorOption(i), "Color Option");
     }
 
-    public void verifyElementDisplayed(String xpath, String elementName) {
+    public void verifyAirCareDetails(int i) {
+        verifyElementDisplayed(productDetails.addToCartButton(i), "Add to Cart");
+    }
+
+
+    public void verifyElementDisplayed(By xpath, String elementName) {
         try {
             WebDriver driver = DriverManager.getDriver();
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(xpath));
             boolean isDisplayed = element.isDisplayed();
-            System.out.println(elementName + " is displayed: " + isDisplayed + " "+ element.getText());
             softAssert.assertTrue(isDisplayed, elementName + " should be displayed.");
         } catch (Exception e) {
-            System.out.println(elementName + " not found or not displayed.");
             softAssert.fail(elementName + " not found or not displayed. Exception: " + e.getMessage());
         }
     }
