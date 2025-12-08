@@ -1,6 +1,8 @@
 package com.automation.familystoreus.pages;
 
 
+import org.openqa.selenium.By;
+
 import com.automation.familystoreus.locators.FSUS_Homepage;
 import com.automation.familystoreus.locators.FSUS_InviteFamilyFriendsPage;
 import com.automation.models.CreateAccountData;
@@ -15,37 +17,17 @@ public class FsusMyAccountInviteFamilyFriendsPageActions {
 		 return this;
 	 }
 	 
-	 public FsusMyAccountInviteFamilyFriendsPageActions enterFirstName(String firstName)  {
-		 WebElementUtil.waitForElementToBeClickable(FSUS_InviteFamilyFriendsPage.firstNameField);
-		 WebElementUtil.sendKeys(FSUS_InviteFamilyFriendsPage.firstNameField, firstName);
-		 var count = 0;
-		 while(WebElementUtil.getDomProperty(FSUS_InviteFamilyFriendsPage.firstNameField, "value").isEmpty() && count<2) {
-			 WebElementUtil.sendKeys(FSUS_InviteFamilyFriendsPage.firstNameField, firstName);
-			 count++;
-		 }
-		 return this;
+	 public FsusMyAccountInviteFamilyFriendsPageActions enterFirstName(String firstName)  { 
+		 return typeAndVerify(FSUS_InviteFamilyFriendsPage.firstNameField, firstName);
 	 }
 	 
-	 public FsusMyAccountInviteFamilyFriendsPageActions enterLastName(String lastName) {
-		 WebElementUtil.waitForElementToBeClickable(FSUS_InviteFamilyFriendsPage.lastNameField);
-		 WebElementUtil.sendKeys(FSUS_InviteFamilyFriendsPage.lastNameField, lastName);
-		 var count = 0;
-		 while(WebElementUtil.getDomProperty(FSUS_InviteFamilyFriendsPage.lastNameField, "value").isEmpty() && count<2) {
-			 WebElementUtil.sendKeys(FSUS_InviteFamilyFriendsPage.lastNameField, lastName);
-			 count++;
-		 }
-		 return this;
+	 public FsusMyAccountInviteFamilyFriendsPageActions enterLastName(String lastName) { 
+		 return typeAndVerify(FSUS_InviteFamilyFriendsPage.lastNameField, lastName);
 	 }
 	 
 	 public FsusMyAccountInviteFamilyFriendsPageActions enterEmailAddress(String emailAddress) {
-		 WebElementUtil.waitForElementToBeClickable(FSUS_InviteFamilyFriendsPage.emailAddressField);
-		 WebElementUtil.sendKeys(FSUS_InviteFamilyFriendsPage.emailAddressField, emailAddress);
-		 var count = 0;
-		 while(WebElementUtil.getDomProperty(FSUS_InviteFamilyFriendsPage.emailAddressField, "value").isEmpty() && count<2) {
-			 WebElementUtil.sendKeys(FSUS_InviteFamilyFriendsPage.emailAddressField, emailAddress);
-			 count++;
-		 }
-		 return this;
+		 return typeAndVerify(FSUS_InviteFamilyFriendsPage.emailAddressField, emailAddress);
+		 
 	 }
 	 
 	 public FsusMyAccountInviteFamilyFriendsPageActions clickSendInvitationButton() {
@@ -88,5 +70,19 @@ public class FsusMyAccountInviteFamilyFriendsPageActions {
 		 WebElementUtil.clickElement(FSUS_Homepage.logOutDropOption);
 		 return this;
 	 }
+	 
+	 private FsusMyAccountInviteFamilyFriendsPageActions typeAndVerify(By locator, String text) {
+		    WebElementUtil.waitForElementToBeClickable(locator);
+		    int retries = 0;
+		    while (retries < 3) {
+		        WebElementUtil.sendKeys(locator, text);
+		        var actualValue = WebElementUtil.getDomProperty(locator, "value");
+		        if (text.equals(actualValue)) {
+		            return this;
+		        }
+		        retries++;
+		    }
+		   return this;
+		}
 	 
 }
