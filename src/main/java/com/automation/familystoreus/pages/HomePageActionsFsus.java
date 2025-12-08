@@ -42,9 +42,9 @@ public class HomePageActionsFsus {
         		&& WebElementUtil.isDisplayed(FSUS_Homepage.categoryNavigationMenuBar);
 	 }
 	 
-	 public FsusMyAccountInviteFamilyFriendsPageActions navigateToMyAccountInviteFamilyFriendsPage() {
+	 public MyAccountInviteFamilyFriendsPageActionsFsus navigateToMyAccountInviteFamilyFriendsPage() {
 		 WebElementUtil.scrollIntoView(FSUS_Homepage.inviteFriendsFamilyHeaderLink);
 		 WebElementUtil.clickElement(FSUS_Homepage.inviteFriendsFamilyHeaderLink);
-		 return new FsusMyAccountInviteFamilyFriendsPageActions();
+		 return new MyAccountInviteFamilyFriendsPageActionsFsus();
 	 }
 }

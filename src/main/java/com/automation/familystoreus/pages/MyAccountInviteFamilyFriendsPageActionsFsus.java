@@ -8,35 +8,35 @@ import com.automation.familystoreus.locators.FSUS_InviteFamilyFriendsPage;
 import com.automation.models.CreateAccountData;
 import com.automation.utils.WebElementUtil;
 
-public class FsusMyAccountInviteFamilyFriendsPageActions {
+public class MyAccountInviteFamilyFriendsPageActionsFsus {
 	 
-	 public FsusMyAccountInviteFamilyFriendsPageActions clickSendNewInvitationButton() {
+	 public MyAccountInviteFamilyFriendsPageActionsFsus clickSendNewInvitationButton() {
 		 WebElementUtil.isDisplayed(FSUS_InviteFamilyFriendsPage.sendNewInvitationButton);
 		 WebElementUtil.scrollIntoView(FSUS_InviteFamilyFriendsPage.sendNewInvitationButton);
 		 WebElementUtil.clickElement(FSUS_InviteFamilyFriendsPage.sendNewInvitationButton);
 		 return this;
 	 }
 	 
-	 public FsusMyAccountInviteFamilyFriendsPageActions enterFirstName(String firstName)  { 
+	 public MyAccountInviteFamilyFriendsPageActionsFsus enterFirstName(String firstName)  { 
 		 return typeAndVerify(FSUS_InviteFamilyFriendsPage.firstNameField, firstName);
 	 }
 	 
-	 public FsusMyAccountInviteFamilyFriendsPageActions enterLastName(String lastName) { 
+	 public MyAccountInviteFamilyFriendsPageActionsFsus enterLastName(String lastName) { 
 		 return typeAndVerify(FSUS_InviteFamilyFriendsPage.lastNameField, lastName);
 	 }
 	 
-	 public FsusMyAccountInviteFamilyFriendsPageActions enterEmailAddress(String emailAddress) {
+	 public MyAccountInviteFamilyFriendsPageActionsFsus enterEmailAddress(String emailAddress) {
 		 return typeAndVerify(FSUS_InviteFamilyFriendsPage.emailAddressField, emailAddress);
 		 
 	 }
 	 
-	 public FsusMyAccountInviteFamilyFriendsPageActions clickSendInvitationButton() {
+	 public MyAccountInviteFamilyFriendsPageActionsFsus clickSendInvitationButton() {
 		 WebElementUtil.scrollIntoView(FSUS_InviteFamilyFriendsPage.sendInvitationButton);
 		 WebElementUtil.clickElement(FSUS_InviteFamilyFriendsPage.sendInvitationButton);
 		 return this;
 	 }
 	 
-	 public FsusMyAccountInviteFamilyFriendsPageActions inviteUser(String firstName, String lastName, String emailAddress) {
+	 public MyAccountInviteFamilyFriendsPageActionsFsus inviteUser(String firstName, String lastName, String emailAddress) {
 		 return clickSendNewInvitationButton()
 				 .enterFirstName(firstName)
 				 .enterLastName(lastName)
@@ -44,7 +44,7 @@ public class FsusMyAccountInviteFamilyFriendsPageActions {
 				 .clickSendInvitationButton();
 	 }
 	 
-	 public FsusMyAccountInviteFamilyFriendsPageActions inviteUser(CreateAccountData data) {
+	 public MyAccountInviteFamilyFriendsPageActionsFsus inviteUser(CreateAccountData data) {
 		 return clickSendNewInvitationButton()
 				 .enterFirstName(data.firstName())
 				 .enterLastName(data.lastName())
@@ -60,18 +60,18 @@ public class FsusMyAccountInviteFamilyFriendsPageActions {
 		 clickLogoutOption();
 	 }
 	 
-	 public FsusMyAccountInviteFamilyFriendsPageActions clickUserGreetingDropdown() {
+	 public MyAccountInviteFamilyFriendsPageActionsFsus clickUserGreetingDropdown() {
 		 WebElementUtil.scrollIntoView(FSUS_Homepage.userGreetingDropdown);
 		 WebElementUtil.clickElement(FSUS_Homepage.userGreetingDropdown);
 		 return this;
 	 }
 	 
-	 public FsusMyAccountInviteFamilyFriendsPageActions clickLogoutOption() {
+	 public MyAccountInviteFamilyFriendsPageActionsFsus clickLogoutOption() {
 		 WebElementUtil.clickElement(FSUS_Homepage.logOutDropOption);
 		 return this;
 	 }
 	 
-	 private FsusMyAccountInviteFamilyFriendsPageActions typeAndVerify(By locator, String text) {
+	 private MyAccountInviteFamilyFriendsPageActionsFsus typeAndVerify(By locator, String text) {
 		    WebElementUtil.waitForElementToBeClickable(locator);
 		    int retries = 0;
 		    while (retries < 3) {
