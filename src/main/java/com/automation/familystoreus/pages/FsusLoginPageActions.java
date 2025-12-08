@@ -51,7 +51,7 @@ public class FsusLoginPageActions {
 							 .clickTermsAndConditionsCheckbox()
 							 .clickLoginButton();						  
 		 var count = 0;
-		 while(!waitUntilLoginButtonIsInvisible() && count<2) {
+		 while(!waitUntilLoginButtonIsInvisible() && count<3) {
 			 clickLoginButton();
 			 count++;
 		 }
@@ -88,6 +88,12 @@ public class FsusLoginPageActions {
 		 catch(Exception e){
 			 return false;
 		 }
+	 }
+	 
+	 public FsusCustomerRegistrationPageActions clickregisterWithInvitationCodeLink() {
+		 WebElementUtil.scrollIntoView(FSUS_LoginPage.registerWithInvitationCodeLink);
+		 WebElementUtil.clickElement(FSUS_LoginPage.registerWithInvitationCodeLink);
+		 return new FsusCustomerRegistrationPageActions();
 	 }
 	 
 }

@@ -1,6 +1,7 @@
 package com.automation.utils;
 
 import com.automation.models.CreateAccountData;
+import com.automation.models.FSCreateAccountData;
 
 public class UserTestData {
 
@@ -9,7 +10,8 @@ public class UserTestData {
     public static final String USERNAME = ConfigReader.getProperty("user.email");
     public static final String PASSWORD = ConfigReader.getProperty("user.password");
     public static final String FS_USERNAME = ConfigReader.getProperty("user.emailfamilystore");
-
+    public static final String ZIPCODE = "40001";
+    
     // Generate a new email EVERY TIME someone calls the method
     public static String getDisposableYopmailEmailAddress() {
         var number = WebElementUtil.getRandomNumber(10000);
@@ -40,5 +42,15 @@ public class UserTestData {
     
     public static String getPassword() {
     	return PASSWORD;
+    }
+    
+    public static CreateAccountData getInviteUserData(String emailAddress) {
+    	return new CreateAccountData(emailAddress
+    			,FIRST_NAME,LAST_NAME,PASSWORD);
+    }
+    
+    public static FSCreateAccountData getFSCreateAccountData(String emailAddress, String invitationCode) {
+    	return 	new FSCreateAccountData(emailAddress
+    				,FIRST_NAME,LAST_NAME,PASSWORD,invitationCode,ZIPCODE);
     }
 }
