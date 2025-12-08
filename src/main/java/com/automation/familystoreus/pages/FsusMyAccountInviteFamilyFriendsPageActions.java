@@ -15,27 +15,36 @@ public class FsusMyAccountInviteFamilyFriendsPageActions {
 		 return this;
 	 }
 	 
-	 public FsusMyAccountInviteFamilyFriendsPageActions enterFirstName(String firstName) throws InterruptedException {
+	 public FsusMyAccountInviteFamilyFriendsPageActions enterFirstName(String firstName)  {
 		 WebElementUtil.waitForElementToBeClickable(FSUS_InviteFamilyFriendsPage.firstNameField);
 		 WebElementUtil.sendKeys(FSUS_InviteFamilyFriendsPage.firstNameField, firstName);
-		 WebElementUtil.sendKeys(FSUS_InviteFamilyFriendsPage.firstNameField, firstName);
-		 
+		 var count = 0;
+		 while(WebElementUtil.getDomProperty(FSUS_InviteFamilyFriendsPage.firstNameField, "value").isEmpty() && count<2) {
+			 WebElementUtil.sendKeys(FSUS_InviteFamilyFriendsPage.firstNameField, firstName);
+			 count++;
+		 }
 		 return this;
 	 }
 	 
-	 public FsusMyAccountInviteFamilyFriendsPageActions enterLastName(String lastName) throws InterruptedException {
+	 public FsusMyAccountInviteFamilyFriendsPageActions enterLastName(String lastName) {
 		 WebElementUtil.waitForElementToBeClickable(FSUS_InviteFamilyFriendsPage.lastNameField);
 		 WebElementUtil.sendKeys(FSUS_InviteFamilyFriendsPage.lastNameField, lastName);
-		 WebElementUtil.sendKeys(FSUS_InviteFamilyFriendsPage.lastNameField, lastName);
-		 
+		 var count = 0;
+		 while(WebElementUtil.getDomProperty(FSUS_InviteFamilyFriendsPage.lastNameField, "value").isEmpty() && count<2) {
+			 WebElementUtil.sendKeys(FSUS_InviteFamilyFriendsPage.lastNameField, lastName);
+			 count++;
+		 }
 		 return this;
 	 }
 	 
-	 public FsusMyAccountInviteFamilyFriendsPageActions enterEmailAddress(String emailAddress) throws InterruptedException {
+	 public FsusMyAccountInviteFamilyFriendsPageActions enterEmailAddress(String emailAddress) {
 		 WebElementUtil.waitForElementToBeClickable(FSUS_InviteFamilyFriendsPage.emailAddressField);
-//		 WebElementUtil.clickElement(FSUS_InviteFamilyFriendsPage.emailAddressField);
 		 WebElementUtil.sendKeys(FSUS_InviteFamilyFriendsPage.emailAddressField, emailAddress);
-		 WebElementUtil.sendKeys(FSUS_InviteFamilyFriendsPage.emailAddressField, emailAddress);
+		 var count = 0;
+		 while(WebElementUtil.getDomProperty(FSUS_InviteFamilyFriendsPage.emailAddressField, "value").isEmpty() && count<2) {
+			 WebElementUtil.sendKeys(FSUS_InviteFamilyFriendsPage.emailAddressField, emailAddress);
+			 count++;
+		 }
 		 return this;
 	 }
 	 
@@ -45,7 +54,7 @@ public class FsusMyAccountInviteFamilyFriendsPageActions {
 		 return this;
 	 }
 	 
-	 public FsusMyAccountInviteFamilyFriendsPageActions inviteUser(String firstName, String lastName, String emailAddress) throws InterruptedException {
+	 public FsusMyAccountInviteFamilyFriendsPageActions inviteUser(String firstName, String lastName, String emailAddress) {
 		 return clickSendNewInvitationButton()
 				 .enterFirstName(firstName)
 				 .enterLastName(lastName)
@@ -53,7 +62,7 @@ public class FsusMyAccountInviteFamilyFriendsPageActions {
 				 .clickSendInvitationButton();
 	 }
 	 
-	 public FsusMyAccountInviteFamilyFriendsPageActions inviteUser(CreateAccountData data) throws InterruptedException {
+	 public FsusMyAccountInviteFamilyFriendsPageActions inviteUser(CreateAccountData data) {
 		 return clickSendNewInvitationButton()
 				 .enterFirstName(data.firstName())
 				 .enterLastName(data.lastName())
