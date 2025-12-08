@@ -3,6 +3,7 @@ package com.automation.electrolux.pages;
 import com.automation.electrolux.locators.ELUX_Homepage;
 import com.automation.utils.ConfigReader;
 import com.automation.utils.DriverManager;
+import com.automation.utils.UserTestData;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
@@ -52,18 +53,31 @@ public class HomePageActions {
     }
 
     public LoginPageActions navigateToLoginPage() {
-    	navigateToHomePage();
     	WebElementUtil.hoverElement(ELUX_Homepage.mainMenu_Login_OrderStatus);
     	WebElementUtil.clickElement(ELUX_Homepage.mainMenu_Login_OrderStatus_Login);
     	return new LoginPageActions();
     }
 
-
 	public boolean isUserGreetingDropdownDisplayed() {
 		return WebElementUtil.isDisplayed(ELUX_Homepage.userGreetingDropdownButton);
 	}
 	
-	public HomePageActions login(String emailAddress, String password) throws InterruptedException {
-		return navigateToLoginPage().login(emailAddress, password);
+	public String getGreetingMessage() {
+		return WebElementUtil.getText(ELUX_Homepage.userGreetingDropdownButton)
+					.replace("\n", " ").trim();	
 	}
+	
+	public HomePageActions login(String emailAddress, String password) throws InterruptedException {
+		return navigateToHomePage().navigateToLoginPage()
+									.login(emailAddress, password);
+	}
+	
+	public HomePageActions loginWithDefaultCredentials() {
+		return navigateToHomePage().navigateToLoginPage()
+									.login(UserTestData.getUserName(), UserTestData.getPassword());
+	}
+	
+	public ForgotPasswordPageActions navigateToResetPasswordPage() {
+    	return navigateToHomePage().navigateToLoginPage().clickForgotPasswordLink();
+    }
 }

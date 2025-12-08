@@ -114,7 +114,9 @@ public class ConfigReader {
         if (brand.equals("electrolux") || brand.equals("elux")) {
             return getProperty("app.elux");
         }
+
         if (brand.equals("fsus") || brand.equals("family_Store_US")) {
+
             return getProperty("app.fsus");
         }
 
