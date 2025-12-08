@@ -10,20 +10,20 @@ import com.automation.familystoreus.locators.FSUS_YopMailPage;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
 
-public class FsusYopmailPageActions {
+public class YopmailPageActionsFsus {
 	
-	public FsusYopmailPageActions navigateToYopmailPage() {
+	public YopmailPageActionsFsus navigateToYopmailPage() {
 		WebElementUtil.navigateTo("https://yopmail.com/");
 		return this;
 	}
 	
-	public FsusYopmailPageActions enterEmailAddress(String emailAddress) throws InterruptedException {
+	public YopmailPageActionsFsus enterEmailAddress(String emailAddress) throws InterruptedException {
 		WebElementUtil.waitForElementToBeClickable(FSUS_YopMailPage.emailAddressField);
 		WebElementUtil.sendKeys(FSUS_YopMailPage.emailAddressField, emailAddress);
 		return this;
 	}
 	
-	public FsusYopmailPageActions clickCheckInboxButton() {
+	public YopmailPageActionsFsus clickCheckInboxButton() {
 		WebElementUtil.clickElement(FSUS_YopMailPage.checkInboxIcon);	
 		return this;
 	}
@@ -32,25 +32,25 @@ public class FsusYopmailPageActions {
 		return WebElementUtil.isDisplayed(FSUS_YopMailPage.inboxEmailIdTitle);
 	}
 	
-	public FsusYopmailPageActions login(String emailAddress) throws InterruptedException {
+	public YopmailPageActionsFsus login(String emailAddress) throws InterruptedException {
 		return navigateToYopmailPage()
 					.enterEmailAddress(emailAddress)
 					.clickCheckInboxButton();
 	}
 	
-	public FsusYopmailPageActions clickInboxRefresh() {
+	public YopmailPageActionsFsus clickInboxRefresh() {
 		WebElementUtil.clickElement(FSUS_YopMailPage.inboxRefreshButton);	
 		return this;
 	}
 	
-	public FsusYopmailPageActions clickFirstMailInInbox() {	
+	public YopmailPageActionsFsus clickFirstMailInInbox() {	
 		WebElementUtil.switchToFrame("ifinbox");
 		WebElementUtil.clickElement(FSUS_YopMailPage.firstMail);
 		WebElementUtil.switchToDefaultContent();
 		return this;
 	}
 	
-	public FsusYopmailPageActions openFirstMailInInbox(String emailAddress) throws InterruptedException {
+	public YopmailPageActionsFsus openFirstMailInInbox(String emailAddress) throws InterruptedException {
 		return login(emailAddress).clickInboxRefresh().clickFirstMailInInbox();
 	}
 	
@@ -87,12 +87,12 @@ public class FsusYopmailPageActions {
 	);
 	}
 	
-	public FsusLoginPageActions clickOnRegistrationLink() {
+	public LoginPageActionsFsus clickOnRegistrationLink() {
 		WebElementUtil.switchToFrame("ifmail");
 		WebElementUtil.openLinkInNewTab(FSUS_YopMailPage.mailRegistrationLink);
 		WebElementUtil.switchToDefaultContent();
 		WebElementUtil.switchToLatestTabAndClosePrevious();
-		return new FsusLoginPageActions();
+		return new LoginPageActionsFsus();
 	}
 	
 	public String getInvitedUserEmail() {
@@ -122,7 +122,7 @@ public class FsusYopmailPageActions {
 	);
 	}
 	
-	public FsusYopmailPageActions verifyUserInvitationMail(String invitedUserEmail) {
+	public YopmailPageActionsFsus verifyUserInvitationMail(String invitedUserEmail) {
 		Assert.assertTrue(isGreetingMessageDisplayed(),"Greeting Message is not present in the User Invitation Mail");
 		Assert.assertTrue(isFSRegistrationLinkDisplayed(),"Family Store Registration Link is not present in the User Invitation Mail");
 		Assert.assertTrue(getFSInvitationMessage().contains("You've been invited to join the Electrolux Family Store")

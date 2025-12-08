@@ -12,9 +12,9 @@ import com.automation.models.FSCreateAccountData;
 import com.automation.utils.ConfigReader;
 import com.automation.utils.WebElementUtil;
 
-public class FsusCustomerRegistrationPageActions {
+public class CustomerRegistrationPageActionsFsus {
 
-	 public FsusCustomerRegistrationPageActions navigateToCreateAccountPage() {
+	 public CustomerRegistrationPageActionsFsus navigateToCreateAccountPage() {
 		WebElementUtil.navigateTo(ConfigReader.getAppUrl()+"createAccount");
         try {
             WebElement acceptBtn = untilClickable(FSUS_Homepage.acceptButtonLocator, 15);
@@ -97,42 +97,42 @@ public class FsusCustomerRegistrationPageActions {
 		 return WebElementUtil.isDisplayed(FSUS_CustomerRegistrationPage.alreadyHaveAccountLoginHereLink);
 	 }
 	 
-	 public FsusCustomerRegistrationPageActions enterEmailAddress(String emailAddress) {
+	 public CustomerRegistrationPageActionsFsus enterEmailAddress(String emailAddress) {
 		 WebElementUtil.isDisplayed(FSUS_CustomerRegistrationPage.emailAddressField);
 		 WebElementUtil.scrollIntoView(FSUS_CustomerRegistrationPage.emailAddressField);
 		 WebElementUtil.sendKeys(FSUS_CustomerRegistrationPage.emailAddressField, emailAddress);
 		 return this;
 	 }
 	 
-	 public FsusCustomerRegistrationPageActions enterPassword(String password) {
+	 public CustomerRegistrationPageActionsFsus enterPassword(String password) {
 		 WebElementUtil.scrollIntoView(FSUS_CustomerRegistrationPage.passwordField);
 		 WebElementUtil.sendKeys(FSUS_CustomerRegistrationPage.passwordField, password);
 		 return this;
 	 }
 	 
-	 public FsusCustomerRegistrationPageActions enterFirstName(String firstName) {
+	 public CustomerRegistrationPageActionsFsus enterFirstName(String firstName) {
 		 WebElementUtil.scrollIntoView(FSUS_CustomerRegistrationPage.firstNameField);
 		 WebElementUtil.sendKeys(FSUS_CustomerRegistrationPage.firstNameField, firstName);
 		 return this;
 	 }
 	 
-	 public FsusCustomerRegistrationPageActions enterLastName(String lastName) {
+	 public CustomerRegistrationPageActionsFsus enterLastName(String lastName) {
 		 WebElementUtil.scrollIntoView(FSUS_CustomerRegistrationPage.lastNameField);
 		 WebElementUtil.sendKeys(FSUS_CustomerRegistrationPage.lastNameField, lastName);
 		 return this;
 	 }
 	 
-	 public FsusHomePageActions clickCreateAccountButton() {
+	 public HomePageActionsFsus clickCreateAccountButton() {
 		 WebElementUtil.clickElement(FSUS_CustomerRegistrationPage.createAccountButton);
-		 return new FsusHomePageActions();
+		 return new HomePageActionsFsus();
 	 }
 	 
-	 public FsusCustomerRegistrationPageActions enterInvitationCode(String invitationCode) {
+	 public CustomerRegistrationPageActionsFsus enterInvitationCode(String invitationCode) {
 		 WebElementUtil.sendKeys(FSUS_CustomerRegistrationPage.invitationCodeField, invitationCode);
 		 return this;
 	 }
 	 
-	 public FsusCustomerRegistrationPageActions enterZipCode(String zipCode) {
+	 public CustomerRegistrationPageActionsFsus enterZipCode(String zipCode) {
 		 if(zipCode==null || zipCode.isEmpty() || zipCode.equals("")) {
 			 zipCode = "400001";
 		 }
@@ -140,7 +140,7 @@ public class FsusCustomerRegistrationPageActions {
 		 return this;
 	 }
 	 
-	 public FsusHomePageActions createAccount(String emailAddress, String password, String firstName, String lastName,String invitationCode,String zipCode) {
+	 public HomePageActionsFsus createAccount(String emailAddress, String password, String firstName, String lastName,String invitationCode,String zipCode) {
 		 return enterEmailAddress(emailAddress)
 					 	.enterFirstName(firstName)
 					 	.enterLastName(lastName)
@@ -150,7 +150,7 @@ public class FsusCustomerRegistrationPageActions {
 					 	.clickCreateAccountButton();			 	
 	 }
 	 
-	 public FsusHomePageActions createAccount(FSCreateAccountData createAccountData) {
+	 public HomePageActionsFsus createAccount(FSCreateAccountData createAccountData) {
 		 return enterEmailAddress(createAccountData.emailAddress())
 					 	.enterFirstName(createAccountData.firstName())
 					 	.enterLastName(createAccountData.lastName())
@@ -160,7 +160,7 @@ public class FsusCustomerRegistrationPageActions {
 					 	.clickCreateAccountButton();			 	
 	 }
 	 
-	 public FsusCustomerRegistrationPageActions verifyCustomerRegistrationPageFieldsAndMessages() {
+	 public CustomerRegistrationPageActionsFsus verifyCustomerRegistrationPageFieldsAndMessages() {
 			Assert.assertTrue(isWelcomeTitleDisplayed()
 					,"Welcome to Frigidaire and Electrolux Family Store! title is not displayed");
 	 	Assert.assertTrue(isMarketingBannerDisplayed()

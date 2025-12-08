@@ -11,9 +11,9 @@ import com.automation.utils.ConfigReader;
 import com.automation.utils.UserTestData;
 import com.automation.utils.WebElementUtil;
 
-public class FsusLoginPageActions {
+public class LoginPageActionsFsus {
 
-	 public FsusLoginPageActions navigateToLoginPage() {
+	 public LoginPageActionsFsus navigateToLoginPage() {
 		WebElementUtil.navigateTo(ConfigReader.getAppUrl()+"/login");
 		acceptCookies();
 		return this;
@@ -30,7 +30,7 @@ public class FsusLoginPageActions {
 	        }
 	 }
 	 
-	 public FsusHomePageActions login(String emailAddress, String password) {
+	 public HomePageActionsFsus login(String emailAddress, String password) {
 		 enterEmailAddress(emailAddress)
 							 .enterPassword(password)
 							 .clickTermsAndConditionsCheckbox()
@@ -40,11 +40,11 @@ public class FsusLoginPageActions {
 			 clickLoginButton();
 			 count++;
 		 }
-		 return new FsusHomePageActions();
+		 return new HomePageActionsFsus();
 	 }
 	 
 	 
-	 public FsusHomePageActions loginWithDefaultCredentials() throws InterruptedException {
+	 public HomePageActionsFsus loginWithDefaultCredentials() throws InterruptedException {
 		 navigateToLoginPage();
 		 enterEmailAddress(UserTestData.getUserName())
 							 .enterPassword(UserTestData.getPassword())
@@ -55,26 +55,26 @@ public class FsusLoginPageActions {
 			 clickLoginButton();
 			 count++;
 		 }
-		 return new FsusHomePageActions();
+		 return new HomePageActionsFsus();
 	 }
 	 
-	 public FsusLoginPageActions enterEmailAddress(String emailAddress) {
+	 public LoginPageActionsFsus enterEmailAddress(String emailAddress) {
 		 WebElementUtil.sendKeys(FSUS_LoginPage.emailAddressInput,emailAddress);
 		 return this;
 	 }
 	 
-	 public FsusLoginPageActions enterPassword(String password) {
+	 public LoginPageActionsFsus enterPassword(String password) {
 		 WebElementUtil.sendKeys(FSUS_LoginPage.passwordInput,password);
 		 return this;
 	 }
 	 
-	 public FsusHomePageActions clickLoginButton() {
+	 public HomePageActionsFsus clickLoginButton() {
 		 WebElementUtil.scrollIntoView(FSUS_LoginPage.loginButton);
 		 WebElementUtil.clickElement(FSUS_LoginPage.loginButton);
-		 return new FsusHomePageActions();
+		 return new HomePageActionsFsus();
 	 }
 	 
-	 public FsusLoginPageActions clickTermsAndConditionsCheckbox() {
+	 public LoginPageActionsFsus clickTermsAndConditionsCheckbox() {
 		 WebElementUtil.scrollIntoView(FSUS_LoginPage.termsAndConditionsCheckbox);
 		 WebElementUtil.clickElement(FSUS_LoginPage.termsAndConditionsCheckbox);
 		 return this;
@@ -90,10 +90,10 @@ public class FsusLoginPageActions {
 		 }
 	 }
 	 
-	 public FsusCustomerRegistrationPageActions clickregisterWithInvitationCodeLink() {
+	 public CustomerRegistrationPageActionsFsus clickregisterWithInvitationCodeLink() {
 		 WebElementUtil.scrollIntoView(FSUS_LoginPage.registerWithInvitationCodeLink);
 		 WebElementUtil.clickElement(FSUS_LoginPage.registerWithInvitationCodeLink);
-		 return new FsusCustomerRegistrationPageActions();
+		 return new CustomerRegistrationPageActionsFsus();
 	 }
 	 
 }
