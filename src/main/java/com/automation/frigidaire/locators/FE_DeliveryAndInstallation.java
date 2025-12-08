@@ -50,7 +50,7 @@ public class FE_DeliveryAndInstallation {
     public static By totalPrice = By.xpath("//div[contains(@class, 'Body_Large-Title') and contains(@class, 'Utility-TextPrice-Sm') and contains(@class, 'total-price')]");
     public static By totalPriceForElectrolux = By.xpath("//div[contains(@class,'Body_Large-Title col-md-4 p-0 text-right ng-star-inserted')]");
     public static By protectionPlanPriceForElectrolux = By.xpath("//div[text()=' Protection Plan ']/following-sibling::div[@class='col-md-4 p-0 text-right']");
-    public static By installationServices = By.xpath("//div[text()=' Installation Services']/following-sibling::div[@class=\"col-md-4 p-0 text-right\"]");
+    public static By installationServices = By.xpath("//div[text()='Installation parts']/following-sibling::div[@class=\"col-md-4 p-0 text-right\"]");
     public static By yearPlan(String Text){
         return By.xpath("//span[text()='" + text +"']/ancestor::div[@class=\"elxtapselection\"]//div[@class='mt-0 SmallBody_Small_Centered']");
     }

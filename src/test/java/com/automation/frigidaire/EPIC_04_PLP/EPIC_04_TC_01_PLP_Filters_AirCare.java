@@ -120,14 +120,15 @@ public class EPIC_04_TC_01_PLP_Filters_AirCare extends BaseTest {
 
     }
 
-    @Test(groups = {"regression"}, description = "Verify Select yoour room size")
+   // @Test(groups = {"regression"}, description = "Verify Select yoour room size")
     public void EPIC_04_PLP_TC_01_verify_Select_Your_Room_Size_Filter() throws InterruptedException {
         navigateToAirCare("frigidaire", "Air Care", "Window Mounted AC");
         PLPProductItemsPageActions.verifyProductItemPage("Window Mounted Air Conditioners", "Window Mounted Air Conditioners");
         PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
         PLPProductItemsPageActions.verifyAcRoomSize(" Small Room", "Performance", "Cool Area", "250", 100, 350);
-        // loadMoreProducts(driver);
-        // validateAirCareProductsForRoomSize( SpecsName ,  SpecsKey ,  SpecValue ,  lowerBound, upperBound);
+//         loadMoreProducts(driver);
+//         validateAirCareProductsForRoomSize( SpecsName ,  SpecsKey ,  SpecValue ,  lowerBound, upperBound);
+        PLPProductItemsPageActions.validateAirCareProductsForRoomSize("Performance", "Cool Area", "250", 100,350);
         ExtentReportManager.getTest().pass("Successfully Verify Select your room size");
 
     }

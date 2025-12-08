@@ -15,15 +15,12 @@ public class EPIC_07_TC_01_DandS extends BaseTest {
     PLPProductItemsPageActions PLPProductItemsPageActions = new PLPProductItemsPageActions();
     DeliveryInstallationPageActions DeliveryInstallationPageActions = new DeliveryInstallationPageActions();
 
-    public void navigateToVacuumsProducts(String webSite, String prodCategory, String subProdCategory) throws InterruptedException {
+    public void navigateToVacuumsProducts(String webSite, String prodCategory, String subProdCategory){
         homePage.navigateToHomePage();
         productCategoryPageActions.clickOnProductMenu(webSite, prodCategory);
         productCategoryPageActions.clickOnProductMenu(webSite, subProdCategory);
         PLPProductItemsPageActions.closeEmailPopUp();
-        // WebElementUtil.zoomInOrOut(25);
         PLPProductItemsPageActions.verifyProductItemPage("Washers", "Washers");
-
-
     }
 
 
@@ -31,7 +28,7 @@ public class EPIC_07_TC_01_DandS extends BaseTest {
     @Test(groups = {"smoke", "regression"}, description = "To verify Included Parts section within Delivery & installation section")
     public void EPIC_05_DandS_TC_01_test_Included_Parts_Section_Within_Delivery_Installation_Section() throws InterruptedException {
         navigateToVacuumsProducts("electrolux", "Laundry", "Washers");
-        DeliveryInstallationPageActions.selectProductAndAddToCart(1);
+        DeliveryInstallationPageActions.selectProductAndAddToCart(3);
         DeliveryInstallationPageActions.verifyHeadingAndSubLinksinDAndSPage("Professional Installation");
         DeliveryInstallationPageActions.verifyPopupTextIsVisible();
         DeliveryInstallationPageActions.verifyProtectionPlanSection("electrolux");
