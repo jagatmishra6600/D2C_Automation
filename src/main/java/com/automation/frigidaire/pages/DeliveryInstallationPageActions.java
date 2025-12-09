@@ -1,6 +1,7 @@
 package com.automation.frigidaire.pages;
 
 import com.automation.frigidaire.locators.FE_DeliveryAndInstallation;
+import com.automation.frigidaire.locators.FE_PLP;
 import com.automation.frigidaire.utils.WebElementUtil;
 import com.automation.utils.DriverManager;
 import com.automation.utils.WaitUtils;
@@ -13,7 +14,7 @@ import org.testng.Assert;
 import java.time.Duration;
 
 import static com.automation.frigidaire.locators.FE_DeliveryAndInstallation.declineprotectionBy;
-import static com.automation.frigidaire.pages.PLPProductItemsPageActions.addToCart;
+
 
 
 public class DeliveryInstallationPageActions {
@@ -41,7 +42,7 @@ public class DeliveryInstallationPageActions {
             com.automation.utils.WebElementUtil.scrollAndClickUsingJSE(driver, product);
             WebElementUtil.scrollByPixels(driver, 0, 500);
             WaitUtils.sleep(5000);
-            WebElementUtil.scrollAndClickUsingJSE(driver, driver.findElement(addToCart));
+            WebElementUtil.scrollAndClickUsingJSE(driver, driver.findElement(FE_PLP.ADD_TO_CART_FOR_PLP));
             WaitUtils.sleep(5000);
         } catch (Exception e) {
             e.printStackTrace();

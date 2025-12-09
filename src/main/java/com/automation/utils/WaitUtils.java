@@ -152,4 +152,12 @@ public final class WaitUtils {
     public static void implicitWait(long seconds) {
         DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(seconds));
     }
+
+    public static WebElement waitForVisibility(WebDriver driver, By locator, int time) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+
+
 }

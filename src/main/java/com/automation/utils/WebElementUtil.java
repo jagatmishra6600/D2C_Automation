@@ -404,4 +404,10 @@ public class WebElementUtil {
     	new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(seconds))
 			.until(condition);
 	}
+
+    public static WebElement waitForClickable(WebDriver driver, By locator, int time) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
+        return wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
 }

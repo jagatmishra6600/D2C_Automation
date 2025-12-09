@@ -2,6 +2,7 @@ package com.automation.electrolux.pages;
 
 
 import com.automation.electrolux.locators.EL_DeliveryAndInstallation;
+import com.automation.frigidaire.locators.FE_DeliveryAndInstallation;
 import com.automation.utils.DriverManager;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
@@ -129,9 +130,11 @@ public class EL_DeliveryInstallationPageActions {
 
     public boolean isDeclineProtectionVisible() {
         try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-            WebElement declineProtection = wait.until(ExpectedConditions.visibilityOfElementLocated(declineprotectionBy));
-            WebElementUtil.clickElementUsingJSE(driver, declineprotectionBy);
+//
+            WebDriver driver=DriverManager.getDriver();
+            WebElement declineProtection = WaitUtils.waitForVisibility(driver, FE_DeliveryAndInstallation.declineprotectionBy,60);
+            WebElementUtil.waitForClickable(driver,FE_DeliveryAndInstallation.declineprotectionBy,60);
+            WebElementUtil.clickElementUsingJSE(driver,FE_DeliveryAndInstallation.declineprotectionBy);
             Assert.assertTrue(declineProtection.isDisplayed(), "Decline Protection is not visible");
             return true;
         } catch (TimeoutException e) {
