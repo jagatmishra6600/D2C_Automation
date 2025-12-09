@@ -1,109 +1,97 @@
 package com.automation.electrolux.EPIC_07_DandS;
 
 import com.automation.BaseTest;
-import com.automation.frigidaire.pages.FrigidaireHomePageActions;
-import com.automation.frigidaire.pages.InstallationAndAddOnServices;
-import com.automation.frigidaire.pages.ProductItemsPageActions;
-import com.automation.frigidaire.pages.ProductListingPageActions;
-import com.automation.utils.DriverManager;
+import com.automation.electrolux.pages.EL_InstallationAndAddOnServices;
+import com.automation.electrolux.pages.ElectroluxHomePageActions;
+import com.automation.electrolux.pages.ElectroluxProductCards;
 import com.automation.utils.ExtentReportManager;
+import com.automation.utils.WebElementUtil;
+import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class EPIC_07_TC_03_DeliveryAddOnService extends BaseTest {
 
-    InstallationAndAddOnServices installationAndAddOnServices = new InstallationAndAddOnServices();
-    FrigidaireHomePageActions homePageActions = new FrigidaireHomePageActions();
-    ProductListingPageActions productListingPageActions = new ProductListingPageActions();
-    ProductItemsPageActions productItems = new ProductItemsPageActions();
+    ElectroluxProductCards electroluxProductCards =new ElectroluxProductCards();
+    ElectroluxHomePageActions electroluxHomePageActions = new ElectroluxHomePageActions();
+    EL_InstallationAndAddOnServices elInstallationAndAddOnServices = new EL_InstallationAndAddOnServices();
 
 
     public void navigateToDSPageElectrolux() throws InterruptedException {
-        homePageActions.navigateToHomePage();
-        productListingPageActions.clickOnProductMenu("Laundry");
-        productListingPageActions.clickOnProductMenu("Washers");
-        productListingPageActions.verifyProductItemPage("Washers", "Washers");
-        //productItems.closeEmailPopUp();
-        installationAndAddOnServices.clickProductBySKU("ELFW7537AW","Electrolux");
+        electroluxHomePageActions.navigateToHomePage();
+        electroluxProductCards.clickOnProductMenu("Laundry");
+        electroluxProductCards.clickOnProductMenu("Washers");
+        Assert.assertTrue(WebElementUtil.isDisplayed(By.xpath("//h1[normalize-space(text())='Washers']")), "Washers");
+        elInstallationAndAddOnServices.clickProductBySKU("ELFW7537AW");
     }
 
     @Test(groups = {"smoke", "regression"}, priority = 1)
     public void  EPIC_04_PLP_TC_03_testForDelivery() throws InterruptedException {
         navigateToDSPageElectrolux();
-        installationAndAddOnServices.validateDeliveryOnlyIsAvailable();
-        installationAndAddOnServices.selectedDeliveryOnly();
-        installationAndAddOnServices.selectCheckBoxRequired();
+        elInstallationAndAddOnServices.validateDeliveryOnlyIsAvailable();
+        elInstallationAndAddOnServices.selectedDeliveryOnly();
+        elInstallationAndAddOnServices.selectCheckBoxRequired();
         ExtentReportManager.getTest().pass("Verified Delivery only is available");
-        DriverManager.quitDriver();
     }
     @Test(groups = {"smoke", "regression"}, priority = 2)
     public void  EPIC_04_PLP_TC_03_testDeliveryInstallation() throws InterruptedException {
         navigateToDSPageElectrolux();
-        installationAndAddOnServices.professionalInstallation();
+        elInstallationAndAddOnServices.professionalInstallation();
         ExtentReportManager.getTest().pass("Verified Delivery Installation is available");
-        DriverManager.quitDriver();
     }
 
     @Test(groups = {"smoke", "regression"}, priority = 3)
     public void  EPIC_04_PLP_TC_03_testForAddOnService() throws InterruptedException {
         navigateToDSPageElectrolux();
-        installationAndAddOnServices.validateAddOnServicesAreAvailable();
-        installationAndAddOnServices.validateDoorSwing();
+        elInstallationAndAddOnServices.validateAddOnServicesAreAvailable();
+        elInstallationAndAddOnServices.validateDoorSwing();
         ExtentReportManager.getTest().pass("Verified Add on service is available");
-        DriverManager.quitDriver();
     }
 
     @Test(groups = {"smoke", "regression"}, priority = 4)
     public void  EPIC_04_PLP_TC_03_testForHaul() throws InterruptedException {
         navigateToDSPageElectrolux();
-        installationAndAddOnServices.selectHaul();
+        elInstallationAndAddOnServices.selectHaul();
         ExtentReportManager.getTest().pass("Verify that the Add-on service 'haul' is selected and check if the total price changes accordingly.");
-        DriverManager.quitDriver();
     }
 
     @Test(groups = {"smoke", "regression"}, priority = 5)
     public void  EPIC_04_PLP_TC_03_testForMove() throws InterruptedException {
         navigateToDSPageElectrolux();
-        installationAndAddOnServices.moveOld();
+        elInstallationAndAddOnServices.moveOld();
         ExtentReportManager.getTest().pass("Verify that the Add-on service 'move' is selected and check if the total price changes accordingly.");
-        DriverManager.quitDriver();
     }
 
     @Test(groups = {"smoke", "regression"}, priority = 6)
     public void  EPIC_04_PLP_TC_03_testForDoorSwing() throws InterruptedException {
         navigateToDSPageElectrolux();
-        installationAndAddOnServices.doorSwing();
+        elInstallationAndAddOnServices.doorSwing();
         ExtentReportManager.getTest().pass("Verify that the Add-on service 'door swing' is selected and check if the total price changes accordingly.");
-        DriverManager.quitDriver();
     }
     @Test(groups = {"smoke", "regression"}, priority = 7)
     public void  EPIC_04_PLP_TC_03_testForHaulAndMove() throws InterruptedException {
         navigateToDSPageElectrolux();
-        installationAndAddOnServices.haulAndMove();
+        elInstallationAndAddOnServices.haulAndMove();
         ExtentReportManager.getTest().pass("Verify that the Add-on service 'haul and move' is selected and check if the total price changes accordingly.");
-
-        DriverManager.quitDriver();
     }
     @Test(groups = {"smoke", "regression"}, priority = 8)
     public void  EPIC_04_PLP_TC_03_testForHaulAndDoor() throws InterruptedException {
         navigateToDSPageElectrolux();
-        installationAndAddOnServices.haulAndDoor();
+        elInstallationAndAddOnServices.haulAndDoor();
         ExtentReportManager.getTest().pass("Verify that the Add-on service 'haul and door' is selected and check if the total price changes accordingly.");
-        DriverManager.quitDriver();
     }
     @Test(groups = {"smoke", "regression"}, priority = 9)
     public void  EPIC_04_PLP_TC_03_testForMoveAndDoor() throws InterruptedException {
         navigateToDSPageElectrolux();
-        installationAndAddOnServices.moveAndDoor();
+        elInstallationAndAddOnServices.moveAndDoor();
         ExtentReportManager.getTest().pass("Verify that the Add-on service 'move and door' is selected and check if the total price changes accordingly.");
-        DriverManager.quitDriver();
     }
 
-    @Test(groups = {"smoke", "regression"}, priority = 9)
+    @Test(groups = {"smoke", "regression"}, priority = 10)
     public void  EPIC_04_PLP_TC_03_testForHaulMoveDoor() throws InterruptedException {
         navigateToDSPageElectrolux();
-        installationAndAddOnServices.haulMoveDoor();
+        elInstallationAndAddOnServices.haulMoveDoor();
         ExtentReportManager.getTest().pass("Verify that the Add-on service 'haul, move and door swing' is selected and check if the total price changes accordingly.");
-        DriverManager.quitDriver();
     }
 
 }

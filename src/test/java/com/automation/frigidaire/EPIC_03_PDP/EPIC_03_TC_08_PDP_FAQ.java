@@ -4,7 +4,6 @@ import com.automation.BaseTest;
 import com.automation.frigidaire.pages.FAQPage;
 import com.automation.frigidaire.pages.FrigidaireHomePageActions;
 
-import com.automation.utils.DriverManager;
 import com.automation.utils.ExtentReportManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -24,8 +23,6 @@ public class EPIC_03_TC_08_PDP_FAQ extends BaseTest {
         faqPage.verifyFAQSecond();
         faqPage.verifyAndClickAllCategoryTiles();
         ExtentReportManager.getTest().pass("Verified the functionality of the FAQ Section and verify all the sub categories");
-        DriverManager.quitDriver();
-
     }
 
     @Test(groups = {"regression", "smoke"}, priority = 2)
@@ -37,7 +34,6 @@ public class EPIC_03_TC_08_PDP_FAQ extends BaseTest {
         faqPage.verifySearchBoxVisible();
         faqPage.verifyAllFAQArticlesRefrigerator();
         ExtentReportManager.getTest().pass("Verified the FAQ for French Door Refrigerator within the Kitchen category and navigated to the article pages successfully");
-        DriverManager.quitDriver();
     }
 
     @Test(groups = {"regression", "smoke"}, priority = 3)
@@ -49,7 +45,6 @@ public class EPIC_03_TC_08_PDP_FAQ extends BaseTest {
         faqPage.verifySearchBoxVisibles();
         faqPage.verifyAllFAQArticlesRoomAC();
         ExtentReportManager.getTest().pass("Verified the FAQ for Window Mounted Air Conditioner within the Room AC category and navigated to the article pages successfully");
-        DriverManager.quitDriver();
     }
 
 }

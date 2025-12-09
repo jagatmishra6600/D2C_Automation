@@ -12,20 +12,12 @@ import org.testng.Assert;
 
 public class InstallationAndAddOnServices {
 
-    public void clickProductBySKU(String sku, String Website) throws InterruptedException {
+    public void clickProductBySKU(String sku) throws InterruptedException {
 
         WebElementUtil.zoomInOrOut(75);
         Thread.sleep(7000);
-        By productClick = null;
+        By productClick =By.xpath("//div[text()='" + sku + "']//parent::div//parent::div//div[@class='col- Product-Name my-2 min-height-v10']//a");
 
-        if(Website.equalsIgnoreCase("Frigidaire")){
-            productClick=By.xpath("//div[text()='" + sku + "']//parent::div//parent::div//div[@class='col- Product-Name my-2 min-height-v10']//a");
-
-        } else if (Website.equalsIgnoreCase("Electrolux")) {
-            productClick=By.xpath("//div[text()='" + sku + "']//parent::div//parent::div//parent::div//parent::div//div[@class=\"col- product-card-inner-row kit\"]//a");
-        }
-        else {
-        }
         WebDriver driver= DriverManager.getDriver();
         WebElement productSKUNumber= driver.findElement(productClick);
         WebElementUtil.scrollToElementStable(productClick);
@@ -62,7 +54,7 @@ public class InstallationAndAddOnServices {
     public void selectedDeliveryOnly() throws InterruptedException {
 
         WaitUtils.implicitWait(5);
-        WebElementUtil.waitForElementToBeVisible(DSPagesService.deliveryRadioButton);
+        WebElementUtil.waitForElementToBeVisible(DSPagesService.deliveryRadioButton, 10);
         WebElementUtil.waitForElementToBeClickable(DSPagesService.deliveryRadioButton, 10);
         WebElementUtil.clickElement(DSPagesService.deliveryRadioButton);
 
@@ -81,7 +73,7 @@ public class InstallationAndAddOnServices {
     }
     public void selectCheckBoxRequired(){
 
-        WebElementUtil.waitForElementToBeVisible(DSPageInstallation.checkBoxRequired);
+        WebElementUtil.waitForElementToBeVisible(DSPageInstallation.checkBoxRequired, 10);
         WebElementUtil.waitForElementToBeClickable(DSPageInstallation.checkBoxRequired, 10);
         WebElementUtil.clickElement(DSPageInstallation.checkBoxRequired);
 
@@ -133,27 +125,6 @@ public class InstallationAndAddOnServices {
 
     }
 
-    public void professionalInstallation (){
-
-        validateElement(DSPageInstallation.professionalInstallation,
-                "Delivery & installation option is NOT displayed!");
-
-        validateElement(DSPageInstallation.professionalInstallationRadioButton,
-                "Delivery & installation radio button is NOT displayed!");
-
-//        validateElement(DSPageInstallation.professionalInstallationTag,
-//                "Recommended tag is NOT displayed!");
-
-        validateElement(DSPageInstallation.professionalInstallationDescription,
-                "Description for Delivery & installation is NOT displayed!");
-
-        validateElement(DSPageInstallation.professionalInstallationPrice,
-                "Price for Delivery & installation is NOT displayed!");
-
-        validateElement(DSPageInstallation.professionalInstallationViewLink,
-                "'View included parts and additional details' link is NOT displayed!");
-    }
-
     public void validateElement(By locator, String errorMessage) {
         WebDriver driver = DriverManager.getDriver();
         WebElementUtil.waitForElementToBeVisible(locator, 15);
@@ -199,21 +170,11 @@ public class InstallationAndAddOnServices {
 
 
     }
-    public void validateDoorSwing(){
-        validateElement(DSPageInstallation.doorSwing,
-                "Door swing option is Not available!");
 
-        validateElement(DSPageInstallation.doorSwingRadioButton,
-                "Door swing Radio button is Not available!");
+    public void selectHaul(){
 
-        validateElement(DSPageInstallation.doorSwingPrice,
-                "Door swing price is Not available!");
-    }
-
-    public void selectHaul() throws InterruptedException {
-
-        //Thread.sleep(5000);
-        WebElementUtil.waitForElementToBeClickable(DSPagesService.deliveryRadioButton);
+        WebElementUtil.waitForElementToBeVisible(DSPagesService.deliveryRadioButton,10);
+        WebElementUtil.waitForElementToBeClickable(DSPagesService.deliveryRadioButton, 10);
         WebElementUtil.clickElement(DSPagesService.deliveryRadioButton);
 
         validateElement(DSPageInstallation.addOnService,
@@ -226,10 +187,10 @@ public class InstallationAndAddOnServices {
         calculatePriceAndAssert(price);
     }
 
-    public void moveOld() throws InterruptedException {
+    public void moveOld(){
 
-        //Thread.sleep(5000);
-        WebElementUtil.waitForElementToBeClickable(DSPagesService.deliveryRadioButton);
+        WebElementUtil.waitForElementToBeVisible(DSPagesService.deliveryRadioButton,10);
+        WebElementUtil.waitForElementToBeClickable(DSPagesService.deliveryRadioButton, 10);
         WebElementUtil.clickElement(DSPagesService.deliveryRadioButton);
 
         validateElement(DSPageInstallation.addOnService,
@@ -242,20 +203,6 @@ public class InstallationAndAddOnServices {
         calculatePriceAndAssert(price);
     }
 
-    public void doorSwing() throws InterruptedException {
-        //Thread.sleep(5000);
-        WebElementUtil.waitForElementToBeClickable(DSPagesService.deliveryRadioButton);
-        WebElementUtil.clickElement(DSPagesService.deliveryRadioButton);
-
-        validateElement(DSPageInstallation.addOnService,
-                "'Add-on services' title is NOT available!");
-
-        WebElementUtil.waitForElementToBeClickable(DSPageInstallation.doorSwingRadioButton);
-        WebElementUtil.clickElement(DSPageInstallation.doorSwingRadioButton);
-
-        String price = WebElementUtil.getText(DSPageInstallation.doorSwingPrice);
-        calculatePriceAndAssert(price);
-    }
     public void calculatePriceAndAssert( String price){
         WebDriver driver = DriverManager.getDriver();
         double priceAdd = 0;
@@ -279,81 +226,21 @@ public class InstallationAndAddOnServices {
         Assert.assertEquals(totalA, expected, "Error" );
     }
 
-    public void haulAndMove() throws InterruptedException {
+    public void haulAndMove(){
 
-        //Thread.sleep(5000);
-        WebElementUtil.waitForElementToBeClickable(DSPagesService.deliveryRadioButton);
+        WebElementUtil.waitForElementToBeVisible(DSPagesService.deliveryRadioButton, 10);
+        WebElementUtil.waitForElementToBeClickable(DSPagesService.deliveryRadioButton, 10);
         WebElementUtil.clickElement(DSPagesService.deliveryRadioButton);
 
         validateElement(DSPageInstallation.addOnService,
                 "'Add-on services' title is NOT available!");
+        WebElementUtil.scrollToElementStable(DSPageInstallation.addOnService);
 
         WebElementUtil.waitForElementToBeClickable(DSPageInstallation.haulCheckBox);
         WebElementUtil.clickElement(DSPageInstallation.haulCheckBox);
 
         WebElementUtil.waitForElementToBeClickable(DSPageInstallation.moveOldCheckBox);
         WebElementUtil.clickElement(DSPageInstallation.moveOldCheckBox);
-
-        WebElementUtil.waitForElementToBeVisible(DSPageInstallation.subTotalAddOnServicePrice);
-        String str = WebElementUtil.getText(DSPageInstallation.subTotalAddOnServicePrice);
-        calculatePriceAndAssert(str);
-    }
-
-    public void haulAndDoor() throws InterruptedException {
-
-        //Thread.sleep(5000);
-        WebElementUtil.waitForElementToBeClickable(DSPagesService.deliveryRadioButton);
-        WebElementUtil.clickElement(DSPagesService.deliveryRadioButton);
-
-        validateElement(DSPageInstallation.addOnService,
-                "'Add-on services' title is NOT available!");
-
-        WebElementUtil.waitForElementToBeClickable(DSPageInstallation.haulCheckBox);
-        WebElementUtil.clickElement(DSPageInstallation.haulCheckBox);
-
-        WebElementUtil.waitForElementToBeClickable(DSPageInstallation.doorSwingRadioButton);
-        WebElementUtil.clickElement(DSPageInstallation.doorSwingRadioButton);
-
-        WebElementUtil.waitForElementToBeVisible(DSPageInstallation.subTotalAddOnServicePrice);
-        String str = WebElementUtil.getText(DSPageInstallation.subTotalAddOnServicePrice);
-        calculatePriceAndAssert(str);
-    }
-    public void moveAndDoor() throws InterruptedException {
-
-        //Thread.sleep(5000);
-        WebElementUtil.waitForElementToBeClickable(DSPagesService.deliveryRadioButton);
-        WebElementUtil.clickElement(DSPagesService.deliveryRadioButton);
-
-        validateElement(DSPageInstallation.addOnService,
-                "'Add-on services' title is NOT available!");
-
-        WebElementUtil.waitForElementToBeClickable(DSPageInstallation.moveOldCheckBox);
-        WebElementUtil.clickElement(DSPageInstallation.moveOldCheckBox);
-
-        WebElementUtil.waitForElementToBeClickable(DSPageInstallation.doorSwingRadioButton);
-        WebElementUtil.clickElement(DSPageInstallation.doorSwingRadioButton);
-
-        WebElementUtil.waitForElementToBeVisible(DSPageInstallation.subTotalAddOnServicePrice);
-        String str = WebElementUtil.getText(DSPageInstallation.subTotalAddOnServicePrice);
-        calculatePriceAndAssert(str);
-    }
-    public void haulMoveDoor() throws InterruptedException {
-
-        //Thread.sleep(5000);
-        WebElementUtil.waitForElementToBeClickable(DSPagesService.deliveryRadioButton);
-        WebElementUtil.clickElement(DSPagesService.deliveryRadioButton);
-
-        validateElement(DSPageInstallation.addOnService,
-                "'Add-on services' title is NOT available!");
-
-        WebElementUtil.waitForElementToBeClickable(DSPageInstallation.haulCheckBox);
-        WebElementUtil.clickElement(DSPageInstallation.haulCheckBox);
-
-        WebElementUtil.waitForElementToBeClickable(DSPageInstallation.moveOldCheckBox);
-        WebElementUtil.clickElement(DSPageInstallation.moveOldCheckBox);
-
-        WebElementUtil.waitForElementToBeClickable(DSPageInstallation.doorSwingRadioButton);
-        WebElementUtil.clickElement(DSPageInstallation.doorSwingRadioButton);
 
         WebElementUtil.waitForElementToBeVisible(DSPageInstallation.subTotalAddOnServicePrice);
         String str = WebElementUtil.getText(DSPageInstallation.subTotalAddOnServicePrice);

@@ -69,12 +69,8 @@ public class FrigidaireProductDetails {
             return By.xpath("//div[@id='PlpItem" + i + "']//div//div//button");
         }
 
-        // PDP Locator (Non-dynamic)
-//        public final By skuPDPPage() {
-//            return By.xpath("//div[@id='overview']//span[@class='ng-star-inserted']//span");
-//        }
 
-    public final By skuPDPPage = By.xpath("//div[@id='overview']//span[@class='ng-star-inserted']//span");
+       public final By skuPDPPage = By.xpath("//div[@id='overview']//span[@class='ng-star-inserted']//span");
 
 
 }

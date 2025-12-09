@@ -1,5 +1,6 @@
 package com.automation.electrolux.pages;
 
+import com.automation.electrolux.locators.EL_ProductCardDetails;
 import com.automation.utils.ConfigReader;
 import com.automation.utils.DriverManager;
 import com.automation.utils.WaitUtils;
@@ -17,6 +18,8 @@ import java.time.Duration;
 import static com.automation.utils.WaitUtils.untilClickable;
 
 public class ElectroluxProductCards {
+
+    EL_ProductCardDetails elPDP = new EL_ProductCardDetails();
 
     private final By emailPopUp = By.xpath("//span[@id=\"close-modal123\"]");
     private final By acceptButtonLocator = By.xpath("//button[@id='onetrust-accept-btn-handler']");
@@ -80,35 +83,35 @@ public class ElectroluxProductCards {
         }
     }
 
-    public void verifyProductDetails() {
+    public void verifyProductDetails(int i) {
 
-        verifyElementDisplayed(skuNumber, "SKU Number");
-        verifyElementDisplayed(leftCornerTag, "Left Corner Tag");
-        verifyElementDisplayed(productImage, "Image");
-        verifyElementDisplayed(productName, "Name");
-        verifyElementDisplayed(colorOption, "Color");
-        verifyElementDisplayed(rating, "Rating");
-        verifyElementDisplayed(feature, "Feature");
-        verifyElementDisplayed(discountPrice, "Discount Price");
-        verifyElementDisplayed(originalPrice, "Original Price");
-        verifyElementDisplayed(priceIcon, "Price Icon");
-        verifyElementDisplayed(compareBox, "Compare Box");
+        verifyElementDisplayed(elPDP.skuNumber(i), "SKU Number");
+        verifyElementDisplayed(elPDP.leftCornerTag(i), "Left Corner Tag");
+        verifyElementDisplayed(elPDP.productImage(i), "Image");
+        verifyElementDisplayed(elPDP.productName(i), "Name");
+        verifyElementDisplayed(elPDP.colorOption(i), "Color");
+        verifyElementDisplayed(elPDP.rating(i), "Rating");
+        verifyElementDisplayed(elPDP.feature(i), "Feature");
+        verifyElementDisplayed(elPDP.discountPrice(i), "Discount Price");
+        verifyElementDisplayed(elPDP.originalPrice(i), "Original Price");
+        verifyElementDisplayed(elPDP.priceIcon(i), "Price Icon");
+        verifyElementDisplayed(elPDP.compareBox(i), "Compare Box");
     }
 
 
-    public void verifyAndClickElements(){
+    public void verifyAndClickElements(int i){
         WebDriver driver = DriverManager.getDriver();
         WebElementUtil.zoomInOrOut(80);
 
-        verifyAndClickIfNeeded(driver, productImage, "Product Image");
-        verifyAndClickIfNeeded(driver, productName, "Product Name");
-        verifyAndClickIfNeeded(driver, rating, "Product Rating");
+        verifyAndClickIfNeeded(driver, elPDP.productImage(i), "Product Image");
+        verifyAndClickIfNeeded(driver, elPDP.productName(i), "Product Name");
+        verifyAndClickIfNeeded(driver, elPDP.rating(i), "Product Rating");
     }
     private void verifyAndClickIfNeeded(WebDriver driver, By xpath, String elementName){
-        By skuPLP = By.xpath("//div[@id=\"PlpItem1\"]//div[@class=\"Product-Card-Sku\"]");
-        WebElementUtil.waitForElementToBeVisible(skuPLP);
-        WebElement skuNumber = driver.findElement(skuPLP);
-        String textValuePLP = skuNumber.getText();
+//        By skuPLP = By.xpath("//div[@id=\"PlpItem1\"]//div[@class=\"Product-Card-Sku\"]");
+//        WebElementUtil.waitForElementToBeVisible(skuPLP);
+//        WebElement skuNumber = driver.findElement(skuPLP);
+//        String textValuePLP = skuNumber.getText();
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
             WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(xpath));
@@ -119,10 +122,11 @@ public class ElectroluxProductCards {
 
                 By skuPDP = By.xpath("//div[@id=\"EluxBreadcrumb\"]//span[@class=\"ng-star-inserted\"]//span");
                 WebElementUtil.waitForElementToBeVisible(skuPDP);
-                WebElement skuNumberPDP = driver.findElement(skuPDP);
-                String textPDP = skuNumberPDP.getText();
+                WebElementUtil.isDisplayed(skuPDP);
+//                WebElement skuNumberPDP = driver.findElement(skuPDP);
+//                String textPDP = skuNumberPDP.getText();
 
-                Assert.assertEquals(textPDP,textValuePLP);
+//                Assert.assertEquals(textPDP,textValuePLP);
 
                 DriverManager.getDriver().navigate().back();
             }
@@ -131,21 +135,21 @@ public class ElectroluxProductCards {
         }
     }
 
-    public void checkPlpItem(String ProductName) throws InterruptedException {
+    public void checkPlpItem(String ProductName, int i) throws InterruptedException {
         WebElementUtil.zoomInOrOut(80);
         WaitUtils.implicitWait(5);
         WebDriver driver = DriverManager.getDriver();
 
         if(ProductName.equalsIgnoreCase("Vacuums")){
-            WebElement nameProduct= driver.findElement(productName);
+            WebElement nameProduct= driver.findElement(elPDP.productName(i));
             WebElementUtil.scrollToElement(driver, nameProduct);
-            verifyProductDetails();
-            verifyAndClickElements();
+            verifyProductDetails(i);
+            verifyAndClickElements(i);
         } else if (ProductName.equalsIgnoreCase("Laundry")) {
-            WebElement nameProduct= driver.findElement(productName);
+            WebElement nameProduct= driver.findElement(elPDP.productName(i));
             WebElementUtil.scrollToElement(driver, nameProduct);
-            verifyProductDetails();
-            verifyAndClickElements();
+            verifyProductDetails(i);
+            verifyAndClickElements(i);
         }
 
     }

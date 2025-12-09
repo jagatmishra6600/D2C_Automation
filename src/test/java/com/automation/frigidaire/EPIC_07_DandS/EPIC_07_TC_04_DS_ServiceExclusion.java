@@ -24,12 +24,11 @@ public class EPIC_07_TC_04_DS_ServiceExclusion extends BaseTest {
         productListingPageActions.clickOnProductMenu("French Door");
         productListingPageActions.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         productItems.closeEmailPopUp();
-        installationAndAddOnServices.clickProductBySKU("FRFG1723AV", "Frigidaire");
+        installationAndAddOnServices.clickProductBySKU("FRFG1723AV");
         dsPageServiceExclusion.zipCodeChange("85062");
         dsPageServiceExclusion.zipCodePop();
         dsPageServiceExclusion.deliveryOnlyIsAvailable();
         dsPageServiceExclusion.installationUnavailable();
         ExtentReportManager.getTest().pass("Verified Delivery page after change the zip code for FEDEX/AIT");
-        DriverManager.quitDriver();
     }
 }

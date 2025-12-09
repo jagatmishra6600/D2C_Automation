@@ -26,12 +26,12 @@ public class DSPageServiceExclusion {
         Thread.sleep(2000);
         WebElementUtil.waitForElementToBeClickable(DSPagesService.zipCodeButton);
         WebElementUtil.clickElement(DSPagesService.zipCodeButton);
-        driver.navigate().refresh();
+        //driver.navigate().refresh();
     }
     public void zipCodePop() throws InterruptedException {
         WebElementUtil.waitForElementToBeVisible(DSPagesService.zipPopUp);
         WebElementUtil.clickElement(DSPagesService.zipPopUp);
-        Thread.sleep(2000);
+        //Thread.sleep(2000);
 
     }
     public void deliveryOnlyIsAvailable() {

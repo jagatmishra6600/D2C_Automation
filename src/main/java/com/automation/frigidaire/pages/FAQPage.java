@@ -21,12 +21,13 @@ public class FAQPage {
 
     public void clickOnProductMenu(String text) {
         By locator = By.xpath("//h5[normalize-space(text())='" + text + "']");
-        WebElementUtil.waitForElementToBeVisible(locator);
+        WebElementUtil.waitForElementToBeVisible(locator, 10);
+        WebElementUtil.waitForElementToBeClickable(locator, 10);
         WebElementUtil.clickElement(locator);
     }
 
     public void verifyFAQHeaderText() {
-        WebElementUtil.waitForElementToBeVisible(faq.headerTitle);
+        WebElementUtil.waitForElementToBeVisible(faq.headerTitle, 10);
 
         WebElement headerElement = WebElementUtil.findElement(faq.headerTitle);
         String actualText = headerElement.getText();
@@ -57,7 +58,7 @@ public class FAQPage {
 
         WebElementUtil.clickElement(tileLocator);
 
-        WebElementUtil.waitForElementToBeVisible(faq.subcategoryHeader);
+        WebElementUtil.waitForElementToBeVisible(faq.subcategoryHeader,10);
         WebElement se = WebElementUtil.findElement(faq.subcategoryHeader);
         String actual = se.getText();
         Assert.assertTrue(actual.contains("Support for " + category));
@@ -69,10 +70,11 @@ public class FAQPage {
 
         WebElementUtil.zoomInOrOut(60);
 
-        WebElementUtil.waitForElementToBeClickable(faq.kitchenLocators);
+        WebElementUtil.waitForElementToBeVisible(faq.kitchenLocators, 10);
+        WebElementUtil.waitForElementToBeClickable(faq.kitchenLocators, 10);
         WebElementUtil.clickElement(faq.kitchenLocators);
 
-        WebElementUtil.waitForElementToBeClickable(faq.refrigeratorsLocators);
+        WebElementUtil.waitForElementToBeClickable(faq.refrigeratorsLocators, 10);
         WebElementUtil.clickElement(faq.refrigeratorsLocators);
 
         WebElement inputBox = WaitUtils.untilVisible(faq.searchBox);
@@ -83,7 +85,8 @@ public class FAQPage {
     public void verifySearchBoxVisibles() {
 
         WebElementUtil.zoomInOrOut(60);
-        WebElementUtil.waitForElementToBeClickable(faq.homeComfort);
+        WebElementUtil.waitForElementToBeVisible(faq.homeComfort,10);
+        WebElementUtil.waitForElementToBeClickable(faq.homeComfort,10);
         WebElementUtil.clickElement(faq.homeComfort);
 
         WebElementUtil.waitForElementToBeClickable(faq.roomAC);
@@ -98,13 +101,13 @@ public class FAQPage {
 
         WebElementUtil.isDisplayed(faq.articleLocatorRoomAc);
 
-        WebElementUtil.waitForElementToBeVisible(faq.articleLocatorRoomAc);
+        WebElementUtil.waitForElementToBeVisible(faq.articleLocatorRoomAc, 10);
         WebElement articleTextRoomAC = WebElementUtil.findElement(faq.articleLocatorRoomAc);
         String actualTextRoomAC = articleTextRoomAC.getText();
 
         WebElementUtil.clickElement(faq.articleLocatorRoomAc);
 
-        WebElementUtil.waitForElementToBeVisible(faq.verifyArticleLocator);
+        WebElementUtil.waitForElementToBeVisible(faq.verifyArticleLocator,10);
         WebElement verifyArticleLocatorText = WebElementUtil.findElement(faq.verifyArticleLocator);
         String expectedText = verifyArticleLocatorText.getText();
 
@@ -116,7 +119,7 @@ public class FAQPage {
 
         WebElementUtil.isDisplayed(faq.articleLocatorRefrigerator);
 
-        WebElementUtil.waitForElementToBeVisible(faq.articleLocatorRefrigerator);
+        WebElementUtil.waitForElementToBeVisible(faq.articleLocatorRefrigerator,10);
         WebElement articleLocatorText = WebElementUtil.findElement(faq.articleLocatorRefrigerator);
         String actualText = articleLocatorText.getText();
 

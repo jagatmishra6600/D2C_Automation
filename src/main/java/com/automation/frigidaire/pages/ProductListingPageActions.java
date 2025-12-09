@@ -49,13 +49,11 @@ public class ProductListingPageActions {
 
             if (element.isDisplayed()) {
                 element.click();
-                System.out.println("Clicked on " + elementName + " — navigating to PDP page.");
                 WebElementUtil.waitForElementToBeVisible(productDetails.skuPDPPage,10);
                 WebElementUtil.isDisplayed(productDetails.skuPDPPage);
 
                 WaitUtils.implicitWait(2);
                 DriverManager.getDriver().navigate().back();
-                System.out.println("Navigated back to PLP page.");
                 WaitUtils.implicitWait(2);
             }
         } catch (Exception e) {
