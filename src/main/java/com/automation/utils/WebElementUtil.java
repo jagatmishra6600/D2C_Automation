@@ -2,6 +2,7 @@ package com.automation.utils;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -208,6 +209,36 @@ public class WebElementUtil {
                 element);
     }
 
+    public static void scrollToElementStable(By locator) {
+        WebDriver driver = DriverManager.getDriver();
+        WebElement element = driver.findElement(locator);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        String script =
+                "var elem = arguments[0];" +
+                        "var viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);" +
+                        "var rect = elem.getBoundingClientRect();" +
+                        "var elemY = rect.top + window.scrollY;" +
+                        "var targetY = elemY - (viewportHeight * 0.30);" +  // scroll to 30% from top
+                        "window.scrollTo({ top: targetY, behavior: 'instant' });" +
+                        "return targetY;";
+
+        // Receive Double safely
+        Number returnedY = (Number) js.executeScript(script, element);
+        long targetY = returnedY.longValue();
+
+        // Wait scroll to finish
+        try {
+            new WebDriverWait(driver, Duration.ofMillis(300))
+                    .until(d -> {
+                        Number nowY = (Number) ((JavascriptExecutor) d)
+                                .executeScript("return Math.round(window.scrollY);");
+                        return Math.abs(nowY.longValue() - targetY) < 2;
+                    });
+        } catch (Exception ignored) {
+        }
+    }
+
     public static List<WebElement> findElements(By locator) {
         if (DriverManager.getDriver() == null) {
             throw new IllegalStateException("WebDriver is not initialized. Ensure DriverManager.getDriver() is called before using findElements.");
@@ -318,4 +349,59 @@ public class WebElementUtil {
             throw new RuntimeException("Failed to scroll by pixels.", e);
         }
     }
+
+    public static WebElement scrollToElementCenter(By locator) {
+        WebDriver driver = DriverManager.getDriver();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+        // 1️⃣ wait for element to exist
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+
+        int maxAttempts = 15; // enough retries for unstable pages
+
+        for (int i = 0; i < maxAttempts; i++) {
+
+            // Re-locate element each iteration (React pages re-render!)
+            element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+
+            // Element position relative to viewport
+            Long rectTop = (Long) js.executeScript("return Math.round(arguments[0].getBoundingClientRect().top);", element);
+            Long viewportHeight = (Long) js.executeScript("return window.innerHeight;");
+
+            long desiredPosition = viewportHeight / 2;  // exact center
+            long offset = rectTop - desiredPosition;
+
+            // If element already centered → stop
+            if (Math.abs(offset) < 10) {
+                break;
+            }
+
+            // Perform incremental scroll
+            js.executeScript("window.scrollBy(0, arguments[0]);", offset);
+
+            // Allow page to stabilize after scroll
+            sleep(300);
+        }
+
+        // After loop → ensure element truly visible & interactable
+        element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        wait.until(ExpectedConditions.elementToBeClickable(locator));
+
+        return element;
+    }
+
+    private static void sleep(long ms) {
+        try { Thread.sleep(ms); } catch (Exception ignored) {}
+    }
+    
+    public static void waitForCondition(ExpectedCondition<?> condition) { 
+    	new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(15))
+			.until(condition);
+	}
+    
+    public static void waitForCondition(ExpectedCondition<?> condition, int seconds) { 
+    	new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(seconds))
+			.until(condition);
+	}
 }

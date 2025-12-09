@@ -43,10 +43,9 @@ public class FrigidaireLoginPageActions {
 	}
 	
 	 public FrigidaireHomePageActions login(String emailAddress, String password) throws InterruptedException {
-		 enterEmailAddress(emailAddress)
-							 .enterPassword(password);
-		 WaitUtils.sleep(4000);
-						return	 clickLoginButton();
+		 return	 enterEmailAddress(emailAddress)
+								.enterPassword(password)
+								.clickLoginButton();
 	 }
 	 
 	public FrigidaireLoginPageActions enterEmailAddress(String emailAddress) {

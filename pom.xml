@@ -114,7 +114,7 @@
                     <useSystemClassLoader>false</useSystemClassLoader>
                     <!-- Enable parallel execution at Surefire level to match TestNG suite parallelism -->
                     <parallel>tests</parallel>
-                    <threadCount>5</threadCount>
+                    <threadCount>1</threadCount>
                     <testFailureIgnore>false</testFailureIgnore>
                     <suiteXmlFiles>
                         <suiteXmlFile>testng.xml</suiteXmlFile>
