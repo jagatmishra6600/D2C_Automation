@@ -78,7 +78,6 @@ public class MyAccountInviteFamilyFriendsPageActionsFsus {
 		    while (retries < 3) {
 		        WebElementUtil.sendKeys(locator, text);
 		        var actualValue = WebElementUtil.getDomProperty(locator, "value");
-		        System.out.println(actualValue);
 		        if (text.equals(actualValue)) {
 		            return this;
 		        }
