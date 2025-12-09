@@ -64,10 +64,6 @@ import org.testng.annotations.Test;
 
 
 
-
-
-
-
             ExtentReportManager.getTest().pass("Login Page loaded Successfully and its Fields and Messages are verified");
         }
     }
