@@ -2,7 +2,7 @@ package com.automation.electrolux.locators;
 
 import org.openqa.selenium.By;
 
-public class EL_ProductCardDetails {
+public class ProductDetailPageLocatorsElux {
 
     public final By skuNumber(int i) {
         return By.xpath("//div[@id='PlpItem" + i + "']//div[@class='Product-Card-Sku']");

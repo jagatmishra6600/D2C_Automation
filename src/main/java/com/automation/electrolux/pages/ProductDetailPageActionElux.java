@@ -1,6 +1,6 @@
 package com.automation.electrolux.pages;
 
-import com.automation.electrolux.locators.EL_ProductCardDetails;
+import com.automation.electrolux.locators.ProductDetailPageLocatorsElux;
 import com.automation.utils.ConfigReader;
 import com.automation.utils.DriverManager;
 import com.automation.utils.WaitUtils;
@@ -17,25 +17,12 @@ import java.time.Duration;
 
 import static com.automation.utils.WaitUtils.untilClickable;
 
-public class ElectroluxProductCards {
+public class ProductDetailPageActionElux {
 
-    EL_ProductCardDetails elPDP = new EL_ProductCardDetails();
+    ProductDetailPageLocatorsElux elPDP = new ProductDetailPageLocatorsElux();
 
     private final By emailPopUp = By.xpath("//span[@id=\"close-modal123\"]");
     private final By acceptButtonLocator = By.xpath("//button[@id='onetrust-accept-btn-handler']");
-
-    private final By skuNumber = By.xpath("//div[@id='PlpItem1']//div[@class='Product-Card-Sku']");
-    private final By leftCornerTag = By.xpath("//div[@id='PlpItem1']//div[@class='mb-4 highlight-wapper']/div");
-    private final By productImage = By.xpath("//div[@id='PlpItem1']//div[@class='col- Product-Image-Placeholder px-0']//img");
-    private final By productName = By.xpath("//div[@id='PlpItem1']//div[@class='col- product-card-inner-row kit']//div");
-    private final By colorOption = By.xpath("//div[@id='PlpItem1']//div[@class='col- Product-Color-Swatch-wrapper my-2 d-flex']/a");
-    private final By rating = By.xpath("//div[@id='PlpItem1']//div[@id='BvProductRating']");
-    private final By feature = By.xpath("//div[@id='PlpItem1']//div[@id='badge']/div");
-    private final By discountPrice = By.xpath("//div[@id='PlpItem1']//div[@class='col- ElementsPricingMSRP-Sale ff']//div//span[@class='H3H3_Desktop saleprice']");
-    private final By originalPrice = By.xpath("//div[@id='PlpItem1']//div[@class='col- ElementsPricingMSRP-Sale ff']/div/span[@class='CTA-Text-ELE-Blue-Mid']/s");
-    private final By priceIcon = By.xpath("//div[@id='PlpItem1']//div[@class='col- ElementsPricingMSRP-Sale ff']//div//app-elux-tooltip//div//img");
-    private final By compareBox = By.xpath("//div[@id='PlpItem1']//div//input[@type='checkbox']");
-
 
     SoftAssert softAssert = new SoftAssert();
 
@@ -44,7 +31,7 @@ public class ElectroluxProductCards {
         WebElementUtil.clickElement(emailPopUp);
     }
 
-    public ElectroluxProductCards navigateToHomePage() {
+    public ProductDetailPageActionElux navigateToHomePage() {
         WebElementUtil.navigateTo(ConfigReader.getAppUrl());
         try {
             WebElement acceptBtn = untilClickable(acceptButtonLocator, 15);

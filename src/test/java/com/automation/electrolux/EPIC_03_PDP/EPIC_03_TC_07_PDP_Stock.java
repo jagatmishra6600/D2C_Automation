@@ -2,7 +2,7 @@ package com.automation.electrolux.EPIC_03_PDP;
 
 import com.automation.BaseTest;
 import com.automation.electrolux.pages.ElectroluxHomePageActions;
-import com.automation.electrolux.pages.ElectroluxOutOfStock;
+import com.automation.electrolux.pages.OutOfStockPageActionElux;
 import com.automation.utils.ExtentReportManager;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.By;
@@ -10,8 +10,9 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class EPIC_03_TC_07_PDP_Stock extends BaseTest {
+    
     ElectroluxHomePageActions electroluxHomePageActions = new ElectroluxHomePageActions();
-    ElectroluxOutOfStock electroluxOutOfStock = new ElectroluxOutOfStock();
+    OutOfStockPageActionElux electroluxOutOfStock = new OutOfStockPageActionElux();
 
     @Test(groups = {"smoke", "regression"}, description = "Verify Vacuums Product Details in Product listing page and validation for stock")
     public void testForVacuumsForStock() throws InterruptedException {

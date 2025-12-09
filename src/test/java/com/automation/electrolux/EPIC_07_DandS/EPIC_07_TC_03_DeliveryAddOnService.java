@@ -1,9 +1,9 @@
 package com.automation.electrolux.EPIC_07_DandS;
 
 import com.automation.BaseTest;
-import com.automation.electrolux.pages.EL_InstallationAndAddOnServices;
+import com.automation.electrolux.pages.InstallationAddOnServicePageActionElux;
 import com.automation.electrolux.pages.ElectroluxHomePageActions;
-import com.automation.electrolux.pages.ElectroluxProductCards;
+import com.automation.electrolux.pages.ProductDetailPageActionElux;
 import com.automation.utils.ExtentReportManager;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.By;
@@ -12,9 +12,9 @@ import org.testng.annotations.Test;
 
 public class EPIC_07_TC_03_DeliveryAddOnService extends BaseTest {
 
-    ElectroluxProductCards electroluxProductCards =new ElectroluxProductCards();
+    ProductDetailPageActionElux electroluxProductCards =new ProductDetailPageActionElux();
     ElectroluxHomePageActions electroluxHomePageActions = new ElectroluxHomePageActions();
-    EL_InstallationAndAddOnServices elInstallationAndAddOnServices = new EL_InstallationAndAddOnServices();
+    InstallationAddOnServicePageActionElux elInstallationAndAddOnServices = new InstallationAddOnServicePageActionElux();
 
 
     public void navigateToDSPageElectrolux() throws InterruptedException {

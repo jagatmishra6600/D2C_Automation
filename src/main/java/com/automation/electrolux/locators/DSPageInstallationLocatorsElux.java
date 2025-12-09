@@ -1,8 +1,8 @@
-package com.automation.frigidaire.locators;
+package com.automation.electrolux.locators;
 
 import org.openqa.selenium.By;
 
-public class DSPageInstallation {
+public class DSPageInstallationLocatorsElux {
 
     public static final By addOnService = By.xpath("//p[text()=\"Add-on Services\" or text()=\"Add-on services\"]\n");
     public static final By addOnMessage = By.xpath("//p[contains(text(), \"You must uninstall your appliance for haul-away or moving.\")]\n");

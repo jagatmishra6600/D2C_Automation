@@ -2,8 +2,8 @@ package com.automation.frigidaire.EPIC_04_PLP;
 
 import com.automation.BaseTest;
 import com.automation.frigidaire.pages.FrigidaireHomePageActions;
-import com.automation.frigidaire.pages.ProductItemsPageActions;
-import com.automation.frigidaire.pages.ProductListingPageActions;
+import com.automation.frigidaire.pages.OutOfStockPageActionFrig;
+import com.automation.frigidaire.pages.ProductDetailPageActionFrig;
 import com.automation.utils.ExtentReportManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -11,8 +11,8 @@ import org.testng.annotations.Test;
 
 public class EPIC_04_TC_03_AQA_PLP_Product_Cards extends BaseTest {
     FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
-    ProductListingPageActions productListingPageActions = new ProductListingPageActions();
-    ProductItemsPageActions productItems = new ProductItemsPageActions();
+    ProductDetailPageActionFrig productListingPageActions = new ProductDetailPageActionFrig();
+    OutOfStockPageActionFrig productItems = new OutOfStockPageActionFrig();
 
 
     @Test(groups = {"smoke", "regression"}, description = "Verify Kitchen Product Details in Product listing page", priority = 1)

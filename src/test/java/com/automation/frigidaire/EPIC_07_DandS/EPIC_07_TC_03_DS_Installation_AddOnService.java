@@ -2,19 +2,19 @@ package com.automation.frigidaire.EPIC_07_DandS;
 
 import com.automation.BaseTest;
 import com.automation.frigidaire.pages.FrigidaireHomePageActions;
-import com.automation.frigidaire.pages.InstallationAndAddOnServices;
-import com.automation.frigidaire.pages.ProductItemsPageActions;
-import com.automation.frigidaire.pages.ProductListingPageActions;
+import com.automation.frigidaire.pages.InstallationAddOnServicesPageActionFrig;
+import com.automation.frigidaire.pages.OutOfStockPageActionFrig;
+import com.automation.frigidaire.pages.ProductDetailPageActionFrig;
 import com.automation.utils.ExtentReportManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class EPIC_07_TC_03_DS_Installation_AddOnService extends BaseTest {
 
-    InstallationAndAddOnServices installationAndAddOnServices = new InstallationAndAddOnServices();
+    InstallationAddOnServicesPageActionFrig installationAndAddOnServices = new InstallationAddOnServicesPageActionFrig();
     FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
-    ProductListingPageActions productListingPageActions = new ProductListingPageActions();
-    ProductItemsPageActions productItems = new ProductItemsPageActions();
+    ProductDetailPageActionFrig productListingPageActions = new ProductDetailPageActionFrig();
+    OutOfStockPageActionFrig productItems = new OutOfStockPageActionFrig();
 
 
     public void navigateToDSPage() throws InterruptedException {

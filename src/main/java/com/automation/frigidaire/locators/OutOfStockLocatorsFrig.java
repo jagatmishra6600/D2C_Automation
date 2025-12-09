@@ -2,7 +2,7 @@ package com.automation.frigidaire.locators;
 
 import org.openqa.selenium.By;
 
-public class FrigidairePLPActions {
+public class OutOfStockLocatorsFrig {
 
     public final By emailPopUp = By.xpath("//span[@id=\"close-modal123\"]");
     public final By earliestDelivery = By.xpath("//span[contains(text(), 'Earliest delivery:') or contains(text(),'In stock!')]");

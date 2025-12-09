@@ -1,6 +1,6 @@
 package com.automation.frigidaire.pages;
 
-import com.automation.frigidaire.locators.FrigidaireFAQ;
+import com.automation.frigidaire.locators.FAQLocatorsFrig;
 import com.automation.utils.DriverManager;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
@@ -11,9 +11,9 @@ import org.testng.Assert;
 import java.util.Arrays;
 import java.util.List;
 
-public class FAQPage {
+public class FAQPageActionFrig {
 
-    FrigidaireFAQ faq = new FrigidaireFAQ();
+    FAQLocatorsFrig faq = new FAQLocatorsFrig();
 
     // Defer WebDriver access to runtime to avoid early initialization during test class construction
 

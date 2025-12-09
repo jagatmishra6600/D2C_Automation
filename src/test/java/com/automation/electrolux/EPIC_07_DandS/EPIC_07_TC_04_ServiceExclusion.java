@@ -1,9 +1,9 @@
 package com.automation.electrolux.EPIC_07_DandS;
 
 import com.automation.BaseTest;
-import com.automation.electrolux.pages.EL_DSPageServiceExclusion;
+import com.automation.electrolux.pages.DSPServiceExclusionPageActionElux;
 import com.automation.electrolux.pages.ElectroluxHomePageActions;
-import com.automation.electrolux.pages.ElectroluxProductCards;
+import com.automation.electrolux.pages.ProductDetailPageActionElux;
 import com.automation.utils.DriverManager;
 import com.automation.utils.ExtentReportManager;
 import com.automation.utils.WebElementUtil;
@@ -11,10 +11,10 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class EPIC_07_TC_04_ServiceExlusion extends BaseTest{
+public class EPIC_07_TC_04_ServiceExclusion extends BaseTest{
 
-    EL_DSPageServiceExclusion elDsPageServiceExclusion = new EL_DSPageServiceExclusion();
-    ElectroluxProductCards electroluxProductCards =new ElectroluxProductCards();
+    DSPServiceExclusionPageActionElux elDsPageServiceExclusion = new DSPServiceExclusionPageActionElux();
+    ProductDetailPageActionElux electroluxProductCards =new ProductDetailPageActionElux();
     ElectroluxHomePageActions electroluxHomePageActions = new ElectroluxHomePageActions();
 
     public void navigateToDSPageElectrolux() throws InterruptedException {

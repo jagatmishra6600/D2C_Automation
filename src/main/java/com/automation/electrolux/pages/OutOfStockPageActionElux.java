@@ -1,5 +1,6 @@
 package com.automation.electrolux.pages;
 
+import com.automation.electrolux.locators.OutOfStockLocatorsElux;
 import com.automation.utils.DriverManager;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
@@ -10,17 +11,7 @@ import org.testng.Assert;
 
 import java.time.Duration;
 
-public class ElectroluxOutOfStock {
-
-    private final By emailPopUp = By.xpath("//span[@id=\"close-modal123\"]");
-    private final By freeDelivery = By.xpath("//p[contains(normalize-space(.), \"Free delivery\")]\n");
-    private final By earliestDelivery = By.xpath("//p[contains(text(), 'Earliest delivery')]");
-    private static final By addToCart = By.xpath("//span[normalize-space()='Add to cart']");
-    private final By outOfStock = By.xpath("//span[contains(text(), 'Temporarily out of stock in your area.')]");
-    private final By emailField = By.xpath("//div[@id='container_EMAIL']//input[@name='Email']");
-    private final By notify = By.xpath("//div[@id='container_EMAIL']//input[@name='submitBtn']");
-    private final By notifyVerify = By.xpath("//span[contains(text(), 'You’re signed up')]");
-
+public class OutOfStockPageActionElux {
 
     public void clickOnProductMenu(String text) {
         By locator = By.xpath("//h5[normalize-space(text())='" + text + "']");
@@ -29,8 +20,8 @@ public class ElectroluxOutOfStock {
     }
 
     public void closeEmailPopUp() {
-        WaitUtils.untilVisible(emailPopUp, 60);
-        WebElementUtil.clickElement(emailPopUp);
+        WaitUtils.untilVisible(OutOfStockLocatorsElux.emailPopUp, 60);
+        WebElementUtil.clickElement(OutOfStockLocatorsElux.emailPopUp);
     }
 
     public void verifyStockForVacuums(String sku) throws InterruptedException {
@@ -45,9 +36,9 @@ public class ElectroluxOutOfStock {
         WebElementUtil.waitForElementToBeClickable(productName);
         WebElementUtil.clickElement(productName);
 
-        if (WebElementUtil.isDisplayed(addToCart)) {
+        if (WebElementUtil.isDisplayed(OutOfStockLocatorsElux.addToCart)) {
             WebElementUtil.zoomInOrOut(50);
-            WebElement freeDeliveryText = driver.findElement(freeDelivery);
+            WebElement freeDeliveryText = driver.findElement(OutOfStockLocatorsElux.freeDelivery);
             String actual = freeDeliveryText.getText();
             String partialText = "Free delivery";
             Assert.assertTrue(actual.contains(partialText));
@@ -66,10 +57,10 @@ public class ElectroluxOutOfStock {
         WebElementUtil.waitForElementToBeClickable(productName);
         WebElementUtil.clickElement(productName);
 
-        if (WebElementUtil.isDisplayed(addToCart)) {
+        if (WebElementUtil.isDisplayed(OutOfStockLocatorsElux.addToCart)) {
             WebElementUtil.zoomInOrOut(50);
             WaitUtils.implicitWait(15);
-            WebElement freeDeliveryText = wait.until(ExpectedConditions.visibilityOfElementLocated(earliestDelivery));
+            WebElement freeDeliveryText = wait.until(ExpectedConditions.visibilityOfElementLocated(OutOfStockLocatorsElux.earliestDelivery));
             Assert.assertTrue(freeDeliveryText.getText().contains("Earliest delivery"));
         } else {
             checkOutOfStock();
@@ -80,17 +71,17 @@ public class ElectroluxOutOfStock {
         WebDriver driver = DriverManager.getDriver();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
-        WebElement outOfStockText = wait.until(ExpectedConditions.visibilityOfElementLocated(outOfStock));
+        WebElement outOfStockText = wait.until(ExpectedConditions.visibilityOfElementLocated(OutOfStockLocatorsElux.outOfStock));
         Assert.assertTrue(outOfStockText.getText().contains("Temporarily out of stock in your area."));
 
-        WebElement emailInput = wait.until(ExpectedConditions.elementToBeClickable(emailField));
+        WebElement emailInput = wait.until(ExpectedConditions.elementToBeClickable(OutOfStockLocatorsElux.emailField));
         emailInput.clear();
         emailInput.sendKeys("rajatverma11@gmail.com");
 
-        WebElement notifyButton = wait.until(ExpectedConditions.elementToBeClickable(notify));
+        WebElement notifyButton = wait.until(ExpectedConditions.elementToBeClickable(OutOfStockLocatorsElux.notify));
         notifyButton.click();
 
-        WebElement verifyText = wait.until(ExpectedConditions.visibilityOfElementLocated(notifyVerify));
+        WebElement verifyText = wait.until(ExpectedConditions.visibilityOfElementLocated(OutOfStockLocatorsElux.notifyVerify));
         Assert.assertTrue(verifyText.getText().contains("You’re signed up"));
 
     }

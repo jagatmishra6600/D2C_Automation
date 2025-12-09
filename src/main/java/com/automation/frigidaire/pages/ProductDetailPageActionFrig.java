@@ -1,6 +1,6 @@
 package com.automation.frigidaire.pages;
 
-import com.automation.frigidaire.locators.FrigidaireProductDetails;
+import com.automation.frigidaire.locators.ProductDetailsLocatorsFrig;
 import com.automation.utils.DriverManager;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
@@ -12,9 +12,9 @@ import org.testng.asserts.SoftAssert;
 
 import java.time.Duration;
 
-public class ProductListingPageActions {
+public class ProductDetailPageActionFrig {
 
-    FrigidaireProductDetails productDetails = new FrigidaireProductDetails();
+    ProductDetailsLocatorsFrig productDetails = new ProductDetailsLocatorsFrig();
     SoftAssert softAssert=new SoftAssert();
 
 

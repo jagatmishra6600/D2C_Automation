@@ -1,9 +1,9 @@
 package com.automation.electrolux.EPIC_03_PDP;
 
 import com.automation.BaseTest;
-import com.automation.electrolux.pages.ElectroluxFAQ;
+import com.automation.electrolux.pages.FAQPageActionElux;
 import com.automation.electrolux.pages.ElectroluxHomePageActions;
-import com.automation.electrolux.pages.ElectroluxProductCards;
+import com.automation.electrolux.pages.ProductDetailPageActionElux;
 import com.automation.utils.ExtentReportManager;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.By;
@@ -12,8 +12,8 @@ import org.testng.annotations.Test;
 
 public class EPIC_03_TC_08_PDP_FAQ extends BaseTest {
     ElectroluxHomePageActions electroluxHomePageActions = new ElectroluxHomePageActions();
-    ElectroluxProductCards electroluxProductCards=new ElectroluxProductCards();
-    ElectroluxFAQ electroluxFAQ=new ElectroluxFAQ();
+    ProductDetailPageActionElux electroluxProductCards=new ProductDetailPageActionElux();
+    FAQPageActionElux electroluxFAQ=new FAQPageActionElux();
 
     @Test(groups = {"smoke", "regression"}, description = "Verify FAQ Section in the PDP")
     public void testForVacuumsFAQ(){

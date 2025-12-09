@@ -2,7 +2,7 @@ package com.automation.frigidaire.locators;
 
 import org.openqa.selenium.By;
 
-public class FrigidaireProductDetails {
+public class ProductDetailsLocatorsFrig {
 
 
         public final By name(int i) {

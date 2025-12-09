@@ -1,6 +1,6 @@
 package com.automation.frigidaire.pages;
 
-import com.automation.frigidaire.locators.FrigidairePLPActions;
+import com.automation.frigidaire.locators.OutOfStockLocatorsFrig;
 import com.automation.utils.DriverManager;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
@@ -11,12 +11,12 @@ import org.testng.Assert;
 
 import java.time.Duration;
 
-public class ProductItemsPageActions {
+public class OutOfStockPageActionFrig {
 
     // Do not initialize WebDriver at class instantiation time.
     // Access DriverManager.getDriver() inside methods after BaseTest @BeforeMethod runs.
 
-    FrigidairePLPActions plpAction = new FrigidairePLPActions();
+    OutOfStockLocatorsFrig plpAction = new OutOfStockLocatorsFrig();
 
 
     public void verifyProductItemPage(String str, String assertValue) {

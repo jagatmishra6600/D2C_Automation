@@ -1,8 +1,8 @@
-package com.automation.electrolux.locators;
+package com.automation.frigidaire.locators;
 
 import org.openqa.selenium.By;
 
-public class EL_DSPageInstallation {
+public class DSPInstallationLocatorsFrig {
 
     public static final By addOnService = By.xpath("//p[text()=\"Add-on Services\" or text()=\"Add-on services\"]\n");
     public static final By addOnMessage = By.xpath("//p[contains(text(), \"You must uninstall your appliance for haul-away or moving.\")]\n");
@@ -36,17 +36,5 @@ public class EL_DSPageInstallation {
     public static final By deliveryInstallationPrice = By.xpath("//div[normalize-space(text())=\"Delivery & installation\"]//parent::div//parent::div//div[@id=\"deliveryInstalltn\"]//div//span");
     public static final By deliveryInstallationViewLink = By.xpath("//div[normalize-space(text())=\"Delivery & installation\"]//parent::div//p[@class=\"f-12 ml-2\"]//a");
     public static final By deliveryInstallationRadioButton = By.xpath("//input[@id=\"Refrigerators_Large_WaterLine_Install\"]");
-
-    public static final By professionalInstallation = By.xpath("//div[normalize-space(text())=\"Professional Installation\"]");
-    public static final By professionalInstallationTag = By.xpath("//cx-page-slot[@class=\"RecommendSlot has-components\"]//cx-paragraph//p");
-    public static final By professionalInstallationDescription = By.xpath("//div[text()=\" Professional Installation \"]//parent::div//cx-page-slot//cx-paragraph//p//p");
-    public static final By professionalInstallationPrice = By.xpath("//div[text()=\" Professional Installation \"]//parent::div//parent::div//div[@class=\"ml-auto p-2 d-flex align-items-center H4H4_Desktop\"]//span");
-    public static final By professionalInstallationViewLink = By.xpath("//div[text()=\" Professional Installation \"]//parent::div//parent::div//p//a");
-    public static final By professionalInstallationRadioButton = By.xpath("//input[@id=\"Laundry_Washers_FrontLoad_Electric_Install\"]");
-
-    public static final By doorSwing = By.xpath("//div[normalize-space(text())='Door swing reversal']\n");
-    public static final By doorSwingRadioButton = By.xpath("//div[normalize-space(text())='Door swing reversal']//parent::div//parent::div//div[@id=\"serviceInputContainer\"]//input\n");
-    public static final By doorSwingPrice = By.xpath("//div[normalize-space(text())='Door swing reversal']//parent::div//parent::div//div[@class=\"ml-auto p-2 d-flex align-items-center H4H4_Desktop\"]//span");
-
 
 }

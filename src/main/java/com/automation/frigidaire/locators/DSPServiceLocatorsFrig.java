@@ -2,7 +2,7 @@ package com.automation.frigidaire.locators;
 
 import org.openqa.selenium.By;
 
-public class DSPagesService {
+public class DSPServiceLocatorsFrig {
 
     public static final By addToCartButton = By.xpath("//span[normalize-space(text()) = 'Add to cart']\n");
 

@@ -1,22 +1,13 @@
 package com.automation.electrolux.pages;
 
+import com.automation.electrolux.locators.FAQLocatorsElux;
 import com.automation.utils.DriverManager;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.*;
 import org.testng.Assert;
 
-public class ElectroluxFAQ {
-
-    private final By emailPopUp = By.xpath("//span[@id=\"close-modal123\"]");
-    private final By faqQuestion = By.xpath("//div[@id=\"faqs\"]//div[@class=\"pdp_faq_accordion accordion\"]/div[1]");
-    private final By helpFullTab=By.xpath("//div[span[text()=\"Helpful?\"]]//span[@role=\"button\"]");
-    private final By collapsedButton=By.xpath("//div[@id=\"faqs\"]//div[@class=\"pdp_faq_accordion accordion\"]//span[@class=\"icon-plus\"]");
-    private final By viewMore = By.xpath("//button[contains(normalize-space(text()), 'View all FAQs')]\n");
-    private final By viewLess = By.xpath("//button[contains(normalize-space(text()), 'View less FAQs')]\n");
-    private final By faqTab = By.xpath("//div[span[text()=\"FAQs\"]]");
-    private final By faqText = By.xpath("//div[@id=\"faqs\"]/h2");
-
+public class FAQPageActionElux {
 
 
     public void clickOnProductMenu(String text) {
@@ -26,8 +17,8 @@ public class ElectroluxFAQ {
     }
 
     public void closeEmailPopUp() {
-        WaitUtils.untilVisible(emailPopUp, 60);
-        WebElementUtil.clickElement(emailPopUp);
+        WaitUtils.untilVisible(FAQLocatorsElux.emailPopUp, 60);
+        WebElementUtil.clickElement(FAQLocatorsElux.emailPopUp);
     }
 
     public void productNameClick(String sku) {
@@ -51,31 +42,31 @@ public class ElectroluxFAQ {
         WaitUtils.implicitWait(5);
 
         try {
-            WebElement faqTabElement = driver.findElement(faqTab);
+            WebElement faqTabElement = driver.findElement(FAQLocatorsElux.faqTab);
             WebElementUtil.scrollToElement(driver, faqTabElement);
-            WebElementUtil.scrollToElementStable(faqTab);
-            WebElementUtil.waitForElementToBeClickable(faqTab);
-            WebElementUtil.clickElement(faqTab);
+            WebElementUtil.scrollToElementStable(FAQLocatorsElux.faqTab);
+            WebElementUtil.waitForElementToBeClickable(FAQLocatorsElux.faqTab);
+            WebElementUtil.clickElement(FAQLocatorsElux.faqTab);
 
 
             Thread.sleep(5000);
             WebElementUtil.zoomInOrOut(70);
-            WebElement faqTextElement = driver.findElement(faqText);
+            WebElement faqTextElement = driver.findElement(FAQLocatorsElux.faqText);
             WebElementUtil.scrollToElement(driver,faqTextElement);
-            WebElementUtil.waitForElementToBeVisible(faqText);
+            WebElementUtil.waitForElementToBeVisible(FAQLocatorsElux.faqText);
 
-            WebElement element = driver.findElement(faqQuestion);
+            WebElement element = driver.findElement(FAQLocatorsElux.faqQuestion);
             WebElementUtil.scrollToElement(driver,element);
-            WebElementUtil.waitForElementToBeVisible(faqQuestion);
-            WebElementUtil.waitForElementToBeClickable(faqQuestion);
-            WebElementUtil.clickElement(faqQuestion);
+            WebElementUtil.waitForElementToBeVisible(FAQLocatorsElux.faqQuestion);
+            WebElementUtil.waitForElementToBeClickable(FAQLocatorsElux.faqQuestion);
+            WebElementUtil.clickElement(FAQLocatorsElux.faqQuestion);
 
-            WebElementUtil.waitForElementToBeVisible(helpFullTab);
-            WebElement helpTab= DriverManager.getDriver().findElement(helpFullTab);
+            WebElementUtil.waitForElementToBeVisible(FAQLocatorsElux.helpFullTab);
+            WebElement helpTab= DriverManager.getDriver().findElement(FAQLocatorsElux.helpFullTab);
             Assert.assertTrue(helpTab.isDisplayed());
 
-            WebElementUtil.waitForElementToBeClickable(collapsedButton);
-            WebElementUtil.clickElement(collapsedButton);
+            WebElementUtil.waitForElementToBeClickable(FAQLocatorsElux.collapsedButton);
+            WebElementUtil.clickElement(FAQLocatorsElux.collapsedButton);
 
             checkViewMore();
 
@@ -89,19 +80,19 @@ public class ElectroluxFAQ {
     public void checkViewMore() {
         try {
             WebDriver driver=DriverManager.getDriver();
-            WebElement viewMoreElement = driver.findElement(viewMore);
+            WebElement viewMoreElement = driver.findElement(FAQLocatorsElux.viewMore);
             WebElementUtil.scrollToElement(driver, viewMoreElement);
-            WebElementUtil.waitForElementToBeVisible(viewMore);
-            WebElementUtil.clickElement(viewMore);
-            WebElement viewLessText= driver.findElement(viewLess);
+            WebElementUtil.waitForElementToBeVisible(FAQLocatorsElux.viewMore);
+            WebElementUtil.clickElement(FAQLocatorsElux.viewMore);
+            WebElement viewLessText= driver.findElement(FAQLocatorsElux.viewLess);
             String viewLessTexts= viewLessText.getText();
             System.out.println("View less");
             Assert.assertTrue(viewLessTexts.contains("View less FAQs"));
 
             Thread.sleep(5000);
-            WebElementUtil.waitForElementToBeClickable(viewLess);
-            WebElementUtil.clickElement(viewLess);
-            WebElement viewMoreText= driver.findElement(viewMore);
+            WebElementUtil.waitForElementToBeClickable(FAQLocatorsElux.viewLess);
+            WebElementUtil.clickElement(FAQLocatorsElux.viewLess);
+            WebElement viewMoreText= driver.findElement(FAQLocatorsElux.viewMore);
             String viewMoreTexts= viewMoreText.getText();
             System.out.println("View more");
             Assert.assertTrue(viewMoreTexts.contains("View all FAQs"));

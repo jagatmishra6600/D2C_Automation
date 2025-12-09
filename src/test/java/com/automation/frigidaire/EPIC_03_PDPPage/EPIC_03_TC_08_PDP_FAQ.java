@@ -1,9 +1,8 @@
-package com.automation.frigidaire.EPIC_03_PDP;
+package com.automation.frigidaire.EPIC_03_PDPPage;
 
 import com.automation.BaseTest;
-import com.automation.frigidaire.pages.FAQPage;
+import com.automation.frigidaire.pages.FAQPageActionFrig;
 import com.automation.frigidaire.pages.FrigidaireHomePageActions;
-
 import com.automation.utils.ExtentReportManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -11,7 +10,7 @@ import org.testng.annotations.Test;
 public class EPIC_03_TC_08_PDP_FAQ extends BaseTest {
 
     FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
-    FAQPage faqPage = new FAQPage();
+    FAQPageActionFrig faqPage = new FAQPageActionFrig();
 
     @Test(groups = {"regression", "smoke"}, priority = 1)
     public void EPIC_03_PDP_TC_02_testForFrigidaireFAQ() {

@@ -2,7 +2,7 @@ package com.automation.frigidaire.locators;
 
 import org.openqa.selenium.By;
 
-public class FrigidaireFAQ {
+public class FAQLocatorsFrig {
 
     public final By headerTitle = By.xpath("//h1[normalize-space(text())='Owner Center Resource Library']");
     public final By searchBox = By.xpath("//input[@name=\"queryString\"]");

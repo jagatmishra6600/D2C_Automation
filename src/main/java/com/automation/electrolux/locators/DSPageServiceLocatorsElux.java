@@ -2,7 +2,7 @@ package com.automation.electrolux.locators;
 
 import org.openqa.selenium.By;
 
-public class EL_DSPagesService {
+public class DSPageServiceLocatorsElux {
 
 
     public static final By addToCartButton = By.xpath("//span[normalize-space(text()) = 'Add to cart']\n");

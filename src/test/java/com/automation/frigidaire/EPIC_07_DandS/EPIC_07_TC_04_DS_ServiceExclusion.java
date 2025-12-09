@@ -2,18 +2,17 @@ package com.automation.frigidaire.EPIC_07_DandS;
 
 import com.automation.BaseTest;
 import com.automation.frigidaire.pages.*;
-import com.automation.utils.DriverManager;
 import com.automation.utils.ExtentReportManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class EPIC_07_TC_04_DS_ServiceExclusion extends BaseTest {
 
-    InstallationAndAddOnServices installationAndAddOnServices = new InstallationAndAddOnServices();
+    InstallationAddOnServicesPageActionFrig installationAndAddOnServices = new InstallationAddOnServicesPageActionFrig();
     FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
-    ProductListingPageActions productListingPageActions = new ProductListingPageActions();
-    DSPageServiceExclusion dsPageServiceExclusion = new DSPageServiceExclusion();
-    ProductItemsPageActions productItems = new ProductItemsPageActions();
+    ProductDetailPageActionFrig productListingPageActions = new ProductDetailPageActionFrig();
+    DSPServiceExclusionPageActionFrig dsPageServiceExclusion = new DSPServiceExclusionPageActionFrig();
+    OutOfStockPageActionFrig productItems = new OutOfStockPageActionFrig();
 
 
     @Test(groups = {"smoke", "regression"})

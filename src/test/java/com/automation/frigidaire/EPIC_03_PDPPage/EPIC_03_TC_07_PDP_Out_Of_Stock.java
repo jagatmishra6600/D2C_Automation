@@ -1,8 +1,8 @@
-package com.automation.frigidaire.EPIC_03_PDP;
+package com.automation.frigidaire.EPIC_03_PDPPage;
 
-import com.automation.frigidaire.pages.FrigidaireHomePageActions;
-import com.automation.frigidaire.pages.ProductItemsPageActions;
 import com.automation.BaseTest;
+import com.automation.frigidaire.pages.FrigidaireHomePageActions;
+import com.automation.frigidaire.pages.OutOfStockPageActionFrig;
 import com.automation.utils.ExtentReportManager;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.By;
@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 public class EPIC_03_TC_07_PDP_Out_Of_Stock extends BaseTest {
 
     FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
-    ProductItemsPageActions productItems = new ProductItemsPageActions();
+    OutOfStockPageActionFrig productItems = new OutOfStockPageActionFrig();
 
     public void navigateToProduct() {
         homePage.navigateToHomePage();
