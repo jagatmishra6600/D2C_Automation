@@ -605,5 +605,8 @@ public class WebElementUtil {
         return DriverManager.getDriver().getCurrentUrl();
     }
 
+    public static void clickBackButton() {
+         DriverManager.getDriver().navigate().back();
+    }
 
 }

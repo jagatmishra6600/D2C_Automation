@@ -15,30 +15,19 @@ import org.testng.annotations.Test;
 
     public class TC_01_CLP extends BaseTest {
 
-        String washerDryersURL = "https://www.electrolux.com/en/washers-dryers/stacked-washer-and-dryer-units";
-        String washerDryerssetURL = "https://www.electrolux.com/en/washer-dryer-sets";
-        String washingmachineURL = "https://www.electrolux.com/en/washers-dryers/washing-machine";
-        String DryersURL = "https://www.electrolux.com/en/washers-dryers/dryer";
 
         private final EluctroluxCategoryListingPage electroluxPage = new EluctroluxCategoryListingPage();
-
-
-
         private final FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
-        private final FeaturesPageActions pdpPage = new FeaturesPageActions();
-        private final FrigidairePlpPageActions plpPage = new FrigidairePlpPageActions();
-        private final FrigidaireRefrigeratorPage frigidairpage = new FrigidaireRefrigeratorPage();
 
 
-
-        @Test(groups = {"smoke", "regression"}, description = "Messages")
+        @Test(groups = {"smoke", "regression"}, description = "ListingPage")
         public void verifyElectroluxCategoryListingPage() throws InterruptedException {
 
             homePage.navigateToHomePage();
             WaitUtils.untilPageLoadComplete();
 
             electroluxPage.clickOnLaundry();
-      //      electroluxPage.clickOnFrontloadlaundry();
+           electroluxPage.clickOnFrontloadLaundry();
             Thread.sleep(2000);
 
 
@@ -48,19 +37,23 @@ import org.testng.annotations.Test;
             Assert.assertTrue(electroluxPage.verifyDryersText(), "Dryers is not found on Laundry page.");
 
             electroluxPage.clickOnLaundryTowers();
-            electroluxPage.verifyListingPage(washerDryersURL);
-
+            Assert.assertTrue(electroluxPage.verifyLaundryTowersTitle());
+            electroluxPage.verifyListingPage();
             electroluxPage.clickBackButton();
+
             electroluxPage.clickOnWasherDryerSets();
-            electroluxPage.verifyListingPage(washerDryerssetURL);
+            Assert.assertTrue(electroluxPage.verifyWasherDryerSetsTitle());
+            electroluxPage.verifyListingPage();
             electroluxPage.clickBackButton();
 
             electroluxPage.clickOnWashers();
-            electroluxPage.verifyListingPage(washingmachineURL);
+            Assert.assertTrue(electroluxPage.verifyWashersTitle());
+            electroluxPage.verifyListingPage();
             electroluxPage.clickBackButton();
 
             electroluxPage.clickOnDryers();
-            electroluxPage.verifyListingPage(DryersURL);
+            Assert.assertTrue(electroluxPage.verifyDryersTitle());
+            electroluxPage.verifyListingPage();
 
 
             ExtentReportManager.getTest().pass("Login Page loaded Successfully and its Fields and Messages are verified");

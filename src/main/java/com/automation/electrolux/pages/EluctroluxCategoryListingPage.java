@@ -5,56 +5,74 @@ import com.automation.electrolux.locators.Elux_CLP;
 import com.automation.frigidaire.utils.WebElementUtil;
 import org.testng.Assert;
 
-public class EluctroluxCategoryListingPage extends Elux_CLP {
+public class EluctroluxCategoryListingPage  {
+
+
+    Elux_CLP eluxPage_Locator = new Elux_CLP();
 
     public void clickOnLaundry() {
-        WebElementUtil.clickElement(Laundry);
+        WebElementUtil.clickElement(eluxPage_Locator.Laundry);
     }
-    public void clickOnFrontloadlaundry() {
-        WebElementUtil.clickElement(Frontloadlaundry);
+    public void clickOnFrontloadLaundry() {
+        WebElementUtil.clickElement(eluxPage_Locator.FrontloadLaundry);
     }
     public boolean verifyLaundryTowersText() {
-        WebElementUtil.isDisplayed(LaundryTowers);
+        Assert.assertTrue(WebElementUtil.getText(eluxPage_Locator.LaundryTowers).contains("Laundry Towers"), "Laundry Towers text is not found");
         return true;
     }
 
     public boolean verifyWasherDryerSetsText() {
-        WebElementUtil.isDisplayed(WasherDryerSets);
+        Assert.assertTrue(WebElementUtil.getText(eluxPage_Locator.WasherDryerSets).contains("Washer and Dryer Sets"), "Washer and Dryer Sets text is not found");
         return true;
     }
 
     public boolean verifyWashersText() {
-        WebElementUtil.isDisplayed(Washers);
+        Assert.assertTrue(WebElementUtil.getText(eluxPage_Locator.Washers).contains("Washers"), "Washers text is not found");
         return true;
     }
 
     public boolean verifyDryersText() {
-        WebElementUtil.isDisplayed(Dryers);
+        Assert.assertTrue(WebElementUtil.getText(eluxPage_Locator.Dryers).contains("Dryers"), "Dryers text is not found");
         return true;
     }
     public void clickOnLaundryTowers() {
-        WebElementUtil.clickElement(LaundryTowers);
+        WebElementUtil.clickElement(eluxPage_Locator.LaundryTowers);
     }
     public void clickOnWasherDryerSets() {
-        WebElementUtil.clickElement(WasherDryerSets);
+        WebElementUtil.clickElement(eluxPage_Locator.WasherDryerSets);
     }
     public void clickOnWashers() {
-        WebElementUtil.clickElement(Washers);
+        WebElementUtil.clickElement(eluxPage_Locator.Washers);
     }
     public void clickOnDryers() {
-        WebElementUtil.clickElement(Dryers);
+        WebElementUtil.clickElement(eluxPage_Locator.Dryers);
+    }
+    public boolean verifyLaundryTowersTitle() {
+        Assert.assertTrue(WebElementUtil.getText(eluxPage_Locator.categoryTitle).contains("Stacked Washer and Dryer Units"), "Stacked Washer and Dryer Units title  not found");
+        return true;
+    }
+    public boolean verifyWasherDryerSetsTitle() {
+        Assert.assertTrue(WebElementUtil.getText(eluxPage_Locator.categoryTitle).contains("Washer & Dryer Sets"), "Washer & Dryer Sets title is not found");
+        return true;
+    }
+    public boolean verifyWashersTitle() {
+        Assert.assertTrue(WebElementUtil.getText(eluxPage_Locator.categoryTitle).contains("Washers"), "Washers title is not found");
+        return true;
+    }
+    public boolean verifyDryersTitle() {
+        Assert.assertTrue(WebElementUtil.getText(eluxPage_Locator.categoryTitle).contains("Dryers"), "Dryers title not found");
+        return true;
     }
 
-
- public void verifyListingPage(String url) {
-     Assert.assertTrue(WebElementUtil.getCurrentUrl().contains(url));
-     Assert.assertTrue(WebElementUtil.getText(Hidefilters).contains("Hide filters"), "Hide Filter is not shown");
-     Assert.assertTrue(WebElementUtil.getText(Results).contains("Results"), "Filter results are not shown");
-     Assert.assertTrue(WebElementUtil.getText(Sortby).contains("Sort by :"), "Sort by option is not shown");
+ public void verifyListingPage() {
+     Assert.assertTrue(WebElementUtil.getText(eluxPage_Locator.Hidefilters).contains("Hide filters"), "Hide Filter is not shown");
+     Assert.assertTrue(WebElementUtil.getText(eluxPage_Locator.Results).contains("Results"), "Filter results are not shown");
+     Assert.assertTrue(WebElementUtil.getText(eluxPage_Locator.Sortby).contains("Sort by :"), "Sort by option is not shown");
 
  }
-public void clickBackButton(){
+public void clickBackButton() throws InterruptedException {
     WebElementUtil.clickBackButton();
+    Thread.sleep(2000);
 
     }
 
