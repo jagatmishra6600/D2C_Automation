@@ -25,6 +25,7 @@ public class EPIC_07_TC_01_DandS extends BaseTest {
 
     }
 
+
     @Test(groups = {"smoke", "regression"}, description = "To verify Included Parts section within Delivery & installation section")
     public void EPIC_05_DandS_TC_02_test_Decline_Protection_Plan() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");

@@ -7,22 +7,14 @@ import org.testng.Assert;
 
 public class ProductCategoryPageActions {
 
-    private final By refrigeratorsCategoryLink = By.cssSelector("[data-testid='Refrigerators'] a");
+
     private final By pageHeader = By.tagName("h1");
 
-    public boolean isPageLoaded() {
-        return WebElementUtil.isDisplayed(pageHeader);
-    }
 
-
-public ProductCategoryPageActions clickOnProductMenu(String website, String text) {
+public ProductCategoryPageActions clickOnProductMenu( String website , String text) {
     By locator;
 
     if (website.equalsIgnoreCase("frigidaire")) {
-        locator = By.xpath("//h5[normalize-space(text())='" + text + "']");
-    } else if (website.equalsIgnoreCase("electrolux")) {
-        locator = By.xpath("//h5[normalize-space(text())='" + text + "']");
-    }else if (website.equalsIgnoreCase("fsus")) {
         locator = By.xpath("//h5[normalize-space(text())='" + text + "']");
     }
     else {

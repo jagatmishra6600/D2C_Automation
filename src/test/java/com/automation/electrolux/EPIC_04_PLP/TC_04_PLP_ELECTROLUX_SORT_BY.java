@@ -1,9 +1,8 @@
 package com.automation.electrolux.EPIC_04_PLP;
 
-import com.automation.frigidaire.locators.FrigidaireConstants;
-import com.automation.frigidaire.pages.FrigidaireHomePageActions;
-import com.automation.frigidaire.pages.PLPProductItemsPageActions;
-import com.automation.frigidaire.pages.ProductCategoryPageActions;
+import com.automation.electrolux.pages.EL_ProductCategoryPageActions;
+import com.automation.electrolux.pages.ElectroluxPLPProductItemsPageActions;
+import com.automation.electrolux.pages.HomePageActions;
 import com.automation.utils.ExtentReportManager;
 import com.automation.utils.WebElementUtil;
 import org.testng.annotations.Test;
@@ -13,9 +12,9 @@ public class TC_04_PLP_ELECTROLUX_SORT_BY  extends BaseTest {
 
 
 
-    FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
-    ProductCategoryPageActions productCategoryPageActions=new ProductCategoryPageActions();
-    PLPProductItemsPageActions PLPProductItemsPageActions =new PLPProductItemsPageActions();
+    HomePageActions homePage = new HomePageActions();
+    EL_ProductCategoryPageActions productCategoryPageActions = new EL_ProductCategoryPageActions();
+    ElectroluxPLPProductItemsPageActions PLPProductItemsPageActions = new ElectroluxPLPProductItemsPageActions();
 
 
 
@@ -46,7 +45,7 @@ public class TC_04_PLP_ELECTROLUX_SORT_BY  extends BaseTest {
     public void testSortByPriceHighToLow() throws InterruptedException {
         navigateToVacuumsProducts("electrolux","Vacuums","Shop All Vacuums");
         PLPProductItemsPageActions.clickOnSortByDropDownvalues("Price (high to low)", "Price (high to low)");
-        PLPProductItemsPageActions.verifyPriceHighToLowSort(FrigidaireConstants.electroxWeb);
+        PLPProductItemsPageActions.verifyPriceHighToLowSort("electrolux");
         ExtentReportManager.getTest().pass("Successfully sort products by Price High to Low");
     }
 

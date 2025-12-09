@@ -1,10 +1,10 @@
 package com.automation.familyStoreUS;
 
 import com.automation.BaseTest;
+import com.automation.electrolux.pages.EL_ProductCategoryPageActions;
+import com.automation.electrolux.pages.ElectroluxPLPProductItemsPageActions;
+import com.automation.electrolux.pages.HomePageActions;
 import com.automation.frigidaire.locators.FrigidaireConstants;
-import com.automation.frigidaire.pages.FrigidaireHomePageActions;
-import com.automation.frigidaire.pages.PLPProductItemsPageActions;
-import com.automation.frigidaire.pages.ProductCategoryPageActions;
 import com.automation.utils.ExtentReportManager;
 import com.automation.utils.WebElementUtil;
 import org.testng.annotations.Test;
@@ -12,9 +12,9 @@ import org.testng.annotations.Test;
 public class EPIC_04_PLP extends BaseTest {
 
 
-    FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
-    ProductCategoryPageActions productCategoryPageActions = new ProductCategoryPageActions();
-    PLPProductItemsPageActions PLPProductItemsPageActions = new PLPProductItemsPageActions();
+    HomePageActions homePage = new HomePageActions();
+    EL_ProductCategoryPageActions productCategoryPageActions = new EL_ProductCategoryPageActions();
+    ElectroluxPLPProductItemsPageActions PLPProductItemsPageActions = new ElectroluxPLPProductItemsPageActions();
 
 
     public void navigateToVacuumsProducts(String webSite, String prodCategory, String subProdCategory) throws InterruptedException {
@@ -26,8 +26,6 @@ public class EPIC_04_PLP extends BaseTest {
         PLPProductItemsPageActions.closeEmailPopUp();
         WebElementUtil.zoomInOrOut(25);
         PLPProductItemsPageActions.verifyProductItemPage("Vacuums", "Vacuums");
-
-//        ExtentReportManager.getTest().pass("Successfully navigated to the Products category page.");
     }
 
     @Test(groups = {"smoke", "regression"}, description = "Should sort products by Price Low to High")

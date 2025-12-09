@@ -1,23 +1,21 @@
-package com.automation.frigidaire.pages;
-
-
+package com.automation.electrolux.pages;
 
 import com.automation.utils.DriverManager;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.*;
-import org.testng.Assert;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
+import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class PLPProductItemsPageActions {
+public class ElectroluxPLPProductItemsPageActions {
+
 
     private final By emailPopUp = By.xpath("//span[@id=\"close-modal123\"]");
     public static final By addToCart = By.xpath("//span[normalize-space()='Add to cart' and contains(@class,'ng-star-inserted')]");
@@ -116,7 +114,7 @@ public class PLPProductItemsPageActions {
 
 
     public void clickOnProductMenu(String text) {
-        WebDriver driver=DriverManager.getDriver();
+        WebDriver driver= DriverManager.getDriver();
         By locator = By.xpath("//span[normalize-space(text())='" + text + "']");
         WebElementUtil.waitForElementToBeVisible(locator);
         WebElementUtil.scrollAndClickUsingJSE(driver,driver.findElement(locator));
@@ -1174,12 +1172,3 @@ public class PLPProductItemsPageActions {
     }
 
 }
-
-
-
-
-
-
-
-
-

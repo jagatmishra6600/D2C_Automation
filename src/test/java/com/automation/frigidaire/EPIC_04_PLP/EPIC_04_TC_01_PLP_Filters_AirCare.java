@@ -15,7 +15,7 @@ public class EPIC_04_TC_01_PLP_Filters_AirCare extends BaseTest {
     ProductCategoryPageActions productCategoryPageActions = new ProductCategoryPageActions();
     PLPProductItemsPageActions PLPProductItemsPageActions = new PLPProductItemsPageActions();
 
-    public void navigateToAirCare(String webSite, String prodCategory, String subProdCategory) throws InterruptedException {
+    public void navigateToAirCare( String webSite,String prodCategory, String subProdCategory) throws InterruptedException {
         homePage.navigateToHomePage();
         Assert.assertTrue(homePage.isHomePageLoaded(), "The Frigidaire home page did not load correctly.");
         productCategoryPageActions.clickOnProductMenu(webSite, prodCategory);

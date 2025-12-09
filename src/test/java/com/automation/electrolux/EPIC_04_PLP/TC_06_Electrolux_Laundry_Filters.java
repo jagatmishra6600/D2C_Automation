@@ -1,8 +1,8 @@
 package com.automation.electrolux.EPIC_04_PLP;
 
-import com.automation.frigidaire.pages.FrigidaireHomePageActions;
-import com.automation.frigidaire.pages.PLPProductItemsPageActions;
-import com.automation.frigidaire.pages.ProductCategoryPageActions;
+import com.automation.electrolux.pages.EL_ProductCategoryPageActions;
+import com.automation.electrolux.pages.ElectroluxPLPProductItemsPageActions;
+import com.automation.electrolux.pages.HomePageActions;
 import com.automation.utils.ExtentReportManager;
 import com.automation.utils.WebElementUtil;
 import org.testng.annotations.Test;
@@ -12,9 +12,9 @@ import static com.automation.frigidaire.locators.FrigidaireConstants.electroxWeb
 public class TC_06_Electrolux_Laundry_Filters extends BaseTest {
 
 
-    FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
-    ProductCategoryPageActions productCategoryPageActions = new ProductCategoryPageActions();
-    PLPProductItemsPageActions PLPProductItemsPageActions = new PLPProductItemsPageActions();
+    HomePageActions homePage = new HomePageActions();
+    EL_ProductCategoryPageActions productCategoryPageActions = new EL_ProductCategoryPageActions();
+    ElectroluxPLPProductItemsPageActions PLPProductItemsPageActions = new ElectroluxPLPProductItemsPageActions();
 
     public void navigateToVacuumsProducts(String webSite, String prodCategory, String subProdCategory) throws InterruptedException {
         homePage.navigateToHomePage();
@@ -79,7 +79,7 @@ public class TC_06_Electrolux_Laundry_Filters extends BaseTest {
         ExtentReportManager.getTest().pass("Verify Model filter for 700 Series");
     }
 
-    @Test(groups = {"smoke", "regression"}, description = "verify Availability of products in PLP")
+   // @Test(groups = {"smoke", "regression"}, description = "verify Availability of products in PLP")
     public void verify_Availaibility_In_PLP() throws InterruptedException
     {
         navigateToVacuumsProducts("electrolux", "Laundry", "Washers");

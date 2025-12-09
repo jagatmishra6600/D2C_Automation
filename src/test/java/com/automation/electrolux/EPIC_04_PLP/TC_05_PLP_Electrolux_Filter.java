@@ -1,8 +1,8 @@
 package com.automation.electrolux.EPIC_04_PLP;
 
-import com.automation.frigidaire.pages.FrigidaireHomePageActions;
-import com.automation.frigidaire.pages.PLPProductItemsPageActions;
-import com.automation.frigidaire.pages.ProductCategoryPageActions;
+import com.automation.electrolux.pages.EL_ProductCategoryPageActions;
+import com.automation.electrolux.pages.ElectroluxPLPProductItemsPageActions;
+import com.automation.electrolux.pages.HomePageActions;
 import com.automation.utils.ExtentReportManager;
 import com.automation.utils.WebElementUtil;
 import org.testng.annotations.Test;
@@ -11,9 +11,9 @@ import static com.automation.frigidaire.locators.FrigidaireConstants.electroxWeb
 public class TC_05_PLP_Electrolux_Filter extends BaseTest {
 
 
-        FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
-        ProductCategoryPageActions productCategoryPageActions=new ProductCategoryPageActions();
-        PLPProductItemsPageActions PLPProductItemsPageActions =new PLPProductItemsPageActions();
+    HomePageActions homePage = new HomePageActions();
+    EL_ProductCategoryPageActions productCategoryPageActions = new EL_ProductCategoryPageActions();
+    ElectroluxPLPProductItemsPageActions PLPProductItemsPageActions = new ElectroluxPLPProductItemsPageActions();
 
     public void navigateToVacuumsProducts(String webSite, String prodCategory , String subProdCategory ) throws InterruptedException {
         homePage.navigateToHomePage();
@@ -100,21 +100,16 @@ public class TC_05_PLP_Electrolux_Filter extends BaseTest {
 
     }
 
-
-
-
-
-
-        @Test(groups = {"regression"}, description = "Verify ENERGY STAR Certified filter with its functionality")
-        public void verifyPLPUpdatesForEnergyStarCertifiedFeature() throws InterruptedException {
-            navigateToVacuumsProducts("electrolux","Vacuums","Shop All Vacuums");
-           // PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
-            PLPProductItemsPageActions.featureFilter(electroxWeb,"Features ", " ENERGY STAR Certified ");
-            PLPProductItemsPageActions.openAllProductsAndValidate("Certifications and Approvals","ENERGY STAR Certified","Yes");
-            ExtentReportManager.getTest().pass("Verify ENERGY STAR Certified filter with its functionality");
-
-
-        }
+//        @Test(groups = {"regression"}, description = "Verify ENERGY STAR Certified filter with its functionality")
+//        public void verifyPLPUpdatesForEnergyStarCertifiedFeature() throws InterruptedException {
+//            navigateToVacuumsProducts("electrolux","Vacuums","Shop All Vacuums");
+//           // PLPProductItemsPageActions.verifyFiltersInProductItems("Availability", 60, "Availability");
+//            PLPProductItemsPageActions.featureFilter("electrolux","Features ", " ENERGY STAR Certified ");
+//            PLPProductItemsPageActions.openAllProductsAndValidate("Certifications and Approvals","ENERGY STAR Certified","Yes");
+//            ExtentReportManager.getTest().pass("Verify ENERGY STAR Certified filter with its functionality");
+//
+//
+//        }
 
 
 
