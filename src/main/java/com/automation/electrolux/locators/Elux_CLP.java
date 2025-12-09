@@ -3,7 +3,7 @@ package com.automation.electrolux.locators;
 import org.openqa.selenium.By;
 
 public class Elux_CLP {
-
+    
     protected final By Laundry = By.xpath("(//div[@class='Desktop-Nav']//h5[@aria-label='Laundry'])[1]");
     protected final By Frontloadlaundry = By.xpath("//*[@class='second-level-nav undefined ' and text()=' Front Load Laundry ']");
     protected final By LaundryTowers = By.xpath("//div[@class='title mb-1']/span[text()='Laundry Towers']");

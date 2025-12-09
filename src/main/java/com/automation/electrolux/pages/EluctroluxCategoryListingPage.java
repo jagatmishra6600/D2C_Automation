@@ -13,7 +13,6 @@ public class EluctroluxCategoryListingPage extends Elux_CLP {
     public void clickOnFrontloadlaundry() {
         WebElementUtil.clickElement(Frontloadlaundry);
     }
-
     public boolean verifyLaundryTowersText() {
         WebElementUtil.isDisplayed(LaundryTowers);
         return true;
