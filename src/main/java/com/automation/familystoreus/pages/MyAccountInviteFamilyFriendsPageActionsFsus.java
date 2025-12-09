@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import com.automation.familystoreus.locators.FSUS_Homepage;
 import com.automation.familystoreus.locators.FSUS_InviteFamilyFriendsPage;
 import com.automation.models.CreateAccountData;
+import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
 
 public class MyAccountInviteFamilyFriendsPageActionsFsus {
@@ -17,15 +18,15 @@ public class MyAccountInviteFamilyFriendsPageActionsFsus {
 		 return this;
 	 }
 	 
-	 public MyAccountInviteFamilyFriendsPageActionsFsus enterFirstName(String firstName)  { 
+	 public MyAccountInviteFamilyFriendsPageActionsFsus enterFirstName(String firstName) throws InterruptedException  { 
 		 return typeAndVerify(FSUS_InviteFamilyFriendsPage.firstNameField, firstName);
 	 }
 	 
-	 public MyAccountInviteFamilyFriendsPageActionsFsus enterLastName(String lastName) { 
+	 public MyAccountInviteFamilyFriendsPageActionsFsus enterLastName(String lastName) throws InterruptedException { 
 		 return typeAndVerify(FSUS_InviteFamilyFriendsPage.lastNameField, lastName);
 	 }
 	 
-	 public MyAccountInviteFamilyFriendsPageActionsFsus enterEmailAddress(String emailAddress) {
+	 public MyAccountInviteFamilyFriendsPageActionsFsus enterEmailAddress(String emailAddress) throws InterruptedException {
 		 return typeAndVerify(FSUS_InviteFamilyFriendsPage.emailAddressField, emailAddress);
 		 
 	 }
@@ -36,7 +37,7 @@ public class MyAccountInviteFamilyFriendsPageActionsFsus {
 		 return this;
 	 }
 	 
-	 public MyAccountInviteFamilyFriendsPageActionsFsus inviteUser(String firstName, String lastName, String emailAddress) {
+	 public MyAccountInviteFamilyFriendsPageActionsFsus inviteUser(String firstName, String lastName, String emailAddress) throws InterruptedException {
 		 return clickSendNewInvitationButton()
 				 .enterFirstName(firstName)
 				 .enterLastName(lastName)
@@ -44,7 +45,7 @@ public class MyAccountInviteFamilyFriendsPageActionsFsus {
 				 .clickSendInvitationButton();
 	 }
 	 
-	 public MyAccountInviteFamilyFriendsPageActionsFsus inviteUser(CreateAccountData data) {
+	 public MyAccountInviteFamilyFriendsPageActionsFsus inviteUser(CreateAccountData data) throws InterruptedException {
 		 return clickSendNewInvitationButton()
 				 .enterFirstName(data.firstName())
 				 .enterLastName(data.lastName())
@@ -71,15 +72,17 @@ public class MyAccountInviteFamilyFriendsPageActionsFsus {
 		 return this;
 	 }
 	 
-	 private MyAccountInviteFamilyFriendsPageActionsFsus typeAndVerify(By locator, String text) {
+	 private MyAccountInviteFamilyFriendsPageActionsFsus typeAndVerify(By locator, String text) throws InterruptedException {
 		    WebElementUtil.waitForElementToBeClickable(locator);
 		    int retries = 0;
 		    while (retries < 3) {
 		        WebElementUtil.sendKeys(locator, text);
 		        var actualValue = WebElementUtil.getDomProperty(locator, "value");
+		        System.out.println(actualValue);
 		        if (text.equals(actualValue)) {
 		            return this;
 		        }
+		        WaitUtils.sleep(1000);
 		        retries++;
 		    }
 		   return this;
