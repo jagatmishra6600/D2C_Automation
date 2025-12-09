@@ -15,8 +15,9 @@ public class ELUX_LoginPage {
 	 public static final By notRecommendedMessage = By.xpath("//label[contains(.,'shared or public device')]");
 	 public static final By forgotPasswordLink = By.xpath("//a[@id='login-forgot-password-link']");
 	 public static final By createAccountLink = By.xpath("//a[contains(.,'Create an account') and contains(@class,'button-style')]");
-	 public static final By electroluxLinkedAccountMessage = By.xpath("//label[contains(.,'part of the Electrolux Group')]");
+	 public static final By frigidaireLinkedAccountMessage = By.xpath("//label[contains(.,'part of the Electrolux Group')]");
 	 public static final By signInWithAppleButton = By.id("Apple_btn");
 	 public static final By signInWithGoogleButton = By.id("Google_btn");
-	 
+	 public static final By newToElectroluxLabel = By.xpath("//label[contains(.,'New to Electrolux')]");
+	 public static final By accountBenefitsLabelList = By.xpath("//label[contains(.,'New to Electrolux')]/parent::div//div[@class='label-list']//label");		
 }
