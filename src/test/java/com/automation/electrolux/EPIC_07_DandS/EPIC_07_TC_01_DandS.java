@@ -23,8 +23,6 @@ public class EPIC_07_TC_01_DandS extends BaseTest {
         PLPProductItemsPageActions.verifyProductItemPage("Washers", "Washers");
     }
 
-
-
     @Test(groups = {"smoke", "regression"}, description = "To verify Included Parts section within Delivery & installation section")
     public void EPIC_05_DandS_TC_01_test_Included_Parts_Section_Within_Delivery_Installation_Section() throws InterruptedException {
         navigateToVacuumsProducts("electrolux", "Laundry", "Washers");
