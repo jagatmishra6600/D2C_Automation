@@ -293,4 +293,11 @@ public class FrigidaireDAndSPageActions {
         String actualText =  WebElementUtil.getText(dandsPage_Locator.inStorePickUpHeading).trim();
         return actualText.toLowerCase().contains(expectedText.toLowerCase());
     }
+
+    public CartPageActionsFrig clickSaveAndViewCartButton() {
+        WebElementUtil.scrollToElementCenter(dandsPage_Locator.saveAndViewCartButton);
+        WebElementUtil.clickElement(dandsPage_Locator.saveAndViewCartButton);
+        return new CartPageActionsFrig();
+    }
+
 }

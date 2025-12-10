@@ -72,9 +72,6 @@ public class EPIC_03_TC_01_AQA_Dnads_Productdetails extends BaseTest {
 
             dnsPage.clickCloseButtonAdditionalDetails();
 
-
-
-
         }
 
         ExtentReportManager.getTest().pass("Verify product details ( Delivery and Services Section ) on D&S page for French Door Refrigerator");
