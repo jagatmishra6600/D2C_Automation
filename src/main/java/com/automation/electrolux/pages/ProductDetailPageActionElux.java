@@ -6,14 +6,10 @@ import com.automation.utils.DriverManager;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
-import java.time.Duration;
 
 import static com.automation.utils.WaitUtils.untilClickable;
 
@@ -21,20 +17,22 @@ public class ProductDetailPageActionElux {
 
     ProductDetailPageLocatorsElux elPDP = new ProductDetailPageLocatorsElux();
 
-    private final By emailPopUp = By.xpath("//span[@id=\"close-modal123\"]");
-    private final By acceptButtonLocator = By.xpath("//button[@id='onetrust-accept-btn-handler']");
 
     SoftAssert softAssert = new SoftAssert();
 
     public void closeEmailPopUp() {
-        WaitUtils.untilVisible(emailPopUp, 60);
-        WebElementUtil.clickElement(emailPopUp);
+        try {
+            WaitUtils.untilVisible(elPDP.emailPopUp, 60);
+            WebElementUtil.clickElement(elPDP.emailPopUp);
+        } catch (Exception e) {
+            System.out.println(" ");
+        }
     }
 
     public ProductDetailPageActionElux navigateToHomePage() {
         WebElementUtil.navigateTo(ConfigReader.getAppUrl());
         try {
-            WebElement acceptBtn = untilClickable(acceptButtonLocator, 15);
+            WebElement acceptBtn = untilClickable(elPDP.acceptButtonLocator, 15);
             if (acceptBtn != null) {
                 acceptBtn.click();
             }
@@ -59,9 +57,7 @@ public class ProductDetailPageActionElux {
 
     public void verifyElementDisplayed(By xpath, String elementName) {
         try {
-            WebDriver driver = DriverManager.getDriver();
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(xpath));
+            WebElement element = WebElementUtil.waitForElementToBeVisible(xpath,20);
 
             boolean isDisplayed = element.isDisplayed();
             softAssert.assertTrue(isDisplayed, elementName + " should be displayed.");
@@ -87,54 +83,40 @@ public class ProductDetailPageActionElux {
 
 
     public void verifyAndClickElements(int i){
-        WebDriver driver = DriverManager.getDriver();
         WebElementUtil.zoomInOrOut(80);
 
-        verifyAndClickIfNeeded(driver, elPDP.productImage(i), "Product Image");
-        verifyAndClickIfNeeded(driver, elPDP.productName(i), "Product Name");
-        verifyAndClickIfNeeded(driver, elPDP.rating(i), "Product Rating");
+        verifyAndClickIfNeeded(elPDP.productImage(i), "Product Image");
+        verifyAndClickIfNeeded(elPDP.productName(i), "Product Name");
+        verifyAndClickIfNeeded(elPDP.rating(i), "Product Rating");
     }
-    private void verifyAndClickIfNeeded(WebDriver driver, By xpath, String elementName){
-//        By skuPLP = By.xpath("//div[@id=\"PlpItem1\"]//div[@class=\"Product-Card-Sku\"]");
-//        WebElementUtil.waitForElementToBeVisible(skuPLP);
-//        WebElement skuNumber = driver.findElement(skuPLP);
-//        String textValuePLP = skuNumber.getText();
+    private void verifyAndClickIfNeeded( By xpath, String elementName){
         try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
-            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(xpath));
-
-
+            WebElement element = WebElementUtil.waitForElementToBeVisible(xpath, 20);
             if (element.isDisplayed()) {
+                WaitUtils.untilClickable(xpath,10);
                 element.click();
+                WebElementUtil.waitForElementToBeVisible(elPDP.skuPDP,10);
+                WebElementUtil.isDisplayed(elPDP.skuPDP);
 
-                By skuPDP = By.xpath("//div[@id=\"EluxBreadcrumb\"]//span[@class=\"ng-star-inserted\"]//span");
-                WebElementUtil.waitForElementToBeVisible(skuPDP);
-                WebElementUtil.isDisplayed(skuPDP);
-//                WebElement skuNumberPDP = driver.findElement(skuPDP);
-//                String textPDP = skuNumberPDP.getText();
-
-//                Assert.assertEquals(textPDP,textValuePLP);
-
+                WaitUtils.sleep(3);
                 DriverManager.getDriver().navigate().back();
+                WaitUtils.sleep(3);
             }
         } catch (Exception e) {
             System.out.println(elementName + " NOT found or not displayed. Xpath: " + xpath);
         }
     }
 
-    public void checkPlpItem(String ProductName, int i) throws InterruptedException {
+    public void checkPlpItem(String ProductName, int i)  {
         WebElementUtil.zoomInOrOut(80);
-        WaitUtils.implicitWait(5);
-        WebDriver driver = DriverManager.getDriver();
+        WaitUtils.implicitWait(10);
 
         if(ProductName.equalsIgnoreCase("Vacuums")){
-            WebElement nameProduct= driver.findElement(elPDP.productName(i));
-            WebElementUtil.scrollToElement(driver, nameProduct);
+            WebElementUtil.scrollToElementStable(elPDP.productName(i));
             verifyProductDetails(i);
             verifyAndClickElements(i);
         } else if (ProductName.equalsIgnoreCase("Laundry")) {
-            WebElement nameProduct= driver.findElement(elPDP.productName(i));
-            WebElementUtil.scrollToElement(driver, nameProduct);
+            WebElementUtil.scrollToElementStable(elPDP.productName(i));
             verifyProductDetails(i);
             verifyAndClickElements(i);
         }

@@ -7,7 +7,6 @@ import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 
 public class DSPServiceExclusionPageActionElux {
 
@@ -17,16 +16,12 @@ public class DSPServiceExclusionPageActionElux {
         Thread.sleep(7000);
         By productClick =By.xpath("//div[text()='" + sku + "']//parent::div//parent::div//parent::div//parent::div//div[@class=\"col- product-card-inner-row kit\"]//a");
 
-        WebDriver driver= DriverManager.getDriver();
-        WebElement productSKUNumber= driver.findElement(productClick);
         WebElementUtil.scrollToElementStable(productClick);
         WebElementUtil.waitForElementToBeVisible(productClick, 10);
         WebElementUtil.waitForElementToBeClickable(productClick, 10);
         WebElementUtil.clickElement(productClick);
 
         Thread.sleep(3000);
-        WebElement addButton = driver.findElement(DSPageServiceLocatorsElux.addToCartButton);
-        WebElementUtil.scrollToElement(driver, addButton);
         WebElementUtil.scrollToElementStable(DSPageServiceLocatorsElux.addToCartButton);
         WebElementUtil.waitForElementToBeVisible(DSPageServiceLocatorsElux.addToCartButton, 10);
         WebElementUtil.waitForElementToBeClickable(DSPageServiceLocatorsElux.addToCartButton, 10);
@@ -53,22 +48,17 @@ public class DSPServiceExclusionPageActionElux {
         WebElementUtil.clickElement(DSPageServiceLocatorsElux.zipCodeButton);
     }
     public void zipCodePop(){
-        WebElementUtil.waitForElementToBeVisible(DSPageServiceLocatorsElux.zipPopUp);
+        WebElementUtil.waitForElementToBeVisible(DSPageServiceLocatorsElux.zipPopUp, 10);
         WebElementUtil.clickElement(DSPageServiceLocatorsElux.zipPopUp);
     }
     public void deliveryOnlyIsAvailable() {
-        WebDriver driver = DriverManager.getDriver();
-
-        WebElement element= driver.findElement(DSPageServiceLocatorsElux.deliverySubTitle);
-        WebElementUtil.scrollToElement(driver, element);
+        WebElementUtil.scrollToElementStable(DSPageServiceLocatorsElux.deliverySubTitle);
         WebElementUtil.waitForElementToBeVisible(DSPageServiceLocatorsElux.deliverySubTitle);
-
-        Assert.assertTrue(driver.findElement(DSPageServiceLocatorsElux.deliverySubTitle).isDisplayed(),
-                "'Delivery only' radio button is NOT available!");
+        WebElementUtil.isDisplayed(DSPageServiceLocatorsElux.deliverySubTitle);
 
         WebElementUtil.waitForElementToBeVisible(DSPageServiceLocatorsElux.deliveryRadioButton, 10);
-        Assert.assertTrue(driver.findElement(DSPageServiceLocatorsElux.deliveryRadioButton).isDisplayed(),
-                "'Delivery only' radio button is NOT available!");
+        WebElementUtil.isDisplayed(DSPageServiceLocatorsElux.deliveryRadioButton);
+
 
 //        WebElementUtil.waitForElementToBeVisible(EL_DSPagesService.deliveryPrice, 10);
 //        Assert.assertTrue(driver.findElement(EL_DSPagesService.deliveryPrice).isDisplayed(),
@@ -78,23 +68,17 @@ public class DSPServiceExclusionPageActionElux {
         WebElementUtil.clickElement(DSPageServiceLocatorsElux.deliveryRadioButton);
 
         WebElementUtil.waitForElementToBeVisible(DSPageServiceLocatorsElux.requiredInstallation, 10);
-        Assert.assertTrue(driver.findElement(DSPageServiceLocatorsElux.requiredInstallation).isDisplayed(),
-                "Required Installation is NOT available!");
+        WebElementUtil.isDisplayed(DSPageServiceLocatorsElux.requiredInstallation);
 
         WebElementUtil.waitForElementToBeVisible(DSPageServiceLocatorsElux.checkBoxRequired, 10);
-        Assert.assertTrue(driver.findElement(DSPageServiceLocatorsElux.checkBoxRequired).isDisplayed(),
-                "Required checkbox is NOT available!");
+        WebElementUtil.isDisplayed(DSPageServiceLocatorsElux.checkBoxRequired);
 
         WebElementUtil.waitForElementToBeVisible(DSPageServiceLocatorsElux.listOfAvailable, 10);
-        Assert.assertTrue(driver.findElement(DSPageServiceLocatorsElux.listOfAvailable).isDisplayed(),
-                "Required Installation list of available is NOT available!");
+        WebElementUtil.isDisplayed(DSPageServiceLocatorsElux.listOfAvailable);
 
     }
     public void installationUnavailable(){
 
-        WebDriver driver= DriverManager.getDriver();
-
-        Assert.assertTrue(driver.findElement(DSPageServiceLocatorsElux.installationUnavailable).isDisplayed(),
-                "Installation part is NOT available!");
+        WebElementUtil.isDisplayed(DSPageServiceLocatorsElux.installationUnavailable);
     }
 }

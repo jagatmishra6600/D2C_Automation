@@ -8,7 +8,6 @@ import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 public class InstallationAddOnServicePageActionElux {
@@ -19,15 +18,12 @@ public class InstallationAddOnServicePageActionElux {
         WebElementUtil.zoomInOrOut(75);
         Thread.sleep(7000);
         By productClick =By.xpath("//div[text()='" + sku + "']//parent::div//parent::div//parent::div//parent::div//div[@class=\"col- product-card-inner-row kit\"]//a");
-        WebDriver driver= DriverManager.getDriver();
         WebElementUtil.scrollToElementStable(productClick);
         WebElementUtil.waitForElementToBeVisible(productClick, 10);
         WebElementUtil.waitForElementToBeClickable(productClick, 10);
         WebElementUtil.clickElement(productClick);
 
         Thread.sleep(3000);
-        WebElement addButton = driver.findElement(DSPageServiceLocatorsElux.addToCartButton);
-        WebElementUtil.scrollToElement(driver, addButton);
         WebElementUtil.scrollToElementStable(DSPageServiceLocatorsElux.addToCartButton);
         WebElementUtil.waitForElementToBeVisible(DSPageServiceLocatorsElux.addToCartButton, 10);
         WebElementUtil.waitForElementToBeClickable(DSPageServiceLocatorsElux.addToCartButton, 10);
@@ -83,9 +79,7 @@ public class InstallationAddOnServicePageActionElux {
         double price = Double.parseDouble(priceRequiredText);
 
 
-        WebDriver driver = DriverManager.getDriver();
-        WebElement element = driver.findElement(DSPageInstallationLocatorsElux.subTotal);
-        WebElementUtil.scrollToElement(driver, element);
+        WebElementUtil.scrollToElementStable(DSPageInstallationLocatorsElux.subTotal);
 
         String subTotalPrice = WebElementUtil.getText(DSPageInstallationLocatorsElux.subTotal);
 
@@ -147,14 +141,16 @@ public class InstallationAddOnServicePageActionElux {
     }
 
     public void validateElement(By locator, String errorMessage) {
-        WebDriver driver = DriverManager.getDriver();
+      //  WebDriver driver = DriverManager.getDriver();
         WebElementUtil.waitForElementToBeVisible(locator, 15);
-        WebElement element = driver.findElement(locator);
+       // WebElement element = driver.findElement(locator);
 
-        WebElementUtil.scrollToElement(driver, element);
+       // WebElementUtil.scrollToElement(driver, element);
+        WebElementUtil.scrollToElementStable(locator);
         WebElementUtil.waitForElementToBeVisible(locator);
 
-        Assert.assertTrue(element.isDisplayed(), errorMessage);
+       // Assert.assertTrue(element.isDisplayed(), errorMessage);
+        WebElementUtil.isDisplayed(locator);
     }
 
     public void validateAddOnServicesAreAvailable() {
@@ -253,7 +249,6 @@ public class InstallationAddOnServicePageActionElux {
         calculatePriceAndAssert(price);
     }
     public void calculatePriceAndAssert( String price){
-        WebDriver driver = DriverManager.getDriver();
         double priceAdd = 0;
         if(price.equalsIgnoreCase("Free")){
             priceAdd =0;
@@ -262,8 +257,7 @@ public class InstallationAddOnServicePageActionElux {
             priceAdd = Double.parseDouble(num);
         }
         WebElementUtil.waitForElementToBeVisible(DSPageInstallationLocatorsElux.subTotal);
-        WebElement element = driver.findElement(DSPageInstallationLocatorsElux.subTotal);
-        WebElementUtil.scrollToElement(driver,element);
+        WebElementUtil.scrollToElementStable(DSPageInstallationLocatorsElux.subTotal);
         String subTotalText = WebElementUtil.getText(DSPageInstallationLocatorsElux.subTotal);
         String totalPriceNumeric = subTotalText.replace("$", "").replace(",", "");
         double subTotalprice = Double.parseDouble(totalPriceNumeric);

@@ -4,7 +4,6 @@ import com.automation.BaseTest;
 import com.automation.electrolux.pages.DSPServiceExclusionPageActionElux;
 import com.automation.electrolux.pages.ElectroluxHomePageActions;
 import com.automation.electrolux.pages.ProductDetailPageActionElux;
-import com.automation.utils.DriverManager;
 import com.automation.utils.ExtentReportManager;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.By;
@@ -33,6 +32,5 @@ public class EPIC_07_TC_04_ServiceExclusion extends BaseTest{
         elDsPageServiceExclusion.deliveryOnlyIsAvailable();
         elDsPageServiceExclusion.installationUnavailable();
         ExtentReportManager.getTest().pass("Verified Delivery page after change the zip code for FEDEX/AIT");
-        DriverManager.quitDriver();
     }
 }

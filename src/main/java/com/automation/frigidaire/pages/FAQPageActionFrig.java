@@ -30,9 +30,8 @@ public class FAQPageActionFrig {
         WebElementUtil.waitForElementToBeVisible(faq.headerTitle, 10);
 
         WebElement headerElement = WebElementUtil.findElement(faq.headerTitle);
-        String actualText = headerElement.getText();
-        Assert.assertTrue(actualText.equals(headerTextFAQ),
-                " Header text mismatch! Expected: '" + headerTextFAQ + "' but found: '" + actualText + "'");
+        Assert.assertTrue(headerElement.getText().equals(headerTextFAQ),
+                " Header text mismatch! Expected: '" + headerTextFAQ + "' but found:");
     }
 
     public void verifyFAQSecond() {
@@ -53,15 +52,13 @@ public class FAQPageActionFrig {
         By tileLocator = By.xpath("//a[@class='group']//h3[text()='" + category + "']");
 
         WebElementUtil.waitForElementToBeVisible(tileLocator);
-        WebElement tileElement = WebElementUtil.findElement(tileLocator);
-        Assert.assertTrue(tileElement.isDisplayed(), " Category tile not visible: " + category);
+        WebElementUtil.isDisplayed(tileLocator);
 
         WebElementUtil.clickElement(tileLocator);
 
         WebElementUtil.waitForElementToBeVisible(faq.subcategoryHeader,10);
         WebElement se = WebElementUtil.findElement(faq.subcategoryHeader);
-        String actual = se.getText();
-        Assert.assertTrue(actual.contains("Support for " + category));
+        Assert.assertTrue(se.getText().contains("Support for " + category));
 
         DriverManager.getDriver().navigate().back();
     }

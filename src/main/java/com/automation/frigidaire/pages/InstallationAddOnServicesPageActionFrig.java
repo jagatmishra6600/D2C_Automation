@@ -18,16 +18,15 @@ public class InstallationAddOnServicesPageActionFrig {
         Thread.sleep(7000);
         By productClick =By.xpath("//div[text()='" + sku + "']//parent::div//parent::div//div[@class='col- Product-Name my-2 min-height-v10']//a");
 
-        WebDriver driver= DriverManager.getDriver();
-        WebElement productSKUNumber= driver.findElement(productClick);
+        //WebDriver driver= DriverManager.getDriver();
         WebElementUtil.scrollToElementStable(productClick);
         WebElementUtil.waitForElementToBeVisible(productClick, 10);
         WebElementUtil.waitForElementToBeClickable(productClick, 10);
         WebElementUtil.clickElement(productClick);
 
         Thread.sleep(3000);
-        WebElement addButton = driver.findElement(DSPServiceLocatorsFrig.addToCartButton);
-        WebElementUtil.scrollToElement(driver, addButton);
+        //WebElement addButton = driver.findElement(DSPServiceLocatorsFrig.addToCartButton);
+       // WebElementUtil.scrollToElement(driver, addButton);
         WebElementUtil.scrollToElementStable(DSPServiceLocatorsFrig.addToCartButton);
         WebElementUtil.waitForElementToBeVisible(DSPServiceLocatorsFrig.addToCartButton, 10);
         WebElementUtil.waitForElementToBeClickable(DSPServiceLocatorsFrig.addToCartButton, 10);
@@ -38,13 +37,15 @@ public class InstallationAddOnServicesPageActionFrig {
     public void validateDeliveryOnlyIsAvailable() {
         WebDriver driver = DriverManager.getDriver();
 
-        WebElementUtil.waitForElementToBeVisible(DSPServiceLocatorsFrig.deliverySubTitle);
-        Assert.assertTrue(driver.findElement(DSPServiceLocatorsFrig.deliverySubTitle).isDisplayed(),
-                "'Delivery only' radio button is NOT available!");
+        WebElementUtil.waitForElementToBeVisible(DSPServiceLocatorsFrig.deliverySubTitle,10);
+//        Assert.assertTrue(driver.findElement(DSPServiceLocatorsFrig.deliverySubTitle).isDisplayed(),
+//                "'Delivery only' radio button is NOT available!");
+        WebElementUtil.isDisplayed(DSPServiceLocatorsFrig.deliverySubTitle);
 
-        WebElementUtil.waitForElementToBeVisible(DSPServiceLocatorsFrig.deliveryRadioButton);
-        Assert.assertTrue(driver.findElement(DSPServiceLocatorsFrig.deliveryRadioButton).isDisplayed(),
-                "'Delivery only' radio button is NOT available!");
+        WebElementUtil.waitForElementToBeVisible(DSPServiceLocatorsFrig.deliveryRadioButton,10);
+//        Assert.assertTrue(driver.findElement(DSPServiceLocatorsFrig.deliveryRadioButton).isDisplayed(),
+//                "'Delivery only' radio button is NOT available!");
+        WebElementUtil.isDisplayed(DSPServiceLocatorsFrig.deliveryRadioButton);
 
 
 //        WebElementUtil.waitForElementToBeVisible(DSPagesService.deliveryPrice);
@@ -58,17 +59,13 @@ public class InstallationAddOnServicesPageActionFrig {
         WebElementUtil.waitForElementToBeClickable(DSPServiceLocatorsFrig.deliveryRadioButton, 10);
         WebElementUtil.clickElement(DSPServiceLocatorsFrig.deliveryRadioButton);
 
-        validateElement(DSPInstallationLocatorsFrig.requiredInstallation,
-                "Required Installation is not available");
+        validateElement(DSPInstallationLocatorsFrig.requiredInstallation);
 
-        validateElement(DSPInstallationLocatorsFrig.checkBoxRequired,
-                "Required check box is not available");
+        validateElement(DSPInstallationLocatorsFrig.checkBoxRequired);
 
-        validateElement(DSPInstallationLocatorsFrig.listOfAvailable,
-                "Required Installation list of available is not available");
+        validateElement(DSPInstallationLocatorsFrig.listOfAvailable);
 
-        validateElement(DSPInstallationLocatorsFrig.priceRequired,
-                "Required Installation price is not available");
+        validateElement(DSPInstallationLocatorsFrig.priceRequired);
 
     }
     public void selectCheckBoxRequired(){
@@ -83,9 +80,11 @@ public class InstallationAddOnServicesPageActionFrig {
         double price = Double.parseDouble(priceRequiredText);
 
 
-        WebDriver driver = DriverManager.getDriver();
-        WebElement element = driver.findElement(DSPInstallationLocatorsFrig.subTotal);
-        WebElementUtil.scrollToElement(driver, element);
+        //WebDriver driver = DriverManager.getDriver();
+        //WebElement element = driver.findElement(DSPInstallationLocatorsFrig.subTotal);
+        //WebElementUtil.scrollToElement(driver, element);
+
+        WebElementUtil.scrollToElementStable(DSPInstallationLocatorsFrig.subTotal);
 
         String subTotalPrice = WebElementUtil.getText(DSPInstallationLocatorsFrig.subTotal);
 
@@ -105,70 +104,55 @@ public class InstallationAddOnServicesPageActionFrig {
     }
     public void deliveryInstallation(){
 
-        validateElement(DSPInstallationLocatorsFrig.deliveryInstallation,
-                "Delivery & installation option is NOT displayed!");
+        validateElement(DSPInstallationLocatorsFrig.deliveryInstallation);
 
-        validateElement(DSPInstallationLocatorsFrig.deliveryInstallationRadioButton,
-                "Delivery & installation radio button is NOT displayed!");
+        validateElement(DSPInstallationLocatorsFrig.deliveryInstallationRadioButton);
 
-        validateElement(DSPInstallationLocatorsFrig.deliveryInstallationTag,
-                "Recommended tag is NOT displayed!");
+        validateElement(DSPInstallationLocatorsFrig.deliveryInstallationTag);
 
-        validateElement(DSPInstallationLocatorsFrig.deliveryInstallationDescription,
-                "Description for Delivery & installation is NOT displayed!");
+        validateElement(DSPInstallationLocatorsFrig.deliveryInstallationDescription);
 
-        validateElement(DSPInstallationLocatorsFrig.deliveryInstallationPrice,
-                "Price for Delivery & installation is NOT displayed!");
+        validateElement(DSPInstallationLocatorsFrig.deliveryInstallationPrice);
 
-        validateElement(DSPInstallationLocatorsFrig.deliveryInstallationViewLink,
-                "'View included parts and additional details' link is NOT displayed!");
+        validateElement(DSPInstallationLocatorsFrig.deliveryInstallationViewLink);
 
     }
 
-    public void validateElement(By locator, String errorMessage) {
-        WebDriver driver = DriverManager.getDriver();
+    public void validateElement(By locator) {
+        //WebDriver driver = DriverManager.getDriver();
         WebElementUtil.waitForElementToBeVisible(locator, 15);
-        WebElement element = driver.findElement(locator);
+        //WebElement element = driver.findElement(locator);
 
-        WebElementUtil.scrollToElement(driver, element);
+        //WebElementUtil.scrollToElement(driver, element);
+        WebElementUtil.scrollToElementStable(locator);
         WebElementUtil.waitForElementToBeVisible(locator);
 
-        Assert.assertTrue(element.isDisplayed(), errorMessage);
+        //Assert.assertTrue(element.isDisplayed(), errorMessage);
+        WebElementUtil.isDisplayed(locator);
     }
 
     public void validateAddOnServicesAreAvailable() {
 
-        validateElement(DSPInstallationLocatorsFrig.addOnService,
-                "'Add-on services' title is NOT available!");
+        validateElement(DSPInstallationLocatorsFrig.addOnService);
 
 //        validateElement(DSPageInstallation.addOnMessage,
 //                "Add-on services message is NOT available!");
 
-        validateElement(DSPInstallationLocatorsFrig.haulCheckBox,
-                "'Haul away / dispose old appliance' checkbox is NOT available!");
+        validateElement(DSPInstallationLocatorsFrig.haulCheckBox);
 
-        validateElement(DSPInstallationLocatorsFrig.haulText,
-                "Haul away text is Not available!");
+        validateElement(DSPInstallationLocatorsFrig.haulText);
 
-        validateElement(DSPInstallationLocatorsFrig.haulDescription,
-                "'Haul away / dispose old appliance' description is NOT available!");
+        validateElement(DSPInstallationLocatorsFrig.haulDescription);
 
-        validateElement(DSPInstallationLocatorsFrig.haulPrice,
-                "'Haul away / dispose old appliance' price is NOT available!");
+        validateElement(DSPInstallationLocatorsFrig.haulPrice);
 
-        validateElement(DSPInstallationLocatorsFrig.moveOldCheckBox,
-                "'Move old unit to another room' checkbox is NOT available!");
+        validateElement(DSPInstallationLocatorsFrig.moveOldCheckBox);
 
-        validateElement(DSPInstallationLocatorsFrig.moveOld,
-                "Move old text is Not available!");
+        validateElement(DSPInstallationLocatorsFrig.moveOld);
 
-        validateElement(DSPInstallationLocatorsFrig.moveOldDescription,
-                "'Move old unit to another room' description is NOT available!");
+        validateElement(DSPInstallationLocatorsFrig.moveOldDescription);
 
-        validateElement(DSPInstallationLocatorsFrig.moveOldPrice,
-                "'Move old unit to another room' price is NOT available!");
-
-
+        validateElement(DSPInstallationLocatorsFrig.moveOldPrice);
     }
 
     public void selectHaul(){
@@ -177,8 +161,8 @@ public class InstallationAddOnServicesPageActionFrig {
         WebElementUtil.waitForElementToBeClickable(DSPServiceLocatorsFrig.deliveryRadioButton, 10);
         WebElementUtil.clickElement(DSPServiceLocatorsFrig.deliveryRadioButton);
 
-        validateElement(DSPInstallationLocatorsFrig.addOnService,
-                "'Add-on services' title is NOT available!");
+        validateElement(DSPInstallationLocatorsFrig.addOnService);
+        WebElementUtil.scrollToElementStable(DSPInstallationLocatorsFrig.addOnService);
 
         WebElementUtil.waitForElementToBeClickable(DSPInstallationLocatorsFrig.haulCheckBox);
         WebElementUtil.clickElement(DSPInstallationLocatorsFrig.haulCheckBox);
@@ -193,8 +177,8 @@ public class InstallationAddOnServicesPageActionFrig {
         WebElementUtil.waitForElementToBeClickable(DSPServiceLocatorsFrig.deliveryRadioButton, 10);
         WebElementUtil.clickElement(DSPServiceLocatorsFrig.deliveryRadioButton);
 
-        validateElement(DSPInstallationLocatorsFrig.addOnService,
-                "'Add-on services' title is NOT available!");
+        validateElement(DSPInstallationLocatorsFrig.addOnService);
+        WebElementUtil.scrollToElementStable(DSPInstallationLocatorsFrig.addOnService);
 
         WebElementUtil.waitForElementToBeClickable(DSPInstallationLocatorsFrig.moveOldCheckBox);
         WebElementUtil.clickElement(DSPInstallationLocatorsFrig.moveOldCheckBox);
@@ -204,7 +188,7 @@ public class InstallationAddOnServicesPageActionFrig {
     }
 
     public void calculatePriceAndAssert( String price){
-        WebDriver driver = DriverManager.getDriver();
+        //WebDriver driver = DriverManager.getDriver();
         double priceAdd = 0;
         if(price.equalsIgnoreCase("Free")){
             priceAdd =0;
@@ -213,8 +197,9 @@ public class InstallationAddOnServicesPageActionFrig {
             priceAdd = Double.parseDouble(num);
         }
         WebElementUtil.waitForElementToBeVisible(DSPInstallationLocatorsFrig.subTotal);
-        WebElement element = driver.findElement(DSPInstallationLocatorsFrig.subTotal);
-        WebElementUtil.scrollToElement(driver,element);
+        //WebElement element = driver.findElement(DSPInstallationLocatorsFrig.subTotal);
+        //WebElementUtil.scrollToElement(driver,element);
+        WebElementUtil.scrollToElementStable(DSPInstallationLocatorsFrig.subTotal);
         String subTotalText = WebElementUtil.getText(DSPInstallationLocatorsFrig.subTotal);
         String totalPriceNumeric = subTotalText.replace("$", "").replace(",", "");
         double subTotalprice = Double.parseDouble(totalPriceNumeric);
@@ -232,8 +217,7 @@ public class InstallationAddOnServicesPageActionFrig {
         WebElementUtil.waitForElementToBeClickable(DSPServiceLocatorsFrig.deliveryRadioButton, 10);
         WebElementUtil.clickElement(DSPServiceLocatorsFrig.deliveryRadioButton);
 
-        validateElement(DSPInstallationLocatorsFrig.addOnService,
-                "'Add-on services' title is NOT available!");
+        validateElement(DSPInstallationLocatorsFrig.addOnService);
         WebElementUtil.scrollToElementStable(DSPInstallationLocatorsFrig.addOnService);
 
         WebElementUtil.waitForElementToBeClickable(DSPInstallationLocatorsFrig.haulCheckBox);

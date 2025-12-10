@@ -4,6 +4,9 @@ import org.openqa.selenium.By;
 
 public class ProductDetailPageLocatorsElux {
 
+    public final By emailPopUp = By.xpath("//span[@id=\"close-modal123\"]");
+    public final By acceptButtonLocator = By.xpath("//button[@id='onetrust-accept-btn-handler']");
+
     public final By skuNumber(int i) {
         return By.xpath("//div[@id='PlpItem" + i + "']//div[@class='Product-Card-Sku']");
     }
@@ -47,5 +50,8 @@ public class ProductDetailPageLocatorsElux {
     public final By compareBox(int i) {
         return By.xpath("//div[@id='PlpItem" + i + "']//input[@type='checkbox']");
     }
+
+    public final By skuPDP = By.xpath("//div[@id=\"EluxBreadcrumb\"]//span[@class=\"ng-star-inserted\"]//span");
+
 
 }

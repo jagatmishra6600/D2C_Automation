@@ -5,12 +5,9 @@ import com.automation.utils.DriverManager;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
-import java.time.Duration;
 
 public class ProductDetailPageActionFrig {
 
@@ -33,18 +30,16 @@ public class ProductDetailPageActionFrig {
     }
 
     public void verifyAndClickElements(int i) throws InterruptedException {
-        WebDriver driver = DriverManager.getDriver();
         WebElementUtil.zoomInOrOut(70);
 
-        verifyAndClickIfNeeded(driver, productDetails.productImage(i), "Product Image");
-        verifyAndClickIfNeeded(driver, productDetails.name(i), "Product Name");
-        verifyAndClickIfNeeded(driver, productDetails.productRating(i), "Product Rating");
+        verifyAndClickIfNeeded(productDetails.productImage(i), "Product Image");
+        verifyAndClickIfNeeded(productDetails.name(i), "Product Name");
+        verifyAndClickIfNeeded(productDetails.productRating(i), "Product Rating");
     }
-    private void verifyAndClickIfNeeded(WebDriver driver, By xpath, String elementName) throws InterruptedException {
+    private void verifyAndClickIfNeeded( By xpath, String elementName){
         WaitUtils.implicitWait(3);
         try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
-            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(xpath));
+            WebElement element = WebElementUtil.waitForElementToBeVisible(xpath,10);
 
 
             if (element.isDisplayed()) {
@@ -64,16 +59,13 @@ public class ProductDetailPageActionFrig {
     public void checkPlpItem(String ProductName, int i) throws InterruptedException {
         WebElementUtil.zoomInOrOut(70);
         WaitUtils.implicitWait(10);
-        WebDriver driver = DriverManager.getDriver();
         if(ProductName.equalsIgnoreCase("Kitchen")){
-            WebElement nameProduct= driver.findElement(productDetails.name(i));
-            WebElementUtil.scrollToElement(driver,nameProduct);
+            WebElementUtil.scrollToElementStable(productDetails.name(i));
             checkProductDetail(i);
             verifyKitchenDetails(i);
             verifyAndClickElements(i);
         } else if (ProductName.equalsIgnoreCase("Air Care")) {
-            WebElement nameProduct= driver.findElement(productDetails.name(i));
-            WebElementUtil.scrollToElement(driver,nameProduct);
+            WebElementUtil.scrollToElementStable(productDetails.name(i));
             checkProductDetail(i);
             verifyAirCareDetails(i);
             verifyAndClickElements(i);
@@ -112,9 +104,7 @@ public class ProductDetailPageActionFrig {
 
     public void verifyElementDisplayed(By xpath, String elementName) {
         try {
-            WebDriver driver = DriverManager.getDriver();
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(xpath));
+            WebElement element = WebElementUtil.waitForElementToBeVisible(xpath, 10);
             boolean isDisplayed = element.isDisplayed();
             softAssert.assertTrue(isDisplayed, elementName + " should be displayed.");
         } catch (Exception e) {

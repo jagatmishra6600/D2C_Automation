@@ -16,13 +16,8 @@ public class FAQPageActionElux {
         WebElementUtil.clickElement(locator);
     }
 
-    public void closeEmailPopUp() {
-        WaitUtils.untilVisible(FAQLocatorsElux.emailPopUp, 60);
-        WebElementUtil.clickElement(FAQLocatorsElux.emailPopUp);
-    }
-
     public void productNameClick(String sku) {
-        WebDriver driver = DriverManager.getDriver();
+    //    WebDriver driver = DriverManager.getDriver();
         WebElementUtil.zoomInOrOut(75);
         WaitUtils.implicitWait(5);
 
@@ -30,20 +25,20 @@ public class FAQPageActionElux {
                 "//div[text()='" + sku + "']/parent::div/parent::div/parent::div/parent::div//div[@class='col- product-card-inner-row kit']//a"
         );
 
-        WebElement element = driver.findElement(productXpath);
-        WebElementUtil.scrollToElement(driver, element);
+//        WebElement element = driver.findElement(productXpath);
+//        WebElementUtil.scrollToElement(driver, element);
         WebElementUtil.scrollToElementStable(productXpath);
         WebElementUtil.clickElement(productXpath);
         System.out.println("Clicked on product: ");
     }
 
     public void productFAQsSection() {
-        WebDriver driver = DriverManager.getDriver();
+//        WebDriver driver = DriverManager.getDriver();
         WaitUtils.implicitWait(5);
 
         try {
-            WebElement faqTabElement = driver.findElement(FAQLocatorsElux.faqTab);
-            WebElementUtil.scrollToElement(driver, faqTabElement);
+//            WebElement faqTabElement = driver.findElement(FAQLocatorsElux.faqTab);
+//            WebElementUtil.scrollToElement(driver, faqTabElement);
             WebElementUtil.scrollToElementStable(FAQLocatorsElux.faqTab);
             WebElementUtil.waitForElementToBeClickable(FAQLocatorsElux.faqTab);
             WebElementUtil.clickElement(FAQLocatorsElux.faqTab);
@@ -51,12 +46,14 @@ public class FAQPageActionElux {
 
             Thread.sleep(5000);
             WebElementUtil.zoomInOrOut(70);
-            WebElement faqTextElement = driver.findElement(FAQLocatorsElux.faqText);
-            WebElementUtil.scrollToElement(driver,faqTextElement);
+//            WebElement faqTextElement = driver.findElement(FAQLocatorsElux.faqText);
+//            WebElementUtil.scrollToElement(driver,faqTextElement);
+            WebElementUtil.scrollToElementStable(FAQLocatorsElux.faqText);
             WebElementUtil.waitForElementToBeVisible(FAQLocatorsElux.faqText);
 
-            WebElement element = driver.findElement(FAQLocatorsElux.faqQuestion);
-            WebElementUtil.scrollToElement(driver,element);
+//            WebElement element = driver.findElement(FAQLocatorsElux.faqQuestion);
+//            WebElementUtil.scrollToElement(driver,element);
+            WebElementUtil.scrollToElementStable(FAQLocatorsElux.faqQuestion);
             WebElementUtil.waitForElementToBeVisible(FAQLocatorsElux.faqQuestion);
             WebElementUtil.waitForElementToBeClickable(FAQLocatorsElux.faqQuestion);
             WebElementUtil.clickElement(FAQLocatorsElux.faqQuestion);
@@ -80,8 +77,9 @@ public class FAQPageActionElux {
     public void checkViewMore() {
         try {
             WebDriver driver=DriverManager.getDriver();
-            WebElement viewMoreElement = driver.findElement(FAQLocatorsElux.viewMore);
-            WebElementUtil.scrollToElement(driver, viewMoreElement);
+//            WebElement viewMoreElement = driver.findElement(FAQLocatorsElux.viewMore);
+//            WebElementUtil.scrollToElement(driver, viewMoreElement);
+            WebElementUtil.scrollToElementStable(FAQLocatorsElux.viewMore);
             WebElementUtil.waitForElementToBeVisible(FAQLocatorsElux.viewMore);
             WebElementUtil.clickElement(FAQLocatorsElux.viewMore);
             WebElement viewLessText= driver.findElement(FAQLocatorsElux.viewLess);

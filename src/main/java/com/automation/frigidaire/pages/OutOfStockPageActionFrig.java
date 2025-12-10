@@ -5,11 +5,8 @@ import com.automation.utils.DriverManager;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import java.time.Duration;
 
 public class OutOfStockPageActionFrig {
 
@@ -42,12 +39,9 @@ public class OutOfStockPageActionFrig {
     }
 
     public void clickOnProductName(String sku) throws InterruptedException {
-        WebDriver driver = DriverManager.getDriver();
         WebElementUtil.zoomInOrOut(75);
         Thread.sleep(5000);
         By productNameX = By.xpath("//div[normalize-space(text())='" + sku + "']/parent::div/parent::div//div[@class='col- Product-Name my-2 min-height-v10']//a");
-        WebElement element = driver.findElement(productNameX);
-        WebElementUtil.scrollToElement(driver, element);
         WebElementUtil.scrollToElementStable(productNameX);
         WebElementUtil.waitForElementToBeVisible(productNameX);
         WebElementUtil.waitForElementToBeClickable(productNameX);
@@ -66,20 +60,15 @@ public class OutOfStockPageActionFrig {
     }
 
     public void verifyStockForAirCareProduct() {
-        WebDriver driver = DriverManager.getDriver();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
         WebElementUtil.zoomInOrOut(60);
 
         WebElementUtil.isDisplayed(plpAction.earliestDelivery);
-        WebElement deliveryElement = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(plpAction.earliestDelivery)
 
-        );
-        String actualText = deliveryElement.getText().trim();
+        WebElement deliveryElement = WebElementUtil.waitForElementToBeVisible(plpAction.earliestDelivery,10);
         Assert.assertTrue(
-                actualText.contains("Earliest delivery") || actualText.contains("In stock"),
-                " Text does not contain 'Earliest delivery' or 'In stock'. Found: " + actualText);
+                deliveryElement.getText().trim().contains("Earliest delivery") || deliveryElement.getText().trim().contains("In stock"),
+                " Text does not contain 'Earliest delivery' or 'In stock'. Found: ");
 
     }
 
@@ -87,19 +76,18 @@ public class OutOfStockPageActionFrig {
         WebElementUtil.zoomInOrOut(75);
         WebDriver driver = DriverManager.getDriver();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        WebElement outOfStockText = wait.until(ExpectedConditions.visibilityOfElementLocated(plpAction.outOfStock));
+        WebElement outOfStockText = WebElementUtil.waitForElementToBeVisible(plpAction.outOfStock,10);
         WebElementUtil.scrollToElement(driver, outOfStockText);
         Assert.assertTrue(outOfStockText.getText().contains("Temporarily out of stock in your area."));
 
-        WebElement emailInput = wait.until(ExpectedConditions.elementToBeClickable(plpAction.emailField));
+        WebElement emailInput = WebElementUtil.waitForElementToBeClickable(plpAction.emailField,10);
         emailInput.clear();
         emailInput.sendKeys("rajatverma11@gmail.com");
 
-        WebElement notifyBtn = wait.until(ExpectedConditions.elementToBeClickable(plpAction.notifyButton));
+        WebElement notifyBtn = WebElementUtil.waitForElementToBeClickable(plpAction.notifyButton,10);
         notifyBtn.click();
 
-        WebElement verifyText = wait.until(ExpectedConditions.visibilityOfElementLocated(plpAction.notifyVerify));
+        WebElement verifyText = WebElementUtil.waitForElementToBeVisible(plpAction.notifyVerify,10);
         Assert.assertTrue(verifyText.getText().contains("You’re signed up"));
 
     }

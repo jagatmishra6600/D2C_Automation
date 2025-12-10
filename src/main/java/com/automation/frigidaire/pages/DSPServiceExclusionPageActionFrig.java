@@ -6,7 +6,6 @@ import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 
 public class DSPServiceExclusionPageActionFrig {
 
@@ -26,27 +25,20 @@ public class DSPServiceExclusionPageActionFrig {
         Thread.sleep(2000);
         WebElementUtil.waitForElementToBeClickable(DSPServiceLocatorsFrig.zipCodeButton);
         WebElementUtil.clickElement(DSPServiceLocatorsFrig.zipCodeButton);
-        //driver.navigate().refresh();
     }
-    public void zipCodePop() throws InterruptedException {
+    public void zipCodePop(){
         WebElementUtil.waitForElementToBeVisible(DSPServiceLocatorsFrig.zipPopUp);
         WebElementUtil.clickElement(DSPServiceLocatorsFrig.zipPopUp);
-        //Thread.sleep(2000);
-
     }
     public void deliveryOnlyIsAvailable() {
-        WebDriver driver = DriverManager.getDriver();
 
-        WebElement element= driver.findElement(DSPServiceLocatorsFrig.deliverySubTitle);
-        WebElementUtil.scrollToElement(driver, element);
-        WebElementUtil.waitForElementToBeVisible(DSPServiceLocatorsFrig.deliverySubTitle);
+        WebElementUtil.scrollToElementStable(DSPServiceLocatorsFrig.deliverySubTitle);
 
-        Assert.assertTrue(driver.findElement(DSPServiceLocatorsFrig.deliverySubTitle).isDisplayed(),
-                "'Delivery only' radio button is NOT available!");
+        WebElementUtil.waitForElementToBeVisible(DSPServiceLocatorsFrig.deliverySubTitle,10);
+        WebElementUtil.isDisplayed(DSPServiceLocatorsFrig.deliverySubTitle);
 
         WebElementUtil.waitForElementToBeVisible(DSPServiceLocatorsFrig.deliveryRadioButton, 10);
-        Assert.assertTrue(driver.findElement(DSPServiceLocatorsFrig.deliveryRadioButton).isDisplayed(),
-                "'Delivery only' radio button is NOT available!");
+        WebElementUtil.isDisplayed(DSPServiceLocatorsFrig.deliveryRadioButton);
 
 //        WebElementUtil.waitForElementToBeVisible(DSPagesService.deliveryPrice, 10);
 //        Assert.assertTrue(driver.findElement(DSPagesService.deliveryPrice).isDisplayed(),
@@ -56,23 +48,17 @@ public class DSPServiceExclusionPageActionFrig {
         WebElementUtil.clickElement(DSPServiceLocatorsFrig.deliveryRadioButton);
 
         WebElementUtil.waitForElementToBeVisible(DSPServiceLocatorsFrig.requiredInstallation, 10);
-        Assert.assertTrue(driver.findElement(DSPServiceLocatorsFrig.requiredInstallation).isDisplayed(),
-                "Required Installation is NOT available!");
+        WebElementUtil.isDisplayed(DSPServiceLocatorsFrig.requiredInstallation);
 
         WebElementUtil.waitForElementToBeVisible(DSPServiceLocatorsFrig.checkBoxRequired, 10);
-        Assert.assertTrue(driver.findElement(DSPServiceLocatorsFrig.checkBoxRequired).isDisplayed(),
-                "Required checkbox is NOT available!");
+        WebElementUtil.isDisplayed(DSPServiceLocatorsFrig.checkBoxRequired);
 
         WebElementUtil.waitForElementToBeVisible(DSPServiceLocatorsFrig.listOfAvailable, 10);
-        Assert.assertTrue(driver.findElement(DSPServiceLocatorsFrig.listOfAvailable).isDisplayed(),
-                "Required Installation list of available is NOT available!");
+        WebElementUtil.isDisplayed(DSPServiceLocatorsFrig.listOfAvailable);
 
     }
     public void installationUnavailable(){
-
-        WebDriver driver= DriverManager.getDriver();
-
-        Assert.assertTrue(driver.findElement(DSPServiceLocatorsFrig.installationUnavailable).isDisplayed(),
-                "Installation part is NOT available!");
+        WebElementUtil.waitForElementToBeVisible(DSPServiceLocatorsFrig.installationUnavailable,10);
+        WebElementUtil.isDisplayed(DSPServiceLocatorsFrig.installationUnavailable);
     }
 }

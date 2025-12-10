@@ -11,7 +11,7 @@ public class EPIC_04_TC_01_PLP_Product_Cards extends BaseTest {
     ProductDetailPageActionElux electroluxProductCards =new ProductDetailPageActionElux();
 
     @Test(groups = {"smoke", "regression"}, description = "Verify Vacuums Product Details in Product listing page")
-    public void testForVacuums() throws InterruptedException {
+    public void testForVacuums(){
         electroluxProductCards.navigateToHomePage();
         electroluxProductCards.clickOnProductMenu("Vacuums");
         electroluxProductCards.clickOnProductMenu("Shop All Vacuums");
@@ -22,11 +22,12 @@ public class EPIC_04_TC_01_PLP_Product_Cards extends BaseTest {
     }
 
     @Test(groups = {"smoke", "regression"}, description = "Verify Vacuums Product Details in Product listing page")
-    public void testForLaundry() throws InterruptedException {
+    public void testForLaundry(){
         electroluxProductCards.navigateToHomePage();
         electroluxProductCards.clickOnProductMenu("Laundry");
         electroluxProductCards.clickOnProductMenu("Washers");
         electroluxProductCards.verifyProductItemPage("Washers", "Washers");
+        electroluxProductCards.closeEmailPopUp();
         electroluxProductCards.checkPlpItem("Laundry", 2);
         ExtentReportManager.getTest().pass("Verify Vacuums product details in product listing page and click on image, product name and rating navigate to PDP");
     }
