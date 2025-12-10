@@ -143,4 +143,9 @@ public class LoginPageActions {
 	    return !WebElementUtil.findElements(ELUX_LoginPage.accountBenefitsLabelList)
 	    					.isEmpty();
 	}
+	
+	public ForgotPasswordPageActions clickForgotPasswordLink() {
+		WebElementUtil.clickElement(ELUX_LoginPage.forgotPasswordLink);
+		return new ForgotPasswordPageActions();
+	}
 }

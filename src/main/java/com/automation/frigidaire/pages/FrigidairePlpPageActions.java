@@ -18,6 +18,9 @@ public class FrigidairePlpPageActions {
     private static String selectedHeight;
     private static String selectedWidth;
     private static String selectedDepth;
+    private static String providedProductTitle;
+    private static String providedProductPrice;
+    private static String providedProductId;
 
     public FrigidairePlpPageActions closePopupModel() {
 
@@ -75,6 +78,36 @@ public class FrigidairePlpPageActions {
         return new FrigidairePdpPageActions();
     }
 
+    public boolean checkProvidedIdIsVisibleOnPlpPage() {
+        WaitUtils.untilVisible(plpPage_Locator.frenchdoorProductId);
+        return WebElementUtil.isElementPresented(plpPage_Locator.frenchdoorProductId);
+    }
+
+    public FrigidairePlpPageActions storeProvidedProductId() {
+        WaitUtils.untilVisible(plpPage_Locator.frenchdoorProductIdText);
+        providedProductId = WebElementUtil.getText(plpPage_Locator.frenchdoorProductIdText);
+        return this;
+    }
+
+    public FrigidairePlpPageActions storeProvidedProductTitle() {
+        WaitUtils.untilVisible(plpPage_Locator.frenchdoorProductTitle);
+        providedProductTitle = WebElementUtil.getText(plpPage_Locator.frenchdoorProductTitle);
+        return this;
+    }
+
+    public FrigidairePlpPageActions storeProvidedProductPrice() {
+        WaitUtils.untilVisible(plpPage_Locator.frenchdoorProductPrice);
+        providedProductPrice = WebElementUtil.getText(plpPage_Locator.frenchdoorProductPrice);
+        return this;
+    }
+
+    public FrigidairePdpPageActions clickProvidedProduct() {
+        WebElementUtil.scrollToElementCenter(plpPage_Locator.frenchdoorProductId);
+        WebElementUtil.clickElement(plpPage_Locator.frenchdoorProductId);
+        return new FrigidairePdpPageActions();
+    }
+
+
     public static String getSelectedProductId() {
         return selectedProductId;
     }
@@ -102,5 +135,15 @@ public class FrigidairePlpPageActions {
     public static String getSelectedDepth() {
         return selectedDepth;
     }
+
+    public static String getProvidedProductTitle() {
+        return providedProductTitle;
+    }
+
+    public static String getProvidedProductPrice() {
+        return providedProductPrice;
+    }
+
+    public static String getProvidedProductId() {return providedProductId;}
 
 }

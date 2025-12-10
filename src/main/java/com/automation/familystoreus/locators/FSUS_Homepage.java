@@ -11,6 +11,7 @@ public class FSUS_Homepage {
 	 public static final By familyStoreLogo = By.cssSelector("cx-page-slot.SiteLogo img[src*='FamilyStore-Logo' ]");
 	 public static final By categoryNavigationMenuBar = By.xpath("(//cx-category-navigation//cx-navigation-ui )[1]");
 	 public static final By myAccountDropdownMenuButton = By.xpath("//a[normalize-space()='My account']");
-		
+	 public static final By logOutDropOption = By.xpath("//div[@class='dropdown-menu']//a[contains(.,'Log out')]");
+	 	
 }
 

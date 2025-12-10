@@ -82,16 +82,16 @@ public class MailDropPageActions {
 	    );
 	}
 	
-//	public ResetPasswordPageActions clickMailResetYourPasswordLink() throws InterruptedException {
-//		WaitUtils.sleep(2000);
-//		WebElementUtil.switchToFrame(ELUX_MailDropPage.mailFrame);
-////		WebElementUtil.ctrlClick(mailResetPasswordLink);
-////		WebElementUtil.ctrlClickWithJS(mailResetPasswordLink);
-//		WebElementUtil.openLinkInNewTab(ELUX_MailDropPage.mailResetPasswordLink);
-//		WebElementUtil.switchToDefaultContent();
-//		WebElementUtil.switchToLatestTabAndClosePrevious();
-//		return new ResetPasswordPageActions();
-//	}
+	public ResetPasswordPageActions clickMailResetYourPasswordLink() throws InterruptedException {
+		WaitUtils.sleep(2000);
+		WebElementUtil.switchToFrame(ELUX_MailDropPage.mailFrame);
+//		WebElementUtil.ctrlClick(mailResetPasswordLink);
+//		WebElementUtil.ctrlClickWithJS(mailResetPasswordLink);
+		WebElementUtil.openLinkInNewTab(ELUX_MailDropPage.mailResetPasswordLink);
+		WebElementUtil.switchToDefaultContent();
+		WebElementUtil.switchToLatestTabAndClosePrevious();
+		return new ResetPasswordPageActions();
+	}
 	
 	public String getPasswordResetMailMessage() {
 	    return WebElementUtil.performInFrame(ELUX_MailDropPage.mailFrame, () -> 
@@ -148,21 +148,23 @@ public class MailDropPageActions {
 		return WebElementUtil.getText(ELUX_MailDropPage.firstMailSubject);
 	}
 	
-	public void verifyElectroluxPasswordResetMail() throws InterruptedException {	
+	public MailDropPageActions verifyElectroluxPasswordResetMail() throws InterruptedException {	
 		Assert.assertEquals(getMailTitle(), "Reset your Electrolux password", "'Reset your Electrolux password' title is not present in password reset mail");
         Assert.assertTrue(isMailResetYourPasswordLinkDisplayed(), "'Click here to reset your password' link is not displayed in the in password reset mail");
         Assert.assertTrue(getMailText().contains("You have requested to have your password reset for Electrolux"), "Email Body does not contain Message stating Request for Password Reset");
         Assert.assertTrue(isMailElectroluxLogoDisplayed(), "Electrolux Logo is not displayed in password reset mail");
+        return this;
 	}
 	
-	public void verifyElectroluxPasswordResetSuccessMail() throws InterruptedException {
+	public MailDropPageActions verifyElectroluxPasswordResetSuccessMail() throws InterruptedException {
 		Assert.assertEquals(getMailTitle(), "Electrolux: Password Reset Confirmation", "'Electrolux: Password Reset Confirmation' title is not present in reset success mail");
         Assert.assertTrue(isMailElectroluxLogoDisplayed(), "Electrolux Brand logo is not present in reset success mail");
         Assert.assertTrue(getMailText().contains("your password was successfully changed"), "Reset Successful Text is not present in reset success mail");
         Assert.assertTrue(isMailContactUsLinkDisplayed(), "Contact Us Link is not present in reset success mail");
         Assert.assertTrue(getMailText().contains("Electrolux team"), "Electrolux team Text is not present in reset success mail");
         Assert.assertTrue(isMailConnectSocialMediaLinksDisplayed(), "Connect Social Media Links Section is not present in reset success mail");
-        }
+        return this;
+	}
 	
 	public Boolean isMailElectroluxLogoDisplayed() {
 		return WebElementUtil.performInFrame(ELUX_MailDropPage.mailFrame, () -> 
@@ -170,7 +172,7 @@ public class MailDropPageActions {
         );
 	}
 	
-	public void verifyCustomerRegistrationVerificationMail(String firstName, String lastName) throws InterruptedException {
+	public MailDropPageActions verifyCustomerRegistrationVerificationMail(String firstName, String lastName) throws InterruptedException {
 		Assert.assertEquals(getMailTitle(), "Electrolux: Account Verification", "'Electrolux: Account Verification' title is not present in reset success mail");    
 		Assert.assertTrue(isClickHereToActivateAccountLinkDisplayed(), "Click Here to Activate Your Account link is not present in the mail");
         Assert.assertEquals(getMailGreetingMessage(), "Dear " + firstName + " " + lastName + ",", "Greeting Text does not contain First Name and Last Name");
@@ -179,6 +181,7 @@ public class MailDropPageActions {
         Assert.assertTrue(getLinkExpiresMessage().contains("This link expires in 24 hours."), "Link expires in 24 hours text is not present in the mail");
         Assert.assertEquals(getNotIntendedRecipientMessage(), "If you are not the intended recipient of this email, please delete this message and contact us immediately. Thanks for your help.", "'If you are not intended recipient of this email' text is not present in the mail");
         Assert.assertTrue(isMailFooterSocialMediaLinksDisplayed(), "Social Media Links are present in the mail footer section");
+        return this;
 	}
 	
 	public boolean isMailFooterSocialMediaLinksDisplayed() {
@@ -222,4 +225,6 @@ public class MailDropPageActions {
 		WebElementUtil.isDisplayed(ELUX_MailDropPage.mailClickToActivateAccountLink)
     );
 	}
+	
+
 }

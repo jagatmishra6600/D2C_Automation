@@ -6,7 +6,6 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
 import java.time.Duration;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -395,59 +394,52 @@ public class WebElementUtil {
         try { Thread.sleep(ms); } catch (Exception ignored) {}
     }
 
-    public static void waitForCondition(ExpectedCondition<?> condition) {
-    	new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(15))
-			.until(condition);
-	}
+    public static String getAttributeValue(By locator, String attributeName) {
+        final String[] value = new String[1];
+        retryOnFailure(() ->
+                        value[0] = waitForElementToBeVisible(locator).getAttribute(attributeName),
+                3, 1000);
 
-    public static void waitForCondition(ExpectedCondition<?> condition, int seconds) {
-    	new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(seconds))
-			.until(condition);
-	}
+        return value[0];
+    }
 
-    public static WebElement validateInsideShadowDom(By outer, By targetLocator) {
+    public static float convertPriceToFloat(String price) {
+        price = price.replace("$", "").trim();
+        price = price.replaceAll(",", "");
+        price = price.replaceAll("\\.(0|00)$", "");
+        return Float.parseFloat(price);
+    }
 
-        WebDriver driver = DriverManager.getDriver();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
+    public static float getPrice(By locator) {
+        String priceText = getText(locator);
+        return convertPriceToFloat(priceText);
+    }
+
+    public static void forceClick(By locator) {
+        WebElement element = DriverManager.getDriver().findElement(locator);
+        ((JavascriptExecutor) DriverManager.getDriver())
+                .executeScript("arguments[0].click();", element);
         try {
-            // Wait for Shadow Host
-            WebElement shadowHost = wait.until(ExpectedConditions.presenceOfElementLocated(outer));
-
-            // Wait until shadowRoot becomes available
-            SearchContext shadowRoot = wait.until(d -> {
-                try {
-                    return shadowHost.getShadowRoot();
-                } catch (Exception e) {
-                    return null; // retry
-                }
-            });
-
-            if (shadowRoot == null) {
-                throw new RuntimeException("Shadow root not found for host: " + outer);
-            }
-
-            // Now wait for element ***inside shadow DOM***
-            WebElement innerElement = wait.until(d -> {
-                try {
-                    WebElement el = shadowRoot.findElement(targetLocator);
-                    return el.isDisplayed() ? el : null;
-                } catch (StaleElementReferenceException | NoSuchElementException ex) {
-                    return null; // retry
-                }
-            });
-
-            // Scroll to center (stable)
-            ((JavascriptExecutor) driver)
-                    .executeScript("arguments[0].scrollIntoView({block: 'center', inline: 'center'});", innerElement);
-
-            return innerElement;
-
-        } catch (Exception e) {
-            System.err.println("Failed to locate element inside Shadow DOM → " + targetLocator);
-            e.printStackTrace();
-            return null;
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
     }
 
+    
+    public static void waitForCondition(ExpectedCondition<?> condition) { 
+    	new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(15))
+			.until(condition);
+	}
+    
+    public static void waitForCondition(ExpectedCondition<?> condition, int seconds) { 
+    	new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(seconds))
+			.until(condition);
+	}
+    
+    public static String getDomProperty(By locator, String propertyName) {
+    	var element = DriverManager.getDriver().findElement(locator);
+    	return element.getDomProperty(propertyName);
+    }
 }

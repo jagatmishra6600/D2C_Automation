@@ -8,10 +8,10 @@ import com.automation.familystoreus.locators.FSUS_Homepage;
 import com.automation.utils.ConfigReader;
 import com.automation.frigidaire.utils.WebElementUtil;
 
-public class FsusHomePageActions {
+public class HomePageActionsFsus {
 
 	
-	 public FsusHomePageActions navigateToLoginPage() {
+	 public HomePageActionsFsus navigateToLoginPage() {
 		WebElementUtil.navigateTo(ConfigReader.getAppUrl());
         try {
             WebElement acceptBtn = untilClickable(FSUS_Homepage.acceptButtonLocator, 15);
@@ -40,5 +40,11 @@ public class FsusHomePageActions {
 	 public boolean isHomePageLoaded() {
         return WebElementUtil.isDisplayed(FSUS_Homepage.familyStoreLogo)
         		&& WebElementUtil.isDisplayed(FSUS_Homepage.categoryNavigationMenuBar);
+	 }
+	 
+	 public MyAccountInviteFamilyFriendsPageActionsFsus navigateToMyAccountInviteFamilyFriendsPage() {
+		 WebElementUtil.scrollIntoView(FSUS_Homepage.inviteFriendsFamilyHeaderLink);
+		 WebElementUtil.clickElement(FSUS_Homepage.inviteFriendsFamilyHeaderLink);
+		 return new MyAccountInviteFamilyFriendsPageActionsFsus();
 	 }
 }
