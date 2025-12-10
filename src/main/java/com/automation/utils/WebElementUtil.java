@@ -6,7 +6,6 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
 import java.time.Duration;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -404,4 +403,9 @@ public class WebElementUtil {
     	new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(seconds))
 			.until(condition);
 	}
+    
+    public static String getDomProperty(By locator, String propertyName) {
+    	var element = DriverManager.getDriver().findElement(locator);
+    	return element.getDomProperty(propertyName);
+    }
 }
