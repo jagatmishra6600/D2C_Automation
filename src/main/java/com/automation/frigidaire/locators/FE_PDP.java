@@ -14,11 +14,6 @@ public class FE_PDP {
     public final By quickSpecificationBtnOnPDP = By.xpath("//strong[text()='Quick Specs']/../../../following-sibling::div/span/span");
     public final By quickSpecSeeAll = By.xpath("//p[text()='See all']");
     public final By overViewAndFeatures = By.xpath("//strong[text()='Overview & Features']");
-    public final By keySpecificationHeading = By.xpath("//h2[text()='Key specifications']");
-    public final By additionalKeySpecText = By.xpath("//h3[text()='Additional specifications']");
-    public final By generalSpecText = By.xpath("//h4[text()='General Specifications']");
-    public final By fullSpecDownload = By.xpath("//a[text()=' Download Full Product Specs Sheet ']");
-    public final By viewFullSpecBtn = By.xpath("//button[text()='View full specs']");
-    public final By specificationText = By.xpath("//h3[text()='Specifications']");
-    public final By closeModelButton = By.xpath("//h3[text()='Specifications']/following-sibling::img");
+    public final By frenchdoorDelivery = By.xpath("//span[normalize-space(text()) = 'Delivery']");
+    public final By addToCartButton = By.xpath("(//span[normalize-space(text()) = 'Add to cart'])[2]");
 }

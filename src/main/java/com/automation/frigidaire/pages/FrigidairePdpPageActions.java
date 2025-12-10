@@ -1,11 +1,9 @@
 package com.automation.frigidaire.pages;
 
 import com.automation.frigidaire.locators.FE_PDP;
-import com.automation.utils.BrowserUtils;
-import com.automation.utils.DriverManager;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
-import org.openqa.selenium.By;
+
 
 public class FrigidairePdpPageActions {
 
@@ -83,4 +81,18 @@ public class FrigidairePdpPageActions {
 
         return actualDepth.equalsIgnoreCase(expectedDepth);
     }
+
+    public FrigidairePdpPageActions clickDeliveryOption() {
+        WebElementUtil.scrollToElementCenter(pdpPage_Locator.frenchdoorDelivery);
+        WebElementUtil.clickElement(pdpPage_Locator.frenchdoorDelivery);
+        return this;
+    }
+
+    public FrigidaireDAndSPageActions clickAddToCartButton() {
+        WebElementUtil.scrollToElementCenter(pdpPage_Locator.addToCartButton);
+        WebElementUtil.clickElement(pdpPage_Locator.addToCartButton);
+        return new FrigidaireDAndSPageActions();
+    }
+
+
 }
