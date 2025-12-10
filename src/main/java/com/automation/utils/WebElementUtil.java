@@ -2,9 +2,9 @@ package com.automation.utils;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 
 import java.time.Duration;
 import java.util.List;
@@ -208,6 +208,36 @@ public class WebElementUtil {
                 element);
     }
 
+    public static void scrollToElementStable(By locator) {
+        WebDriver driver = DriverManager.getDriver();
+        WebElement element = driver.findElement(locator);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        String script =
+                "var elem = arguments[0];" +
+                        "var viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);" +
+                        "var rect = elem.getBoundingClientRect();" +
+                        "var elemY = rect.top + window.scrollY;" +
+                        "var targetY = elemY - (viewportHeight * 0.30);" +  // scroll to 30% from top
+                        "window.scrollTo({ top: targetY, behavior: 'instant' });" +
+                        "return targetY;";
+
+        // Receive Double safely
+        Number returnedY = (Number) js.executeScript(script, element);
+        long targetY = returnedY.longValue();
+
+        // Wait scroll to finish
+        try {
+            new WebDriverWait(driver, Duration.ofMillis(300))
+                    .until(d -> {
+                        Number nowY = (Number) ((JavascriptExecutor) d)
+                                .executeScript("return Math.round(window.scrollY);");
+                        return Math.abs(nowY.longValue() - targetY) < 2;
+                    });
+        } catch (Exception ignored) {
+        }
+    }
+
     public static List<WebElement> findElements(By locator) {
         if (DriverManager.getDriver() == null) {
             throw new IllegalStateException("WebDriver is not initialized. Ensure DriverManager.getDriver() is called before using findElements.");
@@ -397,4 +427,19 @@ public class WebElementUtil {
         }
     }
 
+    
+    public static void waitForCondition(ExpectedCondition<?> condition) { 
+    	new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(15))
+			.until(condition);
+	}
+    
+    public static void waitForCondition(ExpectedCondition<?> condition, int seconds) { 
+    	new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(seconds))
+			.until(condition);
+	}
+    
+    public static String getDomProperty(By locator, String propertyName) {
+    	var element = DriverManager.getDriver().findElement(locator);
+    	return element.getDomProperty(propertyName);
+    }
 }

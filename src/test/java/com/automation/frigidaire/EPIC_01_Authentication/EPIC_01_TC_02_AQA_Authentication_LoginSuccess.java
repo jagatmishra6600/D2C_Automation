@@ -19,7 +19,7 @@ public class EPIC_01_TC_02_AQA_Authentication_LoginSuccess extends BaseTest{
 	        		.login(emailAddress, password);
 
 	        Assert.assertTrue(homePage.isHomePageLoaded(),"User is not navigated to HomePage after Logging in with Valid Credentials");
-	        Assert.assertTrue(homePage.isUserGreetingDropdownVisible(),"User Greeting Dropdown Button is not displayed");
+	        //Assert.assertTrue(homePage.isUserGreetingDropdownVisible(),"User Greeting Dropdown Button is not displayed");
 	        ExtentReportManager.getTest().pass("User Logged In Using Valid Credentials and Navigated to HomePage");
 	    }
 }

@@ -1,5 +1,6 @@
 package com.automation.frigidaire.pages;
 
+import com.automation.frigidaire.locators.FrigidaireFeaturesLocators;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -9,58 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FeaturesPageActions {
-
-    private final By searchButton = By.cssSelector(".searchClose");
-    private final By productPDP = By.xpath("//div[contains(@class,'Appliance-Card')] | //div[contains(@class,'accessories-product')]");
-    private final By featureHeading = By.xpath("//strong[text()='Overview & Features']//parent::h4//parent::span");
-    private final By viewAll = By.xpath("//p[text()='View all']");
-    private final By featureBanner = By.cssSelector(".featureBanner");
-    private final By viewMoreButton = By.xpath("//button[contains(text(),' View more')]");
-    private final By searchBox = By.xpath("//input[@aria-label=\"search\"]");
-    private final By viewMoreFeatures = By.cssSelector(".viewMoreFeatures");
-    private final By featureListItems = By.cssSelector(".featureList .cursor-pointer");
-    private final By featureDescription = By.cssSelector(".pdp_description");
-
-    private final By ownerSection = By.cssSelector(".owners-section");
-    private final By ownerTitle = By.xpath("//h3[text()='Guides & Manuals']");
-    private final By languageTabs = By.xpath("//span[contains(@class,'Body-MediumBody_Medium_Centered')]");
-    private final By documentLinks = By.xpath("//div[contains(@class,'Body-MediumBody_Medium-Link')]//a");
-    private final By singleLangDocuments = By.xpath("//div[contains(@class,'Card-Title')]//a");
-
-    // Locators for Service & Parts section
-    private final By replacementPartsTile = By.xpath("//h4[text()='Replacement Parts']");
-    private final By replacementPartsButton = By.xpath("//h4[text()='Replacement Parts']//parent::p//parent::cx-paragraph//following-sibling::cx-link//a");
-    private final By repairsServiceTile = By.xpath("//h4[text()='Repairs & Service']");
-    private final By repairsServiceButton = By.xpath("//h4[text()='Repairs & Service']//parent::p//parent::cx-paragraph//following-sibling::cx-link//a");
-
-    // Locator for Add to cart button (handles <a> or <button> with inner span text)
-    private final By addToCartButton = By.xpath("//span[normalize-space()='Add to cart']/ancestor::a | //button[normalize-space()='Add to cart']");
-
-    // Locators for Delivery & Installation and Save & view cart
-    private final By deliveryInstallationRadio = By.id("Refrigerators_Large_WaterLine_Install");
-    private final By saveAndViewCartButton = By.xpath("//button[normalize-space()='Save and view cart']");
-    // Locator for Proceed to checkout button on the Cart/Order Summary
-    private final By proceedToCheckoutButton = By.xpath("//button[normalize-space()='Proceed to checkout']");
-    // Locator for Continue to delivery button on the shipping/address step
-    private final By continueToDeliveryButton = By.id("continueToDeliveryButton");
-
-    // Shipping address fields (used on checkout shipping step)
-    private final By shippingEmail = By.id("email");
-    private final By shippingFirstName = By.id("firstName");
-    private final By shippingLastName = By.id("lastName");
-    private final By shippingAddressLine1 = By.xpath("//input[@formcontrolname='line1' or @id='address-1' or contains(@placeholder,'Address')]");
-    private final By shippingPhone = By.id("phone");
-    private final By addressSuggestionOption = By.xpath("//ngb-typeahead-window//button[@role='option'] | //div[contains(@class,'dropdown-menu')]//button[@role='option']");
-
-    // Delivery date selection elements
-    private final By deliveryCalendarHeader = By.xpath("//h2[contains(text(),'Delivery date')]");
-    private final By deliveryAvailableInputs = By.xpath("//input[@type='radio' and @formcontrolname='selectedSlot' and not(@disabled)]");
-    private final By deliveryAvailableLabels = By.xpath("//label[contains(@class,'cx-delivery-label') and not(contains(@class,'disabled'))]");
+    FrigidaireFeaturesLocators locators = new FrigidaireFeaturesLocators();
 
 
     public void searchProduct(String productName) {
-        WebElementUtil.waitForElementToBeVisible(searchBox);
-        WebElementUtil.sendKeys(searchBox, productName + Keys.ENTER);
+        WebElementUtil.waitForElementToBeClickable(locators.searchBox, 20);
+        WebElementUtil.sendKeys(locators.searchBox, productName + Keys.ENTER);
     }
 
     /**
@@ -69,10 +24,10 @@ public class FeaturesPageActions {
      */
     public void clickAddToCart() {
         // Ensure the button is in viewport first (covers sticky headers/overlays)
-        WebElementUtil.scrollIntoView(addToCartButton, 200);
-        WebElementUtil.waitForElementToBeVisible(addToCartButton);
-        WebElementUtil.waitForElementToBeClickable(addToCartButton);
-        WebElementUtil.clickElement(addToCartButton);
+        WebElementUtil.scrollIntoView(locators.addToCartButton, 200);
+        WebElementUtil.waitForElementToBeVisible(locators.addToCartButton);
+        WebElementUtil.waitForElementToBeClickable(locators.addToCartButton);
+        WebElementUtil.clickElement(locators.addToCartButton);
     }
 
     /**
@@ -81,14 +36,14 @@ public class FeaturesPageActions {
      */
     public void selectDeliveryAndSaveAndViewCart() {
         // Select delivery & installation radio
-        WebElementUtil.scrollIntoView(deliveryInstallationRadio, 200);
-        WebElementUtil.waitForElementToBeClickable(deliveryInstallationRadio);
-        WebElementUtil.clickElement(deliveryInstallationRadio);
+        WebElementUtil.scrollIntoView(locators.deliveryInstallationRadio, 200);
+        WebElementUtil.waitForElementToBeClickable(locators.deliveryInstallationRadio);
+        WebElementUtil.clickElement(locators.deliveryInstallationRadio);
 
         // Click Save and view cart
-        WebElementUtil.scrollIntoView(saveAndViewCartButton, 200);
-        WebElementUtil.waitForElementToBeClickable(saveAndViewCartButton, 20);
-        WebElementUtil.clickElement(saveAndViewCartButton);
+        WebElementUtil.scrollIntoView(locators.saveAndViewCartButton, 200);
+        WebElementUtil.waitForElementToBeClickable(locators.saveAndViewCartButton, 20);
+        WebElementUtil.clickElement(locators.saveAndViewCartButton);
     }
 
     /**
@@ -96,9 +51,9 @@ public class FeaturesPageActions {
      * Returns true if the click succeeded, false otherwise.
      */
     public void clickProceedToCheckout() {
-        WebElementUtil.waitForElementToBeVisible(proceedToCheckoutButton, 20);
-        WebElementUtil.waitForElementToBeClickable(proceedToCheckoutButton);
-        WebElementUtil.clickElement(proceedToCheckoutButton);
+        WebElementUtil.waitForElementToBeVisible(locators.proceedToCheckoutButton, 20);
+        WebElementUtil.waitForElementToBeClickable(locators.proceedToCheckoutButton);
+        WebElementUtil.clickElement(locators.proceedToCheckoutButton);
     }
 
     /**
@@ -123,36 +78,36 @@ public class FeaturesPageActions {
     public boolean clickContinueToDelivery(String email, String firstName, String lastName, String addressLine1, String phone) {
         try {
             // Fill email
-            WebElementUtil.scrollIntoView(shippingEmail, 200);
-            WebElementUtil.waitForElementToBeVisible(shippingEmail);
-            WebElementUtil.sendKeys(shippingEmail, email);
+            WebElementUtil.scrollIntoView(locators.shippingEmail, 200);
+            WebElementUtil.waitForElementToBeVisible(locators.shippingEmail);
+            WebElementUtil.sendKeys(locators.shippingEmail, email);
 
             // Fill first name and last name
-            WebElementUtil.scrollIntoView(shippingFirstName, 200);
-            WebElementUtil.waitForElementToBeVisible(shippingFirstName);
-            WebElementUtil.sendKeys(shippingFirstName, firstName);
+            WebElementUtil.scrollIntoView(locators.shippingFirstName, 200);
+            WebElementUtil.waitForElementToBeVisible(locators.shippingFirstName);
+            WebElementUtil.sendKeys(locators.shippingFirstName, firstName);
 
-            WebElementUtil.waitForElementToBeVisible(shippingLastName);
-            WebElementUtil.sendKeys(shippingLastName, lastName);
+            WebElementUtil.waitForElementToBeVisible(locators.shippingLastName);
+            WebElementUtil.sendKeys(locators.shippingLastName, lastName);
 
             // Fill address line (autocomplete fields sometimes require typing then selecting; we type then select suggestion if present)
-            WebElementUtil.scrollIntoView(shippingAddressLine1, 200);
-            WebElementUtil.waitForElementToBeVisible(shippingAddressLine1);
-            WebElementUtil.sendKeys(shippingAddressLine1, addressLine1);
+            WebElementUtil.scrollIntoView(locators.shippingAddressLine1, 200);
+            WebElementUtil.waitForElementToBeVisible(locators.shippingAddressLine1);
+            WebElementUtil.sendKeys(locators.shippingAddressLine1, addressLine1);
 
 
-            WebElementUtil.waitForElementToBeVisible(addressSuggestionOption);
-            WebElementUtil.clickElement(addressSuggestionOption);
+            WebElementUtil.waitForElementToBeVisible(locators.addressSuggestionOption);
+            WebElementUtil.clickElement(locators.addressSuggestionOption);
 
             // Fill phone
-            WebElementUtil.scrollIntoView(shippingPhone, 200);
-            WebElementUtil.waitForElementToBeVisible(shippingPhone);
-            WebElementUtil.sendKeys(shippingPhone, phone);
+            WebElementUtil.scrollIntoView(locators.shippingPhone, 200);
+            WebElementUtil.waitForElementToBeVisible(locators.shippingPhone);
+            WebElementUtil.sendKeys(locators.shippingPhone, phone);
 
             // Click continue button
-            WebElementUtil.scrollIntoView(continueToDeliveryButton, 200);
-            WebElementUtil.waitForElementToBeClickable(continueToDeliveryButton);
-            WebElementUtil.clickElement(continueToDeliveryButton);
+            WebElementUtil.scrollIntoView(locators.continueToDeliveryButton, 200);
+            WebElementUtil.waitForElementToBeClickable(locators.continueToDeliveryButton);
+            WebElementUtil.clickElement(locators.continueToDeliveryButton);
 
             return true;
         } catch (Exception e) {
@@ -162,25 +117,26 @@ public class FeaturesPageActions {
     }
 
     public void selectProductFromPLP() {
-        WebElementUtil.waitForElementToBeVisible(productPDP);
-        WebElementUtil.clickElement(productPDP);
+        WebElementUtil.waitForElementToBeVisible(locators.productPDP, 10);
+        WebElementUtil.waitForElementToBeClickable(locators.productPDP, 10);
+        WebElementUtil.clickElement(locators.productPDP);
     }
 
     public boolean validateFeatureTitle(){
-        WebElementUtil.scrollIntoView(featureHeading, 200);
-        WebElementUtil.waitForElementToBeVisible(featureHeading);
-        WebElementUtil.clickElement(featureHeading);
-        return WebElementUtil.isDisplayed(featureHeading);
+        WebElementUtil.scrollIntoView(locators.featureHeading, 200);
+        WebElementUtil.waitForElementToBeVisible(locators.featureHeading);
+        WebElementUtil.clickElement(locators.featureHeading);
+        return WebElementUtil.isDisplayed(locators.featureHeading);
     }
 
     public boolean validateFeatureBanner() {
-        WebElementUtil.scrollIntoView(featureHeading, 200);
-        WebElementUtil.clickElement(featureHeading);
-        WebElementUtil.scrollIntoView(viewAll, 200);
-        WebElementUtil.waitForElementToBeVisible(viewAll);
-        WebElementUtil.clickElement(viewAll);
-        WebElementUtil.waitForElementToBeVisible(featureBanner);
-        return WebElementUtil.isDisplayed(featureBanner);
+        WebElementUtil.scrollIntoView(locators.featureHeading, 200);
+        WebElementUtil.clickElement(locators.featureHeading);
+        WebElementUtil.scrollIntoView(locators.viewAll, 200);
+        WebElementUtil.waitForElementToBeVisible(locators.viewAll);
+        WebElementUtil.clickElement(locators.viewAll);
+        WebElementUtil.waitForElementToBeVisible(locators.featureBanner);
+        return WebElementUtil.isDisplayed(locators.featureBanner);
     }
 
     private By getSectionHeadingLocator(String featureText) {
@@ -188,12 +144,12 @@ public class FeaturesPageActions {
     }
 
     public void verifyFeatureNavigation() {
-        int featureCount = WebElementUtil.findElements(featureListItems).size();
+        int featureCount = WebElementUtil.findElements(locators.featureListItems).size();
         for (int i = 0; i < featureCount; i++) {
             By featureItemBy = By.xpath("(//div[contains(@class,'featureList')]//span[contains(@class,'cursor-pointer')])[" + (i + 1) + "]");
             String featureText = WebElementUtil.getExactText(featureItemBy);
             System.out.println("🔹 Clicking feature: " + featureText);
-            WebElementUtil.scrollIntoView(featureHeading, 200);
+            WebElementUtil.scrollIntoView(locators.featureHeading, 200);
             WebElementUtil.waitForElementToBeClickable(featureItemBy);
             WebElementUtil.clickElement(featureItemBy);
             By sectionHeading = getSectionHeadingLocator(featureText);
@@ -201,39 +157,39 @@ public class FeaturesPageActions {
             if (!WebElementUtil.isDisplayed(sectionHeading)) {
                 throw new AssertionError("Section for feature '" + featureText + "' is not visible or in viewport after navigation.");
             }
-            WebElementUtil.scrollIntoView(featureHeading, 200);
+            WebElementUtil.scrollIntoView(locators.featureHeading, 200);
             System.out.println("Feature '" + featureText + "' navigated successfully.");
         }
     }
 
     public boolean validateFeatureDescription() {
-        WebElementUtil.waitForElementToBeVisible(featureDescription);
-        String description = WebElementUtil.getText(featureDescription);
+        WebElementUtil.waitForElementToBeVisible(locators.featureDescription);
+        String description = WebElementUtil.getText(locators.featureDescription);
         return description != null && !description.trim().isEmpty();
     }
 
     public boolean validateViewMoreButtonFunctionality() {
-        WebElementUtil.scrollIntoView(viewMoreButton, 200);
-        WebElementUtil.waitForElementToBeVisible(viewMoreButton);
-        WebElementUtil.clickElement(viewMoreButton);
-        WebElementUtil.scrollIntoView(viewMoreFeatures, 200);
-        WebElementUtil.waitForElementToBeVisible(viewMoreFeatures);
-        WebElementUtil.clickElement(viewMoreFeatures);
-        return WebElementUtil.isDisplayed(viewMoreFeatures);
+        WebElementUtil.scrollIntoView(locators.viewMoreButton, 200);
+        WebElementUtil.waitForElementToBeVisible(locators.viewMoreButton);
+        WebElementUtil.clickElement(locators.viewMoreButton);
+        WebElementUtil.scrollIntoView(locators.viewMoreFeatures, 200);
+        WebElementUtil.waitForElementToBeVisible(locators.viewMoreFeatures);
+        WebElementUtil.clickElement(locators.viewMoreFeatures);
+        return WebElementUtil.isDisplayed(locators.viewMoreFeatures);
     }
 
     public boolean validateGuideAndManualSection() {
-        WebElementUtil.waitForElementToBeVisible(ownerTitle);
-        WebElementUtil.waitForElementToBeVisible(ownerSection);
-        WebElementUtil.scrollIntoView(ownerSection, 200);
-        return WebElementUtil.isDisplayed(ownerSection);
+        WebElementUtil.waitForElementToBeVisible(locators.ownerTitle);
+        WebElementUtil.waitForElementToBeVisible(locators.ownerSection);
+        WebElementUtil.scrollIntoView(locators.ownerSection, 200);
+        return WebElementUtil.isDisplayed(locators.ownerSection);
     }
 
     /**
      * Returns a list of all available language names in the Guides & Manuals section.
      */
     private List<String> getAvailableLanguageNames() {
-        List<WebElement> elements = WebElementUtil.findElements(languageTabs);
+        List<WebElement> elements = WebElementUtil.findElements(locators.languageTabs);
         List<String> names = new ArrayList<>();
         for (WebElement el : elements) {
             String name = el.getText().trim();
@@ -274,7 +230,7 @@ public class FeaturesPageActions {
         }
 
         // Validate document links
-        List<WebElement> docs = WebElementUtil.findElements(documentLinks);
+        List<WebElement> docs = WebElementUtil.findElements(locators.documentLinks);
 
         if (docs.isEmpty()) {
             System.err.println("No documents found for language: " + language);
@@ -299,7 +255,7 @@ public class FeaturesPageActions {
 
     public boolean validateDownloadableDocuments() {
         // Validate document links
-        List<WebElement> docs = WebElementUtil.findElements(singleLangDocuments);
+        List<WebElement> docs = WebElementUtil.findElements(locators.singleLangDocuments);
 
         if (docs.isEmpty()) {
             System.err.println("No documents found: ");
@@ -322,12 +278,12 @@ public class FeaturesPageActions {
     }
 
     public boolean validateReplacementPartsTile() {
-        WebElementUtil.scrollIntoView(replacementPartsTile, 200);
-        if (!WebElementUtil.isDisplayed(replacementPartsTile)) {
+        WebElementUtil.scrollIntoView(locators.replacementPartsTile, 200);
+        if (!WebElementUtil.isDisplayed(locators.replacementPartsTile)) {
             System.err.println("Replacement Parts tile is not visible.");
             return false;
         }
-        if (!WebElementUtil.isDisplayed(replacementPartsButton) || !WebElementUtil.waitForElementToBeClickable(replacementPartsButton).isEnabled()) {
+        if (!WebElementUtil.isDisplayed(locators.replacementPartsButton) || !WebElementUtil.waitForElementToBeClickable(locators.replacementPartsButton).isEnabled()) {
             System.err.println("Replacement Parts button is not clickable.");
             return false;
         }
@@ -335,12 +291,12 @@ public class FeaturesPageActions {
     }
 
     public boolean validateRepairsServiceTile() {
-        WebElementUtil.scrollIntoView(repairsServiceTile, 200);
-        if (!WebElementUtil.isDisplayed(repairsServiceTile)) {
+        WebElementUtil.scrollIntoView(locators.repairsServiceTile, 200);
+        if (!WebElementUtil.isDisplayed(locators.repairsServiceTile)) {
             System.err.println("Repairs & Service tile is not visible.");
             return false;
         }
-        if (!WebElementUtil.isDisplayed(repairsServiceButton) || !WebElementUtil.waitForElementToBeClickable(repairsServiceButton).isEnabled()) {
+        if (!WebElementUtil.isDisplayed(locators.repairsServiceButton) || !WebElementUtil.waitForElementToBeClickable(locators.repairsServiceButton).isEnabled()) {
             System.err.println("Repairs & Service button is not clickable.");
             return false;
         }
@@ -355,7 +311,7 @@ public class FeaturesPageActions {
     public boolean validateDeliveryDateEnabledAndClickable() {
         // Best-effort wait for delivery calendar to appear
         try {
-            WebElementUtil.waitForElementToBeVisible(deliveryCalendarHeader);
+            WebElementUtil.waitForElementToBeVisible(locators.deliveryCalendarHeader);
         } catch (Exception ignored) {
             // continue if header isn't present
         }
@@ -364,7 +320,7 @@ public class FeaturesPageActions {
         while (attempts < 3) {
             try {
                 // Try radio inputs first
-                List<WebElement> inputs = WebElementUtil.findElements(deliveryAvailableInputs);
+                List<WebElement> inputs = WebElementUtil.findElements(locators.deliveryAvailableInputs);
                 if (!inputs.isEmpty()) {
                     WebElement first = inputs.get(0);
                     String id = first.getAttribute("id");
@@ -379,7 +335,7 @@ public class FeaturesPageActions {
                 }
 
                 // Fallback: try label elements which are not disabled
-                List<WebElement> labels = WebElementUtil.findElements(deliveryAvailableLabels);
+                List<WebElement> labels = WebElementUtil.findElements(locators.deliveryAvailableLabels);
                 if (!labels.isEmpty()) {
                     WebElement firstLabel = labels.get(0);
                     String forAttr = firstLabel.getAttribute("for");
@@ -395,7 +351,7 @@ public class FeaturesPageActions {
                         WebElementUtil.scrollIntoView(By.xpath("(//label[contains(@class,'cx-delivery-label') and not(contains(@class,'disabled'))])[1]"), 200);
                         WebElementUtil.clickElement(By.xpath("(//label[contains(@class,'cx-delivery-label') and not(contains(@class,'disabled'))])[1]"));
                         // After clicking label try to find any enabled input
-                        List<WebElement> postInputs = WebElementUtil.findElements(deliveryAvailableInputs);
+                        List<WebElement> postInputs = WebElementUtil.findElements(locators.deliveryAvailableInputs);
                         if (!postInputs.isEmpty()) {
                             return postInputs.get(0).isSelected();
                         }
