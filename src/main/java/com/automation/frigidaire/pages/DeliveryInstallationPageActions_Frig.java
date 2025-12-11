@@ -166,36 +166,37 @@ public class DeliveryInstallationPageActions_Frig {
             Assert.assertEquals(totalPrice, displayedTotalPrice, "ERROR: The total price does not match!");
             WebElementUtil.waitForElementToBeVisible(yearLocator, 60);
             WebElementUtil.scrollToElement(driver, driver.findElement(yearLocator));
-        } else {
-            By yearLocator = DeliveryAndInstallation_Frig.getYearLocatorForElectrolux(year);
-            WebElementUtil.waitForElementToBeVisible(yearLocator, 60);
-            WebElementUtil.clickElementUsingJSE(driver, yearLocator);
-            double extractedPrice = extractPrice(DeliveryAndInstallation_Frig.getPriceLocatorForElectrolux(year));
-            WebElementUtil.scrollByPixels(driver, 550, 0);
-
-//            WebElementUtil.scrollToElement(driver, driver.findElement(FE_DeliveryAndInstallation.installationServices));
-
-            WebElementUtil.scrollToElement(driver, driver.findElement(DeliveryAndInstallation_Frig.protectionPlanPriceForElectrolux));
-            WaitUtils.sleep(5000);
-            WaitUtils.untilVisible(DeliveryAndInstallation_Frig.protectionPlanPriceForElectrolux, 60);
-            WebElement protectionPlanElement = driver.findElement(DeliveryAndInstallation_Frig.protectionPlanPriceForElectrolux);
-            String protectionPlanText = protectionPlanElement.getText();
-            String cleanedProtectionPlanPrice = protectionPlanText.replaceAll("[^0-9.]", "");// Remove '$' and ',' for example
-            double protectionPlanPrice = Double.parseDouble(cleanedProtectionPlanPrice);
-            Assert.assertEquals(extractedPrice, protectionPlanPrice, "Price Mismatch");
-            WebElementUtil.isDisplayed(DeliveryAndInstallation_Frig.subTotalPrice);
-            WebElement subTotalPrice = driver.findElement(DeliveryAndInstallation_Frig.subTotalPrice);
-            String GetSubtotalPrice = subTotalPrice.getText().replaceAll("[^0-9.]", "");
-            double subtotal = Double.parseDouble(GetSubtotalPrice);
-            double totalPrice = subtotal +  protectionPlanPrice;
-            WebElement totalPriceElement = driver.findElement(DeliveryAndInstallation_Frig.totalPriceForElectrolux);
-            String totalPriceText = totalPriceElement.getText();
-            String cleanedTotalPrice = totalPriceText.replaceAll("[^0-9.]", "");
-            double displayedTotalPrice = Double.parseDouble(cleanedTotalPrice);
-            Assert.assertEquals(totalPrice, displayedTotalPrice, "ERROR: The total price does not match!");
-            WebElementUtil.waitForElementToBeVisible(yearLocator, 60);
-            WebElementUtil.scrollToElement(driver, driver.findElement(yearLocator));
-        }
+     }
+       // else {
+//            By yearLocator = DeliveryAndInstallation_Frig.getYearLocatorForElectrolux(year);
+//            WebElementUtil.waitForElementToBeVisible(yearLocator, 60);
+//            WebElementUtil.clickElementUsingJSE(driver, yearLocator);
+//            double extractedPrice = extractPrice(DeliveryAndInstallation_Frig.getPriceLocatorForElectrolux(year));
+//            WebElementUtil.scrollByPixels(driver, 550, 0);
+//
+////            WebElementUtil.scrollToElement(driver, driver.findElement(FE_DeliveryAndInstallation.installationServices));
+//
+//            WebElementUtil.scrollToElement(driver, driver.findElement(DeliveryAndInstallation_Frig.protectionPlanPriceForElectrolux));
+//            WaitUtils.sleep(5000);
+//            WaitUtils.untilVisible(DeliveryAndInstallation_Frig.protectionPlanPriceForElectrolux, 60);
+//            WebElement protectionPlanElement = driver.findElement(DeliveryAndInstallation_Frig.protectionPlanPriceForElectrolux);
+//            String protectionPlanText = protectionPlanElement.getText();
+//            String cleanedProtectionPlanPrice = protectionPlanText.replaceAll("[^0-9.]", "");// Remove '$' and ',' for example
+//            double protectionPlanPrice = Double.parseDouble(cleanedProtectionPlanPrice);
+//            Assert.assertEquals(extractedPrice, protectionPlanPrice, "Price Mismatch");
+//            WebElementUtil.isDisplayed(DeliveryAndInstallation_Frig.subTotalPrice);
+//            WebElement subTotalPrice = driver.findElement(DeliveryAndInstallation_Frig.subTotalPrice);
+//            String GetSubtotalPrice = subTotalPrice.getText().replaceAll("[^0-9.]", "");
+//            double subtotal = Double.parseDouble(GetSubtotalPrice);
+//            double totalPrice = subtotal +  protectionPlanPrice;
+//            WebElement totalPriceElement = driver.findElement(DeliveryAndInstallation_Frig.totalPriceForElectrolux);
+//            String totalPriceText = totalPriceElement.getText();
+//            String cleanedTotalPrice = totalPriceText.replaceAll("[^0-9.]", "");
+//            double displayedTotalPrice = Double.parseDouble(cleanedTotalPrice);
+//            Assert.assertEquals(totalPrice, displayedTotalPrice, "ERROR: The total price does not match!");
+//            WebElementUtil.waitForElementToBeVisible(yearLocator, 60);
+//            WebElementUtil.scrollToElement(driver, driver.findElement(yearLocator));
+//        }
     }
 
     public double extractPrice(By locator) {

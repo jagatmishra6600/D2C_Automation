@@ -1,5 +1,6 @@
 package com.automation.frigidaire.pages;
 
+import com.automation.frigidaire.locators.FE_PLP;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.WebElement;
@@ -9,7 +10,7 @@ import static com.automation.utils.WaitUtils.untilClickable;
 
 public class PlpPageActions_Frig {
 
-    PLP_Frig plpPage_Locator = new PLP_Frig();
+    FE_PLP plpPage_Locator = new FE_PLP();
 
     private static String selectedProductId;
     private static String selectedProductTitle;
@@ -18,6 +19,9 @@ public class PlpPageActions_Frig {
     private static String selectedHeight;
     private static String selectedWidth;
     private static String selectedDepth;
+    private static String providedProductTitle;
+    private static String providedProductPrice;
+    private static String providedProductId;
 
     public PlpPageActions_Frig closePopupModel() {
 
@@ -75,6 +79,36 @@ public class PlpPageActions_Frig {
         return new FrigidairePdpPageActions();
     }
 
+    public boolean checkProvidedIdIsVisibleOnPlpPage() {
+        WaitUtils.untilVisible(plpPage_Locator.frenchdoorProductId);
+        return WebElementUtil.isElementPresented(plpPage_Locator.frenchdoorProductId);
+    }
+
+    public PlpPageActions_Frig storeProvidedProductId() {
+        WaitUtils.untilVisible(plpPage_Locator.frenchdoorProductIdText);
+        providedProductId = WebElementUtil.getText(plpPage_Locator.frenchdoorProductIdText);
+        return this;
+    }
+
+    public PlpPageActions_Frig storeProvidedProductTitle() {
+        WaitUtils.untilVisible(plpPage_Locator.frenchdoorProductTitle);
+        providedProductTitle = WebElementUtil.getText(plpPage_Locator.frenchdoorProductTitle);
+        return this;
+    }
+
+    public PlpPageActions_Frig storeProvidedProductPrice() {
+        WaitUtils.untilVisible(plpPage_Locator.frenchdoorProductPrice);
+        providedProductPrice = WebElementUtil.getText(plpPage_Locator.frenchdoorProductPrice);
+        return this;
+    }
+
+    public FrigidairePdpPageActions clickProvidedProduct() {
+        WebElementUtil.scrollToElementCenter(plpPage_Locator.frenchdoorProductId);
+        WebElementUtil.clickElement(plpPage_Locator.frenchdoorProductId);
+        return new FrigidairePdpPageActions();
+    }
+
+
     public static String getSelectedProductId() {
         return selectedProductId;
     }
@@ -102,5 +136,15 @@ public class PlpPageActions_Frig {
     public static String getSelectedDepth() {
         return selectedDepth;
     }
+
+    public static String getProvidedProductTitle() {
+        return providedProductTitle;
+    }
+
+    public static String getProvidedProductPrice() {
+        return providedProductPrice;
+    }
+
+    public static String getProvidedProductId() {return providedProductId;}
 
 }

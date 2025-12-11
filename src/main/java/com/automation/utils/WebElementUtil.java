@@ -6,7 +6,6 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
 import java.time.Duration;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -394,7 +393,41 @@ public class WebElementUtil {
     private static void sleep(long ms) {
         try { Thread.sleep(ms); } catch (Exception ignored) {}
     }
-    
+
+    public static String getAttributeValue(By locator, String attributeName) {
+        final String[] value = new String[1];
+        retryOnFailure(() ->
+                        value[0] = waitForElementToBeVisible(locator).getAttribute(attributeName),
+                3, 1000);
+
+        return value[0];
+    }
+
+    public static float convertPriceToFloat(String price) {
+        price = price.replace("$", "").trim();
+        price = price.replaceAll(",", "");
+        price = price.replaceAll("\\.(0|00)$", "");
+        return Float.parseFloat(price);
+    }
+
+
+    public static float getPrice(By locator) {
+        String priceText = getText(locator);
+        return convertPriceToFloat(priceText);
+    }
+
+    public static void forceClick(By locator) {
+        WebElement element = DriverManager.getDriver().findElement(locator);
+        ((JavascriptExecutor) DriverManager.getDriver())
+                .executeScript("arguments[0].click();", element);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+
     public static void waitForCondition(ExpectedCondition<?> condition) { 
     	new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(15))
 			.until(condition);
@@ -418,4 +451,9 @@ public class WebElementUtil {
         } catch (Exception e) { throw new RuntimeException(e); }
     }
 
+
+    public static String getDomProperty(By locator, String propertyName) {
+    	var element = DriverManager.getDriver().findElement(locator);
+    	return element.getDomProperty(propertyName);
+    }
 }
