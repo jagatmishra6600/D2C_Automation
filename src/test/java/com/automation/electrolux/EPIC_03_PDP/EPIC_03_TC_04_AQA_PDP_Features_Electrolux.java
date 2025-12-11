@@ -2,14 +2,14 @@ package com.automation.electrolux.EPIC_03_PDP;
 
 import com.automation.BaseTest;
 import com.automation.electrolux.pages.ElectroluxFeaturePageActions;
-import com.automation.electrolux.pages.ElectroluxProductCards;
+import com.automation.electrolux.pages.ProductDetailPageActionElux;
 import com.automation.frigidaire.pages.FrigidairePlpPageActions;
 import com.automation.utils.ExtentReportManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
     public class EPIC_03_TC_04_AQA_PDP_Features_Electrolux extends BaseTest {
-    private final ElectroluxProductCards homePage = new ElectroluxProductCards();
+    private final ProductDetailPageActionElux homePage = new ProductDetailPageActionElux();
     private final ElectroluxFeaturePageActions pdpPage = new ElectroluxFeaturePageActions();
     private final FrigidairePlpPageActions plpPage = new FrigidairePlpPageActions();
 

@@ -1,18 +1,16 @@
-package com.automation.frigidaire.EPIC_03_PDP;
+package com.automation.frigidaire.EPIC_03_PDPPage;
 
 import com.automation.BaseTest;
-import com.automation.frigidaire.pages.FAQPage;
+import com.automation.frigidaire.pages.FAQPageActionFrig;
 import com.automation.frigidaire.pages.FrigidaireHomePageActions;
-
-import com.automation.utils.DriverManager;
 import com.automation.utils.ExtentReportManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class EPIC_03_TC_NAGDTOPS_15700_AQA_Frigidaire_PDP_FAQ extends BaseTest {
+public class EPIC_03_TC_08_PDP_FAQ extends BaseTest {
 
     FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
-    FAQPage faqPage = new FAQPage();
+    FAQPageActionFrig faqPage = new FAQPageActionFrig();
 
     @Test(groups = {"regression", "smoke"}, priority = 1)
     public void EPIC_03_PDP_TC_02_testForFrigidaireFAQ() {
@@ -23,7 +21,7 @@ public class EPIC_03_TC_NAGDTOPS_15700_AQA_Frigidaire_PDP_FAQ extends BaseTest {
         faqPage.verifyFAQHeaderText();
         faqPage.verifyFAQSecond();
         faqPage.verifyAndClickAllCategoryTiles();
-        ExtentReportManager.getTest().pass("Verified the functionality of the FAQ feature — shopper " + "successfully navigated from 'Owner Support' → 'FAQs and How-Tos' to the 'Owner Center Resource" + " Library' page, confirmed banner title, search input with suggestions, and visibility " + "of product category tiles: Accessories, Filters, General Knowledge, Home Comfort, Kitchen, " + "Laundry, and Online Orders and Delivery, each leading to its respective subcategory page.");
+        ExtentReportManager.getTest().pass("Verified the functionality of the FAQ Section and verify all the sub categories");
     }
 
     @Test(groups = {"regression", "smoke"}, priority = 2)
@@ -34,8 +32,7 @@ public class EPIC_03_TC_NAGDTOPS_15700_AQA_Frigidaire_PDP_FAQ extends BaseTest {
         faqPage.clickOnProductMenu("FAQs & How-Tos");
         faqPage.verifySearchBoxVisible();
         faqPage.verifyAllFAQArticlesRefrigerator();
-
-        ExtentReportManager.getTest().pass("Verified the FAQ for French Door Refrigerator — shopper successfully" + " navigated via Kitchen → Refrigerators tile, confirmed visibility of search topic" + " input box, and verified that the list of recommended Refrigerator " + "articles are displayed as clickable links leading to their respective article pages.");
+        ExtentReportManager.getTest().pass("Verified the FAQ for French Door Refrigerator within the Kitchen category and navigated to the article pages successfully");
     }
 
     @Test(groups = {"regression", "smoke"}, priority = 3)
@@ -46,10 +43,7 @@ public class EPIC_03_TC_NAGDTOPS_15700_AQA_Frigidaire_PDP_FAQ extends BaseTest {
         faqPage.clickOnProductMenu("FAQs & How-Tos");
         faqPage.verifySearchBoxVisibles();
         faqPage.verifyAllFAQArticlesRoomAC();
-
-        ExtentReportManager.getTest().pass("Verified the FAQ for Window Mounted Air Conditioner — shopper successfully" + " navigated via Home Comfort → Room AC tile, confirmed visibility of search topic input box, and verified " + "that the list of recommended Room AC articles are displayed as clickable links leading to their" + " respective article pages.");
-
-        DriverManager.quitDriver();
+        ExtentReportManager.getTest().pass("Verified the FAQ for Window Mounted Air Conditioner within the Room AC category and navigated to the article pages successfully");
     }
 
 }
