@@ -58,6 +58,7 @@ public class FeaturesPageActionsFrig {
         WebElementUtil.waitForElementToBeVisible(locators.proceedToCheckoutButton, 20);
         WebElementUtil.waitForElementToBeClickable(locators.proceedToCheckoutButton);
         WebElementUtil.clickElement(locators.proceedToCheckoutButton);
+        WebElementUtil.waitForElementToBeVisible(locators.shippingAddressForm, 10);
     }
 
     /**
@@ -80,37 +81,38 @@ public class FeaturesPageActionsFrig {
      * Returns true if the click succeeded and no exception was thrown.
      */
     public boolean clickContinueToDelivery(String email, String firstName, String lastName, String addressLine1, String phone) {
+
         try {
             // Fill email
             WebElementUtil.scrollToElementStable(locators.shippingEmail);
-            WebElementUtil.waitForElementToBeVisible(locators.shippingEmail);
+            WebElementUtil.waitForElementToBeVisible(locators.shippingEmail, 10);
             WebElementUtil.sendKeys(locators.shippingEmail, email);
 
             // Fill first name and last name
             WebElementUtil.scrollToElementStable(locators.shippingFirstName);
-            WebElementUtil.waitForElementToBeVisible(locators.shippingFirstName);
+            WebElementUtil.waitForElementToBeVisible(locators.shippingFirstName, 10);
             WebElementUtil.sendKeys(locators.shippingFirstName, firstName);
 
-            WebElementUtil.waitForElementToBeVisible(locators.shippingLastName);
+            WebElementUtil.waitForElementToBeVisible(locators.shippingLastName, 10);
             WebElementUtil.sendKeys(locators.shippingLastName, lastName);
 
             // Fill address line
             WebElementUtil.scrollToElementStable(locators.shippingAddressLine1);
-            WebElementUtil.waitForElementToBeVisible(locators.shippingAddressLine1);
+            WebElementUtil.waitForElementToBeVisible(locators.shippingAddressLine1, 10);
             WebElementUtil.sendKeys(locators.shippingAddressLine1, addressLine1);
 
 
-            WebElementUtil.waitForElementToBeVisible(locators.addressSuggestionOption);
+            WebElementUtil.waitForElementToBeVisible(locators.addressSuggestionOption, 10);
             WebElementUtil.clickElement(locators.addressSuggestionOption);
 
             // Fill phone
             WebElementUtil.scrollToElementStable(locators.shippingPhone);
-            WebElementUtil.waitForElementToBeVisible(locators.shippingPhone);
+            WebElementUtil.waitForElementToBeVisible(locators.shippingPhone, 10);
             WebElementUtil.sendKeys(locators.shippingPhone, phone);
 
             // Click continue button
             WebElementUtil.scrollToElementStable(locators.continueToDeliveryButton);
-            WebElementUtil.waitForElementToBeClickable(locators.continueToDeliveryButton);
+            WebElementUtil.waitForElementToBeClickable(locators.continueToDeliveryButton,10);
             WebElementUtil.clickElement(locators.continueToDeliveryButton);
 
             return true;
@@ -129,7 +131,7 @@ public class FeaturesPageActionsFrig {
 
     public boolean validateFeatureTitle(){
         WebElementUtil.scrollToElementStable(locators.featureHeading);
-        WebElementUtil.waitForElementToBeVisible(locators.featureHeading);
+        WebElementUtil.waitForElementToBeVisible(locators.featureHeading, 10);
         WebElementUtil.clickElement(locators.featureHeading);
         return WebElementUtil.isDisplayed(locators.featureHeading);
     }
@@ -138,9 +140,9 @@ public class FeaturesPageActionsFrig {
         WebElementUtil.scrollToElementStable(locators.featureHeading);
         WebElementUtil.clickElement(locators.featureHeading);
         WebElementUtil.scrollToElementStable(locators.viewAll);
-        WebElementUtil.waitForElementToBeVisible(locators.viewAll);
+        WebElementUtil.waitForElementToBeVisible(locators.viewAll, 10);
         WebElementUtil.clickElement(locators.viewAll);
-        WebElementUtil.waitForElementToBeVisible(locators.featureBanner);
+        WebElementUtil.waitForElementToBeVisible(locators.featureBanner, 10);
         return WebElementUtil.isDisplayed(locators.featureBanner);
     }
 
@@ -168,24 +170,24 @@ public class FeaturesPageActionsFrig {
     }
 
     public boolean validateFeatureDescription() {
-        WebElementUtil.waitForElementToBeVisible(locators.featureDescription);
+        WebElementUtil.waitForElementToBeVisible(locators.featureDescription, 10);
         String description = WebElementUtil.getText(locators.featureDescription);
         return description != null && !description.trim().isEmpty();
     }
 
     public boolean validateViewMoreButtonFunctionality() {
         WebElementUtil.scrollToElementStable(locators.viewMoreButton);
-        WebElementUtil.waitForElementToBeVisible(locators.viewMoreButton);
+        WebElementUtil.waitForElementToBeVisible(locators.viewMoreButton, 10);
         WebElementUtil.clickElement(locators.viewMoreButton);
         WebElementUtil.scrollToElementStable(locators.viewMoreFeatures);
-        WebElementUtil.waitForElementToBeVisible(locators.viewMoreFeatures);
+        WebElementUtil.waitForElementToBeVisible(locators.viewMoreFeatures, 10);
         WebElementUtil.clickElement(locators.viewMoreFeatures);
         return WebElementUtil.isDisplayed(locators.viewMoreFeatures);
     }
 
     public boolean validateGuideAndManualSection() {
-        WebElementUtil.waitForElementToBeVisible(locators.ownerTitle);
-        WebElementUtil.waitForElementToBeVisible(locators.ownerSection);
+        WebElementUtil.waitForElementToBeVisible(locators.ownerTitle, 10);
+        WebElementUtil.waitForElementToBeVisible(locators.ownerSection, 10);
         WebElementUtil.scrollToElementStable(locators.ownerSection);
         return WebElementUtil.isDisplayed(locators.ownerSection);
     }

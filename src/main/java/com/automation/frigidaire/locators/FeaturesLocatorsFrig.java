@@ -36,6 +36,7 @@ public class FeaturesLocatorsFrig {
     public final By proceedToCheckoutButton = By.xpath("//button[normalize-space()='Proceed to checkout']");
     // Locator for Continue to delivery button on the shipping/address step
     public final By continueToDeliveryButton = By.id("continueToDeliveryButton");
+    public final By shippingAddressForm = By.xpath("//span[text()='Shipping address']");
 
     // Shipping address fields (used on checkout shipping step)
     public final By shippingEmail = By.id("email");

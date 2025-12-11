@@ -1,7 +1,7 @@
 package com.automation.fsus.EPIC_03_PDP;
 
 import com.automation.BaseTest;
-import com.automation.familystoreus.pages.FsusLoginPageActions;
+import com.automation.familystoreus.pages.LoginPageActionsFsus;
 import com.automation.familystoreus.pages.ReviewsPageActionsFsus;
 import com.automation.frigidaire.pages.FeaturesPageActionsFrig;
 import com.automation.frigidaire.pages.FrigidaireHomePageActions;
@@ -16,7 +16,7 @@ public class EPIC_03_TC_03_AQA_PDP_Reviews_Fsus extends BaseTest {
     private final FeaturesPageActionsFrig pdpPage = new FeaturesPageActionsFrig();
     private final FrigidairePlpPageActions plpPage = new FrigidairePlpPageActions();
     private final ReviewsPageActionsFsus reviewsPage = new ReviewsPageActionsFsus();
-    private final FsusLoginPageActions loginPage = new FsusLoginPageActions();
+    private final LoginPageActionsFsus loginPage = new LoginPageActionsFsus();
 
     @Test(groups = { "smoke", "regression" }, description = "Verify Reviews on PDP page")
     public void testReviewsFunctionality() throws InterruptedException {
