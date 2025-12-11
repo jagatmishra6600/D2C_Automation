@@ -10,30 +10,31 @@ import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
 
 public class MyAccountInviteFamilyFriendsPageActionsFsus {
+	 private FSUS_InviteFamilyFriendsPage locator = new FSUS_InviteFamilyFriendsPage();
 	 
 	 public MyAccountInviteFamilyFriendsPageActionsFsus clickSendNewInvitationButton() {
-		 WebElementUtil.isDisplayed(FSUS_InviteFamilyFriendsPage.sendNewInvitationButton);
-		 WebElementUtil.scrollIntoView(FSUS_InviteFamilyFriendsPage.sendNewInvitationButton);
-		 WebElementUtil.clickElement(FSUS_InviteFamilyFriendsPage.sendNewInvitationButton);
+		 WebElementUtil.isDisplayed(locator.sendNewInvitationButton);
+		 WebElementUtil.scrollIntoView(locator.sendNewInvitationButton);
+		 WebElementUtil.clickElement(locator.sendNewInvitationButton);
 		 return this;
 	 }
 	 
 	 public MyAccountInviteFamilyFriendsPageActionsFsus enterFirstName(String firstName) throws InterruptedException  { 
-		 return typeAndVerify(FSUS_InviteFamilyFriendsPage.firstNameField, firstName);
+		 return typeAndVerify(locator.firstNameField, firstName);
 	 }
 	 
 	 public MyAccountInviteFamilyFriendsPageActionsFsus enterLastName(String lastName) throws InterruptedException { 
-		 return typeAndVerify(FSUS_InviteFamilyFriendsPage.lastNameField, lastName);
+		 return typeAndVerify(locator.lastNameField, lastName);
 	 }
 	 
 	 public MyAccountInviteFamilyFriendsPageActionsFsus enterEmailAddress(String emailAddress) throws InterruptedException {
-		 return typeAndVerify(FSUS_InviteFamilyFriendsPage.emailAddressField, emailAddress);
+		 return typeAndVerify(locator.emailAddressField, emailAddress);
 		 
 	 }
 	 
 	 public MyAccountInviteFamilyFriendsPageActionsFsus clickSendInvitationButton() {
-		 WebElementUtil.scrollIntoView(FSUS_InviteFamilyFriendsPage.sendInvitationButton);
-		 WebElementUtil.clickElement(FSUS_InviteFamilyFriendsPage.sendInvitationButton);
+		 WebElementUtil.scrollIntoView(locator.sendInvitationButton);
+		 WebElementUtil.clickElement(locator.sendInvitationButton);
 		 return this;
 	 }
 	 

@@ -145,9 +145,13 @@ public final class WaitUtils {
         });
     }
 
-    public static void sleep(int seconds) throws InterruptedException {
-       Thread.sleep(seconds);
-    }
+    public static void sleep(int milliSeconds) {
+		try {
+			Thread.sleep(milliSeconds);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 
     public static void implicitWait(long seconds) {
         DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(seconds));

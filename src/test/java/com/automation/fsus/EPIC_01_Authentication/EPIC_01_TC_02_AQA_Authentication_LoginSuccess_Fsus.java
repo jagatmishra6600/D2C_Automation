@@ -9,7 +9,7 @@ import com.automation.BaseTest;
 import com.automation.utils.ExtentReportManager;
 import com.automation.utils.UserTestData;
 
-public class EPIC_01_TC_02_AQA_Authentication_LoginSuccess extends BaseTest{
+public class EPIC_01_TC_02_AQA_Authentication_LoginSuccess_Fsus extends BaseTest{
 	HomePageActionsFsus homePage = new HomePageActionsFsus();
 	LoginPageActionsFsus loginPage = new LoginPageActionsFsus();
 	

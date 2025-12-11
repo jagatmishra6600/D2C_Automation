@@ -196,6 +196,7 @@ public class WebElementUtil {
     }
 
     public static WebElement scrollIntoView(By locator) {
+    	isDisplayed(locator);
         WebElement element = DriverManager.getDriver().findElement(locator);
         ((JavascriptExecutor) DriverManager.getDriver()).executeScript("arguments[0].scrollIntoView({behavior: 'instant', block: 'center', inline: 'nearest'});", element);
         return element;
