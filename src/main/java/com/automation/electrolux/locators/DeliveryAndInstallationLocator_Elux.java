@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 
 import static java.awt.SystemColor.text;
 
-public class EL_DeliveryAndInstallation {
+public class DeliveryAndInstallationLocator_Elux {
     public static By getRadioButton(String deliveryOption) {
         return By.xpath("//div[normalize-space(text())='" + deliveryOption + "']/parent::div/parent::div//div[@id=\"deliveryServiceDiv\" or  \"Laundry_Washers_FrontLoad_Electric_Install\"]//input");
     }

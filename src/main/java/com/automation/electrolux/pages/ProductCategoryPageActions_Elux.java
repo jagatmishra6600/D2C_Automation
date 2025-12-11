@@ -4,10 +4,10 @@ import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 
-public class EL_ProductCategoryPageActions {
+public class ProductCategoryPageActions_Elux {
 
 
-    public EL_ProductCategoryPageActions clickOnProductMenu(String website, String text) {
+    public ProductCategoryPageActions_Elux clickOnProductMenu(String website, String text) {
         By locator;
 
        if (website.equalsIgnoreCase("electrolux")) {

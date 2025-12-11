@@ -2,7 +2,7 @@ package com.automation.frigidaire.locators;
 
 import org.openqa.selenium.By;
 
-public class FE_PLP {
+public class PLP_Frig {
 
     public final By closePopupButton = By.xpath("//span[contains(@id, 'close-modal')]");
     public final By plpProductId = By.xpath("(//div[@id='ReviewsPLPItemComponent']/preceding-sibling::div)[1] | (//div[@id='BvProductRating']/../preceding-sibling::div)[1]");

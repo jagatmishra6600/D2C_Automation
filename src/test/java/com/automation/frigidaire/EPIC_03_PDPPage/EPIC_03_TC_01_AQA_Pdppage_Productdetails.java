@@ -3,7 +3,7 @@ package com.automation.frigidaire.EPIC_03_PDPPage;
 import com.automation.BaseTest;
 import com.automation.frigidaire.pages.FrigidaireHomePageActions;
 import com.automation.frigidaire.pages.FrigidairePdpPageActions;
-import com.automation.frigidaire.pages.FrigidairePlpPageActions;
+import com.automation.frigidaire.pages.PlpPageActions_Frig;
 import com.automation.utils.ExtentReportManager;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
@@ -14,7 +14,7 @@ public class EPIC_03_TC_01_AQA_Pdppage_Productdetails extends BaseTest {
 
     private final FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
     private final FrigidairePdpPageActions pdpPage = new FrigidairePdpPageActions();
-    private final FrigidairePlpPageActions plpPage = new FrigidairePlpPageActions();
+    private final PlpPageActions_Frig plpPage = new PlpPageActions_Frig();
     private String currentUrl;
 
 

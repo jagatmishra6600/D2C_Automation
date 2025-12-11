@@ -410,4 +410,12 @@ public class WebElementUtil {
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
+    public static void scrollAndClickUsingJSE(WebDriver driver, By locator) {
+        try {
+            WebElement element = driver.findElement(locator);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+        } catch (Exception e) { throw new RuntimeException(e); }
+    }
+
 }

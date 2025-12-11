@@ -1,11 +1,8 @@
 package com.automation.frigidaire.pages;
 
 import com.automation.frigidaire.locators.FE_PDP;
-import com.automation.utils.BrowserUtils;
-import com.automation.utils.DriverManager;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
-import org.openqa.selenium.By;
 
 public class FrigidairePdpPageActions {
 
@@ -14,14 +11,14 @@ public class FrigidairePdpPageActions {
     public boolean isProductIdMatchingWithPLP() {
         WaitUtils.untilVisible(pdpPage_Locator.productIdOnPDP);
         String actualId = WebElementUtil.getText(pdpPage_Locator.productIdOnPDP).trim();
-        String expectedId = FrigidairePlpPageActions.getSelectedProductId().trim();
+        String expectedId = PlpPageActions_Frig.getSelectedProductId().trim();
         return actualId.equalsIgnoreCase(expectedId);
     }
 
     public boolean isProductTitleMatchingWithPLP() {
         WaitUtils.untilVisible(pdpPage_Locator.productTitleOnPDP);
         String actualTitle = WebElementUtil.getText(pdpPage_Locator.productTitleOnPDP).trim();
-        String expectedTitle = FrigidairePlpPageActions.getSelectedProductTitle().trim();
+        String expectedTitle = PlpPageActions_Frig.getSelectedProductTitle().trim();
         return actualTitle.toLowerCase().contains(expectedTitle.toLowerCase());
     }
 
@@ -29,7 +26,7 @@ public class FrigidairePdpPageActions {
         WaitUtils.untilVisible(pdpPage_Locator.productPriceOnPDP);
         String actualPrice = WebElementUtil.getText(pdpPage_Locator.productPriceOnPDP).trim();
         actualPrice = actualPrice.replaceAll("\\.\\d+$", "");
-        String expectedPrice = FrigidairePlpPageActions.getSelectedProductPrice().trim();
+        String expectedPrice = PlpPageActions_Frig.getSelectedProductPrice().trim();
         expectedPrice = expectedPrice.replaceAll("(\\.00|00)$", "");
         return actualPrice.equalsIgnoreCase(expectedPrice);
     }
@@ -37,7 +34,7 @@ public class FrigidairePdpPageActions {
     public boolean isProductReviewMatchingWithPLP() {
         WaitUtils.untilVisible(pdpPage_Locator.productReviewNumberOnPDP);
         String actualReview = WebElementUtil.getText(pdpPage_Locator.productReviewNumberOnPDP).trim();
-        String expectedReview = FrigidairePlpPageActions.getSelectedProductReviewNumber().trim();
+        String expectedReview = PlpPageActions_Frig.getSelectedProductReviewNumber().trim();
         return actualReview.equalsIgnoreCase(expectedReview);
     }
 
@@ -61,7 +58,7 @@ public class FrigidairePdpPageActions {
         WaitUtils.untilVisible(pdpPage_Locator.pdpHeight);
 
         String actualHeight = WebElementUtil.getText(pdpPage_Locator.pdpHeight).trim();
-        String expectedHeight = FrigidairePlpPageActions.getSelectedHeight().trim();
+        String expectedHeight = PlpPageActions_Frig.getSelectedHeight().trim();
 
         return actualHeight.equalsIgnoreCase(expectedHeight);
     }
@@ -70,7 +67,7 @@ public class FrigidairePdpPageActions {
         WaitUtils.untilVisible(pdpPage_Locator.pdpWidth);
 
         String actualWidth = WebElementUtil.getText(pdpPage_Locator.pdpWidth).trim();
-        String expectedWidth = FrigidairePlpPageActions.getSelectedWidth().trim();
+        String expectedWidth = PlpPageActions_Frig.getSelectedWidth().trim();
 
         return actualWidth.equalsIgnoreCase(expectedWidth);
     }
@@ -79,7 +76,7 @@ public class FrigidairePdpPageActions {
         WaitUtils.untilVisible(pdpPage_Locator.pdpDepth);
 
         String actualDepth = WebElementUtil.getText(pdpPage_Locator.pdpDepth).trim();
-        String expectedDepth = FrigidairePlpPageActions.getSelectedDepth().trim();
+        String expectedDepth = PlpPageActions_Frig.getSelectedDepth().trim();
 
         return actualDepth.equalsIgnoreCase(expectedDepth);
     }

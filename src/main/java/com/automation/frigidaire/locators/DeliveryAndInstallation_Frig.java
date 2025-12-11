@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import static java.awt.SystemColor.text;
 
 
-public class FE_DeliveryAndInstallation {
+public class DeliveryAndInstallation_Frig {
 
 
 

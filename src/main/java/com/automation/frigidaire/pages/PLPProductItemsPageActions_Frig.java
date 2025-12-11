@@ -1,70 +1,23 @@
-package com.automation.electrolux.pages;
+package com.automation.frigidaire.pages;
 
+
+
+import com.automation.frigidaire.locators.PLP_Frig;
 import com.automation.utils.DriverManager;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.*;
+import org.testng.Assert;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
-
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-public class ElectroluxPLPProductItemsPageActions {
-
-
-    private final By emailPopUp = By.xpath("//span[@id=\"close-modal123\"]");
-    public static final By addToCart = By.xpath("//span[normalize-space()='Add to cart' and contains(@class,'ng-star-inserted')]");
-    private final By earliestDelivery = By.xpath("//span[contains(text(), 'Earliest delivery:') or contains(text(),'In stock!')]");
-    private final By temporarilyLocator = By.xpath("//button[span[text()=\"Temporarily Out of Stock\"]]");
-    private final By emailFieldLocator = By.xpath("//input[@name=\"Email\" and contains(@placeholder, \"Enter email\")]");
-    private final By notifyBtnLocator = By.xpath("//input[@id=\"submitBtn\" and @name=\"submitBtn\"]");
-    private final By emailValidationLocator = By.xpath("//span[contains(normalize-space(.), \"You’re signed up\")]");
-    private final By temporarilyLocatorAirCare = By.xpath("//span[text()=\"Temporarily out of stock in your area.\"]");
-
-    private final By sortByDropdownBtn = By.xpath("//div[@id='sortByFacet']//div[@class='ng-select-container ng-has-value']");
-
-    private final By standardWidth = By.xpath("//b[text()=\"Standard Width \"]/ancestor::app-elux-product-facet-list//div[label[div[span[text()=' 36\" ']]]]/input\n");
-    // private final By standardWidthProductCount=By.xpath("//span[contains(text(),'W:')]/following-sibling::span[@class='font-weight-bold']");
-    private final By loadMoreBtn = By.xpath("//div[@class='row col-12 load-more']//button[text()=' Load more ']");
-    private final By productCount = By.xpath("//span[@name='ProductsCount' or @class='totalResults resultsBorder']");
-
-    private final By viewFullSpecsBtn = By.xpath("//button[text()='View full specs']");
-    private final By quickSpecs = By.xpath("//div[@id='QuickSpecAccrd']");
-    private final By specificationsHeading = By.xpath("//h3[text()='Specifications']");
-
-    private final By resetAllButton = By.xpath("//span[text()=\" Hide filters\"]/ancestor::div//span[text()=\" Reset all \"]");
-    private final By productUniqueCode = By.xpath("//h2[@class='prod_id Utility-TextProduct-SKU-Sm ng-star-inserted']");
-    private final By productTitle = By.xpath("//h1[@class='H1H1_Desktop mt-34 category-heading']");
-
-    private final By availabilityCheckbox = By.xpath("//b[contains(text(),'Availability')]" + "/ancestor::app-elux-product-facet-list" + "//div//b[text()='Availability']" + "/parent::div/child::div//input[@aria-label='Availability']");
-
-    private final By addToCartForPLP = By.xpath("//div[@id='earliestDeliveryDateDiv']/parent::app-elx-earliest-delivery-day-common//following-sibling::div//span[contains(text(),'Add to cart')]");
-
-    private By getFeatureLocator(String featureKey, String featureValue) {
-        return By.xpath("//b[contains(text(),'" + featureKey + "')]/ancestor::app-elux-product-facet-list//div//input[@id='" + featureValue + "']");
+public class PLPProductItemsPageActions_Frig {
 
 
-    }
-
-    private By getSelectRoomSizeLocator(String featureKey) {
-        return By.xpath("//div[@id='facet-drawer']//div[@id='roomSizeRange-wrapper']//span[text()='" + featureKey + "']/parent::div/preceding-sibling::div");
-    }
-
-
-    private By getQuiickSpecsFeatureLocator(String featureKey, String featureValue) {
-        return By.xpath("//span[text()='" + featureKey + "']//parent::div//following-sibling::div//span[contains(text(),'" + featureValue + "')]");
-
-
-    }
-
-    private By selectedFilterCross(String filterName) {
-        return By.xpath("//span[@class='border border-light p-2 m-2 Body-MediumBody_Medium' and normalize-space(text())='" + filterName + "']//i");
-    }
 
     public boolean productIsInStock(String productName) {
         WebElementUtil.zoomInOrOut(10);
@@ -87,14 +40,14 @@ public class ElectroluxPLPProductItemsPageActions {
 
             try {
 
-                popup = WaitUtils.untilVisible(emailPopUp);
+                popup = WaitUtils.untilVisible(PLP_Frig.EMAIL_POPUP);
             } catch (TimeoutException e) {
                 System.out.println("No email popup detected. Continuing test...");
             }
 
             if (popup != null && popup.isDisplayed()) {
                 System.out.println("Email popup detected. Attempting to close...");
-                WebElementUtil.clickElement(emailPopUp);
+                WebElementUtil.clickElement(PLP_Frig.EMAIL_POPUP);
 
                 Thread.sleep(1000);
 
@@ -114,20 +67,22 @@ public class ElectroluxPLPProductItemsPageActions {
 
 
     public void clickOnProductMenu(String text) {
-        WebDriver driver= DriverManager.getDriver();
+        WebDriver driver=DriverManager.getDriver();
         By locator = By.xpath("//span[normalize-space(text())='" + text + "']");
         WebElementUtil.waitForElementToBeVisible(locator);
         WebElementUtil.scrollAndClickUsingJSE(driver,driver.findElement(locator));
     }
 
 
-    public WebElement verifyFiltersInPLP(String text) {
-        WebDriver driver = DriverManager.getDriver();
+    public void verifyFiltersInPLP(String text) {
+        //WebDriver driver = DriverManager.getDriver();
         String dynamicXpath = "//b[contains(text(),'" + text + "')]";
-        WebElement element = WebElementUtil.findElement(By.xpath(dynamicXpath));
-        WebElementUtil.scrollToElement(driver, element);
-        Assert.assertTrue(element.isDisplayed(), "Element with text '" + text + "' is not displayed.");
-        return element;
+        By locator = By.xpath(dynamicXpath);
+        //WebElement element = WebElementUtil.findElement(By.xpath(dynamicXpath));
+        //WebElementUtil.scrollToElement(driver, element);
+        WebElementUtil.scrollToElementStable(locator);
+        //Assert.assertTrue(element.isDisplayed(), "Element with text '" + text + "' is not displayed.");
+        WebElementUtil.isDisplayed(locator);
     }
 
     public void verifyProductItemPage(String text, String assertValue) {
@@ -211,12 +166,7 @@ public class ElectroluxPLPProductItemsPageActions {
     }
 
 
-    public void standardWidthClick() throws InterruptedException {
-        WaitUtils.untilVisible(standardWidth, 60);
-        WebElementUtil.clickElement(standardWidth);
-        Thread.sleep(3000);
 
-    }
 
 
     public void verifyProductWidthHeightAndDepth(String type, String value) throws InterruptedException {
@@ -348,7 +298,7 @@ public class ElectroluxPLPProductItemsPageActions {
         WebElement verifyResetAll = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
         Assert.assertTrue(verifyResetAll.isDisplayed(), "The Hidden filter is not displayed.");
 
-        WebElementUtil.scrollAndClickUsingJSE(driver,driver.findElement(resetAllButton));
+        WebElementUtil.scrollAndClickUsingJSE(driver,driver.findElement(PLP_Frig.RESET_ALL_BUTTON));
 
         Thread.sleep(6000);
         List<WebElement> filtersAfterReset = WebElementUtil.findElements(By.xpath(xpath));
@@ -407,9 +357,9 @@ public class ElectroluxPLPProductItemsPageActions {
 
     public void clickOnSortByDropDownvalues(String text, String assertValue) throws InterruptedException {
         WebDriver driver = DriverManager.getDriver();
-        WaitUtils.untilVisible(sortByDropdownBtn, 60000);
+        WaitUtils.untilVisible(PLP_Frig.SORT_BY_DROPDOWN_BTN, 60000);
         //WebElementUtil.clickElementUsingJSE(driver,sortByDropdownBtn);
-        WebElementUtil.clickElement(sortByDropdownBtn);
+        WebElementUtil.clickElement(PLP_Frig.SORT_BY_DROPDOWN_BTN);
         String selectedSortBy = WebElementUtil.findElement(getSortOptionByText(text)).getText();
 
         Thread.sleep(3000);
@@ -424,9 +374,9 @@ public class ElectroluxPLPProductItemsPageActions {
         WebDriver driver = DriverManager.getDriver();
 
 
-        WaitUtils.untilVisible(loadMoreBtn, 60);
+        WaitUtils.untilVisible(PLP_Frig.LOAD_MORE_BTN, 60);
 
-        WebElement element = WebElementUtil.findElement(loadMoreBtn);
+        WebElement element = WebElementUtil.findElement(PLP_Frig.LOAD_MORE_BTN);
         WebElementUtil.scrollToElement(driver, element);
         WaitUtils.untilClickable(element, 40000);
         WebElementUtil.scrollAndClickUsingJSE(driver, element);
@@ -640,18 +590,18 @@ public class ElectroluxPLPProductItemsPageActions {
             driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 
             WebElement productCountElement = null;
-            WebElement loadMoreElement = WebElementUtil.findElement(loadMoreBtn);
+            WebElement loadMoreElement = WebElementUtil.findElement(PLP_Frig.LOAD_MORE_BTN);
 
             if (loadMoreElement.isDisplayed()) {
                 WebElementUtil.scrollAndClickUsingJSE(driver, loadMoreElement);
                 Thread.sleep(5000);
-                productCountElement = WaitUtils.untilVisible((productCount), 40000);
+                productCountElement = WaitUtils.untilVisible((PLP_Frig.PRODUCT_COUNT), 40000);
                 WebElementUtil.scrollToElement(driver, productCountElement);
                 Assert.assertTrue(productCountElement.isDisplayed(), "Not displayed");
                 System.out.println(productCountElement.getText());
 
             } else {
-                productCountElement = WaitUtils.untilVisible((productCount), 40000);
+                productCountElement = WaitUtils.untilVisible((PLP_Frig.PRODUCT_COUNT), 40000);
                 WebElementUtil.scrollToElement(driver, productCountElement);
                 Assert.assertTrue(productCountElement.isDisplayed(), "Not displayed");
                 System.out.println(productCountElement.getText());
@@ -723,7 +673,7 @@ public class ElectroluxPLPProductItemsPageActions {
             WebElementUtil.zoomInOrOut(25);
             loadMoreProducts(driver);
             WebElementUtil.zoomInOrOut(25);
-            verifyProductCount(driver, WebElementUtil.findElement(productCount));
+            verifyProductCount(driver, WebElementUtil.findElement(PLP_Frig.PRODUCT_COUNT));
 
             List<WebElement> products = WebElementUtil.findElements(By.xpath("//div[starts-with(@id,'PlpItem')]"));
             int totalProducts = products.size();
@@ -759,13 +709,13 @@ public class ElectroluxPLPProductItemsPageActions {
             WebDriver driver = DriverManager.getDriver();
             System.out.println("Validating product index " + index);
             System.out.println("Current URL: " + driver.getCurrentUrl());
-            WebElementUtil.scrollAndClickUsingJSE(driver, WebElementUtil.findElement(viewFullSpecsBtn));
+            WebElementUtil.scrollAndClickUsingJSE(driver, WebElementUtil.findElement(PLP_Frig.VIEW_FULL_SPECS_BTN));
             WebElement featureNameElement = WaitUtils.untilVisible(getFeatureSpecsLocator(featureName), 30000);
             WebElementUtil.scrollToElement(driver, featureNameElement);
             Assert.assertTrue(featureNameElement.isDisplayed(), featureName + " feature element is not displayed.");
 
 
-            WebElement featureElement = WaitUtils.untilVisible(getQuiickSpecsFeatureLocator(featureKey, featureValue), 1);
+            WebElement featureElement = WaitUtils.untilVisible(PLP_Frig.getQuickSpecsFeatureLocator(featureKey, featureValue), 1);
             String elementText = featureElement.getText().trim();
             Assert.assertEquals(elementText, featureValue, "Value Mismatch");
             System.out.println("Feature value for " + featureKey + ": " + elementText);
@@ -780,20 +730,20 @@ public class ElectroluxPLPProductItemsPageActions {
             System.out.println("Validating product index " + index);
             System.out.println("Current URL: " + driver.getCurrentUrl());
 
-            WebElement productUniqueCodeElement = WaitUtils.untilVisible(productUniqueCode, 30000);
+            WebElement productUniqueCodeElement = WaitUtils.untilVisible(PLP_Frig.PRODUCT_UNIQUE_CODE, 30000);
             System.out.println(productUniqueCodeElement);
             Assert.assertTrue(productUniqueCodeElement.isDisplayed(), "Unique Product Code not displayed");
 
 
             System.out.println("unique prod check");
 
-            WaitUtils.untilVisible(quickSpecs, 30000);
-            WebElementUtil.scrollAndClickUsingJSE(driver, WebElementUtil.findElement(quickSpecs));
+            WaitUtils.untilVisible(PLP_Frig.QUICK_SPECS, 30000);
+            WebElementUtil.scrollAndClickUsingJSE(driver, WebElementUtil.findElement(PLP_Frig.QUICK_SPECS));
             System.out.println("quick specs check");
 
 
-            WebElementUtil.scrollAndClickUsingJSE(driver, WebElementUtil.findElement(viewFullSpecsBtn));
-            WebElement specifications = WaitUtils.untilVisible(specificationsHeading, 80000);
+            WebElementUtil.scrollAndClickUsingJSE(driver, WebElementUtil.findElement(PLP_Frig.VIEW_FULL_SPECS_BTN));
+            WebElement specifications = WaitUtils.untilVisible(PLP_Frig.SPECIFICATIONS_HEADING, 80000);
             WebElementUtil.mouseHover(driver, specifications);
 
             WebElement featureNameElement = WaitUtils.untilVisible(getFeatureSpecsLocator(featureName), 80000);
@@ -803,7 +753,7 @@ public class ElectroluxPLPProductItemsPageActions {
             Assert.assertTrue(featureNameElement.isDisplayed(), featureName + " feature element is not displayed.");
 
 
-            WebElement featureElement = WaitUtils.untilVisible(getFeatureLocator(featureKey, featureValue), 30000);
+            WebElement featureElement = WaitUtils.untilVisible(PLP_Frig.getFeatureLocator(featureKey, featureValue), 30000);
             String elementText = featureElement.getText().trim();
 
 
@@ -929,7 +879,7 @@ public class ElectroluxPLPProductItemsPageActions {
 
     public void validateAvailabilityOfProductsInPLP() {
         WebDriver driver = DriverManager.getDriver();
-        WebElementUtil.clickElementUsingJSE(driver, availabilityCheckbox);
+        WebElementUtil.clickElementUsingJSE(driver, PLP_Frig.AVAILABILITY_CHECKBOX);
         loadMoreProducts(driver);
         openAndValidateAvailibilityOfProducts();
 
@@ -957,7 +907,7 @@ public class ElectroluxPLPProductItemsPageActions {
 
 
                     WebElementUtil.switchToNewTab(driver, mainWindow);
-                    validateProductIsInStock(addToCartForPLP);
+                    validateProductIsInStock(PLP_Frig.ADD_TO_CART_FOR_PLP);
 
                     driver.close();
                     driver.switchTo().window(mainWindow);
@@ -985,7 +935,7 @@ public class ElectroluxPLPProductItemsPageActions {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
 
-        By pill = selectedFilterCross(filterName);
+        By pill = PLP_Frig.selectedFilterCross(filterName);
         WebElement pillElement = wait.until(ExpectedConditions.visibilityOfElementLocated(pill));
         Assert.assertTrue(pillElement.isDisplayed(), " Selected filter pill not visible for: " + filterName);
 
@@ -998,16 +948,16 @@ public class ElectroluxPLPProductItemsPageActions {
         WebDriver driver = DriverManager.getDriver();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
-        By pillCross = selectedFilterCross(crossFilterName);
+        By pillCross =  PLP_Frig.selectedFilterCross(crossFilterName);
 
-        By checkbox = getFeatureLocator(filterCategory, filterName);
+        By checkbox = PLP_Frig.getFeatureLocator(filterCategory, filterName);
         wait.until(ExpectedConditions.elementToBeClickable(checkbox));
         WebElementUtil.scrollAndClickUsingJSE(driver, WebElementUtil.findElement(checkbox));
         WebElement crossElement = wait.until(ExpectedConditions.elementToBeClickable(pillCross));
         WebElementUtil.scrollToElement(driver, crossElement);
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", crossElement);
 
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(selectedFilterCross(crossFilterName)));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated( PLP_Frig.selectedFilterCross(crossFilterName)));
         WebElement freshCheckbox = wait.until(ExpectedConditions.presenceOfElementLocated(checkbox));
         boolean isUnchecked = !freshCheckbox.isSelected();
         Assert.assertTrue(isUnchecked, " Checkbox for " + filterName + " is still checked after removing filter.");
@@ -1019,9 +969,9 @@ public class ElectroluxPLPProductItemsPageActions {
 
         WebDriver driver=DriverManager.getDriver();
         WebElementUtil.scrollByPixels(driver,0,350);
-        WebElement imageElement = WaitUtils.untilClickable(getSelectRoomSizeLocator(featureKey),60);
+        WebElement imageElement = WaitUtils.untilClickable(PLP_Frig.getSelectRoomSizeLocator(featureKey),60);
         WebElementUtil.mouseHover(DriverManager.getDriver(), imageElement);
-        WebElementUtil.scrollAndClickUsingJSE(DriverManager.getDriver(), WebElementUtil.findElement(getSelectRoomSizeLocator(featureKey)));
+        WebElementUtil.scrollAndClickUsingJSE(DriverManager.getDriver(), WebElementUtil.findElement(PLP_Frig.getSelectRoomSizeLocator(featureKey)));
 
 //        WebElementUtil.clickElement(getSelectRoomSizeLocator(featureKey));
         Thread.sleep(6000);
@@ -1049,15 +999,15 @@ public class ElectroluxPLPProductItemsPageActions {
                     actions.keyDown(Keys.CONTROL).click(imageElement).keyUp(Keys.CONTROL).build().perform();
                     Thread.sleep(10000);
                     WebElementUtil.switchToNewTab(driver, mainWindow);
-                    WebElement productUniqueCodeElement = WaitUtils.untilVisible(productUniqueCode, 30000);
+                    WebElement productUniqueCodeElement = WaitUtils.untilVisible(PLP_Frig.PRODUCT_UNIQUE_CODE, 30000);
                     Assert.assertTrue(productUniqueCodeElement.isDisplayed(), "Unique Product Code not displayed");
-                    WaitUtils.untilVisible(quickSpecs, 30000);
-                    WebElementUtil.scrollAndClickUsingJSE(driver, WebElementUtil.findElement(quickSpecs));
-                    WebElementUtil.scrollAndClickUsingJSE(driver, WebElementUtil.findElement(viewFullSpecsBtn));
+                    WaitUtils.untilVisible(PLP_Frig.QUICK_SPECS, 30000);
+                    WebElementUtil.scrollAndClickUsingJSE(driver, WebElementUtil.findElement(PLP_Frig.QUICK_SPECS));
+                    WebElementUtil.scrollAndClickUsingJSE(driver, WebElementUtil.findElement(PLP_Frig.VIEW_FULL_SPECS_BTN));
                     WebElement featureNameElement = WaitUtils.untilVisible(getFeatureSpecsLocator(SpecsName), 30000);
                     WebElementUtil.scrollToElement(driver, featureNameElement);
                     Assert.assertTrue(featureNameElement.isDisplayed(), SpecsName + " feature element is not displayed.");
-                    WebElement featureElement = WaitUtils.untilVisible(getQuiickSpecsFeatureLocator(SpecsKey, SpecValue), 1);
+                    WebElement featureElement = WaitUtils.untilVisible(PLP_Frig.getQuickSpecsFeatureLocator(SpecsKey, SpecValue), 1);
                     String elementText = featureElement.getText().trim();
                     String[] rangeParts = SpecValue.split("-");
                     if (rangeParts.length == 2) {
@@ -1089,7 +1039,7 @@ public class ElectroluxPLPProductItemsPageActions {
         try {
             WebDriver driver = DriverManager.getDriver();
             loadMoreProducts(driver);
-            verifyProductCount(driver, driver.findElement(productCount));
+            verifyProductCount(driver, driver.findElement(PLP_Frig.PRODUCT_COUNT));
 
             List<WebElement> products = driver.findElements(By.xpath("//div[starts-with(@id,'PlpItem')]"));
             int totalProducts = products.size();
@@ -1172,3 +1122,12 @@ public class ElectroluxPLPProductItemsPageActions {
     }
 
 }
+
+
+
+
+
+
+
+
+

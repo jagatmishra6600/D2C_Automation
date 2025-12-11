@@ -1,7 +1,7 @@
 package com.automation.electrolux.EPIC_04_PLP;
 
-import com.automation.electrolux.pages.EL_ProductCategoryPageActions;
-import com.automation.electrolux.pages.ElectroluxPLPProductItemsPageActions;
+import com.automation.electrolux.pages.ProductCategoryPageActions_Elux;
+import com.automation.electrolux.pages.PLPProductItemsPageActions_Elux;
 import com.automation.electrolux.pages.HomePageActions;
 import com.automation.utils.ExtentReportManager;
 import com.automation.utils.WebElementUtil;
@@ -9,12 +9,12 @@ import org.testng.annotations.Test;
 import com.automation.BaseTest;
 import static com.automation.frigidaire.locators.FrigidaireConstants.electroxWeb;
 
-public class TC_06_Electrolux_Laundry_Filters extends BaseTest {
+public class TC_06_Laundry_Filters_Elux extends BaseTest {
 
 
     HomePageActions homePage = new HomePageActions();
-    EL_ProductCategoryPageActions productCategoryPageActions = new EL_ProductCategoryPageActions();
-    ElectroluxPLPProductItemsPageActions PLPProductItemsPageActions = new ElectroluxPLPProductItemsPageActions();
+    ProductCategoryPageActions_Elux productCategoryPageActions = new ProductCategoryPageActions_Elux();
+    PLPProductItemsPageActions_Elux PLPProductItemsPageActions = new PLPProductItemsPageActions_Elux();
 
     public void navigateToVacuumsProducts(String webSite, String prodCategory, String subProdCategory) throws InterruptedException {
         homePage.navigateToHomePage();

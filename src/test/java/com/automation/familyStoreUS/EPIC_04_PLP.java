@@ -1,8 +1,8 @@
 package com.automation.familyStoreUS;
 
 import com.automation.BaseTest;
-import com.automation.electrolux.pages.EL_ProductCategoryPageActions;
-import com.automation.electrolux.pages.ElectroluxPLPProductItemsPageActions;
+import com.automation.electrolux.pages.ProductCategoryPageActions_Elux;
+import com.automation.electrolux.pages.PLPProductItemsPageActions_Elux;
 import com.automation.electrolux.pages.HomePageActions;
 import com.automation.frigidaire.locators.FrigidaireConstants;
 import com.automation.utils.ExtentReportManager;
@@ -13,8 +13,8 @@ public class EPIC_04_PLP extends BaseTest {
 
 
     HomePageActions homePage = new HomePageActions();
-    EL_ProductCategoryPageActions productCategoryPageActions = new EL_ProductCategoryPageActions();
-    ElectroluxPLPProductItemsPageActions PLPProductItemsPageActions = new ElectroluxPLPProductItemsPageActions();
+    ProductCategoryPageActions_Elux productCategoryPageActions = new ProductCategoryPageActions_Elux();
+    PLPProductItemsPageActions_Elux PLPProductItemsPageActions = new PLPProductItemsPageActions_Elux();
 
 
     public void navigateToVacuumsProducts(String webSite, String prodCategory, String subProdCategory) throws InterruptedException {

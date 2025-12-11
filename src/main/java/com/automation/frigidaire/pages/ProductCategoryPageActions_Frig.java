@@ -5,13 +5,13 @@ import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 
-public class ProductCategoryPageActions {
+public class ProductCategoryPageActions_Frig {
 
 
     private final By pageHeader = By.tagName("h1");
 
 
-public ProductCategoryPageActions clickOnProductMenu( String website , String text) {
+public ProductCategoryPageActions_Frig clickOnProductMenu(String website , String text) {
     By locator;
 
     if (website.equalsIgnoreCase("frigidaire")) {
