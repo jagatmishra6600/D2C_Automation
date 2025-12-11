@@ -605,6 +605,10 @@ public class WebElementUtil {
         return DriverManager.getDriver().getCurrentUrl();
     }
 
+    public static void clickBackButton() {
+         DriverManager.getDriver().navigate().back();
+    }
+
     public static void scrollByPixels(WebDriver driver, int x, int y) {
         try {
             ((JavascriptExecutor) driver).executeScript("window.scrollBy(arguments[0], arguments[1]);", x, y);
