@@ -116,4 +116,33 @@ public class ElectroluxPdpPageActions {
         return expectedProductId.contains(productCode);
     }
 
+    public boolean isProvidedProductIdMatchingWithPLP() {
+        WaitUtils.untilVisible(pdpPage_Locator.selectedProductId);
+        String actualId = WebElementUtil.getText(pdpPage_Locator.selectedProductId).trim();
+        String expectedId = ElectroluxHomePageActions.getProvidedProductId().trim();
+        return actualId.equalsIgnoreCase(expectedId);
+    }
+
+    public boolean isProvidedProductTitleMatchingWithPLP() {
+        WaitUtils.untilVisible(pdpPage_Locator.selectedProductName);
+        String actualId = WebElementUtil.getText(pdpPage_Locator.selectedProductName).trim();
+        String expectedId = ElectroluxHomePageActions.getProvidedProductTitle().trim();
+        return actualId.equalsIgnoreCase(expectedId);
+    }
+
+    public boolean isProvidedProductPriceMatchingWithPLP() {
+        WaitUtils.untilVisible(pdpPage_Locator.selectedProductPrice);
+        String actualPrice = WebElementUtil.getText(pdpPage_Locator.selectedProductPrice).trim();
+        actualPrice = actualPrice.replaceAll("\\.\\d+$", "");
+        String expectedPrice = ElectroluxHomePageActions.getProvidedProductPrice().trim();
+        expectedPrice = expectedPrice.replaceAll("(\\.00|00)$", "");
+        return actualPrice.equalsIgnoreCase(expectedPrice);
+    }
+
+    public DeliveryAndServicePageActionElux clickAddToCartButton() {
+        WebElementUtil.scrollToElementCenter(pdpPage_Locator.addToCartButton);
+        WebElementUtil.clickElement(pdpPage_Locator.addToCartButton);
+        return new DeliveryAndServicePageActionElux();
+    }
+
 }

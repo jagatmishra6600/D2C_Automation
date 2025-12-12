@@ -19,4 +19,9 @@ public class EL_PDP {
     public final By viewFullSpecBtn = By.xpath("//button[text()='View full specs']");
     public final By specificationText = By.xpath("//h3[text()='Specifications']");
     public final By closeModelButton = By.xpath("//h3[text()='Specifications']/following-sibling::img");
+    public final By selectedProductName = By.xpath("//p[contains(@class, 'prod_name Product-title')]");
+    public final By selectedProductId = By.xpath("//p[contains(@class, 'prod_id ')]");
+    public final By selectedProductPrice = By.xpath("//span[contains(@class, 'H3H3_Desktop saleprice')]");
+    public final By addToCartButton = By.xpath("(//span[normalize-space(text())='Add to cart'])[1]");
+
 }
