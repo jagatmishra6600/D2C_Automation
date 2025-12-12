@@ -4,7 +4,7 @@ import com.automation.BaseTest;
 import com.automation.electrolux.pages.ElectroluxFeaturePageActions;
 import com.automation.electrolux.pages.ProductDetailPageActionElux;
 import com.automation.frigidaire.pages.FeaturesPageActions;
-import com.automation.frigidaire.pages.FrigidairePlpPageActions;
+import com.automation.frigidaire.pages.PlpPageActions_Frig;
 import com.automation.utils.ExtentReportManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -13,7 +13,7 @@ public class EPIC_03_TC_05_AQA_PDP_Owners_Electrolux extends BaseTest {
 
     private final ProductDetailPageActionElux homePage = new ProductDetailPageActionElux();
     private final FeaturesPageActions pdpPage = new FeaturesPageActions();
-    private final FrigidairePlpPageActions plpPage = new FrigidairePlpPageActions();
+    private final PlpPageActions_Frig plpPage = new PlpPageActions_Frig();
     private final ElectroluxFeaturePageActions elePage = new ElectroluxFeaturePageActions();
 
     @Test(groups = {"regression"}, description = "Verify My Owners section on PDP page")

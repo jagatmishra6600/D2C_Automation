@@ -2,7 +2,7 @@ package com.automation.frigidaire.EPIC_03_PDPPage;
 
 import com.automation.frigidaire.pages.FeaturesPageActions;
 import com.automation.frigidaire.pages.FrigidaireHomePageActions;
-import com.automation.frigidaire.pages.FrigidairePlpPageActions;
+import com.automation.frigidaire.pages.PlpPageActions_Frig;
 import com.automation.frigidaire.pages.ReviewsPageActions;
 import com.automation.BaseTest;
 import com.automation.utils.ExtentReportManager;
@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 public class TC_03_AQA_PDP_Reviews extends BaseTest {
     private final FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
     private final FeaturesPageActions pdpPage = new FeaturesPageActions();
-    private final FrigidairePlpPageActions plpPage = new FrigidairePlpPageActions();
+    private final PlpPageActions_Frig plpPage = new PlpPageActions_Frig();
     private final ReviewsPageActions reviewsPage = new ReviewsPageActions();
 
     @Test(groups = {"smoke", "regression"}, description = "Verify Reviews on PDP page")

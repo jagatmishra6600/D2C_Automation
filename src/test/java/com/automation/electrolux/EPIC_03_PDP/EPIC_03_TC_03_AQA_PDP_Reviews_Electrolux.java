@@ -4,7 +4,7 @@ import com.automation.BaseTest;
 import com.automation.electrolux.pages.ElectroluxFeaturePageActions;
 import com.automation.electrolux.pages.ElectroluxReviewsPageActions;
 import com.automation.frigidaire.pages.FrigidaireHomePageActions;
-import com.automation.frigidaire.pages.FrigidairePlpPageActions;
+import com.automation.frigidaire.pages.PlpPageActions_Frig;
 import com.automation.utils.ExtentReportManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 public class EPIC_03_TC_03_AQA_PDP_Reviews_Electrolux extends BaseTest {
     private final FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
     private final ElectroluxFeaturePageActions page = new ElectroluxFeaturePageActions();
-    private final FrigidairePlpPageActions plpPage = new FrigidairePlpPageActions();
+    private final PlpPageActions_Frig plpPage = new PlpPageActions_Frig();
     private final ElectroluxReviewsPageActions reviewsPage = new ElectroluxReviewsPageActions();
 
     @Test(groups = {"smoke", "regression"}, description = "Verify Reviews on PDP page")

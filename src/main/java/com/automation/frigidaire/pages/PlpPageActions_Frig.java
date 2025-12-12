@@ -1,13 +1,14 @@
 package com.automation.frigidaire.pages;
 
+import com.automation.frigidaire.locators.FE_PLP;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.WebElement;
-import com.automation.frigidaire.locators.FE_PLP;
+import com.automation.frigidaire.locators.PLP_Frig;
 
 import static com.automation.utils.WaitUtils.untilClickable;
 
-public class FrigidairePlpPageActions {
+public class PlpPageActions_Frig {
 
     FE_PLP plpPage_Locator = new FE_PLP();
 
@@ -22,7 +23,7 @@ public class FrigidairePlpPageActions {
     private static String providedProductPrice;
     private static String providedProductId;
 
-    public FrigidairePlpPageActions closePopupModel() {
+    public PlpPageActions_Frig closePopupModel() {
 
         try {
             WaitUtils.untilVisible(plpPage_Locator.closePopupButton, 20);
@@ -36,31 +37,31 @@ public class FrigidairePlpPageActions {
         return this;
     }
 
-    public FrigidairePlpPageActions storeSelectedProductId() {
+    public PlpPageActions_Frig storeSelectedProductId() {
         WaitUtils.untilVisible(plpPage_Locator.plpProductId);
         selectedProductId = WebElementUtil.getText(plpPage_Locator.plpProductId);
         return this;
     }
 
-    public FrigidairePlpPageActions storeSelectedProductTitle() {
+    public PlpPageActions_Frig storeSelectedProductTitle() {
         WaitUtils.untilVisible(plpPage_Locator.plpProductTitle);
         selectedProductTitle = WebElementUtil.getText(plpPage_Locator.plpProductTitle);
         return this;
     }
 
-    public FrigidairePlpPageActions storeSelectedProductPrice() {
+    public PlpPageActions_Frig storeSelectedProductPrice() {
         WaitUtils.untilVisible(plpPage_Locator.plpProductPrice);
         selectedProductPrice = WebElementUtil.getText(plpPage_Locator.plpProductPrice);
         return this;
     }
 
-    public FrigidairePlpPageActions storeSelectedProductReviewNumber() {
+    public PlpPageActions_Frig storeSelectedProductReviewNumber() {
         WaitUtils.untilVisible(plpPage_Locator.plpProductReviewNumber);
         selectedProductReviewNumber = WebElementUtil.getText(plpPage_Locator.plpProductReviewNumber);
         return this;
     }
 
-    public FrigidairePlpPageActions storeProductDimensions() {
+    public PlpPageActions_Frig storeProductDimensions() {
         WaitUtils.untilVisible(plpPage_Locator.plpHeight);
         WaitUtils.untilVisible(plpPage_Locator.plpWidth);
         WaitUtils.untilVisible(plpPage_Locator.plpDepth);
@@ -83,19 +84,19 @@ public class FrigidairePlpPageActions {
         return WebElementUtil.isElementPresented(plpPage_Locator.frenchdoorProductId);
     }
 
-    public FrigidairePlpPageActions storeProvidedProductId() {
+    public PlpPageActions_Frig storeProvidedProductId() {
         WaitUtils.untilVisible(plpPage_Locator.frenchdoorProductIdText);
         providedProductId = WebElementUtil.getText(plpPage_Locator.frenchdoorProductIdText);
         return this;
     }
 
-    public FrigidairePlpPageActions storeProvidedProductTitle() {
+    public PlpPageActions_Frig storeProvidedProductTitle() {
         WaitUtils.untilVisible(plpPage_Locator.frenchdoorProductTitle);
         providedProductTitle = WebElementUtil.getText(plpPage_Locator.frenchdoorProductTitle);
         return this;
     }
 
-    public FrigidairePlpPageActions storeProvidedProductPrice() {
+    public PlpPageActions_Frig storeProvidedProductPrice() {
         WaitUtils.untilVisible(plpPage_Locator.frenchdoorProductPrice);
         providedProductPrice = WebElementUtil.getText(plpPage_Locator.frenchdoorProductPrice);
         return this;

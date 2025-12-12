@@ -21,14 +21,14 @@ public class FrigidaireDAndSPageActions {
     public boolean isProductIdMatchingWithPLP() {
         WaitUtils.untilVisible(dandsPage_Locator.productIdText);
         String actualTitle = WebElementUtil.getText(dandsPage_Locator.productIdText).trim();
-        String expectedTitle = FrigidairePlpPageActions.getProvidedProductId().trim();
+        String expectedTitle = PlpPageActions_Frig.getProvidedProductId().trim();
         return actualTitle.toLowerCase().contains(expectedTitle.toLowerCase());
     }
 
     public boolean isProductTitleMatchingWithPLP() {
         WaitUtils.untilVisible(dandsPage_Locator.productTitleText);
         String actualTitle = WebElementUtil.getText(dandsPage_Locator.productTitleText).trim();
-        String expectedTitle = FrigidairePlpPageActions.getProvidedProductTitle().trim();
+        String expectedTitle = PlpPageActions_Frig.getProvidedProductTitle().trim();
         return actualTitle.toLowerCase().contains(expectedTitle.toLowerCase());
     }
 
@@ -36,7 +36,7 @@ public class FrigidaireDAndSPageActions {
         WaitUtils.untilVisible(dandsPage_Locator.productPriceText);
         String actualPrice = WebElementUtil.getText(dandsPage_Locator.productPriceText).trim();
         actualPrice = actualPrice.replaceAll("\\.\\d+$", "");
-        String expectedPrice = FrigidairePlpPageActions.getProvidedProductPrice().trim();
+        String expectedPrice = PlpPageActions_Frig.getProvidedProductPrice().trim();
         expectedPrice = expectedPrice.replaceAll("(\\.00|00)$", "");
         return actualPrice.equalsIgnoreCase(expectedPrice);
     }

@@ -4,7 +4,6 @@ import com.automation.BaseTest;
 import com.automation.electrolux.pages.EluctroluxCategoryListingPage;
 import com.automation.frigidaire.pages.FeaturesPageActions;
 import com.automation.frigidaire.pages.FrigidaireHomePageActions;
-import com.automation.frigidaire.pages.FrigidairePlpPageActions;
 import com.automation.frigidaire.pages.FrigidaireRefrigeratorPage;
 import com.automation.frigidaire.utils.WebElementUtil;
 import com.automation.utils.ExtentReportManager;
