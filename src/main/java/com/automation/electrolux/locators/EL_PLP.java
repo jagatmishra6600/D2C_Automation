@@ -9,4 +9,8 @@ public class EL_PLP {
     public final By plpProductTitle = By.xpath("(//div[@id='BvProductRating']/../../../../following-sibling::div/a)[1]");
     public final By plpProductPrice = By.xpath("(//span[contains(@class, 'H3H3_Desktop')])[1]");
     public final By plpProductReview = By.xpath("(//div[@id='BvProductRating'])[1]");
+
+
+
+
 }

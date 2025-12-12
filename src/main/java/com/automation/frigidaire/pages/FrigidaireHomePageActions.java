@@ -3,7 +3,6 @@ package com.automation.frigidaire.pages;
 import com.automation.utils.ConfigReader;
 import com.automation.utils.DriverManager;
 import com.automation.utils.WaitUtils;
-import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -359,9 +358,9 @@ public class FrigidaireHomePageActions {
     }
 
 
-    public ProductCategoryPageActions clickProductsLink() {
+    public ProductCategoryPageActions_Frig clickProductsLink() {
         WebElementUtil.clickElement(productsLink);
-        return new ProductCategoryPageActions();
+        return new ProductCategoryPageActions_Frig();
     }
     public boolean isLoginDisplayed() {
         return WebElementUtil.isDisplayed(mainMenu_Login_OrderStatus);
@@ -426,16 +425,16 @@ public class FrigidaireHomePageActions {
     	return new FrigidaireLoginPageActions();
     }
 
-    public FrigidairePlpPageActions clickWindowMounted() {
+    public PlpPageActions_Frig clickWindowMounted() {
         WebElementUtil.clickElement(homePage_Locator.navigationBarAirConditioners);
         WebElementUtil.clickElement(homePage_Locator.windowMounted);
-        return new FrigidairePlpPageActions();
+        return new PlpPageActions_Frig();
     }
 
-    public FrigidairePlpPageActions clickFrenchDoor() {
+    public PlpPageActions_Frig clickFrenchDoor() {
         WebElementUtil.clickElement(homePage_Locator.navigationBarKitchen);
         WebElementUtil.clickElement(homePage_Locator.frenchDoor);
-        return new FrigidairePlpPageActions();
+        return new PlpPageActions_Frig();
     }
 
 

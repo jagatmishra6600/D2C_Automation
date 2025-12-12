@@ -12,7 +12,7 @@ public class EPIC_03_TC_02_AQA_Dnads_OrderSummary_Frig extends BaseTest {
 
     private final FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
     private final FrigidairePdpPageActions pdpPage = new FrigidairePdpPageActions();
-    private final FrigidairePlpPageActions plpPage = new FrigidairePlpPageActions();
+    private final PlpPageActions_Frig plpPage = new PlpPageActions_Frig();
     private final FrigidaireDAndSPageActions dnsPage = new FrigidaireDAndSPageActions();
     private final CartPageActionsFrig cartOage = new CartPageActionsFrig();
     private String currentUrl;

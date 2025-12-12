@@ -44,7 +44,7 @@ public class LoginPageActionsFsus {
 	 }
 	 
 	 
-	 public HomePageActionsFsus loginWithDefaultCredentials() throws InterruptedException {
+	 public HomePageActionsFsus loginWithDefaultCredentials() {
 		 navigateToLoginPage();
 		 enterEmailAddress(UserTestData.getUserName())
 							 .enterPassword(UserTestData.getPassword())
@@ -94,6 +94,19 @@ public class LoginPageActionsFsus {
 		 WebElementUtil.scrollIntoView(FSUS_LoginPage.registerWithInvitationCodeLink);
 		 WebElementUtil.clickElement(FSUS_LoginPage.registerWithInvitationCodeLink);
 		 return new CustomerRegistrationPageActionsFsus();
+	 }
+	 
+	 public ForgotPasswordPageActionsFsus clickForgotPasswordLink() {
+		 WebElementUtil.scrollIntoView(FSUS_LoginPage.forgotYourPasswordLink);
+		 WebElementUtil.clickElement(FSUS_LoginPage.forgotYourPasswordLink);
+		 if(WebElementUtil.isDisplayed(FSUS_LoginPage.forgotYourPasswordLink)) {
+			 WebElementUtil.clickElement(FSUS_LoginPage.forgotYourPasswordLink);
+		 }
+		 return new ForgotPasswordPageActionsFsus();
+	 }
+	 
+	 public ForgotPasswordPageActionsFsus resetPassword(String emailAddress) {
+		 return navigateToLoginPage().clickForgotPasswordLink().resetPassword(emailAddress);
 	 }
 	 
 }

@@ -53,4 +53,12 @@ public class UserTestData {
     	return 	new FSCreateAccountData(emailAddress
     				,FIRST_NAME,LAST_NAME,PASSWORD,invitationCode,ZIPCODE);
     }
+    
+    public static String generateRandomPassword() {
+    	return "Test@1234_"+generateRandomNumber();
+    }
+    
+    private static int generateRandomNumber() {
+    	return WebElementUtil.getRandomNumber(10000);
+    }
 }

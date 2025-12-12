@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 public class EPIC_03_TC_05_AQA_PDP_Owners_Frig extends BaseTest {
     private final FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
     private final FeaturesPageActionsFrig pdpPage = new FeaturesPageActionsFrig();
-    private final FrigidairePlpPageActions plpPage = new FrigidairePlpPageActions();
+    private final PlpPageActions_Frig plpPage = new PlpPageActions_Frig();
 
     @Test(groups = {"regression"}, description = "Verify My Owners section on PDP page")
     public void EPIC_03_PDPPage_TC_05_verifyFeaturesSectionOnPDP() {

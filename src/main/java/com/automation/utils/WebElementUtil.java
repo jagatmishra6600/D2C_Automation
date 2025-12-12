@@ -196,6 +196,7 @@ public class WebElementUtil {
     }
 
     public static WebElement scrollIntoView(By locator) {
+    	isDisplayed(locator);
         WebElement element = DriverManager.getDriver().findElement(locator);
         ((JavascriptExecutor) DriverManager.getDriver()).executeScript("arguments[0].scrollIntoView({behavior: 'instant', block: 'center', inline: 'nearest'});", element);
         return element;
@@ -426,7 +427,7 @@ public class WebElementUtil {
             Thread.currentThread().interrupt();
         }
     }
-    
+
     public static void waitForCondition(ExpectedCondition<?> condition) { 
     	new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(15))
 			.until(condition);
@@ -436,7 +437,21 @@ public class WebElementUtil {
     	new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(seconds))
 			.until(condition);
 	}
-    
+
+    public static WebElement waitForClickable(WebDriver driver, By locator, int time) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
+        return wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
+    public static void scrollAndClickUsingJSE(WebDriver driver, By locator) {
+        try {
+            WebElement element = driver.findElement(locator);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+        } catch (Exception e) { throw new RuntimeException(e); }
+    }
+
+
     public static String getDomProperty(By locator, String propertyName) {
     	var element = DriverManager.getDriver().findElement(locator);
     	return element.getDomProperty(propertyName);
