@@ -13,14 +13,14 @@ import com.automation.familystoreus.pages.YopmailPageActionsFsus;
 import com.automation.utils.ExtentReportManager;
 import com.automation.utils.UserTestData;
 
-public class EPIC_01_FSUS_TC_01_AQA_Authentication_CustomerRegistration extends BaseTest {
+public class EPIC_01_TC_01_AQA_Authentication_CustomerRegistration_Fsus extends BaseTest {
 	 LoginPageActionsFsus loginPage = new LoginPageActionsFsus();
 	 YopmailPageActionsFsus yopmailPage = new YopmailPageActionsFsus();
 	 CustomerRegistrationPageActionsFsus customerRegistrationPage = new CustomerRegistrationPageActionsFsus();
 	 HomePageActionsFsus homePage = new HomePageActionsFsus();
 	 
 	 @Test(groups = {"smoke", "regression"}, description = "Verify that a new user receives the email invitation, uses the invitation code, completes registration successfully, and is logged in with the correct greeting message.")
-	    public void EPIC_01_FSUS_TC_01_Verify_NewUserInvitation_And_RegistrationFlow() throws InterruptedException {
+	    public void EPIC_01_TC_01_Verify_NewUserInvitation_And_RegistrationFlow() throws InterruptedException {
 		 	var newUserEmail = UserTestData.getDisposableYopmailEmailAddress();
 		 	var inviteUserData = UserTestData.getInviteUserData(newUserEmail);
 		 	loginPage.loginWithDefaultCredentials()
