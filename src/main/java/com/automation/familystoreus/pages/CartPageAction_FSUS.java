@@ -1,11 +1,11 @@
-package com.automation.electrolux.pages;
+package com.automation.familystoreus.pages;
 
-import com.automation.electrolux.locators.CartLocatorElux;
+import com.automation.familystoreus.locators.CartPageLocator_FSUS;
 import com.automation.utils.WebElementUtil;
 
-public class CartPageActionsElux {
+public class CartPageAction_FSUS {
 
-    CartLocatorElux cartPage_Locator = new CartLocatorElux();
+    CartPageLocator_FSUS cartPage_Locator = new CartPageLocator_FSUS();
 
     public boolean isOrderSummaryTextVisibleAndCorrect(String expectedText) {
         WebElementUtil.isDisplayed(cartPage_Locator.orderSummaryText);
@@ -37,17 +37,6 @@ public class CartPageActionsElux {
         return WebElementUtil.isDisplayed(cartPage_Locator.homeDeliveryPrice);
     }
 
-    public boolean isInstallationPartTextVisibleAndCorrect(String expectedText) {
-        WebElementUtil.scrollToElementCenter(cartPage_Locator.installationPartsText);
-        WebElementUtil.isDisplayed(cartPage_Locator.installationPartsText);
-        String actualText =  WebElementUtil.getText(cartPage_Locator.installationPartsText).trim();
-        return actualText.toLowerCase().contains(expectedText.toLowerCase());
-    }
-
-    public boolean isInstallationPriceVisible() {
-        WebElementUtil.scrollToElementCenter(cartPage_Locator.installationPartsPrice);
-        return WebElementUtil.isDisplayed(cartPage_Locator.installationPartsPrice);
-    }
 
     public boolean isTotalTextVisibleAndCorrect(String expectedText) {
         WebElementUtil.scrollToElementCenter(cartPage_Locator.totalText);
@@ -61,14 +50,8 @@ public class CartPageActionsElux {
         return WebElementUtil.isDisplayed(cartPage_Locator.totalPrice);
     }
 
-    public boolean isPromoCodeTextVisibleAndCorrect(String expectedText) {
-        WebElementUtil.scrollToElementCenter(cartPage_Locator.promoCodeText);
-        WebElementUtil.isDisplayed(cartPage_Locator.promoCodeText);
-        String actualText =  WebElementUtil.getText(cartPage_Locator.promoCodeText).trim();
-        return actualText.toLowerCase().contains(expectedText.toLowerCase());
-    }
 
-    public CartPageActionsElux clickProceedToCheckOutButton() {
+    public CartPageAction_FSUS clickProceedToCheckOutButton() {
         WebElementUtil.clickElement(cartPage_Locator.proceedToCheckOutButton);
         return this;
     }

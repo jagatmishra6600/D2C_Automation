@@ -1,12 +1,8 @@
 package com.automation.frigidaire.pages;
 
 import com.automation.frigidaire.locators.FE_DandS;
-import com.automation.frigidaire.locators.FE_PDP;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 
 public class FrigidaireDAndSPageActions {
 
