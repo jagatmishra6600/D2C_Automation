@@ -7,7 +7,7 @@ import com.automation.utils.WaitUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class EPIC_03_TC_02_AQA_Dnads_OrderSummary_Frig extends BaseTest {
+public class EPIC_07_TC_02_AQA_Dnads_OrderSummary extends BaseTest {
 
     private final FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
     private final FrigidairePdpPageActions pdpPage = new FrigidairePdpPageActions();

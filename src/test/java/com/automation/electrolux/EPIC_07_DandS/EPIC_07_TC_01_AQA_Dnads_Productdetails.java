@@ -7,7 +7,7 @@ import com.automation.utils.WaitUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class EPIC_03_TC_01_AQA_Dnads_Productdetails extends BaseTest {
+public class EPIC_07_TC_01_AQA_Dnads_Productdetails extends BaseTest {
 
     private final ElectroluxHomePageActions homePage = new ElectroluxHomePageActions();
     private final ElectroluxPdpPageActions pdpPage = new ElectroluxPdpPageActions();
