@@ -1,32 +1,32 @@
-package com.automation.electrolux.EPIC_03_PDP;
+package com.automation.fsus.EPIC_03_PDPPage;
 
 import com.automation.BaseTest;
-import com.automation.electrolux.pages.HomePageActionsElux;
-import com.automation.electrolux.pages.PdpPageActionsElux;
-import com.automation.electrolux.pages.PlpPageActionsElux;
+import com.automation.familystoreus.pages.HomePageActionsFsus;
+import com.automation.familystoreus.pages.LoginPageActionsFsus;
+import com.automation.familystoreus.pages.PdpPageActions_FSUS;
+import com.automation.familystoreus.pages.PlpPageActions_FSUS;
 import com.automation.utils.ExtentReportManager;
-import com.automation.utils.WaitUtils;
-import com.automation.utils.WebElementUtil;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class EPIC_03_TC_02_AQA_Pdppage_Product_Specs_Elux extends BaseTest {
+public class EPIC_03_TC_18_AQA_Pdppage_Product_Specs extends BaseTest {
 
-    private final HomePageActionsElux homePage = new HomePageActionsElux();
-    private final PdpPageActionsElux pdpPage = new PdpPageActionsElux();
-    private final PlpPageActionsElux plpPage = new PlpPageActionsElux();
-    private String currentUrl;
+    private final HomePageActionsFsus homePage = new HomePageActionsFsus();
+    private final PdpPageActions_FSUS pdpPage = new PdpPageActions_FSUS();
+    private final PlpPageActions_FSUS plpPage = new PlpPageActions_FSUS();
+    LoginPageActionsFsus loginPage = new LoginPageActionsFsus();
 
 
-    @Test(groups = {"smoke", "regression"}, description = "Verify product quick specification on PDP page for window mounted AC and Vacuums")
-    public void EPIC_03_PDPPage_TC_02_verifyProductSpecificationOnPdpPageForWindowMountedACAndVacuums() {
-        homePage.navigateToHomePage();
-        WaitUtils.untilPageLoadComplete();
+    @Test(groups = {"smoke", "regression"}, description = "Verify product quick specification on PDP page for Vacuums")
+    public void EPIC_03_PDPPage_TC_18_verifyProductSpecificationOnPdpPageForVacuums() throws InterruptedException {
+        loginPage.loginWithDefaultCredentials();
+        loginPage.acceptCookies();
+
         homePage.clickVacuums();
         plpPage.closePopupModel();
         plpPage.storeSelectedProductId();
         plpPage.clickFirstProduct();
-        pdpPage.clickQuickSpec();
+        pdpPage.clickSpec();
 
         Assert.assertTrue(pdpPage.isKeySpecificationHeadingVisibleOnPDP(), "Product key specification heading is not visible on PDP page");
         Assert.assertTrue(pdpPage.isHeightVisibleOnPDP(), "Product Height is not visible on PDP page");
@@ -42,18 +42,18 @@ public class EPIC_03_TC_02_AQA_Pdppage_Product_Specs_Elux extends BaseTest {
 
         Assert.assertTrue(pdpPage.isFullProductSpecMatchedTheProductId(), "Product id is not matched in Specification file");
 
-        ExtentReportManager.getTest().pass("Verified quick specification on PDP page for window mounted AC and Vacuums");
+        ExtentReportManager.getTest().pass("Verified quick specification on PDP page for Vacuums");
     }
 
     @Test(groups = {"smoke", "regression"}, description = "Verify product quick specification on PDP page for french door refrigerator and Washers")
-    public void EPIC_03_PDPPage_TC_02_verifyProductSpecificationOnPdpPageForFrenchDoorFridgeAndWashers() {
-        homePage.navigateToHomePage();
-        WaitUtils.untilPageLoadComplete();
+    public void EPIC_03_PDPPage_TC_18_verifyProductSpecificationOnPdpPageForWashers() throws InterruptedException {
+        loginPage.loginWithDefaultCredentials();
+        loginPage.acceptCookies();
         homePage.clickWasher();
         plpPage.closePopupModel();
         plpPage.storeSelectedProductId();
         plpPage.clickFirstProduct();
-        pdpPage.clickQuickSpec();
+        pdpPage.clickSpec();
 
         Assert.assertTrue(pdpPage.isKeySpecificationHeadingVisibleOnPDP(), "Product key specification heading is not visible on PDP page");
         Assert.assertTrue(pdpPage.isHeightVisibleOnPDP(), "Product Height is not visible on PDP page");
@@ -69,7 +69,7 @@ public class EPIC_03_TC_02_AQA_Pdppage_Product_Specs_Elux extends BaseTest {
 
         Assert.assertTrue(pdpPage.isFullProductSpecMatchedTheProductId(), "Product id is not matched in Specification file");
 
-        ExtentReportManager.getTest().pass("Verified quick specification on PDP page for french door refrigerator and Washers");
+        ExtentReportManager.getTest().pass("Verified quick specification on PDP page for Washers");
     }
 
 }
