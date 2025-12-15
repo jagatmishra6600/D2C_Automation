@@ -10,7 +10,7 @@ import com.automation.utils.ExtentReportManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class EPIC_03_TC_01_AQA_Dnads_Productdetails extends BaseTest {
+public class EPIC_07_TC_01_AQA_Dnads_Productdetails extends BaseTest {
 
     private final HomePageActionsFsus homePage = new HomePageActionsFsus();
     private final PdpPageActions_FSUS pdpPage = new PdpPageActions_FSUS();
