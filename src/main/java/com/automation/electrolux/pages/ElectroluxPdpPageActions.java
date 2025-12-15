@@ -5,7 +5,6 @@ import com.automation.utils.BrowserUtils;
 import com.automation.utils.DriverManager;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
-import org.openqa.selenium.By;
 
 public class ElectroluxPdpPageActions {
 

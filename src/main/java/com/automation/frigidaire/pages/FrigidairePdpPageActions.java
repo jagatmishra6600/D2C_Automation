@@ -3,7 +3,6 @@ package com.automation.frigidaire.pages;
 import com.automation.frigidaire.locators.FE_PDP;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
-import org.openqa.selenium.By;
 
 public class FrigidairePdpPageActions {
 

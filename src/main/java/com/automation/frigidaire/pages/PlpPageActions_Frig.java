@@ -4,8 +4,6 @@ import com.automation.frigidaire.locators.FE_PLP;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.WebElement;
-import com.automation.frigidaire.locators.PLP_Frig;
-
 import static com.automation.utils.WaitUtils.untilClickable;
 
 public class PlpPageActions_Frig {

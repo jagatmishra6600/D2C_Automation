@@ -1,7 +1,6 @@
 package com.automation.frigidaire.pages;
 
 import com.automation.frigidaire.locators.CartLocatorFrig;
-import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
 
 public class CartPageActionsFrig {

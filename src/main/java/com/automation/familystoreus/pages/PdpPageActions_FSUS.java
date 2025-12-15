@@ -1,10 +1,6 @@
 package com.automation.familystoreus.pages;
 
-import com.automation.electrolux.locators.EL_PDP;
-import com.automation.electrolux.pages.DeliveryAndServicePageActionElux;
-import com.automation.electrolux.pages.ElectroluxHomePageActions;
 import com.automation.familystoreus.locators.ProductDetailsPageLocator_FSUS;
-import com.automation.frigidaire.pages.FrigidairePlpPageActions;
 import com.automation.utils.BrowserUtils;
 import com.automation.utils.DriverManager;
 import com.automation.utils.WaitUtils;
@@ -138,7 +134,7 @@ public class PdpPageActions_FSUS {
         WaitUtils.untilVisible(pdpPage_Locator.pdpHeight);
 
         String actualHeight = WebElementUtil.getText(pdpPage_Locator.pdpHeight).trim();
-        String expectedHeight = FrigidairePlpPageActions.getSelectedHeight().trim();
+        String expectedHeight = PlpPageActions_FSUS.getSelectedHeight().trim();
 
         return actualHeight.equalsIgnoreCase(expectedHeight);
     }
@@ -148,7 +144,7 @@ public class PdpPageActions_FSUS {
         WaitUtils.untilVisible(pdpPage_Locator.pdpWidth);
 
         String actualWidth = WebElementUtil.getText(pdpPage_Locator.pdpWidth).trim();
-        String expectedWidth = FrigidairePlpPageActions.getSelectedWidth().trim();
+        String expectedWidth = PlpPageActions_FSUS.getSelectedWidth().trim();
 
         return actualWidth.equalsIgnoreCase(expectedWidth);
     }
@@ -158,7 +154,7 @@ public class PdpPageActions_FSUS {
         WaitUtils.untilVisible(pdpPage_Locator.pdpDepth);
 
         String actualDepth = WebElementUtil.getText(pdpPage_Locator.pdpDepth).trim();
-        String expectedDepth = FrigidairePlpPageActions.getSelectedDepth().trim();
+        String expectedDepth = PlpPageActions_FSUS.getSelectedDepth().trim();
 
         return actualDepth.equalsIgnoreCase(expectedDepth);
     }

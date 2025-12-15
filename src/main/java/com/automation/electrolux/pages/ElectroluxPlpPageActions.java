@@ -3,7 +3,6 @@ package com.automation.electrolux.pages;
 import com.automation.electrolux.locators.EL_PLP;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import static com.automation.utils.WaitUtils.untilClickable;
