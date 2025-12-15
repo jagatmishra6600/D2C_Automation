@@ -123,15 +123,15 @@ public class FeaturesPageActionsFrig {
     }
 
     public void selectProductFromPLP() {
-        WebElementUtil.waitForElementToBeVisible(locators.productPDP, 10);
-        WebElementUtil.waitForElementToBeClickable(locators.productPDP, 10);
+        WebElementUtil.waitForElementToBeVisible(locators.productPDP, 20);
+        WebElementUtil.waitForElementToBeClickable(locators.productPDP, 20);
         WebElementUtil.scrollIntoView(locators.productPDP);
         WebElementUtil.clickElement(locators.productPDP);
     }
 
     public boolean validateFeatureTitle(){
+        WebElementUtil.waitForElementToBeVisible(locators.featureHeading, 20);
         WebElementUtil.scrollToElementStable(locators.featureHeading);
-        WebElementUtil.waitForElementToBeVisible(locators.featureHeading, 10);
         WebElementUtil.clickElement(locators.featureHeading);
         return WebElementUtil.isDisplayed(locators.featureHeading);
     }
@@ -140,7 +140,7 @@ public class FeaturesPageActionsFrig {
         WebElementUtil.scrollToElementStable(locators.featureHeading);
         WebElementUtil.clickElement(locators.featureHeading);
         WebElementUtil.scrollToElementStable(locators.viewAll);
-        WebElementUtil.waitForElementToBeVisible(locators.viewAll, 10);
+        WebElementUtil.waitForElementToBeVisible(locators.viewAll, 20);
         WebElementUtil.clickElement(locators.viewAll);
         WebElementUtil.waitForElementToBeVisible(locators.featureBanner, 10);
         return WebElementUtil.isDisplayed(locators.featureBanner);
@@ -186,8 +186,8 @@ public class FeaturesPageActionsFrig {
     }
 
     public boolean validateGuideAndManualSection() {
-        WebElementUtil.waitForElementToBeVisible(locators.ownerTitle, 10);
-        WebElementUtil.waitForElementToBeVisible(locators.ownerSection, 10);
+        WebElementUtil.waitForElementToBeVisible(locators.ownerTitle, 20);
+        WebElementUtil.waitForElementToBeVisible(locators.ownerSection, 20);
         WebElementUtil.scrollToElementStable(locators.ownerSection);
         return WebElementUtil.isDisplayed(locators.ownerSection);
     }
@@ -285,6 +285,7 @@ public class FeaturesPageActionsFrig {
     }
 
     public boolean validateReplacementPartsTile() {
+        WebElementUtil.waitForElementToBeVisible(locators.replacementPartsTile, 20);
         WebElementUtil.scrollToElementStable(locators.replacementPartsTile);
         if (!WebElementUtil.isDisplayed(locators.replacementPartsTile)) {
             System.err.println("Replacement Parts tile is not visible.");
@@ -298,6 +299,7 @@ public class FeaturesPageActionsFrig {
     }
 
     public boolean validateRepairsServiceTile() {
+        WebElementUtil.waitForElementToBeVisible(locators.repairsServiceTile, 20);
         WebElementUtil.scrollToElementStable(locators.repairsServiceTile);
         if (!WebElementUtil.isDisplayed(locators.repairsServiceTile)) {
             System.err.println("Repairs & Service tile is not visible.");

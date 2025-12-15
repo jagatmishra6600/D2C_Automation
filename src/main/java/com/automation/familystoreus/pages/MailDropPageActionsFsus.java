@@ -3,8 +3,7 @@ package com.automation.familystoreus.pages;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
-import com.automation.familystoreus.locators.MailDropPage_Fsus;
-import static com.automation.familystoreus.locators.MailDropPage_Fsus.*;
+import com.automation.familystoreus.locators.MailDropLocatorsFsus;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
 
@@ -17,18 +16,18 @@ public class MailDropPageActionsFsus {
 	}
 	
 	public MailDropPageActionsFsus enterEmailAddress(String emailAddress) {
-		WebElementUtil.isDisplayed(MailDropPage_Fsus.firstMail);
-		WebElementUtil.sendKeys(MailDropPage_Fsus.header_EmailAddressField, emailAddress);
+		WebElementUtil.isDisplayed(MailDropLocatorsFsus.firstMail);
+		WebElementUtil.sendKeys(MailDropLocatorsFsus.header_EmailAddressField, emailAddress);
 		return this;
 	}
 	
 	public MailDropPageActionsFsus clickViewMailBoxButton() {
-		WebElementUtil.clickElement(MailDropPage_Fsus.header_ViewMailBoxButton);
+		WebElementUtil.clickElement(MailDropLocatorsFsus.header_ViewMailBoxButton);
 		return this;
 	}
 	
 	public boolean isInboxLoaded() {
-		return WebElementUtil.isDisplayed(MailDropPage_Fsus.inboxRefreshButton);
+		return WebElementUtil.isDisplayed(MailDropLocatorsFsus.inboxRefreshButton);
 	}
 	
 	public MailDropPageActionsFsus login(String emailAddress) {
@@ -39,19 +38,19 @@ public class MailDropPageActionsFsus {
 	}
 
 	public MailDropPageActionsFsus clickInboxRefresh() {
-		WebElementUtil.clickElement(MailDropPage_Fsus.inboxRefreshButton);
+		WebElementUtil.clickElement(MailDropLocatorsFsus.inboxRefreshButton);
 		return this;
 	}
 	
 	public MailDropPageActionsFsus clickFirstMailInInbox() {
 		waitForFirstMailToAppear();
-		WebElementUtil.clickElement(MailDropPage_Fsus.firstMail);
+		WebElementUtil.clickElement(MailDropLocatorsFsus.firstMail);
 		return this;
 	}
 	
 	public void waitForFirstMailToAppear() {
 		var count = 0;
-		while(!WebElementUtil.isDisplayed(MailDropPage_Fsus.firstMail) && count<3) {
+		while(!WebElementUtil.isDisplayed(MailDropLocatorsFsus.firstMail) && count<3) {
 			firstMailFlag = true;
 			clickRefreshMailboxButton();
 			count++;
@@ -69,7 +68,7 @@ public class MailDropPageActionsFsus {
 	public MailDropPageActionsFsus refreshInboxUntilMailTitleMatches(String expectedMailTitle) {
 		for(int i=0;i<5;i++) {
 			WaitUtils.sleep(2000);
-			WebElementUtil.isDisplayed(MailDropPage_Fsus.mail_Title);
+			WebElementUtil.isDisplayed(MailDropLocatorsFsus.mail_Title);
 			if(getMailTitle().equalsIgnoreCase(expectedMailTitle)) {
 				return this;
 			}
@@ -80,7 +79,7 @@ public class MailDropPageActionsFsus {
 	
 	public MailDropPageActionsFsus openFirstMailInInbox(String emailAddress) {
 		login(emailAddress).clickInboxRefresh().clickFirstMailInInbox();
-		WebElementUtil.isDisplayed(MailDropPage_Fsus.mail_Title);
+		WebElementUtil.isDisplayed(MailDropLocatorsFsus.mail_Title);
 		return this;
 	}
 	
@@ -95,33 +94,33 @@ public class MailDropPageActionsFsus {
 	}
 
 	public String getMailTitle() {
-		WebElementUtil.isDisplayed(MailDropPage_Fsus.mail_Title);
-		var mailTitleValue = WebElementUtil.getText(MailDropPage_Fsus.mail_Title);
+		WebElementUtil.isDisplayed(MailDropLocatorsFsus.mail_Title);
+		var mailTitleValue = WebElementUtil.getText(MailDropLocatorsFsus.mail_Title);
 	    if(mailTitleValue.isEmpty() || mailTitleValue.equals("")) {
-	    	WebElementUtil.isDisplayed(MailDropPage_Fsus.mail_Title);
-	    	mailTitleValue = WebElementUtil.getText(MailDropPage_Fsus.mail_Title);
+	    	WebElementUtil.isDisplayed(MailDropLocatorsFsus.mail_Title);
+	    	mailTitleValue = WebElementUtil.getText(MailDropLocatorsFsus.mail_Title);
 	    }
 	    return mailTitleValue;
 	}
 	
 	public boolean isMailResetYourPasswordLinkDisplayed() {
-	    return WebElementUtil.performInFrame(MailDropPage_Fsus.mailFrame, () -> 
-	        WebElementUtil.isDisplayed(MailDropPage_Fsus.mail_ResetPasswordLink)
+	    return WebElementUtil.performInFrame(MailDropLocatorsFsus.mailFrame, () ->
+	        WebElementUtil.isDisplayed(MailDropLocatorsFsus.mail_ResetPasswordLink)
 	    );
 	}
 	
 	public ResetPasswordPageActionsFsus clickMailResetYourPasswordLink() {
-		WebElementUtil.isDisplayed(MailDropPage_Fsus.mail_Title);
-		WebElementUtil.switchToFrame(MailDropPage_Fsus.mailFrame);
-		WebElementUtil.openLinkInNewTab(MailDropPage_Fsus.mail_ResetPasswordLink);
+		WebElementUtil.isDisplayed(MailDropLocatorsFsus.mail_Title);
+		WebElementUtil.switchToFrame(MailDropLocatorsFsus.mailFrame);
+		WebElementUtil.openLinkInNewTab(MailDropLocatorsFsus.mail_ResetPasswordLink);
 		WebElementUtil.switchToDefaultContent();
 		WebElementUtil.switchToLatestTabAndClosePrevious();
 		return new ResetPasswordPageActionsFsus();
 	}
 	
 	public String getPasswordResetMailMessage() {
-	    return WebElementUtil.performInFrame(MailDropPage_Fsus.mailFrame, () -> 
-	    	WebElementUtil.getText(MailDropPage_Fsus.passwordResetMailBodyText)
+	    return WebElementUtil.performInFrame(MailDropLocatorsFsus.mailFrame, () ->
+	    	WebElementUtil.getText(MailDropLocatorsFsus.passwordResetMailBodyText)
 		);
 	}
 
@@ -130,23 +129,23 @@ public class MailDropPageActionsFsus {
 	}
 	
 	public String getFirstMailSubject() {	
-		return WebElementUtil.getText(MailDropPage_Fsus.firstMailSubject);
+		return WebElementUtil.getText(MailDropLocatorsFsus.firstMailSubject);
 	}
 	
 	public Boolean isMailFamilyStoreLogoDisplayed() {
-		return WebElementUtil.performInFrame(MailDropPage_Fsus.mailFrame, () -> 
-			WebElementUtil.isDisplayed(MailDropPage_Fsus.mail_FamilyStoreLogo)
+		return WebElementUtil.performInFrame(MailDropLocatorsFsus.mailFrame, () ->
+			WebElementUtil.isDisplayed(MailDropLocatorsFsus.mail_FamilyStoreLogo)
         );
 	}
 	
 	public MailDropPageActionsFsus clickRefreshMailboxButton() {
-		WebElementUtil.clickElement(MailDropPage_Fsus.refreshMailBoxButton);
+		WebElementUtil.clickElement(MailDropLocatorsFsus.refreshMailBoxButton);
 		return this;
 	}
 	
 	public int getMailsCount() {
-		WebElementUtil.waitForCondition(ExpectedConditions.visibilityOfAllElementsLocatedBy(MailDropPage_Fsus.mailList));
-		return WebElementUtil.findElements(MailDropPage_Fsus.mailList).size();
+		WebElementUtil.waitForCondition(ExpectedConditions.visibilityOfAllElementsLocatedBy(MailDropLocatorsFsus.mailList));
+		return WebElementUtil.findElements(MailDropLocatorsFsus.mailList).size();
 	}
 	
 	public MailDropPageActionsFsus verifyPasswordResetMail() {

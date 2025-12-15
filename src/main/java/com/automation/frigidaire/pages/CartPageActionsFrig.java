@@ -1,12 +1,11 @@
 package com.automation.frigidaire.pages;
 
-import com.automation.frigidaire.locators.CartLocatorFrig;
-import com.automation.utils.WaitUtils;
+import com.automation.frigidaire.locators.CartLocatorsFrig;
 import com.automation.utils.WebElementUtil;
 
 public class CartPageActionsFrig {
 
-    CartLocatorFrig cartPage_Locator = new CartLocatorFrig();
+    CartLocatorsFrig cartPage_Locator = new CartLocatorsFrig();
 
     public boolean isOrderSummaryTextVisibleAndCorrect(String expectedText) {
         WebElementUtil.isDisplayed(cartPage_Locator.orderSummaryText);

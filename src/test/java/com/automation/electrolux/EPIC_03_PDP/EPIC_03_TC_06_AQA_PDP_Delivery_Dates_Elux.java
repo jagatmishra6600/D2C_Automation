@@ -2,15 +2,15 @@ package com.automation.electrolux.EPIC_03_PDP;
 
 import com.automation.BaseTest;
 import com.automation.electrolux.pages.DeliveryDatePageActionsElux;
-import com.automation.frigidaire.pages.FrigidaireHomePageActions;
-import com.automation.frigidaire.pages.FrigidairePlpPageActions;
+import com.automation.frigidaire.pages.HomePageActionsFrig;
+import com.automation.frigidaire.pages.PlpPageActionsFrig;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class EPIC_03_TC_06_AQA_PDP_Delivery_Dates_Elux extends BaseTest {
-    private final FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
+    private final HomePageActionsFrig homePage = new HomePageActionsFrig();
     private final DeliveryDatePageActionsElux pdpPage = new DeliveryDatePageActionsElux();
-    private final FrigidairePlpPageActions plpPage = new FrigidairePlpPageActions();
+    private final PlpPageActionsFrig plpPage = new PlpPageActionsFrig();
 
 
 

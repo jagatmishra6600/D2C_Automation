@@ -10,24 +10,24 @@ public class ReviewsPageActionsFrig {
 
 
     public boolean isReviewSectionVisible() {
-        WebElementUtil.waitForElementToBeVisible(locators.reviewSection, 10);
+        WebElementUtil.waitForElementToBeVisible(locators.reviewSection, 20);
         return WebElementUtil.isDisplayed(locators.reviewSection);
     }
 
     public boolean isProductRatingVisible() {
-        WebElementUtil.waitForElementToBeVisible(locators.productRating, 10);
+        WebElementUtil.waitForElementToBeVisible(locators.productRating, 20);
         return WebElementUtil.isDisplayed(locators.productRating);
     }
 
     public boolean isTotalReviewsVisible() {
-        WebElementUtil.waitForElementToBeVisible(locators.totalReviews, 10);
+        WebElementUtil.waitForElementToBeVisible(locators.totalReviews, 20);
         return WebElementUtil.isDisplayed(locators.totalReviews);
     }
 
     public boolean isRatingSnapshotVisible() {
-        WebElementUtil.waitForElementToBeVisible(locators.banner, 10);
+        WebElementUtil.waitForElementToBeVisible(locators.banner, 20);
         WebElementUtil.scrollIntoView(locators.banner);
-        WebElementUtil.waitForElementToBeVisible(locators.reviewPage, 10);
+        WebElementUtil.waitForElementToBeVisible(locators.reviewPage, 20);
         WebElementUtil.scrollToElementStable(locators.reviewPage);
         WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.ratingSnapshot);
         return ele.isDisplayed();

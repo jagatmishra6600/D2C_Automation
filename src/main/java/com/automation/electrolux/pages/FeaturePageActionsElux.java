@@ -16,8 +16,8 @@ public class FeaturePageActionsElux {
     }
 
     public void selectProductFromPLP() {
-        WebElementUtil.waitForElementToBeVisible(locators.productPDP, 10);
-        WebElementUtil.waitForElementToBeClickable(locators.productPDP, 10);
+        WebElementUtil.waitForElementToBeVisible(locators.productPDP, 20);
+        WebElementUtil.waitForElementToBeClickable(locators.productPDP, 20);
         WebElementUtil.scrollIntoView(locators.productPDP);
         WebElementUtil.clickElement(locators.productPDP);
     }
@@ -30,11 +30,10 @@ public class FeaturePageActionsElux {
     }
 
     public boolean validateViewMoreButtonFunctionality() {
-        WebElementUtil.scrollToElementStable(locators.featureBtnSection);
-        WebElementUtil.scrollIntoView(locators.viewMoreButton, 200);
+        WebElementUtil.scrollToElementStable(locators.viewMoreButton);
         WebElementUtil.waitForElementToBeVisible(locators.viewMoreButton, 10);
         WebElementUtil.clickElement(locators.viewMoreButton);
-        WebElementUtil.scrollIntoView(locators.viewMoreFeatures, 100);
+        WebElementUtil.scrollToElementStable(locators.viewMoreFeatures);
         WebElementUtil.waitForElementToBeVisible(locators.viewMoreFeatures, 10);
         WebElementUtil.clickElement(locators.viewMoreFeatures);
         return WebElementUtil.isDisplayed(locators.viewMoreFeatures);

@@ -3,14 +3,14 @@ package com.automation.familystoreus.pages;
 
 import org.openqa.selenium.By;
 
-import com.automation.familystoreus.locators.FSUS_Homepage;
-import com.automation.familystoreus.locators.FSUS_InviteFamilyFriendsPage;
+import com.automation.familystoreus.locators.HomeLocatorsFsus;
+import com.automation.familystoreus.locators.InviteFamilyFriendsLocatorsFsus;
 import com.automation.models.CreateAccountData;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
 
 public class MyAccountInviteFamilyFriendsPageActionsFsus {
-	 private FSUS_InviteFamilyFriendsPage locator = new FSUS_InviteFamilyFriendsPage();
+	 private InviteFamilyFriendsLocatorsFsus locator = new InviteFamilyFriendsLocatorsFsus();
 	 
 	 public MyAccountInviteFamilyFriendsPageActionsFsus clickSendNewInvitationButton() {
 		 WebElementUtil.isDisplayed(locator.sendNewInvitationButton);
@@ -56,20 +56,20 @@ public class MyAccountInviteFamilyFriendsPageActionsFsus {
 	 
 	 public void logOut() {
 		 clickUserGreetingDropdown();
-		 if(!WebElementUtil.isDisplayed(FSUS_Homepage.logOutDropOption)) {
+		 if(!WebElementUtil.isDisplayed(HomeLocatorsFsus.logOutDropOption)) {
 			 clickUserGreetingDropdown();
 		 }
 		 clickLogoutOption();
 	 }
 	 
 	 public MyAccountInviteFamilyFriendsPageActionsFsus clickUserGreetingDropdown() {
-		 WebElementUtil.scrollIntoView(FSUS_Homepage.userGreetingDropdown);
-		 WebElementUtil.clickElement(FSUS_Homepage.userGreetingDropdown);
+		 WebElementUtil.scrollIntoView(HomeLocatorsFsus.userGreetingDropdown);
+		 WebElementUtil.clickElement(HomeLocatorsFsus.userGreetingDropdown);
 		 return this;
 	 }
 	 
 	 public MyAccountInviteFamilyFriendsPageActionsFsus clickLogoutOption() {
-		 WebElementUtil.clickElement(FSUS_Homepage.logOutDropOption);
+		 WebElementUtil.clickElement(HomeLocatorsFsus.logOutDropOption);
 		 return this;
 	 }
 	 

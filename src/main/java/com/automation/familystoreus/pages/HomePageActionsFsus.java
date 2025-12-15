@@ -2,19 +2,33 @@ package com.automation.familystoreus.pages;
 
 import static com.automation.utils.WaitUtils.untilClickable;
 
+import com.automation.electrolux.pages.HomePageActionsElux;
 import org.openqa.selenium.WebElement;
 
-import com.automation.familystoreus.locators.FSUS_Homepage;
+import com.automation.familystoreus.locators.HomeLocatorsFsus;
 import com.automation.utils.ConfigReader;
 import com.automation.frigidaire.utils.WebElementUtil;
 
 public class HomePageActionsFsus {
 
+    public HomePageActionsFsus navigateToHomePage() {
+        com.automation.utils.WebElementUtil.navigateTo(ConfigReader.getAppUrl());
+        try {
+            WebElement acceptBtn = untilClickable(HomeLocatorsFsus.acceptButtonLocator, 15);
+            if (acceptBtn != null) {
+                acceptBtn.click();
+            }
+        } catch (Exception ignored) {
+            // Cookie banner not present or not interactable; continue
+        }
+        return this;
+    }
+
 	
 	 public HomePageActionsFsus navigateToLoginPage() {
 		WebElementUtil.navigateTo(ConfigReader.getAppUrl());
         try {
-            WebElement acceptBtn = untilClickable(FSUS_Homepage.acceptButtonLocator, 15);
+            WebElement acceptBtn = untilClickable(HomeLocatorsFsus.acceptButtonLocator, 15);
             if (acceptBtn != null) {
                 acceptBtn.click();
             }
@@ -25,26 +39,26 @@ public class HomePageActionsFsus {
 	}
 	 
 	 public boolean isInviteFriendsFamilyHeaderLinkDisplayed() {
-		 return WebElementUtil.isDisplayed(FSUS_Homepage.inviteFriendsFamilyHeaderLink);
+		 return WebElementUtil.isDisplayed(HomeLocatorsFsus.inviteFriendsFamilyHeaderLink);
 	 }
 	 
 	 public boolean isUserGreetingDropdownDisplayed() {
-		 return WebElementUtil.isDisplayed(FSUS_Homepage.userGreetingDropdown);
+		 return WebElementUtil.isDisplayed(HomeLocatorsFsus.userGreetingDropdown);
 	 }
 	 
 	 public String getUserGreetingMessage() {
-		 return WebElementUtil.getText(FSUS_Homepage.userGreetingDropdown)
+		 return WebElementUtil.getText(HomeLocatorsFsus.userGreetingDropdown)
 						.replace("\n", " ").trim();	
 	 }
 	 
 	 public boolean isHomePageLoaded() {
-        return WebElementUtil.isDisplayed(FSUS_Homepage.familyStoreLogo)
-        		&& WebElementUtil.isDisplayed(FSUS_Homepage.categoryNavigationMenuBar);
+        return WebElementUtil.isDisplayed(HomeLocatorsFsus.familyStoreLogo)
+        		&& WebElementUtil.isDisplayed(HomeLocatorsFsus.categoryNavigationMenuBar);
 	 }
 	 
 	 public MyAccountInviteFamilyFriendsPageActionsFsus navigateToMyAccountInviteFamilyFriendsPage() {
-		 WebElementUtil.scrollIntoView(FSUS_Homepage.inviteFriendsFamilyHeaderLink);
-		 WebElementUtil.clickElement(FSUS_Homepage.inviteFriendsFamilyHeaderLink);
+		 WebElementUtil.scrollIntoView(HomeLocatorsFsus.inviteFriendsFamilyHeaderLink);
+		 WebElementUtil.clickElement(HomeLocatorsFsus.inviteFriendsFamilyHeaderLink);
 		 return new MyAccountInviteFamilyFriendsPageActionsFsus();
 	 }
 }

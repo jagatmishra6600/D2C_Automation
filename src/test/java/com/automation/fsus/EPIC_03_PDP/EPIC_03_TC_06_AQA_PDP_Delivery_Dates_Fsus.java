@@ -2,15 +2,15 @@ package com.automation.fsus.EPIC_03_PDP;
 
 import com.automation.BaseTest;
 import com.automation.familystoreus.pages.DeliveryDatePageActionsFsus;
-import com.automation.frigidaire.pages.FrigidaireHomePageActions;
-import com.automation.frigidaire.pages.FrigidairePlpPageActions;
+import com.automation.frigidaire.pages.HomePageActionsFrig;
+import com.automation.frigidaire.pages.PlpPageActionsFrig;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class EPIC_03_TC_06_AQA_PDP_Delivery_Dates_Fsus extends BaseTest {
-    private final FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
+    private final HomePageActionsFrig homePage = new HomePageActionsFrig();
     private final DeliveryDatePageActionsFsus pdpPage = new DeliveryDatePageActionsFsus();
-    private final FrigidairePlpPageActions plpPage = new FrigidairePlpPageActions();
+    private final PlpPageActionsFrig plpPage = new PlpPageActionsFrig();
 
 
 

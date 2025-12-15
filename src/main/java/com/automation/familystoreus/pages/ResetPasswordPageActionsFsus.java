@@ -5,15 +5,15 @@ import static com.automation.utils.WaitUtils.untilClickable;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-import com.automation.familystoreus.locators.FSUS_Homepage;
-import com.automation.familystoreus.locators.ResetPasswordPage_Fsus;
+import com.automation.familystoreus.locators.HomeLocatorsFsus;
+import com.automation.familystoreus.locators.ResetPasswordLocatorsFsus;
 import com.automation.utils.WebElementUtil;
 
 public class ResetPasswordPageActionsFsus {
 
 	 public ResetPasswordPageActionsFsus acceptAllCookies() {
 		 try {
-	            WebElement acceptBtn = untilClickable(FSUS_Homepage.acceptButtonLocator, 15);
+	            WebElement acceptBtn = untilClickable(HomeLocatorsFsus.acceptButtonLocator, 15);
 	            if (acceptBtn != null) {
 	                acceptBtn.click();
 	            }
@@ -24,21 +24,21 @@ public class ResetPasswordPageActionsFsus {
 	 }
 	 
 	 public boolean isResetPasswordButtonDisplayed() {
-		 return WebElementUtil.isDisplayed(ResetPasswordPage_Fsus.submitButton);			 
+		 return WebElementUtil.isDisplayed(ResetPasswordLocatorsFsus.submitButton);
 	 }
 	 
 	 public ResetPasswordPageActionsFsus enterNewPassword(String password) {
-		WebElementUtil.sendKeys(ResetPasswordPage_Fsus.newPasswordInput, password);
+		WebElementUtil.sendKeys(ResetPasswordLocatorsFsus.newPasswordInput, password);
 		return this;
 	 }
 	 
 	 public ResetPasswordPageActionsFsus enterConfirmPassword(String password) {
-		WebElementUtil.sendKeys(ResetPasswordPage_Fsus.confirmPasswordInput,password);
+		WebElementUtil.sendKeys(ResetPasswordLocatorsFsus.confirmPasswordInput,password);
 		return this;
 	 }
 	 
 	 public ResetPasswordPageActionsFsus clickSubmitButton() {
-		 WebElementUtil.clickElement(ResetPasswordPage_Fsus.submitButton);
+		 WebElementUtil.clickElement(ResetPasswordLocatorsFsus.submitButton);
 		 return this;
 	 }
 	 
@@ -49,20 +49,20 @@ public class ResetPasswordPageActionsFsus {
 	 }
 	 
 	 public boolean isNewPasswordFieldDisplayed() {
-		 return WebElementUtil.isDisplayed(ResetPasswordPage_Fsus.newPasswordInput);
+		 return WebElementUtil.isDisplayed(ResetPasswordLocatorsFsus.newPasswordInput);
 	 }
 	 
 	 public boolean isConfirmPasswordFieldDisplayed() {
-		 return WebElementUtil.isDisplayed(ResetPasswordPage_Fsus.confirmPasswordInput);
+		 return WebElementUtil.isDisplayed(ResetPasswordLocatorsFsus.confirmPasswordInput);
 	 }
 	 
 	 public boolean isSubmitButtonDisplayed() {
-		 return WebElementUtil.isDisplayed(ResetPasswordPage_Fsus.submitButton);
+		 return WebElementUtil.isDisplayed(ResetPasswordLocatorsFsus.submitButton);
 	 }
 	 
 	 
 	 public boolean isChangePasswordTitleDisplayed() {
-		 return WebElementUtil.isDisplayed(ResetPasswordPage_Fsus.resetPasswordTitle);
+		 return WebElementUtil.isDisplayed(ResetPasswordLocatorsFsus.resetPasswordTitle);
 	 }
 	 
 	 public boolean isAllResetPasswordFieldsAndButtonsDisplayed() {
@@ -81,11 +81,11 @@ public class ResetPasswordPageActionsFsus {
 	 }
 	 
 	 public boolean isResetPasswordSuccessMessageDisplayed() {
-		 return WebElementUtil.isDisplayed(ResetPasswordPage_Fsus.resetPasswordSuccessMessage);
+		 return WebElementUtil.isDisplayed(ResetPasswordLocatorsFsus.resetPasswordSuccessMessage);
 	 }
 	
 	 public boolean isLoginLinkDisplayed() {
-		 return WebElementUtil.isDisplayed(ResetPasswordPage_Fsus.loginLink);
+		 return WebElementUtil.isDisplayed(ResetPasswordLocatorsFsus.loginLink);
 	 }
 	
 	 
