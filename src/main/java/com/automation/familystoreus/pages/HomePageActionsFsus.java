@@ -2,6 +2,7 @@ package com.automation.familystoreus.pages;
 
 import static com.automation.utils.WaitUtils.untilClickable;
 
+import com.automation.electrolux.pages.ElectroluxPlpPageActions;
 import org.openqa.selenium.WebElement;
 
 import com.automation.familystoreus.locators.FSUS_Homepage;
@@ -47,4 +48,16 @@ public class HomePageActionsFsus {
 		 WebElementUtil.clickElement(FSUS_Homepage.inviteFriendsFamilyHeaderLink);
 		 return new MyAccountInviteFamilyFriendsPageActionsFsus();
 	 }
+
+    public ElectroluxPlpPageActions clickVacuums() {
+        com.automation.utils.WebElementUtil.clickElement(FSUS_Homepage.navigationBarVacuums);
+        com.automation.utils.WebElementUtil.clickElement(FSUS_Homepage.allVacuums);
+        return new ElectroluxPlpPageActions();
+    }
+
+    public ElectroluxPlpPageActions clickWasher() {
+        com.automation.utils.WebElementUtil.clickElement(FSUS_Homepage.navigationBarLaundry);
+        com.automation.utils.WebElementUtil.clickElement(FSUS_Homepage.washer);
+        return new ElectroluxPlpPageActions();
+    }
 }
