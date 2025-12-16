@@ -2,9 +2,7 @@ package com.automation.electrolux.EPIC_07_DandS;
 
 import com.automation.BaseTest;
 import com.automation.electrolux.pages.*;
-import com.automation.frigidaire.pages.FrigidaireDAndSPageActions;
-import com.automation.frigidaire.pages.FrigidaireHomePageActions;
-import com.automation.frigidaire.pages.FrigidairePdpPageActions;
+
 
 import com.automation.utils.ExtentReportManager;
 import com.automation.utils.WaitUtils;
@@ -14,10 +12,10 @@ import org.testng.annotations.Test;
 
 public class EPIC_03_TC_01_AQA_Dnads_Productdetails extends BaseTest {
 
-    private final ElectroluxHomePageActions homePage = new ElectroluxHomePageActions();
-    private final ElectroluxPdpPageActions pdpPage = new ElectroluxPdpPageActions();
-    private final ElectroluxPlpPageActions plpPage = new ElectroluxPlpPageActions();
-    private final DeliveryAndServicePageActionElux dnsPage = new DeliveryAndServicePageActionElux();
+    private final HomePageActionsElux homePage = new HomePageActionsElux();
+    private final PdpPageActionsElux pdpPage = new PdpPageActionsElux();
+    private final PlpPageActionsElux plpPage = new PlpPageActionsElux();
+    private final DeliveryAndServicePageActionsElux dnsPage = new DeliveryAndServicePageActionsElux();
     private String currentUrl;
 
 

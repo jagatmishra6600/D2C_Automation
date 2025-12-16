@@ -1,13 +1,8 @@
 package com.automation.familystoreus.pages;
 
-import java.time.Duration;
-import java.util.stream.Stream;
-
-import org.openqa.selenium.By;
 import org.testng.Assert;
 
-import com.automation.familystoreus.locators.FSUS_YopMailPage;
-import com.automation.utils.WaitUtils;
+import com.automation.familystoreus.locators.YopMailLocatorsFsus;
 import com.automation.utils.WebElementUtil;
 
 public class YopmailPageActionsFsus {
@@ -18,18 +13,18 @@ public class YopmailPageActionsFsus {
 	}
 	
 	public YopmailPageActionsFsus enterEmailAddress(String emailAddress) throws InterruptedException {
-		WebElementUtil.waitForElementToBeClickable(FSUS_YopMailPage.emailAddressField);
-		WebElementUtil.sendKeys(FSUS_YopMailPage.emailAddressField, emailAddress);
+		WebElementUtil.waitForElementToBeClickable(YopMailLocatorsFsus.emailAddressField);
+		WebElementUtil.sendKeys(YopMailLocatorsFsus.emailAddressField, emailAddress);
 		return this;
 	}
 	
 	public YopmailPageActionsFsus clickCheckInboxButton() {
-		WebElementUtil.clickElement(FSUS_YopMailPage.checkInboxIcon);	
+		WebElementUtil.clickElement(YopMailLocatorsFsus.checkInboxIcon);
 		return this;
 	}
 	
 	public boolean isInboxLoaded() {
-		return WebElementUtil.isDisplayed(FSUS_YopMailPage.inboxEmailIdTitle);
+		return WebElementUtil.isDisplayed(YopMailLocatorsFsus.inboxEmailIdTitle);
 	}
 	
 	public YopmailPageActionsFsus login(String emailAddress) throws InterruptedException {
@@ -39,13 +34,13 @@ public class YopmailPageActionsFsus {
 	}
 	
 	public YopmailPageActionsFsus clickInboxRefresh() {
-		WebElementUtil.clickElement(FSUS_YopMailPage.inboxRefreshButton);	
+		WebElementUtil.clickElement(YopMailLocatorsFsus.inboxRefreshButton);
 		return this;
 	}
 	
 	public YopmailPageActionsFsus clickFirstMailInInbox() {	
 		WebElementUtil.switchToFrame("ifinbox");
-		WebElementUtil.clickElement(FSUS_YopMailPage.firstMail);
+		WebElementUtil.clickElement(YopMailLocatorsFsus.firstMail);
 		WebElementUtil.switchToDefaultContent();
 		return this;
 	}
@@ -56,19 +51,19 @@ public class YopmailPageActionsFsus {
 	
 	public String getGreetingMessage() {
 	    return WebElementUtil.performInFrame("ifmail", () -> 
-	        WebElementUtil.getText(FSUS_YopMailPage.mailGreetingMessage)
+	        WebElementUtil.getText(YopMailLocatorsFsus.mailGreetingMessage)
 	    );
 	}
 	
 	public Boolean isGreetingMessageDisplayed() {
 		return WebElementUtil.performInFrame("ifmail", () -> 
-        WebElementUtil.isDisplayed(FSUS_YopMailPage.mailGreetingMessage)
+        WebElementUtil.isDisplayed(YopMailLocatorsFsus.mailGreetingMessage)
     );	
 	}
 	
 	public String getInvitationCode() {
 		var registationDetailsText = WebElementUtil.performInFrame("ifmail", () -> 
-				WebElementUtil.getText(FSUS_YopMailPage.mailRegisterForFamilyStoreSectionText)
+				WebElementUtil.getText(YopMailLocatorsFsus.mailRegisterForFamilyStoreSectionText)
 					);
 		return registationDetailsText.split("Invitation Code:")[1]
                 .trim()
@@ -77,19 +72,19 @@ public class YopmailPageActionsFsus {
 	
 	public Boolean isFSRegistrationLinkDisplayed() {
 		return WebElementUtil.performInFrame("ifmail", () -> 
-        WebElementUtil.isDisplayed(FSUS_YopMailPage.mailRegistrationLink)
+        WebElementUtil.isDisplayed(YopMailLocatorsFsus.mailRegistrationLink)
     );	
 	}
 	
 	public String getFSInvitationMessage() {
 		return WebElementUtil.performInFrame("ifmail", () -> 
-    	WebElementUtil.getText(FSUS_YopMailPage.mailFSInvitationMessage)
+    	WebElementUtil.getText(YopMailLocatorsFsus.mailFSInvitationMessage)
 	);
 	}
 	
 	public LoginPageActionsFsus clickOnRegistrationLink() {
 		WebElementUtil.switchToFrame("ifmail");
-		WebElementUtil.openLinkInNewTab(FSUS_YopMailPage.mailRegistrationLink);
+		WebElementUtil.openLinkInNewTab(YopMailLocatorsFsus.mailRegistrationLink);
 		WebElementUtil.switchToDefaultContent();
 		WebElementUtil.switchToLatestTabAndClosePrevious();
 		return new LoginPageActionsFsus();
@@ -97,7 +92,7 @@ public class YopmailPageActionsFsus {
 	
 	public String getInvitedUserEmail() {
 	    var registrationDetailsText = WebElementUtil.performInFrame("ifmail", () ->
-	            WebElementUtil.getText(FSUS_YopMailPage.mailRegisterForFamilyStoreSectionText)
+	            WebElementUtil.getText(YopMailLocatorsFsus.mailRegisterForFamilyStoreSectionText)
 	    );
 	    return registrationDetailsText.split("Email Address:")[1]
 	            .trim()
@@ -106,19 +101,19 @@ public class YopmailPageActionsFsus {
 	
 	public Boolean isInvitationMailContactUsLinkDisplayed() {
 		return WebElementUtil.performInFrame("ifmail", () -> 
-        WebElementUtil.isDisplayed(FSUS_YopMailPage.mailInvitationContactUsLink)
+        WebElementUtil.isDisplayed(YopMailLocatorsFsus.mailInvitationContactUsLink)
 	);
 	}
 	
 	public String getInvitationEmailValidityMessage() {
 		return WebElementUtil.performInFrame("ifmail", () -> 
-    	WebElementUtil.getText(FSUS_YopMailPage.mailInvitationCodeEmailValidityMessage)
+    	WebElementUtil.getText(YopMailLocatorsFsus.mailInvitationCodeEmailValidityMessage)
 	);
 	}
 	
 	public Boolean isTermsAndConditionsLinkDisplayed() {
 		return WebElementUtil.performInFrame("ifmail", () -> 
-        WebElementUtil.isDisplayed(FSUS_YopMailPage.mailTermsAndCondtionsLink)
+        WebElementUtil.isDisplayed(YopMailLocatorsFsus.mailTermsAndCondtionsLink)
 	);
 	}
 	

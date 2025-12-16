@@ -1,19 +1,19 @@
 package com.automation.electrolux.EPIC_07_DandS;
 
 import com.automation.BaseTest;
-import com.automation.electrolux.pages.DeliveryInstallationPageActions_Elux;
-import com.automation.electrolux.pages.ProductCategoryPageActions_Elux;
-import com.automation.electrolux.pages.PLPProductItemsPageActions_Elux;
-import com.automation.electrolux.pages.HomePageActions;
+import com.automation.electrolux.pages.DeliveryInstallationPageActionsElux;
+import com.automation.electrolux.pages.HomePageActionsElux;
+import com.automation.electrolux.pages.ProductCategoryPageActionsElux;
+import com.automation.electrolux.pages.PLPProductItemsPageActionsElux;
 import com.automation.utils.ExtentReportManager;
 import org.testng.annotations.Test;
 
 public class EPIC_07_TC_01_DandS_Elux extends BaseTest {
 
-    HomePageActions homePage = new HomePageActions();
-    ProductCategoryPageActions_Elux productCategoryPageActions = new ProductCategoryPageActions_Elux();
-    PLPProductItemsPageActions_Elux PLPProductItemsPageActions = new PLPProductItemsPageActions_Elux();
-    DeliveryInstallationPageActions_Elux DeliveryInstallationPageActions = new DeliveryInstallationPageActions_Elux();
+    HomePageActionsElux homePage = new HomePageActionsElux();
+    ProductCategoryPageActionsElux productCategoryPageActions = new ProductCategoryPageActionsElux();
+    PLPProductItemsPageActionsElux PLPProductItemsPageActions = new PLPProductItemsPageActionsElux();
+    DeliveryInstallationPageActionsElux DeliveryInstallationPageActions = new DeliveryInstallationPageActionsElux();
 
     public void navigateToVacuumsProducts(String webSite, String prodCategory, String subProdCategory){
         homePage.navigateToHomePage();

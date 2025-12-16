@@ -508,45 +508,6 @@ public class WebElementUtil {
         DriverManager.getDriver().switchTo().window(tabs.get(tabs.size() - 2)).close();
         DriverManager.getDriver().switchTo().window(tabs.get(tabs.size() - 1));
     }
-
-    public static WebElement validateInsideShadowDom(By outer, By targetLocator) {
-
-        WebElement target = null;
-        WebDriver driver = DriverManager.getDriver();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        try {
-            // Step 1️ - Find the outer shadow host
-            WebElement outerHost = wait.until(ExpectedConditions.presenceOfElementLocated(outer));
-
-            // Step 2 - Access its shadow root
-            SearchContext shadowRoot = null;
-            try {
-                shadowRoot = outerHost.getShadowRoot();
-                System.out.println("Outer shadow root accessed.");
-            } catch (NoSuchShadowRootException e) {
-                System.out.println("Outer host has no shadow root!");
-            }
-
-            // Step 3 - If an inner shadow host is provided, go one level deeper
-            SearchContext activeRoot = shadowRoot;
-
-            // Step 4 - Find and click the target element
-            target = wait.until(d -> {
-                assert activeRoot != null;
-                return activeRoot.findElement(targetLocator);
-            });
-
-            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", target);
-
-            System.out.println("Clicked element inside shadow DOM successfully!");
-
-        } catch (Exception e) {
-            System.err.println("Failed to click inside shadow DOM.");
-            e.printStackTrace();
-        }
-        return target;
-    }
     
     /**
      * Performs Control + Click action on a Element to open it into a new Tab

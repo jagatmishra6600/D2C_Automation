@@ -1,6 +1,5 @@
 package com.automation.familystoreus.pages;
 
-import com.automation.electrolux.locators.EL_PLP;
 import com.automation.familystoreus.locators.ProductListingPageLocator_FSUS;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;

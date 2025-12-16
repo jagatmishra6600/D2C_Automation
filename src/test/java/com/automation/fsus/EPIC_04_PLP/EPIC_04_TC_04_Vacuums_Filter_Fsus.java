@@ -1,6 +1,7 @@
 package com.automation.fsus.EPIC_04_PLP;
 
-import com.automation.electrolux.pages.HomePageActions;
+
+import com.automation.familystoreus.pages.HomePageActionsFsus;
 import com.automation.familystoreus.pages.LoginPageActionsFsus;
 import com.automation.familystoreus.pages.PlpProductItemPageActions_Fsus;
 import com.automation.familystoreus.pages.ProductCategoryPageActions_Fsus;
@@ -9,7 +10,8 @@ import com.automation.utils.WebElementUtil;
 import org.testng.annotations.Test;
 
 public class EPIC_04_TC_04_Vacuums_Filter_Fsus {
-    HomePageActions homePage = new HomePageActions();
+
+    HomePageActionsFsus homePage = new HomePageActionsFsus();
     PlpProductItemPageActions_Fsus plpProductItemPageActionsFsus = new PlpProductItemPageActions_Fsus();
     ProductCategoryPageActions_Fsus productCategoryPageActionsFsus = new ProductCategoryPageActions_Fsus();
     LoginPageActionsFsus loginPage = new LoginPageActionsFsus();

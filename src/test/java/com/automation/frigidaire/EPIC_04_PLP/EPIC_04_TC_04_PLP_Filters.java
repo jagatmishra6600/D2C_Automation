@@ -2,18 +2,17 @@ package com.automation.frigidaire.EPIC_04_PLP;
 
 import com.automation.BaseTest;
 
-import com.automation.frigidaire.locators.FrigidaireConstants;
-import com.automation.frigidaire.pages.FrigidaireHomePageActions;
-import com.automation.frigidaire.pages.ProductCategoryPageActions_Frig;
-import com.automation.frigidaire.pages.PLPProductItemsPageActions_Frig;
+import com.automation.frigidaire.pages.HomePageActionsFrig;
+import com.automation.frigidaire.pages.PLPProductItemsPageActionsFrig;
+import com.automation.frigidaire.pages.ProductCategoryPageActionsFrig;
 import com.automation.utils.ExtentReportManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class EPIC_04_TC_04_PLP_Filters extends BaseTest {
-    FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
-    ProductCategoryPageActions_Frig productCategoryPageActionsFrig = new ProductCategoryPageActions_Frig();
-    PLPProductItemsPageActions_Frig PLPProductItemsPageActions_Frig = new PLPProductItemsPageActions_Frig();
+    HomePageActionsFrig homePage = new HomePageActionsFrig();
+    ProductCategoryPageActionsFrig productCategoryPageActionsFrig = new ProductCategoryPageActionsFrig();
+    PLPProductItemsPageActionsFrig PLPProductItemsPageActions_Frig = new PLPProductItemsPageActionsFrig();
 
     public void navigateToFrenchDoorRefrigerators(String webSite, String prodCategory, String subProdCategory) throws InterruptedException {
         homePage.navigateToHomePage();
@@ -46,7 +45,7 @@ public class EPIC_04_TC_04_PLP_Filters extends BaseTest {
         PLPProductItemsPageActions_Frig.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions_Frig.verifyFiltersInProductItems("Availability", 60, "Availability");
         //PLPProductItemsPageActions.standardWidthClick();
-        PLPProductItemsPageActions_Frig.featureFilter(FrigidaireConstants.frigidaireWeb, "Height", "70");
+        PLPProductItemsPageActions_Frig.featureFilter("frigidaire", "Height", "70");
         PLPProductItemsPageActions_Frig.verifyProductWidthHeightAndDepth("H", "70\"");
         ExtentReportManager.getTest().pass("SuccessfullyVerify product dimensions for height");
     }
@@ -57,7 +56,7 @@ public class EPIC_04_TC_04_PLP_Filters extends BaseTest {
         PLPProductItemsPageActions_Frig.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions_Frig.verifyFiltersInProductItems("Availability", 60, "Availability");
         //PLPProductItemsPageActions.standardWidthClick();
-        PLPProductItemsPageActions_Frig.featureFilter(FrigidaireConstants.frigidaireWeb, "Height", "67 9/10\"");
+        PLPProductItemsPageActions_Frig.featureFilter("frigidaire", "Height", "67 9/10\"");
         PLPProductItemsPageActions_Frig.verifyProductWidthHeightAndDepth("H", "67 9/10\"");
         ExtentReportManager.getTest().pass("Successfully Verify product dimensions for height");
     }
@@ -68,13 +67,13 @@ public class EPIC_04_TC_04_PLP_Filters extends BaseTest {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions_Frig.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions_Frig.verifyFiltersInProductItems("Availability", 60, "Availability");
-        PLPProductItemsPageActions_Frig.verifyExpandAndCollapseFilter(FrigidaireConstants.frigidaireWeb, "Series", "Frigidaire");
-        PLPProductItemsPageActions_Frig.verifyExpandAndCollapseFilter(FrigidaireConstants.frigidaireWeb, "color", "Stainless Steel");
-        PLPProductItemsPageActions_Frig.verifyExpandAndCollapseFilter(FrigidaireConstants.frigidaireWeb, "Depth Type", "Counter-Depth");
-        PLPProductItemsPageActions_Frig.verifyExpandAndCollapseFilter(FrigidaireConstants.frigidaireWeb, "Features", "Ice Maker");
-        PLPProductItemsPageActions_Frig.verifyExpandAndCollapseFilter(FrigidaireConstants.frigidaireWeb, "Standard Width", "30\"");
-        PLPProductItemsPageActions_Frig.verifyExpandAndCollapseFilter(FrigidaireConstants.frigidaireWeb, "Height", "70\"");
-        PLPProductItemsPageActions_Frig.verifyExpandAndCollapseFilter(FrigidaireConstants.frigidaireWeb, "Price", "$1,000-$1,499");
+        PLPProductItemsPageActions_Frig.verifyExpandAndCollapseFilter("frigidaire", "Series", "Frigidaire");
+        PLPProductItemsPageActions_Frig.verifyExpandAndCollapseFilter("frigidaire", "color", "Stainless Steel");
+        PLPProductItemsPageActions_Frig.verifyExpandAndCollapseFilter("frigidaire", "Depth Type", "Counter-Depth");
+        PLPProductItemsPageActions_Frig.verifyExpandAndCollapseFilter("frigidaire", "Features", "Ice Maker");
+        PLPProductItemsPageActions_Frig.verifyExpandAndCollapseFilter("frigidaire", "Standard Width", "30\"");
+        PLPProductItemsPageActions_Frig.verifyExpandAndCollapseFilter("frigidaire", "Height", "70\"");
+        PLPProductItemsPageActions_Frig.verifyExpandAndCollapseFilter("frigidaire", "Price", "$1,000-$1,499");
         ExtentReportManager.getTest().pass("Successfully Verify every filter is with its sub-filter");
 
     }
@@ -85,7 +84,7 @@ public class EPIC_04_TC_04_PLP_Filters extends BaseTest {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions_Frig.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions_Frig.verifyFiltersInProductItems("Availability", 60, "Availability");
-        PLPProductItemsPageActions_Frig.featureFilter(FrigidaireConstants.frigidaireWeb, "Series ", " Frigidaire Gallery ");
+        PLPProductItemsPageActions_Frig.featureFilter("frigidaire", "Series ", " Frigidaire Gallery ");
         PLPProductItemsPageActions_Frig.verifySelectedFilters("Frigidaire Gallery ");
         ExtentReportManager.getTest().pass("Successfully Verify reset all filter");
 
@@ -96,7 +95,7 @@ public class EPIC_04_TC_04_PLP_Filters extends BaseTest {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions_Frig.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions_Frig.verifyFiltersInProductItems("Availability", 60, "Availability");
-        PLPProductItemsPageActions_Frig.featureFilter(FrigidaireConstants.frigidaireWeb, "Features ", " Ice Maker ");
+        PLPProductItemsPageActions_Frig.featureFilter("frigidaire", "Features ", " Ice Maker ");
         PLPProductItemsPageActions_Frig.openAllProductsAndValidate("Ice Maker", "Ice Maker", "Yes");
         ExtentReportManager.getTest().pass("Verify Ice maker filter with its functionality");
 
@@ -108,7 +107,7 @@ public class EPIC_04_TC_04_PLP_Filters extends BaseTest {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions_Frig.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions_Frig.verifyFiltersInProductItems("Availability", 60, "Availability");
-        PLPProductItemsPageActions_Frig.featureFilter(FrigidaireConstants.frigidaireWeb, "Features ", " Water Dispenser ");
+        PLPProductItemsPageActions_Frig.featureFilter("frigidaire", "Features ", " Water Dispenser ");
         PLPProductItemsPageActions_Frig.openAllProductsAndValidate("Dispenser", "Water Dispenser", "Yes");
         ExtentReportManager.getTest().pass("Verify water dispenser filter with its functionality");
 
@@ -120,7 +119,7 @@ public class EPIC_04_TC_04_PLP_Filters extends BaseTest {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions_Frig.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions_Frig.verifyFiltersInProductItems("Availability", 60, "Availability");
-        PLPProductItemsPageActions_Frig.featureFilter(FrigidaireConstants.frigidaireWeb, "Features ", " ADA Compliant ");
+        PLPProductItemsPageActions_Frig.featureFilter("frigidaire", "Features ", " ADA Compliant ");
         PLPProductItemsPageActions_Frig.openAllProductsAndValidate("Certifications and Approvals", "ADA Compliant", "Yes");
         ExtentReportManager.getTest().pass("Verify ADA Complaint filter with its functionality");
 
@@ -133,7 +132,7 @@ public class EPIC_04_TC_04_PLP_Filters extends BaseTest {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions_Frig.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions_Frig.verifyFiltersInProductItems("Availability", 60, "Availability");
-        PLPProductItemsPageActions_Frig.featureFilter(FrigidaireConstants.frigidaireWeb, "Features ", " ENERGY STAR Certified ");
+        PLPProductItemsPageActions_Frig.featureFilter("frigidaire", "Features ", " ENERGY STAR Certified ");
         PLPProductItemsPageActions_Frig.openAllProductsAndValidate("Certifications and Approvals", "ENERGY STAR Certified", "Yes");
         ExtentReportManager.getTest().pass("Verify ENERGY STAR Certified filter with its functionality");
 
@@ -164,7 +163,7 @@ public class EPIC_04_TC_04_PLP_Filters extends BaseTest {
         PLPProductItemsPageActions_Frig.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions_Frig.verifyFiltersInProductItems("Availability", 60, "Availability");
         PLPProductItemsPageActions_Frig.verifyFiltersInPLP("Availability");
-        PLPProductItemsPageActions_Frig.featureFilter(FrigidaireConstants.frigidaireWeb, "Series ", " Frigidaire Gallery ");
+        PLPProductItemsPageActions_Frig.featureFilter("frigidaire", "Series ", " Frigidaire Gallery ");
         PLPProductItemsPageActions_Frig.validateFrigidaireGalleryAndProfessionalProducts("Frigidaire Gallery", "Frigidaire Gallery");
         ExtentReportManager.getTest().pass("Verify Visibility of frigidaire gallery filters in PLP");
 
@@ -176,7 +175,7 @@ public class EPIC_04_TC_04_PLP_Filters extends BaseTest {
         PLPProductItemsPageActions_Frig.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions_Frig.verifyFiltersInProductItems("Availability", 60, "Availability");
         PLPProductItemsPageActions_Frig.verifyFiltersInPLP("Availability");
-        PLPProductItemsPageActions_Frig.featureFilter(FrigidaireConstants.frigidaireWeb, "Series ", " Frigidaire Professional ");
+        PLPProductItemsPageActions_Frig.featureFilter("frigidaire", "Series ", " Frigidaire Professional ");
         PLPProductItemsPageActions_Frig.validateFrigidaireGalleryAndProfessionalProducts("Frigidaire Professional", "Frigidaire Professional");
         ExtentReportManager.getTest().pass("Verify Visibility of frigidaire professional filters in PLP");
 
@@ -202,7 +201,7 @@ public class EPIC_04_TC_04_PLP_Filters extends BaseTest {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions_Frig.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions_Frig.verifyFiltersInProductItems("Availability", 60, "Availability");
-        PLPProductItemsPageActions_Frig.featureFilter(FrigidaireConstants.frigidaireWeb, "Depth Type", "Counter-Depth");
+        PLPProductItemsPageActions_Frig.featureFilter("frigidaire", "Depth Type", "Counter-Depth");
         PLPProductItemsPageActions_Frig.validatePopularFilterTurnsRed("Counter Depth");
         ExtentReportManager.getTest().pass("verify Popular Filters Is Checked On Clicking the Related Filter In PLP");
 
@@ -215,7 +214,7 @@ public class EPIC_04_TC_04_PLP_Filters extends BaseTest {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions_Frig.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions_Frig.verifyFiltersInProductItems("Availability", 60, "Availability");
-        PLPProductItemsPageActions_Frig.featureFilter(FrigidaireConstants.frigidaireWeb, "Depth Type ", " Counter-Depth ");
+        PLPProductItemsPageActions_Frig.featureFilter("frigidaire", "Depth Type ", " Counter-Depth ");
         PLPProductItemsPageActions_Frig.validateCheckboxCheckedWhenPopularFilterClicked("Counter Depth", "Depth Type", "Counter-Depth");
         ExtentReportManager.getTest().pass("verify counter depth filter is checked when counter depth in popular filter is selected");
 
@@ -226,7 +225,7 @@ public class EPIC_04_TC_04_PLP_Filters extends BaseTest {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions_Frig.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions_Frig.verifyFiltersInProductItems("Availability", 60, "Availability");
-        PLPProductItemsPageActions_Frig.featureFilter(FrigidaireConstants.frigidaireWeb, "Features", "Standard-Depth");
+        PLPProductItemsPageActions_Frig.featureFilter("frigidaire", "Features", "Standard-Depth");
         // PLPProductItemsPageActions.getFeatureSpecsLocator()
         PLPProductItemsPageActions_Frig.validatePopularFilterTurnsRed(" Std. Depth ");
         ExtentReportManager.getTest().pass("Successfully verify popular filter turrns red in PLP");
@@ -240,7 +239,7 @@ public class EPIC_04_TC_04_PLP_Filters extends BaseTest {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions_Frig.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions_Frig.verifyFiltersInProductItems("Availability", 60, "Availability");
-        PLPProductItemsPageActions_Frig.featureFilter(FrigidaireConstants.frigidaireWeb, "Depth Type", "Standard-Depth");
+        PLPProductItemsPageActions_Frig.featureFilter("frigidaire", "Depth Type", "Standard-Depth");
         PLPProductItemsPageActions_Frig.validateCheckboxCheckedWhenPopularFilterClicked("Std. Depth", "Depth Type", "Standard-Depth");
         ExtentReportManager.getTest().pass("Successfully Verify product dimensions for standard width");
 
@@ -252,7 +251,7 @@ public class EPIC_04_TC_04_PLP_Filters extends BaseTest {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions_Frig.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions_Frig.verifyFiltersInProductItems("Availability", 60, "Availability");
-        PLPProductItemsPageActions_Frig.featureFilter(FrigidaireConstants.frigidaireWeb, "Features ", " Ice Maker ");
+        PLPProductItemsPageActions_Frig.featureFilter("frigidaire", "Features ", " Ice Maker ");
         PLPProductItemsPageActions_Frig.validatePopularFilterTurnsRed("Ice Maker");
         ExtentReportManager.getTest().pass("Successfully Popular filter 'Ice Maker' successfully turned red");
 
@@ -265,7 +264,7 @@ public class EPIC_04_TC_04_PLP_Filters extends BaseTest {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions_Frig.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions_Frig.verifyFiltersInProductItems("Availability", 60, "Availability");
-        PLPProductItemsPageActions_Frig.featureFilter(FrigidaireConstants.frigidaireWeb, "Depth Type ", " Ice Maker ");
+        PLPProductItemsPageActions_Frig.featureFilter("frigidaire", "Depth Type ", " Ice Maker ");
         PLPProductItemsPageActions_Frig.validateCheckboxCheckedWhenPopularFilterClicked("Ice Maker", "Features", "Ice Maker");
         ExtentReportManager.getTest().pass("Successfully Checkbox for 'Ice Maker' is now checked after Popular Filter click");
 
@@ -277,7 +276,7 @@ public class EPIC_04_TC_04_PLP_Filters extends BaseTest {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions_Frig.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions_Frig.verifyFiltersInProductItems("Availability", 60, "Availability");
-        PLPProductItemsPageActions_Frig.featureFilter(FrigidaireConstants.frigidaireWeb, "Features", "Water Dispenser");
+        PLPProductItemsPageActions_Frig.featureFilter("frigidaire", "Features", "Water Dispenser");
         PLPProductItemsPageActions_Frig.validatePopularFilterTurnsRed("Water Disp.");
         ExtentReportManager.getTest().pass("Successfully verify Popular filter 'Water Disp.' successfully turned red");
 
@@ -290,7 +289,7 @@ public class EPIC_04_TC_04_PLP_Filters extends BaseTest {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
         PLPProductItemsPageActions_Frig.verifyProductItemPage("French Door Refrigerators", "French Door Refrigerators");
         PLPProductItemsPageActions_Frig.verifyFiltersInProductItems("Availability", 60, "Availability");
-        PLPProductItemsPageActions_Frig.featureFilter(FrigidaireConstants.frigidaireWeb, "Depth Type", "Water Dispenser");
+        PLPProductItemsPageActions_Frig.featureFilter("frigidaire", "Depth Type", "Water Dispenser");
         PLPProductItemsPageActions_Frig.validateCheckboxCheckedWhenPopularFilterClicked("Water Disp.", "Features", "Water Dispenser");
         ExtentReportManager.getTest().pass("Successfully verify Checkbox for 'Water Dispenser' is now checked after Popular Filter click");
 

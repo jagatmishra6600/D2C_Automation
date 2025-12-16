@@ -1,8 +1,5 @@
 package com.automation.familystoreus.pages;
 
-import com.automation.electrolux.locators.EL_PDP;
-import com.automation.electrolux.pages.DeliveryAndServicePageActionElux;
-import com.automation.electrolux.pages.ElectroluxHomePageActions;
 import com.automation.familystoreus.locators.ProductDetailsPageLocator_FSUS;
 import com.automation.utils.BrowserUtils;
 import com.automation.utils.DriverManager;

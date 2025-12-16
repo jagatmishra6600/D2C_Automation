@@ -1,16 +1,11 @@
 package com.automation.fsus.EPIC_03_PDPPage;
 
 import com.automation.BaseTest;
-import com.automation.electrolux.pages.ElectroluxHomePageActions;
-import com.automation.electrolux.pages.ElectroluxPdpPageActions;
-import com.automation.electrolux.pages.ElectroluxPlpPageActions;
 import com.automation.familystoreus.pages.HomePageActionsFsus;
 import com.automation.familystoreus.pages.LoginPageActionsFsus;
 import com.automation.familystoreus.pages.PdpPageActions_FSUS;
 import com.automation.familystoreus.pages.PlpPageActions_FSUS;
 import com.automation.utils.ExtentReportManager;
-import com.automation.utils.WaitUtils;
-import com.automation.utils.WebElementUtil;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

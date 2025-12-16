@@ -2,12 +2,11 @@ package com.automation.familystoreus.pages;
 
 import static com.automation.utils.WaitUtils.untilClickable;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-import com.automation.familystoreus.locators.FSUS_CustomerRegistrationPage;
-import com.automation.familystoreus.locators.FSUS_Homepage;
+import com.automation.familystoreus.locators.CustomerRegistrationLocatorsFsus;
+import com.automation.familystoreus.locators.HomeLocatorsFsus;
 import com.automation.models.FSCreateAccountData;
 import com.automation.utils.ConfigReader;
 import com.automation.utils.WebElementUtil;
@@ -17,7 +16,7 @@ public class CustomerRegistrationPageActionsFsus {
 	 public CustomerRegistrationPageActionsFsus navigateToCreateAccountPage() {
 		WebElementUtil.navigateTo(ConfigReader.getAppUrl()+"createAccount");
         try {
-            WebElement acceptBtn = untilClickable(FSUS_Homepage.acceptButtonLocator, 15);
+            WebElement acceptBtn = untilClickable(HomeLocatorsFsus.acceptButtonLocator, 15);
             if (acceptBtn != null) {
                 acceptBtn.click();
             }
@@ -28,107 +27,107 @@ public class CustomerRegistrationPageActionsFsus {
 	}
 	 
 	 public boolean isWelcomeTitleDisplayed() {
-		 return WebElementUtil.isDisplayed(FSUS_CustomerRegistrationPage.welcomeTitle);
+		 return WebElementUtil.isDisplayed(CustomerRegistrationLocatorsFsus.welcomeTitle);
 	 }
 	 
 	 public boolean isMarketingBannerDisplayed() {
-		 return WebElementUtil.isDisplayed(FSUS_CustomerRegistrationPage.marketingBanner);
+		 return WebElementUtil.isDisplayed(CustomerRegistrationLocatorsFsus.marketingBanner);
 	 }
 	 
 	 public boolean isAlreadyHaveAnAccountMessageDisplayed() {
-		 return WebElementUtil.getText(FSUS_CustomerRegistrationPage.alreadyHaveAccountAndCompleteRegistrationMessage)
+		 return WebElementUtil.getText(CustomerRegistrationLocatorsFsus.alreadyHaveAccountAndCompleteRegistrationMessage)
 				 .contains("Already have an account?");
 	 }
 	 
 	 public boolean isCompleteTheRegistrationMessageDisplayed() {
-		 return WebElementUtil.getText(FSUS_CustomerRegistrationPage.alreadyHaveAccountAndCompleteRegistrationMessage)
+		 return WebElementUtil.getText(CustomerRegistrationLocatorsFsus.alreadyHaveAccountAndCompleteRegistrationMessage)
 				 .contains("To join the program, please complete the registration form below:");
 	 }
 	 
 	 public boolean isFirstNameFieldDisplayed() {
-		 return WebElementUtil.isDisplayed(FSUS_CustomerRegistrationPage.firstNameField);
+		 return WebElementUtil.isDisplayed(CustomerRegistrationLocatorsFsus.firstNameField);
 	 }	
 	 
 	 public boolean isLastNameFieldDisplayed() {
-		 return WebElementUtil.isDisplayed(FSUS_CustomerRegistrationPage.lastNameField);
+		 return WebElementUtil.isDisplayed(CustomerRegistrationLocatorsFsus.lastNameField);
 	 }
 	 
 	 public boolean isZipCodeFieldDisplayed() {
-		 return WebElementUtil.isDisplayed(FSUS_CustomerRegistrationPage.zipCodeField);
+		 return WebElementUtil.isDisplayed(CustomerRegistrationLocatorsFsus.zipCodeField);
 	 }
 
 	 public boolean isEmailAddressFieldDisplayed() {
-		 return WebElementUtil.isDisplayed(FSUS_CustomerRegistrationPage.emailAddressField);
+		 return WebElementUtil.isDisplayed(CustomerRegistrationLocatorsFsus.emailAddressField);
 	 }
 	 
 	 public boolean isPasswordFieldDisplayed() {
-		return WebElementUtil.isDisplayed(FSUS_CustomerRegistrationPage.passwordField);
+		return WebElementUtil.isDisplayed(CustomerRegistrationLocatorsFsus.passwordField);
 	 }
 	 
 	 public boolean isPasswordFieldShowPasswordEyeIconDisplayed() {
-		 return WebElementUtil.isDisplayed(FSUS_CustomerRegistrationPage.passwordFieldShowPasswordEyeIcon);
+		 return WebElementUtil.isDisplayed(CustomerRegistrationLocatorsFsus.passwordFieldShowPasswordEyeIcon);
 	 }
 	 
 	 public boolean isInvitationCodeFieldDisplayed() {
-		 return WebElementUtil.isDisplayed(FSUS_CustomerRegistrationPage.invitationCodeField);
+		 return WebElementUtil.isDisplayed(CustomerRegistrationLocatorsFsus.invitationCodeField);
 	 }
 	 
 	 public boolean isAcknowledgementMessageDisplayed() {
-		 return WebElementUtil.isDisplayed(FSUS_CustomerRegistrationPage.acknowledgementMessage);
+		 return WebElementUtil.isDisplayed(CustomerRegistrationLocatorsFsus.acknowledgementMessage);
 	 }
 	 
 	 public boolean isTermsAndConditionsMessageDisplayed() {
-		 return WebElementUtil.isDisplayed(FSUS_CustomerRegistrationPage.termsAndConditionsMessage);
+		 return WebElementUtil.isDisplayed(CustomerRegistrationLocatorsFsus.termsAndConditionsMessage);
 	 }
 	 
 	 public boolean isConsentCheckBoxDisplayed() {
-		 return WebElementUtil.isDisplayed(FSUS_CustomerRegistrationPage.consentCheckBox);
+		 return WebElementUtil.isDisplayed(CustomerRegistrationLocatorsFsus.consentCheckBox);
 	 }
 	 
 	 public boolean isCreateAccountButtonDisplayed() {
-		 return WebElementUtil.isDisplayed(FSUS_CustomerRegistrationPage.createAccountButton);
+		 return WebElementUtil.isDisplayed(CustomerRegistrationLocatorsFsus.createAccountButton);
 	 }
 	 
 	 public boolean isCancelButtonDisplayed() {
-		 return WebElementUtil.isDisplayed(FSUS_CustomerRegistrationPage.cancelButton);
+		 return WebElementUtil.isDisplayed(CustomerRegistrationLocatorsFsus.cancelButton);
 	 }
 	 
 	 public boolean isLoginHereLinkDisplayed() {
-		 return WebElementUtil.isDisplayed(FSUS_CustomerRegistrationPage.alreadyHaveAccountLoginHereLink);
+		 return WebElementUtil.isDisplayed(CustomerRegistrationLocatorsFsus.alreadyHaveAccountLoginHereLink);
 	 }
 	 
 	 public CustomerRegistrationPageActionsFsus enterEmailAddress(String emailAddress) {
-		 WebElementUtil.isDisplayed(FSUS_CustomerRegistrationPage.emailAddressField);
-		 WebElementUtil.scrollIntoView(FSUS_CustomerRegistrationPage.emailAddressField);
-		 WebElementUtil.sendKeys(FSUS_CustomerRegistrationPage.emailAddressField, emailAddress);
+		 WebElementUtil.isDisplayed(CustomerRegistrationLocatorsFsus.emailAddressField);
+		 WebElementUtil.scrollIntoView(CustomerRegistrationLocatorsFsus.emailAddressField);
+		 WebElementUtil.sendKeys(CustomerRegistrationLocatorsFsus.emailAddressField, emailAddress);
 		 return this;
 	 }
 	 
 	 public CustomerRegistrationPageActionsFsus enterPassword(String password) {
-		 WebElementUtil.scrollIntoView(FSUS_CustomerRegistrationPage.passwordField);
-		 WebElementUtil.sendKeys(FSUS_CustomerRegistrationPage.passwordField, password);
+		 WebElementUtil.scrollIntoView(CustomerRegistrationLocatorsFsus.passwordField);
+		 WebElementUtil.sendKeys(CustomerRegistrationLocatorsFsus.passwordField, password);
 		 return this;
 	 }
 	 
 	 public CustomerRegistrationPageActionsFsus enterFirstName(String firstName) {
-		 WebElementUtil.scrollIntoView(FSUS_CustomerRegistrationPage.firstNameField);
-		 WebElementUtil.sendKeys(FSUS_CustomerRegistrationPage.firstNameField, firstName);
+		 WebElementUtil.scrollIntoView(CustomerRegistrationLocatorsFsus.firstNameField);
+		 WebElementUtil.sendKeys(CustomerRegistrationLocatorsFsus.firstNameField, firstName);
 		 return this;
 	 }
 	 
 	 public CustomerRegistrationPageActionsFsus enterLastName(String lastName) {
-		 WebElementUtil.scrollIntoView(FSUS_CustomerRegistrationPage.lastNameField);
-		 WebElementUtil.sendKeys(FSUS_CustomerRegistrationPage.lastNameField, lastName);
+		 WebElementUtil.scrollIntoView(CustomerRegistrationLocatorsFsus.lastNameField);
+		 WebElementUtil.sendKeys(CustomerRegistrationLocatorsFsus.lastNameField, lastName);
 		 return this;
 	 }
 	 
 	 public HomePageActionsFsus clickCreateAccountButton() {
-		 WebElementUtil.clickElement(FSUS_CustomerRegistrationPage.createAccountButton);
+		 WebElementUtil.clickElement(CustomerRegistrationLocatorsFsus.createAccountButton);
 		 return new HomePageActionsFsus();
 	 }
 	 
 	 public CustomerRegistrationPageActionsFsus enterInvitationCode(String invitationCode) {
-		 WebElementUtil.sendKeys(FSUS_CustomerRegistrationPage.invitationCodeField, invitationCode);
+		 WebElementUtil.sendKeys(CustomerRegistrationLocatorsFsus.invitationCodeField, invitationCode);
 		 return this;
 	 }
 	 
@@ -136,7 +135,7 @@ public class CustomerRegistrationPageActionsFsus {
 		 if(zipCode==null || zipCode.isEmpty() || zipCode.equals("")) {
 			 zipCode = "400001";
 		 }
-		 WebElementUtil.sendKeys(FSUS_CustomerRegistrationPage.zipCodeField, zipCode);
+		 WebElementUtil.sendKeys(CustomerRegistrationLocatorsFsus.zipCodeField, zipCode);
 		 return this;
 	 }
 	 

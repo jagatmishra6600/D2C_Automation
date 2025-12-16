@@ -1,12 +1,11 @@
 package com.automation.electrolux.pages;
 
-import com.automation.electrolux.locators.CartLocatorElux;
-import com.automation.frigidaire.locators.CartLocatorFrig;
+import com.automation.electrolux.locators.CartLocatorsElux;
 import com.automation.utils.WebElementUtil;
 
 public class CartPageActionsElux {
 
-    CartLocatorElux cartPage_Locator = new CartLocatorElux();
+    CartLocatorsElux cartPage_Locator = new CartLocatorsElux();
 
     public boolean isOrderSummaryTextVisibleAndCorrect(String expectedText) {
         WebElementUtil.isDisplayed(cartPage_Locator.orderSummaryText);
