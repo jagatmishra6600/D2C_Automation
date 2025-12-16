@@ -9,10 +9,10 @@ import org.testng.annotations.Test;
 
 public class EPIC_07_TC_02_AQA_Dnads_OrderSummary extends BaseTest {
 
-    private final FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
-    private final FrigidairePdpPageActions pdpPage = new FrigidairePdpPageActions();
-    private final PlpPageActions_Frig plpPage = new PlpPageActions_Frig();
-    private final FrigidaireDAndSPageActions dnsPage = new FrigidaireDAndSPageActions();
+    private final HomePageActionsFrig homePage = new HomePageActionsFrig();
+    private final PdpPageActionsFrig pdpPage = new PdpPageActionsFrig();
+    private final PlpPageActionsFrig plpPage = new PlpPageActionsFrig();
+    private final DAndSPageActionsFrig dnsPage = new DAndSPageActionsFrig();
     private final CartPageActionsFrig cartOage = new CartPageActionsFrig();
 
     @Test(groups = {"smoke", "regression"}, description = "Verify Order Summary on D&S page for French Door Refrigerator")

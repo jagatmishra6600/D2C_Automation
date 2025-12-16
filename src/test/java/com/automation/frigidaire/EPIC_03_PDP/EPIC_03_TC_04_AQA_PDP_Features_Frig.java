@@ -1,0 +1,44 @@
+package com.automation.frigidaire.EPIC_03_PDP;
+
+import com.automation.frigidaire.pages.HomePageActionsFrig;
+import com.automation.frigidaire.pages.PlpPageActionsFrig;
+import com.automation.BaseTest;
+import com.automation.frigidaire.pages.FeaturesPageActionsFrig;
+import com.automation.utils.ExtentReportManager;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+public class EPIC_03_TC_04_AQA_PDP_Features_Frig extends BaseTest {
+    private final HomePageActionsFrig homePage = new HomePageActionsFrig();
+    private final FeaturesPageActionsFrig pdpPage = new FeaturesPageActionsFrig();
+    private final PlpPageActionsFrig plpPage = new PlpPageActionsFrig();
+
+
+    @Test(groups = {"regression"}, description = "Verify features in the Overview & Features section with description and links")
+    public void EPIC_03_PDPPage_TC_04_verifyFeaturesSectionOnPDP() {
+        homePage.navigateToHomePage();
+        pdpPage.searchProduct("GRMC2273CF-C1");
+        pdpPage.selectProductFromPLP();
+        plpPage.closePopupModel();
+        Assert.assertTrue(pdpPage.validateFeatureTitle(), "Feature Section is not visible");
+        pdpPage.verifyFeatureNavigation();
+        boolean isDescriptionDisplayed = pdpPage.validateFeatureDescription();
+        Assert.assertTrue(isDescriptionDisplayed, "Description is not visible for features");
+
+        ExtentReportManager.getTest().pass("Verify features in the Overview & Features section with description and links");
+    }
+
+    @Test(groups = {"regression"}, description = "Verify View All functionality and Show More button to reveal more banners")
+    public void EPIC_03_PDPPage_TC_05_verifyViewMoreFunctionalityInFeaturesSectionOnPDP() {
+        homePage.navigateToHomePage();
+        pdpPage.searchProduct("GRMC2273CF-C1");
+        pdpPage.selectProductFromPLP();
+        plpPage.closePopupModel();
+        Assert.assertTrue(pdpPage.validateFeatureBanner(), "Feature Banner is not showing");
+        Assert.assertTrue(pdpPage.validateViewMoreButtonFunctionality(), "View MFore button is not working");
+
+        ExtentReportManager.getTest().pass("Verify View All functionality and Show More button to reveal more banners");
+    }
+}
+

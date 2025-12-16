@@ -428,7 +428,6 @@ public class WebElementUtil {
         }
     }
 
-
     public static void waitForCondition(ExpectedCondition<?> condition) { 
     	new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(15))
 			.until(condition);
@@ -457,4 +456,50 @@ public class WebElementUtil {
     	var element = DriverManager.getDriver().findElement(locator);
     	return element.getDomProperty(propertyName);
     }
+
+    public static WebElement validateInsideShadowDom(By outer, By targetLocator) {
+
+        WebDriver driver = DriverManager.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        try {
+            // Wait for Shadow Host
+            WebElement shadowHost = wait.until(ExpectedConditions.presenceOfElementLocated(outer));
+
+            // Wait until shadowRoot becomes available
+            SearchContext shadowRoot = wait.until(d -> {
+                try {
+                    return shadowHost.getShadowRoot();
+                } catch (Exception e) {
+                    return null; // retry
+                }
+            });
+
+            if (shadowRoot == null) {
+                throw new RuntimeException("Shadow root not found for host: " + outer);
+            }
+
+            // Now wait for element ***inside shadow DOM***
+            WebElement innerElement = wait.until(d -> {
+                try {
+                    WebElement el = shadowRoot.findElement(targetLocator);
+                    return el.isDisplayed() ? el : null;
+                } catch (StaleElementReferenceException | NoSuchElementException ex) {
+                    return null; // retry
+                }
+            });
+
+            // Scroll to center (stable)
+            ((JavascriptExecutor) driver)
+                    .executeScript("arguments[0].scrollIntoView({block: 'center', inline: 'center'});", innerElement);
+
+            return innerElement;
+
+        } catch (Exception e) {
+            System.err.println("Failed to locate element inside Shadow DOM → " + targetLocator);
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

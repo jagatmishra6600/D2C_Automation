@@ -9,9 +9,9 @@ import org.testng.annotations.Test;
 
 public class EPIC_07_TC_01_AQA_Dnads_Productdetails extends BaseTest {
 
-    private final ElectroluxHomePageActions homePage = new ElectroluxHomePageActions();
-    private final ElectroluxPdpPageActions pdpPage = new ElectroluxPdpPageActions();
-    private final DeliveryAndServicePageActionElux dnsPage = new DeliveryAndServicePageActionElux();
+    private final HomePageActionsElux homePage = new HomePageActionsElux();
+    private final PdpPageActionsElux pdpPage = new PdpPageActionsElux();
+    private final DeliveryAndServicePageActionsElux dnsPage = new DeliveryAndServicePageActionsElux();
 
 
     @Test(groups = {"smoke", "regression"}, description = "Verify product details on D&S page for Front Load Washer")

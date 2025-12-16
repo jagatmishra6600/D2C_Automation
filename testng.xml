@@ -24,7 +24,7 @@
             </run>
         </groups>
         <packages>
-            <package name="com.automation.frigidaire.EPIC_02_HomePage"/>
+            <package name="com.automation.frigidaire.EPIC_02_Home"/>
         </packages>
     </test>
 
@@ -50,7 +50,7 @@
             </run>
         </groups>
         <packages>
-            <package name="com.automation.frigidaire.EPIC_03_PDPPage"/>
+            <package name="com.automation.frigidaire.EPIC_03_PDP"/>
         </packages>
     </test>
 

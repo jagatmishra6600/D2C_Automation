@@ -1,11 +1,11 @@
 package com.automation.frigidaire.EPIC_07_DandS;
 
 import com.automation.BaseTest;
-import com.automation.frigidaire.pages.FrigidaireDAndSPageActions;
-import com.automation.frigidaire.pages.FrigidaireHomePageActions;
-import com.automation.frigidaire.pages.FrigidairePdpPageActions;
+import com.automation.frigidaire.pages.DAndSPageActionsFrig;
+import com.automation.frigidaire.pages.HomePageActionsFrig;
+import com.automation.frigidaire.pages.PdpPageActionsFrig;
 
-import com.automation.frigidaire.pages.PlpPageActions_Frig;
+import com.automation.frigidaire.pages.PlpPageActionsFrig;
 import com.automation.utils.ExtentReportManager;
 import com.automation.utils.WaitUtils;
 import org.testng.Assert;
@@ -13,10 +13,10 @@ import org.testng.annotations.Test;
 
 public class EPIC_07_TC_01_AQA_Dnads_Productdetails extends BaseTest {
 
-    private final FrigidaireHomePageActions homePage = new FrigidaireHomePageActions();
-    private final FrigidairePdpPageActions pdpPage = new FrigidairePdpPageActions();
-    private final PlpPageActions_Frig plpPage = new PlpPageActions_Frig();
-    private final FrigidaireDAndSPageActions dnsPage = new FrigidaireDAndSPageActions();
+    private final HomePageActionsFrig homePage = new HomePageActionsFrig();
+    private final PdpPageActionsFrig pdpPage = new PdpPageActionsFrig();
+    private final PlpPageActionsFrig plpPage = new PlpPageActionsFrig();
+    private final DAndSPageActionsFrig dnsPage = new DAndSPageActionsFrig();
 
 
     @Test(groups = {"smoke", "regression"}, description = "Verify product details on D&S page for French Door Refrigerator")
