@@ -156,6 +156,15 @@ public class WebElementUtil {
         } catch (Exception e) { throw new RuntimeException(e); }
     }
 
+    public static void clickElementUsingJSE( By locator) {
+        try {
+            WebDriver driver=DriverManager.getDriver();
+            WebElement element = driver.findElement(locator);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+        } catch (Exception e) { throw new RuntimeException(e); }
+    }
+
     public static void scrollUp(WebDriver driver, int pixels) {
         try { ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-" + pixels + ")"); }
         catch (Exception e) { throw new RuntimeException(e); }
@@ -355,7 +364,7 @@ public class WebElementUtil {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
-        // 1️⃣ wait for element to exist
+        //wait for element to exist
         WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
 
         int maxAttempts = 15; // enough retries for unstable pages
@@ -458,3 +467,5 @@ public class WebElementUtil {
     	return element.getDomProperty(propertyName);
     }
 }
+
+

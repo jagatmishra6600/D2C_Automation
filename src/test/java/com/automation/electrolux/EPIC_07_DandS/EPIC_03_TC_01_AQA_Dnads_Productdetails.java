@@ -5,7 +5,7 @@ import com.automation.electrolux.pages.*;
 import com.automation.frigidaire.pages.FrigidaireDAndSPageActions;
 import com.automation.frigidaire.pages.FrigidaireHomePageActions;
 import com.automation.frigidaire.pages.FrigidairePdpPageActions;
-import com.automation.frigidaire.pages.FrigidairePlpPageActions;
+
 import com.automation.utils.ExtentReportManager;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;

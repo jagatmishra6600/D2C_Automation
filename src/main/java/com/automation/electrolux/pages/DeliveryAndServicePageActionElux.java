@@ -3,7 +3,6 @@ package com.automation.electrolux.pages;
 import com.automation.electrolux.locators.DandSLocatorElux;
 import com.automation.frigidaire.pages.CartPageActionsFrig;
 import com.automation.frigidaire.pages.FrigidaireDAndSPageActions;
-import com.automation.frigidaire.pages.FrigidairePlpPageActions;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
 

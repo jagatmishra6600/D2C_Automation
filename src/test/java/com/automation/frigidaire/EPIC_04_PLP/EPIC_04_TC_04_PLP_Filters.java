@@ -25,6 +25,9 @@ public class EPIC_04_TC_04_PLP_Filters extends BaseTest {
     }
 
 
+
+
+
     @Test(groups = {"smoke", "regression"}, description = "Verify hide/show filters functionality")
     public void EPIC_04_PLP_TC_04_testHideShowFilters() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
