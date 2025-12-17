@@ -37,8 +37,8 @@ public class FE_DandS {
     public final By saveAndViewCartButton = By.xpath("//button[normalize-space(text())='Save and view cart']");
     public final By inStorePickUpCheckBox = By.xpath("//div[text()='In-store Pickup']");
     public final By inStorePickUpHeading = By.xpath("//div[text()='In-store Pickup at Best Buy']");
-
-
-
+    public final By partPriceOrderSummary = By.xpath("//div[text()='Installation parts']/following-sibling::div");
+    public final By addOnServicesPriceOrderSummary = By.xpath("//div[normalize-space(text())='Add-on services']/following-sibling::div");
+    public final By protectionPlanPriceOrderSummary = By.xpath("//div[normalize-space(text())='tap protection plan']/following-sibling::div");
 
 }
