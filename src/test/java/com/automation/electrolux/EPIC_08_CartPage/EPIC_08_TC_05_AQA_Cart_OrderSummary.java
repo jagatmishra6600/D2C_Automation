@@ -18,8 +18,8 @@ public class EPIC_08_TC_05_AQA_Cart_OrderSummary extends BaseTest {
     private final CartPageActionsElux cartPage = new CartPageActionsElux();
 
 
-    @Test(groups = {"smoke", "regression"}, description = "Verify Order Summary on D&S page for Front Load Washer")
-    public void EPIC_07_DandS_TC_02_verifyOrderSummaryForFrontLoadWasher() {
+    @Test(groups = {"smoke", "regression"}, description = "Verify Order Summary on Cart page for Front Load Washer")
+    public void EPIC_08_Cart_TC_05_verifyOrderSummaryForFrontLoadWasher() {
         homePage.navigateToHomePage();
         WaitUtils.untilPageLoadComplete();
         homePage.clickSearchAndEnterProductId("ELFW7537AT");
@@ -43,6 +43,6 @@ public class EPIC_08_TC_05_AQA_Cart_OrderSummary extends BaseTest {
         cartPage.clickProceedToCheckOutButton();
 
 
-        ExtentReportManager.getTest().pass("Verify order summary on D&S page for Front Load Washer");
+        ExtentReportManager.getTest().pass("Verify order summary on Cart page for Front Load Washer");
     }
 }
