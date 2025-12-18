@@ -1,5 +1,6 @@
 package com.automation.frigidaire.pages;
 
+
 import com.automation.frigidaire.locators.CartLocatorsFrig;
 import com.automation.utils.WebElementUtil;
 
@@ -56,8 +57,9 @@ public class CartPageActionsFrig {
         return actualText.toLowerCase().contains(expectedText.toLowerCase());
     }
 
-    public CartPageActionsFrig clickProceedToCheckOutButton() {
-        WebElementUtil.clickElement(cartPage_Locator.proceedToCheckOutButton);
-        return this;
-    }
+    public ShippingAddressPageActionsFrig clickProceedToCheckOutButton() {
+    	WebElementUtil.scrollIntoView(cartPage_Locator.proceedToCheckOutButton);
+    	WebElementUtil.clickElement(cartPage_Locator.proceedToCheckOutButton);
+        return new ShippingAddressPageActionsFrig();
+    } 
 }

@@ -14,12 +14,12 @@ public class EPIC_01_TC_02_AQA_Authentication_LoginSuccess_Frig extends BaseTest
  	 String password = ConfigReader.getProperty("user.password");
 	 
 	 @Test(groups = {"smoke", "regression"}, description = "User should be able to login Successfully with valid Credentials")
-	    public void TC_02_S1_VerifyTestLoginSuccess() throws InterruptedException {
+	    public void TC_02_S1_VerifyTestLoginSuccess() {
 	        homePage.navigateToLoginPage()
 	        		.login(emailAddress, password);
 
 	        Assert.assertTrue(homePage.isHomePageLoaded(),"User is not navigated to HomePage after Logging in with Valid Credentials");
-	        //Assert.assertTrue(homePage.isUserGreetingDropdownVisible(),"User Greeting Dropdown Button is not displayed");
+	        Assert.assertTrue(homePage.isUserGreetingDropdownDisplayed(),"User Greeting Dropdown Button is not displayed");
 	        ExtentReportManager.getTest().pass("User Logged In Using Valid Credentials and Navigated to HomePage");
 	    }
 }
