@@ -6,6 +6,7 @@ import com.automation.frigidaire.locators.LoginLocatorsFrig;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+
 import com.automation.utils.UserTestData;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
@@ -14,11 +15,15 @@ public class AccountLoginPageComponentActionsFrig {
 	private LoginLocatorsFrig login_Locators = new LoginLocatorsFrig();
 	private AccountLoginLocatorsFrig accountLogin_Locators = new AccountLoginLocatorsFrig();
 	
-	 public ShippingAddressPageActionsFrig login(String emailAddress, String password) {
-		 return	 enterEmailAddress(emailAddress)
-								.enterPassword(password)
-								.clickLoginButton();
-	 }
+	public ShippingAddressPageActionsFrig login(String emailAddress, String password) {
+		 enterEmailAddress(emailAddress)
+						.enterPassword(password)
+						.clickLoginButton();
+		 //Handling 2 Refreshes before the page becomes stable
+		 WaitUtils.waitForPageLoad();  
+	     WaitUtils.waitForPageLoad();
+		 return new ShippingAddressPageActionsFrig();	
+	}
 	 
 	public AccountLoginPageComponentActionsFrig enterEmailAddress(String emailAddress) {
 		WebElementUtil.sendKeys(login_Locators.emailAddressInput, emailAddress);
@@ -105,11 +110,6 @@ public class AccountLoginPageComponentActionsFrig {
 	}
 
 	public ShippingAddressPageActionsFrig loginWithDefaultCredentials() {
-		var isLoginSectionDisplayed = login(UserTestData.getUserName(),UserTestData.getPassword())
-				.isLoginSectionDisplayed();
-		if(isLoginSectionDisplayed) {
-			WaitUtils.waitForPageLoad();
-		}
-		return new ShippingAddressPageActionsFrig();
+		return login(UserTestData.getUserName(),UserTestData.getPassword());
 	}
 }
