@@ -34,9 +34,8 @@ public class DandSLocatorsElux {
     public final By fiveYearsPlanPrice = By.xpath("//div[text()='5 years']/../../following-sibling::div");
     public final By fiveYearsCheckBox = By.xpath("//div[text()='5 years']/../parent::label");
     public final By saveAndViewCartButton = By.xpath("//button[@aria-label='Save and view cart']");
-    
-
-
-
+    public final By partPriceOrderSummary = By.xpath("//div[text()='Installation parts']/following-sibling::div");
+    public final By addOnServicesPriceOrderSummary = By.xpath("//div[normalize-space(text())='Add-on Services']/following-sibling::div");
+    public final By protectionPlanPriceOrderSummary = By.xpath("//div[normalize-space(text())='Protection Plan']/following-sibling::div");
 
 }

@@ -62,4 +62,26 @@ public class CartPageActionsFrig {
     	WebElementUtil.clickElement(cartPage_Locator.proceedToCheckOutButton);
         return new ShippingAddressPageActionsFrig();
     } 
+
+    public CartPageActionsFrig clickEmptyCartButton() {
+        WebElementUtil.scrollToElementCenter(cartPage_Locator.emptyCartButton);
+        WebElementUtil.clickElement(cartPage_Locator.emptyCartButton);
+        WebElementUtil.clickElement(cartPage_Locator.confirmButton);
+        return this;
+    }
+
+    public boolean isYourCartEmptyTextVisibleAndCorrect(String expectedText) {
+        WebElementUtil.scrollToElementCenter(cartPage_Locator.yourCartIsEmptyText);
+        WebElementUtil.isDisplayed(cartPage_Locator.yourCartIsEmptyText);
+        String actualText =  WebElementUtil.getText(cartPage_Locator.yourCartIsEmptyText).trim();
+        return actualText.toLowerCase().contains(expectedText.toLowerCase());
+    }
+
+    public CartPageActionsFrig clickRemoveFromCartButton() {
+        WebElementUtil.scrollToElementCenter(cartPage_Locator.productRemoveCloseButton);
+        WebElementUtil.clickElement(cartPage_Locator.productRemoveCloseButton);
+        WebElementUtil.clickElement(cartPage_Locator.removeButton);
+        WebElementUtil.isDisplayed(cartPage_Locator.yourCartIsEmptyText);
+        return this;
+    }
 }

@@ -15,8 +15,8 @@ public class EPIC_08_TC_05_AQA_Cart_OrderSummary extends BaseTest {
     private final CartPageAction_FSUS cartPage = new CartPageAction_FSUS();
 
 
-    @Test(groups = {"smoke", "regression"}, description = "Verify Order Summary on D&S page for French Door Refrigerator")
-    public void EPIC_07_DandS_TC_02_verifyOrderSummaryForFrenchDoorRefrigerator() {
+    @Test(groups = {"smoke", "regression"}, description = "Verify Order Summary on Cart page for French Door Refrigerator")
+    public void EPIC_08_Cart_TC_05_verifyOrderSummaryForFrenchDoorRefrigerator() {
         loginPage.loginWithDefaultCredentials();
         loginPage.acceptCookies();
         homePage.clickSearchAndEnterProductId("FRFG1723AV");
@@ -36,6 +36,6 @@ public class EPIC_08_TC_05_AQA_Cart_OrderSummary extends BaseTest {
 
         cartPage.clickProceedToCheckOutButton();
 
-        ExtentReportManager.getTest().pass("Verify order summary on D&S page for French Door Refrigerator");
+        ExtentReportManager.getTest().pass("Verify order summary on Cart page for French Door Refrigerator");
     }
 }

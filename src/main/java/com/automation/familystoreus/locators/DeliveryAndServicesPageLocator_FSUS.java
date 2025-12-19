@@ -32,5 +32,8 @@ public class DeliveryAndServicesPageLocator_FSUS {
     public final By fiveYearsPlanPrice = By.xpath("//div[text()='5 years']/../../following-sibling::div");
     public final By fiveYearsCheckBox = By.xpath("//div[text()='5 years']/../parent::label");
     public final By saveAndViewCartButton = By.xpath("//button[normalize-space(text())='Save and view cart']");
+    public final By partPriceOrderSummary = By.xpath("//div[normalize-space(text())='Installation parts']/following-sibling::div");
+    public final By addOnServicesPriceOrderSummary = By.xpath("//div[normalize-space(text())='Add-on services']/following-sibling::div");
+    public final By protectionPlanPriceOrderSummary = By.xpath("//div[contains(text(), 'protection plan')]/following-sibling::div");
 
 }

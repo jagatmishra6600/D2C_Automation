@@ -15,8 +15,8 @@ public class EPIC_08_TC_05_AQA_Cart_OrderSummary extends BaseTest {
     private final DAndSPageActionsFrig dnsPage = new DAndSPageActionsFrig();
     private final CartPageActionsFrig cartOage = new CartPageActionsFrig();
 
-    @Test(groups = {"smoke", "regression"}, description = "Verify Order Summary on D&S page for French Door Refrigerator")
-    public void EPIC_07_DandS_TC_02_verifyOrderSummaryForFrenchDoorRefrigerator() {
+    @Test(groups = {"smoke", "regression"}, description = "Verify Order Summary on Cart page for French Door Refrigerator")
+    public void EPIC_08_Cart_TC_05_verifyOrderSummaryForFrenchDoorRefrigerator() {
         homePage.navigateToHomePage();
         WaitUtils.untilPageLoadComplete();
         homePage.clickFrenchDoor();
@@ -38,6 +38,6 @@ public class EPIC_08_TC_05_AQA_Cart_OrderSummary extends BaseTest {
 
         cartOage.clickProceedToCheckOutButton();
 
-        ExtentReportManager.getTest().pass("Verify order summary on D&S page for French Door Refrigerator");
+        ExtentReportManager.getTest().pass("Verify order summary on Cart page for French Door Refrigerator");
     }
 }
