@@ -12,6 +12,7 @@ public class CartLocatorsFrig {
     public final By promoCodeText = By.xpath("//h6[normalize-space(text())='Promo code']");
     public final By proceedToCheckOutButton = By.xpath("(//button[normalize-space(text())='Proceed to checkout'])[2]");
     public final By emptyCartButton = By.xpath("//button[contains(@class, 'emptyCartBtn')]");
+    public final By confirmButton = By.xpath("//app-elux-cart-empty-modal//button//p[contains(text(),'Yes')]");
     public final By yourCartIsEmptyText = By.xpath("//p[text()='Your shopping cart is empty']");
     public final By productRemoveCloseButton = By.xpath("//a[contains(@href, '/en/p')]//..//..//following-sibling::div[3]//button");
     public final By removeButton = By.xpath("//app-elux-cart-confirm-modal//button//p[text()='Remove']");
