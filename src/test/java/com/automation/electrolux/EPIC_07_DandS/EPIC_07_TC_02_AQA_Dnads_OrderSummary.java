@@ -12,11 +12,32 @@ public class EPIC_07_TC_02_AQA_Dnads_OrderSummary extends BaseTest {
     private final HomePageActionsElux homePage = new HomePageActionsElux();
     private final PdpPageActionsElux pdpPage = new PdpPageActionsElux();
     private final DeliveryAndServicePageActionsElux dnsPage = new DeliveryAndServicePageActionsElux();
-    private final CartPageActionsElux cartPage = new CartPageActionsElux();
 
 
-    @Test(groups = {"smoke", "regression"}, description = "Verify Order Summary on D&S page for Front Load Washer")
-    public void EPIC_07_DandS_TC_02_verifyOrderSummaryForFrontLoadWasher() {
+    @Test(groups = {"smoke", "regression"}, description = "Verify Order summary on D&S page for Front Load Washer")
+    public void EPIC_07_DandS_TC_02_verifyOrderSummaryOnDeliveryAndServicePageForFrontLoadWasher() {
+        homePage.navigateToHomePage();
+        WaitUtils.untilPageLoadComplete();
+        homePage.clickSearchAndEnterProductId("ELFW7537AT");
+        homePage.clickSearchIcon();
+        homePage.storeProvidedProductId();
+        homePage.storeProvidedProductTitle();
+        homePage.storeProvidedProductPrice();
+        homePage.clickProvidedProduct();
+        pdpPage.clickAddToCartButton();
+
+        Assert.assertTrue(dnsPage.isDeliveryAndServicePageHeadingVisibleAndCorrect("Delivery, installation & service options"), "Delivery, installation & service options does not visible on Delivery and service page");
+        Assert.assertTrue(dnsPage.isProductTitleMatchingWithHomePage(), "Product Title on DandS does not match the selected product from Home Page.");
+        Assert.assertTrue(dnsPage.isProductPriceMatchingWithHomePage(), "Product Price on DNS does not match the selected product from Home Page.");
+        Assert.assertTrue(dnsPage.isDeliveryAndServiceTextVisibleAndCorrect("Delivery & installation services"), "Delivery & installation services does not display on Page or Not matched with expected text");
+//            Assert.assertTrue(dnsPage.validateDeliveryOptionIsSelected("selected"), "Selected delivery option does not display on Page or Not matched with expected class name");
+
+
+        ExtentReportManager.getTest().pass("Verify Order Summary on D&S page for Front Load Washer");
+    }
+
+    @Test(groups = {"smoke", "regression"}, description = "Verify Order Summary ( Delivery and Services Section ) on D&S page for Front Load Washer")
+    public void EPIC_07_DandS_TC_02_verifyDeliveryAndInstallationServicesSectionForFrontLoadWasher() {
         homePage.navigateToHomePage();
         WaitUtils.untilPageLoadComplete();
         homePage.clickSearchAndEnterProductId("ELFW7537AT");
@@ -24,22 +45,58 @@ public class EPIC_07_TC_02_AQA_Dnads_OrderSummary extends BaseTest {
         homePage.clickProvidedProduct();
         pdpPage.clickAddToCartButton();
 
-        dnsPage.clickSaveAndViewCartButton();
+        Assert.assertTrue(dnsPage.isDeliveryAndServicePageHeadingVisibleAndCorrect("Delivery, installation & service options"), "Delivery, installation & service options does not visible on Delivery and service page");
+        Assert.assertTrue(dnsPage.isDeliveryAndServiceTextVisibleAndCorrect("Delivery & installation services"), "Delivery and installation services text does not display on Page or Not matched with expected text");
+        Assert.assertTrue(dnsPage.clickDeliveryOnlyAndCheckTheUpdatedTotalPrice(), "The total price didn't matched after clicking action");
+        Assert.assertTrue(dnsPage.isRequireInstallationPartsTextVisibleAndCorrect("Required installation parts"), "Required installation parts text does not display on Page or Not matched with expected text");
+        Assert.assertTrue(dnsPage.clickPartAndCheckTheUpdatedTotalPrice(), "The total price didn't matched after clicking action");
+        Assert.assertTrue(dnsPage.clickProfessionalInstallationAndCheckTheUpdatedTotalPrice(), "The total price didn't matched after clicking action");
 
-        Assert.assertTrue(cartPage.isOrderSummaryTextVisibleAndCorrect("Order Summary"), "Order summary text does not visible on page or Not matched with the expected one");
-        Assert.assertTrue(cartPage.isSubtotalTextVisibleAndCorrect("Subtotal"), "Subtotal Text does not visible on page or Not matched with the expected one");
-        Assert.assertTrue(cartPage.isSubtotalPriceVisible(), "Subtotal price does not visible on page");
-        Assert.assertTrue(cartPage.isHomeDeliveryTextVisibleAndCorrect("Home delivery"), "Home delivery Text does not visible on page or Not matched with the expected one");
-        Assert.assertTrue(cartPage.isHomeDeliveryPriceVisible(), "Home delivery price does not visible on page");
-        Assert.assertTrue(cartPage.isInstallationPartTextVisibleAndCorrect("Installation parts"), "Installation parts Text does not visible on page or Not matched with the expected one");
-        Assert.assertTrue(cartPage.isInstallationPriceVisible(), "Installation parts price does not visible on page");
-        Assert.assertTrue(cartPage.isTotalTextVisibleAndCorrect("Total"), "Total Text does not visible on page or Not matched with the expected one");
-        Assert.assertTrue(cartPage.isTotalPriceVisible(), "Total price does not visible on page");
-        Assert.assertTrue(cartPage.isPromoCodeTextVisibleAndCorrect("Promo code"), "Promo code Text does not visible on page or Not matched with the expected one");
+        dnsPage.clickAdditionalDetailsLink();
 
-        cartPage.clickProceedToCheckOutButton();
+        Assert.assertTrue(dnsPage.isAdditionalDetailsTextVisibleAndCorrect("Delivery & appliance install"), "Delivery & appliance install text does not display on Page or Not matched with expected text");
+
+        dnsPage.clickCloseButtonAdditionalDetails();
 
 
-        ExtentReportManager.getTest().pass("Verify order summary on D&S page for Front Load Washer");
+
+        ExtentReportManager.getTest().pass("Verify Order Sumary ( Delivery and Services Section ) on D&S page for Front Load Washer");
+    }
+
+    @Test(groups = {"smoke", "regression"}, description = "Verify Order Summary ( Add-on Services Section ) on D&S page for Front Load Washer")
+    public void EPIC_07_DandS_TC_01_verifyAddonServicesSectionForFrontLoadWasher() {
+        homePage.navigateToHomePage();
+        WaitUtils.untilPageLoadComplete();
+        homePage.clickSearchAndEnterProductId("ELFW7537AT");
+        homePage.clickSearchIcon();
+        homePage.clickProvidedProduct();
+        pdpPage.clickAddToCartButton();
+
+        Assert.assertTrue(dnsPage.isAddonServicesTextVisibleAndCorrect("Add-on Services"), "Add-on services does not visible on Delivery and service page");
+        Assert.assertTrue(dnsPage.clickHaulAwayCheckBoxAndCheckTheUpdatedTotalPrice(), "The total price didn't matched after clicking action");
+        Assert.assertTrue(dnsPage.clickMoveOldUnitCheckBoxAndCheckTheUpdatedTotalPrice(), "The total price didn't matched after clicking action");
+        Assert.assertTrue(dnsPage.clickDoorSwingCheckBoxAndCheckTheUpdatedTotalPrice(), "The total price didn't matched after clicking action");
+
+
+        ExtentReportManager.getTest().pass("Verify Order Summary ( Add-on Services Section ) on D&S page for Front Load Washer");
+    }
+
+    @Test(groups = {"smoke", "regression"}, description = "Verify Order Summary ( Protection Plan Section ) on D&S page for Front Load Washer")
+    public void EPIC_07_DandS_TC_01_verifyProtectionPlanSectionForFrontLoadWasher() {
+        homePage.navigateToHomePage();
+        WaitUtils.untilPageLoadComplete();
+        homePage.clickSearchAndEnterProductId("ELFW7537AT");
+        homePage.clickSearchIcon();
+        homePage.clickProvidedProduct();
+        pdpPage.clickAddToCartButton();
+
+        Assert.assertTrue(dnsPage.isProtectionPlanTextVisibleAndCorrect("Select a protection plan"), "Select a protection plan does not visible on Delivery and service page");
+        Assert.assertTrue(dnsPage.validateDeclineOptionIsSelected("active"), "The class name does not matched with the expected one");
+        Assert.assertTrue(dnsPage.clickOneYearProtectionAndCheckTheUpdatedTotalPrice(), "The total price didn't matched after clicking action");
+        Assert.assertTrue(dnsPage.clickThreeYearProtectionAndCheckTheUpdatedTotalPrice(), "The total price didn't matched after clicking action");
+        Assert.assertTrue(dnsPage.clickFiveYearProtectionAndCheckTheUpdatedTotalPrice(), "The total price didn't matched after clicking action");
+
+
+        ExtentReportManager.getTest().pass("Verify Order Summary ( Protection Plan Section ) on D&S page for Front Load Washer");
     }
 }
