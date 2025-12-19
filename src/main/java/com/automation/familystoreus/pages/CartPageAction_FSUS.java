@@ -72,6 +72,7 @@ public class CartPageAction_FSUS {
     public CartPageAction_FSUS clickRemoveFromCartButton() {
         WebElementUtil.scrollToElementCenter(cartPage_Locator.productRemoveCloseButton);
         WebElementUtil.clickElement(cartPage_Locator.productRemoveCloseButton);
+        WebElementUtil.clickElement(cartPage_Locator.removeButton);
         WebElementUtil.isDisplayed(cartPage_Locator.yourCartIsEmptyText);
         return this;
     }
