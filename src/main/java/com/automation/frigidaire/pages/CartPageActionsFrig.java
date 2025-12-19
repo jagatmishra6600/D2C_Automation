@@ -64,6 +64,7 @@ public class CartPageActionsFrig {
     public CartPageActionsFrig clickEmptyCartButton() {
         WebElementUtil.scrollToElementCenter(cartPage_Locator.emptyCartButton);
         WebElementUtil.clickElement(cartPage_Locator.emptyCartButton);
+        WebElementUtil.clickElement(cartPage_Locator.confirmButton);
         return this;
     }
 
