@@ -15,8 +15,30 @@ public class EPIC_07_TC_02_AQA_Dnads_OrderSummary extends BaseTest {
     private final CartPageAction_FSUS cartPage = new CartPageAction_FSUS();
 
 
-    @Test(groups = {"smoke", "regression"}, description = "Verify Order Summary on D&S page for French Door Refrigerator")
-    public void EPIC_07_DandS_TC_02_verifyOrderSummaryForFrenchDoorRefrigerator() {
+    @Test(groups = {"smoke", "regression"}, description = "Verify product details on D&S page for French Door Refrigerator")
+    public void EPIC_07_DandS_TC_02_verifyProductDetailsOnDeliveryAndServicePageForFrenchDoorRefrigerator() {
+        loginPage.loginWithDefaultCredentials();
+        loginPage.acceptCookies();
+        homePage.clickSearchAndEnterProductId("FRFG1723AV");
+        homePage.clickSearchIcon();
+        homePage.storeProvidedProductId();
+        homePage.storeProvidedProductTitle();
+        homePage.storeProvidedProductPrice();
+        homePage.clickProvidedProduct();
+        pdpPage.clickAddToCartButton();
+
+        Assert.assertTrue(dnsPage.isDeliveryAndServicePageHeadingVisibleAndCorrect("Delivery, installation & service options"), "Delivery, installation & service options does not visible on Delivery and service page");
+        Assert.assertTrue(dnsPage.isProductTitleMatchingWithHomePage(), "Product Title on DandS does not match the selected product from Home Page.");
+        Assert.assertTrue(dnsPage.isProductPriceMatchingWithHomePage(), "Product Price on DNS does not match the selected product from Home Page.");
+        Assert.assertTrue(dnsPage.isDeliveryAndServiceTextVisibleAndCorrect("Delivery & installation services"), "Delivery & installation services does not display on Page or Not matched with expected text");
+//            Assert.assertTrue(dnsPage.validateDeliveryOptionIsSelected("selected"), "Selected delivery option does not display on Page or Not matched with expected class name");
+
+
+        ExtentReportManager.getTest().pass("Verify product details on D&S page for French Door Refrigerator");
+    }
+
+    @Test(groups = {"smoke", "regression"}, description = "Verify Order Summary ( Delivery and Services Section ) on D&S page for French Door Refrigerator")
+    public void EPIC_07_DandS_TC_02_verifyDeliveryAndInstallationServicesSectionForFrenchDoorRefrigerator() {
         loginPage.loginWithDefaultCredentials();
         loginPage.acceptCookies();
         homePage.clickSearchAndEnterProductId("FRFG1723AV");
@@ -24,18 +46,58 @@ public class EPIC_07_TC_02_AQA_Dnads_OrderSummary extends BaseTest {
         homePage.clickProvidedProduct();
         pdpPage.clickAddToCartButton();
 
-        dnsPage.clickSaveAndViewCartButton();
+        Assert.assertTrue(dnsPage.isDeliveryAndServicePageHeadingVisibleAndCorrect("Delivery, installation & service options"), "Delivery, installation & service options does not visible on Delivery and service page");
+        Assert.assertTrue(dnsPage.isDeliveryAndServiceTextVisibleAndCorrect("Delivery & installation services"), "Delivery and installation services text does not display on Page or Not matched with expected text");
+        Assert.assertTrue(dnsPage.clickDeliveryOnlyAndCheckTheUpdatedTotalPrice(), "The total price didn't matched after clicking action");
+        Assert.assertTrue(dnsPage.isRequireInstallationPartsTextVisibleAndCorrect("Required installation parts"), "Required installation parts text does not display on Page or Not matched with expected text");
+        Assert.assertTrue(dnsPage.clickPartAndCheckTheUpdatedTotalPrice(), "The total price didn't matched after clicking action");
+        Assert.assertTrue(dnsPage.clickProfessionalInstallationAndCheckTheUpdatedTotalPrice(), "The total price didn't matched after clicking action");
 
-        Assert.assertTrue(cartPage.isOrderSummaryTextVisibleAndCorrect("Order summary"), "Order summary text does not visible on page or Not matched with the expected one");
-        Assert.assertTrue(cartPage.isSubtotalTextVisibleAndCorrect("Subtotal"), "Subtotal Text does not visible on page or Not matched with the expected one");
-        Assert.assertTrue(cartPage.isSubtotalPriceVisible(), "Subtotal price does not visible on page");
-        Assert.assertTrue(cartPage.isHomeDeliveryTextVisibleAndCorrect("Home Delivery"), "Home delivery Text does not visible on page or Not matched with the expected one");
-        Assert.assertTrue(cartPage.isHomeDeliveryPriceVisible(), "Home delivery price does not visible on page");
-        Assert.assertTrue(cartPage.isTotalTextVisibleAndCorrect("Total"), "Total Text does not visible on page or Not matched with the expected one");
-        Assert.assertTrue(cartPage.isTotalPriceVisible(), "Total price does not visible on page");
+        dnsPage.clickAdditionalDetailsLink();
 
-        cartPage.clickProceedToCheckOutButton();
+        Assert.assertTrue(dnsPage.isAdditionalDetailsTextVisibleAndCorrect("Included with service:"), "Included with service: text does not display on Page or Not matched with expected text");
 
-        ExtentReportManager.getTest().pass("Verify order summary on D&S page for French Door Refrigerator");
+        dnsPage.clickCloseButtonAdditionalDetails();
+
+
+
+        ExtentReportManager.getTest().pass("Verify Order Summary ( Delivery and Services Section ) on D&S page for French Door Refrigerator");
+    }
+
+    @Test(groups = {"smoke", "regression"}, description = "Verify Order Summary ( Add-on Services Section ) on D&S page for French Door Refrigerator")
+    public void EPIC_07_DandS_TC_02_verifyAddonServicesSectionForFrenchDoorRefrigerator() {
+        loginPage.loginWithDefaultCredentials();
+        loginPage.acceptCookies();
+        homePage.clickSearchAndEnterProductId("FRFG1723AV");
+        homePage.clickSearchIcon();
+        homePage.clickProvidedProduct();
+        pdpPage.clickAddToCartButton();
+
+        Assert.assertTrue(dnsPage.isAddonServicesTextVisibleAndCorrect("Add-on Service"), "Add-on services does not visible on Delivery and service page");
+        Assert.assertTrue(dnsPage.clickHaulAwayCheckBoxAndCheckTheUpdatedTotalPrice(), "The total price didn't matched after clicking action");
+        Assert.assertTrue(dnsPage.clickMoveOldUnitCheckBoxAndCheckTheUpdatedTotalPrice(), "The total price didn't matched after clicking action");
+
+
+        ExtentReportManager.getTest().pass("Verify Order Summary ( Add-on Services Section ) on D&S page for French Door Refrigerator");
+    }
+
+    @Test(groups = {"smoke", "regression"}, description = "Verify Order Summary ( Protection Plan Section ) on D&S page for French Door Refrigerator")
+    public void EPIC_07_DandS_TC_02_verifyProtectionPlanSectionForFrenchDoorRefrigerator() {
+        loginPage.loginWithDefaultCredentials();
+        loginPage.acceptCookies();
+        homePage.clickSearchAndEnterProductId("FRFG1723AV");
+        homePage.clickSearchIcon();
+        homePage.clickProvidedProduct();
+        pdpPage.clickAddToCartButton();
+
+        Assert.assertTrue(dnsPage.isProtectionPlanTextVisibleAndCorrect("Protection plan"), "Select a protection plan does not visible on Delivery and service page");
+        Assert.assertTrue(dnsPage.validateDeclineOptionIsSelected("active"), "The class name does not matched with the expected one");
+        Assert.assertTrue(dnsPage.clickOneYearProtectionAndCheckTheUpdatedTotalPrice(), "The total price didn't matched after clicking action");
+        Assert.assertTrue(dnsPage.clickThreeYearProtectionAndCheckTheUpdatedTotalPrice(), "The total price didn't matched after clicking action");
+        Assert.assertTrue(dnsPage.clickFiveYearProtectionAndCheckTheUpdatedTotalPrice(), "The total price didn't matched after clicking action");
+
+
+
+        ExtentReportManager.getTest().pass("Verify Order Summary ( Protection Plan Section ) on D&S page for French Door Refrigerator");
     }
 }
