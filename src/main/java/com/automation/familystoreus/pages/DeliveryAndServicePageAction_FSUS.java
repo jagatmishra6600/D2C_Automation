@@ -3,6 +3,8 @@ package com.automation.familystoreus.pages;
 import com.automation.familystoreus.locators.DeliveryAndServicesPageLocator_FSUS;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
+import org.openqa.selenium.By;
+import org.testng.Assert;
 
 public class DeliveryAndServicePageAction_FSUS {
 
@@ -70,24 +72,8 @@ public class DeliveryAndServicePageAction_FSUS {
         WebElementUtil.scrollToElementCenter(dns_Locator.deliveryOnlyCheckBox);
         WebElementUtil.clickElement(dns_Locator.deliveryOnlyCheckBox);
 
-        String deliveryText = WebElementUtil.getText(dns_Locator.partPrice).trim();
-        float partPrice = deliveryText.equalsIgnoreCase("Free")
-                ? 0
-                : WebElementUtil.convertPriceToFloat(deliveryText);
-
-        float startingTotal = WebElementUtil.getPrice(dns_Locator.totalPrice);
-
-        WebElementUtil.scrollToElementCenter(dns_Locator.partCheckBox);
-
-        WebElementUtil.clickElement(dns_Locator.partCheckBox);
-
-        WebElementUtil.scrollToElementCenter(dns_Locator.totalPrice);
-
-        float afterClickTotal = WebElementUtil.getPrice(dns_Locator.totalPrice);
-
-        WebElementUtil.clickElement(dns_Locator.partCheckBox);
-
-        return afterClickTotal == startingTotal + partPrice;
+        actionMethod(dns_Locator.partPrice,dns_Locator.totalPrice, dns_Locator.partCheckBox, dns_Locator.partPriceOrderSummary, dns_Locator.partCheckBox);
+        return true;
     }
 
     public boolean clickProfessionalInstallationAndCheckTheUpdatedTotalPrice() {
@@ -135,51 +121,13 @@ public class DeliveryAndServicePageAction_FSUS {
     }
 
     public boolean clickHaulAwayCheckBoxAndCheckTheUpdatedTotalPrice() {
-
-        String haulawayPrice = WebElementUtil.getText(dns_Locator.haulAwayPrice).trim();
-        float finalHaulAwayPrice = haulawayPrice.equalsIgnoreCase("Free")
-                ? 0
-                : WebElementUtil.convertPriceToFloat(haulawayPrice);
-
-        float startingTotal = WebElementUtil.getPrice(dns_Locator.totalPrice);
-
-        WebElementUtil.scrollToElementCenter(dns_Locator.haulAwayCheckBox);
-
-        WebElementUtil.clickElement(dns_Locator.haulAwayCheckBox);
-
-        WebElementUtil.scrollToElementCenter(dns_Locator.totalPrice);
-
-        float afterClickTotal = WebElementUtil.getPrice(dns_Locator.totalPrice);
-
-        WebElementUtil.scrollToElementCenter(dns_Locator.haulAwayCheckBox);
-
-        WebElementUtil.clickElement(dns_Locator.haulAwayCheckBox);
-
-        return afterClickTotal == startingTotal + finalHaulAwayPrice;
+        actionMethod(dns_Locator.haulAwayPrice, dns_Locator.totalPrice, dns_Locator.haulAwayCheckBox, dns_Locator.addOnServicesPriceOrderSummary, dns_Locator.haulAwayCheckBox);
+        return true;
     }
 
     public boolean clickMoveOldUnitCheckBoxAndCheckTheUpdatedTotalPrice() {
-
-        String moveOldUnitPrice = WebElementUtil.getText(dns_Locator.moveOldUnitPrice).trim();
-        float finalmoveOldUnitPricePrice = moveOldUnitPrice.equalsIgnoreCase("Free")
-                ? 0
-                : WebElementUtil.convertPriceToFloat(moveOldUnitPrice);
-
-        float startingTotal = WebElementUtil.getPrice(dns_Locator.totalPrice);
-
-        WebElementUtil.scrollToElementCenter(dns_Locator.moveOldUnitCheckBox);
-
-        WebElementUtil.clickElement(dns_Locator.moveOldUnitCheckBox);
-
-        WebElementUtil.scrollToElementCenter(dns_Locator.totalPrice);
-
-        float afterClickTotal = WebElementUtil.getPrice(dns_Locator.totalPrice);
-
-        WebElementUtil.scrollToElementCenter(dns_Locator.moveOldUnitCheckBox);
-
-        WebElementUtil.clickElement(dns_Locator.moveOldUnitCheckBox);
-
-        return afterClickTotal == startingTotal + finalmoveOldUnitPricePrice;
+        actionMethod(dns_Locator.moveOldUnitPrice, dns_Locator.totalPrice, dns_Locator.moveOldUnitCheckBox, dns_Locator.addOnServicesPriceOrderSummary, dns_Locator.moveOldUnitCheckBox);
+        return true;
     }
 
     public boolean isProtectionPlanTextVisibleAndCorrect(String expectedText) {
@@ -196,78 +144,55 @@ public class DeliveryAndServicePageAction_FSUS {
     }
 
     public boolean clickOneYearProtectionAndCheckTheUpdatedTotalPrice() {
-
-        WebElementUtil.scrollToElementCenter(dns_Locator.oneYearPlanPrice);
-        String oneYearPrice = WebElementUtil.getText(dns_Locator.oneYearPlanPrice).trim();
-        float finaloneYearPrice = oneYearPrice.equalsIgnoreCase("Free")
-                ? 0
-                : WebElementUtil.convertPriceToFloat(oneYearPrice);
-
-        float startingTotal = WebElementUtil.getPrice(dns_Locator.totalPrice);
-
-        WebElementUtil.scrollToElementCenter(dns_Locator.oneYearCheckBox);
-
-        WebElementUtil.clickElement(dns_Locator.oneYearCheckBox);
-
-        WebElementUtil.scrollToElementCenter(dns_Locator.totalPrice);
-
-        float afterClickTotal = WebElementUtil.getPrice(dns_Locator.totalPrice);
-
-        WebElementUtil.scrollToElementCenter(dns_Locator.declineProtection);
-        WebElementUtil.forceClick(dns_Locator.declineProtection);
-
-        return afterClickTotal == startingTotal + finaloneYearPrice;
+        actionMethod(dns_Locator.oneYearPlanPrice,dns_Locator.totalPrice, dns_Locator.oneYearCheckBox, dns_Locator.protectionPlanPriceOrderSummary, dns_Locator.declineProtection);
+        return true;
     }
 
     public boolean clickThreeYearProtectionAndCheckTheUpdatedTotalPrice() {
-
-        WebElementUtil.scrollToElementCenter(dns_Locator.threeYearsPlanPrice);
-        String threeYearPrice = WebElementUtil.getText(dns_Locator.threeYearsPlanPrice).trim();
-        float finalthreeYearPrice = threeYearPrice.equalsIgnoreCase("Free")
-                ? 0
-                : WebElementUtil.convertPriceToFloat(threeYearPrice);
-
-        float startingTotal = WebElementUtil.getPrice(dns_Locator.totalPrice);
-
-        WebElementUtil.scrollToElementCenter(dns_Locator.threeYearsCheckBox);
-
-        WebElementUtil.clickElement(dns_Locator.threeYearsCheckBox);
-
-        WebElementUtil.scrollToElementCenter(dns_Locator.totalPrice);
-
-        float afterClickTotal = WebElementUtil.getPrice(dns_Locator.totalPrice);
-
-        WebElementUtil.scrollToElementCenter(dns_Locator.declineProtection);
-        WebElementUtil.forceClick(dns_Locator.declineProtection);
-
-        return afterClickTotal == startingTotal + finalthreeYearPrice;
+        actionMethod(dns_Locator.threeYearsPlanPrice,dns_Locator.totalPrice, dns_Locator.threeYearsCheckBox, dns_Locator.protectionPlanPriceOrderSummary, dns_Locator.declineProtection);
+        return true;
     }
 
     public boolean clickFiveYearProtectionAndCheckTheUpdatedTotalPrice() {
-        WebElementUtil.forceClick(dns_Locator.declineProtection);
-
-        WebElementUtil.scrollToElementCenter(dns_Locator.fiveYearsPlanPrice);
-        String fiveYearPrice = WebElementUtil.getText(dns_Locator.fiveYearsPlanPrice).trim();
-        float finalFiveYearPrice = fiveYearPrice.equalsIgnoreCase("Free")
-                ? 0
-                : WebElementUtil.convertPriceToFloat(fiveYearPrice);
-
-        float startingTotal = WebElementUtil.getPrice(dns_Locator.totalPrice);
-
-        WebElementUtil.scrollToElementCenter(dns_Locator.fiveYearsCheckBox);
-
-        WebElementUtil.forceClick(dns_Locator.fiveYearsCheckBox);
-
-        WebElementUtil.scrollToElementCenter(dns_Locator.totalPrice);
-
-        float afterClickTotal = WebElementUtil.getPrice(dns_Locator.totalPrice);
-
-        return afterClickTotal == startingTotal + finalFiveYearPrice;
+        actionMethod(dns_Locator.fiveYearsPlanPrice,dns_Locator.totalPrice, dns_Locator.fiveYearsCheckBox, dns_Locator.protectionPlanPriceOrderSummary, dns_Locator.declineProtection);
+        return true;
     }
 
     public CartPageAction_FSUS clickSaveAndViewCartButton() {
         WebElementUtil.scrollToElementCenter(dns_Locator.saveAndViewCartButton);
         WebElementUtil.clickElement(dns_Locator.saveAndViewCartButton);
         return new CartPageAction_FSUS();
+    }
+
+    public boolean actionMethod(By elementPriceLocator, By totalPriceLocator, By elementCheckBoxLocator, By orderSummaryLocator, By defaultCheckBox) {
+
+        WebElementUtil.scrollToElementCenter(elementPriceLocator);
+        String price = WebElementUtil.getText(elementPriceLocator).trim();
+        float finalPrice = price.equalsIgnoreCase("Free")
+                ? 0
+                : WebElementUtil.convertPriceToFloat(price);
+
+        float startingTotal = WebElementUtil.getPrice(totalPriceLocator);
+
+        WebElementUtil.scrollToElementCenter(elementCheckBoxLocator);
+
+        WebElementUtil.clickElement(elementCheckBoxLocator);
+
+        WebElementUtil.scrollToElementCenter(totalPriceLocator);
+
+        float afterClickTotal = WebElementUtil.getPrice(totalPriceLocator);
+
+        String priceOrderSummary = WebElementUtil.getText(orderSummaryLocator).trim();
+
+        float finalOrderSummaryPrice = priceOrderSummary.equalsIgnoreCase("Free")
+                ? 0
+                : WebElementUtil.convertPriceToFloat(priceOrderSummary);
+
+        Assert.assertEquals(finalPrice, finalOrderSummaryPrice, "Both the price doesn't matched");
+
+        WebElementUtil.scrollToElementCenter(defaultCheckBox);
+        WebElementUtil.forceClick(defaultCheckBox);
+
+        return afterClickTotal == startingTotal + finalPrice;
     }
 }
