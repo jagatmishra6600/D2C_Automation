@@ -1,6 +1,7 @@
 package com.automation.electrolux.pages;
 
 import com.automation.electrolux.locators.CartLocatorsElux;
+import com.automation.familystoreus.pages.CartPageAction_FSUS;
 import com.automation.utils.WebElementUtil;
 
 public class CartPageActionsElux {
@@ -70,6 +71,27 @@ public class CartPageActionsElux {
 
     public CartPageActionsElux clickProceedToCheckOutButton() {
         WebElementUtil.clickElement(cartPage_Locator.proceedToCheckOutButton);
+        return this;
+    }
+
+    public CartPageActionsElux clickEmptyCartButton() {
+        WebElementUtil.scrollToElementCenter(cartPage_Locator.emptyCartButton);
+        WebElementUtil.clickElement(cartPage_Locator.emptyCartButton);
+        return this;
+    }
+
+    public boolean isYourCartEmptyTextVisibleAndCorrect(String expectedText) {
+        WebElementUtil.scrollToElementCenter(cartPage_Locator.yourCartIsEmptyText);
+        WebElementUtil.isDisplayed(cartPage_Locator.yourCartIsEmptyText);
+        String actualText =  WebElementUtil.getText(cartPage_Locator.yourCartIsEmptyText).trim();
+        return actualText.toLowerCase().contains(expectedText.toLowerCase());
+    }
+
+    public CartPageActionsElux clickRemoveFromCartButton() {
+        WebElementUtil.scrollToElementCenter(cartPage_Locator.productRemoveCloseButton);
+        WebElementUtil.clickElement(cartPage_Locator.productRemoveCloseButton);
+        WebElementUtil.clickElement(cartPage_Locator.removeButton);
+        WebElementUtil.isDisplayed(cartPage_Locator.yourCartIsEmptyText);
         return this;
     }
 }

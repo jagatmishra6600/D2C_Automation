@@ -13,6 +13,10 @@ public class CartLocatorsElux {
     public final By totalPrice = By.xpath("//div[normalize-space(text())='Total']/following-sibling::div[contains(@class, 'summary-amount')]");
     public final By promoCodeText = By.xpath("//h6[normalize-space(text())='Promo code']");
     public final By proceedToCheckOutButton = By.xpath("//button[normalize-space(text())='Proceed to Checkout']");
+    public final By emptyCartButton = By.xpath("//button[@class='emptyCartBtn']");
+    public final By yourCartIsEmptyText = By.xpath("//p[text()='Your shopping cart is empty']");
+    public final By productRemoveCloseButton = By.xpath("//a[contains(@href, '/en/p')]//..//..//following-sibling::div[4]//button");
+    public final By removeButton = By.xpath("//app-elux-cart-confirm-modal//button//p[text()='Remove']");
 
 
 }
