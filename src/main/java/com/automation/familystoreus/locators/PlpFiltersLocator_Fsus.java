@@ -17,7 +17,11 @@ public class PlpFiltersLocator_Fsus {
         return By.xpath("//div[@class=\"mainFacetContainer\"]//span[text()='" + text + "']");
     }
     public static By filtersCheckBox(String filterName) {
-        return By.xpath("//app-elux-product-facet//div[@class=\"acc-body-srp Utility-TextSpecs-List\"]//span[text()='" + text + "']/parent::label/parent::div/input");
+        return By.xpath("//app-elux-product-facet//div[@class=\"acc-body-srp Utility-TextSpecs-List\"]//span[text()='" + filterName + "']/parent::label/parent::div/input");
+    }
+
+    public static By filterName(String filterName) {
+        return By.xpath("//app-elux-product-facet//div[@class=\"acc-body-srp Utility-TextSpecs-List\"]//span[text()='" + filterName + "']");
     }
     public static By hideAndShowFilter(String text)
     {

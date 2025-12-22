@@ -24,9 +24,6 @@ public class EPIC_04_TC_04_PLP_Filters extends BaseTest {
     }
 
 
-
-
-
     @Test(groups = {"smoke", "regression"}, description = "Verify hide/show filters functionality")
     public void EPIC_04_PLP_TC_04_testHideShowFilters() throws InterruptedException {
         navigateToFrenchDoorRefrigerators("frigidaire", "Kitchen", "French Door");
@@ -135,8 +132,6 @@ public class EPIC_04_TC_04_PLP_Filters extends BaseTest {
         PLPProductItemsPageActions_Frig.featureFilter("frigidaire", "Features ", " ENERGY STAR Certified ");
         PLPProductItemsPageActions_Frig.openAllProductsAndValidate("Certifications and Approvals", "ENERGY STAR Certified", "Yes");
         ExtentReportManager.getTest().pass("Verify ENERGY STAR Certified filter with its functionality");
-
-
     }
 
     @Test(groups = {"regression"}, description = "Verify filter with its functionality")

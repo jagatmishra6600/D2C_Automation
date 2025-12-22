@@ -45,7 +45,7 @@ public class PlpProductItemPageActions_Fsus {
         WebElementUtil.isDisplayed(locator);
     }
 
-    public void verifyExpandAndCollapseFilter( String facetName, String filterValue) throws InterruptedException {
+    public void verifyFilterValuesAreHiddenAfterCollapse( String facetName, String filterValue) throws InterruptedException {
 
         //  WaitUtils.untilVisible(PlpFiltersLocator_Fsus.expandAndCollapseFilter(facetName));
         WebElementUtil.scrollToElementStable(PlpFiltersLocator_Fsus.expandAndCollapseFilter(facetName));
@@ -53,6 +53,22 @@ public class PlpProductItemPageActions_Fsus {
         WebElementUtil.waitForElementToBeClickable(PlpFiltersLocator_Fsus.expandAndCollapseFilter(facetName));
        // WebElementUtil.clickElementUsingJSE(PlpFiltersLocator_Fsus.expandAndCollapseFilter(facetName));
         WebElementUtil.clickElement(PlpFiltersLocator_Fsus.expandAndCollapseFilter(facetName));
+        WaitUtils.untilInvisible(PlpFiltersLocator_Fsus.filterName(filterValue),5000);
+        Assert.assertFalse(WebElementUtil.isDisplayed(PlpFiltersLocator_Fsus.filterName(filterValue)), "Filter value should NOT be visible after collapse");
+
+
+    }
+    public void verifyFilterValuesAreVisibleAfterExpand( String facetName, String filterValue) throws InterruptedException {
+
+        //  WaitUtils.untilVisible(PlpFiltersLocator_Fsus.expandAndCollapseFilter(facetName));
+        WebElementUtil.scrollToElementStable(PlpFiltersLocator_Fsus.expandAndCollapseFilter(facetName));
+        WebElementUtil.waitForElementToBeVisible(PlpFiltersLocator_Fsus.expandAndCollapseFilter(facetName));
+        WebElementUtil.waitForElementToBeClickable(PlpFiltersLocator_Fsus.expandAndCollapseFilter(facetName));
+        // WebElementUtil.clickElementUsingJSE(PlpFiltersLocator_Fsus.expandAndCollapseFilter(facetName));
+        WebElementUtil.clickElement(PlpFiltersLocator_Fsus.expandAndCollapseFilter(facetName));
+        WaitUtils.untilInvisible(PlpFiltersLocator_Fsus.filterName(filterValue),5000);
+        Assert.assertTrue(WebElementUtil.isDisplayed(PlpFiltersLocator_Fsus.filterName(filterValue)), "Filter value should be visible after expand");
+
 
     }
 }
