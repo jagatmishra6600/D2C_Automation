@@ -12,6 +12,8 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 import static com.automation.utils.WaitUtils.untilClickable;
+
+import com.automation.electrolux.locators.HomepageLocatorsElux;
 import com.automation.frigidaire.locators.HomepageLocatorsFrig;
 
 public class HomePageActionsFrig {
@@ -307,7 +309,8 @@ public class HomePageActionsFrig {
 
     public boolean isHomePageLoaded() {
         // isDisplayed now handles the wait internally
-        return WebElementUtil.isDisplayed(homePage_Locator.frigidaireLogo);
+        return WebElementUtil.isDisplayed(homePage_Locator.frigidaireLogo)
+        		&& WebElementUtil.isDisplayed(homePage_Locator.homePageTemplate);
     }
 
     public boolean isBrancdLogoLoaded() {
@@ -773,5 +776,21 @@ public boolean isNewsletterRight_SupportDisplayed(){
 }
 public boolean isNewsletterRight_ProductRegistrationDisplayed(){
     return WebElementUtil.isDisplayed(newsletterRight_ProductRegistration);
+}
+
+public boolean isUserGreetingDropdownDisplayed() {
+    return WebElementUtil.isDisplayed(homePage_Locator.userGreetingDropdownButton);
+}
+
+public HomePageActionsFrig acceptCookies() {
+	try {
+        WebElement acceptBtn = untilClickable(homePage_Locator.acceptButtonLocator, 20);
+        if (acceptBtn != null) {
+            acceptBtn.click();
+        }
+    } catch (Exception ignored) {
+        // Cookie banner not present or not interactable; continue
+    }
+    return this;
 }
 }

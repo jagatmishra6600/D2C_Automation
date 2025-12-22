@@ -3,6 +3,8 @@ package com.automation.frigidaire.pages;
 import static com.automation.utils.WaitUtils.untilClickable;
 
 import com.automation.electrolux.pages.LoginPageActionsElux;
+import com.automation.frigidaire.locators.LoginLocatorsFrig;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -15,30 +17,9 @@ import static com.automation.utils.WaitUtils.untilVisible;
 
 public class LoginPageActionsFrig {
 
+	 private LoginLocatorsFrig login_Locator = new LoginLocatorsFrig();
 	 private final By acceptButtonLocator = By.xpath("//button[@id='onetrust-accept-btn-handler']");
 
-	 private final By emailAddressInput = By.xpath("//input[@placeholder='Email address *' or @placeholder='jane.doe@company.com *']");
-	 private final By passwordInput = By.xpath("//input[@placeholder='Password *' or contains(@id,'gigya-password')]");
-	 private final By loginButton = By.cssSelector("input[value='Log in']");
-	 private final By loginToStoreTitle = By.xpath("//h2[normalize-space()='Log in to Frigidaire' or normalize-space()='Log in to Electrolux']");
-	 private final By loginTitleMessage = By.xpath("//label[normalize-space()='Log in with your email and password: *']");
-	 private final By showPasswordIcon = By.cssSelector("button[title='Show Password'] i");
-	 private final By keepMeLoggedInCheckbox = By.xpath("//input[@id='gigya-checkbox-remember']");
-	 private final By notRecommendedMessage = By.xpath("//label[contains(.,'shared or public device')]");
-	 private final By forgotPasswordLink = By.xpath("//a[@id='login-forgot-password-link']");
-	 private final By createAccountLink = By.xpath("//a[@id='createAccButton']");
-	 private final By electroluxLinkedAccountMessage = By.xpath("//label[contains(.,'part of the Electrolux Group')]");
-	 private final By signInWithAppleButton = By.id("Apple_btn");
-	 private final By signInWithGoogleButton = By.id("Google_btn");
-
-    private final By txt_Email = By.cssSelector("input[placeholder='Email address *']");
-    private final By txt_Password = By.cssSelector("input[placeholder='Password *']");
-    private final By btn_Login = By.cssSelector("input[value='Log in']");
-    private final By lnk_ForgotPassword = By.cssSelector("#login-forgot-password-link");
-    private final By lnk_CreateAccount = By.cssSelector("#login-create-account-link");
-    private final By login_HomeLogo = By.cssSelector("//img[@alt='Frigidaire Company Logo']");
-	 
-	 
 	 public LoginPageActionsFrig navigateToLoginPage() {
 		WebElementUtil.navigateTo(ConfigReader.getAppUrl()+"login");
        try {
@@ -52,69 +33,69 @@ public class LoginPageActionsFrig {
        return this;
 	}
 	
-	 public HomePageActionsFrig login(String emailAddress, String password) throws InterruptedException {
+	 public HomePageActionsFrig login(String emailAddress, String password) {
 		 return	 enterEmailAddress(emailAddress)
 								.enterPassword(password)
 								.clickLoginButton();
 	 }
 	 
 	public LoginPageActionsFrig enterEmailAddress(String emailAddress) {
-		WebElementUtil.sendKeys(emailAddressInput, emailAddress);
+		WebElementUtil.sendKeys(login_Locator.emailAddressInput, emailAddress);
 		return this;
 	}
 	
 	public LoginPageActionsFrig enterPassword(String password) {
-		WebElementUtil.sendKeys(passwordInput, password);
+		WebElementUtil.sendKeys(login_Locator.passwordInput, password);
 		return this;
 	}
 	
 	public HomePageActionsFrig clickLoginButton() {
-		WebElementUtil.clickElement(loginButton);
+		WebElementUtil.clickElement(login_Locator.loginButton);
 		return new HomePageActionsFrig();
 	}
 	
 	public boolean isLoginPageLoaded() {
-		return WebElementUtil.isDisplayed(loginButton);
+		return WebElementUtil.isDisplayed(login_Locator.loginButton);
 	}
 	
 	public boolean isLoginToFrigidaireTitleDisplayed() {
-		return WebElementUtil.isDisplayed(loginToStoreTitle);
+		return WebElementUtil.isDisplayed(login_Locator.loginToStoreTitle);
 	}
 	
 	public boolean isLoginTitleMessageDisplayed() {
-		return WebElementUtil.isDisplayed(loginTitleMessage);
+		return WebElementUtil.isDisplayed(login_Locator.loginTitleMessage);
 	}
 	
 	public boolean isEmailAddressFieldDisplayed() {
-		return WebElementUtil.isDisplayed(emailAddressInput);
+		return WebElementUtil.isDisplayed(login_Locator.emailAddressInput);
 	}
 	
 	public boolean isPasswordFieldDisplayed() {
-		return WebElementUtil.isDisplayed(passwordInput);
+		return WebElementUtil.isDisplayed(login_Locator.passwordInput);
 	}
 	
 	public boolean isShowPasswordIconDisplayed() {
-		return WebElementUtil.isDisplayed(showPasswordIcon);
+		return WebElementUtil.isDisplayed(login_Locator.showPasswordIcon);
 	}
 	
 	public boolean isKeepMeLoggedInCheckboxDisplayed() {
-		return WebElementUtil.isDisplayed(keepMeLoggedInCheckbox);
+		return WebElementUtil.isDisplayed(login_Locator.keepMeLoggedInCheckbox);
 	}
 	
 	public String getNotRecommendedLabelText() {
-		return WebElementUtil.getText(notRecommendedMessage);
+		return WebElementUtil.getText(login_Locator.notRecommendedMessage);
 	}
 	
 	public boolean isForgotPasswordLinkDisplayed() {
-		return WebElementUtil.isDisplayed(forgotPasswordLink);
+		return WebElementUtil.isDisplayed(login_Locator.forgotPasswordLink);
 	}
 	
 	public boolean isCreateAccountLinkDisplayed() {
-		return WebElementUtil.isDisplayed(createAccountLink);
+		return WebElementUtil.isDisplayed(login_Locator.createAccountLink);
 	}
 	
 	public String getElectroluxLinkedAccountMessage() {
-		return WebElementUtil.getText(electroluxLinkedAccountMessage);
+		return WebElementUtil.getText(login_Locator.electroluxLinkedAccountMessage);
 	}
 	
 	public boolean isAlternateLoginOptionsDisplayed() {
@@ -122,26 +103,26 @@ public class LoginPageActionsFrig {
 	}
 	
 	public boolean isSignInWithAppleButtonDisplayed() {
-		return WebElementUtil.isDisplayed(signInWithAppleButton);
+		return WebElementUtil.isDisplayed(login_Locator.signInWithAppleButton);
 	}
 	
 	public boolean isSignInWithGoogleButtonDisplayed() {
-		return WebElementUtil.isDisplayed(signInWithGoogleButton);
+		return WebElementUtil.isDisplayed(login_Locator.signInWithGoogleButton);
 	}
 	
 	public CreateAccountPageActionsFrig clickCreateAccountLink() {
-		WebElementUtil.scrollIntoView(createAccountLink);
-		WebElementUtil.clickElement(createAccountLink);
+		WebElementUtil.scrollIntoView(login_Locator.createAccountLink);
+		WebElementUtil.clickElement(login_Locator.createAccountLink);
 		return new CreateAccountPageActionsFrig();
 	}
 	
 	public ForgotPasswordPageActionsFrig clickForgotPasswordLink() {
-		WebElementUtil.clickElement(forgotPasswordLink);
+		WebElementUtil.clickElement(login_Locator.forgotPasswordLink);
 		return new ForgotPasswordPageActionsFrig();
 	}
 	
 	public boolean isLoginToStoreTitleDisplayed() {
-		return WebElementUtil.isDisplayed(loginToStoreTitle);
+		return WebElementUtil.isDisplayed(login_Locator.loginToStoreTitle);
 	}
 
 	public CreateAccountPageActionsFrig navigateToCreateAccountPage() {
@@ -164,10 +145,10 @@ public class LoginPageActionsFrig {
 	}
 
     public boolean validateLogoAfterLogin() {
-        WebElementUtil.sendKeys(txt_Email, ConfigReader.getProperty("username"));
-        WebElementUtil.sendKeys(txt_Password, ConfigReader.getProperty("password"));
-        WebElementUtil.clickElement(btn_Login);
-        return WebElementUtil.isDisplayed(login_HomeLogo);
+        WebElementUtil.sendKeys(login_Locator.txt_Email, ConfigReader.getProperty("username"));
+        WebElementUtil.sendKeys(login_Locator.txt_Password, ConfigReader.getProperty("password"));
+        WebElementUtil.clickElement(login_Locator.btn_Login);
+        return WebElementUtil.isDisplayed(login_Locator.login_HomeLogo);
     }
 
 //    public boolean isLoginPageLoaded() {
@@ -194,11 +175,11 @@ public class LoginPageActionsFrig {
      */
     public boolean loginWithCredentials(String username, String password) {
         try {
-            WebElementUtil.sendKeys(txt_Email, username);
-            WebElementUtil.sendKeys(txt_Password, password);
-            WebElementUtil.clickElement(btn_Login);
-            untilVisible(login_HomeLogo,20);
-            return WebElementUtil.isDisplayed(login_HomeLogo);
+            WebElementUtil.sendKeys(login_Locator.txt_Email, username);
+            WebElementUtil.sendKeys(login_Locator.txt_Password, password);
+            WebElementUtil.clickElement(login_Locator.btn_Login);
+            untilVisible(login_Locator.login_HomeLogo,20);
+            return WebElementUtil.isDisplayed(login_Locator.login_HomeLogo);
         } catch (Exception e) {
             return false;
         }
