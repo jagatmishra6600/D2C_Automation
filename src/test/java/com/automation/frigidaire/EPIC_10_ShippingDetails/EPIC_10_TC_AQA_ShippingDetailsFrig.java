@@ -16,9 +16,9 @@ public class EPIC_10_TC_AQA_ShippingDetailsFrig extends BaseTest {
     ShippingAddressPageActionsFrig shippingAddressPage = new ShippingAddressPageActionsFrig();
 
     @Test(groups = { "smoke", "regression" }, description = "Verify that the Login section on the Checkout Shipping Address page displays correct UI, messages, fields  and allows the user to successfully log in with valid credentials.")
-    public void EPIC_09_CheckoutLogin_TC_02_VerifyCheckoutLoginSectionAndUserLoginSuccess() {
+    public void EPIC_09_CheckoutLogin_TC_02_VerifyCheckoutLoginSectionAndUserLoginSuccess() throws InterruptedException {
         navigateToShippingAddressPage();
-        shippingAddressPage.verifyShippingDeatils();
+        shippingAddressPage.verifyShippingDetails("automationtestengineer@maildrop.cc","PETER","PARKER","LANDIS","North Carolina","7829918924","28088","1234 Maple Street");
         ExtentReportManager.getTest().pass(
                 "Verified Login section UI, fields and messages on the Checkout Shipping Address page, " +
                         "and confirmed successful valid user login with welcome greeting and logout link.");
@@ -29,5 +29,7 @@ public class EPIC_10_TC_AQA_ShippingDetailsFrig extends BaseTest {
                 .clickFrenchDoor().closePopupModel().clickProvidedProduct().clickDeliveryOption().clickAddToCartButton()
                 .clickSaveAndViewCartButton().clickProceedToCheckOutButton();
     }
+
+
 
 }

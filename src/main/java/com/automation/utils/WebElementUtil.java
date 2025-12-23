@@ -507,7 +507,14 @@ public class WebElementUtil {
     	WaitUtils.waitForPageLoad();
     }
 
-
+    public static void clickElementUsingJSE(By locator) {
+        try {
+            WebDriver driver=DriverManager.getDriver();
+            WebElement element = driver.findElement(locator);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+        } catch (Exception e) { throw new RuntimeException(e); }
+    }
 
 
 }
