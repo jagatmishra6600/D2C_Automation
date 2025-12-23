@@ -501,5 +501,13 @@ public class WebElementUtil {
             return null;
         }
     }
+    
+    public static void refreshPage() {
+    	DriverManager.getDriver().navigate().refresh();
+    	WaitUtils.waitForPageLoad();
+    }
+
+
+
 
 }

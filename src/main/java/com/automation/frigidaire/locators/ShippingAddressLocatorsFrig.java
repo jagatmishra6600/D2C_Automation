@@ -4,6 +4,25 @@ import org.openqa.selenium.By;
 
 public class ShippingAddressLocatorsFrig {
 
+
+    public final By loginSection = By.cssSelector("shipping-address-cdc-login");
+    public final By alreadyHaveAccountMessage = By.cssSelector("shipping-address-cdc-login h5");
+    public final By fasterCheckoutLoginMessage = By.cssSelector("shipping-address-cdc-login span.loginMessage");
+    public final By loginButton = By.xpath("//shipping-address-cdc-login//button[contains(.,'Log in')]");
+    public final By welcomeBackGreetingMessage = By.xpath("//shipping-address-cdc-login//h5[contains(.,'Welcome back')]");
+    public final By logoutLink = By.xpath("//a[contains(.,'Log out')]");
+
+    public final By SHPPING_ADRESS_POINT_ONE = By.xpath("//a[text()='Shipping address']");
+    public final By EMAIL_ADDRESS_TXT_FIELD = By.xpath("//input[@id='email']");
+
+    public final By MANUALLY_ENTER_ADDRESS_LINK = By.xpath("//a[text()='Manually enter address']");
+
+
+
+
+
+
+
     public static final By CONTINUE_TO_DELIVERY_BTN = By.xpath("//button[@id='continueToDeliveryButton' and @disabled]");
     public static final By SHIPPING_ADRESS_HEADING = By.xpath("//span[text()='Shipping address']");
     public static final By FIRST_NAME = By.xpath("//input[@placeholder='First name*']");
@@ -13,11 +32,6 @@ public class ShippingAddressLocatorsFrig {
     public static final By CITY = By.xpath("//input[@placeholder='City*']");
     public static final By STATE = By.xpath("//ng-select[@placeholder='State*']//span[@class='ng-arrow-wrapper']");
     public static final By ZIPCODE = By.xpath("//input[@id='zipcode']");
-
-
-
-
-
 
 
 }
