@@ -17,5 +17,15 @@ public class CartLocatorsFrig {
     public final By productRemoveCloseButton = By.xpath("//a[contains(@href, '/en/p')]//..//..//following-sibling::div[3]//button");
     public final By removeButton = By.xpath("//app-elux-cart-confirm-modal//button//p[text()='Remove']");
 
+    //promo code locators
+    public final By promoDropdown = By.xpath("//h6[contains(normalize-space(),'Promo code')]");
+    public final By promoCodeInputField = By.id("couponCodeEntryForm");
+    public final By applyPromoCodeButton = By.id("submitCouponButton");
+    public final By promoErrorMessage = By.xpath("//div[@id='appliedCouponMessage']//b");
+
+
+
+
+
 
 }
