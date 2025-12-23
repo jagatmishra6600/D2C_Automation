@@ -56,9 +56,9 @@ public class DeliveryDatePageActionsFrig {
 //     * Clicks the "Continue to delivery" button after shipping details are entered.
 //            * Returns true if the click succeeded, false otherwise.
 //     */
-    public boolean clickContinueToDelivery() {
+    public void clickContinueToDelivery() {
 
-        return clickContinueToDelivery(
+        clickContinueToDelivery(
                 "pandey.devishankar@knacksystems.com",
                 "Bhavani",
                 "Pandey",
