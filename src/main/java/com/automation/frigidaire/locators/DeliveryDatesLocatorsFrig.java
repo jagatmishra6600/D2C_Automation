@@ -20,5 +20,6 @@ public class DeliveryDatesLocatorsFrig {
     public final By addressSuggestionOption = By.xpath("//ngb-typeahead-window//button[@role='option']");
     public final By deliveryCalendarHeader = By.xpath("//p[contains(text(),'Delivery and installation items')]");
     public final By deliveryDateAvailable = By.cssSelector("cx-delivery-label avaliableDates");
+    public final By addOnServices = By.xpath("//cx-page-slot[@position='More services Paragraph']//following-sibling::div[contains(@class,'delivery-installation-options')]//input");
 
 }

@@ -30,28 +30,30 @@ public class ReviewsPageActionsFrig {
         WebElementUtil.waitForElementToBeVisible(locators.reviewPage, 20);
         WebElementUtil.scrollToElementStable(locators.reviewPage);
         WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.ratingSnapshot);
-        return ele.isDisplayed();
+        return ele != null && ele.isDisplayed();
     }
 
     public boolean isReviewStarButtonDisplayed() {
        WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.star4);
-        return ele.isDisplayed();
+        return ele != null && ele.isDisplayed();
     }
 
     public boolean isMessageDisplayed() {
         WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.messagePopup);
-        return ele.isDisplayed();
+        return ele != null && ele.isDisplayed();
     }
 
     public boolean isReviewImagesDisplayed() {
         WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.reviewImagesSection);
-        ele.isDisplayed();
+        if (ele == null || !ele.isDisplayed()) {
+            return false;
+        }
 
         WebElement image = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.reviewImages);
         image.click();
 
         WebElement singleImg = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.singleReviewImage);
-        return singleImg.isDisplayed();
+        return singleImg != null && ele.isDisplayed();
     }
 
     public boolean isSearchReviewBox() {
@@ -59,42 +61,42 @@ public class ReviewsPageActionsFrig {
         close.click();
 
         WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.searchReviewBox);
-        return ele.isDisplayed();
+        return ele != null && ele.isDisplayed();
     }
 
     public boolean isRatingFilterDisplayed() {
         WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.ratingFilter);
-        return ele.isDisplayed();
+        return ele != null && ele.isDisplayed();
     }
 
     public boolean isSortByRatingDisplayed() {
         WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.sortByRating);
-        return ele.isDisplayed();
+        return ele != null && ele.isDisplayed();
     }
 
     public boolean isThumbUpButtonDisplayed() {
         WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.thumbUp);
-        return ele.isDisplayed();
+        return ele != null && ele.isDisplayed();
     }
 
     public boolean isThumbDownButtonDisplayed() {
         WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.thumbDown);
-        return ele.isDisplayed();
+        return ele != null && ele.isDisplayed();
     }
 
     public boolean isReportButtonDisplayed() {
         WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.reportButton);
-        return ele.isDisplayed();
+        return ele != null && ele.isDisplayed();
     }
 
     public boolean isPaginationInfoDisplayed() {
         WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.paginationInfo);
-        return ele.isDisplayed();
+        return ele != null && ele.isDisplayed();
     }
 
     public boolean isLoadMoreButtonDisplayed() {
         WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.loadMore);
-        return ele.isDisplayed();
+        return ele != null && ele.isDisplayed();
     }
 
 }
