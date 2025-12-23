@@ -6,18 +6,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import com.automation.frigidaire.locators.ResetPasswordLocatorsFrig;
 import com.automation.utils.WebElementUtil;
 
 public class ResetPasswordPageActionsFrig {
 
 	 private final By acceptButtonLocator = By.xpath("//button[@id='onetrust-accept-btn-handler']");
-	 private final By submitButton = By.cssSelector("input[value='Submit']");
-	 private final By newPasswordInput = By.cssSelector("input[placeholder='New password *']");
-	 private final By confirmPasswordInput = By.cssSelector("input[placeholder='Confirm password *']");
-	 private final By changePasswordTitle = By.xpath("//h2[normalize-space()='Change Password']");
-	 private final By newPasswordShowHideIcon = By.xpath("//input[@placeholder='New password *']/parent::div//button[@title='Show Password']");
-	 private final By confirmPasswordShowHideIcon = By.xpath("//input[@placeholder='Confirm password *']/parent::div//button[@title='Show Password']");
-		
+	 private final ResetPasswordLocatorsFrig rpLocator = new ResetPasswordLocatorsFrig();
+	 	
 	 
 	 public ResetPasswordPageActionsFrig acceptAllCookies() {
 		 try {
@@ -33,21 +29,21 @@ public class ResetPasswordPageActionsFrig {
 	 
 	 
 	 public boolean isResetPasswordButtonDisplayed() {
-		 return WebElementUtil.isDisplayed(submitButton);			 
+		 return WebElementUtil.isDisplayed(rpLocator.submitButton);			 
 	 }
 	 
 	 public ResetPasswordPageActionsFrig enterNewPassword(String password) {
-		WebElementUtil.sendKeys(newPasswordInput, password);
+		WebElementUtil.sendKeys(rpLocator.newPasswordInput, password);
 		return this;
 	 }
 	 
 	 public ResetPasswordPageActionsFrig enterConfirmPassword(String password) {
-		WebElementUtil.sendKeys(confirmPasswordInput,password);
+		WebElementUtil.sendKeys(rpLocator.confirmPasswordInput,password);
 		return this;
 	 }
 	 
 	 public ResetPasswordPageActionsFrig clickSubmitButton() {
-		 WebElementUtil.clickElement(submitButton);
+		 WebElementUtil.clickElement(rpLocator.submitButton);
 		 return this;
 	 }
 	 
@@ -58,27 +54,27 @@ public class ResetPasswordPageActionsFrig {
 	 }
 	 
 	 public boolean isNewPasswordFieldDisplayed() {
-		 return WebElementUtil.isDisplayed(newPasswordInput);
+		 return WebElementUtil.isDisplayed(rpLocator.newPasswordInput);
 	 }
 	 
 	 public boolean isConfirmPasswordFieldDisplayed() {
-		 return WebElementUtil.isDisplayed(confirmPasswordInput);
+		 return WebElementUtil.isDisplayed(rpLocator.confirmPasswordInput);
 	 }
 	 
 	 public boolean isSubmitButtonDisplayed() {
-		 return WebElementUtil.isDisplayed(submitButton);
+		 return WebElementUtil.isDisplayed(rpLocator.submitButton);
 	 }
 	 
 	 public boolean isNewPasswordShowHideIconDisplayed() {
-		 return WebElementUtil.isDisplayed(newPasswordShowHideIcon);
+		 return WebElementUtil.isDisplayed(rpLocator.newPasswordShowHideIcon);
 	 }
 	 
 	 public boolean isConfirmPasswordShowHideIconDisplayed() {
-		 return WebElementUtil.isDisplayed(confirmPasswordShowHideIcon);
+		 return WebElementUtil.isDisplayed(rpLocator.confirmPasswordShowHideIcon);
 	 }
 	 
 	 public boolean isChangePasswordTitleDisplayed() {
-		 return WebElementUtil.isDisplayed(changePasswordTitle);
+		 return WebElementUtil.isDisplayed(rpLocator.changePasswordTitle);
 	 }
 	 
 	 public boolean isAllResetPasswordFieldsAndButtonsDisplayed() {
@@ -92,12 +88,21 @@ public class ResetPasswordPageActionsFrig {
 		 
 	 } 
 	 
-	 public void verifyResetPasswordPage() {
+	 public ResetPasswordPageActionsFrig verifyResetPasswordPage() {
 		 Assert.assertTrue(isChangePasswordTitleDisplayed(), "'Change Password' Title is not displayed in reset password page");
 		 Assert.assertTrue(isNewPasswordFieldDisplayed(), "New Password field is not displayed in reset password page");
 		 Assert.assertTrue(isConfirmPasswordFieldDisplayed(), "Confirm Password field is not displayed in reset password page");
 		 Assert.assertTrue(isNewPasswordShowHideIconDisplayed(), "New Password Show/Hide Eye Icon is not displayed in reset password page");
 	     Assert.assertTrue(isConfirmPasswordShowHideIconDisplayed(), "Confirm Password Show/Hide Eye Icon is not displayed in reset password page");
 	     Assert.assertTrue(isSubmitButtonDisplayed(), "Submit Button is not displayed in reset password page");            
+	     return this;
 	 } 
+	 
+	 public String getResetSuccessMessage() {
+		 return WebElementUtil.getText(rpLocator.resetPasswordSucccessScreenMessage);
+	 }
+	 
+	 public boolean isLoginToYourAccountLinkDisplayed() {
+		 return WebElementUtil.isDisplayed(rpLocator.loginToYourAccountLink);
+	 }
 }

@@ -30,7 +30,7 @@ public class MailDropPageActionsFrig {
 		return this;
 	}
 	
-	public MailDropPageActionsFrig enterEmailAddress(String emailAddress) throws InterruptedException {
+	public MailDropPageActionsFrig enterEmailAddress(String emailAddress) {
 		WaitUtils.sleep(2000);
 		WebElementUtil.sendKeys(headerEmailAddressField, emailAddress);
 		return this;
@@ -45,7 +45,7 @@ public class MailDropPageActionsFrig {
 		return WebElementUtil.isDisplayed(inboxRefreshButton);
 	}
 	
-	public MailDropPageActionsFrig login(String emailAddress) throws InterruptedException {
+	public MailDropPageActionsFrig login(String emailAddress) {
 		return navigateToMailDropPage()
 					.enterEmailAddress(emailAddress)
 					.clickViewMailBoxButton();
@@ -61,13 +61,13 @@ public class MailDropPageActionsFrig {
 		return this;
 	}
 	
-	public MailDropPageActionsFrig openFirstMailInInbox(String emailAddress) throws InterruptedException {
+	public MailDropPageActionsFrig openFirstMailInInbox(String emailAddress) {
 		login(emailAddress).clickInboxRefresh().clickFirstMailInInbox();
 		WaitUtils.sleep(2000);
 		return this;
 	}
 	
-	public MailDropPageActionsFrig openFirstMailInInbox(String emailAddress, String expectedMailTitle) throws InterruptedException {
+	public MailDropPageActionsFrig openFirstMailInInbox(String emailAddress, String expectedMailTitle) {
 		login(emailAddress).clickInboxRefresh().clickFirstMailInInbox();
 		for(int i=0;i<5;i++) {
 			WaitUtils.sleep(2000);
@@ -80,9 +80,9 @@ public class MailDropPageActionsFrig {
 		return this;
 	}
 
-	public String getMailTitle() throws InterruptedException {
+	public String getMailTitle() {
 		var mailTitleValue = WebElementUtil.getText(mailTitle);
-	    if(mailTitleValue.equals(null) || mailTitleValue.isEmpty() || mailTitleValue.equals("")) {
+	    if(mailTitleValue.isEmpty() || mailTitleValue.equals("")) {
 	    	WaitUtils.sleep(2000);
 	    	mailTitleValue = WebElementUtil.getText(mailTitle);
 	    }
@@ -96,7 +96,7 @@ public class MailDropPageActionsFrig {
 	    );
 	}
 	
-	public ResetPasswordPageActionsFrig clickMailResetYourPasswordLink() throws InterruptedException {
+	public ResetPasswordPageActionsFrig clickMailResetYourPasswordLink() {
 		WaitUtils.sleep(2000);
 		WebElementUtil.switchToFrame(mailFrame);
 //		WebElementUtil.ctrlClick(mailResetPasswordLink);
@@ -195,12 +195,13 @@ public class MailDropPageActionsFrig {
 	    return "";
 	}
 	
-	public void verifyFrigidaireResponseMailIsCorrect() throws InterruptedException {
+	public MailDropPageActionsFrig verifyFrigidaireResponseMailIsCorrect() {
 	    var mailSubject = getFirstMailSubject();
 	    verifyFrigidaireMailCorrect(mailSubject);
+	    return this;
 	}
 	
-	private void verifyFrigidaireMailCorrect(String mailSubject) throws InterruptedException {
+	private MailDropPageActionsFrig verifyFrigidaireMailCorrect(String mailSubject) {
 	    if (mailSubject.equalsIgnoreCase("Password Reset")) {
 	         verifyFrigidairePasswordResetMail();
 	    } else if (mailSubject.equalsIgnoreCase("Frigidaire password changed")) {
@@ -209,17 +210,19 @@ public class MailDropPageActionsFrig {
 	    else {
 	    	throw new IllegalStateException("Invalid Mail : "+mailSubject);
 	    }
+	    return this;
 	}
 	    
 	
-	public void verifyFrigidairePasswordResetMail() throws InterruptedException {	
+	public MailDropPageActionsFrig verifyFrigidairePasswordResetMail() {	
 		Assert.assertEquals(getMailTitle(), "Password Reset", "'Password Reset' title is not present in password reset mail");
         Assert.assertTrue(isMailResetYourPasswordLinkDisplayed(), "'Click here to reset your password' link is not displayed in the in password reset mail");
         Assert.assertTrue(getMailText().contains("If you did not make this request, please ignore this email. If you don't use this link within 24 hours, it will expire."), "Email Body does not contain Message stating 'Link will expire in 24 hours' in password reset mail");
         Assert.assertTrue(isBrandLogoDisplayed(), "Frigidaire Logo is not displayed in password reset mail");
+        return this;
 	}
 	
-	public void verifyFrigidairePasswordResetSuccessMail() throws InterruptedException {
+	public MailDropPageActionsFrig verifyFrigidairePasswordResetSuccessMail() {
 		Assert.assertEquals(getMailTitle(), "Frigidaire password changed", "'Frigidaire password changed' title is not present in reset success mail");
         Assert.assertTrue(isBrandLogoDisplayed(), "Brand logo is not present in reset success mail");
         Assert.assertTrue(getMailText().contains("Your password was successfully reset."), "Reset Successful Text is not present in reset success mail");
@@ -227,5 +230,6 @@ public class MailDropPageActionsFrig {
         Assert.assertTrue(getMailText().contains("Frigidaire team"), "Frigidaire team Text is not present in reset success mail");
         Assert.assertTrue(isMailConnectSocialMediaLinksDisplayed(), "Connect Social Media Links Section is not present in reset success mail");
         Assert.assertTrue(isMailFooterLinksDisplayed(), "Footer Links Section is not present in reset success mail");  
+        return this;
 	}
 }
