@@ -106,9 +106,6 @@ public class EPIC_07_TC_01_AQA_Dnads_Productdetails extends BaseTest {
         Assert.assertTrue(dnsPage.clickOneYearProtectionAndCheckTheUpdatedTotalPrice(), "The total price didn't matched after clicking action");
         Assert.assertTrue(dnsPage.clickThreeYearProtectionAndCheckTheUpdatedTotalPrice(), "The total price didn't matched after clicking action");
         Assert.assertTrue(dnsPage.clickFiveYearProtectionAndCheckTheUpdatedTotalPrice(), "The total price didn't matched after clicking action");
-
-
-
         ExtentReportManager.getTest().pass("Verify product details ( Protection Plan Section ) on D&S page for French Door Refrigerator");
     }
 
@@ -121,13 +118,13 @@ public class EPIC_07_TC_01_AQA_Dnads_Productdetails extends BaseTest {
         plpPage.clickProvidedProduct();
         pdpPage.clickDeliveryOption();
         pdpPage.clickAddToCartButton();
-
         dnsPage.clickInstorePickup();
-
         Assert.assertTrue(dnsPage.isInstorePickUpTextVisibleAndCorrect("In-store Pickup at Best Buy"), "In-store Pickup at Best Buy does not visible on Delivery and service page");
-
-
-
         ExtentReportManager.getTest().pass("Verify product details ( Instore Pick Up ) on D&S page for French Door Refrigerator");
     }
 }
+
+
+
+
+
