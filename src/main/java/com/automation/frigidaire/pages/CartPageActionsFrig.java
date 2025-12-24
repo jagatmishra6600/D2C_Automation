@@ -85,6 +85,60 @@ public class CartPageActionsFrig {
         return this;
     }
 
+    public boolean increaseQuantityAndValidateCount() {
+        WebElementUtil.scrollToElementCenter(cartPage_Locator.productCount);
+        float initialValue = WebElementUtil.getValueOfDom(cartPage_Locator.productCount);
+
+        float expectedValue = initialValue;
+
+        for (int i = 1; i <= 4; i++) {
+
+            WebElementUtil.forceClick(cartPage_Locator.increaseButton);
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+
+            expectedValue += 1;
+
+            float currentValue = WebElementUtil.getValueOfDom(cartPage_Locator.productCount);
+
+            if (currentValue != expectedValue) {
+                return false;
+            }
+        }
+
+        return WebElementUtil.getValueOfDom(cartPage_Locator.productCount) == initialValue + 4;
+    }
+
+    public boolean decreaseQuantityAndValidateCount() {
+
+        WebElementUtil.scrollToElementCenter(cartPage_Locator.productCount);
+        float initialValue = WebElementUtil.getValueOfDom(cartPage_Locator.productCount);
+
+        float expectedValue = initialValue;
+
+        for (int i = 1; i <= 4; i++) {
+
+            WebElementUtil.forceClick(cartPage_Locator.decreaseButton);
+
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+
+            expectedValue -= 1;
+
+            float currentValue = WebElementUtil.getValueOfDom(cartPage_Locator.productCount);
+
+            if (currentValue != expectedValue) {
+                return false;
+            }
+        }
+
+        return WebElementUtil.getValueOfDom(cartPage_Locator.productCount) == initialValue - 4;
     public void clickOnPromoDropdown() {
         WebElementUtil.waitForElementToBeVisible(cartPage_Locator.promoDropdown, 40);
         WebElementUtil.scrollToElementCenter(cartPage_Locator.promoDropdown);

@@ -89,10 +89,10 @@ public class HomePageActionsElux {
         return this;
     }
 
-    public HomePageActionsElux clickAccesProduct() {
+    public PdpPageActionsElux clickAccesProduct() {
         WebElementUtil.scrollToElementCenter(homePage_Locator.accesProductLink);
         WebElementUtil.clickElement(homePage_Locator.accesProductLink);
-        return this;
+        return new PdpPageActionsElux();
     }
 
     public static String getProvidedProductId() {

@@ -11,6 +11,9 @@ public class HomepageLocatorsFrig {
     public final By windowMounted = By.xpath("//h5[contains(text(), 'Window Mounted')]");
     public final By navigationBarKitchen = By.xpath("//h5[@aria-label='Kitchen']");
     public final By frenchDoor = By.xpath("//h5[contains(text(), 'French Door')]");
+    public final By searchBox = By.xpath("//input[@aria-label='search']");
+    public final By searchIcon = By.xpath("//*[contains(@class, 'elxIconsSearch ')]");
+    public final By accesProductLink = By.xpath("(//a[contains(@title, 'Top Mount Refrigerator Ice Maker Kit')])[1]");
     public final By homePageTemplate = By.cssSelector("cx-page-layout.FrigiHomePageTemplate1");
     public final By userGreetingDropdownButton = By.xpath("(//a[@id='dropdownMenuButton' and contains(.,'Hello')])[1]");
 
