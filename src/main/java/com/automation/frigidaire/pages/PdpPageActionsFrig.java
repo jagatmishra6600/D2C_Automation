@@ -1,5 +1,6 @@
 package com.automation.frigidaire.pages;
 
+import com.automation.electrolux.pages.CartPageActionsElux;
 import com.automation.frigidaire.locators.PDPLocatorsFrig;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
@@ -91,6 +92,18 @@ public class PdpPageActionsFrig {
         WebElementUtil.scrollToElementCenter(pdpPage_Locator.addToCartButton);
         WebElementUtil.clickElement(pdpPage_Locator.addToCartButton);
         return new DAndSPageActionsFrig();
+    }
+
+    public PdpPageActionsFrig clickAddToCart() {
+        WebElementUtil.scrollToElementCenter(pdpPage_Locator.addToCartButton);
+        WebElementUtil.clickElement(pdpPage_Locator.addToCartButton);
+        return this;
+    }
+
+    public CartPageActionsFrig clickViewCartButton() {
+        WebElementUtil.scrollToElementCenter(pdpPage_Locator.viewCartButton);
+        WebElementUtil.clickElement(pdpPage_Locator.viewCartButton);
+        return new CartPageActionsFrig();
     }
 
 

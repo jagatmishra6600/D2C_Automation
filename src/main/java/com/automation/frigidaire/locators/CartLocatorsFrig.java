@@ -16,6 +16,9 @@ public class CartLocatorsFrig {
     public final By yourCartIsEmptyText = By.xpath("//p[text()='Your shopping cart is empty']");
     public final By productRemoveCloseButton = By.xpath("//a[contains(@href, '/en/p')]//..//..//following-sibling::div[3]//button");
     public final By removeButton = By.xpath("//app-elux-cart-confirm-modal//button//p[text()='Remove']");
+    public final By productCount = By.xpath("//cx-item-counter//input[@type='number']");
+    public final By increaseButton = By.xpath("//cx-item-counter//button[@type='button']//img[contains(@src, 'plus')]");
+    public final By decreaseButton = By.xpath("//cx-item-counter//button[@type='button']//img[contains(@src, 'minus')]");
 
 
 }
