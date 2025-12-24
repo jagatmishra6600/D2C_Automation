@@ -138,7 +138,8 @@ public class CartPageActionsFrig {
             }
         }
 
-        return WebElementUtil.getValueOfDom(cartPage_Locator.productCount) == initialValue - 4;
+        return WebElementUtil.getValueOfDom(cartPage_Locator.productCount) == initialValue - 4;}
+
     public void clickOnPromoDropdown() {
         WebElementUtil.waitForElementToBeVisible(cartPage_Locator.promoDropdown, 40);
         WebElementUtil.scrollToElementCenter(cartPage_Locator.promoDropdown);
@@ -159,4 +160,5 @@ public class CartPageActionsFrig {
         WebElementUtil.scrollToElementCenter(cartPage_Locator.promoErrorMessage);
         return WebElementUtil.getText(cartPage_Locator.promoErrorMessage);
     }
+
 }
