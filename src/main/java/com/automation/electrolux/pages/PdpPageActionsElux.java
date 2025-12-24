@@ -144,4 +144,10 @@ public class PdpPageActionsElux {
         return new DeliveryAndServicePageActionsElux();
     }
 
+    public CartPageActionsElux clickViewCartButton() {
+        WebElementUtil.scrollToElementCenter(pdpPage_Locator.viewCartButton);
+        WebElementUtil.clickElement(pdpPage_Locator.viewCartButton);
+        return new CartPageActionsElux();
+    }
+
 }
