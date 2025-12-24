@@ -4,12 +4,21 @@ import org.openqa.selenium.By;
 
 public class OrderSummaryForCheckOutPage1Frig {
 
+    public final By orderSummaryText = By.xpath("//h4[normalize-space(text())='Order summary']");
+    public final By subtotalText = By.xpath("//div[normalize-space(text())='Subtotal']");
+    public final By subtotalPrice = By.xpath("//div[normalize-space(text())='Subtotal']/following-sibling::div[contains(@class, 'summary-amount')]");
+    public final By installationPartsText =  By.xpath("//div[normalize-space(text())='Installation parts']");
+    public final By installationPartsPrice = By.xpath("//div[normalize-space(text())='Installation parts']/following-sibling::div[contains(@class, 'summary-amount')]");
+    public final By totalText = By.xpath("//div[normalize-space(text())='Total']");
+    public final By totalPrice = By.xpath("//div[normalize-space(text())='Total']/following-sibling::div[contains(@class, 'summary-amount')]");
+    public final By promoCodeText = By.xpath("//h6[normalize-space(text())='Promo code']");
+    public final By proceedToCheckOutButton = By.xpath("(//button[normalize-space(text())='Proceed to checkout'])[2]");
+    public final By emptyCartButton = By.xpath("//button[contains(@class, 'emptyCartBtn')]");
+    public final By confirmButton = By.xpath("//app-elux-cart-empty-modal//button//p[contains(text(),'Yes')]");
+    public final By yourCartIsEmptyText = By.xpath("//p[text()='Your shopping cart is empty']");
+    public final By productRemoveCloseButton = By.xpath("//a[contains(@href, '/en/p')]//..//..//following-sibling::div[3]//button");
+    public final By removeButton = By.xpath("//app-elux-cart-confirm-modal//button//p[text()='Remove']");
 
-    public static final By ORDER_SUMMARY_HEADING = By.xpath("//h4[normalize-space()='Order summary']");
-    public static final By SUBTOTALPRICE= By.xpath("//div[contains(@class, 'Utility-TextPrice-Sm mb-4')]");
-    public static final By INSTALLATION_PARTS_PRICE =By.xpath("");
-    public final By totalPrice = By.xpath("//div[normalize-space(text())='Total']/following-sibling::div");
 
-    public final By subTotalPrice = By.xpath("//div[contains(@class,'Utility-TextPrice-Sm mb-4')]");
 
 }
