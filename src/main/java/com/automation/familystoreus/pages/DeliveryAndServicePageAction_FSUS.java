@@ -45,7 +45,7 @@ public class DeliveryAndServicePageAction_FSUS {
         String deliveryText = WebElementUtil.getText(dns_Locator.deliveryOnlyPrice).trim();
         float deliveryPrice = deliveryText.equalsIgnoreCase("Free")
                 ? 0
-                : WebElementUtil.convertPriceToFloat(deliveryText);
+                : WebElementUtil.converStringToFloat(deliveryText);
 
         float startingTotal = WebElementUtil.getPrice(dns_Locator.totalPrice);
 
@@ -81,7 +81,7 @@ public class DeliveryAndServicePageAction_FSUS {
         String deliveryText = WebElementUtil.getText(dns_Locator.professionalInstallationPrice).trim();
         float deliveryAndInstallationPrice = deliveryText.equalsIgnoreCase("Free")
                 ? 0
-                : WebElementUtil.convertPriceToFloat(deliveryText);
+                : WebElementUtil.converStringToFloat(deliveryText);
 
         float startingTotal = WebElementUtil.getPrice(dns_Locator.totalPrice);
 
@@ -170,7 +170,7 @@ public class DeliveryAndServicePageAction_FSUS {
         String price = WebElementUtil.getText(elementPriceLocator).trim();
         float finalPrice = price.equalsIgnoreCase("Free")
                 ? 0
-                : WebElementUtil.convertPriceToFloat(price);
+                : WebElementUtil.converStringToFloat(price);
 
         float startingTotal = WebElementUtil.getPrice(totalPriceLocator);
 
@@ -186,7 +186,7 @@ public class DeliveryAndServicePageAction_FSUS {
 
         float finalOrderSummaryPrice = priceOrderSummary.equalsIgnoreCase("Free")
                 ? 0
-                : WebElementUtil.convertPriceToFloat(priceOrderSummary);
+                : WebElementUtil.converStringToFloat(priceOrderSummary);
 
         Assert.assertEquals(finalPrice, finalOrderSummaryPrice, "Both the price doesn't matched");
 

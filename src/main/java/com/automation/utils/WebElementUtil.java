@@ -440,17 +440,17 @@ public class WebElementUtil {
         return value[0];
     }
 
-    public static float convertPriceToFloat(String price) {
-        price = price.replace("$", "").trim();
-        price = price.replaceAll(",", "");
-        price = price.replaceAll("\\.(0|00)$", "");
-        return Float.parseFloat(price);
+    public static float converStringToFloat(String text) {
+        text = text.replace("$", "").trim();
+        text = text.replaceAll(",", "");
+        text = text.replaceAll("\\.(0|00)$", "");
+        return Float.parseFloat(text);
     }
 
 
     public static float getPrice(By locator) {
         String priceText = getText(locator);
-        return convertPriceToFloat(priceText);
+        return converStringToFloat(priceText);
     }
 
     public static void forceClick(By locator) {
@@ -542,5 +542,20 @@ public class WebElementUtil {
     	DriverManager.getDriver().navigate().refresh();
     	WaitUtils.waitForPageLoad();
     }
+
+    public static float  getValueOfDom(By locator) {
+        WebDriver driver = DriverManager.getDriver();
+        WebElement element = driver.findElement(locator);
+
+        String value = element.getAttribute("value");
+
+        if (value == null || value.isEmpty()) {
+            value = (String) ((JavascriptExecutor) driver)
+                    .executeScript("return arguments[0].value;", element);
+        }
+
+        return converStringToFloat(value);
+    }
+
 
 }

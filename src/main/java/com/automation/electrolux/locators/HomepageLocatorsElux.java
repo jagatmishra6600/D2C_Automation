@@ -21,4 +21,6 @@ public class HomepageLocatorsElux {
     public static final By homePageTemplate = By.xpath("//cx-page-layout[contains(@class,'ElxSecondaryPageTemplate')]");
     public static final By userGreetingDropdownButton = By.xpath("(//a[@role='link' and contains(.,'Hello')])[1]");
     public static final By cookie_AcceptButton = By.id("onetrust-accept-btn-handler");
+    public static final By accesProductLink = By.xpath("(//a[contains(@title, 'PureAdvantage')])[1]");
+
 }
