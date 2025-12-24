@@ -10,7 +10,7 @@ public class DeliveryDatesLocatorsElux {
     public final By viewCartButton = By.xpath("//a[normalize-space()='View cart']");
     public final By deliveryInstallationRadio = By.id("Refrigerators_Large_WaterLine_Install");
     public final By saveAndViewCartButton = By.xpath("//button[normalize-space()='Save and view cart']");
-    public final By proceedToCheckoutButton = By.xpath("//button[normalize-space()='Proceed to checkout']");
+    public final By proceedToCheckoutButton = By.xpath("//button[normalize-space()='Proceed To Checkout']");
     public final By continueToDeliveryButton = By.id("continueToDeliveryButton");
     public final By shippingAddressForm = By.xpath("//span[text()='Shipping address']");
     public final By shippingEmail = By.id("email");

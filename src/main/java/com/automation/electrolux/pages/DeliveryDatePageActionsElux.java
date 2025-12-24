@@ -21,8 +21,8 @@ public class DeliveryDatePageActionsElux {
     }
 
     public void selectProductFromPLP() {
-        WebElementUtil.waitForElementToBeVisible(locators.productPDP, 10);
-        WebElementUtil.waitForElementToBeClickable(locators.productPDP, 10);
+        WebElementUtil.waitForElementToBeVisible(locators.productPDP, 20);
+        WebElementUtil.waitForElementToBeClickable(locators.productPDP, 20);
         WebElementUtil.scrollIntoView(locators.productPDP);
         WebElementUtil.clickElement(locators.productPDP);
     }
