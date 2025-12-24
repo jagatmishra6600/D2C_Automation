@@ -42,7 +42,6 @@ public class CartLocatorsFrig {
     public final By YourCart = By.xpath("//h1[@class='count Your-cart-1 H1H1_Desktop_Reg ng-star-inserted']");
 
     public final By Carticon = By.xpath("//*[@class='elxIconsCart' and @ src='/icons/frg-icons-cart-1-f-6-d-2.svg']");
-
     public final By Currentlyunavailable = By.xpath(" (//*[@class='H4H4_Desktop col-md-11 col-12 p-0 m-0'])[1]");
     public final By Itemcurrentlyunavailable = By.xpath("(//*[@class='stock-msg removeMobileText'])[1]");
     public final By Removefromcart = By.xpath("( (//*[@class='textDecoration' and text()=' Remove from cart '])[1]");
