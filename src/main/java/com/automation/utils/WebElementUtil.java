@@ -101,6 +101,13 @@ public class WebElementUtil {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
+    public static WebElement waitForElementToBeVisible(WebElement element) {
+        WebDriver driver = DriverManager.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        return wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
     public static WebElement waitForElementToBeClickable(By locator) {
         WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(15));
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
@@ -212,6 +219,35 @@ public class WebElementUtil {
     public static void scrollToElementStable(By locator) {
         WebDriver driver = DriverManager.getDriver();
         WebElement element = driver.findElement(locator);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        String script =
+                "var elem = arguments[0];" +
+                        "var viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);" +
+                        "var rect = elem.getBoundingClientRect();" +
+                        "var elemY = rect.top + window.scrollY;" +
+                        "var targetY = elemY - (viewportHeight * 0.30);" +  // scroll to 30% from top
+                        "window.scrollTo({ top: targetY, behavior: 'instant' });" +
+                        "return targetY;";
+
+        // Receive Double safely
+        Number returnedY = (Number) js.executeScript(script, element);
+        long targetY = returnedY.longValue();
+
+        // Wait scroll to finish
+        try {
+            new WebDriverWait(driver, Duration.ofMillis(300))
+                    .until(d -> {
+                        Number nowY = (Number) ((JavascriptExecutor) d)
+                                .executeScript("return Math.round(window.scrollY);");
+                        return Math.abs(nowY.longValue() - targetY) < 2;
+                    });
+        } catch (Exception ignored) {
+        }
+    }
+
+    public static void scrollToElementStable(WebElement element) {
+        WebDriver driver = DriverManager.getDriver();
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
         String script =
@@ -500,6 +536,11 @@ public class WebElementUtil {
             e.printStackTrace();
             return null;
         }
+    }
+    
+    public static void refreshPage() {
+    	DriverManager.getDriver().navigate().refresh();
+    	WaitUtils.waitForPageLoad();
     }
 
     public static float  getValueOfDom(By locator) {

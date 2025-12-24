@@ -1,5 +1,6 @@
 package com.automation.frigidaire.pages;
 
+import com.automation.frigidaire.locators.CartLocatorsFrig;
 import com.automation.frigidaire.locators.DandSLocatorsFrig;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
@@ -9,6 +10,7 @@ import org.testng.Assert;
 public class DAndSPageActionsFrig {
 
     DandSLocatorsFrig dandsPage_Locator = new DandSLocatorsFrig();
+    CartLocatorsFrig cartPage_Locator = new CartLocatorsFrig();
 
     public boolean isItemAddedToCartVisibleOnDnSPage(String expectedText) {
         WebElementUtil.isDisplayed(dandsPage_Locator.itemAddedToCartText);
@@ -188,9 +190,14 @@ public class DAndSPageActionsFrig {
     }
 
     public CartPageActionsFrig clickSaveAndViewCartButton() {
-        WebElementUtil.scrollToElementCenter(dandsPage_Locator.saveAndViewCartButton);
-        WebElementUtil.clickElement(dandsPage_Locator.saveAndViewCartButton);
-        return new CartPageActionsFrig();
+        for (int attempt = 1; attempt <= 2; attempt++) {
+            WebElementUtil.clickElement(dandsPage_Locator.saveAndViewCartButton);
+
+            if (isCartPageLoaded()) {
+                return new CartPageActionsFrig();
+            }
+        }
+    	return new CartPageActionsFrig();
     }
 
     public boolean actionMethod(By elementPriceLocator, By totalPriceLocator, By elementCheckBoxLocator, By orderSummaryLocator, By defaultCheckBox) {
@@ -223,6 +230,10 @@ public class DAndSPageActionsFrig {
         WebElementUtil.forceClick(defaultCheckBox);
 
         return afterClickTotal == startingTotal + finalPrice;
+    }
+    
+    private boolean isCartPageLoaded() {
+    	return WebElementUtil.isDisplayed(cartPage_Locator.proceedToCheckOutButton);
     }
 
 }

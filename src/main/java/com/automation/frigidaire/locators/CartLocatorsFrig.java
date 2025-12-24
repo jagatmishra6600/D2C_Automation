@@ -20,5 +20,15 @@ public class CartLocatorsFrig {
     public final By increaseButton = By.xpath("//cx-item-counter//button[@type='button']//img[contains(@src, 'plus')]");
     public final By decreaseButton = By.xpath("//cx-item-counter//button[@type='button']//img[contains(@src, 'minus')]");
 
+    //promo code locators
+    public final By promoDropdown = By.xpath("//h6[contains(normalize-space(),'Promo code')]");
+    public final By promoCodeInputField = By.id("couponCodeEntryForm");
+    public final By applyPromoCodeButton = By.id("submitCouponButton");
+    public final By promoErrorMessage = By.xpath("//div[@id='appliedCouponMessage']//b");
+
+
+
+
+
 
 }

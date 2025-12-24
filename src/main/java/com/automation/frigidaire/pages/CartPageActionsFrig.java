@@ -1,5 +1,6 @@
 package com.automation.frigidaire.pages;
 
+
 import com.automation.frigidaire.locators.CartLocatorsFrig;
 import com.automation.utils.WebElementUtil;
 
@@ -56,10 +57,11 @@ public class CartPageActionsFrig {
         return actualText.toLowerCase().contains(expectedText.toLowerCase());
     }
 
-    public CartPageActionsFrig clickProceedToCheckOutButton() {
-        WebElementUtil.clickElement(cartPage_Locator.proceedToCheckOutButton);
-        return this;
-    }
+    public ShippingAddressPageActionsFrig clickProceedToCheckOutButton() {
+    	WebElementUtil.scrollIntoView(cartPage_Locator.proceedToCheckOutButton);
+    	WebElementUtil.clickElement(cartPage_Locator.proceedToCheckOutButton);
+        return new ShippingAddressPageActionsFrig();
+    } 
 
     public CartPageActionsFrig clickEmptyCartButton() {
         WebElementUtil.scrollToElementCenter(cartPage_Locator.emptyCartButton);
@@ -137,5 +139,24 @@ public class CartPageActionsFrig {
         }
 
         return WebElementUtil.getValueOfDom(cartPage_Locator.productCount) == initialValue - 4;
+    public void clickOnPromoDropdown() {
+        WebElementUtil.waitForElementToBeVisible(cartPage_Locator.promoDropdown, 40);
+        WebElementUtil.scrollToElementCenter(cartPage_Locator.promoDropdown);
+        WebElementUtil.clickElement(cartPage_Locator.promoDropdown);
+    }
+
+    public void applyPromoCode(String promoCode) {
+        WebElementUtil.waitForElementToBeVisible(cartPage_Locator.promoCodeInputField, 20);
+        WebElementUtil.scrollToElementCenter(cartPage_Locator.promoCodeInputField);
+        WebElementUtil.sendKeys(cartPage_Locator.promoCodeInputField, promoCode);
+
+        WebElementUtil.waitForElementToBeClickable(cartPage_Locator.applyPromoCodeButton);
+        WebElementUtil.clickElement(cartPage_Locator.applyPromoCodeButton);
+    }
+
+    public String getPromoErrorMessage() {
+        WebElementUtil.waitForElementToBeVisible(cartPage_Locator.promoErrorMessage, 20);
+        WebElementUtil.scrollToElementCenter(cartPage_Locator.promoErrorMessage);
+        return WebElementUtil.getText(cartPage_Locator.promoErrorMessage);
     }
 }
