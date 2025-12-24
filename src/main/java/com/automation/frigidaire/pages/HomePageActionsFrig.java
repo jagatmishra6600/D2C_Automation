@@ -1,5 +1,7 @@
 package com.automation.frigidaire.pages;
 
+import com.automation.electrolux.pages.HomePageActionsElux;
+import com.automation.electrolux.pages.PdpPageActionsElux;
 import com.automation.utils.ConfigReader;
 import com.automation.utils.DriverManager;
 import com.automation.utils.WaitUtils;
@@ -438,6 +440,24 @@ public class HomePageActionsFrig {
         WebElementUtil.clickElement(homePage_Locator.navigationBarKitchen);
         WebElementUtil.clickElement(homePage_Locator.frenchDoor);
         return new PlpPageActionsFrig();
+    }
+
+    public HomePageActionsFrig  clickSearchAndEnterProductId(String productId) {
+        WebElementUtil.clickElement(homePage_Locator.searchBox);
+        WebElementUtil.sendKeys(homePage_Locator.searchBox, productId);
+        return this;
+    }
+
+    public HomePageActionsFrig clickSearchIconAndWaitForAccessProduct() {
+        WebElementUtil.clickElement(homePage_Locator.searchIcon);
+        WebElementUtil.waitForElementToBeVisible(homePage_Locator.accesProductLink);
+        return this;
+    }
+
+    public PdpPageActionsFrig clickAccesProduct() {
+        WebElementUtil.scrollToElementCenter(homePage_Locator.accesProductLink);
+        WebElementUtil.clickElement(homePage_Locator.accesProductLink);
+        return new PdpPageActionsFrig();
     }
 
 
