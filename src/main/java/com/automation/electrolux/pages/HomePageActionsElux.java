@@ -44,7 +44,7 @@ public class HomePageActionsElux {
         return new PlpPageActionsElux();
     }
 
-    public HomePageActionsElux clickSearchAndEnterProductId(String productId) {
+    public HomePageActionsElux  clickSearchAndEnterProductId(String productId) {
         WebElementUtil.clickElement(homePage_Locator.searchBox);
         WebElementUtil.sendKeys(homePage_Locator.searchBox, productId);
         return this;
@@ -80,6 +80,18 @@ public class HomePageActionsElux {
     public PdpPageActionsElux clickProvidedProduct() {
         WebElementUtil.scrollToElementCenter(homePage_Locator.productTitle);
         WebElementUtil.clickElement(homePage_Locator.productLink);
+        return new PdpPageActionsElux();
+    }
+
+    public HomePageActionsElux clickSearchIconAndWaitForAccessProduct() {
+        WebElementUtil.clickElement(homePage_Locator.searchIcon);
+        WebElementUtil.waitForElementToBeVisible(homePage_Locator.accesProductLink);
+        return this;
+    }
+
+    public PdpPageActionsElux clickAccesProduct() {
+        WebElementUtil.scrollToElementCenter(homePage_Locator.accesProductLink);
+        WebElementUtil.clickElement(homePage_Locator.accesProductLink);
         return new PdpPageActionsElux();
     }
 

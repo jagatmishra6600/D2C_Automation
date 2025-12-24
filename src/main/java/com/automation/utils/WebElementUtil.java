@@ -101,6 +101,13 @@ public class WebElementUtil {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
+    public static WebElement waitForElementToBeVisible(WebElement element) {
+        WebDriver driver = DriverManager.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        return wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
     public static WebElement waitForElementToBeClickable(By locator) {
         WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(15));
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
@@ -212,6 +219,35 @@ public class WebElementUtil {
     public static void scrollToElementStable(By locator) {
         WebDriver driver = DriverManager.getDriver();
         WebElement element = driver.findElement(locator);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        String script =
+                "var elem = arguments[0];" +
+                        "var viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);" +
+                        "var rect = elem.getBoundingClientRect();" +
+                        "var elemY = rect.top + window.scrollY;" +
+                        "var targetY = elemY - (viewportHeight * 0.30);" +  // scroll to 30% from top
+                        "window.scrollTo({ top: targetY, behavior: 'instant' });" +
+                        "return targetY;";
+
+        // Receive Double safely
+        Number returnedY = (Number) js.executeScript(script, element);
+        long targetY = returnedY.longValue();
+
+        // Wait scroll to finish
+        try {
+            new WebDriverWait(driver, Duration.ofMillis(300))
+                    .until(d -> {
+                        Number nowY = (Number) ((JavascriptExecutor) d)
+                                .executeScript("return Math.round(window.scrollY);");
+                        return Math.abs(nowY.longValue() - targetY) < 2;
+                    });
+        } catch (Exception ignored) {
+        }
+    }
+
+    public static void scrollToElementStable(WebElement element) {
+        WebDriver driver = DriverManager.getDriver();
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
         String script =
@@ -404,17 +440,17 @@ public class WebElementUtil {
         return value[0];
     }
 
-    public static float convertPriceToFloat(String price) {
-        price = price.replace("$", "").trim();
-        price = price.replaceAll(",", "");
-        price = price.replaceAll("\\.(0|00)$", "");
-        return Float.parseFloat(price);
+    public static float converStringToFloat(String text) {
+        text = text.replace("$", "").trim();
+        text = text.replaceAll(",", "");
+        text = text.replaceAll("\\.(0|00)$", "");
+        return Float.parseFloat(text);
     }
 
 
     public static float getPrice(By locator) {
         String priceText = getText(locator);
-        return convertPriceToFloat(priceText);
+        return converStringToFloat(priceText);
     }
 
     public static void forceClick(By locator) {
@@ -507,6 +543,7 @@ public class WebElementUtil {
     	WaitUtils.waitForPageLoad();
     }
 
+
     public static void clickElementUsingJSE(By locator) {
         try {
             WebDriver driver=DriverManager.getDriver();
@@ -514,6 +551,20 @@ public class WebElementUtil {
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
         } catch (Exception e) { throw new RuntimeException(e); }
+
+    public static float  getValueOfDom(By locator) {
+        WebDriver driver = DriverManager.getDriver();
+        WebElement element = driver.findElement(locator);
+
+        String value = element.getAttribute("value");
+
+        if (value == null || value.isEmpty()) {
+            value = (String) ((JavascriptExecutor) driver)
+                    .executeScript("return arguments[0].value;", element);
+        }
+
+        return converStringToFloat(value);
+
     }
 
 
