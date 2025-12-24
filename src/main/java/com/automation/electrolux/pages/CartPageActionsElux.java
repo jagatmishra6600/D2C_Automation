@@ -70,6 +70,7 @@ public class CartPageActionsElux {
     }
 
     public CartPageActionsElux clickProceedToCheckOutButton() {
+    	WebElementUtil.scrollToElementCenter(cartPage_Locator.proceedToCheckOutButton);
         WebElementUtil.clickElement(cartPage_Locator.proceedToCheckOutButton);
         return this;
     }

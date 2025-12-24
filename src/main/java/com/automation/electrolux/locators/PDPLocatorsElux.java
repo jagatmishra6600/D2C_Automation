@@ -23,5 +23,5 @@ public class PDPLocatorsElux {
     public final By selectedProductId = By.xpath("//p[contains(@class, 'prod_id ')]");
     public final By selectedProductPrice = By.xpath("//span[contains(@class, 'H3H3_Desktop saleprice')]");
     public final By addToCartButton = By.xpath("(//span[normalize-space(text())='Add to cart'])[1]");
-
+    public final By closePopupButton = By.xpath("//span[contains(@id, 'close-modal')]");
 }

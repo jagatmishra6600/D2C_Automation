@@ -1,5 +1,9 @@
 package com.automation.electrolux.pages;
 
+import static com.automation.utils.WaitUtils.untilClickable;
+
+import org.openqa.selenium.WebElement;
+
 import com.automation.electrolux.locators.PDPLocatorsElux;
 import com.automation.utils.BrowserUtils;
 import com.automation.utils.DriverManager;
@@ -142,6 +146,20 @@ public class PdpPageActionsElux {
         WebElementUtil.scrollToElementCenter(pdpPage_Locator.addToCartButton);
         WebElementUtil.clickElement(pdpPage_Locator.addToCartButton);
         return new DeliveryAndServicePageActionsElux();
+    }
+    
+    public PdpPageActionsElux closePopupModel() {
+
+        try {
+            WaitUtils.untilVisible(pdpPage_Locator.closePopupButton, 20);
+            WebElement closeBtn = untilClickable(pdpPage_Locator.closePopupButton, 20);
+            if (closeBtn != null) {
+                closeBtn.click();
+            }
+        } catch (Exception ignored) {
+
+        }
+        return this;
     }
 
 }
