@@ -4,8 +4,6 @@ import com.automation.electrolux.pages.HomePageActionsElux;
 import com.automation.electrolux.pages.PdpPageActionsElux;
 import com.automation.utils.ConfigReader;
 import com.automation.utils.DriverManager;
-import com.automation.utils.WaitUtils;
-import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -13,7 +11,9 @@ import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
-import static com.automation.utils.WaitUtils.untilClickable;
+
+import static com.automation.utils.WebElementUtil.*;
+import static com.automation.utils.WaitUtils.*;
 
 import com.automation.electrolux.locators.HomepageLocatorsElux;
 import com.automation.frigidaire.locators.HomepageLocatorsFrig;
@@ -182,7 +182,7 @@ public class HomePageActionsFrig {
     private final By productsLink = By.linkText("Products");
     // Footer helpers
     public void scrollToFooter() throws InterruptedException {
-        WaitUtils.waitForPageLoad();
+        waitForPageLoad();
         acceptCookiesIfPresent();
         int attempts = 0;
         while (attempts < 3) {
@@ -191,20 +191,20 @@ public class HomePageActionsFrig {
                         .executeScript("window.scrollTo({top: Math.max(document.body.scrollHeight, document.documentElement.scrollHeight), behavior: 'instant'});");
                 suppressObstructingOverlays();
                 // Ensure footer is present and visible
-                WaitUtils.untilPresent(homePage_Locator.footer_Root, 10);
-                WaitUtils.untilVisible(homePage_Locator.footer_Root, 10);
+                untilPresent(homePage_Locator.footer_Root, 10);
+                untilVisible(homePage_Locator.footer_Root);
                 return;
             } catch (StaleElementReferenceException sere) {
                 attempts++;
-                WaitUtils.sleep(300);
+                sleep(300);
             } catch (Exception e) {
                 attempts++;
-                WaitUtils.sleep(300);
+                sleep(300);
             }
         }
         // Final attempt using visibility check
         try {
-            WaitUtils.untilVisible(homePage_Locator.footer_Root, 10);
+            untilVisible(homePage_Locator.footer_Root);
         } catch (Exception ignored) {}
     }
 
@@ -224,10 +224,10 @@ public class HomePageActionsFrig {
 
     private void acceptCookiesIfPresent() {
         try {
-            try { WaitUtils.untilPresent(homePage_Locator.cookie_AcceptButton, 5); } catch (Exception ignored) {}
-            if (WebElementUtil.isDisplayed(homePage_Locator.cookie_AcceptButton)) {
-                WebElementUtil.clickElement(homePage_Locator.cookie_AcceptButton);
-                WaitUtils.sleep(500);
+            try { untilPresent(homePage_Locator.cookie_AcceptButton, 5); } catch (Exception ignored) {}
+            if (isDisplayed(homePage_Locator.cookie_AcceptButton)) {
+                clickElement(homePage_Locator.cookie_AcceptButton);
+                sleep(500);
             }
         } catch (Exception ignored) {}
     }
@@ -235,71 +235,71 @@ public class HomePageActionsFrig {
     public void clickFooter_ContactUs() throws InterruptedException {
         scrollToFooter();
         acceptCookiesIfPresent();
-        WebElementUtil.scrollIntoView(footer_Link_ContactUs, 150);
+        scrollIntoView(footer_Link_ContactUs, 150);
         suppressObstructingOverlays();
-        WebElementUtil.clickElement(footer_Link_ContactUs);
+        clickElement(footer_Link_ContactUs);
     }
 
     public boolean isFooterVisible() {
-        return WebElementUtil.isDisplayed(footerRoot);
+        return isDisplayed(footerRoot);
     }
 
     public boolean isFooterElectroluxLogoDisplayed() {
-        return WebElementUtil.isDisplayed(footer_ElectroluxLogo);
+        return isDisplayed(footer_ElectroluxLogo);
     }
 
     // CONTACT & SUPPORT visibility
-    public boolean isFooterContactUsDisplayed() { return WebElementUtil.isDisplayed(footer_ContactUs); }
-    public boolean isFooterServiceAndRepairDisplayed() { return WebElementUtil.isDisplayed(footer_ServiceAndRepair); }
-    public boolean isFooterProductRegistrationDisplayed() { return WebElementUtil.isDisplayed(footer_ProductRegistration); }
-    public boolean isFooterFAQsDisplayed() { return WebElementUtil.isDisplayed(footer_FAQs); }
-    public boolean isFooterReturnAndExchangePolicyDisplayed() { return WebElementUtil.isDisplayed(footer_ReturnAndExchangePolicy); }
-    public boolean isFooterShippingDeliveryInstallPolicyDisplayed() { return WebElementUtil.isDisplayed(footer_ShippingDeliveryInstallPolicy); }
-    public boolean isFooterFinancingDisplayed() { return WebElementUtil.isDisplayed(footer_Financing); }
-    public boolean isFooterIcemakerRecallDisplayed() { return WebElementUtil.isDisplayed(footer_IcemakerRecall); }
+    public boolean isFooterContactUsDisplayed() { return isDisplayed(footer_ContactUs); }
+    public boolean isFooterServiceAndRepairDisplayed() { return isDisplayed(footer_ServiceAndRepair); }
+    public boolean isFooterProductRegistrationDisplayed() { return isDisplayed(footer_ProductRegistration); }
+    public boolean isFooterFAQsDisplayed() { return isDisplayed(footer_FAQs); }
+    public boolean isFooterReturnAndExchangePolicyDisplayed() { return isDisplayed(footer_ReturnAndExchangePolicy); }
+    public boolean isFooterShippingDeliveryInstallPolicyDisplayed() { return isDisplayed(footer_ShippingDeliveryInstallPolicy); }
+    public boolean isFooterFinancingDisplayed() { return isDisplayed(footer_Financing); }
+    public boolean isFooterIcemakerRecallDisplayed() { return isDisplayed(footer_IcemakerRecall); }
 
     // ABOUT ELECTROLUX visibility
-    public boolean isFooterAboutElectroluxGroupDisplayed() { return WebElementUtil.isDisplayed(footer_About_ElectroluxGroup); }
-    public boolean isFooterAboutPressNewsDisplayed() { return WebElementUtil.isDisplayed(footer_About_PressNews); }
-    public boolean isFooterAboutFinancialInformationDisplayed() { return WebElementUtil.isDisplayed(footer_About_FinancialInformation); }
-    public boolean isFooterAboutCareerOpportunitiesDisplayed() { return WebElementUtil.isDisplayed(footer_About_CareerOpportunities); }
-    public boolean isFooterAboutElectroluxProfessionalDisplayed() { return WebElementUtil.isDisplayed(footer_About_ElectroluxProfessional); }
+    public boolean isFooterAboutElectroluxGroupDisplayed() { return isDisplayed(footer_About_ElectroluxGroup); }
+    public boolean isFooterAboutPressNewsDisplayed() { return isDisplayed(footer_About_PressNews); }
+    public boolean isFooterAboutFinancialInformationDisplayed() { return isDisplayed(footer_About_FinancialInformation); }
+    public boolean isFooterAboutCareerOpportunitiesDisplayed() { return isDisplayed(footer_About_CareerOpportunities); }
+    public boolean isFooterAboutElectroluxProfessionalDisplayed() { return isDisplayed(footer_About_ElectroluxProfessional); }
 
     // TERMS & CONDITIONS visibility
-    public boolean isFooterPrivacyPolicyDisplayed() { return WebElementUtil.isDisplayed(footer_Terms_PrivacyPolicy); }
-    public boolean isFooterDoNotSellDisplayed() { return WebElementUtil.isDisplayed(footer_Terms_DoNotSell); }
+    public boolean isFooterPrivacyPolicyDisplayed() { return isDisplayed(footer_Terms_PrivacyPolicy); }
+    public boolean isFooterDoNotSellDisplayed() { return isDisplayed(footer_Terms_DoNotSell); }
 
     // CONNECT WITH US visibility
-    public boolean isFooterFacebookIconDisplayed() { return WebElementUtil.isDisplayed(footer_Connect_Facebook_Anchor); }
-    public boolean isFooterYoutubeIconDisplayed() { return WebElementUtil.isDisplayed(footer_Connect_Youtube_Anchor); }
-    public boolean isFooterInstagramIconDisplayed() { return WebElementUtil.isDisplayed(footer_Connect_Instagram_Anchor); }
+    public boolean isFooterFacebookIconDisplayed() { return isDisplayed(footer_Connect_Facebook_Anchor); }
+    public boolean isFooterYoutubeIconDisplayed() { return isDisplayed(footer_Connect_Youtube_Anchor); }
+    public boolean isFooterInstagramIconDisplayed() { return isDisplayed(footer_Connect_Instagram_Anchor); }
 
     // Not in USA? and Live Chat
-    public boolean isFooterNotInUSADisplayed() { return WebElementUtil.isDisplayed(footer_NotInUSA); }
+    public boolean isFooterNotInUSADisplayed() { return isDisplayed(footer_NotInUSA); }
     public boolean isLiveChatIconDisplayed() throws InterruptedException {
         scrollToFooter();
-        try { WaitUtils.untilPresent(footer_LiveChatIcon, 10); } catch (Exception ignored) {}
-        try { WaitUtils.untilPresent(chatIcon_Global, 10); } catch (Exception ignored) {}
-        return WebElementUtil.isDisplayed(footer_LiveChatIcon) || WebElementUtil.isDisplayed(chatIcon_Global);
+        try { untilPresent(footer_LiveChatIcon, 10); } catch (Exception ignored) {}
+        try { untilPresent(chatIcon_Global, 10); } catch (Exception ignored) {}
+        return isDisplayed(footer_LiveChatIcon) || isDisplayed(chatIcon_Global);
     }
     public void clickLiveChatIcon() throws InterruptedException {
         scrollToFooter();
         suppressObstructingOverlays();
-        if (WebElementUtil.isDisplayed(footer_LiveChatIcon)) {
-            WebElementUtil.scrollIntoView(footer_LiveChatIcon, 150);
-            WebElementUtil.clickElement(footer_LiveChatIcon);
-        } else if (WebElementUtil.isDisplayed(chatIcon_Global)) {
-            WebElementUtil.scrollIntoView(chatIcon_Global, 150);
-            WebElementUtil.clickElement(chatIcon_Global);
+        if (isDisplayed(footer_LiveChatIcon)) {
+            scrollIntoView(footer_LiveChatIcon, 150);
+            clickElement(footer_LiveChatIcon);
+        } else if (isDisplayed(chatIcon_Global)) {
+            scrollIntoView(chatIcon_Global, 150);
+            clickElement(chatIcon_Global);
         }
     }
-    public boolean isLiveChatInterfaceDisplayed() { return WebElementUtil.isDisplayed(liveChat_Interface); }
+    public boolean isLiveChatInterfaceDisplayed() { return isDisplayed(liveChat_Interface); }
 
 
     public HomePageActionsFrig navigateToHomePage() {
-        WebElementUtil.navigateTo(ConfigReader.getAppUrl());
+        navigateTo(ConfigReader.getAppUrl());
         try {
-            WebElement acceptBtn = untilClickable(homePage_Locator.acceptButtonLocator, 15);
+            WebElement acceptBtn = untilClickable(homePage_Locator.acceptButtonLocator);
             if (acceptBtn != null) {
                 acceptBtn.click();
             }
@@ -311,152 +311,152 @@ public class HomePageActionsFrig {
 
     public boolean isHomePageLoaded() {
         // isDisplayed now handles the wait internally
-        return WebElementUtil.isDisplayed(homePage_Locator.frigidaireLogo)
-        		&& WebElementUtil.isDisplayed(homePage_Locator.homePageTemplate);
+        return isDisplayed(homePage_Locator.frigidaireLogo)
+        		&& isDisplayed(homePage_Locator.homePageTemplate);
     }
 
     public boolean isBrancdLogoLoaded() {
-        return WebElementUtil.isDisplayed(homePage_Locator.frigidaireLogo);
+        return isDisplayed(homePage_Locator.frigidaireLogo);
     }
 
 //    public void navigateToLoginPage() {
-//        WebElementUtil.hoverOverElement(mainMenu_Login_OrderStatus);
-//        WebElementUtil.clickElement(mainMenu_Login);
+//        hoverOverElement(mainMenu_Login_OrderStatus);
+//        clickElement(mainMenu_Login);
 //    }
 
     public boolean validateUserNavigateBackToHomepage() {
-        WebElementUtil.clickElement(mainMenu_Contact);
-        WebElementUtil.clickElement(mainMenu_Logo);
-        return WebElementUtil.isDisplayed(mainMenu_Logo);
+        clickElement(mainMenu_Contact);
+        clickElement(mainMenu_Logo);
+        return isDisplayed(mainMenu_Logo);
     }
 
     public void navigateToProductsPage() {
-        WebElementUtil.clickElement(mainMenu_Contact);
+        clickElement(mainMenu_Contact);
     }
 
     public boolean isContactUsLinkDisplayed() {
-        return WebElementUtil.isDisplayed(mainMenu_Contact);
+        return isDisplayed(mainMenu_Contact);
     }
 
     public void clickContactUsLink() {
-        WebElementUtil.clickElement(mainMenu_Contact);
+        clickElement(mainMenu_Contact);
     }
 
     public boolean isZipCodeDisplayed() {
-        return WebElementUtil.isDisplayed(mainMenu_DeliverTo);
+        return isDisplayed(mainMenu_DeliverTo);
     }
 
     public String getDefaultZipCode() {
-        return WebElementUtil.getText(mainMenu_DeliverTo);
+        return getText(mainMenu_DeliverTo);
     }
 
     public void clickZipCodeArea() {
-        WebElementUtil.clickElement(mainMenu_DeliverTo);
+        clickElement(mainMenu_DeliverTo);
     }
 
     public boolean isMiniCartDisplayed() {
-        return WebElementUtil.isDisplayed(mainMenu_Cart);
+        return isDisplayed(mainMenu_Cart);
     }
 
     public void clickMiniCart() {
-        WebElementUtil.clickElement(mainMenu_Cart);
+        clickElement(mainMenu_Cart);
     }
 
 
     public ProductCategoryPageActionsFrig clickProductsLink() {
-        WebElementUtil.clickElement(productsLink);
+        clickElement(productsLink);
         return new ProductCategoryPageActionsFrig();
     }
     public boolean isLoginDisplayed() {
-        return WebElementUtil.isDisplayed(mainMenu_Login_OrderStatus);
+        return isDisplayed(mainMenu_Login_OrderStatus);
     }
 
     //Methods for Header
     public boolean validateInvalidZIPWhenBlank() {
-        WebElementUtil.clickElement(mainMenu_DeliverTo);
-        WebElement zipInput = WebElementUtil.waitForElementToBeVisible(By.xpath("//*[@id=\"ngb-popover-1\"]/div[2]/div/form/div/div/input"));
+        clickElement(mainMenu_DeliverTo);
+        WebElement zipInput = waitForElementToBeVisible(By.xpath("//*[@id=\"ngb-popover-1\"]/div[2]/div/form/div/div/input"));
         zipInput.clear();
-        WebElement errorMessage = WebElementUtil.waitForElementToBeVisible(By.xpath("//*[@id=\"ngb-popover-1\"]/div[2]/div/form/div[2]"));
+        WebElement errorMessage = waitForElementToBeVisible(By.xpath("//*[@id=\"ngb-popover-1\"]/div[2]/div/form/div[2]"));
         return errorMessage.getText().contains("Invalid Zip Code");
     }
 
     public boolean validateInvalidZIPWhenLessThan5Digits() {
-        WebElementUtil.clickElement(mainMenu_DeliverTo);
-        WebElement zipInput = WebElementUtil.waitForElementToBeVisible(By.xpath("//*[@id=\"ngb-popover-1\"]/div[2]/div/form/div/div/input"));
+        clickElement(mainMenu_DeliverTo);
+        WebElement zipInput = waitForElementToBeVisible(By.xpath("//*[@id=\"ngb-popover-1\"]/div[2]/div/form/div/div/input"));
         zipInput.clear();
         zipInput.sendKeys("123");
-        WebElement errorMessage = WebElementUtil.waitForElementToBeVisible(By.xpath("//*[@id=\"ngb-popover-1\"]/div[2]/div/form/div[2]"));
+        WebElement errorMessage = waitForElementToBeVisible(By.xpath("//*[@id=\"ngb-popover-1\"]/div[2]/div/form/div[2]"));
         return errorMessage.getText().contains("Invalid Zip Code");
     }
 
     public void enterZipCode(String zip) {
-        WebElementUtil.clickElement(mainMenu_DeliverTo);
-        WebElement zipInput = WebElementUtil.waitForElementToBeVisible(By.xpath("//*[@id=\"ngb-popover-1\"]/div[2]/div/form/div/div/input"));
+        clickElement(mainMenu_DeliverTo);
+        WebElement zipInput = waitForElementToBeVisible(By.xpath("//*[@id=\"ngb-popover-1\"]/div[2]/div/form/div/div/input"));
         zipInput.clear();
         zipInput.sendKeys(zip);
-        WebElementUtil.clickElement(By.cssSelector("#deliverToRibbonZipCodeButton"));
+        clickElement(By.cssSelector("#deliverToRibbonZipCodeButton"));
     }
 
     public boolean isMiniCartCountUpdated() {
-        WebElement cartIcon = WebElementUtil.waitForElementToBeVisible(mainMenu_Cart);
-        String ariaLabel = WebElementUtil.getText(mainMenu_CartCount);
+        WebElement cartIcon = waitForElementToBeVisible(mainMenu_Cart);
+        String ariaLabel = getText(mainMenu_CartCount);
         return ariaLabel != null && ariaLabel.contains("1");
     }
 
     public void addIteamToCart(String itemName) {
-        WebElementUtil.sendKeys(mainMenu_searchInput, itemName);
-        WebElementUtil.clickElement(mainMenu_searchButton);
-        WebElementUtil.clickElement(mainMenu_Logo);
+        sendKeys(mainMenu_searchInput, itemName);
+        clickElement(mainMenu_searchButton);
+        clickElement(mainMenu_Logo);
     }
 
     public HomePageActionsFrig clickLoginOrderStatusLink() {
-    	WebElementUtil.clickElement(mainMenu_Login_OrderStatus);
-    	if(!WebElementUtil.isDisplayed(mainMenu_Login_OrderStatus_CreateAccount)) {
-    		WebElementUtil.clickElement(mainMenu_Login_OrderStatus);
+    	clickElement(mainMenu_Login_OrderStatus);
+    	if(!isDisplayed(mainMenu_Login_OrderStatus_CreateAccount)) {
+    		clickElement(mainMenu_Login_OrderStatus);
     	}
     	return this;
     }
 
     public CreateAccountPageActionsFrig navigateToCreateAccountPage() {
     	clickLoginOrderStatusLink();
-    	WebElementUtil.clickElement(mainMenu_Login_OrderStatus_CreateAccount);
+    	clickElement(mainMenu_Login_OrderStatus_CreateAccount);
     	return new CreateAccountPageActionsFrig();
     }
 
     public LoginPageActionsFrig navigateToLoginPage() {
     	navigateToHomePage();
-    	WebElementUtil.hoverElement(mainMenu_Login_OrderStatus);
-    	WebElementUtil.clickElement(mainMenu_Login_OrderStatus_Login);
+    	hoverElement(mainMenu_Login_OrderStatus);
+    	clickElement(mainMenu_Login_OrderStatus_Login);
     	return new LoginPageActionsFrig();
     }
 
     public PlpPageActionsFrig clickWindowMounted() {
-        WebElementUtil.clickElement(homePage_Locator.navigationBarAirConditioners);
-        WebElementUtil.clickElement(homePage_Locator.windowMounted);
+        clickElement(homePage_Locator.navigationBarAirConditioners);
+        clickElement(homePage_Locator.windowMounted);
         return new PlpPageActionsFrig();
     }
 
     public PlpPageActionsFrig clickFrenchDoor() {
-        WebElementUtil.clickElement(homePage_Locator.navigationBarKitchen);
-        WebElementUtil.clickElement(homePage_Locator.frenchDoor);
+        clickElement(homePage_Locator.navigationBarKitchen);
+        clickElement(homePage_Locator.frenchDoor);
         return new PlpPageActionsFrig();
     }
 
     public HomePageActionsFrig  clickSearchAndEnterProductId(String productId) {
-        WebElementUtil.clickElement(homePage_Locator.searchBox);
-        WebElementUtil.sendKeys(homePage_Locator.searchBox, productId);
+        clickElement(homePage_Locator.searchBox);
+        sendKeys(homePage_Locator.searchBox, productId);
         return this;
     }
 
     public HomePageActionsFrig clickSearchIconAndWaitForAccessProduct() {
-        WebElementUtil.clickElement(homePage_Locator.searchIcon);
-        WebElementUtil.waitForElementToBeVisible(homePage_Locator.accesProductLink);
+        clickElement(homePage_Locator.searchIcon);
+        waitForElementToBeVisible(homePage_Locator.accesProductLink);
         return this;
     }
 
     public PdpPageActionsFrig clickAccesProduct() {
-        WebElementUtil.scrollToElementCenter(homePage_Locator.accesProductLink);
-        WebElementUtil.clickElement(homePage_Locator.accesProductLink);
+        scrollToElementCenter(homePage_Locator.accesProductLink);
+        clickElement(homePage_Locator.accesProductLink);
         return new PdpPageActionsFrig();
     }
 
@@ -466,31 +466,31 @@ public class HomePageActionsFrig {
     }
 
     public boolean isSearchIconDisplayed() {
-        return WebElementUtil.isDisplayed(mainMenu_searchInput);
+        return isDisplayed(mainMenu_searchInput);
     }
 
     public void clickSearchInputAndEnterText(String searchText) throws InterruptedException {
-        WebElementUtil.clickElement(mainMenu_searchInput);
-        WebElement searchInputElement = WebElementUtil.waitForElementToBeVisible(mainMenu_searchInput);
+        clickElement(mainMenu_searchInput);
+        WebElement searchInputElement = waitForElementToBeVisible(mainMenu_searchInput);
         searchInputElement.clear();
         for (char c : searchText.toCharArray()) {
             searchInputElement.sendKeys(String.valueOf(c));
-            WaitUtils.sleep(100);
+            sleep(100);
         }
         if (searchText.length() >= 4) {
-            WebElementUtil.waitForElementToBeVisible(mainMenu_searchSuggestions);
+            waitForElementToBeVisible(mainMenu_searchSuggestions);
         }
     }
 
     public List<WebElement> getSearchSuggestionsList() {
-        WaitUtils.untilPresent(mainMenu_searchSuggestions);
-        return WebElementUtil.findElements(mainMenu_searchSuggestions);
+        untilPresent(mainMenu_searchSuggestions);
+        return findElements(mainMenu_searchSuggestions);
     }
 
 
     public boolean areSearchSuggestionsDisplayed() {
         try {
-            WebElement suggestionsElement = WebElementUtil.waitForElementToBeVisible(mainMenu_searchSuggestions);
+            WebElement suggestionsElement = waitForElementToBeVisible(mainMenu_searchSuggestions);
             return suggestionsElement.isDisplayed() && !getSearchSuggestionsList().isEmpty();
         } catch (Exception e) {
             return false;
@@ -499,7 +499,7 @@ public class HomePageActionsFrig {
 
     public boolean isSearchInputFieldDisplayed() {
         try {
-            WebElement searchInputElement = WebElementUtil.waitForElementToBeVisible(mainMenu_searchInput);
+            WebElement searchInputElement = waitForElementToBeVisible(mainMenu_searchInput);
             return searchInputElement.isDisplayed();
         } catch (Exception e) {
             return false;
@@ -507,12 +507,12 @@ public class HomePageActionsFrig {
     }
 
     public void selectFirstSuggestion() {
-        WebElementUtil.clickElement(mainMenu_searchSuggestions_FirstElement);
+        clickElement(mainMenu_searchSuggestions_FirstElement);
     }
 
     public boolean isUserOnSearchResultsPage() {
         try {
-            WebElement resultsElement = WebElementUtil.waitForElementToBeVisible(mainMenu_searchSuggestions_Landing);
+            WebElement resultsElement = waitForElementToBeVisible(mainMenu_searchSuggestions_Landing);
             return resultsElement.isDisplayed();
         } catch (Exception e) {
             return false;
@@ -520,14 +520,14 @@ public class HomePageActionsFrig {
     }
 
     public boolean isShopOurCategoriesSectionDisplayed() {
-        return WebElementUtil.waitForElementToBeVisible(body_shopOurCategoriesHeading).isDisplayed() ;
+        return waitForElementToBeVisible(body_shopOurCategoriesHeading).isDisplayed() ;
     }
 
     public List<String> getShopOurCategories() {
         List<String> categories = new ArrayList<>();
         try {
             // Try primary locator first
-            List<WebElement> categoryElements = WebElementUtil.findElements(body_category_item);
+            List<WebElement> categoryElements = findElements(body_category_item);
 
             for (WebElement categoryElement : categoryElements) {
                 String categoryName = categoryElement.getText().trim();
@@ -542,18 +542,18 @@ public class HomePageActionsFrig {
     }
 
     public boolean isShopOurTopRatedAppliancesSectionDisplayed() {
-        return WebElementUtil.waitForElementToBeVisible(body_ShopOurTopRatedAppliancesSection).isDisplayed() ;
+        return waitForElementToBeVisible(body_ShopOurTopRatedAppliancesSection).isDisplayed() ;
     }
 
     public boolean areProductCardsElementsDisplayed() {
-        return WebElementUtil.waitForElementToBeVisible(body_ShopOurTopRatedAppliancesCard).isDisplayed() ;
+        return waitForElementToBeVisible(body_ShopOurTopRatedAppliancesCard).isDisplayed() ;
     }
 
     public void clickFirstProductCard() throws InterruptedException {
         try {
-            WaitUtils.sleep(1000);
-            WebElementUtil.scrollIntoView(body_firstProductCard);
-            WebElement firstProductCard = WebElementUtil.waitForElementToBeVisible(body_firstProductCard);
+            sleep(1000);
+            scrollIntoView(body_firstProductCard);
+            WebElement firstProductCard = waitForElementToBeVisible(body_firstProductCard);
             firstProductCard.click();
         } catch (Exception e) {
             System.out.println("Error clicking first product card: " + e.getMessage());
@@ -562,22 +562,22 @@ public class HomePageActionsFrig {
     }
 
     public boolean isUserOnPDP() {
-        String skuProductTitle = WebElementUtil.getText(body_firstProductSku);
-        WebElementUtil.clickElement(body_firstProductCard);
-        String getSKu = WebElementUtil.getText(body_PDPfirstProductSku);
+        String skuProductTitle = getText(body_firstProductSku);
+        clickElement(body_firstProductCard);
+        String getSKu = getText(body_PDPfirstProductSku);
         return skuProductTitle.equals(getSKu);
     }
 
     public boolean isMoreToExploreSectionDisplayed(){
-        return WebElementUtil.waitForElementToBeVisible(body_MoretoExpHeading).isDisplayed() ;
+        return waitForElementToBeVisible(body_MoretoExpHeading).isDisplayed() ;
     }
 
     public List<String> getMoreToExp() {
         List<String> categories = new ArrayList<>();
         try {
             // Try primary locator first
-            WebElementUtil.scrollIntoView(body_category_item);
-            List<WebElement> categoryElements = WebElementUtil.findElements(body_category_item);
+            scrollIntoView(body_category_item);
+            List<WebElement> categoryElements = findElements(body_category_item);
 
             for (WebElement categoryElement : categoryElements) {
                 String categoryName = categoryElement.getText().trim();
@@ -594,217 +594,217 @@ public class HomePageActionsFrig {
 
 // Right Footer Newsletter: visibility checks
 public boolean isRightNewsletter_ProductRegistrationDisplayed() {
-    return WebElementUtil.isDisplayed(pre_Footer_GetMoreFromFrigidaire_ProductRegistration);
+    return isDisplayed(pre_Footer_GetMoreFromFrigidaire_ProductRegistration);
 }
 
 public boolean isRightNewsletter_PromotionsDisplayed() {
-    return WebElementUtil.isDisplayed(pre_Footer_GetMoreFromFrigidaire_Promotions);
+    return isDisplayed(pre_Footer_GetMoreFromFrigidaire_Promotions);
 }
 
 public boolean isRightNewsletter_ExtendedServiceWarrantiesDisplayed() {
-    return WebElementUtil.isDisplayed(pre_Footer_GetMoreFromFrigidaire_ExtendedServiceWarranties);
+    return isDisplayed(pre_Footer_GetMoreFromFrigidaire_ExtendedServiceWarranties);
 }
 
 public boolean isRightNewsletter_BlogInspirationDisplayed() {
-    return WebElementUtil.isDisplayed(pre_Footer_GetMoreFromFrigidaire_BlogInspiration);
+    return isDisplayed(pre_Footer_GetMoreFromFrigidaire_BlogInspiration);
 }
 
 // Right Footer Newsletter: click actions
 public void clickRightNewsletter_ProductRegistration() {
-    WebElementUtil.scrollIntoView(pre_Footer_GetMoreFromFrigidaire_ProductRegistration);
-    WebElementUtil.clickElement(pre_Footer_GetMoreFromFrigidaire_ProductRegistration);
+    scrollIntoView(pre_Footer_GetMoreFromFrigidaire_ProductRegistration);
+    clickElement(pre_Footer_GetMoreFromFrigidaire_ProductRegistration);
 }
 
 public void clickRightNewsletter_Promotions() {
-    WebElementUtil.scrollIntoView(pre_Footer_GetMoreFromFrigidaire_Promotions);
-    WebElementUtil.clickElement(pre_Footer_GetMoreFromFrigidaire_Promotions);
+    scrollIntoView(pre_Footer_GetMoreFromFrigidaire_Promotions);
+    clickElement(pre_Footer_GetMoreFromFrigidaire_Promotions);
 }
 
 public void clickRightNewsletter_ExtendedServiceWarranties() {
-    WebElementUtil.scrollIntoView(pre_Footer_GetMoreFromFrigidaire_ExtendedServiceWarranties);
-    WebElementUtil.clickElement(pre_Footer_GetMoreFromFrigidaire_ExtendedServiceWarranties);
+    scrollIntoView(pre_Footer_GetMoreFromFrigidaire_ExtendedServiceWarranties);
+    clickElement(pre_Footer_GetMoreFromFrigidaire_ExtendedServiceWarranties);
 }
 
 public void clickRightNewsletter_BlogInspiration() {
-    WebElementUtil.scrollIntoView(pre_Footer_GetMoreFromFrigidaire_BlogInspiration);
-    WebElementUtil.clickElement(pre_Footer_GetMoreFromFrigidaire_BlogInspiration);
+    scrollIntoView(pre_Footer_GetMoreFromFrigidaire_BlogInspiration);
+    clickElement(pre_Footer_GetMoreFromFrigidaire_BlogInspiration);
 }
 
 // Right Footer Newsletter: simple page verifications by heading text
 public boolean isProductRegistrationPageLoaded() {
-    return WebElementUtil.isDisplayed(By.xpath("//h1[contains(text(),'Product Registration')]"));
+    return isDisplayed(By.xpath("//h1[contains(text(),'Product Registration')]"));
 }
 
 public boolean isPromotionsPageLoaded() {
-    return WebElementUtil.isDisplayed(By.xpath("//h1[contains(text(),'Promotions')]|//h2[contains(text(),'Promotions')]"));
+    return isDisplayed(By.xpath("//h1[contains(text(),'Promotions')]|//h2[contains(text(),'Promotions')]"));
 }
 
 public boolean isExtendedServiceWarrantiesPageLoaded() {
-    return WebElementUtil.isDisplayed(By.xpath("//h1[contains(text(),'Extended Service Warranties')]|//h2[contains(text(),'Extended Service Warranties')]"));
+    return isDisplayed(By.xpath("//h1[contains(text(),'Extended Service Warranties')]|//h2[contains(text(),'Extended Service Warranties')]"));
 }
 
 public boolean isBlogInspirationPageLoaded() {
-    return WebElementUtil.isDisplayed(By.xpath("//h1[contains(text(),'Blog Inspiration')]|//h2[contains(text(),'Blog Inspiration')]"));
+    return isDisplayed(By.xpath("//h1[contains(text(),'Blog Inspiration')]|//h2[contains(text(),'Blog Inspiration')]"));
 }
 
 //==================== TC_03 Footer & Newsletter Helpers ====================
-public boolean isFooterDisplayed() { return WebElementUtil.isDisplayed(homePage_Locator.footer_Root); }
+public boolean isFooterDisplayed() { return isDisplayed(homePage_Locator.footer_Root); }
 
 // Footer section headings visibility
 public boolean isContactSupportSectionVisible(){
-    return WebElementUtil.isDisplayed(footer_Heading_ContactSupport)
-            || WebElementUtil.isDisplayed(footer_ContactUs)
-            || WebElementUtil.isDisplayed(footer_ServiceAndRepair)
-            || WebElementUtil.isDisplayed(footer_FAQs);
+    return isDisplayed(footer_Heading_ContactSupport)
+            || isDisplayed(footer_ContactUs)
+            || isDisplayed(footer_ServiceAndRepair)
+            || isDisplayed(footer_FAQs);
 }
 public boolean isAboutElectroluxSectionVisible() throws InterruptedException {
     scrollToFooter();
-    try { WaitUtils.untilPresent(footer_Heading_AboutElectrolux, 10); } catch (Exception ignored) {}
-    return WebElementUtil.isDisplayed(footer_Heading_AboutElectrolux)
-            || WebElementUtil.isDisplayed(footer_About_ElectroluxGroup)
-            || WebElementUtil.isDisplayed(footer_About_PressNews)
-            || WebElementUtil.isDisplayed(footer_About_FinancialInformation)
-            || WebElementUtil.isDisplayed(footer_About_CareerOpportunities)
-            || WebElementUtil.isDisplayed(footer_About_ElectroluxProfessional)
-            || WebElementUtil.isDisplayed(By.xpath("//footer//a[contains(@href,'electroluxgroup')]"))
-            || WebElementUtil.isDisplayed(By.xpath("//footer//a[contains(@href,'careers.electroluxgroup')]"))
-            || WebElementUtil.isDisplayed(By.xpath("//footer//a[contains(@href,'electroluxprofessional')]"));
+    try { untilPresent(footer_Heading_AboutElectrolux, 10); } catch (Exception ignored) {}
+    return isDisplayed(footer_Heading_AboutElectrolux)
+            || isDisplayed(footer_About_ElectroluxGroup)
+            || isDisplayed(footer_About_PressNews)
+            || isDisplayed(footer_About_FinancialInformation)
+            || isDisplayed(footer_About_CareerOpportunities)
+            || isDisplayed(footer_About_ElectroluxProfessional)
+            || isDisplayed(By.xpath("//footer//a[contains(@href,'electroluxgroup')]"))
+            || isDisplayed(By.xpath("//footer//a[contains(@href,'careers.electroluxgroup')]"))
+            || isDisplayed(By.xpath("//footer//a[contains(@href,'electroluxprofessional')]"));
 }
 public boolean isTermsConditionsSectionVisible(){
-    return WebElementUtil.isDisplayed(footer_Heading_TermsConditions)
-            || WebElementUtil.isDisplayed(footer_Terms_PrivacyPolicy)
-            || WebElementUtil.isDisplayed(footer_Terms_DoNotSell)
-            || WebElementUtil.isDisplayed(footer_Terms_TermsAndConditions)
-            || WebElementUtil.isDisplayed(footer_Terms_TransparencySupplyChains);
+    return isDisplayed(footer_Heading_TermsConditions)
+            || isDisplayed(footer_Terms_PrivacyPolicy)
+            || isDisplayed(footer_Terms_DoNotSell)
+            || isDisplayed(footer_Terms_TermsAndConditions)
+            || isDisplayed(footer_Terms_TransparencySupplyChains);
 }
 public boolean isConnectWithUsSectionVisible(){
-    return WebElementUtil.isDisplayed(footer_Heading_ConnectWithUs)
-            || WebElementUtil.isDisplayed(footer_Connect_Facebook_Anchor)
-            || WebElementUtil.isDisplayed(footer_Connect_Youtube_Anchor)
-            || WebElementUtil.isDisplayed(footer_Connect_Instagram_Anchor);
+    return isDisplayed(footer_Heading_ConnectWithUs)
+            || isDisplayed(footer_Connect_Facebook_Anchor)
+            || isDisplayed(footer_Connect_Youtube_Anchor)
+            || isDisplayed(footer_Connect_Instagram_Anchor);
 }
 
 // CONTACT & SUPPORT visibility
-public boolean isFooter_ContactUsDisplayed(){ return WebElementUtil.isDisplayed(footer_Link_ContactUs); }
-public boolean isFooter_ServiceRepairDisplayed(){ return WebElementUtil.isDisplayed(footer_Link_ServiceRepair); }
-public boolean isFooter_ProductRegistrationDisplayed(){ return WebElementUtil.isDisplayed(footer_Link_ProductRegistration); }
-public boolean isFooter_FAQsDisplayed(){ return WebElementUtil.isDisplayed(footer_Link_FAQs); }
-public boolean isFooter_ReturnExchangeDisplayed(){ return WebElementUtil.isDisplayed(footer_Link_ReturnExchange); }
-public boolean isFooter_ShippingDeliveryInstallDisplayed(){ return WebElementUtil.isDisplayed(footer_Link_ShippingDeliveryInstall); }
-public boolean isFooter_FinancingDisplayed(){ return WebElementUtil.isDisplayed(footer_Link_Financing); }
-public boolean isFooter_IcemakerRecallDisplayed(){ return WebElementUtil.isDisplayed(footer_Link_IcemakerRecall); }
+public boolean isFooter_ContactUsDisplayed(){ return isDisplayed(footer_Link_ContactUs); }
+public boolean isFooter_ServiceRepairDisplayed(){ return isDisplayed(footer_Link_ServiceRepair); }
+public boolean isFooter_ProductRegistrationDisplayed(){ return isDisplayed(footer_Link_ProductRegistration); }
+public boolean isFooter_FAQsDisplayed(){ return isDisplayed(footer_Link_FAQs); }
+public boolean isFooter_ReturnExchangeDisplayed(){ return isDisplayed(footer_Link_ReturnExchange); }
+public boolean isFooter_ShippingDeliveryInstallDisplayed(){ return isDisplayed(footer_Link_ShippingDeliveryInstall); }
+public boolean isFooter_FinancingDisplayed(){ return isDisplayed(footer_Link_Financing); }
+public boolean isFooter_IcemakerRecallDisplayed(){ return isDisplayed(footer_Link_IcemakerRecall); }
 
 public void clickFooter_IcemakerRecall() throws InterruptedException {
     scrollToFooter();
     suppressObstructingOverlays();
-    WebElementUtil.scrollIntoView(footer_Link_IcemakerRecall, 150);
-    WebElementUtil.clickElement(footer_Link_IcemakerRecall);
+    scrollIntoView(footer_Link_IcemakerRecall, 150);
+    clickElement(footer_Link_IcemakerRecall);
 }
 
 // ABOUT ELECTROLUX visibility
-public boolean isFooter_ElectroluxGroupDisplayed(){ return WebElementUtil.isDisplayed(footer_Link_ElectroluxGroup); }
-public boolean isFooter_PressNewsDisplayed(){ return WebElementUtil.isDisplayed(footer_Link_PressNews); }
-public boolean isFooter_FinancialInfoDisplayed(){ return WebElementUtil.isDisplayed(footer_Link_FinancialInfo); }
-public boolean isFooter_CareerOpportunitiesDisplayed(){ return WebElementUtil.isDisplayed(footer_Link_CareerOpportunities); }
-public boolean isFooter_ElectroluxProfessionalDisplayed(){ return WebElementUtil.isDisplayed(footer_Link_ElectroluxProfessional); }
-public boolean isFooter_PrivacyPolicyDisplayed(){ return WebElementUtil.isDisplayed(footer_Link_PrivacyPolicy); }
-public boolean isFooter_DoNotSellInfoDisplayed(){ return WebElementUtil.isDisplayed(footer_Link_DoNotSellInfo); }
-public boolean isFooter_TermsConditionsDisplayed(){ return WebElementUtil.isDisplayed(footer_Link_TermsConditions); }
-public boolean isFooter_TransparencySupplyChainsDisplayed(){ return WebElementUtil.isDisplayed(footer_Link_TransparencySupplyChains); }
-public boolean isFooter_NotInUSADisplayed(){ return WebElementUtil.isDisplayed(footer_Link_NotInUSA); }
+public boolean isFooter_ElectroluxGroupDisplayed(){ return isDisplayed(footer_Link_ElectroluxGroup); }
+public boolean isFooter_PressNewsDisplayed(){ return isDisplayed(footer_Link_PressNews); }
+public boolean isFooter_FinancialInfoDisplayed(){ return isDisplayed(footer_Link_FinancialInfo); }
+public boolean isFooter_CareerOpportunitiesDisplayed(){ return isDisplayed(footer_Link_CareerOpportunities); }
+public boolean isFooter_ElectroluxProfessionalDisplayed(){ return isDisplayed(footer_Link_ElectroluxProfessional); }
+public boolean isFooter_PrivacyPolicyDisplayed(){ return isDisplayed(footer_Link_PrivacyPolicy); }
+public boolean isFooter_DoNotSellInfoDisplayed(){ return isDisplayed(footer_Link_DoNotSellInfo); }
+public boolean isFooter_TermsConditionsDisplayed(){ return isDisplayed(footer_Link_TermsConditions); }
+public boolean isFooter_TransparencySupplyChainsDisplayed(){ return isDisplayed(footer_Link_TransparencySupplyChains); }
+public boolean isFooter_NotInUSADisplayed(){ return isDisplayed(footer_Link_NotInUSA); }
 
 // Duplicate method removed; using earlier version with overlay suppression
 
 // Dynamic header helpers for L0/L1 checks
 public boolean isHeaderCategoryDisplayed(String categoryLabel) {
     By category = By.cssSelector("h5[aria-label='" + categoryLabel + "']");
-    return WebElementUtil.isDisplayed(category);
+    return isDisplayed(category);
 }
 
 public void openHeaderCategory(String categoryLabel) {
     By category = By.cssSelector("h5[aria-label='" + categoryLabel + "']");
-    WebElementUtil.clickElement(category);
+    clickElement(category);
 }
 
 public boolean isHeaderSubcategoryDisplayed(String subLabel) {
     By sub = By.xpath("//h5[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')," +
             "'" + subLabel.toLowerCase() + "')]");
-    return WebElementUtil.isDisplayed(sub);
+    return isDisplayed(sub);
 }
 
 // More to Explore CTA click by link text
 public void clickMoreToExploreLink(String linkText) {
     By link = By.xpath("//h2[contains(.,'More to Explore')]/following::a[normalize-space()='%s']".replace("%s", linkText));
-    WebElementUtil.scrollIntoView(link);
-    WebElementUtil.clickElement(link);
+    scrollIntoView(link);
+    clickElement(link);
 }
 
 // Newsletter left visibility and actions
 public boolean isNewsletterLeft_HeadingDisplayed(){
-    return WebElementUtil.isDisplayed(newsletterLeft_Heading)
-            || WebElementUtil.isDisplayed(pre_Footer_FirstToKnow_EmailInput)
-            || WebElementUtil.isDisplayed(pre_Footer_FirstToKnow_SubmitButton);
+    return isDisplayed(newsletterLeft_Heading)
+            || isDisplayed(pre_Footer_FirstToKnow_EmailInput)
+            || isDisplayed(pre_Footer_FirstToKnow_SubmitButton);
 }
 public boolean isNewsletterLeft_DescriptionDisplayed(){
-    return WebElementUtil.isDisplayed(newsletterLeft_Description)
-            || WebElementUtil.isDisplayed(pre_Footer_FirstToKnow_TermsAndConditions)
-            || WebElementUtil.isDisplayed(pre_Footer_FirstToKnow_PrivacyPolicy);
+    return isDisplayed(newsletterLeft_Description)
+            || isDisplayed(pre_Footer_FirstToKnow_TermsAndConditions)
+            || isDisplayed(pre_Footer_FirstToKnow_PrivacyPolicy);
 }
 public boolean isNewsletterLeft_EmailInputDisplayed(){
-    if (WebElementUtil.isDisplayed(By.xpath("//input[@id='newsletterEmailControl']"))) {
+    if (isDisplayed(By.xpath("//input[@id='newsletterEmailControl']"))) {
         return true;
     }
-    return WebElementUtil.isDisplayed(newsletterLeft_EmailInput);
+    return isDisplayed(newsletterLeft_EmailInput);
 }
 public boolean isNewsletterLeft_SignUpDisplayed(){
-    if (WebElementUtil.isDisplayed(By.xpath("//input[@id='submitBtn']"))) {
+    if (isDisplayed(By.xpath("//input[@id='submitBtn']"))) {
         return true;
     }
-    return WebElementUtil.isDisplayed(newsletterLeft_SignUpButton);
+    return isDisplayed(newsletterLeft_SignUpButton);
 }
 public boolean isNewsletterLeft_TermsTextDisplayed(){
-    if (WebElementUtil.isDisplayed(By.xpath("//u[normalize-space()='Terms and Conditions']"))
-            || WebElementUtil.isDisplayed(By.xpath("//u[normalize-space()='Privacy Policy']"))){
+    if (isDisplayed(By.xpath("//u[normalize-space()='Terms and Conditions']"))
+            || isDisplayed(By.xpath("//u[normalize-space()='Privacy Policy']"))){
         return true;
     }
-    return WebElementUtil.isDisplayed(newsletterLeft_TermsText);
+    return isDisplayed(newsletterLeft_TermsText);
 }
 public void newsletterLeft_EnterEmail(String email){
-    if (WebElementUtil.isDisplayed(By.xpath("//input[@id='newsletterEmailControl']"))) {
-        WebElementUtil.sendKeys(By.xpath("//input[@id='newsletterEmailControl']"), email);
+    if (isDisplayed(By.xpath("//input[@id='newsletterEmailControl']"))) {
+        sendKeys(By.xpath("//input[@id='newsletterEmailControl']"), email);
         return;
     }
-    WebElementUtil.sendKeys(newsletterLeft_EmailInput, email);
+    sendKeys(newsletterLeft_EmailInput, email);
 }
 public void newsletterLeft_ClickSignUp(){
-    if (WebElementUtil.isDisplayed(By.xpath("//input[@id='submitBtn']"))) {
-        WebElementUtil.clickElement(By.xpath("//input[@id='submitBtn']"));
+    if (isDisplayed(By.xpath("//input[@id='submitBtn']"))) {
+        clickElement(By.xpath("//input[@id='submitBtn']"));
         return;
     }
-    WebElementUtil.clickElement(newsletterLeft_SignUpButton);
+    clickElement(newsletterLeft_SignUpButton);
 }
 
 // Newsletter Right visibility
 public boolean isNewsletterRight_HeadingDisplayed(){
-    return WebElementUtil.isDisplayed(newsletterRight_Heading);
+    return isDisplayed(newsletterRight_Heading);
 }
 public boolean isNewsletterRight_SpecialOffersDisplayed(){
-    return WebElementUtil.isDisplayed(newsletterRight_SpecialOffers);
+    return isDisplayed(newsletterRight_SpecialOffers);
 }
 public boolean isNewsletterRight_SupportDisplayed(){
-    return WebElementUtil.isDisplayed(newsletterRight_Support);
+    return isDisplayed(newsletterRight_Support);
 }
 public boolean isNewsletterRight_ProductRegistrationDisplayed(){
-    return WebElementUtil.isDisplayed(newsletterRight_ProductRegistration);
+    return isDisplayed(newsletterRight_ProductRegistration);
 }
 
 public boolean isUserGreetingDropdownDisplayed() {
-    return WebElementUtil.isDisplayed(homePage_Locator.userGreetingDropdownButton);
+    return isDisplayed(homePage_Locator.userGreetingDropdownButton);
 }
 
 public HomePageActionsFrig acceptCookies() {
 	try {
-        WebElement acceptBtn = untilClickable(homePage_Locator.acceptButtonLocator, 20);
+        WebElement acceptBtn = untilClickable(homePage_Locator.acceptButtonLocator);
         if (acceptBtn != null) {
             acceptBtn.click();
         }

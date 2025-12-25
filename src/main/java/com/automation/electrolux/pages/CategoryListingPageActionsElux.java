@@ -2,7 +2,7 @@ package com.automation.electrolux.pages;
 
 
 import com.automation.electrolux.locators.CLPLocatorsElux;
-import com.automation.frigidaire.utils.WebElementUtil;
+import com.automation.utils.WebElementUtil;
 import org.testng.Assert;
 
 public class CategoryListingPageActionsElux {

@@ -39,12 +39,12 @@ public class DeliveryInstallationPageActionsElux {
 
             By productLocator=By.xpath(productXPath);
 
-            com.automation.utils.WebElementUtil.scrollToElement(driver, driver.findElement(By.xpath(productXPath)));
+            WebElementUtil.scrollToElement(driver, driver.findElement(By.xpath(productXPath)));
             WebElementUtil.waitForElementToBeClickable(productLocator,60);
             com.automation.utils.WebElementUtil.scrollAndClickUsingJSE(driver, productLocator);
             WebElementUtil.scrollByPixels(driver, 0, 500);
             WaitUtils.sleep(60);
-            WebElementUtil.scrollAndClickUsingJSE(driver, driver.findElement(addToCart));
+            WaitUtils.scrollAndClickUsingJSE(driver, driver.findElement(addToCart));
             WaitUtils.sleep(60);
         } catch (Exception e) {
             e.printStackTrace();

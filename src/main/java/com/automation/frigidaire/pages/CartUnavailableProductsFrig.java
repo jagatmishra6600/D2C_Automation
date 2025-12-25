@@ -1,7 +1,7 @@
 package com.automation.frigidaire.pages;
 
 import com.automation.frigidaire.locators.CartLocatorsFrig;
-import com.automation.frigidaire.utils.WebElementUtil;
+import com.automation.utils.WebElementUtil;
 
 public class CartUnavailableProductsFrig extends CartLocatorsFrig {
 
@@ -50,9 +50,8 @@ public class CartUnavailableProductsFrig extends CartLocatorsFrig {
         WebElementUtil.clickElement(Icemakersproduct);
 
     }
-    public boolean verifyYourCart() {
+    public void verifyYourCart() {
         WebElementUtil.isDisplayed(YourCart);
-        return true;
 
     }
 

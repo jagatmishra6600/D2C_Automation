@@ -8,7 +8,7 @@ public class CartPageActionsFrig {
 
     CartLocatorsFrig cartPage_Locator = new CartLocatorsFrig();
 
-    public boolean isOrderSummaryTextVisibleAndCorrect(String expectedText) {
+    public boolean isOrderSummaryTextVisibleAndCorrect() {
         return false;
     }
 
@@ -61,11 +61,10 @@ public class CartPageActionsFrig {
         return new ShippingAddressPageActionsFrig();
     }
 
-    public CartPageActionsFrig clickEmptyCartButton() {
+    public void clickEmptyCartButton() {
         WebElementUtil.scrollToElementCenter(cartPage_Locator.emptyCartButton);
         WebElementUtil.clickElement(cartPage_Locator.emptyCartButton);
         WebElementUtil.clickElement(cartPage_Locator.confirmButton);
-        return this;
     }
 
     public boolean isYourCartEmptyTextVisibleAndCorrect(String expectedText) {
@@ -75,12 +74,11 @@ public class CartPageActionsFrig {
         return actualText.toLowerCase().contains(expectedText.toLowerCase());
     }
 
-    public CartPageActionsFrig clickRemoveFromCartButton() {
+    public void clickRemoveFromCartButton() {
         WebElementUtil.scrollToElementCenter(cartPage_Locator.productRemoveCloseButton);
         WebElementUtil.clickElement(cartPage_Locator.productRemoveCloseButton);
         WebElementUtil.clickElement(cartPage_Locator.removeButton);
         WebElementUtil.isDisplayed(cartPage_Locator.yourCartIsEmptyText);
-        return this;
     }
 
     public boolean increaseQuantityAndValidateCount() {

@@ -1,128 +1,110 @@
 package com.automation.utils;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
 public final class WaitUtils {
+    public static WebDriverWait waitSec(int seconds) { return new WebDriverWait(driver(), Duration.ofSeconds(seconds)); }
+    private static Actions actions() { return new Actions(driver()); }
+    private static WebDriver driver() { return DriverManager.getDriver(); }
 
-    private static final long DEFAULT_TIMEOUT_SECONDS = 10;
+    private static final int DEFAULT_TIMEOUT_SECONDS = 10;
 
     private WaitUtils() {
         throw new IllegalStateException("Utility class");
     }
 
     private static WebDriverWait wait(Duration timeout) {
-        return new WebDriverWait(DriverManager.getDriver(), timeout);
+        return new WebDriverWait(driver(), timeout);
     }
 
-    private static WebDriverWait defaultWait() {
-        return wait(Duration.ofSeconds(DEFAULT_TIMEOUT_SECONDS));
-    }
 
     // Visibility
     public static WebElement untilVisible(By locator) {
-        return defaultWait().until(ExpectedConditions.visibilityOfElementLocated(locator));
-    }
-
-    public static WebElement untilVisible(By locator, long timeoutSeconds) {
-        return wait(Duration.ofSeconds(timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(locator));
+        return waitSec(DEFAULT_TIMEOUT_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
     public static WebElement untilVisible(WebElement element) {
-        return defaultWait().until(ExpectedConditions.visibilityOf(element));
+        return waitSec(DEFAULT_TIMEOUT_SECONDS).until(ExpectedConditions.visibilityOf(element));
     }
 
-    public static WebElement untilVisible(WebElement element, long timeoutSeconds) {
-        return wait(Duration.ofSeconds(timeoutSeconds)).until(ExpectedConditions.visibilityOf(element));
-    }
-
-    public static WebElement untilVisible(WebElement element, int timeoutSeconds) {
-        return wait(Duration.ofSeconds(timeoutSeconds)).until(ExpectedConditions.visibilityOf(element));
-    }
-
-    // Clickable
     public static WebElement untilClickable(By locator) {
-        return defaultWait().until(ExpectedConditions.elementToBeClickable(locator));
-    }
-
-    public static WebElement untilClickable(By locator, long timeoutSeconds) {
-        return wait(Duration.ofSeconds(timeoutSeconds)).until(ExpectedConditions.elementToBeClickable(locator));
+        return waitSec(DEFAULT_TIMEOUT_SECONDS).until(ExpectedConditions.elementToBeClickable(locator));
     }
 
     public static WebElement untilClickable(WebElement element) {
-        return defaultWait().until(ExpectedConditions.elementToBeClickable(element));
-    }
-
-    public static WebElement untilClickable(WebElement element, long timeoutSeconds) {
-        return wait(Duration.ofSeconds(timeoutSeconds)).until(ExpectedConditions.elementToBeClickable(element));
+        return waitSec(DEFAULT_TIMEOUT_SECONDS).until(ExpectedConditions.elementToBeClickable(element));
     }
 
     // Presence
     public static WebElement untilPresent(By locator) {
-        return defaultWait().until(ExpectedConditions.presenceOfElementLocated(locator));
+        return waitSec(DEFAULT_TIMEOUT_SECONDS).until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
     public static WebElement untilPresent(By locator, long timeoutSeconds) {
-        return wait(Duration.ofSeconds(timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(locator));
+        return waitSec(DEFAULT_TIMEOUT_SECONDS).until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
-    // Invisibility
     public static boolean untilInvisible(By locator) {
-        return defaultWait().until(ExpectedConditions.invisibilityOfElementLocated(locator));
+        return waitSec(DEFAULT_TIMEOUT_SECONDS).until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
 
     public static boolean untilInvisible(By locator, long timeoutSeconds) {
-        return wait(Duration.ofSeconds(timeoutSeconds)).until(ExpectedConditions.invisibilityOfElementLocated(locator));
+        return waitSec(DEFAULT_TIMEOUT_SECONDS).until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
 
     public static boolean untilInvisible(WebElement element) {
-        return defaultWait().until(ExpectedConditions.invisibilityOf(element));
+        return waitSec(DEFAULT_TIMEOUT_SECONDS).until(ExpectedConditions.invisibilityOf(element));
     }
 
     public static boolean untilInvisible(WebElement element, long timeoutSeconds) {
-        return wait(Duration.ofSeconds(timeoutSeconds)).until(ExpectedConditions.invisibilityOf(element));
+        return waitSec(DEFAULT_TIMEOUT_SECONDS).until(ExpectedConditions.invisibilityOf(element));
     }
 
-    // URL & Title
     public static boolean untilUrlContains(String fraction) {
-        return defaultWait().until(ExpectedConditions.urlContains(fraction));
+        return waitSec(DEFAULT_TIMEOUT_SECONDS).until(ExpectedConditions.urlContains(fraction));
     }
 
     public static boolean untilUrlContains(String fraction, long timeoutSeconds) {
-        return wait(Duration.ofSeconds(timeoutSeconds)).until(ExpectedConditions.urlContains(fraction));
+        return waitSec(DEFAULT_TIMEOUT_SECONDS).until(ExpectedConditions.urlContains(fraction));
     }
 
     public static boolean untilTitleContains(String fraction) {
-        return defaultWait().until(ExpectedConditions.titleContains(fraction));
+        return waitSec(DEFAULT_TIMEOUT_SECONDS).until(ExpectedConditions.titleContains(fraction));  
     }
 
     public static boolean untilTitleContains(String fraction, long timeoutSeconds) {
-        return wait(Duration.ofSeconds(timeoutSeconds)).until(ExpectedConditions.titleContains(fraction));
+        return waitSec(DEFAULT_TIMEOUT_SECONDS).until(ExpectedConditions.titleContains(fraction));
     }
 
     // Attribute & Text
     public static boolean untilAttributeContains(By locator, String attribute, String value) {
         WebElement element = untilPresent(locator);
-        return defaultWait().until(driver -> {
+        return waitSec(DEFAULT_TIMEOUT_SECONDS).until(driver -> {
             String attr = element.getAttribute(attribute);
             return attr != null && attr.contains(value);
         });
     }
+    
+    public static boolean untilAttributeContains(By locator, String attribute, String value, int timeoutSeconds) {
+        return waitSec(timeoutSeconds).until(ExpectedConditions.attributeContains(locator, attribute, value));
+    }
 
     public static boolean untilTextPresent(By locator, String text) {
-        return defaultWait().until(ExpectedConditions.textToBePresentInElementLocated(locator, text));
+        return waitSec(DEFAULT_TIMEOUT_SECONDS).until(ExpectedConditions.textToBePresentInElementLocated(locator, text));
     }
 
     // Selection
     public static boolean untilSelected(By locator) {
-        return defaultWait().until(ExpectedConditions.elementToBeSelected(locator));
+        return waitSec(DEFAULT_TIMEOUT_SECONDS).until(ExpectedConditions.elementToBeSelected(locator));
     }
 
     public static boolean untilSelected(WebElement element) {
-        return defaultWait().until(ExpectedConditions.elementToBeSelected(element));
+        return waitSec(DEFAULT_TIMEOUT_SECONDS).until(ExpectedConditions.elementToBeSelected(element));
     }
 
     // Page load
@@ -154,14 +136,28 @@ public final class WaitUtils {
 	}
 
     public static void implicitWait(long seconds) {
-        DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(seconds));
+        driver().manage().timeouts().implicitlyWait(Duration.ofSeconds(seconds));
     }
 
-    public static WebElement waitForVisibility(WebDriver driver, By locator, int time) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    public static WebElement waitForVisibility(By locator) {
+        return waitSec(DEFAULT_TIMEOUT_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+   
+    public static WebElement waitForElementToBeVisible(By locator) {
+        return waitSec(DEFAULT_TIMEOUT_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
+    public static WebElement waitForElementToBeVisible(WebElement element) {
+        return waitSec(DEFAULT_TIMEOUT_SECONDS).until(ExpectedConditions.visibilityOf(element));
+    }
 
+    public static WebElement waitForElementToBeClickable(By locator) {
+        return waitSec(DEFAULT_TIMEOUT_SECONDS).until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
+    public static void hoverElement(By locator) {
+        WebElement element = waitForElementToBeVisible(locator);
+        actions().moveToElement(element).perform();
+    }
 
 }

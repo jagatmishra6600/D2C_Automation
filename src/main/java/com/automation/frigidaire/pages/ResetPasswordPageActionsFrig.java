@@ -1,6 +1,7 @@
 package com.automation.frigidaire.pages;
 
-import static com.automation.utils.WaitUtils.untilClickable;
+import static com.automation.utils.WaitUtils.*;
+import static com.automation.utils.WebElementUtil.*;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -17,7 +18,7 @@ public class ResetPasswordPageActionsFrig {
 	 
 	 public ResetPasswordPageActionsFrig acceptAllCookies() {
 		 try {
-	            WebElement acceptBtn = untilClickable(acceptButtonLocator, 15);
+	            WebElement acceptBtn = untilClickable(acceptButtonLocator);
 	            if (acceptBtn != null) {
 	                acceptBtn.click();
 	            }
@@ -33,17 +34,17 @@ public class ResetPasswordPageActionsFrig {
 	 }
 	 
 	 public ResetPasswordPageActionsFrig enterNewPassword(String password) {
-		WebElementUtil.sendKeys(rpLocator.newPasswordInput, password);
+		sendKeys(rpLocator.newPasswordInput, password);
 		return this;
 	 }
 	 
 	 public ResetPasswordPageActionsFrig enterConfirmPassword(String password) {
-		WebElementUtil.sendKeys(rpLocator.confirmPasswordInput,password);
+		sendKeys(rpLocator.confirmPasswordInput,password);
 		return this;
 	 }
 	 
 	 public ResetPasswordPageActionsFrig clickSubmitButton() {
-		 WebElementUtil.clickElement(rpLocator.submitButton);
+		 clickElement(rpLocator.submitButton);
 		 return this;
 	 }
 	 
@@ -54,27 +55,27 @@ public class ResetPasswordPageActionsFrig {
 	 }
 	 
 	 public boolean isNewPasswordFieldDisplayed() {
-		 return WebElementUtil.isDisplayed(rpLocator.newPasswordInput);
+		 return isDisplayed(rpLocator.newPasswordInput);
 	 }
 	 
 	 public boolean isConfirmPasswordFieldDisplayed() {
-		 return WebElementUtil.isDisplayed(rpLocator.confirmPasswordInput);
+		 return isDisplayed(rpLocator.confirmPasswordInput);
 	 }
 	 
 	 public boolean isSubmitButtonDisplayed() {
-		 return WebElementUtil.isDisplayed(rpLocator.submitButton);
+		 return isDisplayed(rpLocator.submitButton);
 	 }
 	 
 	 public boolean isNewPasswordShowHideIconDisplayed() {
-		 return WebElementUtil.isDisplayed(rpLocator.newPasswordShowHideIcon);
+		 return isDisplayed(rpLocator.newPasswordShowHideIcon);
 	 }
 	 
 	 public boolean isConfirmPasswordShowHideIconDisplayed() {
-		 return WebElementUtil.isDisplayed(rpLocator.confirmPasswordShowHideIcon);
+		 return isDisplayed(rpLocator.confirmPasswordShowHideIcon);
 	 }
 	 
 	 public boolean isChangePasswordTitleDisplayed() {
-		 return WebElementUtil.isDisplayed(rpLocator.changePasswordTitle);
+		 return isDisplayed(rpLocator.changePasswordTitle);
 	 }
 	 
 	 public boolean isAllResetPasswordFieldsAndButtonsDisplayed() {
@@ -99,10 +100,10 @@ public class ResetPasswordPageActionsFrig {
 	 } 
 	 
 	 public String getResetSuccessMessage() {
-		 return WebElementUtil.getText(rpLocator.resetPasswordSucccessScreenMessage);
+		 return getText(rpLocator.resetPasswordSucccessScreenMessage);
 	 }
 	 
 	 public boolean isLoginToYourAccountLinkDisplayed() {
-		 return WebElementUtil.isDisplayed(rpLocator.loginToYourAccountLink);
+		 return isDisplayed(rpLocator.loginToYourAccountLink);
 	 }
 }

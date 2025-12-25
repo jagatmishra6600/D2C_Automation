@@ -1,158 +1,160 @@
 package com.automation.frigidaire.pages;
 
 import com.automation.electrolux.locators.RefrigeratorLocatorsElux;
-import com.automation.frigidaire.utils.WebElementUtil;
+import com.automation.utils.WebElementUtil;
+
+import static com.automation.utils.WebElementUtil.*;
 
 public class RefrigeratorPageActionsFrig extends RefrigeratorLocatorsElux {
 
 
     public void clickOnKitchen() {
-        WebElementUtil.clickElement(kitchen);
+        clickElement(kitchen);
     }
     public void clickOnRefrigeratorSubcategory() {
-        WebElementUtil.clickElement(RefrigeratorSubcategory);
+        clickElement(RefrigeratorSubcategory);
 
     }
     public boolean verifyRefigeratorText() {
-        WebElementUtil.isDisplayed(Refrigeratorsboldtext);
+        isDisplayed(Refrigeratorsboldtext);
         return true;
     }
 
     public boolean verifyFrenchdoorText() {
-        WebElementUtil.isDisplayed(FrenchDoor);
+        isDisplayed(FrenchDoor);
         return true;
     }
 
     public boolean verifySidebyside() {
-        WebElementUtil.isDisplayed(Sidebyside);
+        isDisplayed(Sidebyside);
         return true;
     }
 
     public boolean verifySingleDoor() {
-        WebElementUtil.isDisplayed(SingleDoor);
+        isDisplayed(SingleDoor);
         return true;
     }
 
     public boolean verifyTopfreezer() {
-        WebElementUtil.isDisplayed(Topfreezer);
+        isDisplayed(Topfreezer);
         return true;
     }
 
     public boolean verifyBottomFreezer() {
-        WebElementUtil.isDisplayed(BottomFreezer);
+        isDisplayed(BottomFreezer);
         return true;
     }
 
     public boolean verifyCompact() {
-        WebElementUtil.isDisplayed(Compact);
+        isDisplayed(Compact);
         return true;
     }
 
     public boolean verifyWineandbeverage() {
-        WebElementUtil.isDisplayed(Wineandbeverage);
+        isDisplayed(Wineandbeverage);
         return true;
     }
     public boolean verifyShoptoprated() {
-        WebElementUtil.scrollIntoView(Shoptoprated);
+        scrollIntoView(Shoptoprated);
         return true;
     }
 
     public boolean verifyBestseller() {
-        WebElementUtil.scrollIntoView(Bestseller);
+        scrollIntoView(Bestseller);
         return true;
     }
 
     public boolean verifyFridgetext() {
-        WebElementUtil.scrollIntoView(Fridgetext);
+        scrollIntoView(Fridgetext);
         return true;
     }
 
     public boolean verifyReviews() {
-        WebElementUtil.scrollIntoView(Reviews);
+        scrollIntoView(Reviews);
         return true;
     }
 
     public boolean verifyPrice() {
-        WebElementUtil.scrollIntoView(Price);
+        scrollIntoView(Price);
         return true;
     }
 
     public boolean verifyTitle() {
-        WebElementUtil.scrollIntoView(Title);
+        scrollIntoView(Title);
         return true;
     }
 
     public boolean verifyMessage() {
-        WebElementUtil.scrollIntoView(Message);
+        scrollIntoView(Message);
         return true;
     }
 
     public void clickOnSidebysidenext() {
-        WebElementUtil.clickElement(Sidebysidenext);
+        clickElement(Sidebysidenext);
     }
 
     public void clickOnNextbutton() {
-        WebElementUtil.clickElement(Nextbutton);
+        clickElement(Nextbutton);
     }
 
     public void clickOnLargestoragecapacity() {
-        WebElementUtil.clickElement(Largestoragecapacity);
+        clickElement(Largestoragecapacity);
     }
     public void clickOnseeresult() {
-        WebElementUtil.clickElement(seeresult);
+        clickElement(seeresult);
 
     }
     public void clickOnYourresult() {
-        WebElementUtil.clickElement(Yourresult);
+        clickElement(Yourresult);
     }
 
         public boolean verifySelecteditemresult() {
-        WebElementUtil.scrollIntoView(Selecteditemresult);
+        scrollIntoView(Selecteditemresult);
         return true;
     }
     public boolean verifyfrigidaireproffessional() {
-        WebElementUtil.isDisplayed(frigidaireproffessional);
+        isDisplayed(frigidaireproffessional);
         return true;
     }
 
 
    public boolean verifytotalRatings() {
-       WebElementUtil.isDisplayed(totalRatings);
+       isDisplayed(totalRatings);
        return true;
 
    }
 
    public boolean VerifyRefrigeratorproductname() {
-       WebElementUtil.isDisplayed(Refrigeratorproductname);
+       isDisplayed(Refrigeratorproductname);
        return true;
    }
     public boolean verifyRefproductprices() {
-        WebElementUtil.isDisplayed(Refproductprices);
+        isDisplayed(Refproductprices);
         return true;
     }
    public void clickOnmorefrenchdooroptions() {
-      WebElementUtil.scrollIntoView(morefrenchdooroptions);
-       WebElementUtil.clickElement(morefrenchdooroptions);
+      scrollIntoView(morefrenchdooroptions);
+       clickElement(morefrenchdooroptions);
    }
    public void clickOnrefrigeratorimage() {
 
-       WebElementUtil.scrollIntoView(refrigeratorimage);
-       WebElementUtil.clickElement(refrigeratorimage);
+       scrollIntoView(refrigeratorimage);
+       clickElement(refrigeratorimage);
 
     }
 
     public boolean verifyPDProductRating() {
-        WebElementUtil.isDisplayed(PDPproductRating);
+        isDisplayed(PDPproductRating);
         return true;
     }
 
     public boolean verifyPDPProductName() {
-        WebElementUtil.isDisplayed(PDPproductname);
+        isDisplayed(PDPproductname);
         return true;
     }
 
     public boolean verifyPDPProductimage() {
-        WebElementUtil.isDisplayed(PDPproduct_image);
+        isDisplayed(PDPproduct_image);
         return true;
     }
 

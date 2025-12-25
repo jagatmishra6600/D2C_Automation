@@ -1,11 +1,10 @@
 package com.automation.frigidaire.pages;
 
 import com.automation.frigidaire.locators.PLPLocatorsFrig;
-import com.automation.utils.WaitUtils;
-import com.automation.utils.WebElementUtil;
-import org.openqa.selenium.WebElement;
+import static com.automation.utils.WebElementUtil.*;
+import static com.automation.utils.WaitUtils.*;
 
-import static com.automation.utils.WaitUtils.untilClickable;
+import org.openqa.selenium.WebElement;
 
 public class PlpPageActionsFrig {
 
@@ -25,8 +24,8 @@ public class PlpPageActionsFrig {
     public PlpPageActionsFrig closePopupModel() {
 
         try {
-            WaitUtils.untilVisible(plpPage_Locator.closePopupButton, 20);
-            WebElement closeBtn = untilClickable(plpPage_Locator.closePopupButton, 20);
+            untilVisible(plpPage_Locator.closePopupButton);
+            WebElement closeBtn = untilClickable(plpPage_Locator.closePopupButton);
             if (closeBtn != null) {
                 closeBtn.click();
             }
@@ -37,73 +36,73 @@ public class PlpPageActionsFrig {
     }
 
     public PlpPageActionsFrig storeSelectedProductId() {
-        WaitUtils.untilVisible(plpPage_Locator.plpProductId);
-        selectedProductId = WebElementUtil.getText(plpPage_Locator.plpProductId);
+        untilVisible(plpPage_Locator.plpProductId);
+        selectedProductId = getText(plpPage_Locator.plpProductId);
         return this;
     }
 
     public PlpPageActionsFrig storeSelectedProductTitle() {
-        WaitUtils.untilVisible(plpPage_Locator.plpProductTitle);
-        selectedProductTitle = WebElementUtil.getText(plpPage_Locator.plpProductTitle);
+        untilVisible(plpPage_Locator.plpProductTitle);
+        selectedProductTitle = getText(plpPage_Locator.plpProductTitle);
         return this;
     }
 
     public PlpPageActionsFrig storeSelectedProductPrice() {
-        WaitUtils.untilVisible(plpPage_Locator.plpProductPrice);
-        selectedProductPrice = WebElementUtil.getText(plpPage_Locator.plpProductPrice);
+        untilVisible(plpPage_Locator.plpProductPrice);
+        selectedProductPrice = getText(plpPage_Locator.plpProductPrice);
         return this;
     }
 
     public PlpPageActionsFrig storeSelectedProductReviewNumber() {
-        WaitUtils.untilVisible(plpPage_Locator.plpProductReviewNumber);
-        selectedProductReviewNumber = WebElementUtil.getText(plpPage_Locator.plpProductReviewNumber);
+        untilVisible(plpPage_Locator.plpProductReviewNumber);
+        selectedProductReviewNumber = getText(plpPage_Locator.plpProductReviewNumber);
         return this;
     }
 
     public PlpPageActionsFrig storeProductDimensions() {
-        WaitUtils.untilVisible(plpPage_Locator.plpHeight);
-        WaitUtils.untilVisible(plpPage_Locator.plpWidth);
-        WaitUtils.untilVisible(plpPage_Locator.plpDepth);
+        untilVisible(plpPage_Locator.plpHeight);
+        untilVisible(plpPage_Locator.plpWidth);
+        untilVisible(plpPage_Locator.plpDepth);
 
-        selectedHeight = WebElementUtil.getText(plpPage_Locator.plpHeight);
-        selectedWidth =  WebElementUtil.getText(plpPage_Locator.plpWidth);
-        selectedDepth = WebElementUtil.getText(plpPage_Locator.plpDepth);
+        selectedHeight = getText(plpPage_Locator.plpHeight);
+        selectedWidth =  getText(plpPage_Locator.plpWidth);
+        selectedDepth = getText(plpPage_Locator.plpDepth);
 
         return this;
     }
 
     public PdpPageActionsFrig clickFirstProduct() {
-        WebElementUtil.scrollIntoView(plpPage_Locator.plpProductReview);
-        WebElementUtil.clickElement(plpPage_Locator.plpProductReview);
+        scrollIntoView(plpPage_Locator.plpProductReview);
+        clickElement(plpPage_Locator.plpProductReview);
         return new PdpPageActionsFrig();
     }
 
     public boolean checkProvidedIdIsVisibleOnPlpPage() {
-        WaitUtils.untilVisible(plpPage_Locator.frenchdoorProductId);
-        return WebElementUtil.isElementPresented(plpPage_Locator.frenchdoorProductId);
+        untilVisible(plpPage_Locator.frenchdoorProductId);
+        return isElementPresented(plpPage_Locator.frenchdoorProductId);
     }
 
     public PlpPageActionsFrig storeProvidedProductId() {
-        WaitUtils.untilVisible(plpPage_Locator.frenchdoorProductIdText);
-        providedProductId = WebElementUtil.getText(plpPage_Locator.frenchdoorProductIdText);
+        untilVisible(plpPage_Locator.frenchdoorProductIdText);
+        providedProductId = getText(plpPage_Locator.frenchdoorProductIdText);
         return this;
     }
 
     public PlpPageActionsFrig storeProvidedProductTitle() {
-        WaitUtils.untilVisible(plpPage_Locator.frenchdoorProductTitle);
-        providedProductTitle = WebElementUtil.getText(plpPage_Locator.frenchdoorProductTitle);
+        untilVisible(plpPage_Locator.frenchdoorProductTitle);
+        providedProductTitle = getText(plpPage_Locator.frenchdoorProductTitle);
         return this;
     }
 
     public PlpPageActionsFrig storeProvidedProductPrice() {
-        WaitUtils.untilVisible(plpPage_Locator.frenchdoorProductPrice);
-        providedProductPrice = WebElementUtil.getText(plpPage_Locator.frenchdoorProductPrice);
+        untilVisible(plpPage_Locator.frenchdoorProductPrice);
+        providedProductPrice = getText(plpPage_Locator.frenchdoorProductPrice);
         return this;
     }
 
     public PdpPageActionsFrig clickProvidedProduct() {
-        WebElementUtil.scrollToElementCenter(plpPage_Locator.frenchdoorProductId);
-        WebElementUtil.clickElement(plpPage_Locator.frenchdoorProductId);
+        scrollToElementCenter(plpPage_Locator.frenchdoorProductId);
+        clickElement(plpPage_Locator.frenchdoorProductId);
         return new PdpPageActionsFrig();
     }
 

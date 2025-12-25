@@ -10,10 +10,10 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import com.automation.utils.ConfigReader;
-import com.automation.utils.WebElementUtil;
 
-import static com.automation.utils.WaitUtils.untilClickable;
-import static com.automation.utils.WaitUtils.untilVisible;
+
+import static com.automation.utils.WaitUtils.*;
+import static com.automation.utils.WebElementUtil.*;
 
 public class LoginPageActionsFrig {
 
@@ -21,9 +21,9 @@ public class LoginPageActionsFrig {
 	 private final By acceptButtonLocator = By.xpath("//button[@id='onetrust-accept-btn-handler']");
 
 	 public LoginPageActionsFrig navigateToLoginPage() {
-		WebElementUtil.navigateTo(ConfigReader.getAppUrl()+"login");
+		navigateTo(ConfigReader.getAppUrl()+"login");
        try {
-           WebElement acceptBtn = untilClickable(acceptButtonLocator, 15);
+           WebElement acceptBtn = untilClickable(acceptButtonLocator);
            if (acceptBtn != null) {
                acceptBtn.click();
            }
@@ -40,62 +40,62 @@ public class LoginPageActionsFrig {
 	 }
 	 
 	public LoginPageActionsFrig enterEmailAddress(String emailAddress) {
-		WebElementUtil.sendKeys(login_Locator.emailAddressInput, emailAddress);
+		sendKeys(login_Locator.emailAddressInput, emailAddress);
 		return this;
 	}
 	
 	public LoginPageActionsFrig enterPassword(String password) {
-		WebElementUtil.sendKeys(login_Locator.passwordInput, password);
+		sendKeys(login_Locator.passwordInput, password);
 		return this;
 	}
 	
 	public HomePageActionsFrig clickLoginButton() {
-		WebElementUtil.clickElement(login_Locator.loginButton);
+		clickElement(login_Locator.loginButton);
 		return new HomePageActionsFrig();
 	}
 	
 	public boolean isLoginPageLoaded() {
-		return WebElementUtil.isDisplayed(login_Locator.loginButton);
+		return isDisplayed(login_Locator.loginButton);
 	}
 	
 	public boolean isLoginToFrigidaireTitleDisplayed() {
-		return WebElementUtil.isDisplayed(login_Locator.loginToStoreTitle);
+		return isDisplayed(login_Locator.loginToStoreTitle);
 	}
 	
 	public boolean isLoginTitleMessageDisplayed() {
-		return WebElementUtil.isDisplayed(login_Locator.loginTitleMessage);
+		return isDisplayed(login_Locator.loginTitleMessage);
 	}
 	
 	public boolean isEmailAddressFieldDisplayed() {
-		return WebElementUtil.isDisplayed(login_Locator.emailAddressInput);
+		return isDisplayed(login_Locator.emailAddressInput);
 	}
 	
 	public boolean isPasswordFieldDisplayed() {
-		return WebElementUtil.isDisplayed(login_Locator.passwordInput);
+		return isDisplayed(login_Locator.passwordInput);
 	}
 	
 	public boolean isShowPasswordIconDisplayed() {
-		return WebElementUtil.isDisplayed(login_Locator.showPasswordIcon);
+		return isDisplayed(login_Locator.showPasswordIcon);
 	}
 	
 	public boolean isKeepMeLoggedInCheckboxDisplayed() {
-		return WebElementUtil.isDisplayed(login_Locator.keepMeLoggedInCheckbox);
+		return isDisplayed(login_Locator.keepMeLoggedInCheckbox);
 	}
 	
 	public String getNotRecommendedLabelText() {
-		return WebElementUtil.getText(login_Locator.notRecommendedMessage);
+		return getText(login_Locator.notRecommendedMessage);
 	}
 	
 	public boolean isForgotPasswordLinkDisplayed() {
-		return WebElementUtil.isDisplayed(login_Locator.forgotPasswordLink);
+		return isDisplayed(login_Locator.forgotPasswordLink);
 	}
 	
 	public boolean isCreateAccountLinkDisplayed() {
-		return WebElementUtil.isDisplayed(login_Locator.createAccountLink);
+		return isDisplayed(login_Locator.createAccountLink);
 	}
 	
 	public String getElectroluxLinkedAccountMessage() {
-		return WebElementUtil.getText(login_Locator.electroluxLinkedAccountMessage);
+		return getText(login_Locator.electroluxLinkedAccountMessage);
 	}
 	
 	public boolean isAlternateLoginOptionsDisplayed() {
@@ -103,26 +103,26 @@ public class LoginPageActionsFrig {
 	}
 	
 	public boolean isSignInWithAppleButtonDisplayed() {
-		return WebElementUtil.isDisplayed(login_Locator.signInWithAppleButton);
+		return isDisplayed(login_Locator.signInWithAppleButton);
 	}
 	
 	public boolean isSignInWithGoogleButtonDisplayed() {
-		return WebElementUtil.isDisplayed(login_Locator.signInWithGoogleButton);
+		return isDisplayed(login_Locator.signInWithGoogleButton);
 	}
 	
 	public CreateAccountPageActionsFrig clickCreateAccountLink() {
-		WebElementUtil.scrollIntoView(login_Locator.createAccountLink);
-		WebElementUtil.clickElement(login_Locator.createAccountLink);
+		scrollIntoView(login_Locator.createAccountLink);
+		clickElement(login_Locator.createAccountLink);
 		return new CreateAccountPageActionsFrig();
 	}
 	
 	public ForgotPasswordPageActionsFrig clickForgotPasswordLink() {
-		WebElementUtil.clickElement(login_Locator.forgotPasswordLink);
+		clickElement(login_Locator.forgotPasswordLink);
 		return new ForgotPasswordPageActionsFrig();
 	}
 	
 	public boolean isLoginToStoreTitleDisplayed() {
-		return WebElementUtil.isDisplayed(login_Locator.loginToStoreTitle);
+		return isDisplayed(login_Locator.loginToStoreTitle);
 	}
 
 	public CreateAccountPageActionsFrig navigateToCreateAccountPage() {
@@ -145,14 +145,14 @@ public class LoginPageActionsFrig {
 	}
 
     public boolean validateLogoAfterLogin() {
-        WebElementUtil.sendKeys(login_Locator.txt_Email, ConfigReader.getProperty("username"));
-        WebElementUtil.sendKeys(login_Locator.txt_Password, ConfigReader.getProperty("password"));
-        WebElementUtil.clickElement(login_Locator.btn_Login);
-        return WebElementUtil.isDisplayed(login_Locator.login_HomeLogo);
+        sendKeys(login_Locator.txt_Email, ConfigReader.getProperty("username"));
+        sendKeys(login_Locator.txt_Password, ConfigReader.getProperty("password"));
+        clickElement(login_Locator.btn_Login);
+        return isDisplayed(login_Locator.login_HomeLogo);
     }
 
 //    public boolean isLoginPageLoaded() {
-//        WebElement loginButton = untilClickable(btn_Login, 10);
+//        WebElement loginButton = untilClickable(btn_Login);
 //        return loginButton.isDisplayed();
 //    }
 
@@ -175,11 +175,11 @@ public class LoginPageActionsFrig {
      */
     public boolean loginWithCredentials(String username, String password) {
         try {
-            WebElementUtil.sendKeys(login_Locator.txt_Email, username);
-            WebElementUtil.sendKeys(login_Locator.txt_Password, password);
-            WebElementUtil.clickElement(login_Locator.btn_Login);
-            untilVisible(login_Locator.login_HomeLogo,20);
-            return WebElementUtil.isDisplayed(login_Locator.login_HomeLogo);
+            sendKeys(login_Locator.txt_Email, username);
+            sendKeys(login_Locator.txt_Password, password);
+            clickElement(login_Locator.btn_Login);
+            untilVisible(login_Locator.login_HomeLogo);
+            return isDisplayed(login_Locator.login_HomeLogo);
         } catch (Exception e) {
             return false;
         }
@@ -191,7 +191,7 @@ public class LoginPageActionsFrig {
      * @return true if error message is displayed, false otherwise
      */
     public boolean isLoginErrorDisplayed() {
-        return WebElementUtil.isDisplayed(By.cssSelector(".error-message"));
+        return isDisplayed(By.cssSelector(".error-message"));
     }
 
     /**
@@ -199,7 +199,7 @@ public class LoginPageActionsFrig {
      * @return error message text or empty string if no error
      */
     public String getLoginErrorMessage() {
-        return WebElementUtil.getText(By.cssSelector(".error-message"));
+        return getText(By.cssSelector(".error-message"));
     }
 
 
@@ -208,7 +208,7 @@ public class LoginPageActionsFrig {
      * @return true if checkbox exists, false otherwise
      */
     public boolean isRememberMePresent() {
-        return WebElementUtil.isDisplayed(By.id("rememberMe"));
+        return isDisplayed(By.id("rememberMe"));
     }
 
     /**
@@ -216,7 +216,7 @@ public class LoginPageActionsFrig {
      * @return LoginPageActions instance for method chaining
      */
     public LoginPageActionsFrig toggleRememberMe() {
-        WebElementUtil.clickElement(By.id("rememberMe"));
+        clickElement(By.id("rememberMe"));
         return this;
     }
 
@@ -226,7 +226,7 @@ public class LoginPageActionsFrig {
      */
     public LoginPageActionsFrig returnToLoginPage() {
         if (!isLoginPageLoaded()) {
-            WebElementUtil.navigateTo(ConfigReader.getProperty("login.url"));
+            navigateTo(ConfigReader.getProperty("login.url"));
         }
         return this;
     }

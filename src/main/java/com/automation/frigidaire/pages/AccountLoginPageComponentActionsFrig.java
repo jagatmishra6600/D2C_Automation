@@ -3,70 +3,71 @@ package com.automation.frigidaire.pages;
 import com.automation.frigidaire.locators.AccountLoginLocatorsFrig;
 import com.automation.frigidaire.locators.LoginLocatorsFrig;
 
+import static com.automation.utils.WaitUtils.*;
+import static com.automation.utils.WebElementUtil.*;
+
+
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
-
-
 import com.automation.utils.UserTestData;
-import com.automation.utils.WaitUtils;
-import com.automation.utils.WebElementUtil;
+
 
 public class AccountLoginPageComponentActionsFrig {
-	private LoginLocatorsFrig login_Locators = new LoginLocatorsFrig();
-	private AccountLoginLocatorsFrig accountLogin_Locators = new AccountLoginLocatorsFrig();
+	private final LoginLocatorsFrig login_Locators = new LoginLocatorsFrig();
+	private final AccountLoginLocatorsFrig accountLogin_Locators = new AccountLoginLocatorsFrig();
 	
 	public ShippingAddressPageActionsFrig login(String emailAddress, String password) {
 		 enterEmailAddress(emailAddress)
 						.enterPassword(password)
 						.clickLoginButton();
 		 //Handling 2 Refreshes before the page becomes stable
-		 WaitUtils.waitForPageLoad();  
-	     WaitUtils.waitForPageLoad();
+		 waitForPageLoad();
+	     waitForPageLoad();
 		 return new ShippingAddressPageActionsFrig();	
 	}
 	 
 	public AccountLoginPageComponentActionsFrig enterEmailAddress(String emailAddress) {
-		WebElementUtil.sendKeys(login_Locators.emailAddressInput, emailAddress);
+		sendKeys(login_Locators.emailAddressInput, emailAddress);
 		return this;
 	}
 	
 	public AccountLoginPageComponentActionsFrig enterPassword(String password) {
-		WebElementUtil.sendKeys(login_Locators.passwordInput, password);
+		sendKeys(login_Locators.passwordInput, password);
 		return this;
 	}
 	
 	public ShippingAddressPageActionsFrig clickLoginButton() {
-		WebElementUtil.clickElement(login_Locators.loginButton);
+		clickElement(login_Locators.loginButton);
 		return new ShippingAddressPageActionsFrig();
 	}
 	
 	public boolean isAccountLoginPageComponentLoaded() {
-		return WebElementUtil.isDisplayed(login_Locators.loginButton);
+		return isDisplayed(login_Locators.loginButton);
 	}
 	
 	
 	public boolean isEmailAddressFieldDisplayed() {
-		return WebElementUtil.isDisplayed(login_Locators.emailAddressInput);
+		return isDisplayed(login_Locators.emailAddressInput);
 	}
 	
 	public boolean isPasswordFieldDisplayed() {
-		return WebElementUtil.isDisplayed(login_Locators.passwordInput);
+		return isDisplayed(login_Locators.passwordInput);
 	}
 	
 	public boolean isShowPasswordIconDisplayed() {
-		return WebElementUtil.isDisplayed(login_Locators.showPasswordIcon);
+		return isDisplayed(login_Locators.showPasswordIcon);
 	}
 	
 	public boolean isForgotPasswordLinkDisplayed() {
-		return WebElementUtil.isDisplayed(accountLogin_Locators.forgotPasswordLink);
+		return isDisplayed(accountLogin_Locators.forgotPasswordLink);
 	}
 	
 	public boolean isCreateAccountLinkDisplayed() {
-		return WebElementUtil.isDisplayed(accountLogin_Locators.createAccountLink);
+		return isDisplayed(accountLogin_Locators.createAccountLink);
 	}
 	
 	public String getElectroluxLinkedAccountMessage() {
-		return WebElementUtil.getText(login_Locators.electroluxLinkedAccountMessage);
+		return getText(login_Locators.electroluxLinkedAccountMessage);
 	}
 	
 	public boolean isAlternateLoginOptionsDisplayed() {
@@ -74,24 +75,24 @@ public class AccountLoginPageComponentActionsFrig {
 	}
 	
 	public boolean isSignInWithAppleButtonDisplayed() {
-		return WebElementUtil.isDisplayed(login_Locators.signInWithAppleButton);
+		return isDisplayed(login_Locators.signInWithAppleButton);
 	}
 	
 	public boolean isSignInWithGoogleButtonDisplayed() {
-		return WebElementUtil.isDisplayed(login_Locators.signInWithGoogleButton);
+		return isDisplayed(login_Locators.signInWithGoogleButton);
 	}
 	
 	public ForgotPasswordPageActionsFrig clickForgotPasswordLink() {
-		WebElementUtil.clickElement(accountLogin_Locators.forgotPasswordLink);
+		clickElement(accountLogin_Locators.forgotPasswordLink);
 		return new ForgotPasswordPageActionsFrig();
 	}
 	
 	public boolean isAccountLoginTitleDisplayed() {
-		return WebElementUtil.isDisplayed(accountLogin_Locators.accountLoginTitle);
+		return isDisplayed(accountLogin_Locators.accountLoginTitle);
 	}
 	
 	public boolean isContinueAsGuestLinkDisplayed() {
-		return WebElementUtil.isDisplayed(accountLogin_Locators.continueAsGuestLink);	
+		return isDisplayed(accountLogin_Locators.continueAsGuestLink);	
 	}
 	
 	public AccountLoginPageComponentActionsFrig verifyAccountLoginPageComponentFieldsAndMessages() {

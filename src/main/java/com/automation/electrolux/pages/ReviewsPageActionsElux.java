@@ -1,6 +1,7 @@
 package com.automation.electrolux.pages;
 
 import com.automation.electrolux.locators.ReviewLocatorsElux;
+import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.WebElement;
 
@@ -8,51 +9,53 @@ public class ReviewsPageActionsElux {
     ReviewLocatorsElux locators = new ReviewLocatorsElux();
 
     public boolean isReviewSectionVisible() {
-        WebElementUtil.waitForElementToBeVisible(locators.reviewSection, 20);
+        WaitUtils.waitForElementToBeVisible(locators.reviewSection);
         return WebElementUtil.isDisplayed(locators.reviewSection);
     }
 
     public boolean isProductRatingVisible() {
-        WebElementUtil.waitForElementToBeVisible(locators.productRating, 20);
+        WaitUtils.waitForElementToBeVisible(locators.productRating);
         return WebElementUtil.isDisplayed(locators.productRating);
     }
 
     public boolean isTotalReviewsVisible() {
-        WebElementUtil.waitForElementToBeVisible(locators.totalReviews, 20);
+        WaitUtils.waitForElementToBeVisible(locators.totalReviews);
         return WebElementUtil.isDisplayed(locators.totalReviews);
     }
 
     public boolean isRatingSnapshotVisible() {
-        WebElementUtil.waitForElementToBeVisible(locators.banner, 20);
+        WaitUtils.waitForElementToBeVisible(locators.banner);
         WebElementUtil.scrollIntoView(locators.banner);
-        WebElementUtil.waitForElementToBeVisible(locators.reviewPage, 20);
+        WaitUtils.waitForElementToBeVisible(locators.reviewPage);
         WebElementUtil.scrollIntoView(locators.reviewPage);
         WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.ratingSnapshot);
         return ele.isDisplayed();
     }
 
     public boolean isReviewStarButtonDisplayed() {
+        WaitUtils.waitForElementToBeVisible(locators.outerHostSelector);
         WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.star4);
         return ele.isDisplayed();
     }
 
     public boolean isMessageDisplayed() {
+        WaitUtils.waitForElementToBeVisible(locators.outerHostSelector);
         WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.messagePopup);
         return ele.isDisplayed();
     }
 
     public boolean isReviewImagesDisplayed() {
-        WebElement ele = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.reviewImagesSection);
-        ele.isDisplayed();
-
+        WaitUtils.waitForElementToBeVisible(locators.outerHostSelector);
+        WebElement section = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.reviewImagesSection);
+        if (section == null || !section.isDisplayed()) return false;
         WebElement image = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.reviewImages);
-        image.click();
-
+        if (image != null) image.click();
         WebElement singleImg = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.singleReviewImage);
-        return singleImg.isDisplayed();
+        return singleImg != null && singleImg.isDisplayed();
     }
 
     public boolean isSearchReviewBox() {
+        WaitUtils.waitForElementToBeVisible(locators.outerHostSelector);
         WebElement close = WebElementUtil.validateInsideShadowDom(locators.outerHostSelector, locators.closeModel);
         close.click();
 

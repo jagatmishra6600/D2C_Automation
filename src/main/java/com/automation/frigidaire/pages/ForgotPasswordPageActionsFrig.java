@@ -1,6 +1,7 @@
 package com.automation.frigidaire.pages;
 
-import static com.automation.utils.WaitUtils.untilClickable;
+import static com.automation.utils.WaitUtils.*;
+import static com.automation.utils.WebElementUtil.*;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -18,7 +19,7 @@ public class ForgotPasswordPageActionsFrig {
 	 public ForgotPasswordPageActionsFrig navigateToForgotPasswordPage() {
 		WebElementUtil.navigateTo(ConfigReader.getAppUrl()+"forgotPassword");
       try {
-          WebElement acceptBtn = untilClickable(acceptButtonLocator, 15);
+          WebElement acceptBtn = untilClickable(acceptButtonLocator);
           if (acceptBtn != null) {
               acceptBtn.click();
           }
@@ -29,28 +30,28 @@ public class ForgotPasswordPageActionsFrig {
 	}
 	 
 	 public boolean isResetPasswordButtonDisplayed() {
-		 return WebElementUtil.isDisplayed(resetPasswordButton);			 
+		 return isDisplayed(resetPasswordButton);
 	 }
 	 
 	 public ForgotPasswordPageActionsFrig enterEmailAddress(String emailAddress) {
-		WebElementUtil.sendKeys(emailAddressInput, emailAddress);
+		sendKeys(emailAddressInput, emailAddress);
 		return this;
 	 }
 	 
 	 public String getCheckYourEmailMessage() {
-		 return WebElementUtil.getText(checkYourEmailMessage).replaceAll("\\s+", " ");
+		 return getText(checkYourEmailMessage).replaceAll("\\s+", " ");
 	 }
 	 
 	 public boolean isCheckYourEmailMessageDisplayed() {
-		 return WebElementUtil.isDisplayed(checkYourEmailMessage);	
+		 return isDisplayed(checkYourEmailMessage);
 	 }
 	 
 	 public boolean isCheckYourInboxMessageDisplayed() {
-		 return WebElementUtil.isDisplayed(checkYourEmailMessage);	
+		 return isDisplayed(checkYourEmailMessage);
 	 }
 	 
 	 public ForgotPasswordPageActionsFrig clickResetPasswordButton() {
-		 WebElementUtil.clickElement(resetPasswordButton);
+		 clickElement(resetPasswordButton);
 		 return this;
 	 }
 	 

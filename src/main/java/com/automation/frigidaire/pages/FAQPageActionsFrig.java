@@ -2,14 +2,15 @@ package com.automation.frigidaire.pages;
 
 import com.automation.frigidaire.locators.FAQLocatorsFrig;
 import com.automation.utils.DriverManager;
-import com.automation.utils.WaitUtils;
-import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import static com.automation.utils.WebElementUtil.*;
+import static com.automation.utils.WaitUtils.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class FAQPageActionsFrig {
 
@@ -21,21 +22,21 @@ public class FAQPageActionsFrig {
 
     public void clickOnProductMenu(String text) {
         By locator = By.xpath("//h5[normalize-space(text())='" + text + "']");
-        WebElementUtil.waitForElementToBeVisible(locator, 10);
-        WebElementUtil.waitForElementToBeClickable(locator, 10);
-        WebElementUtil.clickElement(locator);
+        waitForElementToBeVisible(locator);
+        waitForElementToBeClickable(locator);
+        clickElement(locator);
     }
 
     public void verifyFAQHeaderText() {
-        WebElementUtil.waitForElementToBeVisible(faq.headerTitle, 10);
+        waitForElementToBeVisible(faq.headerTitle);
 
-        WebElement headerElement = WebElementUtil.findElement(faq.headerTitle);
-        Assert.assertTrue(headerElement.getText().equals(headerTextFAQ),
-                " Header text mismatch! Expected: '" + headerTextFAQ + "' but found:");
+        WebElement headerElement = findElement(faq.headerTitle);
+        assert headerElement != null;
+        Assert.assertEquals(headerElement.getText(), headerTextFAQ, " Header text mismatch! Expected: '" + headerTextFAQ + "' but found:");
     }
 
     public void verifyFAQSecond() {
-        WebElementUtil.isDisplayed(faq.searchBox);
+        isDisplayed(faq.searchBox);
     }
 
     public void verifyAndClickAllCategoryTiles() {
@@ -51,82 +52,82 @@ public class FAQPageActionsFrig {
     public void clickCategoryTile(String category) {
         By tileLocator = By.xpath("//a[@class='group']//h3[text()='" + category + "']");
 
-        WebElementUtil.waitForElementToBeVisible(tileLocator);
-        WebElementUtil.isDisplayed(tileLocator);
+        waitForElementToBeVisible(tileLocator);
+        isDisplayed(tileLocator);
 
-        WebElementUtil.clickElement(tileLocator);
+        clickElement(tileLocator);
 
-        WebElementUtil.waitForElementToBeVisible(faq.subcategoryHeader,10);
-        WebElement se = WebElementUtil.findElement(faq.subcategoryHeader);
-        Assert.assertTrue(se.getText().contains("Support for " + category));
+        waitForElementToBeVisible(faq.subcategoryHeader);
+        WebElement se = findElement(faq.subcategoryHeader);
+        Assert.assertTrue(se != null && se.getText().contains("Support for " + category));
 
         DriverManager.getDriver().navigate().back();
     }
 
     public void verifySearchBoxVisible() {
 
-        WebElementUtil.zoomInOrOut(60);
+        zoomInOrOut(60);
 
-        WebElementUtil.waitForElementToBeVisible(faq.kitchenLocators, 10);
-        WebElementUtil.waitForElementToBeClickable(faq.kitchenLocators, 10);
-        WebElementUtil.clickElement(faq.kitchenLocators);
+        waitForElementToBeVisible(faq.kitchenLocators);
+        waitForElementToBeClickable(faq.kitchenLocators);
+        clickElement(faq.kitchenLocators);
 
-        WebElementUtil.waitForElementToBeClickable(faq.refrigeratorsLocators, 10);
-        WebElementUtil.clickElement(faq.refrigeratorsLocators);
+        waitForElementToBeClickable(faq.refrigeratorsLocators);
+        clickElement(faq.refrigeratorsLocators);
 
-        WebElement inputBox = WaitUtils.untilVisible(faq.searchBox);
+        WebElement inputBox = untilVisible(faq.searchBox);
         boolean visible = inputBox.isDisplayed();
         Assert.assertTrue(visible, "Search box should be visible but it is not. ");
     }
 
     public void verifySearchBoxVisibles() {
 
-        WebElementUtil.zoomInOrOut(60);
-        WebElementUtil.waitForElementToBeVisible(faq.homeComfort,10);
-        WebElementUtil.waitForElementToBeClickable(faq.homeComfort,10);
-        WebElementUtil.clickElement(faq.homeComfort);
+        zoomInOrOut(60);
+        waitForElementToBeVisible(faq.homeComfort);
+        waitForElementToBeClickable(faq.homeComfort);
+        clickElement(faq.homeComfort);
 
-        WebElementUtil.waitForElementToBeClickable(faq.roomAC);
-        WebElementUtil.clickElement(faq.roomAC);
+        waitForElementToBeClickable(faq.roomAC);
+        clickElement(faq.roomAC);
 
-        WebElement inputBox = WaitUtils.untilVisible(faq.searchBox);
+        WebElement inputBox = untilVisible(faq.searchBox);
         boolean visible = inputBox.isDisplayed();
         Assert.assertTrue(visible, "Search box should be visible but it is not.");
     }
 
     public void verifyAllFAQArticlesRoomAC() {
 
-        WebElementUtil.isDisplayed(faq.articleLocatorRoomAc);
+        isDisplayed(faq.articleLocatorRoomAc);
 
-        WebElementUtil.waitForElementToBeVisible(faq.articleLocatorRoomAc, 10);
-        WebElement articleTextRoomAC = WebElementUtil.findElement(faq.articleLocatorRoomAc);
-        String actualTextRoomAC = articleTextRoomAC.getText();
+        waitForElementToBeVisible(faq.articleLocatorRoomAc);
+        WebElement articleTextRoomAC = findElement(faq.articleLocatorRoomAc);
+        String actualTextRoomAC = articleTextRoomAC != null ? articleTextRoomAC.getText() : null;
 
-        WebElementUtil.clickElement(faq.articleLocatorRoomAc);
+        clickElement(faq.articleLocatorRoomAc);
 
-        WebElementUtil.waitForElementToBeVisible(faq.verifyArticleLocator,10);
-        WebElement verifyArticleLocatorText = WebElementUtil.findElement(faq.verifyArticleLocator);
-        String expectedText = verifyArticleLocatorText.getText();
+        waitForElementToBeVisible(faq.verifyArticleLocator);
+        WebElement verifyArticleLocatorText = findElement(faq.verifyArticleLocator);
+        String expectedText = verifyArticleLocatorText != null ? verifyArticleLocatorText.getText() : null;
 
-        Assert.assertTrue(actualTextRoomAC.contains(expectedText));
+        Assert.assertTrue(actualTextRoomAC != null && actualTextRoomAC.contains(Objects.requireNonNull(expectedText)));
 
     }
 
     public void verifyAllFAQArticlesRefrigerator() {
 
-        WebElementUtil.isDisplayed(faq.articleLocatorRefrigerator);
+        isDisplayed(faq.articleLocatorRefrigerator);
 
-        WebElementUtil.waitForElementToBeVisible(faq.articleLocatorRefrigerator,10);
-        WebElement articleLocatorText = WebElementUtil.findElement(faq.articleLocatorRefrigerator);
-        String actualText = articleLocatorText.getText();
+        waitForElementToBeVisible(faq.articleLocatorRefrigerator);
+        WebElement articleLocatorText = findElement(faq.articleLocatorRefrigerator);
+        String actualText = articleLocatorText != null ? articleLocatorText.getText() : null;
 
-        WebElementUtil.clickElement(faq.articleLocatorRefrigerator);
+        clickElement(faq.articleLocatorRefrigerator);
 
-        WebElementUtil.waitForElementToBeVisible(faq.verifyArticleLocator);
-        WebElement verifyArticleLocatorText = WebElementUtil.findElement(faq.verifyArticleLocator);
-        String expectedText = verifyArticleLocatorText.getText();
+        waitForElementToBeVisible(faq.verifyArticleLocator);
+        WebElement verifyArticleLocatorText = findElement(faq.verifyArticleLocator);
+        String expectedText = verifyArticleLocatorText != null ? verifyArticleLocatorText.getText() : null;
 
-        Assert.assertTrue(actualText.contains(expectedText));
+        Assert.assertTrue(actualText != null && actualText.contains(Objects.requireNonNull(expectedText)));
 
     }
 

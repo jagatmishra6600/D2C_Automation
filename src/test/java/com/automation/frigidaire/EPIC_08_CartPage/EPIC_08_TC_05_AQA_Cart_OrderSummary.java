@@ -27,7 +27,7 @@ public class EPIC_08_TC_05_AQA_Cart_OrderSummary extends BaseTest {
 
         dnsPage.clickSaveAndViewCartButton();
 
-        Assert.assertTrue(cartOage.isOrderSummaryTextVisibleAndCorrect("Order summary"), "Order summary text does not visible on page or Not matched with the expected one");
+        Assert.assertTrue(cartOage.isOrderSummaryTextVisibleAndCorrect(), "Order summary text does not visible on page or Not matched with the expected one");
         Assert.assertTrue(cartOage.isSubtotalTextVisibleAndCorrect("Subtotal"), "Subtotal Text does not visible on page or Not matched with the expected one");
         Assert.assertTrue(cartOage.isSubtotalPriceVisible(), "Subtotal price does not visible on page");
         Assert.assertTrue(cartOage.isInstallationPartTextVisibleAndCorrect("Installation parts"), "Installation parts Text does not visible on page or Not matched with the expected one");
