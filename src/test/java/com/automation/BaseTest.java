@@ -69,4 +69,5 @@ public class BaseTest {
     public void tearDownSuite() {
         ExtentReportManager.flushReport();
     }
+
 }

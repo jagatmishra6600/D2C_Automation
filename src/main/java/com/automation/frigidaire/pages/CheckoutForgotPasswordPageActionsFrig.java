@@ -11,13 +11,13 @@ import com.automation.utils.WebElementUtil;
 
 public class CheckoutForgotPasswordPageActionsFrig {
 
-	private ForgotPasswordLocatorsFrig fpLocator = new ForgotPasswordLocatorsFrig();
+	private final ForgotPasswordLocatorsFrig fpLocator = new ForgotPasswordLocatorsFrig();
 	private final By acceptButtonLocator = By.xpath("//button[@id='onetrust-accept-btn-handler']");
 	 
 	 public CheckoutForgotPasswordPageActionsFrig navigateToForgotPasswordPage() {
 		WebElementUtil.navigateTo(ConfigReader.getAppUrl()+"forgotPassword");
       try {
-          WebElement acceptBtn = untilClickable(acceptButtonLocator, 15);
+          WebElement acceptBtn = untilClickable(acceptButtonLocator);
           if (acceptBtn != null) {
               acceptBtn.click();
           }

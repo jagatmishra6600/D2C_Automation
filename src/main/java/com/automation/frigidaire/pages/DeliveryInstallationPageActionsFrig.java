@@ -3,17 +3,18 @@ package com.automation.frigidaire.pages;
 import com.automation.electrolux.locators.DeliveryAndInstallationLocatorsElux;
 import com.automation.frigidaire.locators.DeliveryAndInstallationLocatorsFrig;
 import com.automation.frigidaire.locators.PLPLocatorsFrig;
-import com.automation.frigidaire.utils.WebElementUtil;
 import com.automation.utils.DriverManager;
-import com.automation.utils.WaitUtils;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
+import static com.automation.utils.WebElementUtil.*;
+import static com.automation.utils.WaitUtils.*;
 import java.time.Duration;
 
-import static com.automation.electrolux.pages.PLPProductItemsPageActionsElux.addToCart;
 import static com.automation.frigidaire.locators.DeliveryAndInstallationLocatorsFrig.declineprotectionBy;
 
 
@@ -41,15 +42,15 @@ public class DeliveryInstallationPageActionsFrig {
                             "//app-elux-image";
 
             By productLocator=By.xpath(productXPath);
-            com.automation.utils.WebElementUtil.scrollToElement(driver, driver.findElement(By.xpath(productXPath)));
-            com.automation.utils.WebElementUtil.waitForElementToBeClickable(productLocator,60);
+           scrollToElement(driver.findElement(By.xpath(productXPath)));
+           waitForElementToBeClickable(productLocator);
             //WebElement product = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(productXPath)));
-            com.automation.utils.WebElementUtil.scrollAndClickUsingJSE(driver, productLocator);
-            com.automation.utils.WebElementUtil.scrollByPixels(driver, 0, 500);
-            WaitUtils.sleep(60);
-            com.automation.utils.WebElementUtil.waitForElementToBeClickable(PLPLocatorsFrig.ADD_TO_CART_FOR_PLP);
-            WebElementUtil.scrollAndClickUsingJSE(driver, driver.findElement(PLPLocatorsFrig.ADD_TO_CART_FOR_PLP));
-            WaitUtils.sleep(60);
+           scrollAndClickUsingJSE(productLocator);
+            scrollByPixels(0, 500);
+            sleep(60);
+            waitForElementToBeClickable(PLPLocatorsFrig.ADD_TO_CART_FOR_PLP);
+            scrollAndClickUsingJSE(PLPLocatorsFrig.ADD_TO_CART_FOR_PLP);
+            sleep(60);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -57,27 +58,24 @@ public class DeliveryInstallationPageActionsFrig {
     }
 
     public void verifyHeadingAndSubLinksinDAndSPage(String label) {
-
         By radioButton = DeliveryAndInstallationLocatorsFrig.getRadioButton(label);
-
-
-        WebElementUtil.waitForElementToBeClickable(radioButton,60);
-        com.automation.utils.WebElementUtil.scrollToElementStable(DeliveryAndInstallationLocatorsElux.viewIncludedPartsLink);
-        WebElementUtil.scrollAndClickUsingJSE(driver, driver.findElement(DeliveryAndInstallationLocatorsFrig.viewIncludedPartsLink));
+        waitForElementToBeClickable(radioButton);
+        scrollToElementStable(DeliveryAndInstallationLocatorsElux.viewIncludedPartsLink);
+        scrollAndClickUsingJSE(DeliveryAndInstallationLocatorsFrig.viewIncludedPartsLink);
     }
 
     public void validateViewDetailsPopUp() {
         try {
-            WebElement viewDetailsBtn = WaitUtils.untilVisible(DeliveryAndInstallationLocatorsFrig.protectionPlanViewDetailsLink);
+            WebElement viewDetailsBtn = untilVisible(DeliveryAndInstallationLocatorsFrig.protectionPlanViewDetailsLink);
             viewDetailsBtn.click();
 
-            WaitUtils.untilVisible(DeliveryAndInstallationLocatorsFrig.TotalApplianceProtectionHeading);
-            WebElementUtil.isDisplayed(DeliveryAndInstallationLocatorsFrig.TotalApplianceProtectionHeading);
+            untilVisible(DeliveryAndInstallationLocatorsFrig.TotalApplianceProtectionHeading);
+            isDisplayed(DeliveryAndInstallationLocatorsFrig.TotalApplianceProtectionHeading);
 
-            WaitUtils.untilVisible(DeliveryAndInstallationLocatorsFrig.TotalApplianceProtectionPopUpText);
-            WebElementUtil.isDisplayed(DeliveryAndInstallationLocatorsFrig.TotalApplianceProtectionPopUpText);
+            untilVisible(DeliveryAndInstallationLocatorsFrig.TotalApplianceProtectionPopUpText);
+            isDisplayed(DeliveryAndInstallationLocatorsFrig.TotalApplianceProtectionPopUpText);
 
-            WebElement closePopUpBtn = WaitUtils.untilVisible(DeliveryAndInstallationLocatorsFrig.viewIncludePartsClosePopUpButton);
+            WebElement closePopUpBtn = untilVisible(DeliveryAndInstallationLocatorsFrig.viewIncludePartsClosePopUpButton);
 
             Assert.assertTrue(closePopUpBtn.isDisplayed(), "Pop-up Close Button is not visible");
             closePopUpBtn.click();
@@ -91,21 +89,21 @@ public class DeliveryInstallationPageActionsFrig {
 
     public void verifyPopupTextIsVisible() {
         try {
-                WaitUtils.untilVisible(DeliveryAndInstallationLocatorsFrig.DeliveryAndAppliancePopUp);
-                WebElementUtil.isDisplayed(DeliveryAndInstallationLocatorsFrig.DeliveryAndAppliancePopUp);
-               WaitUtils.untilVisible(DeliveryAndInstallationLocatorsFrig.DAndAppIncludedProductTxt);
-               WebElementUtil.isDisplayed(DeliveryAndInstallationLocatorsFrig.DAndAppIncludedProductTxt);
-                WaitUtils.untilVisible(DeliveryAndInstallationLocatorsFrig.includeWithService("Included with service:"));
-                WebElementUtil.isDisplayed(DeliveryAndInstallationLocatorsFrig.includeWithService("Included with service:"));
-                WaitUtils.untilVisible(DeliveryAndInstallationLocatorsFrig.includeWithService("Delivery"));
-                WebElementUtil.isDisplayed(DeliveryAndInstallationLocatorsFrig.includeWithService("Delivery"));
-                WaitUtils.untilVisible(DeliveryAndInstallationLocatorsFrig.includeWithService("Installation (ready to use)"));
-                WebElementUtil.isDisplayed(DeliveryAndInstallationLocatorsFrig.includeWithService("Installation (ready to use)"));
-                WaitUtils.untilVisible(DeliveryAndInstallationLocatorsFrig.includeWithService("Total"));
-                WebElementUtil.isDisplayed(DeliveryAndInstallationLocatorsFrig.includeWithService("Total"));
-                WaitUtils.sleep(5000);
+            untilVisible(DeliveryAndInstallationLocatorsFrig.DeliveryAndAppliancePopUp);
+            isDisplayed(DeliveryAndInstallationLocatorsFrig.DeliveryAndAppliancePopUp);
+            untilVisible(DeliveryAndInstallationLocatorsFrig.DAndAppIncludedProductTxt);
+            isDisplayed(DeliveryAndInstallationLocatorsFrig.DAndAppIncludedProductTxt);
+            untilVisible(DeliveryAndInstallationLocatorsFrig.includeWithService("Included with service:"));
+            isDisplayed(DeliveryAndInstallationLocatorsFrig.includeWithService("Included with service:"));
+            untilVisible(DeliveryAndInstallationLocatorsFrig.includeWithService("Delivery"));
+            isDisplayed(DeliveryAndInstallationLocatorsFrig.includeWithService("Delivery"));
+            untilVisible(DeliveryAndInstallationLocatorsFrig.includeWithService("Installation (ready to use)"));
+            isDisplayed(DeliveryAndInstallationLocatorsFrig.includeWithService("Installation (ready to use)"));
+            untilVisible(DeliveryAndInstallationLocatorsFrig.includeWithService("Total"));
+            isDisplayed(DeliveryAndInstallationLocatorsFrig.includeWithService("Total"));
+            sleep(5000);
                 com.automation.utils.WebElementUtil.isDisplayed(DeliveryAndInstallationLocatorsElux.viewIncludePartsClosePopUpButton);
-                WaitUtils.untilVisible(DeliveryAndInstallationLocatorsElux.viewIncludePartsClosePopUpButton).click();
+            untilVisible(DeliveryAndInstallationLocatorsElux.viewIncludePartsClosePopUpButton).click();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -113,10 +111,10 @@ public class DeliveryInstallationPageActionsFrig {
 
     public void verifyProtectionPlanSection(String brand) {
         try {
-            WaitUtils.untilVisible(DeliveryAndInstallationLocatorsElux.selectProtectionHeading);
+            untilVisible(DeliveryAndInstallationLocatorsElux.selectProtectionHeading);
             com.automation.utils.WebElementUtil.scrollToElementStable(DeliveryAndInstallationLocatorsElux.selectProtectionHeading);
             com.automation.utils.WebElementUtil.isDisplayed(DeliveryAndInstallationLocatorsElux.selectProtectionHeading);
-            WaitUtils.untilVisible(DeliveryAndInstallationLocatorsElux.protectionPlanSubText);
+            untilVisible(DeliveryAndInstallationLocatorsElux.protectionPlanSubText);
             com.automation.utils.WebElementUtil.isDisplayed(DeliveryAndInstallationLocatorsElux.protectionPlanSubText);
         } catch (Exception e) {
             e.printStackTrace();
@@ -128,7 +126,7 @@ public class DeliveryInstallationPageActionsFrig {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
             WebElement declineProtection = wait.until(ExpectedConditions.visibilityOfElementLocated(DeliveryAndInstallationLocatorsFrig.declineprotectionBy));
-            WebElementUtil.clickElementUsingJSE(driver, declineprotectionBy);
+            clickElementUsingJSE(declineprotectionBy);
             Assert.assertTrue(declineProtection.isDisplayed(), "Decline Protection is not visible");
             return true;
         } catch (TimeoutException e) {
@@ -142,19 +140,19 @@ public class DeliveryInstallationPageActionsFrig {
         if (brand.equals("frigidaire")) {
 
             By yearLocator = DeliveryAndInstallationLocatorsFrig.getPlanYearLocator(year);
-            WebElementUtil.waitForElementToBeVisible(yearLocator, 60);
-            WebElementUtil.clickElementUsingJSE(driver, yearLocator);
+            waitForElementToBeVisible(yearLocator);
+            clickElementUsingJSE( yearLocator);
             double extractedPrice = extractPrice(DeliveryAndInstallationLocatorsFrig.getPriceLocator(year));
-            WebElementUtil.scrollByPixels(driver, 550, 0);
-            WebElementUtil.scrollToElement(driver, driver.findElement(DeliveryAndInstallationLocatorsFrig.protectionPlanPrice));
-            WaitUtils.sleep(5000);
-            WaitUtils.untilVisible(DeliveryAndInstallationLocatorsFrig.protectionPlanPrice, 60);
+            scrollByPixels( 550, 0);
+            scrollToElement(driver.findElement(DeliveryAndInstallationLocatorsFrig.protectionPlanPrice));
+            sleep(5000);
+            untilVisible(DeliveryAndInstallationLocatorsFrig.protectionPlanPrice);
             WebElement protectionPlanElement = driver.findElement(DeliveryAndInstallationLocatorsFrig.protectionPlanPrice);
             String protectionPlanText = protectionPlanElement.getText();
             String cleanedProtectionPlanPrice = protectionPlanText.replaceAll("[^0-9.]", "");
             double protectionPlanPrice = Double.parseDouble(cleanedProtectionPlanPrice);
             Assert.assertEquals(extractedPrice, protectionPlanPrice, "Price Mismatch");
-            WebElementUtil.isDisplayed(DeliveryAndInstallationLocatorsFrig.subTotalPrice);
+            isDisplayed(DeliveryAndInstallationLocatorsFrig.subTotalPrice);
             WebElement subTotalPrice = driver.findElement(DeliveryAndInstallationLocatorsFrig.subTotalPrice);
             String GetSubtotalPrice = subTotalPrice.getText().replaceAll("[^0-9.]", "");
             double subtotal = Double.parseDouble(GetSubtotalPrice);
@@ -164,27 +162,27 @@ public class DeliveryInstallationPageActionsFrig {
             String cleanedTotalPrice = totalPriceText.replaceAll("[^0-9.]", "");
             double displayedTotalPrice = Double.parseDouble(cleanedTotalPrice);
             Assert.assertEquals(totalPrice, displayedTotalPrice, "ERROR: The total price does not match!");
-            WebElementUtil.waitForElementToBeVisible(yearLocator, 60);
-            WebElementUtil.scrollToElement(driver, driver.findElement(yearLocator));
+            waitForElementToBeVisible(yearLocator);
+            scrollToElement(driver.findElement(yearLocator));
      }
        // else {
 //            By yearLocator = DeliveryAndInstallation_Frig.getYearLocatorForElectrolux(year);
-//            WebElementUtil.waitForElementToBeVisible(yearLocator, 60);
-//            WebElementUtil.clickElementUsingJSE(driver, yearLocator);
+//           waitForElementToBeVisible(yearLocator, 60);
+//           clickElementUsingJSE(driver, yearLocator);
 //            double extractedPrice = extractPrice(DeliveryAndInstallation_Frig.getPriceLocatorForElectrolux(year));
-//            WebElementUtil.scrollByPixels(driver, 550, 0);
+//           scrollByPixels(driver, 550, 0);
 //
-////            WebElementUtil.scrollToElement(driver, driver.findElement(FE_DeliveryAndInstallation.installationServices));
+////           scrollToElement(driver, driver.findElement(FE_DeliveryAndInstallation.installationServices));
 //
-//            WebElementUtil.scrollToElement(driver, driver.findElement(DeliveryAndInstallation_Frig.protectionPlanPriceForElectrolux));
-//            WaitUtils.sleep(5000);
-//            WaitUtils.untilVisible(DeliveryAndInstallation_Frig.protectionPlanPriceForElectrolux, 60);
+//           scrollToElement(driver, driver.findElement(DeliveryAndInstallation_Frig.protectionPlanPriceForElectrolux));
+//            sleep(5000);
+//            untilVisible(DeliveryAndInstallation_Frig.protectionPlanPriceForElectrolux, 60);
 //            WebElement protectionPlanElement = driver.findElement(DeliveryAndInstallation_Frig.protectionPlanPriceForElectrolux);
 //            String protectionPlanText = protectionPlanElement.getText();
 //            String cleanedProtectionPlanPrice = protectionPlanText.replaceAll("[^0-9.]", "");// Remove '$' and ',' for example
 //            double protectionPlanPrice = Double.parseDouble(cleanedProtectionPlanPrice);
 //            Assert.assertEquals(extractedPrice, protectionPlanPrice, "Price Mismatch");
-//            WebElementUtil.isDisplayed(DeliveryAndInstallation_Frig.subTotalPrice);
+//           isDisplayed(DeliveryAndInstallation_Frig.subTotalPrice);
 //            WebElement subTotalPrice = driver.findElement(DeliveryAndInstallation_Frig.subTotalPrice);
 //            String GetSubtotalPrice = subTotalPrice.getText().replaceAll("[^0-9.]", "");
 //            double subtotal = Double.parseDouble(GetSubtotalPrice);
@@ -194,8 +192,8 @@ public class DeliveryInstallationPageActionsFrig {
 //            String cleanedTotalPrice = totalPriceText.replaceAll("[^0-9.]", "");
 //            double displayedTotalPrice = Double.parseDouble(cleanedTotalPrice);
 //            Assert.assertEquals(totalPrice, displayedTotalPrice, "ERROR: The total price does not match!");
-//            WebElementUtil.waitForElementToBeVisible(yearLocator, 60);
-//            WebElementUtil.scrollToElement(driver, driver.findElement(yearLocator));
+//           waitForElementToBeVisible(yearLocator, 60);
+//           scrollToElement(driver, driver.findElement(yearLocator));
 //        }
     }
 

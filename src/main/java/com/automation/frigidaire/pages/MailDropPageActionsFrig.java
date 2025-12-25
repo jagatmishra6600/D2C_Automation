@@ -5,8 +5,9 @@ import org.testng.Assert;
 
 import com.automation.utils.ConfigReader;
 import com.automation.utils.DriverManager;
-import com.automation.utils.WaitUtils;
-import com.automation.utils.WebElementUtil;
+
+import static com.automation.utils.WebElementUtil.*;
+import static com.automation.utils.WaitUtils.*;
 
 public class MailDropPageActionsFrig {
 
@@ -26,23 +27,23 @@ public class MailDropPageActionsFrig {
 	private final By firstMailSubject = By.xpath("(//div[contains(@class,'message')])[1]//div[@class='truncate']");
 	
 	public MailDropPageActionsFrig navigateToMailDropPage() {
-		WebElementUtil.navigateTo("https://maildrop.cc/");
+		navigateTo("https://maildrop.cc/");
 		return this;
 	}
 	
 	public MailDropPageActionsFrig enterEmailAddress(String emailAddress) {
-		WaitUtils.sleep(2000);
-		WebElementUtil.sendKeys(headerEmailAddressField, emailAddress);
+		sleep(2000);
+		sendKeys(headerEmailAddressField, emailAddress);
 		return this;
 	}
 	
 	public MailDropPageActionsFrig clickViewMailBoxButton() {
-		WebElementUtil.clickElement(headerViewMailBoxButton);
+		clickElement(headerViewMailBoxButton);
 		return this;
 	}
 	
 	public boolean isInboxLoaded() {
-		return WebElementUtil.isDisplayed(inboxRefreshButton);
+		return isDisplayed(inboxRefreshButton);
 	}
 	
 	public MailDropPageActionsFrig login(String emailAddress) {
@@ -52,101 +53,101 @@ public class MailDropPageActionsFrig {
 	}
 
 	public MailDropPageActionsFrig clickInboxRefresh() {
-		WebElementUtil.clickElement(inboxRefreshButton);
+		clickElement(inboxRefreshButton);
 		return this;
 	}
 	
 	public MailDropPageActionsFrig clickFirstMailInInbox() {
-		WebElementUtil.clickElement(firstMail);
+		clickElement(firstMail);
 		return this;
 	}
 	
 	public MailDropPageActionsFrig openFirstMailInInbox(String emailAddress) {
 		login(emailAddress).clickInboxRefresh().clickFirstMailInInbox();
-		WaitUtils.sleep(2000);
+		sleep(2000);
 		return this;
 	}
 	
 	public MailDropPageActionsFrig openFirstMailInInbox(String emailAddress, String expectedMailTitle) {
 		login(emailAddress).clickInboxRefresh().clickFirstMailInInbox();
 		for(int i=0;i<5;i++) {
-			WaitUtils.sleep(2000);
+			sleep(2000);
 			if(getMailTitle().equalsIgnoreCase(expectedMailTitle)) {
 				return this;
 			}
 			clickInboxRefresh();
 		}
-		WaitUtils.sleep(1000);
+		sleep(1000);
 		return this;
 	}
 
 	public String getMailTitle() {
-		var mailTitleValue = WebElementUtil.getText(mailTitle);
+		var mailTitleValue = getText(mailTitle);
 	    if(mailTitleValue.isEmpty() || mailTitleValue.equals("")) {
-	    	WaitUtils.sleep(2000);
-	    	mailTitleValue = WebElementUtil.getText(mailTitle);
+	    	sleep(2000);
+	    	mailTitleValue = getText(mailTitle);
 	    }
 	    return mailTitleValue;
 	}
 	
 
 	public boolean isMailResetYourPasswordLinkDisplayed() {
-	    return WebElementUtil.performInFrame(mailFrame, () -> 
-	        WebElementUtil.isDisplayed(mailResetPasswordLink)
+	    return performInFrame(mailFrame, () -> 
+	        isDisplayed(mailResetPasswordLink)
 	    );
 	}
 	
 	public ResetPasswordPageActionsFrig clickMailResetYourPasswordLink() {
-		WaitUtils.sleep(2000);
-		WebElementUtil.switchToFrame(mailFrame);
-//		WebElementUtil.ctrlClick(mailResetPasswordLink);
-//		WebElementUtil.ctrlClickWithJS(mailResetPasswordLink);
-		WebElementUtil.openLinkInNewTab(mailResetPasswordLink);
-		WebElementUtil.switchToDefaultContent();
-		WebElementUtil.switchToLatestTabAndClosePrevious();
+		sleep(2000);
+		switchToFrame(mailFrame);
+//		ctrlClick(mailResetPasswordLink);
+//		ctrlClickWithJS(mailResetPasswordLink);
+		openLinkInNewTab(mailResetPasswordLink);
+		switchToDefaultContent();
+		switchToLatestTabAndClosePrevious();
 		return new ResetPasswordPageActionsFrig();
 	}
 	
 	public String getPasswordResetMailMessage() {
-	    return WebElementUtil.performInFrame(mailFrame, () -> 
-	        WebElementUtil.getText(passwordResetMailBodyText)
+	    return performInFrame(mailFrame, () -> 
+	        getText(passwordResetMailBodyText)
 	    );
 	}
 	
 	
 	public Boolean isMailFrigidaireLogoDisplayed() {
-		return WebElementUtil.performInFrame(mailFrame, () -> 
-			WebElementUtil.isDisplayed(mailFridgidaireLogo)
+		return performInFrame(mailFrame, () -> 
+			isDisplayed(mailFridgidaireLogo)
         );
 	}
 	
 	public String getPasswordChangeSuccessMailMessage() {
-	    return WebElementUtil.performInFrame(mailFrame, () -> 
-	        WebElementUtil.getText(passwordChangeSuccessMailBodyText)
+	    return performInFrame(mailFrame, () -> 
+	        getText(passwordChangeSuccessMailBodyText)
 	    );
 	}
 	
 	public Boolean isMailContactUsLinkDisplayed() {
-		return WebElementUtil.performInFrame(mailFrame, () -> 
-			WebElementUtil.isDisplayed(mailContactUsLink)
+		return performInFrame(mailFrame, () -> 
+			isDisplayed(mailContactUsLink)
 		);
 	}
 	
 	public boolean isMailConnectSocialMediaLinksDisplayed() {
-		WebElementUtil.switchToFrame(mailFrame);
+		switchToFrame(mailFrame);
 	    var isDisplayed =  DriverManager.getDriver()
 	        .findElements(mailConnectSocialMediaLinks)
 	        .size() > 1;
-	    WebElementUtil.switchToDefaultContent();
+	    switchToDefaultContent();
 	    return isDisplayed;
 	}
 	
 	public boolean isMailFooterLinksDisplayed() {
-        WebElementUtil.switchToFrame(mailFrame);
+        switchToFrame(mailFrame);
 	    var isDisplayed =  DriverManager.getDriver()
 	        .findElements(mailFooterLinks)
 	        .size() > 1;
-	    WebElementUtil.switchToDefaultContent();
+	    switchToDefaultContent();
 	    return isDisplayed;
 	}	
 	
@@ -184,7 +185,7 @@ public class MailDropPageActionsFrig {
 	}
 	
 	public String getFirstMailSubject() {	
-		return WebElementUtil.getText(firstMailSubject);
+		return getText(firstMailSubject);
 	}
 	
 	

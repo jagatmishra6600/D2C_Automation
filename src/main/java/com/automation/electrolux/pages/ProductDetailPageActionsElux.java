@@ -44,20 +44,20 @@ public class ProductDetailPageActionsElux {
 
     public void clickOnProductMenu(String text) {
         By locator = By.xpath("//h5[normalize-space(text())='" + text + "']");
-        WebElementUtil.waitForElementToBeVisible(locator);
+        WaitUtils.waitForElementToBeVisible(locator);
         WebElementUtil.clickElement(locator);
     }
 
     public void verifyProductItemPage(String str, String assertValue) {
         By locator = By.xpath("//h1[normalize-space(text())='" + str + "']");
-        WebElementUtil.waitForElementToBeVisible(locator);
+        WaitUtils.waitForElementToBeVisible(locator);
         String s1 = WebElementUtil.getText(locator);
         Assert.assertEquals(s1, assertValue);
     }
 
     public void verifyElementDisplayed(By xpath, String elementName) {
         try {
-            WebElement element = WebElementUtil.waitForElementToBeVisible(xpath,20);
+            WebElement element = WaitUtils.waitForElementToBeVisible(xpath,20);
 
             boolean isDisplayed = element.isDisplayed();
             softAssert.assertTrue(isDisplayed, elementName + " should be displayed.");
@@ -91,11 +91,11 @@ public class ProductDetailPageActionsElux {
     }
     private void verifyAndClickIfNeeded( By xpath, String elementName){
         try {
-            WebElement element = WebElementUtil.waitForElementToBeVisible(xpath, 20);
+            WebElement element = WaitUtils.waitForElementToBeVisible(xpath, 20);
             if (element.isDisplayed()) {
                 WaitUtils.untilClickable(xpath,10);
                 element.click();
-                WebElementUtil.waitForElementToBeVisible(elPDP.skuPDP,10);
+                WaitUtils.waitForElementToBeVisible(elPDP.skuPDP,10);
                 WebElementUtil.isDisplayed(elPDP.skuPDP);
 
                 WaitUtils.sleep(3);

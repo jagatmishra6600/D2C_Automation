@@ -3,77 +3,75 @@ package com.automation.frigidaire.pages;
 import com.automation.frigidaire.locators.DSPInstallationLocatorsFrig;
 import com.automation.frigidaire.locators.DSPServiceLocatorsFrig;
 import com.automation.utils.DriverManager;
-import com.automation.utils.WaitUtils;
-import com.automation.utils.WebElementUtil;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+
+import static com.automation.utils.WaitUtils.*;
+import static com.automation.utils.WebElementUtil.*;
 
 public class InstallationAddOnServicesPageActionsFrig {
 
     public void clickProductBySKU(String sku) throws InterruptedException {
 
-        WebElementUtil.zoomInOrOut(75);
+        zoomInOrOut(75);
         Thread.sleep(7000);
         By productClick =By.xpath("//div[text()='" + sku + "']//parent::div//parent::div//div[@class='col- Product-Name my-2 min-height-v10']//a");
 
         //WebDriver driver= DriverManager.getDriver();
-        WebElementUtil.scrollToElementStable(productClick);
-        WebElementUtil.waitForElementToBeVisible(productClick, 10);
-        WebElementUtil.waitForElementToBeClickable(productClick, 10);
-        WebElementUtil.clickElement(productClick);
+        scrollToElementStable(productClick);
+        waitForElementToBeVisible(productClick);
+        waitForElementToBeClickable(productClick);
+        clickElement(productClick);
 
         Thread.sleep(3000);
         //WebElement addButton = driver.findElement(DSPServiceLocatorsFrig.addToCartButton);
-       // WebElementUtil.scrollToElement(driver, addButton);
-        WebElementUtil.scrollToElementStable(DSPServiceLocatorsFrig.addToCartButton);
-        WebElementUtil.waitForElementToBeVisible(DSPServiceLocatorsFrig.addToCartButton, 10);
-        WebElementUtil.waitForElementToBeClickable(DSPServiceLocatorsFrig.addToCartButton, 10);
-        WebElementUtil.clickElement(DSPServiceLocatorsFrig.addToCartButton);
+       // scrollToElement(driver, addButton);
+        scrollToElementStable(DSPServiceLocatorsFrig.addToCartButton);
+        waitForElementToBeVisible(DSPServiceLocatorsFrig.addToCartButton);
+        waitForElementToBeClickable(DSPServiceLocatorsFrig.addToCartButton);
+        clickElement(DSPServiceLocatorsFrig.addToCartButton);
 
     }
 
     public void validateDeliveryOnlyIsAvailable() {
         WebDriver driver = DriverManager.getDriver();
 
-        WebElementUtil.waitForElementToBeVisible(DSPServiceLocatorsFrig.deliverySubTitle,10);
+        waitForElementToBeVisible(DSPServiceLocatorsFrig.deliverySubTitle);
 //        Assert.assertTrue(driver.findElement(DSPServiceLocatorsFrig.deliverySubTitle).isDisplayed(),
 //                "'Delivery only' radio button is NOT available!");
-        WebElementUtil.isDisplayed(DSPServiceLocatorsFrig.deliverySubTitle);
+        isDisplayed(DSPServiceLocatorsFrig.deliverySubTitle);
 
-        WebElementUtil.waitForElementToBeVisible(DSPServiceLocatorsFrig.deliveryRadioButton,10);
+        waitForElementToBeVisible(DSPServiceLocatorsFrig.deliveryRadioButton);
 //        Assert.assertTrue(driver.findElement(DSPServiceLocatorsFrig.deliveryRadioButton).isDisplayed(),
 //                "'Delivery only' radio button is NOT available!");
-        WebElementUtil.isDisplayed(DSPServiceLocatorsFrig.deliveryRadioButton);
+        isDisplayed(DSPServiceLocatorsFrig.deliveryRadioButton);
 
 
-//        WebElementUtil.waitForElementToBeVisible(DSPagesService.deliveryPrice);
+//        waitForElementToBeVisible(DSPagesService.deliveryPrice);
 //        Assert.assertTrue(driver.findElement(DSPagesService.deliveryPrice).isDisplayed(),
 //                "'Delivery only' price is NOT available!");
     }
     public void selectedDeliveryOnly() throws InterruptedException {
 
-        WaitUtils.implicitWait(5);
-        WebElementUtil.waitForElementToBeVisible(DSPServiceLocatorsFrig.deliveryRadioButton, 10);
-        WebElementUtil.waitForElementToBeClickable(DSPServiceLocatorsFrig.deliveryRadioButton, 10);
-        WebElementUtil.clickElement(DSPServiceLocatorsFrig.deliveryRadioButton);
-
+        implicitWait(5);
+        waitForElementToBeVisible(DSPServiceLocatorsFrig.deliveryRadioButton);
+        waitForElementToBeClickable(DSPServiceLocatorsFrig.deliveryRadioButton);
+        clickElement(DSPServiceLocatorsFrig.deliveryRadioButton);
         validateElement(DSPInstallationLocatorsFrig.requiredInstallation);
-
         validateElement(DSPInstallationLocatorsFrig.checkBoxRequired);
-
         validateElement(DSPInstallationLocatorsFrig.listOfAvailable);
-
         validateElement(DSPInstallationLocatorsFrig.priceRequired);
 
     }
     public void selectCheckBoxRequired(){
 
-        WebElementUtil.waitForElementToBeVisible(DSPInstallationLocatorsFrig.checkBoxRequired, 10);
-        WebElementUtil.waitForElementToBeClickable(DSPInstallationLocatorsFrig.checkBoxRequired, 10);
-        WebElementUtil.clickElement(DSPInstallationLocatorsFrig.checkBoxRequired);
+        waitForElementToBeVisible(DSPInstallationLocatorsFrig.checkBoxRequired);
+        waitForElementToBeClickable(DSPInstallationLocatorsFrig.checkBoxRequired);
+        clickElement(DSPInstallationLocatorsFrig.checkBoxRequired);
 
-        String actualPriceRequired = WebElementUtil.getText(DSPInstallationLocatorsFrig.priceRequired);
+        String actualPriceRequired = getText(DSPInstallationLocatorsFrig.priceRequired);
         String priceRequiredText = actualPriceRequired.replace("$", "").replace(",", "");
 
         double price = Double.parseDouble(priceRequiredText);
@@ -81,11 +79,11 @@ public class InstallationAddOnServicesPageActionsFrig {
 
         //WebDriver driver = DriverManager.getDriver();
         //WebElement element = driver.findElement(DSPInstallationLocatorsFrig.subTotal);
-        //WebElementUtil.scrollToElement(driver, element);
+        //scrollToElement(driver, element);
 
-        WebElementUtil.scrollToElementStable(DSPInstallationLocatorsFrig.subTotal);
+        scrollToElementStable(DSPInstallationLocatorsFrig.subTotal);
 
-        String subTotalPrice = WebElementUtil.getText(DSPInstallationLocatorsFrig.subTotal);
+        String subTotalPrice = getText(DSPInstallationLocatorsFrig.subTotal);
 
         String subTotalPriceText = subTotalPrice.replace("$", "").replace(",", "");
         double subTotalNumeric = Double.parseDouble(subTotalPriceText);
@@ -93,8 +91,8 @@ public class InstallationAddOnServicesPageActionsFrig {
 
         double expected = price + subTotalNumeric;
 
-        WebElementUtil.waitForElementToBeVisible(DSPInstallationLocatorsFrig.totalPrice);
-        String totalPriceText = WebElementUtil.getText(DSPInstallationLocatorsFrig.totalPrice);
+        waitForElementToBeVisible(DSPInstallationLocatorsFrig.totalPrice);
+        String totalPriceText = getText(DSPInstallationLocatorsFrig.totalPrice);
 
         String totalPriceNumeric = totalPriceText.replace("$", "").replace(",", "");
         double totalPriceProduct = Double.parseDouble(totalPriceNumeric);
@@ -119,15 +117,15 @@ public class InstallationAddOnServicesPageActionsFrig {
 
     public void validateElement(By locator) {
         //WebDriver driver = DriverManager.getDriver();
-        WebElementUtil.waitForElementToBeVisible(locator, 15);
+        waitForElementToBeVisible(locator);
         //WebElement element = driver.findElement(locator);
 
-        //WebElementUtil.scrollToElement(driver, element);
-        WebElementUtil.scrollToElementStable(locator);
-        WebElementUtil.waitForElementToBeVisible(locator);
+        //scrollToElement(driver, element);
+        scrollToElementStable(locator);
+        waitForElementToBeVisible(locator);
 
         //Assert.assertTrue(element.isDisplayed(), errorMessage);
-        WebElementUtil.isDisplayed(locator);
+        isDisplayed(locator);
     }
 
     public void validateAddOnServicesAreAvailable() {
@@ -156,33 +154,33 @@ public class InstallationAddOnServicesPageActionsFrig {
 
     public void selectHaul(){
 
-        WebElementUtil.waitForElementToBeVisible(DSPServiceLocatorsFrig.deliveryRadioButton,10);
-        WebElementUtil.waitForElementToBeClickable(DSPServiceLocatorsFrig.deliveryRadioButton, 10);
-        WebElementUtil.clickElement(DSPServiceLocatorsFrig.deliveryRadioButton);
+        waitForElementToBeVisible(DSPServiceLocatorsFrig.deliveryRadioButton);
+        waitForElementToBeClickable(DSPServiceLocatorsFrig.deliveryRadioButton);
+        clickElement(DSPServiceLocatorsFrig.deliveryRadioButton);
 
         validateElement(DSPInstallationLocatorsFrig.addOnService);
-        WebElementUtil.scrollToElementStable(DSPInstallationLocatorsFrig.addOnService);
+        scrollToElementStable(DSPInstallationLocatorsFrig.addOnService);
 
-        WebElementUtil.waitForElementToBeClickable(DSPInstallationLocatorsFrig.haulCheckBox);
-        WebElementUtil.clickElement(DSPInstallationLocatorsFrig.haulCheckBox);
-        String price = WebElementUtil.getText(DSPInstallationLocatorsFrig.haulPrice);
+        waitForElementToBeClickable(DSPInstallationLocatorsFrig.haulCheckBox);
+        clickElement(DSPInstallationLocatorsFrig.haulCheckBox);
+        String price = getText(DSPInstallationLocatorsFrig.haulPrice);
 
         calculatePriceAndAssert(price);
     }
 
     public void moveOld(){
 
-        WebElementUtil.waitForElementToBeVisible(DSPServiceLocatorsFrig.deliveryRadioButton,10);
-        WebElementUtil.waitForElementToBeClickable(DSPServiceLocatorsFrig.deliveryRadioButton, 10);
-        WebElementUtil.clickElement(DSPServiceLocatorsFrig.deliveryRadioButton);
+        waitForElementToBeVisible(DSPServiceLocatorsFrig.deliveryRadioButton);
+        waitForElementToBeClickable(DSPServiceLocatorsFrig.deliveryRadioButton);
+        clickElement(DSPServiceLocatorsFrig.deliveryRadioButton);
 
         validateElement(DSPInstallationLocatorsFrig.addOnService);
-        WebElementUtil.scrollToElementStable(DSPInstallationLocatorsFrig.addOnService);
+        scrollToElementStable(DSPInstallationLocatorsFrig.addOnService);
 
-        WebElementUtil.waitForElementToBeClickable(DSPInstallationLocatorsFrig.moveOldCheckBox);
-        WebElementUtil.clickElement(DSPInstallationLocatorsFrig.moveOldCheckBox);
+        waitForElementToBeClickable(DSPInstallationLocatorsFrig.moveOldCheckBox);
+        clickElement(DSPInstallationLocatorsFrig.moveOldCheckBox);
 
-        String price = WebElementUtil.getText(DSPInstallationLocatorsFrig.moveOldPrice);
+        String price = getText(DSPInstallationLocatorsFrig.moveOldPrice);
         calculatePriceAndAssert(price);
     }
 
@@ -195,16 +193,16 @@ public class InstallationAddOnServicesPageActionsFrig {
             String num = price.replace("$", "").replace(",", "");
             priceAdd = Double.parseDouble(num);
         }
-        WebElementUtil.waitForElementToBeVisible(DSPInstallationLocatorsFrig.subTotal);
+        waitForElementToBeVisible(DSPInstallationLocatorsFrig.subTotal);
         //WebElement element = driver.findElement(DSPInstallationLocatorsFrig.subTotal);
-        //WebElementUtil.scrollToElement(driver,element);
-        WebElementUtil.scrollToElementStable(DSPInstallationLocatorsFrig.subTotal);
-        String subTotalText = WebElementUtil.getText(DSPInstallationLocatorsFrig.subTotal);
+        //scrollToElement(driver,element);
+        scrollToElementStable(DSPInstallationLocatorsFrig.subTotal);
+        String subTotalText = getText(DSPInstallationLocatorsFrig.subTotal);
         String totalPriceNumeric = subTotalText.replace("$", "").replace(",", "");
         double subTotalprice = Double.parseDouble(totalPriceNumeric);
         double expected = priceAdd + subTotalprice;
-        WebElementUtil.waitForElementToBeVisible(DSPInstallationLocatorsFrig.totalPrice);
-        String totalprice = WebElementUtil.getText(DSPInstallationLocatorsFrig.totalPrice);
+        waitForElementToBeVisible(DSPInstallationLocatorsFrig.totalPrice);
+        String totalprice = getText(DSPInstallationLocatorsFrig.totalPrice);
         String totalPriceActual = totalprice.replace("$", "").replace(",", "");
         double totalA = Double.parseDouble(totalPriceActual);
         Assert.assertEquals(totalA, expected, "Error" );
@@ -212,21 +210,21 @@ public class InstallationAddOnServicesPageActionsFrig {
 
     public void haulAndMove(){
 
-        WebElementUtil.waitForElementToBeVisible(DSPServiceLocatorsFrig.deliveryRadioButton, 10);
-        WebElementUtil.waitForElementToBeClickable(DSPServiceLocatorsFrig.deliveryRadioButton, 10);
-        WebElementUtil.clickElement(DSPServiceLocatorsFrig.deliveryRadioButton);
+        waitForElementToBeVisible(DSPServiceLocatorsFrig.deliveryRadioButton);
+        waitForElementToBeClickable(DSPServiceLocatorsFrig.deliveryRadioButton);
+        clickElement(DSPServiceLocatorsFrig.deliveryRadioButton);
 
         validateElement(DSPInstallationLocatorsFrig.addOnService);
-        WebElementUtil.scrollToElementStable(DSPInstallationLocatorsFrig.addOnService);
+        scrollToElementStable(DSPInstallationLocatorsFrig.addOnService);
 
-        WebElementUtil.waitForElementToBeClickable(DSPInstallationLocatorsFrig.haulCheckBox);
-        WebElementUtil.clickElement(DSPInstallationLocatorsFrig.haulCheckBox);
+        waitForElementToBeClickable(DSPInstallationLocatorsFrig.haulCheckBox);
+        clickElement(DSPInstallationLocatorsFrig.haulCheckBox);
 
-        WebElementUtil.waitForElementToBeClickable(DSPInstallationLocatorsFrig.moveOldCheckBox);
-        WebElementUtil.clickElement(DSPInstallationLocatorsFrig.moveOldCheckBox);
+        waitForElementToBeClickable(DSPInstallationLocatorsFrig.moveOldCheckBox);
+        clickElement(DSPInstallationLocatorsFrig.moveOldCheckBox);
 
-        WebElementUtil.waitForElementToBeVisible(DSPInstallationLocatorsFrig.subTotalAddOnServicePrice);
-        String str = WebElementUtil.getText(DSPInstallationLocatorsFrig.subTotalAddOnServicePrice);
+        waitForElementToBeVisible(DSPInstallationLocatorsFrig.subTotalAddOnServicePrice);
+        String str = getText(DSPInstallationLocatorsFrig.subTotalAddOnServicePrice);
         calculatePriceAndAssert(str);
     }
 

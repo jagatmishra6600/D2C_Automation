@@ -1,6 +1,9 @@
 package com.automation.frigidaire.pages;
 
 import com.automation.frigidaire.locators.DeliveryDatesLocatorsFrig;
+import static com.automation.utils.WebElementUtil.*;
+import static com.automation.utils.WaitUtils.*;
+
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -16,41 +19,41 @@ public class DeliveryDatePageActionsFrig {
     DeliveryDatesLocatorsFrig locators = new DeliveryDatesLocatorsFrig();
 
     public void searchProduct(String productName) {
-        WebElementUtil.waitForElementToBeClickable(locators.searchBox, 20);
-        WebElementUtil.sendKeys(locators.searchBox, productName + Keys.ENTER);
+        waitForElementToBeClickable(locators.searchBox);
+        sendKeys(locators.searchBox, productName + Keys.ENTER);
     }
 
     public void selectProductFromPLP() {
-        WebElementUtil.waitForElementToBeVisible(locators.productPDP, 10);
-        WebElementUtil.waitForElementToBeClickable(locators.productPDP, 10);
-        WebElementUtil.scrollIntoView(locators.productPDP);
-        WebElementUtil.clickElement(locators.productPDP);
+        waitForElementToBeVisible(locators.productPDP);
+        waitForElementToBeClickable(locators.productPDP);
+        scrollIntoView(locators.productPDP);
+        clickElement(locators.productPDP);
     }
 
     public void clickAddToCart() {
-        WebElementUtil.waitForElementToBeVisible(locators.addToCartButton, 10);
-        WebElementUtil.scrollToElementStable(locators.addToCartButton);
-        WebElementUtil.waitForElementToBeClickable(locators.addToCartButton, 10);
-        WebElementUtil.clickElement(locators.addToCartButton);
+        waitForElementToBeVisible(locators.addToCartButton);
+        scrollToElementStable(locators.addToCartButton);
+        waitForElementToBeClickable(locators.addToCartButton);
+        clickElement(locators.addToCartButton);
     }
     public void selectDeliveryAndSaveAndViewCart() {
         // Select delivery & installation radio
-        WebElementUtil.waitForElementToBeVisible(locators.deliveryInstallationRadio, 10);
-        WebElementUtil.scrollToElementStable(locators.deliveryInstallationRadio);
-        WebElementUtil.waitForElementToBeClickable(locators.deliveryInstallationRadio);
-        WebElementUtil.clickElement(locators.deliveryInstallationRadio);
+        waitForElementToBeVisible(locators.deliveryInstallationRadio);
+        scrollToElementStable(locators.deliveryInstallationRadio);
+        waitForElementToBeClickable(locators.deliveryInstallationRadio);
+        clickElement(locators.deliveryInstallationRadio);
 
         // Click Save and view cart
-        WebElementUtil.scrollToElementStable(locators.saveAndViewCartButton);
-        WebElementUtil.waitForElementToBeClickable(locators.saveAndViewCartButton, 20);
-        WebElementUtil.clickElement(locators.saveAndViewCartButton);
+        scrollToElementStable(locators.saveAndViewCartButton);
+        waitForElementToBeClickable(locators.saveAndViewCartButton);
+        clickElement(locators.saveAndViewCartButton);
     }
 
     public void clickProceedToCheckout() {
-        WebElementUtil.waitForElementToBeVisible(locators.proceedToCheckoutButton, 20);
-        WebElementUtil.waitForElementToBeClickable(locators.proceedToCheckoutButton);
-        WebElementUtil.clickElement(locators.proceedToCheckoutButton);
-        WebElementUtil.waitForElementToBeVisible(locators.shippingAddressForm, 20);
+        waitForElementToBeVisible(locators.proceedToCheckoutButton);
+        waitForElementToBeClickable(locators.proceedToCheckoutButton);
+        clickElement(locators.proceedToCheckoutButton);
+        waitForElementToBeVisible(locators.shippingAddressForm);
     }
 
 //     * Clicks the "Continue to delivery" button after shipping details are entered.
@@ -75,36 +78,36 @@ public class DeliveryDatePageActionsFrig {
 
         try {
             // Fill email
-            WebElementUtil.scrollToElementStable(locators.shippingEmail);
-            WebElementUtil.waitForElementToBeVisible(locators.shippingEmail, 10);
-            WebElementUtil.sendKeys(locators.shippingEmail, email);
+            scrollToElementStable(locators.shippingEmail);
+            waitForElementToBeVisible(locators.shippingEmail);
+            sendKeys(locators.shippingEmail, email);
 
             // Fill first name and last name
-            WebElementUtil.scrollToElementStable(locators.shippingFirstName);
-            WebElementUtil.waitForElementToBeVisible(locators.shippingFirstName, 10);
-            WebElementUtil.sendKeys(locators.shippingFirstName, firstName);
+            scrollToElementStable(locators.shippingFirstName);
+            waitForElementToBeVisible(locators.shippingFirstName);
+            sendKeys(locators.shippingFirstName, firstName);
 
-            WebElementUtil.waitForElementToBeVisible(locators.shippingLastName, 10);
-            WebElementUtil.sendKeys(locators.shippingLastName, lastName);
+            waitForElementToBeVisible(locators.shippingLastName);
+            sendKeys(locators.shippingLastName, lastName);
 
             // Fill address line
-            WebElementUtil.scrollToElementStable(locators.shippingAddressLine1);
-            WebElementUtil.waitForElementToBeVisible(locators.shippingAddressLine1, 10);
-            WebElementUtil.sendKeys(locators.shippingAddressLine1, addressLine1);
+            scrollToElementStable(locators.shippingAddressLine1);
+            waitForElementToBeVisible(locators.shippingAddressLine1);
+            sendKeys(locators.shippingAddressLine1, addressLine1);
 
 
-            WebElementUtil.waitForElementToBeVisible(locators.addressSuggestionOption, 10);
-            WebElementUtil.clickElement(locators.addressSuggestionOption);
+            waitForElementToBeVisible(locators.addressSuggestionOption);
+            clickElement(locators.addressSuggestionOption);
 
             // Fill phone
-            WebElementUtil.scrollToElementStable(locators.shippingPhone);
-            WebElementUtil.waitForElementToBeVisible(locators.shippingPhone, 10);
-            WebElementUtil.sendKeys(locators.shippingPhone, phone);
+            scrollToElementStable(locators.shippingPhone);
+            waitForElementToBeVisible(locators.shippingPhone);
+            sendKeys(locators.shippingPhone, phone);
 
             // Click continue button
-            WebElementUtil.scrollToElementStable(locators.continueToDeliveryButton);
-            WebElementUtil.waitForElementToBeClickable(locators.continueToDeliveryButton,10);
-            WebElementUtil.clickElement(locators.continueToDeliveryButton);
+            scrollToElementStable(locators.continueToDeliveryButton);
+            waitForElementToBeClickable(locators.continueToDeliveryButton);
+            clickElement(locators.continueToDeliveryButton);
 
             return true;
         } catch (Exception e) {
@@ -124,10 +127,10 @@ public class DeliveryDatePageActionsFrig {
 
         try {
             // Wait for calendar section to be visible
-            WebElementUtil.waitForElementToBeVisible(locators.deliveryCalendarHeader);
+            waitForElementToBeVisible(locators.deliveryCalendarHeader);
 
             // Get all available date labels
-            List<WebElement> availableDates = WebElementUtil.findElements(locators.deliveryDateAvailable);
+            List<WebElement> availableDates = findElements(locators.deliveryDateAvailable);
 
             if (availableDates.isEmpty()) {
                 System.out.println("No available delivery dates found.");
@@ -142,7 +145,7 @@ public class DeliveryDatePageActionsFrig {
                 WebElement date = availableDates.get(i);
 
                 // Scroll the element into stable center view
-                WebElementUtil.scrollToElementStable((By) date);
+                scrollToElementStable((By) date);
 
                 // Wait for label to be clickable
                 wait.until(ExpectedConditions.elementToBeClickable(date));
@@ -179,7 +182,7 @@ public class DeliveryDatePageActionsFrig {
                 System.out.println("✔ Successfully validated date: " + labelText);
 
                 // Re-fetch available dates after each click because DOM refreshes
-                availableDates = WebElementUtil.findElements(
+                availableDates = findElements(
                         By.cssSelector("label.cx-delivery-label.avaliableDates")
                 );
             }

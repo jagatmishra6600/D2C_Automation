@@ -2,54 +2,56 @@ package com.automation.frigidaire.pages;
 
 import com.automation.frigidaire.locators.ProductDetailsLocatorsFrig;
 import com.automation.utils.DriverManager;
-import com.automation.utils.WaitUtils;
-import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.*;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
+
+import static com.automation.utils.WaitUtils.*;
+import static com.automation.utils.WebElementUtil.*;
 
 
 public class ProductDetailPageActionsFrig {
 
     ProductDetailsLocatorsFrig productDetails = new ProductDetailsLocatorsFrig();
-    SoftAssert softAssert=new SoftAssert();
+    SoftAssert softAssert = new SoftAssert();
 
 
     public void verifyProductItemPage(String str, String assertValue) {
         By locator = By.xpath("//h1[normalize-space(text())='" + str + "']");
-        WebElementUtil.waitForElementToBeVisible(locator);
-        String s1 = WebElementUtil.getText(locator);
+        waitForElementToBeVisible(locator);
+        String s1 = getText(locator);
         Assert.assertEquals(s1, assertValue);
     }
 
     public void clickOnProductMenu(String text) {
         By locator = By.xpath("//h5[normalize-space(text())='" + text + "']");
-        WebElementUtil.waitForElementToBeVisible(locator);
-        WebElementUtil.waitForElementToBeClickable(locator);
-        WebElementUtil.clickElement(locator);
+        waitForElementToBeVisible(locator);
+        waitForElementToBeClickable(locator);
+        clickElement(locator);
     }
 
     public void verifyAndClickElements(int i) throws InterruptedException {
-        WebElementUtil.zoomInOrOut(70);
+        zoomInOrOut(70);
 
         verifyAndClickIfNeeded(productDetails.productImage(i), "Product Image");
         verifyAndClickIfNeeded(productDetails.name(i), "Product Name");
         verifyAndClickIfNeeded(productDetails.productRating(i), "Product Rating");
     }
-    private void verifyAndClickIfNeeded( By xpath, String elementName){
-        WaitUtils.implicitWait(3);
+
+    private void verifyAndClickIfNeeded(By xpath, String elementName) {
+        implicitWait(3);
         try {
-            WebElement element = WebElementUtil.waitForElementToBeVisible(xpath,10);
+            WebElement element = waitForElementToBeVisible(xpath);
 
 
             if (element.isDisplayed()) {
                 element.click();
-                WebElementUtil.waitForElementToBeVisible(productDetails.skuPDPPage,10);
-                WebElementUtil.isDisplayed(productDetails.skuPDPPage);
+                waitForElementToBeVisible(productDetails.skuPDPPage);
+                isDisplayed(productDetails.skuPDPPage);
 
-                WaitUtils.implicitWait(2);
+                implicitWait(10);
                 DriverManager.getDriver().navigate().back();
-                WaitUtils.implicitWait(2);
+                implicitWait(10);
             }
         } catch (Exception e) {
             System.out.println(elementName + " NOT found or not displayed. Xpath: " + xpath);
@@ -57,21 +59,22 @@ public class ProductDetailPageActionsFrig {
     }
 
     public void checkPlpItem(String ProductName, int i) throws InterruptedException {
-        WebElementUtil.zoomInOrOut(70);
-        WaitUtils.implicitWait(10);
-        if(ProductName.equalsIgnoreCase("Kitchen")){
-            WebElementUtil.scrollToElementStable(productDetails.name(i));
+        zoomInOrOut(70);
+        implicitWait(10);
+        if (ProductName.equalsIgnoreCase("Kitchen")) {
+            scrollToElementStable(productDetails.name(i));
             checkProductDetail(i);
             verifyKitchenDetails(i);
             verifyAndClickElements(i);
         } else if (ProductName.equalsIgnoreCase("Air Care")) {
-            WebElementUtil.scrollToElementStable(productDetails.name(i));
+            scrollToElementStable(productDetails.name(i));
             checkProductDetail(i);
             verifyAirCareDetails(i);
             verifyAndClickElements(i);
         }
 
     }
+
     public void checkProductDetail(int i) {
 
         verifyElementDisplayed(productDetails.skuNumber(i), "SKU Number");
@@ -104,7 +107,7 @@ public class ProductDetailPageActionsFrig {
 
     public void verifyElementDisplayed(By xpath, String elementName) {
         try {
-            WebElement element = WebElementUtil.waitForElementToBeVisible(xpath, 10);
+            WebElement element = waitForElementToBeVisible(xpath);
             boolean isDisplayed = element.isDisplayed();
             softAssert.assertTrue(isDisplayed, elementName + " should be displayed.");
         } catch (Exception e) {

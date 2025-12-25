@@ -1,11 +1,12 @@
 package com.automation.frigidaire.pages;
 
-import static com.automation.utils.WaitUtils.untilClickable;
+import static com.automation.utils.WaitUtils.*;
+import static com.automation.utils.WebElementUtil.*;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import com.automation.utils.ConfigReader;
-import com.automation.utils.WebElementUtil;
 
 public class CreateAccountPageActionsFrig {
 
@@ -35,9 +36,9 @@ public class CreateAccountPageActionsFrig {
 	 private final By createAccountAccessToExclusiveSignUpMessage = By.xpath("//label[contains(.,'Get access to exclusive savings')]");
 	 
 	 public CreateAccountPageActionsFrig navigateToCreateAccountPage() {
-		WebElementUtil.navigateTo(ConfigReader.getAppUrl()+"createAccount");
+		navigateTo(ConfigReader.getAppUrl()+"createAccount");
        try {
-           WebElement acceptBtn = untilClickable(acceptButtonLocator, 15);
+           WebElement acceptBtn = untilClickable(acceptButtonLocator);
            if (acceptBtn != null) {
                acceptBtn.click();
            }
@@ -52,16 +53,16 @@ public class CreateAccountPageActionsFrig {
 	 }
 	 
 	 public boolean isCreateAnAccountTitleDisplayed() {
-		 return WebElementUtil.isDisplayed(createAccountTitle);	 
+		 return isDisplayed(createAccountTitle);	 
 	 }
 	 
 	 public String getCreateAccountSignUpMessage() {
 		 var brand = ConfigReader.getProperty("brand");
 		 if(brand.equalsIgnoreCase("electrolux")) {
-			 return WebElementUtil.getText(createAccountAccessToExclusiveSignUpMessage);
+			 return getText(createAccountAccessToExclusiveSignUpMessage);
 		 }
 		 else if(brand.equalsIgnoreCase("frigidaire")) {
-			 return WebElementUtil.getText(createAccountAccessToExclusiveSignUpMessage);
+			 return getText(createAccountAccessToExclusiveSignUpMessage);
 		 }
 		 else {
 			 throw new IllegalStateException("Invalid Environment");
@@ -69,57 +70,57 @@ public class CreateAccountPageActionsFrig {
 	 }
 	 
 	 public boolean isEmailAddressFieldDisplayed() {
-		return WebElementUtil.isDisplayed(emailAddressField);
+		return isDisplayed(emailAddressField);
 	 }
 		
 	 public boolean isPasswordFieldDisplayed() {
-		return WebElementUtil.isDisplayed(passwordField);
+		return isDisplayed(passwordField);
 	 }
 	 
 	 public boolean isConfirmPasswordFieldDisplayed() {
-		return WebElementUtil.isDisplayed(confirmPasswordField);
+		return isDisplayed(confirmPasswordField);
 	 }
 	 
 	 public boolean isFirstNameFieldDisplayed() {
-		 return WebElementUtil.isDisplayed(firstNameField);
+		 return isDisplayed(firstNameField);
 	 }	
 	 
 	 public boolean isLastNameFieldDisplayed() {
-		 return WebElementUtil.isDisplayed(lastNameField);
+		 return isDisplayed(lastNameField);
 	 }
 	 
 	 public boolean isConfirmPasswordFieldShowPasswordIconDisplayed() {
-		 return WebElementUtil.isDisplayed(confirmFieldShowPasswordIcon);
+		 return isDisplayed(confirmFieldShowPasswordIcon);
 	 }
 	 
 	 public boolean isPasswordFieldShowPasswordIconDisplayed() {
-		 return WebElementUtil.isDisplayed(passwordFieldShowPasswordIcon);
+		 return isDisplayed(passwordFieldShowPasswordIcon);
 	 }
 	 
 	 public boolean isShowPasswordIconsDisplayed() {
-		 WebElementUtil.scrollIntoView(passwordFieldShowPasswordIcon);
+		 scrollIntoView(passwordFieldShowPasswordIcon);
 		 return isConfirmPasswordFieldShowPasswordIconDisplayed() &&
 				 isPasswordFieldShowPasswordIconDisplayed();
 	 }
 	 
 	 public String getElectroluxLinkedAccountMessage() {
-		 return WebElementUtil.getText(electroluxLinkedAccountMessage);
+		 return getText(electroluxLinkedAccountMessage);
 	 }
 	 
 	 public boolean isTermsAndConditionsLinkDisplayed() {
-		 return WebElementUtil.isDisplayed(termsAndConditionsLink);
+		 return isDisplayed(termsAndConditionsLink);
 	 }
 	 
 	 public boolean isPrivacyPolicyLinkDisplayed() {
-		 return WebElementUtil.isDisplayed(privacyPolicyLink);
+		 return isDisplayed(privacyPolicyLink);
 	 }
 	 
 	 public boolean isSubmitButtonDisplayed() {
-		 return WebElementUtil.isDisplayed(submitButton);
+		 return isDisplayed(submitButton);
 	 }
 	 
 	 public boolean isHaveAnAccountAlreadyLinkDisplayed() {
-		 return WebElementUtil.isDisplayed(haveAccountAlreadyLink);
+		 return isDisplayed(haveAccountAlreadyLink);
 	 }
 	 
 	 public boolean isAlternateLoginOptionsDisplayed() {
@@ -127,34 +128,34 @@ public class CreateAccountPageActionsFrig {
 	 }
 		
 	 public boolean isSignInWithAppleButtonDisplayed() {
-		return WebElementUtil.isDisplayed(signInWithAppleButton);
+		return isDisplayed(signInWithAppleButton);
 	 }
 		
 	 public boolean isSignInWithGoogleButtonDisplayed() {
-		return WebElementUtil.isDisplayed(signInWithGoogleButton);
+		return isDisplayed(signInWithGoogleButton);
 	 }
 	 
 	 public CreateAccountPageActionsFrig enterEmailAddress(String emailAddress) {
-		 WebElementUtil.sendKeys(emailAddressField, emailAddress);
+		 sendKeys(emailAddressField, emailAddress);
 		 return this;
 	 }
 	 
 	 public CreateAccountPageActionsFrig enterPassword(String password) {
-		 WebElementUtil.sendKeys(passwordField, password);
+		 sendKeys(passwordField, password);
 		 return this;
 	 }
 	 
 	 public CreateAccountPageActionsFrig enterConfirmPassword(String password) {
-		 WebElementUtil.sendKeys(confirmPasswordField, password);
+		 sendKeys(confirmPasswordField, password);
 		 return this;
 	 }
 	 public CreateAccountPageActionsFrig enterFirstName(String firstName) {
-		 WebElementUtil.sendKeys(firstNameField, firstName);
+		 sendKeys(firstNameField, firstName);
 		 return this;
 	 }
 	 
 	 public CreateAccountPageActionsFrig enterLastName(String lastName) {
-		 WebElementUtil.sendKeys(lastNameField, lastName);
+		 sendKeys(lastNameField, lastName);
 		 return this;
 	 }
 	 
@@ -168,36 +169,36 @@ public class CreateAccountPageActionsFrig {
 	 }
 	 
 	 public CreateAccountPageActionsFrig clickSubmitButton() {
-		 WebElementUtil.scrollIntoView(submitButton);
-		 WebElementUtil.clickElement(submitButton);
+		 scrollIntoView(submitButton);
+		 clickElement(submitButton);
 		 return this;
 	 }
 	 
 	 public String getVerificationEmailSentMessage() {
-		 WebElementUtil.isDisplayed(verificationEmailSentMessage);
-		 WebElementUtil.scrollIntoView(verificationEmailSentMessage);
-		 return WebElementUtil.getText(verificationEmailSentMessage);
+		 isDisplayed(verificationEmailSentMessage);
+		 scrollIntoView(verificationEmailSentMessage);
+		 return getText(verificationEmailSentMessage);
 	 }
 	 
 	 public boolean isHereToHelpBannerDisplayed() {
-		 return WebElementUtil.isDisplayed(hereToHelpBanner);
+		 return isDisplayed(hereToHelpBanner);
 	 }
 	 
 	 public boolean isHereToHelpBannerPhoneSectionDisplayed() {
-		 return WebElementUtil.isDisplayed(hereToHelpBannerPhoneSection);
+		 return isDisplayed(hereToHelpBannerPhoneSection);
 	 }
 	 
 	 public boolean isHereToHelpBannerChatSectionDisplayed() {
-		 return WebElementUtil.isDisplayed(hereToHelpBannerChatSection);
+		 return isDisplayed(hereToHelpBannerChatSection);
 	 }
 	 
 	 public boolean isAlreadyHaveAccountLinkDisplayed() {
 		 var environment = ConfigReader.getProperty("app.url");
 		 if(environment.contains("electrolux")) {
-			 return WebElementUtil.isDisplayed(alreadyHaveAnAccountLink);
+			 return isDisplayed(alreadyHaveAnAccountLink);
 		 }
 		 else if(environment.contains("frigidaire")) {
-			 return WebElementUtil.isDisplayed(haveAccountAlreadyLink);
+			 return isDisplayed(haveAccountAlreadyLink);
 		 }
 		 else {
 			 throw new IllegalStateException("Invalid Environment");
@@ -205,11 +206,11 @@ public class CreateAccountPageActionsFrig {
 	 }
 	 
 	 public boolean isCreateAccountSignUpMessageDisplayed() {
-		 return WebElementUtil.isDisplayed(createAccountSignUpMessage);
+		 return isDisplayed(createAccountSignUpMessage);
 	 }
 	 
 	 public boolean isElectroluxGroupLinkedAccountMessageDisplayed() {
-		 return WebElementUtil.isDisplayed(electroluxLinkedAccountMessage);
+		 return isDisplayed(electroluxLinkedAccountMessage);
 	 }
 	 
 	 public void verifyCreateAccountPageFieldAndMessages() {

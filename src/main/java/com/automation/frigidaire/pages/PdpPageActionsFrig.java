@@ -1,31 +1,30 @@
 package com.automation.frigidaire.pages;
 
-import com.automation.electrolux.pages.CartPageActionsElux;
 import com.automation.frigidaire.locators.PDPLocatorsFrig;
-import com.automation.utils.WaitUtils;
-import com.automation.utils.WebElementUtil;
+import static com.automation.utils.WaitUtils.*;
+import static com.automation.utils.WebElementUtil.*;
 
 public class PdpPageActionsFrig {
 
     PDPLocatorsFrig pdpPage_Locator = new PDPLocatorsFrig();
 
     public boolean isProductIdMatchingWithPLP() {
-        WaitUtils.untilVisible(pdpPage_Locator.productIdOnPDP);
-        String actualId = WebElementUtil.getText(pdpPage_Locator.productIdOnPDP).trim();
+        untilVisible(pdpPage_Locator.productIdOnPDP);
+        String actualId = getText(pdpPage_Locator.productIdOnPDP).trim();
         String expectedId = PlpPageActionsFrig.getSelectedProductId().trim();
         return actualId.equalsIgnoreCase(expectedId);
     }
 
     public boolean isProductTitleMatchingWithPLP() {
-        WaitUtils.untilVisible(pdpPage_Locator.productTitleOnPDP);
-        String actualTitle = WebElementUtil.getText(pdpPage_Locator.productTitleOnPDP).trim();
+        untilVisible(pdpPage_Locator.productTitleOnPDP);
+        String actualTitle = getText(pdpPage_Locator.productTitleOnPDP).trim();
         String expectedTitle = PlpPageActionsFrig.getSelectedProductTitle().trim();
         return actualTitle.toLowerCase().contains(expectedTitle.toLowerCase());
     }
 
     public boolean isProductPriceMatchingWithPLP() {
-        WaitUtils.untilVisible(pdpPage_Locator.productPriceOnPDP);
-        String actualPrice = WebElementUtil.getText(pdpPage_Locator.productPriceOnPDP).trim();
+        untilVisible(pdpPage_Locator.productPriceOnPDP);
+        String actualPrice = getText(pdpPage_Locator.productPriceOnPDP).trim();
         actualPrice = actualPrice.replaceAll("\\.\\d+$", "");
         String expectedPrice = PlpPageActionsFrig.getSelectedProductPrice().trim();
         expectedPrice = expectedPrice.replaceAll("(\\.00|00)$", "");
@@ -33,76 +32,76 @@ public class PdpPageActionsFrig {
     }
 
     public boolean isProductReviewMatchingWithPLP() {
-        WaitUtils.untilVisible(pdpPage_Locator.productReviewNumberOnPDP);
-        String actualReview = WebElementUtil.getText(pdpPage_Locator.productReviewNumberOnPDP).trim();
+        untilVisible(pdpPage_Locator.productReviewNumberOnPDP);
+        String actualReview = getText(pdpPage_Locator.productReviewNumberOnPDP).trim();
         String expectedReview = PlpPageActionsFrig.getSelectedProductReviewNumber().trim();
         return actualReview.equalsIgnoreCase(expectedReview);
     }
 
     public boolean isProductColorVisibleOnPDP() {
-        WebElementUtil.isDisplayed(pdpPage_Locator.productColorOnPDP);
+        isDisplayed(pdpPage_Locator.productColorOnPDP);
         return true;
     }
 
     public PdpPageActionsFrig clickQuickSpec() {
-        WebElementUtil.scrollToElementCenter(pdpPage_Locator.overViewAndFeatures);
-        WebElementUtil.clickElement(pdpPage_Locator.quickSpecificationBtnOnPDP);
+        scrollToElementCenter(pdpPage_Locator.overViewAndFeatures);
+        clickElement(pdpPage_Locator.quickSpecificationBtnOnPDP);
         return this;
     }
 
     public boolean isSeeAllVisibleInQuickSpec() {
-        WebElementUtil.isDisplayed(pdpPage_Locator.quickSpecSeeAll);
+        isDisplayed(pdpPage_Locator.quickSpecSeeAll);
         return true;
     }
 
     public boolean isHeightMatchingWithPLP() {
-        WaitUtils.untilVisible(pdpPage_Locator.pdpHeight);
+        untilVisible(pdpPage_Locator.pdpHeight);
 
-        String actualHeight = WebElementUtil.getText(pdpPage_Locator.pdpHeight).trim();
+        String actualHeight = getText(pdpPage_Locator.pdpHeight).trim();
         String expectedHeight = PlpPageActionsFrig.getSelectedHeight().trim();
 
         return actualHeight.equalsIgnoreCase(expectedHeight);
     }
 
     public boolean iswidthMatchingWithPLP() {
-        WaitUtils.untilVisible(pdpPage_Locator.pdpWidth);
+        untilVisible(pdpPage_Locator.pdpWidth);
 
-        String actualWidth = WebElementUtil.getText(pdpPage_Locator.pdpWidth).trim();
+        String actualWidth = getText(pdpPage_Locator.pdpWidth).trim();
         String expectedWidth = PlpPageActionsFrig.getSelectedWidth().trim();
 
         return actualWidth.equalsIgnoreCase(expectedWidth);
     }
 
     public boolean isDepthMatchingWithPLP() {
-        WaitUtils.untilVisible(pdpPage_Locator.pdpDepth);
+        untilVisible(pdpPage_Locator.pdpDepth);
 
-        String actualDepth = WebElementUtil.getText(pdpPage_Locator.pdpDepth).trim();
+        String actualDepth = getText(pdpPage_Locator.pdpDepth).trim();
         String expectedDepth = PlpPageActionsFrig.getSelectedDepth().trim();
 
         return actualDepth.equalsIgnoreCase(expectedDepth);
     }
 
     public PdpPageActionsFrig clickDeliveryOption() {
-        WebElementUtil.scrollToElementCenter(pdpPage_Locator.frenchdoorDelivery);
-        WebElementUtil.clickElement(pdpPage_Locator.frenchdoorDelivery);
+        scrollToElementCenter(pdpPage_Locator.frenchdoorDelivery);
+        clickElement(pdpPage_Locator.frenchdoorDelivery);
         return this;
     }
 
     public DAndSPageActionsFrig clickAddToCartButton() {
-        WebElementUtil.scrollToElementCenter(pdpPage_Locator.addToCartButton);
-        WebElementUtil.clickElement(pdpPage_Locator.addToCartButton);
+        scrollToElementCenter(pdpPage_Locator.addToCartButton);
+        clickElement(pdpPage_Locator.addToCartButton);
         return new DAndSPageActionsFrig();
     }
 
     public PdpPageActionsFrig clickAddToCart() {
-        WebElementUtil.scrollToElementCenter(pdpPage_Locator.addToCartButton);
-        WebElementUtil.clickElement(pdpPage_Locator.addToCartButton);
+        scrollToElementCenter(pdpPage_Locator.addToCartButton);
+        clickElement(pdpPage_Locator.addToCartButton);
         return this;
     }
 
     public CartPageActionsFrig clickViewCartButton() {
-        WebElementUtil.scrollToElementCenter(pdpPage_Locator.viewCartButton);
-        WebElementUtil.clickElement(pdpPage_Locator.viewCartButton);
+        scrollToElementCenter(pdpPage_Locator.viewCartButton);
+        clickElement(pdpPage_Locator.viewCartButton);
         return new CartPageActionsFrig();
     }
 

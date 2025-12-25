@@ -7,7 +7,7 @@ import com.automation.frigidaire.pages.RefrigeratorPageActionsFrig;
 import com.automation.BaseTest;
 import com.automation.utils.ExtentReportManager;
 import com.automation.utils.WaitUtils;
-import com.automation.frigidaire.utils.WebElementUtil;
+import com.automation.utils.WebElementUtil;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
