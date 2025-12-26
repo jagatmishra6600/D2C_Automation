@@ -23,7 +23,10 @@ public class EPIC_06_TC_01_AQA_MyAccount_AccountPreferences_Frig extends BaseTes
 	 @Test(groups = {"smoke", "regression"}, description = "Verify that the user can navigate through all tabs on the Account Preferences Page")
 	    public void TC_01_S2_VerifyTabularNavigationOnAccountPreferencesPage() {
 		 	loginAndNavigateToAccountPreferencesPage();
-	    	assertTrue(accountPreferencePage.isAllTabsNavigationSuccessful(),"Navigation to one or more My Account tabs failed");
+	    	assertTrue(accountPreferencePage.isAccountPreferencesTabNavigationSuccessful(),"User is not navigated to Account Preferences Tab");
+	    	assertTrue(accountPreferencePage.isMyOrdersTabNavigationSuccessful(),"User is not navigated to My Orders Tab");
+	    	assertTrue(accountPreferencePage.isMySubscriptionsTabNavigationSuccessful(),"User is not navigated to My Subscriptions Tab");
+	    	assertTrue(accountPreferencePage.isMyAppliancesTabNavigationSuccessful(),"User is not navigated to My Appliances Tab");
 	    	ExtentReportManager.getTest().pass("User successfully navigated through all tabs on the My Account page and verified each tab loaded correctly.");  	    
 	 } 
 	 

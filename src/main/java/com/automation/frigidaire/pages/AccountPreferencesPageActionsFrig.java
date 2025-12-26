@@ -34,11 +34,11 @@ public class AccountPreferencesPageActionsFrig {
 	}
 	
 	public boolean isAccountPreferenceTabDisplayed() {
-		return isDisplayed(apLocator.accountPreferenceTabButton);
+		return isDisplayed(apLocator.accountPreferencesTabButton);
 	}
 	
 	public boolean isAccountPreferenceTabSelected() {
-	    String classProperty = getDomProperty(apLocator.accountPreferenceTabButton, CLASS_NAME_PROPERTY);
+	    String classProperty = getDomProperty(apLocator.accountPreferencesTabButton, CLASS_NAME_PROPERTY);
 	    return classProperty != null && classProperty.contains(ACTIVE);
 	}
 	
@@ -48,7 +48,7 @@ public class AccountPreferencesPageActionsFrig {
 	}
 	
 	public boolean isMySubscriptionTabSelected() {
-	    String classProperty = getDomProperty(apLocator.mySubscriptionTabButton, CLASS_NAME_PROPERTY);
+	    String classProperty = getDomProperty(apLocator.mySubscriptionsTabButton, CLASS_NAME_PROPERTY);
 	    return classProperty != null && classProperty.contains(ACTIVE);
 	}
 	
@@ -58,11 +58,16 @@ public class AccountPreferencesPageActionsFrig {
 	}
 	
 	public AccountPreferencesPageActionsFrig selectAccountPreferenceTab() {
-		clickElement(apLocator.accountPreferenceTabButton);
+		clickElement(apLocator.accountPreferencesTabButton);
 	    if (!isAccountPreferenceTabSelected()) {
 	        throw new IllegalStateException("Account Preference Tab Not Selected");
 	    }
 	    return this;
+	}
+	
+	public boolean isAccountPreferencesTabNavigationSuccessful() {
+		clickElement(apLocator.accountPreferencesTabButton);
+		return isAccountPreferenceTabSelected();
 	}
 	
 	public AccountPreferencesPageActionsFrig selectMyOrdersTab() {
@@ -73,6 +78,11 @@ public class AccountPreferencesPageActionsFrig {
 	    return this;
 	}
 	
+	public boolean isMyOrdersTabNavigationSuccessful() {
+		clickElement(apLocator.myOrdersTabButton);
+		return isMyOrdersTabSelected();
+	}
+	
 	public AccountPreferencesPageActionsFrig selectMyAppliancesTab() {
 	    clickElement(apLocator.myAppliancesTabButton);
 	    if (!isMyAppliancesTabSelected()) {
@@ -81,24 +91,22 @@ public class AccountPreferencesPageActionsFrig {
 	    return this;
 	}
 	
+	public boolean isMyAppliancesTabNavigationSuccessful() {
+		clickElement(apLocator.myAppliancesTabButton);
+		return isMyAppliancesTabSelected();
+	}
+	
 	public AccountPreferencesPageActionsFrig selectMySubscriptionTab() {
-	    clickElement(apLocator.mySubscriptionTabButton);
+	    clickElement(apLocator.mySubscriptionsTabButton);
 	    if (!isMySubscriptionTabSelected()) {
 	        throw new IllegalStateException("My Subscription Tab Not Selected");
 	    }
 	    return this;
 	}
 	
-	public boolean isAllTabsNavigationSuccessful() {
-	    try {
-	        selectAccountPreferenceTab();
-	        selectMyOrdersTab();
-	        selectMyAppliancesTab();
-	        selectMySubscriptionTab();
-	        return true; 
-	    } catch (Exception e) {
-	        return false;
-	    }
+	public boolean isMySubscriptionsTabNavigationSuccessful() {
+		clickElement(apLocator.mySubscriptionsTabButton);
+		return isMySubscriptionTabSelected();
 	}
 	
 	public boolean isShippingDetailsAddressBoxesDisplayed() {

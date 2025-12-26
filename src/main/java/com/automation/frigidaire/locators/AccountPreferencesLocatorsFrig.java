@@ -3,8 +3,8 @@ import org.openqa.selenium.By;
 
 public class AccountPreferencesLocatorsFrig {
 	
-    public final By accountPreferenceTabButton = By.xpath("//button[@id='myaccountPreferenceComponentelx']");
-    public final By mySubscriptionTabButton = By.xpath("//button[@id='mysubcriptionsComponentelx']");
+    public final By accountPreferencesTabButton = By.xpath("//button[@id='myaccountPreferenceComponentelx']");
+    public final By mySubscriptionsTabButton = By.xpath("//button[@id='mysubcriptionsComponentelx']");
     public final By myOrdersTabButton = By.xpath("//button[@id='myordersComponentelx']");
     public final By myAppliancesTabButton = By.xpath("//button[@id='myappliancesComponentelx']");
     public final By shippingDetailsAddressBoxes = By.cssSelector("div.address-wrapper");
