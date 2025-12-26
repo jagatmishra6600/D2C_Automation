@@ -8,7 +8,7 @@ import com.automation.frigidaire.pages.AccountPreferencesPageActionsFrig;
 import com.automation.frigidaire.pages.HomePageActionsFrig;
 import com.automation.utils.ExtentReportManager;
 
-public class TC_01_AQA_MyAccount_AccountPreferences_Frig extends BaseTest {
+public class EPIC_06_TC_01_AQA_MyAccount_AccountPreferences_Frig extends BaseTest {
 	 HomePageActionsFrig homePage = new HomePageActionsFrig();
 	 AccountPreferencesPageActionsFrig accountPreferencePage = new AccountPreferencesPageActionsFrig();
 	 
