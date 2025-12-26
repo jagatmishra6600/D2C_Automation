@@ -551,7 +551,8 @@ public class WebElementUtil {
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
         } catch (Exception e) { throw new RuntimeException(e); }
-
+    }
+    
     public static float  getValueOfDom(By locator) {
         WebDriver driver = DriverManager.getDriver();
         WebElement element = driver.findElement(locator);
