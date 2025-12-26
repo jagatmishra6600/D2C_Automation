@@ -4,6 +4,7 @@ import com.automation.electrolux.pages.HomePageActionsElux;
 import com.automation.electrolux.pages.PdpPageActionsElux;
 import com.automation.utils.ConfigReader;
 import com.automation.utils.DriverManager;
+import com.automation.utils.UserTestData;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.By;
@@ -40,6 +41,10 @@ public class HomePageActionsFrig {
     private final By mainMenu_searchSuggestions = By.xpath("//*[@class='suggestions font-weight-bold']");
     private final By mainMenu_searchSuggestions_FirstElement = By.xpath("//*[@class='suggestions font-weight-bold']/a[1]");
     private final By mainMenu_searchSuggestions_Landing = By.cssSelector("div[class='title mb-1'] h1 p");
+   
+    private final By mainMenu_ProfileDropdown = By.xpath("//a//span[contains(@class,'welcome-name')]"); 
+    private final By mainMenu_ProfileDropdown_MyAccountLink =By.xpath("//a[normalize-space()='My account']");
+    
     //************************** Header Menu Bar Locators **************************
     private final By mainMenu_Logo = By.xpath("//img[@alt='Frigidaire Company Logo']");
     private final By headerMenu_Kitchen = By.cssSelector("h5[aria-label='Kitchen']");
@@ -812,5 +817,40 @@ public HomePageActionsFrig acceptCookies() {
         // Cookie banner not present or not interactable; continue
     }
     return this;
+}
+
+public HomePageActionsFrig clickProfileDropdown() {
+	WebElementUtil.scrollIntoView(homePage_Locator.mainMenu_ProfileDropdown);
+    WebElementUtil.clickElement(homePage_Locator.mainMenu_ProfileDropdown);
+    return this;
+}
+
+public HomePageActionsFrig clickMyAccountLink() {
+	WebElementUtil.scrollIntoView(homePage_Locator.mainMenu_ProfileDropdown_MyAccountLink);
+    WebElementUtil.clickElement(homePage_Locator.mainMenu_ProfileDropdown_MyAccountLink);
+    return this;
+}
+
+public AccountPreferencesPageActionsFrig navigateToAccountPreferencesPage() {
+	clickProfileDropdown();
+	var count=0;
+	while(!WebElementUtil.isDisplayed(homePage_Locator.mainMenu_ProfileDropdown_MyAccountLink) && count<2) {
+		clickProfileDropdown();
+		count++;
+	}
+	if (!WebElementUtil.isDisplayed(homePage_Locator.mainMenu_ProfileDropdown_MyAccountLink)) {
+        throw new RuntimeException("Profile dropdown did not open. 'My Account' not visible.");
+    }
+	clickMyAccountLink();
+	return new AccountPreferencesPageActionsFrig();
+}
+
+public HomePageActionsFrig login(String emailAddress, String password) {
+	return navigateToLoginPage().login(emailAddress, password);
+}
+
+public HomePageActionsFrig loginWithDefaultCredentials()  {
+    return navigateToLoginPage()
+            .login(UserTestData.getUserName(), UserTestData.getPassword());
 }
 }

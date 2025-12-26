@@ -16,5 +16,7 @@ public class HomepageLocatorsFrig {
     public final By accesProductLink = By.xpath("(//a[contains(@title, 'Top Mount Refrigerator Ice Maker Kit')])[1]");
     public final By homePageTemplate = By.cssSelector("cx-page-layout.FrigiHomePageTemplate1");
     public final By userGreetingDropdownButton = By.xpath("(//a[@id='dropdownMenuButton' and contains(.,'Hello')])[1]");
-
+    public final By mainMenu_ProfileDropdown = By.xpath("//a//span[contains(@class,'welcome-name')]"); 
+    public final By mainMenu_ProfileDropdown_MyAccountLink =By.xpath("//a[normalize-space()='My account']");
+    
 }
