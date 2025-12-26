@@ -39,7 +39,7 @@ public class EPIC_06_TC_01_AQA_MyAccount_AccountPreferences_Frig extends BaseTes
 	    							,"Address Detail in one or more Address is not present");	
 	    	assertTrue(accountPreferencePage.hasAllAddressBoxActionButtons()
 	    							,"Address box is missing one or more buttons (Default/Set as Default, Edit, Delete).");
-	    	ExtentReportManager.getTest().pass("User successfully navigated through all tabs on the My Account page and verified each tab loaded correctly.");  	    
+	    	ExtentReportManager.getTest().pass("Verified all saved addresses, address details, and action buttons are displayed correctly in the Shipping Details section.");  	    
 	 }
 	 
 	 @Test(groups = {"smoke", "regression"}, description = "Verify that the Add New Address section displays all required fields, labels, checkboxes, dropdowns, and action buttons in the Account Preferences Page.")
