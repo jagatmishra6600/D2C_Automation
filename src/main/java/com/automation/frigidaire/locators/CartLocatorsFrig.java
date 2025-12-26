@@ -5,7 +5,7 @@ public class CartLocatorsFrig {
     public final By orderSummaryText = By.xpath("//h4[normalize-space(text())='Order summary']");
     public final By subtotalText = By.xpath("//div[normalize-space(text())='Subtotal']");
     public final By subtotalPrice = By.xpath("//div[normalize-space(text())='Subtotal']/following-sibling::div[contains(@class, 'summary-amount')]");
-    public final By installationPartsText =  By.xpath("//div[normalize-space(text())='Installation parts']");
+    public final By installationPartsText = By.xpath("//div[normalize-space(text())='Installation parts']");
     public final By installationPartsPrice = By.xpath("//div[normalize-space(text())='Installation parts']/following-sibling::div[contains(@class, 'summary-amount')]");
     public final By totalText = By.xpath("//div[normalize-space(text())='Total']");
     public final By totalPrice = By.xpath("//div[normalize-space(text())='Total']/following-sibling::div[contains(@class, 'summary-amount')]");
@@ -26,9 +26,27 @@ public class CartLocatorsFrig {
     public final By applyPromoCodeButton = By.id("submitCouponButton");
     public final By promoErrorMessage = By.xpath("//div[@id='appliedCouponMessage']//b");
 
+    //  Error message for currently unavailable products locators
 
+    public final By SmallAppliances = By.xpath(" //*[@class='undefined' and text()=' Small Appliances ']");
+    public final By Espressomaker = By.xpath("//*[ text()=' Espresso Maker ']");
+    public final By Addtocartbutton = By.xpath("(//*[@class='ng-star-inserted' and text()=' Add to cart '])[2]");
+    public final By SaveandViewCart = By.xpath("//*[@class='btn btn-block btn-primary ng-star-inserted']");
+    public final By Cancelbutton = By.xpath("//*[@src=\"/icons/frg-icons-close-d-7-CartModal.webp\"]");
+    public final By Retrominifridge = By.xpath("//*[@class='secondarycategory text-wrap zeplinStyleChild mb-0 Charcoal ng-star-inserted' and text() = '  Retro Mini Fridges ']");
+    public final By itemaddtocart = By.xpath("(//*[@class='ng-star-inserted' and text()=' Add to cart '])[3]");
+    public final By Minifridgetwo = By.xpath(" (//*[@class='ng-star-inserted' and text()=' Add to cart '])[2]");
+    public final By Accessories = By.xpath(" //*[@class='familyStore-Nav-Multi']");
+    public final By Icemakers = By.xpath(" //*[@class='secondarycategory text-wrap zeplinStyleChild mb-0 ng-star-inserted' and text()=' Ice Makers ']");
+    public final By Icemakersproduct = By.xpath(" (//*[@class='ng-star-inserted' and text()=' Add to cart '])[1]");
+    public final By YourCart = By.xpath("//h1[@class='count Your-cart-1 H1H1_Desktop_Reg ng-star-inserted']");
 
-
-
+    public final By Carticon = By.xpath("//*[@class='elxIconsCart' and @ src='/icons/frg-icons-cart-1-f-6-d-2.svg']");
+    public final By Currentlyunavailable = By.xpath(" (//*[@class='H4H4_Desktop col-md-11 col-12 p-0 m-0'])[1]");
+    public final By Itemcurrentlyunavailable = By.xpath("(//*[@class='stock-msg removeMobileText'])[1]");
+    public final By Removefromcart = By.xpath("( (//*[@class='textDecoration' and text()=' Remove from cart '])[1]");
+    public final By Itemremoved = By.xpath("(//*[@class='modal-subTitle' and text()='The following item(s) have been removed from your cart.']");
+    public final By Proccedtocheckoutbutton = By.xpath("(//*[@class='btn w-100 btn-orange ng-star-inserted' ]");
+    public final By Continueshopping = By.xpath("(//*[@class='btn w-100 btn-outline-dark']");
 
 }

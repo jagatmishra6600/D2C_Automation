@@ -3,6 +3,7 @@ package com.automation.frigidaire.locators;
 import org.openqa.selenium.By;
 
 public class DandSLocatorsFrig {
+
     public final By itemAddedToCartText = By.xpath("//span[text()='Item added to cart']");
     public final By productTitleText = By.xpath("//p[contains(@class, 'product-title')]");
     public final By productIdText = By.xpath("//p[contains(@class, 'product-title')]//..//following-sibling::p");
