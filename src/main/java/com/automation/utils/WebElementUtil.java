@@ -555,7 +555,7 @@ public class WebElementUtil {
         }
     }
 
-    public static float  getValueOfDom(By locator) {
+    public static float getValueOfDom (By locator){
         WebDriver driver = DriverManager.getDriver();
         WebElement element = driver.findElement(locator);
 
@@ -569,6 +569,5 @@ public class WebElementUtil {
         return converStringToFloat(value);
 
     }
-
 
 }
