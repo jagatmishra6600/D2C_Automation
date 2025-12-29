@@ -546,13 +546,16 @@ public class WebElementUtil {
 
     public static void clickElementUsingJSE(By locator) {
         try {
-            WebDriver driver=DriverManager.getDriver();
+            WebDriver driver = DriverManager.getDriver();
             WebElement element = driver.findElement(locator);
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
-        } catch (Exception e) { throw new RuntimeException(e); }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-    public static float  getValueOfDom(By locator) {
+    public static float getValueOfDom (By locator){
         WebDriver driver = DriverManager.getDriver();
         WebElement element = driver.findElement(locator);
 
@@ -566,6 +569,5 @@ public class WebElementUtil {
         return converStringToFloat(value);
 
     }
-
 
 }

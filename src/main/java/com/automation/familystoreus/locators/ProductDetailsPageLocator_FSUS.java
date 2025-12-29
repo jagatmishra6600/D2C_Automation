@@ -19,5 +19,6 @@ public class ProductDetailsPageLocator_FSUS {
     public final By specificationText = By.xpath("//h3[text()='Specifications']");
     public final By closeModelButton = By.xpath("//h3[text()='Specifications']/following-sibling::img");
     public final By addToCartButton = By.xpath("(//span[normalize-space(text())='Add to cart'])[1]");
+    public final By viewCartButton = By.xpath("//app-elux-add-to-cart-popup//a[text()='View cart']");
 
 }

@@ -159,4 +159,10 @@ public class PdpPageActions_FSUS {
         return actualDepth.equalsIgnoreCase(expectedDepth);
     }
 
+    public CartPageAction_FSUS clickViewCartButton() {
+        WebElementUtil.scrollToElementCenter(pdpPage_Locator.viewCartButton);
+        WebElementUtil.clickElement(pdpPage_Locator.viewCartButton);
+        return new CartPageAction_FSUS();
+    }
+
 }
