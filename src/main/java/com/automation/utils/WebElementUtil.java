@@ -49,7 +49,7 @@ public class WebElementUtil {
             WebElement element = waitForElementToBeVisible(locator);
             Actions actions = new Actions(DriverManager.getDriver());
             actions.moveToElement(element).perform();
-        }, 3, 1000);
+        }, 3, 10);
     }
 
     public static Set<String> getWindowHandles() { return DriverManager.getDriver().getWindowHandles(); }
@@ -67,14 +67,14 @@ public class WebElementUtil {
         }
     }
 
-    public static void clickElement(By locator) { retryOnFailure(() -> waitForElementToBeClickable(locator).click(), 3, 1000); }
+    public static void clickElement(By locator) { retryOnFailure(() -> waitForElementToBeClickable(locator).click(), 3, 10); }
 
     public static void sendKeys(By locator, String text) {
         retryOnFailure(() -> {
             WebElement element = waitForElementToBeVisible(locator);
             element.clear();
             element.sendKeys(text);
-        }, 3, 1000);
+        }, 3, 10);
     }
 
     public static void zoomInOrOut(int zoomPercentage) {
@@ -88,7 +88,7 @@ public class WebElementUtil {
 
     public static String getText(By locator) {
         final String[] text = new String[1];
-        retryOnFailure(() -> text[0] = waitForElementToBeVisible(locator).getText(), 3, 1000);
+        retryOnFailure(() -> text[0] = waitForElementToBeVisible(locator).getText(), 3, 10);
         return text[0];
     }
 
@@ -361,7 +361,7 @@ public class WebElementUtil {
             } else {
                 js.executeScript("arguments[0].click();", element);
             }
-        }, 3, 1000);
+        }, 3, 10);
     }
     
     public static void openLinkInNewTab(By locator) {
@@ -435,7 +435,7 @@ public class WebElementUtil {
         final String[] value = new String[1];
         retryOnFailure(() ->
                         value[0] = waitForElementToBeVisible(locator).getAttribute(attributeName),
-                3, 1000);
+                3, 10);
 
         return value[0];
     }
