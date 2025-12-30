@@ -3,12 +3,13 @@ package com.automation.frigidaire.pages;
 import com.automation.frigidaire.locators.OrderItemsLocatorsFrig;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.By;
+import org.testng.Assert;
 
 public class OrderItemsPageActionsFrig {
 
     OrderItemsLocatorsFrig orderItems = new OrderItemsLocatorsFrig();
 
-    public void orderItemsDetails(){
+    public void orderItemsDetails() {
         verifyElement(orderItems.orderItemsHeader, "Order Items Header");
         verifyElement(orderItems.orderProductName, "Product Name");
         verifyElement(orderItems.productPriceDiscount, "Product Price Discount");
@@ -21,13 +22,10 @@ public class OrderItemsPageActionsFrig {
     }
 
     public void verifyElement(By locator, String elementName) {
-        try {
-            WebElementUtil.waitForElementToBeVisible(locator, 10);
-            WebElementUtil.isDisplayed(locator);
-            System.out.println(elementName + " is displayed.");
-        } catch (Exception e) {
-            System.out.println(elementName + " is NOT present.");
-        }
+        WebElementUtil.waitForElementToBeVisible(locator, 10);
+        Assert.assertTrue(
+                WebElementUtil.isDisplayed(locator),
+                elementName + " is NOT displayed in Order Items section."
+        );
     }
-
 }

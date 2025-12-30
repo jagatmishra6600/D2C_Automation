@@ -42,12 +42,15 @@ public class EPIC_11_TC_02_OrderSummary extends BaseTest {
         List<String> labels = Arrays.asList("Subtotal", "Installation parts", "Add-on services", "Parcel shipping",
                 "tap protection plan", "Sales tax");
         for(String label : labels){
-            cposPage.verifySubtotal(label);
+            Assert.assertTrue(
+                    cposPage.verifySubtotal(label), "Order summary label '" + label + "' is not displayed.");
         }
 
         List<String> summaryTexts = Arrays.asList("Total", "You saved", "Package savings", "Cart savings", "Cart discounts");
         for(String total : summaryTexts){
-            cposPage.verifySubtotal(total);
+            Assert.assertTrue(
+                    cposPage.verifySubtotal(total), "Order summary text '" + total + "' is not displayed."
+            );
         }
 
         ExtentReportManager.getTest().pass("Verify Order Summary Pages.");

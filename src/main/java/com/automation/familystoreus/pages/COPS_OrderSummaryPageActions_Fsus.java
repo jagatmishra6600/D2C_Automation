@@ -1,54 +1,29 @@
 package com.automation.familystoreus.pages;
 
+import com.automation.familystoreus.locators.COPS_orderSummaryLocatorsFsus;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.By;
 
 public class COPS_OrderSummaryPageActions_Fsus {
 
-    public By searchBox = By.xpath("//input[@class='navSearchDirty']");
-    public By searchButton = By.xpath("//cx-icon[@class=\"elxIconsSearch search cx-icon fas fa-search\"]");
-    public By clickOnProductLink = By.xpath("//a[@class=\"text-decoration-none\"]");
-
-    public By addToCart = By.xpath("//span[text()=' Add to cart ']");
-    //public By saveAndViewCart = By.xpath("//button[@class='btn btn-orange btn-block saveViewCart']");
-    //public By viewCartButton = By.xpath("//a[@class='btn btn-block btn-orange view-cart']");
-    public By viewOrSaveCartButton = By.xpath("//button[@class=\"btn btn-orange btn-block saveViewCart ng-star-inserted\"] | //a[@class='btn btn-block btn-orange view-cart']");
-    public By proceedToCheckoutButton = By.xpath("//button[@class='proceedToCheckout btn btn-orange btn-block']");
-    public By newAddress = By.xpath("//button[text()=\" Add New Address \"]");
-
-    public By firstNameInput = By.xpath("//input[@id='firstName']");
-    public By lastNameInput = By.xpath("//input[@id='lastName']");
-    public By addressLine1Input = By.xpath("//input[@id='address-1']");
-    public By addressTypeaheadOption = By.xpath("//button[@id='ngb-typeahead-0-1']");
-    public By zipCodeInput = By.xpath("//input[@id='zipcode']");
-    public By continueToDeliveryButton = By.xpath("//button[@name='continueToDeliveryButton']");
-    public By saveAndContinueButton = By.xpath("//button[text()='Save & continue']");
-
-    public By subtotalText(String text) {
-        return By.xpath("//div[contains(normalize-space(), '" + text + "')]");
-    }
-
+    COPS_orderSummaryLocatorsFsus orderSummaryFsus = new COPS_orderSummaryLocatorsFsus();
     public void searchProducts(String skuNumber) {
 
-        WaitUtils.sleep(3000);
+        WaitUtils.sleep(5000);
         WaitUtils.untilPageLoadComplete();
-        WebElementUtil.waitForElementToBeVisible(searchBox, 10);
-        WebElementUtil.sendKeys(searchBox, skuNumber);
+        WebElementUtil.scrollToElementStable(orderSummaryFsus.searchBox);
+        WebElementUtil.waitForElementToBeVisible(orderSummaryFsus.searchBox, 10);
+        WebElementUtil.sendKeys(orderSummaryFsus.searchBox, skuNumber);
 
-        WebElementUtil.waitForElementToBeClickable(searchButton, 10);
-        WebElementUtil.clickElement(searchButton);
+        WebElementUtil.waitForElementToBeClickable(orderSummaryFsus.searchButton, 10);
+        WebElementUtil.clickElement(orderSummaryFsus.searchButton);
 
         WaitUtils.sleep(3000);
-        WebElementUtil.scrollToElementStable(clickOnProductLink);
-        WebElementUtil.waitForElementToBeVisible(clickOnProductLink,10);
-        WebElementUtil.waitForElementToBeClickable(clickOnProductLink,10);
-        WebElementUtil.clickElement(clickOnProductLink);
     }
 
     private void scrollWaitAndClick(By element) {
         WaitUtils.sleep(3000);
-        //WebElementUtil.scrollToElementStable(element);
         WebElementUtil.scrollToElementCenter(element);
         WebElementUtil.waitForElementToBeVisible(element, 10);
         WebElementUtil.waitForElementToBeClickable(element, 10);
@@ -56,56 +31,63 @@ public class COPS_OrderSummaryPageActions_Fsus {
     }
 
     public void clickOnProductBundle() {
-        scrollWaitAndClick(addToCart);
-        //scrollWaitAndClick(viewOrSaveCartButton);
+        WebElementUtil.waitForElementToBeVisible(orderSummaryFsus.addToCart,10);
+        scrollWaitAndClick(orderSummaryFsus.addToCart);
+    }
+    public void selectAddOnProtectionPlan(){
+        WaitUtils.sleep(5000);
+        WaitUtils.untilPageLoadComplete();
+        WebElementUtil.waitForElementToBeVisible(orderSummaryFsus.addOnServices,20);
+        WebElementUtil.scrollToElementStable(orderSummaryFsus.addOnServices);
+
+        WebElementUtil.scrollToElementStable(orderSummaryFsus.addOnServiceSelect);
+        WebElementUtil.waitForElementToBeClickable(orderSummaryFsus.addOnServiceSelect,10);
+        WebElementUtil.clickElement(orderSummaryFsus.addOnServiceSelect);
+
+        WebElementUtil.scrollToElementStable(orderSummaryFsus.protectionPlansSelect);
+        WebElementUtil.waitForElementToBeClickable(orderSummaryFsus.protectionPlansSelect,20);
+        WebElementUtil.clickElement(orderSummaryFsus.protectionPlansSelect);
     }
 
     public void clickOnProductRacks() {
-        scrollWaitAndClick(addToCart);
-        //scrollWaitAndClick(viewOrSaveCartButton);
+        scrollWaitAndClick(orderSummaryFsus.addToCart);
     }
 
     public void clickOnProceedCheckout() {
-        scrollWaitAndClick(viewOrSaveCartButton);
-        scrollWaitAndClick(proceedToCheckoutButton);
+        scrollWaitAndClick(orderSummaryFsus.viewOrSaveCartButton);
+        scrollWaitAndClick(orderSummaryFsus.proceedToCheckoutButton);
     }
 
-    public void enterAddressDetails(String zipCode) {
+    public void enterAddressDetails(String firstName, String lastName,String zipCode) {
 
-        try {
-            scrollWaitAndClick(newAddress);
+        scrollWaitAndClick(orderSummaryFsus.newAddress);
 
-            WebElementUtil.waitForElementToBeVisible(firstNameInput, 10);
-            WebElementUtil.sendKeys(firstNameInput, "Tester");
+        WebElementUtil.waitForElementToBeVisible(orderSummaryFsus.firstNameInput, 10);
+        WebElementUtil.sendKeys(orderSummaryFsus.firstNameInput, firstName);
 
-            WebElementUtil.waitForElementToBeVisible(lastNameInput, 10);
-            WebElementUtil.sendKeys(lastNameInput, "Test");
+        WebElementUtil.waitForElementToBeVisible(orderSummaryFsus.lastNameInput, 10);
+        WebElementUtil.sendKeys(orderSummaryFsus.lastNameInput, lastName);
 
-            WebElementUtil.waitForElementToBeVisible(addressLine1Input, 10);
-            WebElementUtil.sendKeys(addressLine1Input, zipCode);
+        WebElementUtil.waitForElementToBeVisible(orderSummaryFsus.addressLine1Input, 10);
+        WebElementUtil.sendKeys(orderSummaryFsus.addressLine1Input, zipCode);
 
-            WebElementUtil.waitForElementToBeVisible(addressTypeaheadOption, 10);
-            WebElementUtil.clickElement(addressTypeaheadOption);
+        WebElementUtil.waitForElementToBeVisible(orderSummaryFsus.addressTypeaheadOption, 10);
+        WebElementUtil.clickElement(orderSummaryFsus.addressTypeaheadOption);
 
-            WaitUtils.sleep(3000);
-            WebElementUtil.waitForElementToBeVisible(zipCodeInput, 10);
-            WebElementUtil.sendKeys(zipCodeInput, zipCode);
+        WaitUtils.sleep(3000);
+        WebElementUtil.waitForElementToBeVisible(orderSummaryFsus.zipCodeInput, 10);
+        WebElementUtil.sendKeys(orderSummaryFsus.zipCodeInput, zipCode);
 
-            WebElementUtil.waitForElementToBeVisible(continueToDeliveryButton, 10);
-            WebElementUtil.clickElement(continueToDeliveryButton);
+        WebElementUtil.scrollToElementStable(orderSummaryFsus.continueToDeliveryButton);
+        WebElementUtil.waitForElementToBeVisible(orderSummaryFsus.continueToDeliveryButton, 10);
+        WebElementUtil.clickElement(orderSummaryFsus.continueToDeliveryButton);
 
-            WebElementUtil.waitForElementToBeVisible(saveAndContinueButton, 10);
-            WebElementUtil.clickElement(saveAndContinueButton);
-        } catch (Exception e) {
-
-        }
+        WebElementUtil.waitForElementToBeVisible(orderSummaryFsus.saveAndContinueButton, 10);
+        WebElementUtil.clickElement(orderSummaryFsus.saveAndContinueButton);
     }
 
-    public void verifySubtotal(String text) {
-        try {
-            WebElementUtil.waitForElementToBeVisible(subtotalText(text), 10);
-            WebElementUtil.isDisplayed(subtotalText(text));
-        } catch (Exception e) {
-        }
+    public boolean verifySubtotal(String text) {
+        WebElementUtil.waitForElementToBeVisible(orderSummaryFsus.subtotalText(text), 10);
+        return WebElementUtil.isDisplayed(orderSummaryFsus.subtotalText(text));
     }
 }

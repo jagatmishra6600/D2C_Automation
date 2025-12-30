@@ -35,12 +35,9 @@ public class COPS_OrderSummaryPageActionsFrig {
     }
 
 
-    public void verifySubtotal(String text) {
-        try {
-            WebElementUtil.waitForElementToBeVisible(orderSummary.subtotalText(text), 10);
-            WebElementUtil.isDisplayed(orderSummary.subtotalText(text));
-        } catch (Exception e) {
-        }
+    public boolean verifySubtotal(String text) {
+        WebElementUtil.waitForElementToBeVisible(orderSummary.subtotalText(text), 10);
+        return WebElementUtil.isDisplayed(orderSummary.subtotalText(text));
     }
 
 }
