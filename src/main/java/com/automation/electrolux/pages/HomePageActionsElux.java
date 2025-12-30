@@ -165,5 +165,32 @@ public class HomePageActionsElux {
     public ForgotPasswordPageActionsElux navigateToResetPasswordPage() {
         return navigateToHomePage().navigateToLoginPage().clickForgotPasswordLink();
     }
+    
+    public HomePageActionsElux clickProfileDropdown() {
+    	WebElementUtil.isDisplayed(homePage_Locator.mainMenu_ProfileDropdown);
+    	WebElementUtil.scrollIntoView(homePage_Locator.mainMenu_ProfileDropdown);
+        WebElementUtil.clickElement(homePage_Locator.mainMenu_ProfileDropdown);
+        return this;
+    }
+    
+    public HomePageActionsElux clickMyAccountLink() {
+    	WebElementUtil.scrollIntoView(homePage_Locator.mainMenu_ProfileDropdown_MyAccountLink);
+        WebElementUtil.clickElement(homePage_Locator.mainMenu_ProfileDropdown_MyAccountLink);
+        return this;
+    }
+	
+	public AccountPreferencesPageActionsElux navigateToAccountPreferencesPage() {
+    	clickProfileDropdown();
+    	var count=0;
+    	while(!WebElementUtil.isDisplayed(homePage_Locator.mainMenu_ProfileDropdown_MyAccountLink) && count<2) {
+    		clickProfileDropdown();
+    		count++;
+    	}
+    	if (!WebElementUtil.isDisplayed(homePage_Locator.mainMenu_ProfileDropdown_MyAccountLink)) {
+            throw new RuntimeException("Profile dropdown did not open. 'My Account' not visible.");
+        }
+    	clickMyAccountLink();
+    	return new AccountPreferencesPageActionsElux();
+    }
 
 }

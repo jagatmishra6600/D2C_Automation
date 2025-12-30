@@ -1,16 +1,17 @@
-package com.automation.frigidaire.EPIC_06_MyAccount;
+package com.automation.electrolux.EPIC_06_MyAccount;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
 import com.automation.BaseTest;
-import com.automation.frigidaire.pages.AccountPreferencesPageActionsFrig;
-import com.automation.frigidaire.pages.HomePageActionsFrig;
+
+import com.automation.electrolux.pages.AccountPreferencesPageActionsElux;
+import com.automation.electrolux.pages.HomePageActionsElux;
 import com.automation.utils.ExtentReportManager;
 
-public class EPIC_06_TC_01_AQA_MyAccount_AccountPreferences_Frig extends BaseTest {
-	 HomePageActionsFrig homePage = new HomePageActionsFrig();
-	 AccountPreferencesPageActionsFrig accountPreferencePage = new AccountPreferencesPageActionsFrig();
+public class EPIC_06_TC_01_AQA_MyAccount_AccountPreferences extends BaseTest {
+	 private HomePageActionsElux homePage = new HomePageActionsElux();
+	 private AccountPreferencesPageActionsElux accountPreferencePage = new AccountPreferencesPageActionsElux();
 	 
 	 @Test(groups = {"smoke", "regression"}, description = "Verify user navigation to the Account Preferences page")
 	    public void EPIC_06_TC_01_S1_VerifyNavigationToMyAccountPreferencesPage() {	
@@ -20,17 +21,17 @@ public class EPIC_06_TC_01_AQA_MyAccount_AccountPreferences_Frig extends BaseTes
 	    	ExtentReportManager.getTest().pass("Verified navigation to the Account Preferences page successfully.");  	    
 	 } 
 	 
-	 @Test(groups = {"smoke", "regression"}, description = "Verify that the user can navigate through all tabs on the Account Preferences Page")
-	    public void EPIC_06_TC_01_S2_VerifyTabularNavigationOnAccountPreferencesPage() {
+	 @Test(groups = {"smoke", "regression"}, description = "Verify that the user can navigate through all tabs on the My Account page")
+	    public void EPIC_06_TC_01_S2_VerifyTabularNavigationOnMyAccountPage(){
 		 	loginAndNavigateToAccountPreferencesPage();
 	    	assertTrue(accountPreferencePage.isAccountPreferencesTabNavigationSuccessful(),"User is not navigated to Account Preferences Tab");
 	    	assertTrue(accountPreferencePage.isMyOrdersTabNavigationSuccessful(),"User is not navigated to My Orders Tab");
 	    	assertTrue(accountPreferencePage.isMySubscriptionsTabNavigationSuccessful(),"User is not navigated to My Subscriptions Tab");
-	    	assertTrue(accountPreferencePage.isMyAppliancesTabNavigationSuccessful(),"User is not navigated to My Appliances Tab");
+	    	assertTrue(accountPreferencePage.isMyAppliancesTabNavigationSuccessful(),"User is not navigated to My Appliances Tab");  	
 	    	ExtentReportManager.getTest().pass("User successfully navigated through all tabs on the My Account page and verified each tab loaded correctly.");  	    
 	 } 
 	 
-	 @Test(groups = {"smoke", "regression"}, description = "Verify Shipping Details Section have Saved Addresses and Edit and Set To Default button in each of them in the Account Preferences Page")
+	 @Test(groups = {"smoke", "regression"}, description = "Verify Shipping Details Section have Saved Addresses and Edit and Set To Default button in each of them")
 	    public void EPIC_06_TC_01_S3_VerifyShippingDetailsSectionInAccountPreferencesPage() {
 		 	loginAndNavigateToAccountPreferencesPage();
 	    	assertTrue(accountPreferencePage.isShippingDetailsAddressBoxesDisplayed()
@@ -42,9 +43,9 @@ public class EPIC_06_TC_01_AQA_MyAccount_AccountPreferences_Frig extends BaseTes
 	    	ExtentReportManager.getTest().pass("Verified all saved addresses, address details, and action buttons are displayed correctly in the Shipping Details section.");  	    
 	 }
 	 
-	 @Test(groups = {"smoke", "regression"}, description = "Verify that the Add New Address section displays all required fields, labels, checkboxes, dropdowns, and action buttons in the Account Preferences Page.")
+	 @Test(groups = {"smoke", "regression"}, description = "Verify that the Add New Address section displays all required fields, labels, checkboxes, dropdowns, and action buttons.")
 	    public void EPIC_06_TC_01_S3_VerifyAddNewAddressSectionInAccountPreferencesPage() {
-		 	loginAndNavigateToAccountPreferencesPage();
+		    loginAndNavigateToAccountPreferencesPage();
 	    	accountPreferencePage.clickAddNewAddressButton();
 	    	
 	    	assertTrue(accountPreferencePage.isAddNewShippingAddressLabelDisplayed(),"Add New Shipping Address Label is not Displayed");
@@ -65,8 +66,8 @@ public class EPIC_06_TC_01_AQA_MyAccount_AccountPreferences_Frig extends BaseTes
 	    	ExtentReportManager.getTest().pass("Verified that all fields, labels, dropdowns, checkboxes, and action buttons in the Add New Address section are displayed correctly and the section closes on clicking Cancel.");  	    
 	 }
 	 
-	 @Test(groups = {"smoke", "regression"}, description = "Verify that the Change My Password section displays all required fields, labels, password rules, and action buttons in the Account Preferences Page.")
-	    public void EPIC_06_TC_01_S4_VerifyChangeMyPasswordSectionInAccountPreferencesPage() {
+	 @Test(groups = {"smoke", "regression"}, description = "Verify that the Change My Password section displays all required fields, labels, password rules, and action buttons.")
+	    public void EPIC_06_TC_01_S4_VerifyChangeMyPasswordSectionInAccountPreferencesPage()  {
 		 	loginAndNavigateToAccountPreferencesPage();
 
 	    	assertTrue(accountPreferencePage.isCurrentPasswordSectionDisplayed(),"Current Password field or its label is not displayed on the Change Password section.");
@@ -77,21 +78,21 @@ public class EPIC_06_TC_01_AQA_MyAccount_AccountPreferences_Frig extends BaseTes
 	    	
 	    	ExtentReportManager.getTest().pass("Verified that all fields, labels, password requirement text, and the Set Password button are displayed correctly in the Change My Password section.");  	    
 	 }
-	 
-	 @Test(groups = {"smoke", "regression"}, description = "Verify that the Help Section displays the correct support message and operating hours in the Account Preferences Page")
+	 	 
+	 @Test(groups = {"smoke", "regression"}, description = "Verify that the Help section in Account Preferences displays mail and phone support information along with correct operating hours.")
 	    public void EPIC_06_TC_01_S5_VerifyHelpSectionInAccountPreferencesPage() {
 		 	loginAndNavigateToAccountPreferencesPage();
-	    	assertTrue(accountPreferencePage.getNeedHelpBannerText().contains("Need help with your account? Chat with Us!"),
-	    			"'Need help with your account? Chat with Us!' message is not displayed in the Help Section.");	
-	    	assertTrue(accountPreferencePage.getNeedHelpBannerText().contains("Monday-Friday 8:30am-8:00pm ET"),
-	    			"Help Section operating hours are not displayed");	    	
-	    	ExtentReportManager.getTest().pass("Verified that the Help Section displays the support message and operating hours correctly.");  	    
+		 	assertTrue(accountPreferencePage.isMailSectionDisplayed(),"Mail Information section is not displayed in the help section.");
+		 	assertTrue(accountPreferencePage.isPhoneSectionDisplayed(),"Phone Contact Information  Section is not Displayed in help section");
+	    	assertTrue(accountPreferencePage.getKitchenLaundryPhoneSectionText().contains("Monday-Friday, 8:30AM-8PM (EST)")
+	    						,"Operating hours are not displayed in Kitchen Laundry Contact Information Section");
+	    	assertTrue(accountPreferencePage.getSmallKitchenAppliancePhoneSectionText().contains("Monday-Friday, 8:30AM-8PM (EST)")
+					,"Operating hours are not displayed in Small Kitchen Appliances Contact Information Section");
+	    	ExtentReportManager.getTest().pass("Verified Help section displays mail and phone support details along with correct operating hours for all contact categories.");  	    
 	 }
 	 
 	 private void loginAndNavigateToAccountPreferencesPage() {
 		 homePage.loginWithDefaultCredentials()
 			.navigateToAccountPreferencesPage();
-	 }
-	
-	 
+	 }	 
 }

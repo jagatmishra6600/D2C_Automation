@@ -22,5 +22,7 @@ public class HomepageLocatorsElux {
     public static final By userGreetingDropdownButton = By.xpath("(//a[@role='link' and contains(.,'Hello')])[1]");
     public static final By cookie_AcceptButton = By.id("onetrust-accept-btn-handler");
     public static final By accesProductLink = By.xpath("(//a[contains(@title, 'PureAdvantage')])[1]");
+    public final By mainMenu_ProfileDropdown = By.xpath("//a//span[contains(@class,'welcome-name')]"); 
+    public final By mainMenu_ProfileDropdown_MyAccountLink =By.xpath("//a[normalize-space()='My account']");
 
 }
