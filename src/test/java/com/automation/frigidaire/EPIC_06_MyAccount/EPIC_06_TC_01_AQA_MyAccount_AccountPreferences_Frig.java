@@ -13,7 +13,7 @@ public class EPIC_06_TC_01_AQA_MyAccount_AccountPreferences_Frig extends BaseTes
 	 AccountPreferencesPageActionsFrig accountPreferencePage = new AccountPreferencesPageActionsFrig();
 	 
 	 @Test(groups = {"smoke", "regression"}, description = "Verify user navigation to the Account Preferences page")
-	    public void TC_01_S1_VerifyNavigationToMyAccountPreferencesPage() {	
+	    public void EPIC_06_TC_01_S1_VerifyNavigationToMyAccountPreferencesPage() {	
 		 	loginAndNavigateToAccountPreferencesPage();
 	    	assertTrue(accountPreferencePage.isAccountPreferenceTabDisplayed(),"User can see the Account Preference Tab in My Accounts page");
 	    	assertTrue(accountPreferencePage.isUserNavigatedToAccountPreferencesPage(),"User is not Navigated to Account Preference page");
@@ -21,7 +21,7 @@ public class EPIC_06_TC_01_AQA_MyAccount_AccountPreferences_Frig extends BaseTes
 	 } 
 	 
 	 @Test(groups = {"smoke", "regression"}, description = "Verify that the user can navigate through all tabs on the Account Preferences Page")
-	    public void TC_01_S2_VerifyTabularNavigationOnAccountPreferencesPage() {
+	    public void EPIC_06_TC_01_S2_VerifyTabularNavigationOnAccountPreferencesPage() {
 		 	loginAndNavigateToAccountPreferencesPage();
 	    	assertTrue(accountPreferencePage.isAccountPreferencesTabNavigationSuccessful(),"User is not navigated to Account Preferences Tab");
 	    	assertTrue(accountPreferencePage.isMyOrdersTabNavigationSuccessful(),"User is not navigated to My Orders Tab");
@@ -31,7 +31,7 @@ public class EPIC_06_TC_01_AQA_MyAccount_AccountPreferences_Frig extends BaseTes
 	 } 
 	 
 	 @Test(groups = {"smoke", "regression"}, description = "Verify Shipping Details Section have Saved Addresses and Edit and Set To Default button in each of them in the Account Preferences Page")
-	    public void TC_01_S3_VerifyShippingDetailsSectionInAccountPreferencesPage() {
+	    public void EPIC_06_TC_01_S3_VerifyShippingDetailsSectionInAccountPreferencesPage() {
 		 	loginAndNavigateToAccountPreferencesPage();
 	    	assertTrue(accountPreferencePage.isShippingDetailsAddressBoxesDisplayed()
 	    							,"Address Boxes are not displayed in the Shipping Details Section");
@@ -43,7 +43,7 @@ public class EPIC_06_TC_01_AQA_MyAccount_AccountPreferences_Frig extends BaseTes
 	 }
 	 
 	 @Test(groups = {"smoke", "regression"}, description = "Verify that the Add New Address section displays all required fields, labels, checkboxes, dropdowns, and action buttons in the Account Preferences Page.")
-	    public void TC_01_S3_VerifyAddNewAddressSectionInAccountPreferencesPage() {
+	    public void EPIC_06_TC_01_S3_VerifyAddNewAddressSectionInAccountPreferencesPage() {
 		 	loginAndNavigateToAccountPreferencesPage();
 	    	accountPreferencePage.clickAddNewAddressButton();
 	    	
@@ -66,7 +66,7 @@ public class EPIC_06_TC_01_AQA_MyAccount_AccountPreferences_Frig extends BaseTes
 	 }
 	 
 	 @Test(groups = {"smoke", "regression"}, description = "Verify that the Change My Password section displays all required fields, labels, password rules, and action buttons in the Account Preferences Page.")
-	    public void TC_01_S4_VerifyChangeMyPasswordSectionInAccountPreferencesPage() {
+	    public void EPIC_06_TC_01_S4_VerifyChangeMyPasswordSectionInAccountPreferencesPage() {
 		 	loginAndNavigateToAccountPreferencesPage();
 
 	    	assertTrue(accountPreferencePage.isCurrentPasswordSectionDisplayed(),"Current Password field or its label is not displayed on the Change Password section.");
@@ -79,7 +79,7 @@ public class EPIC_06_TC_01_AQA_MyAccount_AccountPreferences_Frig extends BaseTes
 	 }
 	 
 	 @Test(groups = {"smoke", "regression"}, description = "Verify that the Help Section displays the correct support message and operating hours in the Account Preferences Page")
-	    public void TC_01_S5_VerifyHelpSectionInAccountPreferencesPage() {
+	    public void EPIC_06_TC_01_S5_VerifyHelpSectionInAccountPreferencesPage() {
 		 	loginAndNavigateToAccountPreferencesPage();
 	    	assertTrue(accountPreferencePage.getNeedHelpBannerText().contains("Need help with your account? Chat with Us!"),
 	    			"'Need help with your account? Chat with Us!' message is not displayed in the Help Section.");	
