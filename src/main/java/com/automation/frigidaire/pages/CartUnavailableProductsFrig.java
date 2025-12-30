@@ -1,55 +1,58 @@
 package com.automation.frigidaire.pages;
 
+import com.automation.electrolux.locators.CLPLocatorsElux;
 import com.automation.frigidaire.locators.CartLocatorsFrig;
 import com.automation.frigidaire.utils.WebElementUtil;
+import org.testng.Assert;
 
-public class CartUnavailableProductsFrig extends CartLocatorsFrig {
+public class CartUnavailableProductsFrig
+{
+    CartLocatorsFrig cartUnavailable_Locator = new CartLocatorsFrig();
 
     public void clickOnSmallAppliances() {
-        WebElementUtil.clickElement(SmallAppliances);
+        WebElementUtil.clickElement(cartUnavailable_Locator.SmallAppliances);
 
     }
     public void clickOnEspressomaker() {
-        WebElementUtil.clickElement(Espressomaker);
+        WebElementUtil.clickElement(cartUnavailable_Locator.Espressomaker);
 
     }
     public void clickOnSaveandViewCart() {
-        WebElementUtil.clickElement(SaveandViewCart);
+        WebElementUtil.clickElement(cartUnavailable_Locator.SaveandViewCart);
 
     }
     public void clickOnCancelbutton() {
-        WebElementUtil.clickElement(Cancelbutton);
+        WebElementUtil.clickElement(cartUnavailable_Locator.Cancelbutton);
 
     }
     public void clickOnRetrominifridge() {
-        WebElementUtil.clickElement(Retrominifridge);
+        WebElementUtil.clickElement(cartUnavailable_Locator.Retrominifridge);
 
     }
     public void clickOnitemaddtocart() {
-        WebElementUtil.clickElement(itemaddtocart);
+        WebElementUtil.clickElement(cartUnavailable_Locator.itemaddtocart);
 
     }
     public void clickOnMinifridgetwo() {
-        WebElementUtil.clickElement(Minifridgetwo);
+        WebElementUtil.clickElement(cartUnavailable_Locator.Minifridgetwo);
 
     }
     public void clickOnAccessories() {
-        WebElementUtil.clickElement(Accessories);
+        WebElementUtil.clickElement(cartUnavailable_Locator.Accessories);
 
     }
     public void clickOnIcemakers() {
-        WebElementUtil.clickElement(Icemakers);
+        WebElementUtil.clickElement(cartUnavailable_Locator.Icemakers);
 
     }
     public void clickOnIcemakersproduct() {
-        WebElementUtil.clickElement(Icemakersproduct);
+        WebElementUtil.clickElement(cartUnavailable_Locator.Icemakersproduct);
+        }
 
-    }
+
     public boolean verifyYourCart() {
-        WebElementUtil.isDisplayed(YourCart);
+        Assert.assertTrue(WebElementUtil.getText(cartUnavailable_Locator.YourCart).contains(" Empty cart"), "Empty cart text is not found");
         return true;
 
     }
-
-
     }

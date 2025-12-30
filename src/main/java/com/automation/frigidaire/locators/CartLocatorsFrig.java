@@ -1,4 +1,5 @@
 package com.automation.frigidaire.locators;
+import com.automation.electrolux.locators.CLPLocatorsElux;
 import org.openqa.selenium.By;
 
 public class CartLocatorsFrig {
@@ -34,11 +35,11 @@ public class CartLocatorsFrig {
     public final By Cancelbutton = By.xpath("//*[@src=\"/icons/frg-icons-close-d-7-CartModal.webp\"]");
     public final By Retrominifridge = By.xpath("//*[@class='secondarycategory text-wrap zeplinStyleChild mb-0 Charcoal ng-star-inserted' and text() = '  Retro Mini Fridges ']");
     public final By itemaddtocart = By.xpath("(//*[@class='ng-star-inserted' and text()=' Add to cart '])[3]");
-    public final By Minifridgetwo = By.xpath(" (//*[@class='ng-star-inserted' and text()=' Add to cart '])[2]");
+    public final By Minifridgetwo = By.xpath(" (//*[@class='addToCart btn btn-primary btn-block ng-star-inserted'])[4]");
     public final By Accessories = By.xpath(" //*[@class='familyStore-Nav-Multi']");
     public final By Icemakers = By.xpath(" //*[@class='secondarycategory text-wrap zeplinStyleChild mb-0 ng-star-inserted' and text()=' Ice Makers ']");
     public final By Icemakersproduct = By.xpath(" (//*[@class='ng-star-inserted' and text()=' Add to cart '])[1]");
-    public final By YourCart = By.xpath("//h1[@class='count Your-cart-1 H1H1_Desktop_Reg ng-star-inserted']");
+    public final By YourCart = By.xpath("//*[@class='emptyCartBtn Empty-cart Utility-TextUtility-Text-Links']");
     public final By Carticon = By.xpath("//*[@class='elxIconsCart' and @ src='/icons/frg-icons-cart-1-f-6-d-2.svg']");
     public final By Currentlyunavailable = By.xpath(" (//*[@class='H4H4_Desktop col-md-11 col-12 p-0 m-0'])[1]");
     public final By Itemcurrentlyunavailable = By.xpath("(//*[@class='stock-msg removeMobileText'])[1]");
