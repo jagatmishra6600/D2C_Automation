@@ -13,15 +13,10 @@ public class CartUnavailableProductsFrig extends CartLocatorsFrig {
         WebElementUtil.clickElement(Espressomaker);
 
     }
-    public void clickOnAddtocartbutton() {
-        WebElementUtil.clickElement(Addtocartbutton);
-
-    }
     public void clickOnSaveandViewCart() {
         WebElementUtil.clickElement(SaveandViewCart);
 
     }
-
     public void clickOnCancelbutton() {
         WebElementUtil.clickElement(Cancelbutton);
 
