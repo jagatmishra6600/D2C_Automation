@@ -42,6 +42,7 @@ public class DeliveryDatePageActionsFrig {
         WebElementUtil.waitForElementToBeClickable(locators.saveAndViewCartButton, 10);
         WebElementUtil.clickElement(locators.saveAndViewCartButton);
     }
+
     public void selectDeliveryAndSaveAndViewCart() {
         // Select delivery & installation radio
         WebElementUtil.waitForElementToBeVisible(locators.deliveryInstallationRadio, 10);
@@ -578,10 +579,6 @@ public class DeliveryDatePageActionsFrig {
                 return false;
             }
 
-            // Optional: numeric check (only if needed)
-            // if (!qtyText.matches(".*\\d+.*")) {
-            //     return false;
-            // }
         }
 
         return true;
@@ -607,15 +604,5 @@ public class DeliveryDatePageActionsFrig {
 
         return actualText.contains(expectedText);
     }
-
-
-
-
-
-
-
-
-
-
 
 }
