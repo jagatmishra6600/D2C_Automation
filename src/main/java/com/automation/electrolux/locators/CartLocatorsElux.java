@@ -21,5 +21,19 @@ public class CartLocatorsElux {
     public final By increaseButton = By.xpath("//cx-item-counter//button[@type='button' and normalize-space(text())= '+']");
     public final By decreaseButton = By.xpath("//cx-item-counter//button[@type='button' and normalize-space(text())= '-']");
 
+    // Cart unavailable products locators
+
+    public final By Filterandaccessories = By.xpath("(//*[@class='navMenuHeading undefined' and text()=' Filters & Accessories '])[1]");
+    public final By Accessories = By.xpath("(//*[text()=' Accessories '])[1]");
+    public final By Addtocartproduct1 = By.xpath("(//*[text()=' Add to cart '])[1]");
+    public final By Cancelbutton = By.xpath("//*[@class='fr-close cursor-pointer']");
+    public final By Addtocartproduct2 = By.xpath("(//*[text()=' Add to cart '])[2]");
+    public final By Addtocartproduct3 = By.xpath("(//*[text()=' Add to cart '])[3]");
+    public final By Airfilter = By.xpath("(//h5[text()=' Air Filters '])[1]");
+    public final By Addtocartproduct = By.xpath("//*[text()=' Add to cart ']");
+    public final By Dishwasher = By.xpath("(//*[text()=' Dishwasher '])[2]");
+    public final By Dishwasherproduct = By.xpath("(//*[text()=' Add to cart '])[1]");
+    public final By Viewcart = By.xpath("//*[@class='btn btn-block btn-orange view-cart']");
+    public final By emptycart = By.xpath("//*[@class='emptyCartBtn']");
 
 }
