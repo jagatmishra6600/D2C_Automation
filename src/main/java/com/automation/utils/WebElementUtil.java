@@ -108,6 +108,11 @@ public class WebElementUtil {
         return wait.until(ExpectedConditions.visibilityOf(element));
     }
 
+    public static WebElement waitForElementToBeClickable(WebElement ele) {
+        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(15));
+        return wait.until(ExpectedConditions.elementToBeClickable(ele));
+    }
+
     public static WebElement waitForElementToBeClickable(By locator) {
         WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(15));
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
@@ -122,6 +127,14 @@ public class WebElementUtil {
     public static WebElement waitForElementToBeVisible(By locator, int seconds) {
         WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(seconds));
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    public static List<WebElement> waitForElementsToBeVisible(By locator) {
+        WebDriverWait wait =
+                new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(15));
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        return DriverManager.getDriver().findElements(locator);
     }
 
     public static WebElement waitForElementToBeClickable(By locator, int seconds) {
