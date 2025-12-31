@@ -28,12 +28,12 @@ public class DeliveryDatePageActionsElux {
     }
 
     public void clickAddToCart() {
-        WebElementUtil.waitForElementToBeVisible(locators.addToCartButton, 10);
+        WebElementUtil.waitForElementToBeVisible(locators.addToCartButton, 20);
         WebElementUtil.scrollToElementStable(locators.addToCartButton);
-        WebElementUtil.waitForElementToBeClickable(locators.addToCartButton, 10);
+        WebElementUtil.waitForElementToBeClickable(locators.addToCartButton, 20);
         WebElementUtil.clickElement(locators.addToCartButton);
-        WebElementUtil.waitForElementToBeVisible(locators.viewCartButton, 10);
-        WebElementUtil.scrollToElementStable(locators.addToCartButton);
+        WebElementUtil.waitForElementToBeVisible(locators.viewCartButton, 20);
+//        WebElementUtil.scrollToElementStable(locators.addToCartButton);
         WebElementUtil.clickElement(locators.viewCartButton);
     }
     public void selectDeliveryAndSaveAndViewCart() {

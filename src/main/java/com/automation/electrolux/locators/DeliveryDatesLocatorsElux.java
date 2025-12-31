@@ -5,9 +5,9 @@ import org.openqa.selenium.By;
 
 public class DeliveryDatesLocatorsElux {
     public final By searchBox = By.xpath("//input[@aria-label=\"search\"]");
-    public final By productPDP = By.xpath("//div[contains(@class,'Appliance-Card')]");
-    public final By addToCartButton = By.xpath("//span[normalize-space()='Add to cart']/ancestor::button");
-    public final By viewCartButton = By.xpath("//a[normalize-space()='View cart']");
+    public final By productPDP = By.xpath("//div[contains(@class,'Appliance-Card')]  | //div[contains(@class,'accessories-product')]//div[contains(@class,'Product-Name')]");
+    public final By addToCartButton = By.xpath("//span[normalize-space()='Add to cart']/ancestor::button | //span[normalize-space()='Add to cart']/ancestor::a");
+    public final By viewCartButton = By.xpath("//a[normalize-space()='View cart'] | //button[normalize-space()='Save and view cart']");
     public final By deliveryInstallationRadio = By.id("Refrigerators_Large_WaterLine_Install");
     public final By saveAndViewCartButton = By.xpath("//button[normalize-space()='Save and view cart']");
     public final By proceedToCheckoutButton = By.xpath("//button[normalize-space()='Proceed To Checkout']");
