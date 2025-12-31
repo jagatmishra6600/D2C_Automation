@@ -13,4 +13,7 @@ public class ResetPasswordLocatorsElux {
 	 public static final By setNewPasswordMessage = By.xpath("//label[contains(.,'Set a new password')]");
 	 public static final By passwordRulesMessage = By.xpath("//label[contains(.,'Password needs')]");
 	 public static final By credentialsUpdateAccrossGroupMessage = By.xpath("//label[contains(.,'reset will update')]");
+	 public static final By resetPasswordSucccessScreenMessage = By.xpath("//div[@id='gigya-reset-password-success-screen']//label/parent::div");
+	 public static final By loginToYourAccountLink = By.cssSelector("a#reset-password-login-link");
+	
 }
