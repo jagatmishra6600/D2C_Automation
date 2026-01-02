@@ -5,7 +5,9 @@ import com.automation.frigidaire.locators.CartLocatorsFrig;
 import com.automation.frigidaire.pages.*;
 import com.automation.utils.ExtentReportManager;
 import com.automation.utils.WaitUtils;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+
 
 public class EPIC_08_TC_06_AQA_Cart_Error_message_for_UnavailableProducts extends BaseTest {
 
@@ -19,8 +21,6 @@ public class EPIC_08_TC_06_AQA_Cart_Error_message_for_UnavailableProducts extend
         WaitUtils.untilPageLoadComplete();
         cartProductPage.clickOnSmallAppliances();
         cartProductPage.clickOnEspressomaker();
-        cartProductPage.clickOnAddtocartbutton();
-        cartProductPage.clickOnCancelbutton();
         cartProductPage.clickOnSmallAppliances();
         cartProductPage.clickOnRetrominifridge();
         cartProductPage.clickOnitemaddtocart();
@@ -31,7 +31,7 @@ public class EPIC_08_TC_06_AQA_Cart_Error_message_for_UnavailableProducts extend
         cartProductPage.clickOnIcemakers();
         cartProductPage.clickOnIcemakersproduct();
         cartProductPage.clickOnSaveandViewCart();
-        cartProductPage.verifyYourCart();
+        Assert.assertTrue(cartProductPage.verifyYourCart(), "Empty cart text is not found.");
 
         
         ExtentReportManager.getTest().pass("Validate unavailable products on Cart page");
