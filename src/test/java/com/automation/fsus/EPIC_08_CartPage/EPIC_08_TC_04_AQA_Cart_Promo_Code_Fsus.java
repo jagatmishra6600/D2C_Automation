@@ -1,21 +1,23 @@
-package com.automation.electrolux.EPIC_08_CartPage;
+package com.automation.fsus.EPIC_08_CartPage;
 
 import com.automation.BaseTest;
 import com.automation.electrolux.pages.*;
-import com.automation.frigidaire.pages.*;
+import com.automation.familystoreus.pages.*;
 import com.automation.utils.ExtentReportManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class EPIC_08_TC_04_AQA_Cart_Promo_Code_Elux extends BaseTest {
-    private final HomePageActionsElux homePage = new HomePageActionsElux();
-    private final CartPageActionsElux page = new CartPageActionsElux();
-    private final DeliveryDatePageActionsElux dpage = new DeliveryDatePageActionsElux();
-    private final PlpPageActionsElux plpPage = new PlpPageActionsElux();
+public class EPIC_08_TC_04_AQA_Cart_Promo_Code_Fsus extends BaseTest {
+    private final HomePageActionsFsus homePage = new HomePageActionsFsus();
+    private final CartPageAction_FSUS page = new CartPageAction_FSUS();
+    private final DeliveryDatePageActionsFsus dpage = new DeliveryDatePageActionsFsus();
+    private final PlpPageActions_FSUS plpPage = new PlpPageActions_FSUS();
+    private final LoginPageActionsFsus loginPage = new LoginPageActionsFsus();
 
 
     @Test(groups = {"regression"}, description = "Verify No eligible Promo Code message on Cart Page")
     public void verifyNotEligiblePromoCode() {
+        loginPage.loginWithDefaultCredentials();
         homePage.navigateToHomePage();
         dpage.searchProduct("ELFW7537AW");
         dpage.selectProductFromPLP();
@@ -30,6 +32,7 @@ public class EPIC_08_TC_04_AQA_Cart_Promo_Code_Elux extends BaseTest {
 
     @Test(groups = {"regression"}, description = "Verify Invalid Promo Code message on Cart Page")
     public void verifyInvalidEligiblePromoCode() {
+        loginPage.loginWithDefaultCredentials();
         homePage.navigateToHomePage();
         dpage.searchProduct("ELFW7537AW");
         dpage.selectProductFromPLP();
@@ -44,6 +47,7 @@ public class EPIC_08_TC_04_AQA_Cart_Promo_Code_Elux extends BaseTest {
 
     @Test(groups = {"regression"}, description = "Verify Expired Promo Code message on Cart Page")
     public void verifyExpiredPromoCode() {
+        loginPage.loginWithDefaultCredentials();
         homePage.navigateToHomePage();
         dpage.searchProduct("ELFW7537AW");
         dpage.selectProductFromPLP();

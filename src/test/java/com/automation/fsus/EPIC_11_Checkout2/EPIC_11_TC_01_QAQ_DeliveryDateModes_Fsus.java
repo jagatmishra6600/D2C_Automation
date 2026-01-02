@@ -1,21 +1,27 @@
-package com.automation.electrolux.EPIC_11_TC_AQA_Checkout2;
+package com.automation.fsus.EPIC_11_Checkout2;
 
 import com.automation.BaseTest;
 import com.automation.electrolux.pages.DeliveryDatePageActionsElux;
 import com.automation.electrolux.pages.HomePageActionsElux;
 import com.automation.electrolux.pages.PlpPageActionsElux;
+import com.automation.familystoreus.pages.DeliveryDatePageActionsFsus;
+import com.automation.familystoreus.pages.HomePageActionsFsus;
+import com.automation.familystoreus.pages.LoginPageActionsFsus;
+import com.automation.familystoreus.pages.PlpPageActions_FSUS;
 import com.automation.utils.ExtentReportManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class EPIC_11_TC_01_QAQ_DeliveryDateModes_Elux extends BaseTest {
-    private final HomePageActionsElux homePage = new HomePageActionsElux();
-    private final DeliveryDatePageActionsElux pdpPage = new DeliveryDatePageActionsElux();
-    private final PlpPageActionsElux plpPage = new PlpPageActionsElux();
+public class EPIC_11_TC_01_QAQ_DeliveryDateModes_Fsus extends BaseTest {
+    private final HomePageActionsFsus homePage = new HomePageActionsFsus();
+    private final DeliveryDatePageActionsFsus pdpPage = new DeliveryDatePageActionsFsus();
+    private final PlpPageActions_FSUS plpPage = new PlpPageActions_FSUS();
+    private final LoginPageActionsFsus loginPage = new LoginPageActionsFsus();
 
 
     @Test(groups = {"regression"}, description = "Verify Delivery Dates and Shipping modes on checkout page 2")
     public void verifyDeliveryDates() {
+        loginPage.loginWithDefaultCredentials();
         homePage.navigateToHomePage();
         pdpPage.searchProduct("ELFW7537AW");
         pdpPage.selectProductFromPLP();
