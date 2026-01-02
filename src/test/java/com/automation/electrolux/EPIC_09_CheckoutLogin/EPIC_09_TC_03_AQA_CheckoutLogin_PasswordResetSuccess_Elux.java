@@ -14,7 +14,7 @@ import com.automation.utils.ExtentReportManager;
 import com.automation.utils.UserTestData;
 
 @Test
-public class EPIC_09_TC_03_AQA_CheckoutLogin_PasswordResetSuccess_Frig extends BaseTest {
+public class EPIC_09_TC_03_AQA_CheckoutLogin_PasswordResetSuccess_Elux extends BaseTest {
 	HomePageActionsElux homePage = new HomePageActionsElux();
 	ShippingAddressPageActionsElux shippingAddressPage = new ShippingAddressPageActionsElux();
 	CheckoutForgotPasswordPageActionsElux forgotPasswordPage = new CheckoutForgotPasswordPageActionsElux();
