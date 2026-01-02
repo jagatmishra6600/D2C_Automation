@@ -23,7 +23,6 @@ public class OrderItemsPageActionsFsus {
     }
 
     public void verifyElement(By locator, String elementName) {
-        WebElementUtil.waitForElementToBeVisible(locator, 10);
         Assert.assertTrue(
                 WebElementUtil.isDisplayed(locator),
                 elementName + " is NOT displayed in Order Items section.");

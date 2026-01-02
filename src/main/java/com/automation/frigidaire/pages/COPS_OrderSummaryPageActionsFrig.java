@@ -36,7 +36,6 @@ public class COPS_OrderSummaryPageActionsFrig {
 
 
     public boolean verifySubtotal(String text) {
-        WebElementUtil.waitForElementToBeVisible(orderSummary.subtotalText(text), 10);
         return WebElementUtil.isDisplayed(orderSummary.subtotalText(text));
     }
 

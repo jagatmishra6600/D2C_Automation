@@ -100,27 +100,22 @@ public class FEDEX_AITPageActionsFrig {
     }
 
     public boolean isDeliveryOnlyItemsTitleDisplayed() {
-        WebElementUtil.waitForElementToBeVisible(fedexAit.deliveryOnlyItemsTitle, 10);
         return WebElementUtil.isDisplayed(fedexAit.deliveryOnlyItemsTitle);
     }
 
     public boolean isDeliverToZipCodeDisplayed() {
-        WebElementUtil.waitForElementToBeVisible(fedexAit.deliverToZipCode, 10);
         return WebElementUtil.isDisplayed(fedexAit.deliverToZipCode);
     }
 
     public boolean isDeliveryMessageDisplayed() {
-        WebElementUtil.waitForElementToBeVisible(fedexAit.deliveryMessage, 10);
         return WebElementUtil.isDisplayed(fedexAit.deliveryMessage);
     }
 
     public boolean isEstimatedDeliveryDateDisplayed() {
-        WebElementUtil.waitForElementToBeVisible(fedexAit.estimatedDeliveryDate, 10);
         return WebElementUtil.isDisplayed(fedexAit.estimatedDeliveryDate);
     }
 
     public boolean isDeliveryCommentsTextBoxDisplayed() {
-        WebElementUtil.waitForElementToBeVisible(fedexAit.deliveryCommentsTextBox, 10);
         return WebElementUtil.isDisplayed(fedexAit.deliveryCommentsTextBox);
     }
 

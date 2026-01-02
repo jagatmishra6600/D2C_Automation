@@ -87,7 +87,6 @@ public class COPS_OrderSummaryPageActions_Fsus {
     }
 
     public boolean verifySubtotal(String text) {
-        WebElementUtil.waitForElementToBeVisible(orderSummaryFsus.subtotalText(text), 10);
         return WebElementUtil.isDisplayed(orderSummaryFsus.subtotalText(text));
     }
 }
