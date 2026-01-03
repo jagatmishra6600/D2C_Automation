@@ -92,8 +92,17 @@ public class WebElementUtil {
         return text[0];
     }
 
+//    public static boolean isDisplayed(By locator) {
+//        try { return waitForElementToBeVisible(locator).isDisplayed(); } catch (Exception e) { return false; }
+//    }
+
     public static boolean isDisplayed(By locator) {
-        try { return waitForElementToBeVisible(locator).isDisplayed(); } catch (Exception e) { return false; }
+        try {
+            WebElement element = waitForElementToBeVisible(locator);
+            return element != null && element.isDisplayed();
+        } catch (TimeoutException | NoSuchElementException | StaleElementReferenceException e) {
+            return false;
+        }
     }
 
     public static WebElement waitForElementToBeVisible(By locator) {
