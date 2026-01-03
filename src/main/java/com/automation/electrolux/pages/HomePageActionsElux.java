@@ -192,5 +192,11 @@ public class HomePageActionsElux {
     	clickMyAccountLink();
     	return new AccountPreferencesPageActionsElux();
     }
+	
+	public PdpPageActionsElux selectFirstProductFromSearchResults() {
+    	WebElementUtil.scrollIntoView(homePage_Locator.firstSearchResultProduct);
+    	WebElementUtil.clickElement(homePage_Locator.firstSearchResultProduct);
+    	return new PdpPageActionsElux();
+    }
 
 }

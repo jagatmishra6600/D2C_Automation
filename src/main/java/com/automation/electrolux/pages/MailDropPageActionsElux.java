@@ -2,6 +2,7 @@ package com.automation.electrolux.pages;
 
 import java.util.stream.Stream;
 
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 import com.automation.electrolux.locators.MailDropLocatorsElux;
@@ -16,7 +17,7 @@ public class MailDropPageActionsElux {
 		return this;
 	}
 	
-	public MailDropPageActionsElux enterEmailAddress(String emailAddress) throws InterruptedException {
+	public MailDropPageActionsElux enterEmailAddress(String emailAddress) {
 		WaitUtils.sleep(2000);
 		WebElementUtil.sendKeys(MailDropLocatorsElux.headerEmailAddressField, emailAddress);
 		return this;
@@ -31,7 +32,7 @@ public class MailDropPageActionsElux {
 		return WebElementUtil.isDisplayed(MailDropLocatorsElux.inboxRefreshButton);
 	}
 	
-	public MailDropPageActionsElux login(String emailAddress) throws InterruptedException {
+	public MailDropPageActionsElux login(String emailAddress) {
 		return navigateToMailDropPage()
 					.enterEmailAddress(emailAddress)
 					.clickViewMailBoxButton();
@@ -39,6 +40,9 @@ public class MailDropPageActionsElux {
 
 	public MailDropPageActionsElux clickInboxRefresh() {
 		WebElementUtil.clickElement(MailDropLocatorsElux.inboxRefreshButton);
+		if(!WebElementUtil.isDisplayed(MailDropLocatorsElux.firstMail)) {
+			WebElementUtil.clickElement(MailDropLocatorsElux.inboxRefreshButton);
+		}
 		return this;
 	}
 	
@@ -47,13 +51,13 @@ public class MailDropPageActionsElux {
 		return this;
 	}
 	
-	public MailDropPageActionsElux openFirstMailInInbox(String emailAddress) throws InterruptedException {
+	public MailDropPageActionsElux openFirstMailInInbox(String emailAddress) {
 		login(emailAddress).clickInboxRefresh().clickFirstMailInInbox();
 		WaitUtils.sleep(2000);
 		return this;
 	}
 	
-	public MailDropPageActionsElux openFirstMailInInbox(String emailAddress, String expectedMailTitle) throws InterruptedException {
+	public MailDropPageActionsElux openFirstMailInInbox(String emailAddress, String expectedMailTitle) {
 		login(emailAddress).clickInboxRefresh().clickFirstMailInInbox();
 		for(int i=0;i<5;i++) {
 			WaitUtils.sleep(2000);
@@ -66,9 +70,9 @@ public class MailDropPageActionsElux {
 		return this;
 	}
 
-	public String getMailTitle() throws InterruptedException {
+	public String getMailTitle() {
 		var mailTitleValue = WebElementUtil.getText(MailDropLocatorsElux.mailTitle);
-	    if(mailTitleValue.equals(null) || mailTitleValue.isEmpty() || mailTitleValue.equals("")) {
+	    if( mailTitleValue.isEmpty() || mailTitleValue.equals("")) {
 	    	WaitUtils.sleep(2000);
 	    	mailTitleValue = WebElementUtil.getText(MailDropLocatorsElux.mailTitle);
 	    }
@@ -82,11 +86,9 @@ public class MailDropPageActionsElux {
 	    );
 	}
 	
-	public ResetPasswordPageActionsElux clickMailResetYourPasswordLink() throws InterruptedException {
+	public ResetPasswordPageActionsElux clickMailResetYourPasswordLink() {
 		WaitUtils.sleep(2000);
 		WebElementUtil.switchToFrame(MailDropLocatorsElux.mailFrame);
-//		WebElementUtil.ctrlClick(mailResetPasswordLink);
-//		WebElementUtil.ctrlClickWithJS(mailResetPasswordLink);
 		WebElementUtil.openLinkInNewTab(MailDropLocatorsElux.mailResetPasswordLink);
 		WebElementUtil.switchToDefaultContent();
 		WebElementUtil.switchToLatestTabAndClosePrevious();
@@ -148,7 +150,7 @@ public class MailDropPageActionsElux {
 		return WebElementUtil.getText(MailDropLocatorsElux.firstMailSubject);
 	}
 	
-	public MailDropPageActionsElux verifyElectroluxPasswordResetMail() throws InterruptedException {
+	public MailDropPageActionsElux verifyElectroluxPasswordResetMail() {
 		Assert.assertEquals(getMailTitle(), "Reset your Electrolux password", "'Reset your Electrolux password' title is not present in password reset mail");
         Assert.assertTrue(isMailResetYourPasswordLinkDisplayed(), "'Click here to reset your password' link is not displayed in the in password reset mail");
         Assert.assertTrue(getMailText().contains("You have requested to have your password reset for Electrolux"), "Email Body does not contain Message stating Request for Password Reset");
@@ -156,7 +158,7 @@ public class MailDropPageActionsElux {
         return this;
 	}
 	
-	public MailDropPageActionsElux verifyElectroluxPasswordResetSuccessMail() throws InterruptedException {
+	public MailDropPageActionsElux verifyElectroluxPasswordResetSuccessMail() {
 		Assert.assertEquals(getMailTitle(), "Electrolux: Password Reset Confirmation", "'Electrolux: Password Reset Confirmation' title is not present in reset success mail");
         Assert.assertTrue(isMailElectroluxLogoDisplayed(), "Electrolux Brand logo is not present in reset success mail");
         Assert.assertTrue(getMailText().contains("your password was successfully changed"), "Reset Successful Text is not present in reset success mail");

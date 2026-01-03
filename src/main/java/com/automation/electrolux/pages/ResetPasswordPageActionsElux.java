@@ -109,4 +109,12 @@ public class ResetPasswordPageActionsElux {
 	     
 	     return this;
 	 } 
+	 
+	 public String getResetSuccessMessage() {
+		 return WebElementUtil.getText(ResetPasswordLocatorsElux.resetPasswordSucccessScreenMessage);
+	 }
+	 
+	 public boolean isLoginToYourAccountLinkDisplayed() {
+		 return WebElementUtil.isDisplayed(ResetPasswordLocatorsElux.loginToYourAccountLink);
+	 }
 }

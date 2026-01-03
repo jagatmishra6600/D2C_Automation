@@ -99,7 +99,7 @@ public class AccountPreferencesPageActionsElux {
 	
 	public boolean isShippingDetailsAddressBoxesDisplayed() {
 		var addressBoxes = getShippingDetailsAddressBoxList();
-		return addressBoxes != null && addressBoxes.size() > 1;
+		return addressBoxes != null && !addressBoxes.isEmpty();
 	}
 	
 	public boolean isAddressDetailsPresentForAllAddresses() {
@@ -132,41 +132,55 @@ public class AccountPreferencesPageActionsElux {
 		var isDeleteButtonDisplayed = isAddressDeleteButtonDisplayed(addressBox);
 				
 		if(addressBoxes.size()>=2) {
-			return getAddressSetAsDefaultButtonDisplayed(addressBox)
+			return isAddressSetAsDefaultButtonDisplayed(addressBox)
 	                && isEditButtonDisplayed && isDeleteButtonDisplayed;
 		}
 		else {
-			return getAddressMyDefaultButtonDisplayed(addressBox) 
+			return isAddressMyDefaultButtonDisplayed(addressBox) 
 					&& isEditButtonDisplayed && isDeleteButtonDisplayed;
 		}
 	}
 	
-	public boolean getAddressSetAsDefaultButtonDisplayed(WebElement addressElement) {
-		var setAsDefaultAddressElement = addressElement.findElements(By.xpath("//div[contains(@class,'address-buttons')]//a[contains(.,'Set as Default')]"));
-		return setAsDefaultAddressElement.get(0).isDisplayed();
+	public boolean isAddressSetAsDefaultButtonDisplayed(WebElement addressElement) {
+		var setAsDefaultAddressElement = addressElement.findElements(By.xpath(".//div[contains(@class,'address-buttons')]//a[contains(.,'Set as Default')]"));
+		try {
+			return setAsDefaultAddressElement.get(0).isDisplayed();
+		}
+		catch(IndexOutOfBoundsException e) {
+			throw new IllegalStateException("Set As Default Button is not Displayed in the Address Box");
+		}
 	}
 	
 	public boolean isAddressEditPencilButtonDisplayed(WebElement addressElement) {
-		var editButtonXpathLocator = "//div[contains(@class,'address-buttons')]//a[contains(.,'Edit')]";
+		var editButtonXpathLocator = ".//div[contains(@class,'address-buttons')]//a[contains(.,'Edit')]";
 		var addressEditPencilButton = addressElement.findElements(By.xpath(editButtonXpathLocator));
-		if(addressEditPencilButton.isEmpty()) {
-			addressEditPencilButton = addressElement.findElements(By.xpath(editButtonXpathLocator));		
+		try {
+			return addressEditPencilButton.get(0).isDisplayed();
 		}
-		return addressEditPencilButton.get(0).isDisplayed();
+		catch(IndexOutOfBoundsException e) {
+			throw new IllegalStateException("Edit Button is not Displayed in the Address Box");
+		}
 	}
 	
 	public boolean isAddressDeleteButtonDisplayed(WebElement addressElement) {
-		var removeButtonXpathLocator = "//div[contains(@class,'address-buttons')]//a[contains(.,'Remove')]";
+		var removeButtonXpathLocator = ".//div[contains(@class,'address-buttons')]//a[contains(.,'Remove')]";
 		var addressDeleteButton = addressElement.findElements(By.xpath(removeButtonXpathLocator));
-		if(addressDeleteButton.isEmpty()) {
-			addressDeleteButton = addressElement.findElements(By.xpath(removeButtonXpathLocator));		
+		try {
+			return addressDeleteButton.get(0).isDisplayed();
 		}
-		return addressDeleteButton.get(0).isDisplayed();
+		catch(IndexOutOfBoundsException e) {
+			throw new IllegalStateException("Remove Button is not Displayed in the Address Box");
+		}
 	}
 	
-	public boolean getAddressMyDefaultButtonDisplayed(WebElement addressElement) {
-		var defaultAddressElement = addressElement.findElements(By.xpath("//div[contains(@class,'address-buttons')]//a[contains(.,'My Default')]"));
-		return defaultAddressElement.get(0).isDisplayed();
+	public boolean isAddressMyDefaultButtonDisplayed(WebElement addressElement) {
+		var defaultAddressElement = addressElement.findElements(By.xpath(".//div[contains(@class,'address-buttons')]//a[contains(.,'My Default')]"));
+		try {
+			return defaultAddressElement.get(0).isDisplayed();
+		}
+		catch(IndexOutOfBoundsException e) {
+			throw new IllegalStateException("My Default Button is not Displayed in the Address Box");
+		}
 	}
 	
 	public AccountPreferencesPageActionsElux clickAddNewAddressButton() {	
