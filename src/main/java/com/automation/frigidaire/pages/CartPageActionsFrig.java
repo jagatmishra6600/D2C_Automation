@@ -139,6 +139,7 @@ public class CartPageActionsFrig {
         return WebElementUtil.getValueOfDom(cartPage_Locator.productCount) == initialValue - 4;
     }
 
+
         public void clickOnPromoDropdown () {
             WebElementUtil.waitForElementToBeVisible(cartPage_Locator.promoDropdown, 40);
             WebElementUtil.scrollToElementCenter(cartPage_Locator.promoDropdown);
