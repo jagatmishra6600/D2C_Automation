@@ -44,7 +44,8 @@ public class PLPProductItemsPageActionsElux {
     private final By availabilityCheckbox = By.xpath("//b[contains(text(),'Availability')]" + "/ancestor::app-elux-product-facet-list" + "//div//b[text()='Availability']" + "/parent::div/child::div//input[@aria-label='Availability']");
 
     private final By addToCartForPLP = By.xpath("//div[@id='earliestDeliveryDateDiv']/parent::app-elx-earliest-delivery-day-common//following-sibling::div//span[contains(text(),'Add to cart')]");
-
+    public static By searchBoxs = By.xpath("//input[@placeholder='Search']");
+    public static By searchButton = By.xpath("//cx-icon[@aria-label='search']");
     private By getFeatureLocator(String featureKey, String featureValue) {
         return By.xpath("//b[contains(text(),'" + featureKey + "')]/ancestor::app-elux-product-facet-list//div//input[@id='" + featureValue + "']");
 
@@ -65,6 +66,13 @@ public class PLPProductItemsPageActionsElux {
     private By selectedFilterCross(String filterName) {
         return By.xpath("//span[@class='border border-light p-2 m-2 Body-MediumBody_Medium' and normalize-space(text())='" + filterName + "']//i");
     }
+
+
+    public static By productLink(String productCode) {
+        return By.xpath("//div[text()='" + productCode +"']/ancestor::div[@class='col- product-card my-0']/preceding-sibling::div[@class='col-']//a");}
+
+
+
 
     public boolean productIsInStock(String productName) {
         WebElementUtil.zoomInOrOut(10);
@@ -1170,5 +1178,24 @@ public class PLPProductItemsPageActionsElux {
             System.out.println(" Error validating color for product " + index + " on " + webSite + ": " + e.getMessage());
         }
     }
+
+
+
+    public void searchProducts(String skuNumber){
+        WaitUtils.sleep(3000);
+        WaitUtils.untilPageLoadComplete();
+        WebElementUtil.waitForElementToBeVisible(searchBoxs, 10);
+        WebElementUtil.sendKeys(searchBoxs, skuNumber);
+
+        WebElementUtil.waitForElementToBeClickable(searchButton,10);
+        WebElementUtil.clickElement(searchButton);
+        WaitUtils.sleep(3000);
+
+        WebElementUtil.scrollToElementStable(productLink(skuNumber));
+        WebElementUtil.waitForElementToBeVisible(productLink(skuNumber), 10);
+        WebElementUtil.waitForElementToBeClickable(productLink(skuNumber), 10);
+        WebElementUtil.clickElement(productLink(skuNumber));
+    }
+
 
 }

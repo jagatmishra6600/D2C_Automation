@@ -20,7 +20,7 @@ import static com.automation.frigidaire.locators.DeliveryAndInstallationLocators
 
 public class DeliveryInstallationPageActionsFrig {
 
-
+    DeliveryAndInstallationLocatorsFrig dandsPage_Locator=new DeliveryAndInstallationLocatorsFrig();
     private final WebDriver driver;
 
 
@@ -205,5 +205,67 @@ public class DeliveryInstallationPageActionsFrig {
         return Double.parseDouble(text.replace("$", "").replace(",", "").trim());
     }
 
+
+
+    public void selectRequiredInstallationPart() {
+        com.automation.utils.WebElementUtil.scrollToElementCenter(dandsPage_Locator.deliveryOnlyOption);
+        com.automation.utils.WebElementUtil.clickElement(dandsPage_Locator.deliveryOnlyOption);
+        com.automation.utils.WebElementUtil.scrollToElementCenter(dandsPage_Locator.requireInstallationPartsText);
+        com.automation.utils.WebElementUtil.isDisplayed(dandsPage_Locator.requireInstallationPartsText);
+        com.automation.utils.WebElementUtil.waitForElementToBeClickable(dandsPage_Locator.partCheckBox,10);
+        com.automation.utils.WebElementUtil.clickElementUsingJSE(dandsPage_Locator.partCheckBox);
+
+
+    }
+
+
+    public DeliveryInstallationPageActionsFrig clickSideSaveAndViewCartButton() {
+
+        com.automation.utils.WebElementUtil.scrollToElementCenter(dandsPage_Locator.saveSideAndViewCartButton);
+        com.automation.utils.WebElementUtil.waitForElementToBeClickable(dandsPage_Locator.saveSideAndViewCartButton,20);
+        com.automation.utils.WebElementUtil.clickElementUsingJSE(dandsPage_Locator.saveSideAndViewCartButton);
+        return new DeliveryInstallationPageActionsFrig();
+    }
+    public DAndSPageActionsFrig clickAddToCartButton() {
+        com.automation.utils.WebElementUtil.scrollToElementCenter(dandsPage_Locator.addToCartButton);
+        com.automation.utils.WebElementUtil.clickElement(dandsPage_Locator.addToCartButton);
+        return new DAndSPageActionsFrig();
+    }
+
+    public void selectAddOnServices(){
+
+
+        com.automation.utils.WebElementUtil.scrollToElementCenter(dandsPage_Locator.addOnServiceText);
+        WebElementUtil.waitForElementToBeVisible(dandsPage_Locator.addOnServiceText,10);
+
+        WaitUtils.sleep(3000);
+        com.automation.utils.WebElementUtil.scrollToElementStable(dandsPage_Locator.selectAddOnServices);
+        WebElementUtil.waitForElementToBeVisible(dandsPage_Locator.selectAddOnServices,10);
+        com.automation.utils.WebElementUtil.waitForElementToBeClickable(dandsPage_Locator.selectAddOnServices,10);
+        com.automation.utils.WebElementUtil.waitForElementToBeClickable(dandsPage_Locator.selectAddOnServices,10);
+        WebElementUtil.clickElement(dandsPage_Locator.selectAddOnServices);
+
+        com.automation.utils.WebElementUtil.scrollToElementCenter(dandsPage_Locator.protectionPlanText);
+        WebElementUtil.waitForElementToBeVisible(dandsPage_Locator.protectionPlanText,10);
+
+
+        WaitUtils.sleep(3000);
+        WebElementUtil.waitForElementToBeVisible(dandsPage_Locator.selectProtectionPlan, 10);
+        WebElementUtil.waitForElementToBeClickable(dandsPage_Locator.selectProtectionPlan,10);
+        WebElementUtil.clickElement(dandsPage_Locator.selectProtectionPlan);
+        com.automation.utils.WebElementUtil.scrollToElementStable(dandsPage_Locator.InstallationsPartPrice);
+        com.automation.utils.WebElementUtil.isDisplayed(dandsPage_Locator.InstallationsPartPrice);
+        com.automation.utils.WebElementUtil.isDisplayed(dandsPage_Locator.AddOnServicesPartPrice);
+        com.automation.utils.WebElementUtil.isDisplayed(dandsPage_Locator.TapProtectionPlanPrice);
+
+
+        WaitUtils.sleep(3000);
+        com.automation.utils.WebElementUtil.scrollToElementStable(dandsPage_Locator.saveAndViewCartButton);
+        WebElementUtil.waitForElementToBeVisible(dandsPage_Locator.saveAndViewCartButton, 10);
+        WebElementUtil.waitForElementToBeClickable(dandsPage_Locator.saveAndViewCartButton, 10);
+        WebElementUtil.clickElement(dandsPage_Locator.saveAndViewCartButton);
+
+        WaitUtils.sleep(3000);
+    }
 
 }

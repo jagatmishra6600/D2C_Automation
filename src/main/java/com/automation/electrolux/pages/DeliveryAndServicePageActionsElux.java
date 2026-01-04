@@ -169,6 +169,7 @@ public class DeliveryAndServicePageActionsElux {
 
     public CartPageActionsElux clickSaveAndViewCartButton() {
         WebElementUtil.scrollToElementCenter(dns_Locator.saveAndViewCartButton);
+        WebElementUtil.waitForElementToBeClickable(dns_Locator.saveAndViewCartButton,15);
         WebElementUtil.clickElement(dns_Locator.saveAndViewCartButton);
         return new CartPageActionsElux();
     }
@@ -203,6 +204,13 @@ public class DeliveryAndServicePageActionsElux {
         WebElementUtil.forceClick(defaultCheckBox);
 
         return afterClickTotal == startingTotal + finalPrice;
+    }
+
+    public CartPageActionsElux clickViewCartButton() {
+        WebElementUtil.scrollToElementCenter(dns_Locator.viewcartBtn);
+        WebElementUtil.waitForElementToBeClickable(dns_Locator.viewcartBtn,15);
+        WebElementUtil.clickElement(dns_Locator.viewcartBtn);
+        return new CartPageActionsElux();
     }
 
 }

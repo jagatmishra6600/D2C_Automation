@@ -47,6 +47,20 @@ public class DeliveryAndInstallationLocatorsElux {
     public static By totalPriceForElectrolux = By.xpath("//div[contains(@class,'Body_Large-Title col-md-4 p-0 text-right ng-star-inserted')]");
     public static By protectionPlanPriceForElectrolux = By.xpath("//div[text()=' Protection Plan ']/following-sibling::div[@class='col-md-4 p-0 text-right']");
     public static By installationServices = By.xpath("//div[text()='Installation parts']/following-sibling::div[@class=\"col-md-4 p-0 text-right\"]");
+
+
+    public final By deliveryOnlyOption = By.xpath("//div[normalize-space(text())='Delivery only (No Install)']/parent::div/preceding-sibling::div//input");
+    public final By requireInstallationPartsText = By.xpath("//p[text()='Required installation parts']");
+    public final By partCheckBox = By.xpath("//input[@class=\"form-check-input ml-0 mt-0 checkbox-placeholder ng-untouched ng-pristine ng-valid\"]");
+    public By addOnServiceText = By.xpath("//p[normalize-space()='Add-on Services']");
+    public By selectAddOnServices = By.xpath("//div[normalize-space()='Haul away / dispose old appliance']//parent::div/parent::div//input");
+    public By protectionPlanText = By.xpath("//h3[normalize-space()='Available protection plan.']");
+    public By selectProtectionPlan = By.xpath("//div[text()='3 years']");
+    public final By InstallationsPartPrice = By.xpath("//div[text()='Installation parts']/following-sibling::div");
+    public final By AddOnServicesPartPrice = By.xpath("//div[normalize-space()='Add-on Services']/following-sibling::div");
+    public final By  TapProtectionPlanPrice = By.xpath("//div[normalize-space()='Protection Plan']/following-sibling::div");
+    public final By saveAndViewCartButton = By.xpath("//button[normalize-space(text())='Save and view cart']");
+
     public static By yearPlan(String Text){
         return By.xpath("//span[text()='" + text +"']/ancestor::div[@class=\"elxtapselection\"]//div[@class='mt-0 SmallBody_Small_Centered']");
     }

@@ -18,6 +18,19 @@ public class OrderSummaryForCheckOutPage1Frig {
     public final By yourCartIsEmptyText = By.xpath("//p[text()='Your shopping cart is empty']");
     public final By productRemoveCloseButton = By.xpath("//a[contains(@href, '/en/p')]//..//..//following-sibling::div[3]//button");
     public final By removeButton = By.xpath("//app-elux-cart-confirm-modal//button//p[text()='Remove']");
+    public final By saveAndContinueBtn = By.xpath("//button[normalize-space()='Save & continue']");
+    public final By packageSavingPrice = By.xpath("//div[normalize-space()='You saved']/following-sibling::div");
+    public final By cartdiscountPrice = By.xpath("//div[normalize-space()='Cart discounts']/following-sibling::div");
+    public final By cartSavings = By.xpath("//div[normalize-space()='Cart savings']/following-sibling::div");
+    public final By deliveryPriceOrFree = By.xpath("//div[text()='Delivery']/following-sibling::div");
+    public final By salesTax = By.xpath("//div[normalize-space()='Sales tax']/following-sibling::div");
+    public final By installationPartPrice = By.xpath("//div[normalize-space()='Installation parts']/following-sibling::div");
+    public final By addOnServicesPrice = By.xpath("//div[normalize-space()='Add-on services']/following-sibling::div");
+    public final By parcelShippingPrice = By.xpath("//div[normalize-space()='Parcel shipping']/following-sibling::div");
+    public final By tapProtectionPlanPrice = By.xpath("//div[normalize-space()='tap protection plan']/following-sibling::div");
+    public final By subTotalText = By.xpath("//div[normalize-space()='Subtotal']");
+    public final By subTotalPrice = By.xpath("//div[@class='col-4 cx-summary-amount Utility-TextPrice-Sm mb-4']");
+
 
 
 

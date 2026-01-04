@@ -37,5 +37,6 @@ public class DandSLocatorsElux {
     public final By partPriceOrderSummary = By.xpath("//div[text()='Installation parts']/following-sibling::div");
     public final By addOnServicesPriceOrderSummary = By.xpath("//div[normalize-space(text())='Add-on Services']/following-sibling::div");
     public final By protectionPlanPriceOrderSummary = By.xpath("//div[normalize-space(text())='Protection Plan']/following-sibling::div");
+    public final By viewcartBtn = By.xpath("//a[text()='View cart']");
 
 }
