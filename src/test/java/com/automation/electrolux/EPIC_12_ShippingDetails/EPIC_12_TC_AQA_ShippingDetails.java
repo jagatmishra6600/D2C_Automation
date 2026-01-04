@@ -1,10 +1,11 @@
 package com.automation.electrolux.EPIC_12_ShippingDetails;
 
+import com.automation.BaseTest;
 import com.automation.electrolux.pages.*;
 import com.automation.utils.ExtentReportManager;
 import org.testng.annotations.Test;
 
-public class EPIC_12_TC_AQA_ShippingDetails {
+public class EPIC_12_TC_AQA_ShippingDetails extends BaseTest {
 
     HomePageActionsElux homePage = new HomePageActionsElux();
     ShippingAddressPageActionsElux shippingAddressPage = new ShippingAddressPageActionsElux();
@@ -17,7 +18,7 @@ public class EPIC_12_TC_AQA_ShippingDetails {
     DeliveryInstallationPageActionsElux deliveryInstallationPageActionsElux=new DeliveryInstallationPageActionsElux();
     @Test(groups = { "smoke",
             "regression" }, description = "Verify that the Shipping details")
-    public void EPIC_12_CheckoutLogin_TC_02_AQA_OrderSummary_Elux() throws InterruptedException {
+    public void EPIC_12_CheckoutLogin_TC_02_AQA_ShippingDetailsElux() throws InterruptedException {
         navigateToShippingAddressPage("ELFW7337AW");
         deliveryInstallationPageActionsElux.selectRequiredInstallationPart();
         deliveryInstallationPageActionsElux.selectAddOnServices();
