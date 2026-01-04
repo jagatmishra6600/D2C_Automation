@@ -15,7 +15,7 @@ public class EPIC_03_TC_06_AQA_PDP_Delivery_Dates_Frig extends BaseTest {
 
 
 
-    @Test(groups = {"regression"}, description = "Verify Delivery Dates availability on PDP page")
+    @Test(groups = {"regression"}, description = "Verify Delivery Dates availability on checkout page")
     public void verifyDeliveryDates() {
         homePage.navigateToHomePage();
         pdpPage.searchProduct("GRMC2273CF-C1");
@@ -27,7 +27,7 @@ public class EPIC_03_TC_06_AQA_PDP_Delivery_Dates_Frig extends BaseTest {
         pdpPage.clickContinueToDelivery();
         Assert.assertTrue(pdpPage.validateAllAvailableDeliveryDates(), "Delivery date is not available or not clickable");
 
-        ExtentReportManager.getTest().pass("Verify Delivery Dates availability on PDP page");
+        ExtentReportManager.getTest().pass("Verify Delivery Dates availability on checkout page");
     }
 
 }

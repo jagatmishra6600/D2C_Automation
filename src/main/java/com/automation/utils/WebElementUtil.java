@@ -49,7 +49,7 @@ public class WebElementUtil {
             WebElement element = waitForElementToBeVisible(locator);
             Actions actions = new Actions(DriverManager.getDriver());
             actions.moveToElement(element).perform();
-        }, 3, 1000);
+        }, 3, 10);
     }
 
     public static Set<String> getWindowHandles() { return DriverManager.getDriver().getWindowHandles(); }
@@ -67,14 +67,14 @@ public class WebElementUtil {
         }
     }
 
-    public static void clickElement(By locator) { retryOnFailure(() -> waitForElementToBeClickable(locator).click(), 3, 1000); }
+    public static void clickElement(By locator) { retryOnFailure(() -> waitForElementToBeClickable(locator).click(), 3, 10); }
 
     public static void sendKeys(By locator, String text) {
         retryOnFailure(() -> {
             WebElement element = waitForElementToBeVisible(locator);
             element.clear();
             element.sendKeys(text);
-        }, 3, 1000);
+        }, 3, 10);
     }
 
     public static void zoomInOrOut(int zoomPercentage) {
@@ -88,7 +88,7 @@ public class WebElementUtil {
 
     public static String getText(By locator) {
         final String[] text = new String[1];
-        retryOnFailure(() -> text[0] = waitForElementToBeVisible(locator).getText(), 3, 1000);
+        retryOnFailure(() -> text[0] = waitForElementToBeVisible(locator).getText(), 3, 10);
         return text[0];
     }
 
@@ -108,6 +108,11 @@ public class WebElementUtil {
         return wait.until(ExpectedConditions.visibilityOf(element));
     }
 
+    public static WebElement waitForElementToBeClickable(WebElement ele) {
+        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(15));
+        return wait.until(ExpectedConditions.elementToBeClickable(ele));
+    }
+
     public static WebElement waitForElementToBeClickable(By locator) {
         WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(15));
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
@@ -122,6 +127,14 @@ public class WebElementUtil {
     public static WebElement waitForElementToBeVisible(By locator, int seconds) {
         WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(seconds));
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    public static List<WebElement> waitForElementsToBeVisible(By locator) {
+        WebDriverWait wait =
+                new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(15));
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        return DriverManager.getDriver().findElements(locator);
     }
 
     public static WebElement waitForElementToBeClickable(By locator, int seconds) {
@@ -361,7 +374,7 @@ public class WebElementUtil {
             } else {
                 js.executeScript("arguments[0].click();", element);
             }
-        }, 3, 1000);
+        }, 3, 10);
     }
     
     public static void openLinkInNewTab(By locator) {
@@ -435,7 +448,7 @@ public class WebElementUtil {
         final String[] value = new String[1];
         retryOnFailure(() ->
                         value[0] = waitForElementToBeVisible(locator).getAttribute(attributeName),
-                3, 1000);
+                3, 10);
 
         return value[0];
     }
@@ -550,10 +563,12 @@ public class WebElementUtil {
             WebElement element = driver.findElement(locator);
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
-        } catch (Exception e) {throw new RuntimeException(e);}
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public static float  getValueOfDom(By locator) {
+    public static float getValueOfDom (By locator){
         WebDriver driver = DriverManager.getDriver();
         WebElement element = driver.findElement(locator);
 
@@ -567,6 +582,5 @@ public class WebElementUtil {
         return converStringToFloat(value);
 
     }
-
 
 }

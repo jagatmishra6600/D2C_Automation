@@ -153,5 +153,26 @@ public class CartPageActionsElux {
         return WebElementUtil.getValueOfDom(cartPage_Locator.productCount) == initialValue - 4;
     }
 
+    public void clickOnPromoDropdown () {
+        WebElementUtil.waitForElementToBeVisible(cartPage_Locator.promoDropdown, 40);
+        WebElementUtil.scrollToElementCenter(cartPage_Locator.promoDropdown);
+        WebElementUtil.clickElement(cartPage_Locator.promoDropdown);
+    }
+
+    public void applyPromoCode (String promoCode){
+        WebElementUtil.waitForElementToBeVisible(cartPage_Locator.promoCodeInputField, 20);
+        WebElementUtil.scrollToElementCenter(cartPage_Locator.promoCodeInputField);
+        WebElementUtil.sendKeys(cartPage_Locator.promoCodeInputField, promoCode);
+
+        WebElementUtil.waitForElementToBeClickable(cartPage_Locator.applyPromoCodeButton);
+        WebElementUtil.clickElement(cartPage_Locator.applyPromoCodeButton);
+    }
+
+    public String getPromoErrorMessage () {
+        WebElementUtil.waitForElementToBeVisible(cartPage_Locator.promoErrorMessage, 20);
+        WebElementUtil.scrollToElementCenter(cartPage_Locator.promoErrorMessage);
+        return WebElementUtil.getText(cartPage_Locator.promoErrorMessage);
+    }
+
 
 }

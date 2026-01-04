@@ -18,23 +18,20 @@ public class EPIC_TC_AQA_OrderSummary_Elux extends BaseTest {
     OrderSummaryForCheckOutPage1ActionsElux orderSummaryCheckout1PageActionselux = new OrderSummaryForCheckOutPage1ActionsElux();
     DeliveryInstallationPageActionsElux deliveryInstallationPageActionsElux=new DeliveryInstallationPageActionsElux();
     @Test(groups = { "smoke",
-            "regression" }, description = "Verify that the Login section on the Checkout Shipping Address page displays correct UI, messages, fields  and allows the user to successfully log in with valid credentials.")
-    public void EPIC_09_CheckoutLogin_TC_02_AQA_OrderSummary_Elux() throws InterruptedException {
+            "regression" }, description = "Verify the Order Summary details in Checkout Page 1")
+    public void EPIC_11_CheckoutLogin_TC_02_AQA_OrderSummary_Elux() throws InterruptedException {
         navigateToShippingAddressPage("ELFW7337AW");
         deliveryInstallationPageActionsElux.selectRequiredInstallationPart();
         deliveryInstallationPageActionsElux.selectAddOnServices();
         plpProductItemsPageActionsElux.searchProducts( "EHVS75S1AO");
         verifyOrderSummaryForVacuumsProducts();
         shippingAddressPageActionsElux.verifyShippingDetails("automationtestengineer@maildrop.cc","PETER","PARKER","Carolina Beach","North Carolina","7829918924","28428","1 North Carolina Ave");
-        orderSummaryCheckout1PageActionselux.clickOnSaveAndContinueBtnForCheckoutPage1();
         ExtentReportManager.getTest()
-                .pass("Verified Login section UI, fields and messages on the Checkout Shipping Address page, "
-                        + "and confirmed successful valid user login with welcome greeting and logout link.");
+                .pass("Verified Order Summary details in Checkout Page 1");
     }
 
     private void verifyOrderSummaryForVacuumsProducts() throws InterruptedException
     {
-
         pdpPageActionsElux.clickAddToCartButton();
         deliveryAndServicePageActionsElux.clickViewCartButton();
         orderSummaryCheckout1PageActionselux.clickProceedToCheckOutButton();
