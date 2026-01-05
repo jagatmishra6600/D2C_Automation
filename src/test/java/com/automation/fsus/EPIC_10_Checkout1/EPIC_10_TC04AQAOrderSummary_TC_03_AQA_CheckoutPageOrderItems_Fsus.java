@@ -6,7 +6,7 @@ import com.automation.utils.ExtentReportManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class EPIC_10_TC_03_AQA_CheckoutPageOrderItems_Fsus extends BaseTest {
+public class EPIC_10_TC04AQAOrderSummary_TC_03_AQA_CheckoutPageOrderItems_Fsus extends BaseTest {
     private final HomePageActionsFsus homePage = new HomePageActionsFsus();
     private final CheckoutPageActionsFsus page = new CheckoutPageActionsFsus();
     private final DeliveryDatePageActionsFsus dpage = new DeliveryDatePageActionsFsus();

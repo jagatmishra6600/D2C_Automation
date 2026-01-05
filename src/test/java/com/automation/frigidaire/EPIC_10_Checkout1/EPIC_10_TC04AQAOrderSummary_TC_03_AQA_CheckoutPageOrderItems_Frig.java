@@ -9,7 +9,7 @@ import com.automation.utils.ExtentReportManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class EPIC_10_TC_03_AQA_CheckoutPageOrderItems_Frig extends BaseTest {
+public class EPIC_10_TC04AQAOrderSummary_TC_03_AQA_CheckoutPageOrderItems_Frig extends BaseTest {
     private final HomePageActionsFrig homePage = new HomePageActionsFrig();
     private final CheckoutPageActionsFrig page = new CheckoutPageActionsFrig();
     private final DeliveryDatePageActionsFrig dpage = new DeliveryDatePageActionsFrig();

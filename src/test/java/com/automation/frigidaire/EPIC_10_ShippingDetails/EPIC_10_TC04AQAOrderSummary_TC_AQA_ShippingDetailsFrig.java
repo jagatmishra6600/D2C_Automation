@@ -6,7 +6,7 @@ import com.automation.frigidaire.pages.ShippingAddressPageActionsFrig;
 import com.automation.utils.ExtentReportManager;
 import org.testng.annotations.Test;
 
-public class EPIC_10_TC_AQA_ShippingDetailsFrig extends BaseTest {
+public class EPIC_10_TC04AQAOrderSummary_TC_AQA_ShippingDetailsFrig extends BaseTest {
     HomePageActionsFrig homePage = new HomePageActionsFrig();
     ShippingAddressPageActionsFrig shippingAddressPage = new ShippingAddressPageActionsFrig();
 
