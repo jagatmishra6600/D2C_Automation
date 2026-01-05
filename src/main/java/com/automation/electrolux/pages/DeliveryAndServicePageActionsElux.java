@@ -1,5 +1,6 @@
 package com.automation.electrolux.pages;
 
+import com.automation.electrolux.locators.CartLocatorsElux;
 import com.automation.electrolux.locators.DandSLocatorsElux;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
@@ -8,6 +9,7 @@ import org.testng.Assert;
 
 public class DeliveryAndServicePageActionsElux {
     DandSLocatorsElux dns_Locator = new DandSLocatorsElux();
+    CartLocatorsElux cartPage_Locator = new CartLocatorsElux();
 
     public boolean isDeliveryAndServicePageHeadingVisibleAndCorrect(String expectedText) {
         WebElementUtil.isDisplayed(dns_Locator.pageHeading);
@@ -168,9 +170,13 @@ public class DeliveryAndServicePageActionsElux {
     }
 
     public CartPageActionsElux clickSaveAndViewCartButton() {
-        WebElementUtil.scrollToElementCenter(dns_Locator.saveAndViewCartButton);
-        WebElementUtil.waitForElementToBeClickable(dns_Locator.saveAndViewCartButton,15);
-        WebElementUtil.clickElement(dns_Locator.saveAndViewCartButton);
+        for (int attempt = 1; attempt <= 2; attempt++) {
+            WebElementUtil.clickElement(dns_Locator.saveAndViewCartButton);
+
+            if (isCartPageLoaded()) {
+                return new CartPageActionsElux();
+            }
+        }
         return new CartPageActionsElux();
     }
 
@@ -204,6 +210,10 @@ public class DeliveryAndServicePageActionsElux {
         WebElementUtil.forceClick(defaultCheckBox);
 
         return afterClickTotal == startingTotal + finalPrice;
+    }
+    
+    private boolean isCartPageLoaded() {
+    	return WebElementUtil.isDisplayed(cartPage_Locator.proceedToCheckOutButton);
     }
 
     public CartPageActionsElux clickViewCartButton() {
