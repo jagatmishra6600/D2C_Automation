@@ -21,7 +21,7 @@ public class EPIC_09_TC_03_AQA_CheckoutLogin_PasswordResetSuccess_Elux extends B
 	MailDropPageActionsElux mailDropPage = new MailDropPageActionsElux();
 	ResetPasswordPageActionsElux resetPasswordPage = new ResetPasswordPageActionsElux();
 	String emailAddress = UserTestData.getUserName();
-	String productSKU = "ELFW7437AG";
+	String productSKU = "ELFW7738AA";
 
 	@Test(groups = { "smoke","regression" }, description = "Verify the checkout login forgot password flow from the Shipping Address page, including reset email validation, password reset success messages, and login option display.")
 	public void EPIC_09_CheckoutLogin_TC_02_VerifyCheckoutPasswordResetSuccessFlow() {

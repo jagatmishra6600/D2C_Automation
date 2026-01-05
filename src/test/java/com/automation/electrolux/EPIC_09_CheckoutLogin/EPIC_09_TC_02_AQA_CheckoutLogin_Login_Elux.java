@@ -15,7 +15,7 @@ import com.automation.utils.UserTestData;
 public class EPIC_09_TC_02_AQA_CheckoutLogin_Login_Elux extends BaseTest {
 	HomePageActionsElux homePage = new HomePageActionsElux();
 	ShippingAddressPageActionsElux shippingAddressPage = new ShippingAddressPageActionsElux();
-	String productSKU = "ELFW7437AG";
+	String productSKU = "ELFW7738AA";
 	
 	@Test(groups = { "smoke",
 			"regression" }, description = "Verify that the Login section on the Checkout Shipping Address page displays correct UI, messages, fields  and allows the user to successfully log in with valid credentials.")
@@ -45,7 +45,7 @@ public class EPIC_09_TC_02_AQA_CheckoutLogin_Login_Elux extends BaseTest {
 	
 	private void navigateToShippingAddressPage() {
 		homePage.navigateToHomePage().clickSearchAndEnterProductId(productSKU).clickSearchIcon()
-				.clickProvidedProduct().closePopupModel().clickAddToCartButton()
+				.selectFirstProductFromSearchResults().closePopupModel().clickAddToCartButton()
 				.clickSaveAndViewCartButton().clickProceedToCheckOutButton();
 	}
 
