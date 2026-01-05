@@ -19,4 +19,10 @@ public class CartPageLocator_FSUS {
     public final By productCount = By.xpath("//cx-item-counter//input[@type='number']");
     public final By increaseButton = By.xpath("//cx-item-counter//button[@type='button' and normalize-space(text())='+']");
     public final By decreaseButton = By.xpath("//cx-item-counter//button[@type='button' and normalize-space(text())='-']");
+
+    //promo code locators
+    public final By promoDropdown = By.xpath("//h6[contains(normalize-space(),'Promo code')]");
+    public final By promoCodeInputField = By.id("couponCodeEntryForm");
+    public final By applyPromoCodeButton = By.id("submitCouponButton");
+    public final By promoErrorMessage = By.xpath("//div[@id='appliedCouponMessage']//b");
 }

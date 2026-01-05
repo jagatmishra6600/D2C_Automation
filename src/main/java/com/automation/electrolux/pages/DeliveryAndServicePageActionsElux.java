@@ -216,4 +216,11 @@ public class DeliveryAndServicePageActionsElux {
     	return WebElementUtil.isDisplayed(cartPage_Locator.proceedToCheckOutButton);
     }
 
+    public CartPageActionsElux clickViewCartButton() {
+        WebElementUtil.scrollToElementCenter(dns_Locator.viewcartBtn);
+        WebElementUtil.waitForElementToBeClickable(dns_Locator.viewcartBtn,15);
+        WebElementUtil.clickElement(dns_Locator.viewcartBtn);
+        return new CartPageActionsElux();
+    }
+
 }

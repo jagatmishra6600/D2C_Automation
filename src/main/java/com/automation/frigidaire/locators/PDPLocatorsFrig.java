@@ -15,6 +15,6 @@ public class PDPLocatorsFrig {
     public final By quickSpecSeeAll = By.xpath("//p[text()='See all']");
     public final By overViewAndFeatures = By.xpath("//strong[text()='Overview & Features']");
     public final By frenchdoorDelivery = By.xpath("//span[normalize-space(text()) = 'Delivery']");
-    public final By addToCartButton = By.xpath("//app-elux-action-button[contains(@class,'luxuryProductDetails')]//cx-add-to-cart//span[normalize-space(text()) = 'Add to cart']");
+    public final By addToCartButton = By.xpath("//app-elux-action-button[contains(@class,'luxuryProductDetails')]//span[normalize-space(text()) = 'Add to cart']");
     public final By viewCartButton = By.xpath("//a[@href='/en/cart' and text()='Save and view cart']");
 }

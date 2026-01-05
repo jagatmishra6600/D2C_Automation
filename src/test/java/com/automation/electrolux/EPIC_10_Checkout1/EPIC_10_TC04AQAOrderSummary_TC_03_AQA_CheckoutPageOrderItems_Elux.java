@@ -9,7 +9,7 @@ import com.automation.utils.ExtentReportManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class EPIC_10_TC_03_AQA_CheckoutPageOrderItems_Elux extends BaseTest {
+public class EPIC_10_TC04AQAOrderSummary_TC_03_AQA_CheckoutPageOrderItems_Elux extends BaseTest {
     private final HomePageActionsElux homePage = new HomePageActionsElux();
     private final CheckoutPageActionsElux page = new CheckoutPageActionsElux();
     private final DeliveryDatePageActionsElux dpage = new DeliveryDatePageActionsElux();

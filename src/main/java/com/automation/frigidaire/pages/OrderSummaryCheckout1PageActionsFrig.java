@@ -84,4 +84,59 @@ public class OrderSummaryCheckout1PageActionsFrig {
         WebElementUtil.isDisplayed(orderSummary.yourCartIsEmptyText);
         return this;
     }
+    public void clickOnSaveAndContinueBtnForCheckoutPage1()
+    {
+        WebElementUtil.waitForElementToBeClickable(orderSummary.saveAndContinueBtn,20);
+        WebElementUtil.clickElementUsingJSE(orderSummary.saveAndContinueBtn);
+    }
+    public void verifyTaxAndSavingsForPage1()
+    {
+        WebElementUtil.waitForElementToBeVisible(orderSummary.cartdiscountPrice,10);
+        WebElementUtil.isDisplayed(orderSummary.cartdiscountPrice);
+        WebElementUtil.waitForElementToBeVisible(orderSummary.cartSavings,10);
+        WebElementUtil.isDisplayed(orderSummary.cartSavings);
+        WebElementUtil.waitForElementToBeVisible(orderSummary.packageSavingPrice,10);
+        WebElementUtil.isDisplayed(orderSummary.packageSavingPrice);
+        WebElementUtil.waitForElementToBeVisible(orderSummary.deliveryPriceOrFree,10);
+        WebElementUtil.isDisplayed(orderSummary.deliveryPriceOrFree);
+        WebElementUtil.waitForElementToBeVisible(orderSummary.installationPartPrice,10);
+        WebElementUtil.isDisplayed(orderSummary.installationPartPrice);
+        WebElementUtil.waitForElementToBeVisible(orderSummary.addOnServicesPrice,10);
+        WebElementUtil.isDisplayed(orderSummary.addOnServicesPrice);
+        WebElementUtil.waitForElementToBeVisible(orderSummary.tapProtectionPlanPrice,10);
+        WebElementUtil.isDisplayed(orderSummary.tapProtectionPlanPrice);
+        WebElementUtil.waitForElementToBeVisible(orderSummary.subTotalText,10);
+        WebElementUtil.isDisplayed(orderSummary.subTotalText);
+        WebElementUtil.waitForElementToBeVisible(orderSummary.subTotalPrice,10);
+        WebElementUtil.isDisplayed(orderSummary.subTotalPrice);
+    }
+
+    public void verifyTaxAndSavings()
+    {
+        WebElementUtil.waitForElementToBeVisible(orderSummary.salesTax,20);
+        WebElementUtil.isDisplayed(orderSummary.salesTax);
+        WebElementUtil.waitForElementToBeVisible(orderSummary.cartdiscountPrice,10);
+        WebElementUtil.isDisplayed(orderSummary.cartdiscountPrice);
+        WebElementUtil.waitForElementToBeVisible(orderSummary.cartSavings,10);
+        WebElementUtil.isDisplayed(orderSummary.cartSavings);
+        WebElementUtil.waitForElementToBeVisible(orderSummary.packageSavingPrice,10);
+        WebElementUtil.isDisplayed(orderSummary.packageSavingPrice);
+        WebElementUtil.waitForElementToBeVisible(orderSummary.deliveryPriceOrFree,10);
+        WebElementUtil.isDisplayed(orderSummary.deliveryPriceOrFree);
+        WebElementUtil.waitForElementToBeVisible(orderSummary.installationPartPrice,10);
+        WebElementUtil.isDisplayed(orderSummary.installationPartPrice);
+        WebElementUtil.waitForElementToBeVisible(orderSummary.addOnServicesPrice,10);
+        WebElementUtil.isDisplayed(orderSummary.addOnServicesPrice);
+        WebElementUtil.waitForElementToBeVisible(orderSummary.parcelShippingPrice,10);
+        WebElementUtil.isDisplayed(orderSummary.parcelShippingPrice);
+        WebElementUtil.waitForElementToBeVisible(orderSummary.tapProtectionPlanPrice,10);
+        WebElementUtil.isDisplayed(orderSummary.tapProtectionPlanPrice);
+        WebElementUtil.waitForElementToBeVisible(orderSummary.subTotalText,10);
+        WebElementUtil.isDisplayed(orderSummary.subTotalText);
+        WebElementUtil.waitForElementToBeVisible(orderSummary.subTotalPrice,10);
+        WebElementUtil.isDisplayed(orderSummary.subTotalPrice);
+    }
 }
+
+
+
