@@ -10,6 +10,11 @@ public class OrderSummaryForCheckOutPage1ActionsElux {
 
 
     OrderSummaryForCheckOutPage1Elux orderSummary =new OrderSummaryForCheckOutPage1Elux();
+    HomePageActionsElux homePage = new HomePageActionsElux();
+    PdpPageActionsElux pdpPageActionsElux=new PdpPageActionsElux();
+    PLPProductItemsPageActionsElux plpProductItemsPageActionsElux = new PLPProductItemsPageActionsElux();
+    DeliveryAndServicePageActionsElux deliveryAndServicePageActionsElux= new DeliveryAndServicePageActionsElux();
+
 
     public boolean isOrderSummaryTextVisibleAndCorrect(String expectedText) {
         WebElementUtil.isDisplayed(orderSummary.orderSummaryText);
@@ -139,6 +144,7 @@ public class OrderSummaryForCheckOutPage1ActionsElux {
         WebElementUtil.isDisplayed(orderSummary.installationPartPrice);
         WebElementUtil.waitForElementToBeVisible(orderSummary.addOnServicesPrice,10);
         WebElementUtil.isDisplayed(orderSummary.addOnServicesPrice);
+        WebElementUtil.scrollToElementStable(orderSummary.parcelShippingPrice);
         WebElementUtil.waitForElementToBeVisible(orderSummary.parcelShippingPrice,10);
         WebElementUtil.isDisplayed(orderSummary.parcelShippingPrice);
         WebElementUtil.waitForElementToBeVisible(orderSummary.tapProtectionPlanPrice,10);
@@ -153,6 +159,21 @@ public class OrderSummaryForCheckOutPage1ActionsElux {
 
     }
 
+    public void verifyOrderSummaryForVacuumsProducts() throws InterruptedException
+    {
 
+        pdpPageActionsElux.clickAddToCartButton();
+        deliveryAndServicePageActionsElux.clickViewCartButton();
+       clickProceedToCheckOutButton();
+       verifyTaxAndSavingsforPage1();
+    }
+
+    public void navigateToShippingAddressPage(String skuNumber) throws InterruptedException {
+
+        homePage.navigateToHomePage();
+        plpProductItemsPageActionsElux.searchProducts( skuNumber);
+        pdpPageActionsElux.closePopupModel();
+        pdpPageActionsElux.clickAddToCartButton();
+    }
 
 }
