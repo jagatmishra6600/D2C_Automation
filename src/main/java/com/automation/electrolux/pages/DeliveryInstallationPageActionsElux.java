@@ -3,6 +3,8 @@ package com.automation.electrolux.pages;
 
 import com.automation.electrolux.locators.DeliveryAndInstallationLocatorsElux;
 import com.automation.frigidaire.locators.DeliveryAndInstallationLocatorsFrig;
+import com.automation.frigidaire.pages.DAndSPageActionsFrig;
+import com.automation.frigidaire.pages.DeliveryInstallationPageActionsFrig;
 import com.automation.utils.DriverManager;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
@@ -21,7 +23,7 @@ import static com.automation.electrolux.pages.PLPProductItemsPageActionsElux.add
 
 public class DeliveryInstallationPageActionsElux {
     private final WebDriver driver;
-
+    DeliveryAndInstallationLocatorsElux dandsPage_Locator = new DeliveryAndInstallationLocatorsElux();
 
     public DeliveryInstallationPageActionsElux() {
         this.driver = DriverManager.getDriver();
@@ -158,5 +160,81 @@ public class DeliveryInstallationPageActionsElux {
         String text = wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).getText();
         return Double.parseDouble(text.replace("$", "").replace(",", "").trim());
     }
+
+
+
+    public void selectRequiredInstallationPart() {
+        WebElementUtil.scrollToElementCenter(dandsPage_Locator.deliveryOnlyOption);
+        WebElementUtil.waitForElementToBeClickable(dandsPage_Locator.deliveryOnlyOption,15);
+        WebElementUtil.clickElement(dandsPage_Locator.deliveryOnlyOption);
+        WebElementUtil.scrollToElementCenter(dandsPage_Locator.requireInstallationPartsText);
+//        com.automation.utils.WebElementUtil.isDisplayed(dandsPage_Locator.requireInstallationPartsText);
+        WebElementUtil.waitForElementToBeVisible(dandsPage_Locator.requireInstallationPartsText,20);
+        WebElementUtil.waitForElementToBeClickable(dandsPage_Locator.partCheckBox,10);
+        WebElementUtil.clickElementUsingJSE(dandsPage_Locator.partCheckBox);
+
+
+    }
+
+//
+//    public DeliveryInstallationPageActionsFrig clickSideSaveAndViewCartButton() {
+//
+//        com.automation.utils.WebElementUtil.scrollToElementCenter(dandsPage_Locator.saveSideAndViewCartButton);
+//        com.automation.utils.WebElementUtil.waitForElementToBeClickable(dandsPage_Locator.saveSideAndViewCartButton,20);
+//        com.automation.utils.WebElementUtil.clickElementUsingJSE(dandsPage_Locator.saveSideAndViewCartButton);
+//        return new DeliveryInstallationPageActionsFrig();
+//    }
+//    public DAndSPageActionsFrig clickAddToCartButton() {
+//        com.automation.utils.WebElementUtil.scrollToElementCenter(dandsPage_Locator.addToCartButton);
+//        com.automation.utils.WebElementUtil.clickElement(dandsPage_Locator.addToCartButton);
+//        return new DAndSPageActionsFrig();
+//    }
+
+
+    public DeliveryAndServicePageActionsElux clickAddToCartButton() {
+        com.automation.utils.WebElementUtil.scrollToElementCenter(dandsPage_Locator.saveAndViewCartButton);
+        com.automation.utils.WebElementUtil.clickElement(dandsPage_Locator.saveAndViewCartButton);
+        return new DeliveryAndServicePageActionsElux();
+    }
+
+
+    public void selectAddOnServices(){
+
+
+        com.automation.utils.WebElementUtil.scrollToElementCenter(dandsPage_Locator.addOnServiceText);
+        com.automation.frigidaire.utils.WebElementUtil.waitForElementToBeVisible(dandsPage_Locator.addOnServiceText,10);
+
+        WaitUtils.sleep(3000);
+        com.automation.utils.WebElementUtil.scrollToElementStable(dandsPage_Locator.selectAddOnServices);
+        com.automation.frigidaire.utils.WebElementUtil.waitForElementToBeVisible(dandsPage_Locator.selectAddOnServices,10);
+        com.automation.utils.WebElementUtil.waitForElementToBeClickable(dandsPage_Locator.selectAddOnServices,10);
+        com.automation.utils.WebElementUtil.waitForElementToBeClickable(dandsPage_Locator.selectAddOnServices,10);
+        com.automation.frigidaire.utils.WebElementUtil.clickElement(dandsPage_Locator.selectAddOnServices);
+
+        com.automation.utils.WebElementUtil.scrollToElementCenter(dandsPage_Locator.protectionPlanText);
+        com.automation.frigidaire.utils.WebElementUtil.waitForElementToBeVisible(dandsPage_Locator.protectionPlanText,10);
+
+
+        WaitUtils.sleep(3000);
+        com.automation.frigidaire.utils.WebElementUtil.waitForElementToBeVisible(dandsPage_Locator.selectProtectionPlan, 10);
+        com.automation.frigidaire.utils.WebElementUtil.waitForElementToBeClickable(dandsPage_Locator.selectProtectionPlan,10);
+        com.automation.frigidaire.utils.WebElementUtil.clickElement(dandsPage_Locator.selectProtectionPlan);
+        com.automation.utils.WebElementUtil.scrollToElementStable(dandsPage_Locator.InstallationsPartPrice);
+        com.automation.utils.WebElementUtil.isDisplayed(dandsPage_Locator.InstallationsPartPrice);
+        com.automation.utils.WebElementUtil.isDisplayed(dandsPage_Locator.AddOnServicesPartPrice);
+        com.automation.utils.WebElementUtil.isDisplayed(dandsPage_Locator.TapProtectionPlanPrice);
+
+
+        WaitUtils.sleep(3000);
+        com.automation.utils.WebElementUtil.scrollToElementStable(dandsPage_Locator.saveAndViewCartButton);
+        com.automation.frigidaire.utils.WebElementUtil.waitForElementToBeVisible(dandsPage_Locator.saveAndViewCartButton, 10);
+        com.automation.frigidaire.utils.WebElementUtil.waitForElementToBeClickable(dandsPage_Locator.saveAndViewCartButton, 10);
+        com.automation.frigidaire.utils.WebElementUtil.clickElement(dandsPage_Locator.saveAndViewCartButton);
+
+        WaitUtils.sleep(3000);
+    }
+
+
+
 
 }

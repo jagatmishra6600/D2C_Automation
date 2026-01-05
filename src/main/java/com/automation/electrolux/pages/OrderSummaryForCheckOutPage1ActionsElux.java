@@ -1,12 +1,20 @@
-package com.automation.frigidaire.pages;
+package com.automation.electrolux.pages;
 
+import com.automation.electrolux.locators.OrderSummaryForCheckOutPage1Elux;
 import com.automation.frigidaire.locators.OrderSummaryForCheckOutPage1Frig;
-import com.automation.utils.WaitUtils;
+import com.automation.frigidaire.pages.OrderSummaryCheckout1PageActionsFrig;
+import com.automation.frigidaire.pages.ShippingAddressPageActionsFrig;
 import com.automation.utils.WebElementUtil;
 
-public class OrderSummaryCheckout1PageActionsFrig {
+public class OrderSummaryForCheckOutPage1ActionsElux {
 
-    OrderSummaryForCheckOutPage1Frig orderSummary =new OrderSummaryForCheckOutPage1Frig();
+
+    OrderSummaryForCheckOutPage1Elux orderSummary =new OrderSummaryForCheckOutPage1Elux();
+    HomePageActionsElux homePage = new HomePageActionsElux();
+    PdpPageActionsElux pdpPageActionsElux=new PdpPageActionsElux();
+    PLPProductItemsPageActionsElux plpProductItemsPageActionsElux = new PLPProductItemsPageActionsElux();
+    DeliveryAndServicePageActionsElux deliveryAndServicePageActionsElux= new DeliveryAndServicePageActionsElux();
+
 
     public boolean isOrderSummaryTextVisibleAndCorrect(String expectedText) {
         WebElementUtil.isDisplayed(orderSummary.orderSummaryText);
@@ -58,12 +66,13 @@ public class OrderSummaryCheckout1PageActionsFrig {
     }
 
     public ShippingAddressPageActionsFrig clickProceedToCheckOutButton() {
-        WebElementUtil.scrollIntoView(orderSummary.proceedToCheckOutButton);
+        WebElementUtil.scrollToElementStable(orderSummary.proceedToCheckOutButton);
+        //WebElementUtil.scrollIntoView(orderSummary.proceedToCheckOutButton);
         WebElementUtil.clickElement(orderSummary.proceedToCheckOutButton);
         return new ShippingAddressPageActionsFrig();
     }
 
-    public OrderSummaryCheckout1PageActionsFrig clickEmptyCartButton() {
+    public OrderSummaryForCheckOutPage1ActionsElux clickEmptyCartButton() {
         WebElementUtil.scrollToElementCenter(orderSummary.emptyCartButton);
         WebElementUtil.clickElement(orderSummary.emptyCartButton);
         WebElementUtil.clickElement(orderSummary.confirmButton);
@@ -77,46 +86,27 @@ public class OrderSummaryCheckout1PageActionsFrig {
         return actualText.toLowerCase().contains(expectedText.toLowerCase());
     }
 
-    public OrderSummaryCheckout1PageActionsFrig clickRemoveFromCartButton() {
+    public OrderSummaryForCheckOutPage1ActionsElux clickRemoveFromCartButton() {
         WebElementUtil.scrollToElementCenter(orderSummary.productRemoveCloseButton);
         WebElementUtil.clickElement(orderSummary.productRemoveCloseButton);
         WebElementUtil.clickElement(orderSummary.removeButton);
         WebElementUtil.isDisplayed(orderSummary.yourCartIsEmptyText);
         return this;
     }
+
+
     public void clickOnSaveAndContinueBtnForCheckoutPage1()
     {
         WebElementUtil.waitForElementToBeClickable(orderSummary.saveAndContinueBtn,20);
         WebElementUtil.clickElementUsingJSE(orderSummary.saveAndContinueBtn);
-    }
-    public void verifyTaxAndSavingsForPage1()
-    {
-        WebElementUtil.waitForElementToBeVisible(orderSummary.cartdiscountPrice,10);
-        WebElementUtil.isDisplayed(orderSummary.cartdiscountPrice);
-        WebElementUtil.waitForElementToBeVisible(orderSummary.cartSavings,10);
-        WebElementUtil.isDisplayed(orderSummary.cartSavings);
-        WebElementUtil.waitForElementToBeVisible(orderSummary.packageSavingPrice,10);
-        WebElementUtil.isDisplayed(orderSummary.packageSavingPrice);
-        WebElementUtil.waitForElementToBeVisible(orderSummary.deliveryPriceOrFree,10);
-        WebElementUtil.isDisplayed(orderSummary.deliveryPriceOrFree);
-        WebElementUtil.waitForElementToBeVisible(orderSummary.installationPartPrice,10);
-        WebElementUtil.isDisplayed(orderSummary.installationPartPrice);
-        WebElementUtil.waitForElementToBeVisible(orderSummary.addOnServicesPrice,10);
-        WebElementUtil.isDisplayed(orderSummary.addOnServicesPrice);
-        WebElementUtil.waitForElementToBeVisible(orderSummary.tapProtectionPlanPrice,10);
-        WebElementUtil.isDisplayed(orderSummary.tapProtectionPlanPrice);
-        WebElementUtil.waitForElementToBeVisible(orderSummary.subTotalText,10);
-        WebElementUtil.isDisplayed(orderSummary.subTotalText);
-        WebElementUtil.waitForElementToBeVisible(orderSummary.subTotalPrice,10);
-        WebElementUtil.isDisplayed(orderSummary.subTotalPrice);
     }
 
     public void verifyTaxAndSavings()
     {
         WebElementUtil.waitForElementToBeVisible(orderSummary.salesTax,20);
         WebElementUtil.isDisplayed(orderSummary.salesTax);
-        WebElementUtil.waitForElementToBeVisible(orderSummary.cartdiscountPrice,10);
-        WebElementUtil.isDisplayed(orderSummary.cartdiscountPrice);
+//        WebElementUtil.waitForElementToBeVisible(orderSummary.cartdiscountPrice,20);
+//        WebElementUtil.isDisplayed(orderSummary.cartdiscountPrice);
         WebElementUtil.waitForElementToBeVisible(orderSummary.cartSavings,10);
         WebElementUtil.isDisplayed(orderSummary.cartSavings);
         WebElementUtil.waitForElementToBeVisible(orderSummary.packageSavingPrice,10);
@@ -136,7 +126,54 @@ public class OrderSummaryCheckout1PageActionsFrig {
         WebElementUtil.waitForElementToBeVisible(orderSummary.subTotalPrice,10);
         WebElementUtil.isDisplayed(orderSummary.subTotalPrice);
     }
+
+    public void verifyTaxAndSavingsforPage1() throws InterruptedException {
+
+//        WebElementUtil.waitForElementToBeVisible(orderSummary.cartdiscountPrice,20);
+//        WebElementUtil.isDisplayed(orderSummary.cartdiscountPrice);
+
+//        WebElementUtil.waitForElementToBeVisible(orderSummary.packageSavingPrice,10);
+//        WebElementUtil.isDisplayed(orderSummary.packageSavingPrice);
+        WebElementUtil.waitForElementToBeVisible(orderSummary.subTotalText,10);
+        WebElementUtil.isDisplayed(orderSummary.subTotalText);
+        WebElementUtil.waitForElementToBeVisible(orderSummary.subTotalPrice,10);
+        WebElementUtil.isDisplayed(orderSummary.subTotalPrice);
+        WebElementUtil.waitForElementToBeVisible(orderSummary.deliveryPriceOrFree,10);
+        WebElementUtil.isDisplayed(orderSummary.deliveryPriceOrFree);
+        WebElementUtil.waitForElementToBeVisible(orderSummary.installationPartPrice,10);
+        WebElementUtil.isDisplayed(orderSummary.installationPartPrice);
+        WebElementUtil.waitForElementToBeVisible(orderSummary.addOnServicesPrice,10);
+        WebElementUtil.isDisplayed(orderSummary.addOnServicesPrice);
+        WebElementUtil.scrollToElementStable(orderSummary.parcelShippingPrice);
+        WebElementUtil.waitForElementToBeVisible(orderSummary.parcelShippingPrice,10);
+        WebElementUtil.isDisplayed(orderSummary.parcelShippingPrice);
+        WebElementUtil.waitForElementToBeVisible(orderSummary.tapProtectionPlanPrice,10);
+        WebElementUtil.isDisplayed(orderSummary.tapProtectionPlanPrice);
+        WebElementUtil.scrollToElementStable(orderSummary.cartSavings);
+        WebElementUtil.waitForElementToBeVisible(orderSummary.cartSavings,10);
+        WebElementUtil.isDisplayed(orderSummary.cartSavings);
+        Thread.sleep(10000);
+        WebElementUtil.scrollToElementStable(orderSummary.cartdiscountPrice);
+        WebElementUtil.waitForElementToBeVisible(orderSummary.cartdiscountPrice,10);
+        WebElementUtil.isDisplayed(orderSummary.cartdiscountPrice);
+
+    }
+
+    public void verifyOrderSummaryForVacuumsProducts() throws InterruptedException
+    {
+
+        pdpPageActionsElux.clickAddToCartButton();
+        deliveryAndServicePageActionsElux.clickViewCartButton();
+       clickProceedToCheckOutButton();
+       verifyTaxAndSavingsforPage1();
+    }
+
+    public void navigateToShippingAddressPage(String skuNumber) throws InterruptedException {
+
+        homePage.navigateToHomePage();
+        plpProductItemsPageActionsElux.searchProducts( skuNumber);
+        pdpPageActionsElux.closePopupModel();
+        pdpPageActionsElux.clickAddToCartButton();
+    }
+
 }
-
-
-

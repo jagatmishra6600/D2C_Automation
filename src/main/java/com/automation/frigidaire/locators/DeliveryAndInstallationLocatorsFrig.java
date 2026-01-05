@@ -17,7 +17,7 @@ public class DeliveryAndInstallationLocatorsFrig {
 
     public static By radioButton = By.xpath("//div[text()=\" Delivery only (No Install) \"]/parent::div/parent::div//div[@id=\"deliveryServiceDiv\"]//input");
     public static By plpProductOpen = By.xpath("//div[@class=\"container-fluid px-2 plp\"]//div[@id=\"PlpItem0\"]//div[@class=\"col- Product-Image-Placeholder\"]//app-elux-image\n");
-    public static By addToCart = By.xpath("//app-elux-action-button[@class=\"luxuryProductDetails productDetails ng-star-inserted\"]");
+    public static By addToCart = By.xpath("//app-elux-action-button[@class=\"luxuryProductDetails productDektails ng-star-inserted\"]");
     public static By deliveryAndInStoreBox = By.xpath("//div[text()='" + text + "']");
     public static By deliveryAndInstallationHeading = By.xpath("//h3[text()='" + text + "']");
     public static By viewIncludedPartsLink = By.xpath("//a[text()='View included parts and additional details']");
@@ -37,7 +37,32 @@ public class DeliveryAndInstallationLocatorsFrig {
     public static By totalProtectionPlanSubTxt = By.xpath("//p[text()=\"Protect your investment with our appliance protection plan\"]");
     public static By protectionPlanPopUp = By.xpath("//div[@id=\"tap-modal\"]");
     public static By viewIncludePartsClosePopUpButton=By.xpath("//button[@aria-label='Close']/img");
-    //div[@class='Body_Large-Title Utility-TextPrice-Sm col-md-4 p-0 text-right total-price']
+    public final By addToCartButton = By.xpath("//app-elux-action-button[contains(@class,'luxuryProductDetails')]//cx-add-to-cart//span[normalize-space(text()) = 'Add to cart']");
+    public final By saveAndViewCartButton = By.xpath("//button[normalize-space(text())='Save and view cart']");
+    public final By saveSideAndViewCartButton = By.xpath("//a[normalize-space(text())='Save and view cart']");
+    public final By itemAddedToCartText = By.xpath("//span[text()='Item added to cart']");
+    public final By productTitleText = By.xpath("//p[contains(@class, 'product-title')]");
+    public final By productIdText = By.xpath("//p[contains(@class, 'product-title')]//..//following-sibling::p");
+    public final By productPriceText = By.xpath("//span[contains(@class, 'TextPrice')]");
+    public final By optionToReceiveOrderText = By.xpath("//h3[contains(@class,'card-title')]");
+    public final By deliveryOptionBox = By.xpath("//div[text()='Delivery']/parent::div");
+    public final By deliveryAndServiceSectionHeading = By.xpath("//h3[text()='Delivery & installation services']");
+    public static final By totalPrice = By.xpath("//div[normalize-space(text())='Total']/following-sibling::div");
+    public final By deliveryOnlyOption = By.xpath("//div[normalize-space(text())='Delivery only (No Install)']/parent::div/preceding-sibling::div//input");
+    public final By deliveryOnlyOptionPrice = By.xpath("//div[normalize-space(text())='Delivery only (No Install)']/../following-sibling::div//div[contains(@class, 'priceFree')]//span");
+    public final By requireInstallationPartsText = By.xpath("//p[text()='Required installation parts']");
+    public final By partCheckBox = By.xpath("//input[@id='912001026']");
+    public final By InstallationsPartPrice = By.xpath("//div[text()='Installation parts']/following-sibling::div");
+    public final By AddOnServicesPartPrice = By.xpath("//div[normalize-space()='Add-on services']/following-sibling::div");
+    public final By  TapProtectionPlanPrice = By.xpath("//div[normalize-space()='Tap protection plan']/following-sibling::div");
+    public By addOnServiceText = By.xpath("//p[normalize-space()='Add-on services']");
+    public By selectAddOnServices = By.xpath("//div[normalize-space()='Haul away / dispose old appliance']//parent::div/parent::div//input");
+    public By protectionPlanText = By.xpath("//h3[text()=\" Select a protection plan\"]");
+    public By selectProtectionPlan = By.xpath("//span[text()=\"3 years\"]");
+
+
+
+
     public static By optionByText(String text) {
         return By.xpath("//p[normalize-space()='" + text + "']");
     }
@@ -47,7 +72,7 @@ public class DeliveryAndInstallationLocatorsFrig {
     }
     public static By subTotalPrice = By.xpath("//div[@class='Utility-TextPrice-Sm col-md-4 p-0 subtotal-price text-right' or contains(@class,'Body_Large-Title col-md-4 p-0 text-right')]//b");
     public static By protectionPlanPrice = By.xpath("//div[@class='col-md-4 p-0 text-right']");
-    public static By totalPrice = By.xpath("//div[contains(@class, 'Body_Large-Title') and contains(@class, 'Utility-TextPrice-Sm') and contains(@class, 'total-price')]");
+    //public static By totalPrice = By.xpath("//div[contains(@class, 'Body_Large-Title') and contains(@class, 'Utility-TextPrice-Sm') and contains(@class, 'total-price')]");
     public static By totalPriceForElectrolux = By.xpath("//div[contains(@class,'Body_Large-Title col-md-4 p-0 text-right ng-star-inserted')]");
     public static By protectionPlanPriceForElectrolux = By.xpath("//div[text()=' Protection Plan ']/following-sibling::div[@class='col-md-4 p-0 text-right']");
     public static By installationServices = By.xpath("//div[text()='Installation parts']/following-sibling::div[@class=\"col-md-4 p-0 text-right\"]");

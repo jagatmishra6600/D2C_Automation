@@ -42,6 +42,11 @@ public class PLPLocatorsFrig {
     public static final By RESET_ALL_BUTTON = By.xpath("//span[text()=\" Hide filters\"]/ancestor::div//span[text()=\" Reset all \"]");
     public static final By PRODUCT_UNIQUE_CODE = By.xpath("//h2[@class='prod_id Utility-TextProduct-SKU-Sm ng-star-inserted']");
     public static final By PRODUCT_TITLE = By.xpath("//h1[@class='H1H1_Desktop mt-34 category-heading']");
+    public static By searchBoxs = By.xpath("//input[@placeholder='Search...']");
+    public static By searchButton = By.xpath("//img[@class='elxIconsSearch search']");
+
+    public static By productLink(String productCode) {
+        return By.xpath("//div[text()='" + productCode + "']//parent::div//following-sibling::div[@class='col- Product-Name my-2 min-height-v12']//a");}
 
     public static final By AVAILABILITY_CHECKBOX = By.xpath(
             "//b[contains(text(),'Availability')]/ancestor::app-elux-product-facet-list" +

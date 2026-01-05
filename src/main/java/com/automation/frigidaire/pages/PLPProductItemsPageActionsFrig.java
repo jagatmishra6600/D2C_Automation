@@ -15,6 +15,9 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import static com.automation.frigidaire.locators.PLPLocatorsFrig.*;
+
 public class PLPProductItemsPageActionsFrig {
 
 
@@ -1121,6 +1124,39 @@ public class PLPProductItemsPageActionsFrig {
         }
     }
 
+
+
+    public void searchProducts(String skuNumber){
+        WaitUtils.sleep(3000);
+        WaitUtils.untilPageLoadComplete();
+        WebElementUtil.waitForElementToBeVisible(searchBoxs, 10);
+        WebElementUtil.sendKeys(searchBoxs, skuNumber);
+
+        WebElementUtil.waitForElementToBeClickable(searchButton,10);
+        WebElementUtil.clickElement(searchButton);
+        WaitUtils.sleep(3000);
+
+        WebElementUtil.scrollToElementStable(productLink(skuNumber));
+        WebElementUtil.waitForElementToBeVisible(productLink(skuNumber), 10);
+        WebElementUtil.waitForElementToBeClickable(productLink(skuNumber), 10);
+        WebElementUtil.clickElement(productLink(skuNumber));
+    }
+
+    public void searchProductsForAircare(String skuNumber){
+        WaitUtils.sleep(5000);
+        WebElementUtil.scrollToElementStable(searchBoxs);
+        WebElementUtil.waitForElementToBeVisible(searchBoxs, 10);
+        WebElementUtil.sendKeys(searchBoxs, skuNumber);
+
+        WebElementUtil.waitForElementToBeClickable(searchButton,10);
+        WebElementUtil.clickElement(searchButton);
+        WaitUtils.sleep(3000);
+
+        WebElementUtil.scrollToElementStable(productLink(skuNumber));
+        WebElementUtil.waitForElementToBeVisible(productLink(skuNumber), 10);
+        WebElementUtil.waitForElementToBeClickable(productLink(skuNumber), 10);
+        WebElementUtil.clickElement(productLink(skuNumber));
+    }
 }
 
 
