@@ -1,154 +1,78 @@
 package com.automation.familystoreus.pages;
 
-import com.automation.familystoreus.locators.FedexServiceLocatorsFsus;
 import com.automation.familystoreus.locators.InstallationAddOnServiceLocatorsFsus;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 
 public class InstallationAddOnServicePageActionFsus {
 
     InstallationAddOnServiceLocatorsFsus installationAddOnService = new InstallationAddOnServiceLocatorsFsus();
-    FedexServiceLocatorsFsus fedexService = new FedexServiceLocatorsFsus();
 
     public void verifyDeliveryOnlyElements() {
 
-        WebElementUtil.scrollToElementStable(installationAddOnService.pageTitle);
-        WebElementUtil.waitForElementToBeVisible(installationAddOnService.pageTitle, 10);
-        WebElementUtil.isDisplayed(installationAddOnService.pageTitle);
-
-        WebElementUtil.waitForElementToBeVisible(installationAddOnService.freeDeliveryMessage, 10);
-        WebElementUtil.isDisplayed(installationAddOnService.freeDeliveryMessage);
-
-        WebElementUtil.waitForElementToBeVisible(installationAddOnService.sectionTitle, 10);
-        WebElementUtil.isDisplayed(installationAddOnService.sectionTitle);
-    }
-
-    public void verifyProfessionalInstallationSection() {
-
-        WebElementUtil.scrollToElementStable(installationAddOnService.professionalInstallationTitle);
-        WebElementUtil.waitForElementToBeVisible(installationAddOnService.professionalInstallationTitle, 10);
-        WebElementUtil.isDisplayed(installationAddOnService.professionalInstallationTitle);
-
-        WebElementUtil.waitForElementToBeVisible(installationAddOnService.professionalInstallationRadio, 10);
-        WebElementUtil.isDisplayed(installationAddOnService.professionalInstallationRadio);
-
-        WebElementUtil.waitForElementToBeVisible(installationAddOnService.professionalInstallationDescription, 10);
-        WebElementUtil.isDisplayed(installationAddOnService.professionalInstallationDescription);
-
-        WebElementUtil.waitForElementToBeVisible(installationAddOnService.professionalInstallationPrice, 10);
-        WebElementUtil.isDisplayed(installationAddOnService.professionalInstallationPrice);
-
-        WebElementUtil.waitForElementToBeVisible(installationAddOnService.professionalInstallationTag);
-        WebElementUtil.isDisplayed(installationAddOnService.professionalInstallationTag);
-    }
-
-    public void selectDeliveryOnly() {
-
-        WebElementUtil.scrollToElementStable(fedexService.deliveryOption);
-
-        WebElementUtil.waitForElementToBeVisible(fedexService.radioButton, 10);
-        WebElementUtil.waitForElementToBeClickable(fedexService.radioButton, 10);
-        WebElementUtil.clickElement(fedexService.radioButton);
-
-        WebElementUtil.waitForElementToBeVisible(fedexService.installationCheckbox, 10);
-        WebElementUtil.waitForElementToBeClickable(fedexService.installationCheckbox, 10);
-        WebElementUtil.clickElement(fedexService.installationCheckbox);
-
-
+//        WebElementUtil.scrollToElementStable(installationAddOnService.pageTitle);
+//        assertElementDisplayed(installationAddOnService.pageTitle, "Page Title is not displayed");
+        assertElementDisplayed(installationAddOnService.freeDeliveryMessage, "Free Delivery Message is not displayed");
+        assertElementDisplayed(installationAddOnService.sectionTitle, "Section Title is not displayed");
     }
 
     public void verifyAddOnService() {
-
         WebElementUtil.scrollToElementCenter(installationAddOnService.addOnServiceTitle);
 
-        WebElementUtil.waitForElementToBeVisible(installationAddOnService.addOnServiceTitle, 10);
-        WebElementUtil.isDisplayed(installationAddOnService.addOnServiceTitle);
-
-        WebElementUtil.waitForElementToBeVisible(installationAddOnService.addOnServiceMessage, 10);
-        WebElementUtil.isDisplayed(installationAddOnService.addOnServiceMessage);
-
-        WebElementUtil.waitForElementToBeVisible(installationAddOnService.haulAwayLabel, 10);
-        WebElementUtil.isDisplayed(installationAddOnService.haulAwayLabel);
-
-        WebElementUtil.waitForElementToBeVisible(installationAddOnService.haulAwayDescription, 10);
-        WebElementUtil.isDisplayed(installationAddOnService.haulAwayDescription);
-
-        WebElementUtil.waitForElementToBeVisible(installationAddOnService.haulAwayCheckbox, 10);
-        WebElementUtil.isDisplayed(installationAddOnService.haulAwayCheckbox);
-
-        WebElementUtil.waitForElementToBeVisible(installationAddOnService.haulAwayPrice, 10);
-        WebElementUtil.isDisplayed(installationAddOnService.haulAwayPrice);
-
-        WebElementUtil.waitForElementToBeVisible(installationAddOnService.moveUnitLabel, 10);
-        WebElementUtil.isDisplayed(installationAddOnService.moveUnitLabel);
-
-        WebElementUtil.waitForElementToBeVisible(installationAddOnService.moveUnitDescription, 10);
-        WebElementUtil.isDisplayed(installationAddOnService.moveUnitDescription);
-
-        WebElementUtil.waitForElementToBeVisible(installationAddOnService.moveUnitCheckbox, 10);
-        WebElementUtil.isDisplayed(installationAddOnService.moveUnitCheckbox);
-
-        WebElementUtil.waitForElementToBeVisible(installationAddOnService.moveUnitPrice, 10);
-        WebElementUtil.isDisplayed(installationAddOnService.moveUnitPrice);
+        assertElementDisplayed(installationAddOnService.addOnServiceTitle, "Add-On Service Title is not displayed");
+        assertElementDisplayed(installationAddOnService.addOnServiceMessage, "Add-On Service Message is not displayed");
+        assertElementDisplayed(installationAddOnService.haulAwayLabel, "Haul Away Label is not displayed");
+        assertElementDisplayed(installationAddOnService.haulAwayDescription, "Haul Away Description is not displayed");
+        assertElementDisplayed(installationAddOnService.haulAwayCheckbox, "Haul Away Checkbox is not displayed");
+        assertElementDisplayed(installationAddOnService.haulAwayPrice, "Haul Away Price is not displayed");
+        assertElementDisplayed(installationAddOnService.moveUnitLabel, "Move Unit Label is not displayed");
+        assertElementDisplayed(installationAddOnService.moveUnitDescription, "Move Unit Description is not displayed");
+        assertElementDisplayed(installationAddOnService.moveUnitCheckbox, "Move Unit Checkbox is not displayed");
+        assertElementDisplayed(installationAddOnService.moveUnitPrice, "Move Unit Price is not displayed");
     }
 
-    public void selectHaul() throws InterruptedException {
+    public void assertElementDisplayed(By element, String errorMessage) {
+        Assert.assertTrue(WebElementUtil.isDisplayed(element), errorMessage);
+    }
 
-        WaitUtils.sleep(3);
+    public void selectHaul() {
+
+        WaitUtils.sleep(1000);
         WebElementUtil.scrollToElementCenter(installationAddOnService.addOnServiceTitle);
-        WebElementUtil.waitForElementToBeClickable(installationAddOnService.haulAwayCheckbox,10);
+        WebElementUtil.waitForElementToBeClickable(installationAddOnService.haulAwayCheckbox, 10);
         WebElementUtil.clickElement(installationAddOnService.haulAwayCheckbox);
 
         WebElementUtil.scrollToElementCenter(installationAddOnService.subTotalLabel);
-        WebElementUtil.waitForElementToBeVisible(installationAddOnService.subTotalLabel,10);
+        WebElementUtil.waitForElementToBeVisible(installationAddOnService.subTotalLabel, 10);
 
         String subTotal = WebElementUtil.getText(installationAddOnService.subTotalAddOnServicePrice).trim();
         subTotal = subTotal.replace("$", "").replace(",", "");
-        System.out.println(subTotal);
         calculatePriceAndAssert(subTotal);
 
-        WebElementUtil.waitForElementToBeClickable(installationAddOnService.haulAwayCheckbox,10);
-        WebElementUtil.clickElement(installationAddOnService.haulAwayCheckbox);
+        WebElementUtil.scrollToElementStable(installationAddOnService.unSelectHaul);
+        WebElementUtil.waitForElementToBeClickable(installationAddOnService.unSelectHaul, 10);
+        WebElementUtil.clickElement(installationAddOnService.unSelectHaul);
     }
 
-    public void selectMove() throws InterruptedException {
+    public void selectMove() {
 
-        WaitUtils.sleep(3);
+        WaitUtils.sleep(1000);
         WebElementUtil.scrollToElementCenter(installationAddOnService.addOnServiceTitle);
-        WebElementUtil.waitForElementToBeClickable(installationAddOnService.moveUnitCheckbox,10);
+        WebElementUtil.waitForElementToBeClickable(installationAddOnService.moveUnitCheckbox, 10);
         WebElementUtil.clickElement(installationAddOnService.moveUnitCheckbox);
 
         WebElementUtil.scrollToElementCenter(installationAddOnService.subTotalLabel);
-        WebElementUtil.waitForElementToBeVisible(installationAddOnService.subTotalLabel,10);
+        WebElementUtil.waitForElementToBeVisible(installationAddOnService.subTotalLabel, 10);
 
         String subTotal = WebElementUtil.getText(installationAddOnService.subTotalAddOnServicePrice).trim();
         subTotal = subTotal.replace("$", "").replace(",", "");
-        System.out.println(subTotal);
         calculatePriceAndAssert(subTotal);
 
-        WebElementUtil.waitForElementToBeClickable(installationAddOnService.moveUnitCheckbox,10);
-        WebElementUtil.clickElement(installationAddOnService.moveUnitPrice);
-    }
-
-    public void selectHaulAndMove() throws InterruptedException {
-
-        WaitUtils.sleep(3);
-        WebElementUtil.scrollToElementCenter(installationAddOnService.addOnServiceTitle);
-        WebElementUtil.waitForElementToBeClickable(installationAddOnService.haulAwayCheckbox,10);
-        WebElementUtil.clickElement(installationAddOnService.haulAwayCheckbox);
-
-        WebElementUtil.waitForElementToBeClickable(installationAddOnService.moveUnitCheckbox,10);
-        WebElementUtil.clickElement(installationAddOnService.moveUnitCheckbox);
-
-        WebElementUtil.scrollToElementCenter(installationAddOnService.subTotalLabel);
-        WebElementUtil.waitForElementToBeVisible(installationAddOnService.subTotalLabel,10);
-
-        String subTotal = WebElementUtil.getText(installationAddOnService.subTotalAddOnServicePrice).trim();
-        subTotal = subTotal.replace("$", "").replace(",", "");
-        System.out.println(subTotal);
-        calculatePriceAndAssert(subTotal);
-
+        WebElementUtil.scrollToElementStable(installationAddOnService.unSelectMove);
+        WebElementUtil.waitForElementToBeClickable(installationAddOnService.unSelectMove, 10);
+        WebElementUtil.clickElement(installationAddOnService.unSelectMove);
     }
 
     private void calculatePriceAndAssert(String price) {

@@ -11,15 +11,15 @@ public class EPIC_07_TC_04_DS_FedexServiceExclusion extends BaseTest {
     FedexServiceExclusionPageActionFsus fedexService = new FedexServiceExclusionPageActionFsus();
     LoginPageActionsFsus loginPage = new LoginPageActionsFsus();
 
-    @Test(groups = {"smoke", "regression"}, description = "Verify Air care Product Details in Product listing page", priority = 2)
-    public void EPIC_04_PLP_TC_03_testForAirCare() throws InterruptedException {
+    @Test(groups = {"smoke", "regression"}, description = "Verify Fedex product Delivery", priority = 2)
+    public void EPIC_04_PLP_TC_03_testForFedexProduct() throws InterruptedException {
         loginPage.loginWithDefaultCredentials();
         fedexService.enterZipCode("85062");
         fedexService.searchProduct("FRFG1723AV");
         fedexService.clickProduct();
         fedexService.checkDeliveryOptions();
         fedexService.checkInstallationUnavailable();
-        ExtentReportManager.getTest().pass("Verify Laundry product details in product listing page and click on image,productName and rating navigate to PDP");
+        ExtentReportManager.getTest().pass("Verify Fedex services provided delivery");
     }
 
 }

@@ -12,8 +12,8 @@ public class EPIC_04_TC_03_AQA_PLP_ProductCards extends BaseTest {
     LoginPageActionsFsus loginPage = new LoginPageActionsFsus();
 
 
-    @Test(groups = {"smoke", "regression"}, description = "Verify Kitchen Product Details in Product listing page", priority = 1)
-    public void EPIC_04_PLP_TC_03_testForKitchen(){
+    @Test(groups = {"smoke", "regression"}, description = "Verify Vacuums Product Details in Product listing page", priority = 1)
+    public void EPIC_04_PLP_TC_03_testForVacuums(){
         loginPage.loginWithDefaultCredentials();
         loginPage.acceptCookies();
         productCard.clickOnProductMenu("Vacuums");
@@ -23,8 +23,8 @@ public class EPIC_04_TC_03_AQA_PLP_ProductCards extends BaseTest {
         ExtentReportManager.getTest().pass("Verify vacuums product details in product listing page and click on image, product name and rating navigate to PDP");
     }
 
-    @Test(groups = {"smoke", "regression"}, description = "Verify Air care Product Details in Product listing page", priority = 2)
-    public void EPIC_04_PLP_TC_03_testForAirCare(){
+    @Test(groups = {"smoke", "regression"}, description = "Verify Laundry Product Details in Product listing page", priority = 2)
+    public void EPIC_04_PLP_TC_03_testForLaundry(){
         loginPage.loginWithDefaultCredentials();
         loginPage.acceptCookies();
         productCard.clickOnProductMenu("Laundry");

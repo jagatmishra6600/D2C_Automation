@@ -99,7 +99,6 @@ public class ProductCardsPageActionFsus {
 
     public void verifyElementDisplayed(By xpath, String elementName) {
         try {
-            WebElementUtil.waitForElementToBeVisible(xpath,10);
             boolean isDisplayed = WebElementUtil.isDisplayed(xpath);
             softAssert.assertTrue(isDisplayed, elementName + " should be displayed.");
         } catch (Exception e) {
