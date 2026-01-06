@@ -15,6 +15,7 @@ public class EPIC_04_TC_03_AQA_PLP_ProductCards extends BaseTest {
     @Test(groups = {"smoke", "regression"}, description = "Verify Kitchen Product Details in Product listing page", priority = 1)
     public void EPIC_04_PLP_TC_03_testForKitchen(){
         loginPage.loginWithDefaultCredentials();
+        loginPage.acceptCookies();
         productCard.clickOnProductMenu("Vacuums");
         productCard.clickOnProductSubMenu("Explore Vacuums");
         productCard.verifyProductItemPage("Vacuums", "Vacuums");
@@ -25,6 +26,7 @@ public class EPIC_04_TC_03_AQA_PLP_ProductCards extends BaseTest {
     @Test(groups = {"smoke", "regression"}, description = "Verify Air care Product Details in Product listing page", priority = 2)
     public void EPIC_04_PLP_TC_03_testForAirCare(){
         loginPage.loginWithDefaultCredentials();
+        loginPage.acceptCookies();
         productCard.clickOnProductMenu("Laundry");
         productCard.clickOnProductSubMenu("Electrolux Laundry");
         productCard.verifyProductItemPage("Laundry", "Laundry");

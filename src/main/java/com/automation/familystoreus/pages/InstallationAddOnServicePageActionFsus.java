@@ -13,9 +13,9 @@ public class InstallationAddOnServicePageActionFsus {
 
     public void verifyDeliveryOnlyElements() {
 
-//        WebElementUtil.scrollToElementStable(installationAddOnService.pageTitle);
-//        WebElementUtil.waitForElementToBeVisible(installationAddOnService.pageTitle, 10);
-//        WebElementUtil.isDisplayed(installationAddOnService.pageTitle);
+        WebElementUtil.scrollToElementStable(installationAddOnService.pageTitle);
+        WebElementUtil.waitForElementToBeVisible(installationAddOnService.pageTitle, 10);
+        WebElementUtil.isDisplayed(installationAddOnService.pageTitle);
 
         WebElementUtil.waitForElementToBeVisible(installationAddOnService.freeDeliveryMessage, 10);
         WebElementUtil.isDisplayed(installationAddOnService.freeDeliveryMessage);
@@ -175,79 +175,5 @@ public class InstallationAddOnServicePageActionFsus {
 
         Assert.assertEquals(actualTotal, expectedTotal, "Error");
     }
-//
-//    public void selectHaul() {
-//
-//        WebElementUtil.scrollToElementCenter(installationAddOnService.addOnServiceTitle);
-//        clickAddon(installationAddOnService.haulAwayCheckbox);
-//        //validateSubtotal();
-//        WebElementUtil.scrollToElementCenter(installationAddOnService.subTotalLabel);
-//        WebElementUtil.waitForElementToBeVisible(installationAddOnService.subTotalLabel, 10);
-//
-//        String subTotal = WebElementUtil.getText(installationAddOnService.subTotalAddOnServicePrice)
-//                .trim()
-//                .replace("$", "")
-//                .replace(",", "");
-//
-//        System.out.println(subTotal);
-//        calculatePriceAndAssert(subTotal);
-//        WebElementUtil.waitForElementToBeClickable(installationAddOnService.haulAwayCheckbox, 10);
-//        WebElementUtil.clickElement(installationAddOnService.haulAwayCheckbox);
-//    }
-//
-//    public void selectMove() {
-//        WebElementUtil.scrollToElementCenter(installationAddOnService.addOnServiceTitle);
-//        clickAddon(installationAddOnService.moveUnitCheckbox);
-//        //validateSubtotal();
-//        WebElementUtil.scrollToElementCenter(installationAddOnService.subTotalLabel);
-//        WebElementUtil.waitForElementToBeVisible(installationAddOnService.subTotalLabel, 10);
-//        String subTotal = WebElementUtil.getText(installationAddOnService.subTotalAddOnServicePrice)
-//                .trim()
-//                .replace("$", "")
-//                .replace(",", "");
-//
-//        System.out.println(subTotal);
-//        calculatePriceAndAssert(subTotal);
-//        WebElementUtil.waitForElementToBeClickable(installationAddOnService.moveUnitCheckbox, 10);
-//        WebElementUtil.clickElement(installationAddOnService.moveUnitCheckbox);
-//    }
-//
-//    public void selectHaulAndMove() {
-//
-//        WebElementUtil.scrollToElementCenter(installationAddOnService.addOnServiceTitle);
-//        clickAddon(installationAddOnService.haulAwayCheckbox);
-//        clickAddon(installationAddOnService.moveUnitCheckbox);
-//        //validateSubtotal();
-//        WebElementUtil.scrollToElementCenter(installationAddOnService.subTotalLabel);
-//        WebElementUtil.waitForElementToBeVisible(installationAddOnService.subTotalLabel, 10);
-//
-//        String subTotal = WebElementUtil.getText(installationAddOnService.subTotalAddOnServicePrice)
-//                .trim()
-//                .replace("$", "")
-//                .replace(",", "");
-//
-//        System.out.println(subTotal);
-//        calculatePriceAndAssert(subTotal);
-//    }
-//
-//    private void clickAddon(By checkbox) {
-//        WebElementUtil.scrollToElementCenter(installationAddOnService.addOnServiceTitle);
-//        WebElementUtil.waitForElementToBeClickable(checkbox, 10);
-//        WebElementUtil.clickElement(checkbox);
-//    }
-//
-//    private void validateSubtotal() {
-//        WebElementUtil.scrollToElementCenter(installationAddOnService.subTotalLabel);
-//        WebElementUtil.waitForElementToBeVisible(installationAddOnService.subTotalLabel, 10);
-//
-//        String subTotal = WebElementUtil.getText(installationAddOnService.subTotalAddOnServicePrice)
-//                .trim()
-//                .replace("$", "")
-//                .replace(",", "");
-//
-//        System.out.println(subTotal);
-//        calculatePriceAndAssert(subTotal);
-//    }
-
 
 }

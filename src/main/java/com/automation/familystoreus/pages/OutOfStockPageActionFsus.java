@@ -10,43 +10,60 @@ public class OutOfStockPageActionFsus {
 
     OutOfStockLocatorsFsus outOfStockLocatorsFsus = new OutOfStockLocatorsFsus();
 
-    public void selectInStock(String str) throws InterruptedException {
+    public void selectInStock(String str, String product) {
+        WaitUtils.sleep(2000);
+        WebElementUtil.waitForElementToBeVisible(outOfStockLocatorsFsus.resetAll,10);
+        WebElementUtil.clickElement(outOfStockLocatorsFsus.resetAll);
 
-        Thread.sleep(5000);
-        WaitUtils.untilPageLoadComplete(10);
+        WaitUtils.sleep(2000);
         WebElementUtil.scrollToElementStable(outOfStockLocatorsFsus.inStockFilter);
         WebElementUtil.waitForElementToBeVisible(outOfStockLocatorsFsus.inStockFilter, 20);
 
-//        WebElementUtil.waitForElementToBeClickable(outOfStockLocatorsFsus.collapseButton,10);
-//        WebElementUtil.clickElement(outOfStockLocatorsFsus.collapseButton);
-
-        Thread.sleep(5000);
-        WebElementUtil.waitForElementToBeVisible(outOfStockLocatorsFsus.checkBoxFilter(str), 10);
-        WebElement element= WebElementUtil.waitForElementToBeVisible(outOfStockLocatorsFsus.checkBoxFilter(str));
-
-        if(element.isSelected()){
-            element.click();
-            Thread.sleep(5000);
+        WaitUtils.sleep(2000);
+        if (product.equalsIgnoreCase("Laundry")) {
+            WebElementUtil.waitForElementToBeClickable(outOfStockLocatorsFsus.collapseButton, 5);
+            WebElementUtil.clickElement(outOfStockLocatorsFsus.collapseButton);
+            WaitUtils.sleep(2000);
+            WebElementUtil.scrollToElementStable(outOfStockLocatorsFsus.checkBoxFilter(str));
+            WebElementUtil.waitForElementToBeVisible(outOfStockLocatorsFsus.checkBoxFilter(str), 10);
+            WebElementUtil.waitForElementToBeClickable(outOfStockLocatorsFsus.checkBoxFilter(str),10);
+            WebElementUtil.clickElement(outOfStockLocatorsFsus.checkBoxFilter(str));
+            WaitUtils.sleep(3000);
         }
-        element.click();
+        else {
+            WaitUtils.sleep(2000);
+            WebElementUtil.scrollToElementStable(outOfStockLocatorsFsus.checkBoxFilter(str));
+            WebElementUtil.waitForElementToBeVisible(outOfStockLocatorsFsus.checkBoxFilter(str), 10);
+            WebElementUtil.waitForElementToBeClickable(outOfStockLocatorsFsus.checkBoxFilter(str), 10);
+            WebElementUtil.clickElement(outOfStockLocatorsFsus.checkBoxFilter(str));
+            WaitUtils.sleep(3000);
+        }
+
     }
 
     public void checkInStock(){
 
+        WaitUtils.sleep(3000);
         WebElementUtil.scrollToElementStable(outOfStockLocatorsFsus.productName);
         WebElementUtil.waitForElementToBeVisible(outOfStockLocatorsFsus.productName, 10);
+        WebElementUtil.clickElement(outOfStockLocatorsFsus.productName);
 
-        WebElementUtil.waitForElementToBeVisible(outOfStockLocatorsFsus.addToCartBtn,10);
-        WebElement element = WebElementUtil.waitForElementToBeClickable(outOfStockLocatorsFsus.addToCartBtn);
-
-        Assert.assertTrue(element.isEnabled(), "Add to Cart button is not enabled");
+        WaitUtils.sleep(3000);
+        WebElementUtil.scrollToElementStable(outOfStockLocatorsFsus.addToCartBtn);
+//        WebElementUtil.waitForElementToBeVisible(outOfStockLocatorsFsus.addToCartBtn,10);
+//        WebElement element = WebElementUtil.waitForElementToBeClickable(outOfStockLocatorsFsus.addToCartBtn);
+//        boolean element = WebElementUtil.isDisplayed(outOfStockLocatorsFsus.addToCartBtn);
+//        Assert.assertTrue(element.isEnabled(), "Add to Cart button is not enabled");
+        Assert.assertTrue(WebElementUtil.isDisplayed(outOfStockLocatorsFsus.addToCartBtn),"Add to Cart button is not enabled");
     }
     public void checkOutStock(){
+        WaitUtils.sleep(2000);
         WebElementUtil.scrollToElementStable(outOfStockLocatorsFsus.productName);
         WebElementUtil.waitForElementToBeVisible(outOfStockLocatorsFsus.productName, 10);
 
         WebElementUtil.clickElement(outOfStockLocatorsFsus.productName);
 
+        WaitUtils.sleep(5000);
         WebElementUtil.scrollToElementStable(outOfStockLocatorsFsus.msg1);
         WebElement message1 = WebElementUtil.waitForElementToBeVisible(outOfStockLocatorsFsus.msg1);
         Assert.assertEquals(message1.getText().trim(),

@@ -15,29 +15,27 @@ public class ProductCardsPageActionFsus {
     SoftAssert softAssert=new SoftAssert();
 
 
-    public void verifyProductItemPage(String str, String assertValue) {
-        By locator = By.xpath("//h1[normalize-space(text())='" + str + "']");
-        WebElementUtil.scrollToElementStable(locator);
-        WebElementUtil.waitForElementToBeVisible(locator,10);
-        String s1 = WebElementUtil.getText(locator);
+    public void verifyProductItemPage(String str, String assertValue){
+        WaitUtils.sleep(3000);
+        WebElementUtil.scrollToElementStable(productDetails.productItemPage(str));
+        WebElementUtil.waitForElementToBeVisible(productDetails.productItemPage(str),10);
+        String s1 = WebElementUtil.getText(productDetails.productItemPage(str));
         Assert.assertEquals(s1, assertValue);
     }
 
     public void clickOnProductMenu(String text) {
-        By locator = By.xpath("//h5[normalize-space(text())='" + text + "']");
-//        //(//h5[normalize-space(text())='Vacuums'])[1]
-       // By locator = By.xpath("(//h5[normalize-space(text())='" + text + "'])[1]");
-        WebElementUtil.scrollToElementStable(locator);
-        WebElementUtil.waitForElementToBeVisible(locator,20);
-        WebElementUtil.waitForElementToBeClickable(locator,20);
-        WebElementUtil.clickElement(locator);
+        WaitUtils.sleep(2000);
+        WebElementUtil.scrollToElementStable(productDetails.productMenu(text));
+        WebElementUtil.waitForElementToBeVisible(productDetails.productMenu(text),20);
+        WebElementUtil.waitForElementToBeClickable(productDetails.productMenu(text),20);
+        WebElementUtil.clickElement(productDetails.productMenu(text));
     }
     public void clickOnProductSubMenu(String text) {
-        By locator = By.xpath("//span[normalize-space(text())='" + text + "']");
-        WebElementUtil.scrollToElementStable(locator);
-        WebElementUtil.waitForElementToBeVisible(locator,20);
-        WebElementUtil.waitForElementToBeClickable(locator,20);
-        WebElementUtil.clickElement(locator);
+        WaitUtils.sleep(2000);
+        WebElementUtil.scrollToElementStable(productDetails.productSubProduct(text));
+        WebElementUtil.waitForElementToBeVisible(productDetails.productSubProduct(text),20);
+        WebElementUtil.waitForElementToBeClickable(productDetails.productSubProduct(text),20);
+        WebElementUtil.clickElement(productDetails.productSubProduct(text));
     }
 
     public void verifyAndClickElements(int i) {

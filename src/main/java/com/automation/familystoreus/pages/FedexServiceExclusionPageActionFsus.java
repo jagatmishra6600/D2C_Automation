@@ -46,40 +46,6 @@ public class FedexServiceExclusionPageActionFsus {
         WebElementUtil.waitForElementToBeClickable(fedexService.addToCartButton,15);
         WebElementUtil.clickElement(fedexService.addToCartButton);
     }
-//    public void checkDeliveryOptions() {
-//
-//        WebElementUtil.scrollToElementStable(fedexService.deliveryOption);
-//        WebElementUtil.waitForElementToBeVisible(fedexService.deliveryOption, 10);
-//
-//        WebElementUtil.waitForElementToBeVisible(fedexService.radioButton, 10);
-//        WebElementUtil.isDisplayed(fedexService.radioButton);
-//
-//        WebElementUtil.waitForElementToBeVisible(fedexService.deliveryOnlyText, 10);
-//        WebElementUtil.isDisplayed(fedexService.deliveryOnlyText);
-//
-//        WebElementUtil.waitForElementToBeVisible(fedexService.descriptionText, 10);
-//        WebElementUtil.isDisplayed(fedexService.descriptionText);
-//
-//        WebElementUtil.waitForElementToBeVisible(fedexService.deliveryPrice, 10);
-//        WebElementUtil.isDisplayed(fedexService.deliveryPrice);
-//
-//        WebElementUtil.scrollToElementStable(fedexService.requiredInstallationParts);
-//        WebElementUtil.waitForElementToBeVisible(fedexService.requiredInstallationParts,10);
-//        WebElementUtil.isDisplayed(fedexService.requiredInstallationParts);
-//
-//        WebElementUtil.scrollToElementStable(fedexService.installationList);
-//        WebElementUtil.waitForElementToBeVisible(fedexService.installationList,10);
-//        WebElementUtil.isDisplayed(fedexService.installationList);
-//
-//        WebElementUtil.waitForElementToBeVisible(fedexService.installationCheckbox,10);
-//        WebElementUtil.isDisplayed(fedexService.installationCheckbox);
-//
-//        WebElementUtil.waitForElementToBeVisible(fedexService.installationPrice,10);
-//        WebElementUtil.isDisplayed(fedexService.installationPrice);
-//
-//        WebElementUtil.waitForElementToBeVisible(fedexService.installationUnavailable,10);
-//        WebElementUtil.isDisplayed(fedexService.installationUnavailable);
-//    }
 
     public void assertElementVisible(By locator, String elementName) {
         Assert.assertTrue(WebElementUtil.isDisplayed(locator), elementName + " is not visible");
@@ -87,13 +53,14 @@ public class FedexServiceExclusionPageActionFsus {
     }
 
     public void checkDeliveryOptions() {
+        WebElementUtil.clickElement(fedexService.deliveryOption);
         assertElementVisible(fedexService.deliveryOption, "Delivery Option");
         assertElementVisible(fedexService.radioButton, "Delivery Radio Button");
         assertElementVisible(fedexService.deliveryOnlyText, "Delivery Only Text");
-        //assertElementVisible(fedexService.descriptionText, "Delivery Description");
-        //assertElementVisible(fedexService.deliveryPrice, "Delivery Price");
+        assertElementVisible(fedexService.descriptionText, "Delivery Description");
+        assertElementVisible(fedexService.deliveryPrice, "Delivery Price");
         assertElementVisible(fedexService.requiredInstallationParts, "Required Installation Parts");
-        //assertElementVisible(fedexService.installationList, "Installation List");
+        assertElementVisible(fedexService.installationList, "Installation List");
         assertElementVisible(fedexService.installationCheckbox, "Installation Checkbox");
         assertElementVisible(fedexService.installationPrice, "Installation Price");
     }

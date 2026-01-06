@@ -4,6 +4,19 @@ import org.openqa.selenium.By;
 
 public class productCardsLocatorsFsus {
 
+    public By productItemPage(String str) {
+        return By.xpath("//h1[normalize-space(text())='" + str + "']");
+    }
+
+    public By productMenu(String str) {
+        return By.xpath("//h5[normalize-space(text())='" + str + "']");
+    }
+
+    public By productSubProduct(String str) {
+       return By.xpath("//span[normalize-space(text())='" + str + "']");
+    }
+
+
     public By leftCornerTag(int i) {
         return By.xpath("//div[@id='PlpItem" + i + "']//div[@class='col- highlight-wapper']");
     }
