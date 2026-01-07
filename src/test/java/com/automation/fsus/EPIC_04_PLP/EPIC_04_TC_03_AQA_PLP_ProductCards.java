@@ -19,7 +19,7 @@ public class EPIC_04_TC_03_AQA_PLP_ProductCards extends BaseTest {
         productCard.clickOnProductMenu("Vacuums");
         productCard.clickOnProductSubMenu("Explore Vacuums");
         productCard.verifyProductItemPage("Vacuums", "Vacuums");
-        productCard.checkPlpItem("Vacuums", 1);
+        productCard.checkPlpItem("Vacuums", 2);
         ExtentReportManager.getTest().pass("Verify vacuums product details in product listing page and click on image, product name and rating navigate to PDP");
     }
 

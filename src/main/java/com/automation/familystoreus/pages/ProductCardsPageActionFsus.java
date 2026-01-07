@@ -7,12 +7,10 @@ import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.asserts.SoftAssert;
 
 public class ProductCardsPageActionFsus {
 
     productCardsLocatorsFsus productDetails = new productCardsLocatorsFsus();
-    SoftAssert softAssert=new SoftAssert();
 
 
     public void verifyProductItemPage(String str, String assertValue){
@@ -98,12 +96,7 @@ public class ProductCardsPageActionFsus {
     }
 
     public void verifyElementDisplayed(By xpath, String elementName) {
-        try {
-            boolean isDisplayed = WebElementUtil.isDisplayed(xpath);
-            softAssert.assertTrue(isDisplayed, elementName + " should be displayed.");
-        } catch (Exception e) {
-            softAssert.fail(elementName + " not found or not displayed. Exception: " + e.getMessage());
-        }
+            Assert.assertTrue(WebElementUtil.isDisplayed(xpath), elementName + " should not displayed.");
     }
 
 }

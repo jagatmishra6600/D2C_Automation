@@ -50,11 +50,8 @@ public class OutOfStockPageActionFsus {
 
         WaitUtils.sleep(3000);
         WebElementUtil.scrollToElementStable(outOfStockLocatorsFsus.addToCartBtn);
-//        WebElementUtil.waitForElementToBeVisible(outOfStockLocatorsFsus.addToCartBtn,10);
-//        WebElement element = WebElementUtil.waitForElementToBeClickable(outOfStockLocatorsFsus.addToCartBtn);
-//        boolean element = WebElementUtil.isDisplayed(outOfStockLocatorsFsus.addToCartBtn);
-//        Assert.assertTrue(element.isEnabled(), "Add to Cart button is not enabled");
-        Assert.assertTrue(WebElementUtil.isDisplayed(outOfStockLocatorsFsus.addToCartBtn),"Add to Cart button is not enabled");
+        Assert.assertTrue(WebElementUtil.isDisplayed(outOfStockLocatorsFsus.addToCartBtn),
+                "Add to Cart button is not Displayed");
     }
     public void checkOutStock(){
         WaitUtils.sleep(2000);
