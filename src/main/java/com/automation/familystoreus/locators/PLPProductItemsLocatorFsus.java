@@ -1,6 +1,11 @@
 package com.automation.familystoreus.locators;
 
+import com.automation.utils.DriverManager;
+import com.automation.utils.WaitUtils;
+import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 public class PLPProductItemsLocatorFsus {
 
@@ -46,6 +51,7 @@ public class PLPProductItemsLocatorFsus {
 
     public final By searchBoxs = By.xpath("//input[@placeholder='Search']");
     public final By searchButton = By.xpath("//cx-icon[@aria-label='search']");
+
     private By getFeatureLocator(String featureKey, String featureValue) {
         return By.xpath("//b[contains(text(),'" + featureKey + "')]/ancestor::app-elux-product-facet-list//div//input[@id='" + featureValue + "']");
 
