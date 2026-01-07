@@ -25,5 +25,10 @@ public class HomepageLocatorsElux {
     public final By mainMenu_ProfileDropdown = By.xpath("//a//span[contains(@class,'welcome-name')]"); 
     public final By mainMenu_ProfileDropdown_MyAccountLink =By.xpath("//a[normalize-space()='My account']");
     public final By firstSearchResultProduct = By.xpath("(//app-elux-product-list-item//a[@aria-label='Product Link'])[1]");
+    public final By mainMenu_searchInput = By.cssSelector("label.searchbox-desktop input[aria-label=\"search\"]\n");
+    public final By mainMenu_searchSuggestions = By.xpath("//*[@class='suggestions font-weight-bold']");
+    public final By mainMenu_searchSuggestions_FirstElement = By.xpath("//*[@class='suggestions font-weight-bold']/a[1]");
+    public final By mainMenu_searchSuggestions_Landing = By.cssSelector("input[style*=\"margin-top\"]");
+    public final By mainMenu_termsOfOfferSection = By.xpath("//div[contains(@class,'promoDesc')]//span[contains(text(),'Instant Rebate Savings')]");
 
 }
