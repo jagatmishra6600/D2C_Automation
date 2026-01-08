@@ -335,7 +335,7 @@ public class PLPProductItemsPageActionsFsus {
         return "";
     }
 
-
+    private final By viewFullSpecsBtn = By.xpath("//button[text()='View full specs']");
     public void verifyHideAndShowAllFilters(String text) throws InterruptedException {
         By locator = By.xpath("//span[normalize-space(text())='" + text + "']");
 
@@ -353,4 +353,289 @@ public class PLPProductItemsPageActionsFsus {
 
     }
 
+    public void verifyExpandAndCollapseFilter(String facetName, String filterValue) {
+
+        WebDriver driver = DriverManager.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+
+        String facetXPath =
+                "//span[normalize-space(text())='" + facetName + "']";
+
+        String facetArrowXPath =
+                facetXPath + "/ancestor::div[contains(@class,'acc-header-srp')]//img";
+
+        String filterValueXPath =
+                facetXPath +
+                        "/ancestor::app-elux-product-facet-list" +
+                        "//span[normalize-space(text())='" + filterValue + "']";
+
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(filterValueXPath)));
+        } catch (TimeoutException e) {
+            throw new AssertionError("Filter value was not visible before collapsing. Test invalid.");
+        }
+
+        WebElement arrow = WebElementUtil.findElement(By.xpath(facetArrowXPath));
+        WebElementUtil.scrollAndClickUsingJSE(driver, arrow);
+
+        boolean isInvisible = true;
+        try {
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(filterValueXPath)));
+        } catch (TimeoutException e) {
+            isInvisible = false;
+        }
+
+        Assert.assertTrue(isInvisible,
+                "Filter value should be invisible after collapsing the filter group.");
+        //  WebElementUtil.scrollAndClickUsingJSE(driver, arrow);
+    }
+
+    private final By productCount = By.xpath("//span[@name='ProductsCount' or @class='totalResults resultsBorder']");
+
+    public void openAllProductsAndValidate(String featureName, String featureKey, String featureValue) {
+        try {
+            WebDriver driver = DriverManager.getDriver();
+            WebElementUtil.zoomInOrOut(25);
+            loadMoreProducts(driver);
+            WebElementUtil.zoomInOrOut(25);
+            verifyProductCount(driver, WebElementUtil.findElement(productCount));
+
+            List<WebElement> products = WebElementUtil.findElements(By.xpath("//div[starts-with(@id,'PlpItem')]"));
+            int totalProducts = products.size();
+            System.out.println("Total products found: " + totalProducts);
+            String mainWindow = driver.getWindowHandle();
+            for (int i = 0; i < totalProducts; i++) {
+                try {
+                    String imgXpath = "(//div[@class='container-fluid px-0 plp' or @class='container-fluid px-2 plp']//div[@id='PlpItem" + i + "']//app-elux-image//img)[1]";
+                    WebElement imageElement = WaitUtils.untilVisible((By.xpath(imgXpath)), 8000);
+
+                    System.out.println(" Opening product index: " + i);
+                    Actions actions = new Actions(driver);
+                    actions.keyDown(Keys.CONTROL).click(imageElement).keyUp(Keys.CONTROL).build().perform();
+                    Thread.sleep(10000);
+                    WebElementUtil.switchToNewTab(driver, mainWindow);
+                    validateProduct(i, featureName, featureKey, featureValue);
+                    driver.close();
+                    driver.switchTo().window(mainWindow);
+
+                } catch (Exception e) {
+                    System.out.println("Skipping product index " + i + ": " + e.getMessage());
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error iterating over products: " + e.getMessage());
+        }
+    }
+
+    private final By resetAllButton = By.xpath("//span[text()=\" Hide Filters\"]/ancestor::div//span[text()=\" Reset all \"]");
+
+    private void validateProduct(int index, String featureName, String featureKey, String featureValue) {
+        try {
+            WebDriver driver = DriverManager.getDriver();
+            System.out.println("Validating product index " + index);
+            System.out.println("Current URL: " + driver.getCurrentUrl());
+            WebElementUtil.scrollAndClickUsingJSE(driver, WebElementUtil.findElement(viewFullSpecsBtn));
+            WebElement featureNameElement = WaitUtils.untilVisible(getFeatureSpecsLocator(featureName), 30000);
+            WebElementUtil.scrollToElement(driver, featureNameElement);
+            Assert.assertTrue(featureNameElement.isDisplayed(), featureName + " feature element is not displayed.");
+            WebElement featureElement = WaitUtils.untilVisible(getQuiickSpecsFeatureLocator(featureKey, featureValue), 1);
+            String elementText = featureElement.getText().trim();
+            Assert.assertEquals(elementText, featureValue, "Value Mismatch");
+            System.out.println("Feature value for " + featureKey + ": " + elementText);
+        } catch (Exception e) {
+            System.out.println("Validation failed for product index " + index + ": " + e.getMessage());
+        }
+    }
+    public void expandFilterIfCollapsed(String facetName, String filterValue) {
+
+        WebDriver driver = DriverManager.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+
+        String facetXPath =
+                "//span[normalize-space(text())='" + facetName + "']";
+
+        String facetArrowXPath =
+                facetXPath + "/ancestor::div[contains(@class,'acc-header-srp')]//img";
+
+        String filterValueXPath =
+                facetXPath +
+                        "/ancestor::app-elux-product-facet-list" +
+                        "//span[normalize-space(text())='" + filterValue + "']";
+
+        boolean isCollapsed = false;
+
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(filterValueXPath)));
+        } catch (TimeoutException e) {
+
+            isCollapsed = true;
+        }
+
+        if (isCollapsed) {
+            WebElement arrow = WebElementUtil.findElement(By.xpath(facetArrowXPath));
+            WebElementUtil.scrollAndClickUsingJSE(driver, arrow);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(filterValueXPath)));
+        }
+    }
+
+    public By getFeatureSpecsLocator(String text) {
+        return By.xpath("//h5[text()='" + text + "']");
+    }
+
+    private By getQuiickSpecsFeatureLocator(String featureKey, String featureValue) {
+        return By.xpath("//span[text()='" + featureKey + "']//parent::div//following-sibling::div//span[contains(text(),'" + featureValue + "')]");
+
+
+    }
+    public void verifyProductCount(WebDriver driver, WebElement element) {
+
+
+        try {
+            List<WebElement> products = WebElementUtil.findElements(By.xpath("//div[starts-with(@id,'PlpItem')]"));
+            int totalProducts = products.size();
+            System.out.println("Total products found: " + totalProducts);
+            for (int i = 0; i < totalProducts; i++) {
+
+                String productXPath = "//div[@id='PlpItem" + i + "']";
+                WebElement productElement = WebElementUtil.findElement(By.xpath(productXPath));
+                int expectedCount = i + 1;
+            }
+
+
+            int actualTotalCount = totalProducts;
+            System.out.println("Verifying total product count: " + actualTotalCount);
+            String productCountText = element.getText().trim();
+            System.out.println("Product count text: " + productCountText);
+            String expectedTotalCountStr = productCountText.replaceAll("[^0-9]", "");
+            System.out.println("Extracted product count: " + expectedTotalCountStr);
+            int expectedTotalCount = Integer.parseInt(expectedTotalCountStr);
+            Assert.assertEquals(actualTotalCount, expectedTotalCount, "Mismatch in total product count!");
+        } catch (Exception e) {
+            System.out.println("Error verifying product counts: " + e.getMessage());
+        }
+    }
+    public void featureFilter( String featureKey, String featureValue) throws InterruptedException {
+        WebDriver driver = DriverManager.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        String xpath1 = "//span[contains(text(),'" + featureKey + "')]/ancestor::app-elux-product-facet-list//input[normalize-space(@id)='" + featureValue + "']";
+        try {
+            WebElement  elementToClick = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath1)));
+            boolean isChecked = elementToClick.isSelected();
+            Assert.assertFalse(isChecked, " Checkbox for filter '" + featureValue + "' should be unchecked before clicking.");
+            WebElementUtil.scrollAndClickUsingJSE(driver, elementToClick);
+            Thread.sleep(3000);
+        }catch (TimeoutException e1) {
+        }
+    }
+
+
+    public void verifySelectedFilters(String filterText) throws InterruptedException {
+        WebDriver driver = DriverManager.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        String xpath = "//span[text()=' Hide Filters']/ancestor::div//span[text()='" + filterText + "']";
+
+        try {
+            WebElement filterElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+            Assert.assertTrue(filterElement.isDisplayed(), "The filter '" + filterText + "' is not displayed under selected filters.");
+
+        } catch (TimeoutException e) {
+            Assert.fail("The filter '" + filterText + "' was not found under selected filters.");
+        }
+        WebElement verifyResetAll = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+        Assert.assertTrue(verifyResetAll.isDisplayed(), "The Hidden filter is not displayed.");
+
+        WebElementUtil.scrollAndClickUsingJSE(driver,driver.findElement(resetAllButton));
+
+        Thread.sleep(6000);
+        List<WebElement> filtersAfterReset = WebElementUtil.findElements(By.xpath(xpath));
+        Assert.assertTrue(filtersAfterReset.isEmpty(), "The filter '" + filterText + "' should NOT be visible after clicking Reset All.");
+
+
+    }
+
+    public void openAllProductsAndValidateColor( String color ,String expectedColor) {
+        try {
+            WebDriver driver = DriverManager.getDriver();
+            loadMoreProducts(driver);
+            verifyProductCount(driver, driver.findElement(PLPProductItemsLocatorFsus.PRODUCT_COUNT));
+
+            List<WebElement> products = driver.findElements(By.xpath("//div[starts-with(@id,'PlpItem')]"));
+            int totalProducts = products.size();
+            System.out.println("Total filtered products found: " + totalProducts);
+            String mainWindow = driver.getWindowHandle();
+
+            for (int i = 0; i < totalProducts; i++) {
+                try {
+                    String imgXpath = "(//div[@id='PlpItem" + i + "']//app-elux-image//img)[1]";
+                    WebElement imageElement = WaitUtils.untilVisible((By.xpath(imgXpath)), 20000);
+
+                    System.out.println(" Opening product index: " + i);
+                    new Actions(driver).keyDown(Keys.CONTROL).click(imageElement).keyUp(Keys.CONTROL).perform();
+
+                    Thread.sleep(5000);
+                    WebElementUtil.switchToNewTab(driver, mainWindow);
+
+                    ((JavascriptExecutor) driver).executeScript("window.scrollBy(0, 300);");
+
+                    validateProductColor(i,color, expectedColor);
+
+                    driver.close();
+                    driver.switchTo().window(mainWindow);
+
+                } catch (Exception e) {
+                    System.out.println("Skipping product index " + i + ": " + e.getMessage());
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error iterating over products: " + e.getMessage());
+        }
+    }
+    public void validateProductColor(int index, String color, String expectedColor) {
+        WebDriver driver = DriverManager.getDriver();
+        try {
+            By electroluxColorLocator = By.xpath(
+                    "//span[normalize-space()='"+color+"']");
+
+            WebElement colorElement = WaitUtils.untilVisible(electroluxColorLocator, 15000);
+            WebElementUtil.scrollToElementStable(electroluxColorLocator);
+            String actualColor = colorElement.getText().trim().toLowerCase();
+            expectedColor = expectedColor.trim().toLowerCase();
+
+
+            System.out.println("Product " + index + " | Expected Color: " + expectedColor + " | Actual Color: " + actualColor);
+
+            Assert.assertEquals(actualColor, expectedColor,
+                    "Color mismatch for product " + index + ": Expected [" + expectedColor + "] but found [" + actualColor + "]");
+
+
+
+        } catch (Exception e) {
+            System.out.println(" Error validating color for product "  + e.getMessage());
+        }
+    }
+
+    public void verifyFiltersInPLP(String text) {
+        String dynamicXpath = "//span[contains(text(),'" + text + "')]";
+        By locator = By.xpath(dynamicXpath);
+        WebElementUtil.scrollToElementStable(locator);
+        WebElementUtil.isDisplayed(locator);
+    }
+    public void validateCheckboxUncheckedAfterCrossClick(String filterCategory, String filterName, String crossFilterName) {
+        WebDriver driver = DriverManager.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+        By pillCross =  plpProductItemsLocatorFsus.selectedFilterCross(crossFilterName);
+        By checkbox = plpProductItemsLocatorFsus.getFeatureLocator(filterCategory, filterName);
+        WaitUtils.untilClickable(checkbox,15000);
+        WebElementUtil.scrollAndClickUsingJSE(driver, WebElementUtil.findElement(checkbox));
+        WebElement crossElement = wait.until(ExpectedConditions.elementToBeClickable(pillCross));
+        WebElementUtil.scrollAndClickUsingJSE(driver,crossElement);
+        wait.until(ExpectedConditions.invisibilityOfElementLocated( plpProductItemsLocatorFsus.selectedFilterCross(crossFilterName)));
+        WebElement freshCheckbox = wait.until(ExpectedConditions.presenceOfElementLocated(checkbox));
+        boolean isUnchecked = !freshCheckbox.isSelected();
+        Assert.assertTrue(isUnchecked, " Checkbox for " + filterName + " is still checked after removing filter.");
+
+    }
 }
