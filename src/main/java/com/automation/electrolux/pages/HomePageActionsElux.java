@@ -1,15 +1,18 @@
 package com.automation.electrolux.pages;
 
 import com.automation.electrolux.locators.HomepageLocatorsElux;
-import com.automation.frigidaire.pages.HomePageActionsFrig;
 import com.automation.utils.ConfigReader;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import com.automation.utils.UserTestData;
 
 
 import static com.automation.utils.WaitUtils.untilClickable;
+
+import java.util.List;
 
 public class HomePageActionsElux {
 
@@ -18,7 +21,7 @@ public class HomePageActionsElux {
     private static String providedProductId;
     private static String providedProductTitle;
     private static String providedProductPrice;
-
+    
     public HomePageActionsElux navigateToHomePage() {
         WebElementUtil.navigateTo(ConfigReader.getAppUrl());
         try {
@@ -197,6 +200,86 @@ public class HomePageActionsElux {
     	WebElementUtil.scrollIntoView(homePage_Locator.firstSearchResultProduct);
     	WebElementUtil.clickElement(homePage_Locator.firstSearchResultProduct);
     	return new PdpPageActionsElux();
+    }
+	
+
+
+
+    public boolean isBrandLogoLoaded() {
+        return WebElementUtil.isDisplayed(homePage_Locator.electroluxLogo);
+    }
+    
+    public boolean isSearchIconDisplayed() {
+        return WebElementUtil.isDisplayed(homePage_Locator.mainMenu_searchInput);
+    }
+    
+    public boolean isSearchInputFieldDisplayed() {
+        try {
+            WebElement searchInputElement = WebElementUtil.waitForElementToBeVisible(homePage_Locator.mainMenu_searchInput);
+            return searchInputElement.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    public void clickSearchInputAndEnterText(String searchText) {
+        WebElementUtil.clickElement(homePage_Locator.mainMenu_searchInput);
+        WebElement searchInputElement = WebElementUtil.waitForElementToBeVisible(homePage_Locator.mainMenu_searchInput);
+        searchInputElement.clear();
+        for (char c : searchText.toCharArray()) {
+            searchInputElement.sendKeys(String.valueOf(c));
+            WaitUtils.sleep(100);
+        }
+        if (searchText.length() >= 4) {
+            WebElementUtil.waitForElementToBeVisible(homePage_Locator.mainMenu_searchSuggestions);
+        }
+    }
+    
+    public List<WebElement> getSearchSuggestionsList() {
+        WaitUtils.untilPresent(homePage_Locator.mainMenu_searchSuggestions);
+        return WebElementUtil.findElements(homePage_Locator.mainMenu_searchSuggestions);
+    }
+    
+    public boolean areSearchSuggestionsDisplayed() {
+        try {
+            WebElement suggestionsElement = WebElementUtil.waitForElementToBeVisible(homePage_Locator.mainMenu_searchSuggestions);
+            return suggestionsElement.isDisplayed() && !getSearchSuggestionsList().isEmpty();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    public void selectFirstSuggestion() {
+        WebElementUtil.clickElement(homePage_Locator.mainMenu_searchSuggestions_FirstElement);
+    }
+
+    public boolean isUserOnSearchResultsPage() {
+        try {
+            WebElement resultsElement = WebElementUtil.waitForElementToBeVisible(homePage_Locator.mainMenu_searchSuggestions_Landing);
+            return resultsElement.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    public boolean isHeaderCategoryDisplayed(String categoryLabel) {
+        By category = By.cssSelector("h5[aria-label='" + categoryLabel + "']");
+        return WebElementUtil.isDisplayed(category);
+    }
+    
+    public void openHeaderCategory(String categoryLabel) {
+        By category = By.cssSelector("h5[aria-label='" + categoryLabel + "']");
+        WebElementUtil.clickElement(category);
+    }
+
+    public boolean isHeaderSubcategoryDisplayed(String subLabel) {
+        By sub = By.xpath("//h5[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')," +
+                "'" + subLabel.toLowerCase() + "')]");
+        return WebElementUtil.isDisplayed(sub);
+    }
+   
+    public boolean isTermsOfOfferSelectionDisplayed() {
+        return WebElementUtil.isDisplayed(homePage_Locator.mainMenu_termsOfOfferSection);
     }
 
 }
