@@ -25,7 +25,7 @@ public class PLPProductItemsLocatorFsus {
             "//b[text()=\"Standard Width \"]/ancestor::app-elux-product-facet-list" +
                     "//div[label[div[span[text()=' 36\" ']]]]/input"
     );
-
+    public static final By PRODUCT_COUNT = By.xpath("//span[@name='ProductsCount' or @class='totalResults resultsBorder']");
     public final By loadMoreBtn = By.xpath("//div[@class='row col-12 load-more']//button[text()=' Load more ']");
     public final By productCount = By.xpath("//span[@name='ProductsCount' or @class='totalResults resultsBorder']");
 
@@ -52,9 +52,8 @@ public class PLPProductItemsLocatorFsus {
     public final By searchBoxs = By.xpath("//input[@placeholder='Search']");
     public final By searchButton = By.xpath("//cx-icon[@aria-label='search']");
 
-    private By getFeatureLocator(String featureKey, String featureValue) {
-        return By.xpath("//b[contains(text(),'" + featureKey + "')]/ancestor::app-elux-product-facet-list//div//input[@id='" + featureValue + "']");
-
+    public By getFeatureLocator(String featureKey, String featureValue) {
+        return By.xpath("//span[contains(text(),'" + featureKey + "')]/ancestor::app-elux-product-facet-list//div//input[@id='" + featureValue + "']");
 
     }
 
@@ -69,14 +68,12 @@ public class PLPProductItemsLocatorFsus {
 
     }
 
-    private By selectedFilterCross(String filterName) {
-        return By.xpath("//span[@class='border border-light p-2 m-2 Body-MediumBody_Medium' and normalize-space(text())='" + filterName + "']//i");
+    public By selectedFilterCross(String filterName) {
+        return By.xpath("//span[contains(@class,'m-2 selectedBox') and contains(text(),'" + filterName + "')]//i");
     }
-
 
     public static By productLink(String productCode) {
         return By.xpath("//div[text()='" + productCode +"']/ancestor::div[@class='col- product-card my-0']/preceding-sibling::div[@class='col-']//a");}
-
 
 
 }
