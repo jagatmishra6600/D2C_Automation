@@ -111,12 +111,6 @@ public class PLPProductItemsPageActionsFsus {
         return By.xpath("//div[@role='listbox']//span[text()='" + optionText + "']");
     }
 
-    public void validateAvailabilityOfProductsInPLP() {
-        WebDriver driver = DriverManager.getDriver();
-        WebElementUtil.clickElementUsingJSE(driver,
-                plpProductItemsLocatorFsus.availabilityCheckbox);
-        loadMoreProducts(driver);
-    }
 
     public void validateProductIsInStock(By locator) {
         WebElement element =
@@ -452,6 +446,7 @@ public class PLPProductItemsPageActionsFsus {
             System.out.println("Validation failed for product index " + index + ": " + e.getMessage());
         }
     }
+
     public void expandFilterIfCollapsed(String facetName, String filterValue) {
 
         WebDriver driver = DriverManager.getDriver();

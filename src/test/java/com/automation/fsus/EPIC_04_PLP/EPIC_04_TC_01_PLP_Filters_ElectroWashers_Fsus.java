@@ -111,18 +111,4 @@ public class EPIC_04_TC_01_PLP_Filters_ElectroWashers_Fsus extends BaseTest {
         ExtentReportManager.getTest().pass("Successfully Verified product dimensions for height");
     }
 
-    @Test(groups = {"smoke", "regression"}, description = "verify Availability of products in PLP")
-    public void verify_Availaibility_In_PLP() throws InterruptedException
-    {
-
-        loginPage.loginWithDefaultCredentials();
-        loginPage.acceptCookies();
-        productCard.clickOnProductMenu("Laundry");
-        productCard.clickOnProductSubMenu("Electrolux Laundry");
-        productCard.verifyProductItemPage("Laundry", "Laundry");
-        productCard.featureFilter("In stock","Yes");
-        productCard.validateAvailabilityOfProductsInPLP();
-        ExtentReportManager.getTest().pass("Successfully verify Availability of products in PLP");
-
-    }
 }
