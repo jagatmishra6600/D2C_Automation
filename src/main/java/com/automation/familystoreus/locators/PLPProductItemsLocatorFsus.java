@@ -28,12 +28,10 @@ public class PLPProductItemsLocatorFsus {
     public static final By PRODUCT_COUNT = By.xpath("//span[@name='ProductsCount' or @class='totalResults resultsBorder']");
     public final By loadMoreBtn = By.xpath("//div[@class='row col-12 load-more']//button[text()=' Load more ']");
     public final By productCount = By.xpath("//span[@name='ProductsCount' or @class='totalResults resultsBorder']");
-
     public final By viewFullSpecsBtn = By.xpath("//button[text()='View full specs']");
     public final By quickSpecs = By.xpath("//div[@id='QuickSpecAccrd']");
     public final By specificationsHeading = By.xpath("//h3[text()='Specifications']");
-
-    public final By resetAllButton = By.xpath("//span[text()=\" Hide filters\"]/ancestor::div//span[text()=\" Reset all \"]");
+    public final By resetAllButton = By.xpath("//span[text()=\" Hide Filters\"]/ancestor::div//span[text()=\" Reset all \"]");
     public final By productUniqueCode = By.xpath("//h2[@class='prod_id Utility-TextProduct-SKU-Sm ng-star-inserted']");
     public final By productTitle = By.xpath("//h1[@class='H1H1_Desktop mt-34 category-heading']");
 
@@ -62,9 +60,8 @@ public class PLPProductItemsLocatorFsus {
     }
 
 
-    private By getQuiickSpecsFeatureLocator(String featureKey, String featureValue) {
+    public By getQuiickSpecsFeatureLocator(String featureKey, String featureValue) {
         return By.xpath("//span[text()='" + featureKey + "']//parent::div//following-sibling::div//span[contains(text(),'" + featureValue + "')]");
-
 
     }
 
@@ -75,5 +72,19 @@ public class PLPProductItemsLocatorFsus {
     public static By productLink(String productCode) {
         return By.xpath("//div[text()='" + productCode +"']/ancestor::div[@class='col- product-card my-0']/preceding-sibling::div[@class='col-']//a");}
 
+
+
+    public By getFeatureSpecsLocator(String text) {
+        return By.xpath("//h5[text()='" + text + "']");
+    }
+    public By RESET_ALL_FILTER_CASE_INSENSITIVE =
+            By.xpath("//div//span//i[@class='fr-icon fr-reset-16']");
+
+    public By filterBanner(String filterText) {
+        return By.xpath(
+                "//span[text()=' Hide Filters']" +
+                        "/ancestor::div//span[text()='" + filterText + "']"
+        );
+    }
 
 }

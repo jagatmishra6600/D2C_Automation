@@ -17,7 +17,6 @@ import java.util.concurrent.TimeUnit;
 
 public class PLPProductItemsPageActionsFsus {
 
-
     PLPProductItemsLocatorFsus plpProductItemsLocatorFsus = new PLPProductItemsLocatorFsus();
 
     public boolean productIsInStock(String productName) {
@@ -56,8 +55,8 @@ public class PLPProductItemsPageActionsFsus {
     public void clickOnProductMenu(String text) {
         By locator = By.xpath("//h5[normalize-space(text())='" + text + "']");
         WebElementUtil.scrollToElementStable(locator);
-        WebElementUtil.waitForElementToBeVisible(locator,20);
-        WebElementUtil.waitForElementToBeClickable(locator,20);
+        WebElementUtil.waitForElementToBeVisible(locator, 20);
+        WebElementUtil.waitForElementToBeClickable(locator, 20);
         WebElementUtil.clickElement(locator);
     }
 
@@ -68,11 +67,11 @@ public class PLPProductItemsPageActionsFsus {
     }
 
     public void clickOnSortByDropDownvalues(String text, String assertValue) throws InterruptedException {
-        WebDriver driver = DriverManager.getDriver();
         WaitUtils.untilVisible(plpProductItemsLocatorFsus.sortByDropdownBtn, 60000);
         WebElementUtil.clickElement(plpProductItemsLocatorFsus.sortByDropdownBtn);
 
-        String selectedSortBy = WebElementUtil.findElement(getSortOptionByText(text)).getText();
+        String selectedSortBy =
+                WebElementUtil.findElement(getSortOptionByText(text)).getText();
         WaitUtils.untilVisible(getSortOptionByText(text), 60);
         Assert.assertEquals(selectedSortBy, assertValue);
 
@@ -81,23 +80,26 @@ public class PLPProductItemsPageActionsFsus {
     }
 
     public void clickOnLoadMoreBtn() throws InterruptedException {
-        WebDriver driver = DriverManager.getDriver();
         WaitUtils.untilVisible(plpProductItemsLocatorFsus.loadMoreBtn, 60);
-        WebElement element = WebElementUtil.findElement(plpProductItemsLocatorFsus.loadMoreBtn);
-        WebElementUtil.scrollAndClickUsingJSE(driver, element);
+        WebElement element =
+                WebElementUtil.findElement(plpProductItemsLocatorFsus.loadMoreBtn);
+        WebElementUtil.scrollAndClickUsingJSE(DriverManager.getDriver(), element);
         Thread.sleep(7000);
     }
 
     public void loadMoreProducts(WebDriver driver) {
         try {
-            driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-            WebElement loadMoreElement = WebElementUtil.findElement(plpProductItemsLocatorFsus.loadMoreBtn);
+            WaitUtils.implicitWait(60);
+            WebElement loadMoreElement =
+                    WebElementUtil.findElement(plpProductItemsLocatorFsus.loadMoreBtn);
 
             if (loadMoreElement.isDisplayed()) {
-                WebElementUtil.scrollAndClickUsingJSE(driver, loadMoreElement);
+                WebElementUtil.scrollAndClickUsingJSE(
+                        DriverManager.getDriver(), loadMoreElement);
                 Thread.sleep(5000);
+
                 WebElement productCountElement =
-                        WaitUtils.untilVisible(plpProductItemsLocatorFsus.productCount, 40000);
+                        WaitUtils.untilVisible(plpProductItemsLocatorFsus.productCount, 40);
                 Assert.assertTrue(productCountElement.isDisplayed());
             }
         } catch (Exception e) {
@@ -111,12 +113,14 @@ public class PLPProductItemsPageActionsFsus {
 
     public void validateAvailabilityOfProductsInPLP() {
         WebDriver driver = DriverManager.getDriver();
-        WebElementUtil.clickElementUsingJSE(driver, plpProductItemsLocatorFsus.availabilityCheckbox);
+        WebElementUtil.clickElementUsingJSE(driver,
+                plpProductItemsLocatorFsus.availabilityCheckbox);
         loadMoreProducts(driver);
     }
 
     public void validateProductIsInStock(By locator) {
-        WebElement element = WebElementUtil.waitForElementToBeVisible(locator);
+        WebElement element =
+                WebElementUtil.waitForElementToBeVisible(locator);
         Assert.assertTrue(element.isDisplayed(), "product is not in Stock!!!");
     }
 
@@ -124,12 +128,16 @@ public class PLPProductItemsPageActionsFsus {
         WaitUtils.sleep(3000);
         WaitUtils.untilPageLoadComplete();
 
-        WebElementUtil.waitForElementToBeVisible(plpProductItemsLocatorFsus.searchBoxs, 10);
-        WebElementUtil.sendKeys(plpProductItemsLocatorFsus.searchBoxs, skuNumber);
+        WebElementUtil.waitForElementToBeVisible(
+                plpProductItemsLocatorFsus.searchBoxs, 10);
+        WebElementUtil.sendKeys(
+                plpProductItemsLocatorFsus.searchBoxs, skuNumber);
 
-        WebElementUtil.waitForElementToBeClickable(plpProductItemsLocatorFsus.searchButton, 10);
+        WebElementUtil.waitForElementToBeClickable(
+                plpProductItemsLocatorFsus.searchButton, 10);
         WebElementUtil.clickElement(plpProductItemsLocatorFsus.searchButton);
     }
+
 
     public void verifyProductItemPage(String str, String assertValue) throws InterruptedException {
         By locator = By.xpath("//h1[normalize-space(text())='" + str + "']");
@@ -335,7 +343,6 @@ public class PLPProductItemsPageActionsFsus {
         return "";
     }
 
-    private final By viewFullSpecsBtn = By.xpath("//button[text()='View full specs']");
     public void verifyHideAndShowAllFilters(String text) throws InterruptedException {
         By locator = By.xpath("//span[normalize-space(text())='" + text + "']");
 
@@ -390,7 +397,6 @@ public class PLPProductItemsPageActionsFsus {
         //  WebElementUtil.scrollAndClickUsingJSE(driver, arrow);
     }
 
-    private final By productCount = By.xpath("//span[@name='ProductsCount' or @class='totalResults resultsBorder']");
 
     public void openAllProductsAndValidate(String featureName, String featureKey, String featureValue) {
         try {
@@ -398,7 +404,7 @@ public class PLPProductItemsPageActionsFsus {
             WebElementUtil.zoomInOrOut(25);
             loadMoreProducts(driver);
             WebElementUtil.zoomInOrOut(25);
-            verifyProductCount(driver, WebElementUtil.findElement(productCount));
+            verifyProductCount(driver, WebElementUtil.findElement(plpProductItemsLocatorFsus.productCount));
 
             List<WebElement> products = WebElementUtil.findElements(By.xpath("//div[starts-with(@id,'PlpItem')]"));
             int totalProducts = products.size();
@@ -428,18 +434,17 @@ public class PLPProductItemsPageActionsFsus {
         }
     }
 
-    private final By resetAllButton = By.xpath("//span[text()=\" Hide Filters\"]/ancestor::div//span[text()=\" Reset all \"]");
 
     private void validateProduct(int index, String featureName, String featureKey, String featureValue) {
         try {
             WebDriver driver = DriverManager.getDriver();
             System.out.println("Validating product index " + index);
             System.out.println("Current URL: " + driver.getCurrentUrl());
-            WebElementUtil.scrollAndClickUsingJSE(driver, WebElementUtil.findElement(viewFullSpecsBtn));
-            WebElement featureNameElement = WaitUtils.untilVisible(getFeatureSpecsLocator(featureName), 30000);
+            WebElementUtil.scrollAndClickUsingJSE(driver, WebElementUtil.findElement(plpProductItemsLocatorFsus.viewFullSpecsBtn));
+            WebElement featureNameElement = WaitUtils.untilVisible(plpProductItemsLocatorFsus.getFeatureSpecsLocator(featureName), 30000);
             WebElementUtil.scrollToElement(driver, featureNameElement);
             Assert.assertTrue(featureNameElement.isDisplayed(), featureName + " feature element is not displayed.");
-            WebElement featureElement = WaitUtils.untilVisible(getQuiickSpecsFeatureLocator(featureKey, featureValue), 1);
+            WebElement featureElement = WaitUtils.untilVisible(plpProductItemsLocatorFsus.getQuiickSpecsFeatureLocator(featureKey, featureValue), 1);
             String elementText = featureElement.getText().trim();
             Assert.assertEquals(elementText, featureValue, "Value Mismatch");
             System.out.println("Feature value for " + featureKey + ": " + elementText);
@@ -479,15 +484,6 @@ public class PLPProductItemsPageActionsFsus {
         }
     }
 
-    public By getFeatureSpecsLocator(String text) {
-        return By.xpath("//h5[text()='" + text + "']");
-    }
-
-    private By getQuiickSpecsFeatureLocator(String featureKey, String featureValue) {
-        return By.xpath("//span[text()='" + featureKey + "']//parent::div//following-sibling::div//span[contains(text(),'" + featureValue + "')]");
-
-
-    }
     public void verifyProductCount(WebDriver driver, WebElement element) {
 
 
@@ -501,8 +497,6 @@ public class PLPProductItemsPageActionsFsus {
                 WebElement productElement = WebElementUtil.findElement(By.xpath(productXPath));
                 int expectedCount = i + 1;
             }
-
-
             int actualTotalCount = totalProducts;
             System.out.println("Verifying total product count: " + actualTotalCount);
             String productCountText = element.getText().trim();
@@ -529,30 +523,27 @@ public class PLPProductItemsPageActionsFsus {
         }
     }
 
-
     public void verifySelectedFilters(String filterText) throws InterruptedException {
         WebDriver driver = DriverManager.getDriver();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        String xpath = "//span[text()=' Hide Filters']/ancestor::div//span[text()='" + filterText + "']";
+
 
         try {
-            WebElement filterElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
-            Assert.assertTrue(filterElement.isDisplayed(), "The filter '" + filterText + "' is not displayed under selected filters.");
+            WaitUtils.untilVisible(plpProductItemsLocatorFsus.filterBanner(filterText));
+           WebElementUtil.isDisplayed(plpProductItemsLocatorFsus.filterBanner(filterText));
 
         } catch (TimeoutException e) {
             Assert.fail("The filter '" + filterText + "' was not found under selected filters.");
         }
-        WebElement verifyResetAll = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
-        Assert.assertTrue(verifyResetAll.isDisplayed(), "The Hidden filter is not displayed.");
-
-        WebElementUtil.scrollAndClickUsingJSE(driver,driver.findElement(resetAllButton));
+        WebElementUtil.scrollAndClickUsingJSE(driver,driver.findElement(plpProductItemsLocatorFsus.RESET_ALL_FILTER_CASE_INSENSITIVE));
 
         Thread.sleep(6000);
-        List<WebElement> filtersAfterReset = WebElementUtil.findElements(By.xpath(xpath));
+        List<WebElement> filtersAfterReset = WebElementUtil.findElements(plpProductItemsLocatorFsus.filterBanner(filterText));
         Assert.assertTrue(filtersAfterReset.isEmpty(), "The filter '" + filterText + "' should NOT be visible after clicking Reset All.");
 
 
     }
+
 
     public void openAllProductsAndValidateColor( String color ,String expectedColor) {
         try {
@@ -638,4 +629,34 @@ public class PLPProductItemsPageActionsFsus {
         Assert.assertTrue(isUnchecked, " Checkbox for " + filterName + " is still checked after removing filter.");
 
     }
+
+    public void verifyProductWidthHeightAndDepth(String type, String value) throws InterruptedException {
+
+        WebDriver driver = DriverManager.getDriver();
+        loadMoreProducts(driver);
+        List<WebElement> products =
+                WebElementUtil.findElements(By.xpath("//div[starts-with(@id,'PlpItem')]"));
+
+        for (int i = 0; i < products.size(); i++) {
+            String productXpath =
+                    "//div[@id='PlpItem" + i +
+                            "']//span[@class='product-dimension-attr-styles']" +
+                            "/following-sibling::span[contains(text(),'" + value + "')]";
+
+            List<WebElement> sizeElements =
+                    WebElementUtil.findElements(By.xpath(productXpath));
+
+            if (!sizeElements.isEmpty()) {
+                Assert.assertTrue(
+                        sizeElements.get(0).getText().contains(value),
+                        "Invalid size found for product " + i);
+            } else {
+                Assert.fail("Size element not found for product " + i);
+            }
+        }
+
+        driver.navigate().refresh();
+        WaitUtils.implicitWait(30);
+    }
+
 }

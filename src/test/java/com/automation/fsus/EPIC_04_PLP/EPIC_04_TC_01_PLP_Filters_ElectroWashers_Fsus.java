@@ -97,4 +97,32 @@ public class EPIC_04_TC_01_PLP_Filters_ElectroWashers_Fsus extends BaseTest {
         productCard.validateCheckboxUncheckedAfterCrossClick("Category", "Laundry Tower", "Laundry Tower");
         ExtentReportManager.getTest().pass("Successfully verified Checkbox Unchecked After Cross Click");
     }
+
+    @Test(groups = {"smoke", "regression"}, description = "Verify product dimensions for height")
+    public void testForHeightDimensions() throws InterruptedException {
+
+        loginPage.loginWithDefaultCredentials();
+        loginPage.acceptCookies();
+        productCard.clickOnProductMenu("Laundry");
+        productCard.clickOnProductSubMenu("Electrolux Laundry");
+        productCard.verifyProductItemPage("Laundry", "Laundry");
+        productCard.featureFilter("Height", "38\"");
+        productCard.verifyProductWidthHeightAndDepth("38", "38\"");
+        ExtentReportManager.getTest().pass("Successfully Verified product dimensions for height");
+    }
+
+    @Test(groups = {"smoke", "regression"}, description = "verify Availability of products in PLP")
+    public void verify_Availaibility_In_PLP() throws InterruptedException
+    {
+
+        loginPage.loginWithDefaultCredentials();
+        loginPage.acceptCookies();
+        productCard.clickOnProductMenu("Laundry");
+        productCard.clickOnProductSubMenu("Electrolux Laundry");
+        productCard.verifyProductItemPage("Laundry", "Laundry");
+        productCard.featureFilter("In stock","Yes");
+        productCard.validateAvailabilityOfProductsInPLP();
+        ExtentReportManager.getTest().pass("Successfully verify Availability of products in PLP");
+
+    }
 }
