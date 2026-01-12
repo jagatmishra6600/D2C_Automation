@@ -429,19 +429,61 @@ public class PLPProductItemsPageActionsFsus {
     }
 
 
+//    private void validateProduct(int index, String featureName, String featureKey, String featureValue) {
+//        try {
+//            WebDriver driver = DriverManager.getDriver();
+//            System.out.println("Validating product index " + index);
+//            System.out.println("Current URL: " + driver.getCurrentUrl());
+//            WebElementUtil.scrollAndClickUsingJSE(driver, WebElementUtil.findElement(plpProductItemsLocatorFsus.viewFullSpecsBtn));
+//            WebElement featureNameElement = WaitUtils.untilVisible(plpProductItemsLocatorFsus.getFeatureSpecsLocator(featureName), 30000);
+//            WebElementUtil.scrollToElement(driver, featureNameElement);
+//            Assert.assertTrue(featureNameElement.isDisplayed(), featureName + " feature element is not displayed.");
+//            WebElement featureElement = WaitUtils.untilVisible(plpProductItemsLocatorFsus.getQuiickSpecsFeatureLocator(featureKey, featureValue), 1);
+//            String elementText = featureElement.getText().trim();
+//            Assert.assertEquals(elementText, featureValue, "Value Mismatch");
+//            System.out.println("Feature value for " + featureKey + ": " + elementText);
+//        } catch (Exception e) {
+//            System.out.println("Validation failed for product index " + index + ": " + e.getMessage());
+//        }
+//    }
     private void validateProduct(int index, String featureName, String featureKey, String featureValue) {
         try {
-            WebDriver driver = DriverManager.getDriver();
+
             System.out.println("Validating product index " + index);
-            System.out.println("Current URL: " + driver.getCurrentUrl());
-            WebElementUtil.scrollAndClickUsingJSE(driver, WebElementUtil.findElement(plpProductItemsLocatorFsus.viewFullSpecsBtn));
-            WebElement featureNameElement = WaitUtils.untilVisible(plpProductItemsLocatorFsus.getFeatureSpecsLocator(featureName), 30000);
-            WebElementUtil.scrollToElement(driver, featureNameElement);
-            Assert.assertTrue(featureNameElement.isDisplayed(), featureName + " feature element is not displayed.");
-            WebElement featureElement = WaitUtils.untilVisible(plpProductItemsLocatorFsus.getQuiickSpecsFeatureLocator(featureKey, featureValue), 1);
+            System.out.println("Current URL: " + DriverManager.getDriver().getCurrentUrl());
+
+            WebElementUtil.scrollAndClickUsingJSE(
+                    WebElementUtil.findElement(plpProductItemsLocatorFsus.viewFullSpecsBtn)
+            );
+
+            WebElement featureNameElement =
+                    WaitUtils.untilVisible(
+                            plpProductItemsLocatorFsus.getFeatureSpecsLocator(featureName),
+                            30000
+                    );
+
+            WebElementUtil.scrollToElement(featureNameElement);
+
+            Assert.assertTrue(
+                    featureNameElement.isDisplayed(),
+                    featureName + " feature element is not displayed."
+            );
+
+            WebElement featureElement =
+                    WaitUtils.untilVisible(
+                            plpProductItemsLocatorFsus.getQuiickSpecsFeatureLocator(featureKey, featureValue),
+                            1
+                    );
+
             String elementText = featureElement.getText().trim();
-            Assert.assertEquals(elementText, featureValue, "Value Mismatch");
+
+            Assert.assertTrue(
+                    elementText.equalsIgnoreCase(featureValue),
+                    "Value Mismatch. Expected: " + featureValue + " but Found: " + elementText
+            );
+
             System.out.println("Feature value for " + featureKey + ": " + elementText);
+
         } catch (Exception e) {
             System.out.println("Validation failed for product index " + index + ": " + e.getMessage());
         }
@@ -544,9 +586,9 @@ public class PLPProductItemsPageActionsFsus {
         try {
             WebDriver driver = DriverManager.getDriver();
             loadMoreProducts(driver);
-            verifyProductCount(driver, driver.findElement(PLPProductItemsLocatorFsus.PRODUCT_COUNT));
+            verifyProductCount(driver,  WebElementUtil.findElement((PLPProductItemsLocatorFsus.PRODUCT_COUNT)));
 
-            List<WebElement> products = driver.findElements(By.xpath("//div[starts-with(@id,'PlpItem')]"));
+            List<WebElement> products = WebElementUtil.findElements((By.xpath("//div[starts-with(@id,'PlpItem')]")));
             int totalProducts = products.size();
             System.out.println("Total filtered products found: " + totalProducts);
             String mainWindow = driver.getWindowHandle();
@@ -579,23 +621,16 @@ public class PLPProductItemsPageActionsFsus {
         }
     }
     public void validateProductColor(int index, String color, String expectedColor) {
-        WebDriver driver = DriverManager.getDriver();
         try {
             By electroluxColorLocator = By.xpath(
                     "//span[normalize-space()='"+color+"']");
-
             WebElement colorElement = WaitUtils.untilVisible(electroluxColorLocator, 15000);
             WebElementUtil.scrollToElementStable(electroluxColorLocator);
             String actualColor = colorElement.getText().trim().toLowerCase();
             expectedColor = expectedColor.trim().toLowerCase();
 
-
             System.out.println("Product " + index + " | Expected Color: " + expectedColor + " | Actual Color: " + actualColor);
-
-            Assert.assertEquals(actualColor, expectedColor,
-                    "Color mismatch for product " + index + ": Expected [" + expectedColor + "] but found [" + actualColor + "]");
-
-
+            Assert.assertEquals(actualColor, expectedColor, "Color mismatch for product " + index + ": Expected [" + expectedColor + "] but found [" + actualColor + "]");
 
         } catch (Exception e) {
             System.out.println(" Error validating color for product "  + e.getMessage());

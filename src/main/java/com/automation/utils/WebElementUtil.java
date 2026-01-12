@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -583,4 +584,15 @@ public class WebElementUtil {
 
     }
 
+    public static void scrollAndClickUsingJSE(WebElement element) {
+        WebDriver driver = DriverManager.getDriver();
+        scrollAndClickUsingJSE(driver, element);
+    }
+
+    public static void scrollToElement(WebElement element) {
+        WebDriver driver = DriverManager.getDriver();
+        scrollToElement(driver, element);
+    }
+
 }
+
