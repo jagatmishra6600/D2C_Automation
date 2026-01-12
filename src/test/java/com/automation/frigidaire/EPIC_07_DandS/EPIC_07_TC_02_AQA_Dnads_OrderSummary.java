@@ -14,7 +14,7 @@ public class EPIC_07_TC_02_AQA_Dnads_OrderSummary extends BaseTest {
     private final PlpPageActionsFrig plpPage = new PlpPageActionsFrig();
     private final DAndSPageActionsFrig dnsPage = new DAndSPageActionsFrig();
 
-    @Test(groups = {"smoke", "regression"}, description = "Verify Order Summary on D&S page for French Door Refrigerator")
+    @Test(groups = {"smoke", "regression", "fg2"}, description = "Verify Order Summary on D&S page for French Door Refrigerator")
     public void EPIC_07_DandS_TC_02_verifyOrderSummaryForFrenchDoorRefrigerator() {
         homePage.navigateToHomePage();
         WaitUtils.untilPageLoadComplete();
@@ -35,7 +35,7 @@ public class EPIC_07_TC_02_AQA_Dnads_OrderSummary extends BaseTest {
         ExtentReportManager.getTest().pass("Verify order summary ( Delivery and Services Section ) on D&S page for French Door Refrigerator");
     }
 
-    @Test(groups = {"smoke", "regression"}, description = "Verify order summary ( Add-on Services Section ) on D&S page for French Door Refrigerator")
+    @Test(groups = {"smoke", "regression", "fg2"}, description = "Verify order summary ( Add-on Services Section ) on D&S page for French Door Refrigerator")
     public void EPIC_07_DandS_TC_01_verifyAddonServicesSectionForFrenchDoorRefrigerator() {
         homePage.navigateToHomePage();
         WaitUtils.untilPageLoadComplete();
@@ -51,7 +51,7 @@ public class EPIC_07_TC_02_AQA_Dnads_OrderSummary extends BaseTest {
         ExtentReportManager.getTest().pass("Verify Order summary ( Add-on Services Section ) on D&S page for French Door Refrigerator");
     }
 
-    @Test(groups = {"smoke", "regression"}, description = "Verify Order summary ( Protection Plan Section ) on D&S page for French Door Refrigerator")
+    @Test(groups = {"smoke", "regression", "fg2"}, description = "Verify Order summary ( Protection Plan Section ) on D&S page for French Door Refrigerator")
     public void EPIC_07_DandS_TC_01_verifyProtectionPlanSectionForFrenchDoorRefrigerator() {
         homePage.navigateToHomePage();
         WaitUtils.untilPageLoadComplete();

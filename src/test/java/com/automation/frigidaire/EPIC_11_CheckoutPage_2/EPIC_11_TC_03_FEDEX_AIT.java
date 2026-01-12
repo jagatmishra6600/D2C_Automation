@@ -16,7 +16,7 @@ public class EPIC_11_TC_03_FEDEX_AIT extends BaseTest {
     FEDEX_AITPageActionsFrig fedexPage = new FEDEX_AITPageActionsFrig();
     OutOfStockPageActionsFrig productItems = new OutOfStockPageActionsFrig();
 
-    @Test(groups = {"smoke", "regression"}, description = "Verify FEDEX and AIT Delivery")
+    @Test(groups = {"smoke", "regression", "fg2"}, description = "Verify FEDEX and AIT Delivery")
     public void EPIC_04_PLP_TC_03_testFedexDelivery(){
 
         homePage.navigateToHomePage();

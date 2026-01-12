@@ -19,7 +19,8 @@ public class DeliveryDatesLocatorsFrig {
     public final By shippingPhone = By.id("phone");
     public final By addressSuggestionOption = By.xpath("//ngb-typeahead-window//button[@role='option']");
     public final By deliveryCalendarHeader = By.xpath("//p[contains(text(),'Delivery and installation items')]");
-    public final By deliveryDateAvailable = By.cssSelector("cx-delivery-label avaliableDates");
+    public final By deliveryDateAvailable = By.xpath("//label[contains(@class,'avaliableDates')]");
+    //preceding-sibling::input
     public final By addOnServices = By.xpath("//cx-page-slot[@position='More services Paragraph']//following-sibling::div[contains(@class,'delivery-installation-options')]//input");
     public final By currentMonth = By.xpath("(//h2[contains(@class,'cx-month-year')]//span)[1]");
     public final By nextMonth = By.xpath("(//h2[contains(@class,'cx-month-year')]//span)[2]");
