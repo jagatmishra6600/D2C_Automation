@@ -4,6 +4,7 @@ import com.automation.BaseTest;
 import com.automation.electrolux.pages.DeliveryDatePageActionsElux;
 import com.automation.frigidaire.pages.HomePageActionsFrig;
 import com.automation.frigidaire.pages.PlpPageActionsFrig;
+import com.automation.utils.ExtentReportManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -25,6 +26,8 @@ public class EPIC_03_TC_06_AQA_PDP_Delivery_Dates_Elux extends BaseTest {
         pdpPage.clickProceedToCheckout();
         pdpPage.clickContinueToDelivery();
         Assert.assertTrue(pdpPage.validateAllAvailableDeliveryDates(), "Delivery date is not available or not clickable");
+
+        ExtentReportManager.getTest().pass("Verify Delivery Dates availability on checkout page");
     }
 
 }
