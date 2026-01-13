@@ -15,7 +15,7 @@ public class EPIC_03_TC_06_AQA_PDP_Delivery_Dates_Elux extends BaseTest {
 
 
 
-    @Test(groups = {"regression"}, description = "Verify Delivery Dates availablity on PDP page")
+    @Test(groups = {"regression"}, description = "Verify Delivery Dates availability on PDP page")
     public void verifyDeliveryDates() {
         homePage.navigateToHomePage();
         pdpPage.searchProduct("ELFW7537AW");
