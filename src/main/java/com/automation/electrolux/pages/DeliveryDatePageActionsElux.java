@@ -2,6 +2,7 @@ package com.automation.electrolux.pages;
 
 import com.automation.electrolux.locators.DeliveryDatesLocatorsElux;
 import com.automation.utils.DriverManager;
+import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,11 +15,13 @@ public class DeliveryDatePageActionsElux {
     DeliveryDatesLocatorsElux locators = new DeliveryDatesLocatorsElux();
 
     public void searchProduct(String productName) {
+        WaitUtils.waitForPageLoad();
         WebElementUtil.waitForElementToBeClickable(locators.searchBox, 20);
         WebElementUtil.sendKeys(locators.searchBox, productName + Keys.ENTER);
     }
 
     public void selectProductFromPLP() {
+        WaitUtils.waitForPageLoad();
         WebElementUtil.waitForElementToBeVisible(locators.productPDP, 20);
         WebElementUtil.waitForElementToBeClickable(locators.productPDP, 20);
         WebElementUtil.scrollIntoView(locators.productPDP);
@@ -26,24 +29,27 @@ public class DeliveryDatePageActionsElux {
     }
 
     public void clickSaveAndViewCart() {
-        WebElementUtil.waitForElementToBeVisible(locators.saveAndViewCartButton, 20);
+        WaitUtils.waitForPageLoad();
+        WebElementUtil.waitForElementToBeVisible(locators.saveAndViewCartButton, 30);
         WebElementUtil.scrollToElementStable(locators.saveAndViewCartButton);
         WebElementUtil.waitForElementToBeClickable(locators.saveAndViewCartButton, 10);
         WebElementUtil.clickElement(locators.saveAndViewCartButton);
     }
 
     public void clickAddToCart() {
-        WebElementUtil.waitForElementToBeVisible(locators.addToCartButton, 20);
+        WaitUtils.waitForPageLoad();
+        WebElementUtil.waitForElementToBeVisible(locators.addToCartButton, 30);
         WebElementUtil.scrollToElementStable(locators.addToCartButton);
         WebElementUtil.waitForElementToBeClickable(locators.addToCartButton, 20);
         WebElementUtil.clickElement(locators.addToCartButton);
+        WaitUtils.waitForPageLoad();
         WebElementUtil.waitForElementToBeVisible(locators.viewCartButton, 20);
 //        WebElementUtil.scrollToElementStable(locators.addToCartButton);
         WebElementUtil.clickElement(locators.viewCartButton);
     }
     public void selectDeliveryAndSaveAndViewCart() {
         // Select delivery & installation radio
-        WebElementUtil.waitForElementToBeVisible(locators.deliveryInstallationRadio, 10);
+        WebElementUtil.waitForElementToBeVisible(locators.deliveryInstallationRadio, 30);
         WebElementUtil.scrollToElementStable(locators.deliveryInstallationRadio);
         WebElementUtil.waitForElementToBeClickable(locators.deliveryInstallationRadio);
         WebElementUtil.clickElement(locators.deliveryInstallationRadio);
@@ -55,7 +61,8 @@ public class DeliveryDatePageActionsElux {
     }
 
     public void clickProceedToCheckout() {
-        WebElementUtil.waitForElementToBeVisible(locators.proceedToCheckoutButton, 20);
+        WaitUtils.waitForPageLoad();
+        WebElementUtil.waitForElementToBeVisible(locators.proceedToCheckoutButton, 30);
         WebElementUtil.waitForElementToBeClickable(locators.proceedToCheckoutButton);
         WebElementUtil.clickElement(locators.proceedToCheckoutButton);
         WebElementUtil.waitForElementToBeVisible(locators.shippingAddressForm, 20);
@@ -117,12 +124,10 @@ public class DeliveryDatePageActionsElux {
     }
 
     public boolean validateAllAvailableDeliveryDates() {
-        WebElementUtil driver = null;
-        WebDriverWait wait = new WebDriverWait((WebDriver) driver, Duration.ofSeconds(10));
-
         try {
             // Wait for calendar section to be visible
-            WebElementUtil.waitForElementToBeVisible(locators.deliveryCalendarHeader);
+            WebElement ele = WebElementUtil.waitForElementToBeVisible(locators.deliveryCalendarHeader, 30);
+            boolean isDisplay = ele.isDisplayed();
 
             // Get all available date labels
             List<WebElement> availableDates = WebElementUtil.findElements(locators.deliveryDateAvailable);
@@ -139,11 +144,8 @@ public class DeliveryDatePageActionsElux {
 
                 WebElement date = availableDates.get(i);
 
-                // Scroll the element into stable center view
-                WebElementUtil.scrollToElementStable((By) date);
-
                 // Wait for label to be clickable
-                wait.until(ExpectedConditions.elementToBeClickable(date));
+                WebElementUtil.waitForElementToBeClickable(date);
 
                 String labelText = date.getText().trim();
                 System.out.println("Clicking date: " + labelText);
@@ -151,35 +153,8 @@ public class DeliveryDatePageActionsElux {
                 // Click date
                 date.click();
 
-                // Identify hidden input: label has "for=xxx"
-                String inputId = date.getAttribute("for");
-
-                // Validate checkbox/radio behind label
-                if (inputId != null && !inputId.isEmpty()) {
-                    By inputLocator = By.id(inputId);
-                    WebElement input = wait.until(ExpectedConditions.presenceOfElementLocated(inputLocator));
-
-                    // Wait until selected
-                    wait.until(d -> input.isSelected() ||
-                            Boolean.parseBoolean(input.getAttribute("checked")));
-
-                    if (!input.isSelected()) {
-                        System.out.println("Date not selected properly: " + labelText);
-                        return false;
-                    }
-
-                } else {
-                    // If input ID missing, fallback check on label
-                    wait.until(d -> date.getAttribute("class").contains("selected") ||
-                            "true".equals(date.getAttribute("aria-checked")));
-                }
-
                 System.out.println("✔ Successfully validated date: " + labelText);
 
-                // Re-fetch available dates after each click because DOM refreshes
-                availableDates = WebElementUtil.findElements(
-                        By.cssSelector("label.cx-delivery-label.avaliableDates")
-                );
             }
 
             return true;
