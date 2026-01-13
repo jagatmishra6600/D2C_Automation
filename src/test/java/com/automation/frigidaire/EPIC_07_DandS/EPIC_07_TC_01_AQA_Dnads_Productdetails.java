@@ -91,7 +91,7 @@ public class EPIC_07_TC_01_AQA_Dnads_Productdetails extends BaseTest {
         ExtentReportManager.getTest().pass("Verify product details ( Add-on Services Section ) on D&S page for French Door Refrigerator");
     }
 
-    @Test(groups = {"smoke", "regression", "fg2"}, description = "Verify product details ( Protection Plan Section ) on D&S page for French Door Refrigerator")
+    @Test(groups = {"smoke", "regression"}, description = "Verify product details ( Protection Plan Section ) on D&S page for French Door Refrigerator")
     public void EPIC_07_DandS_TC_01_verifyProtectionPlanSectionForFrenchDoorRefrigerator() {
         homePage.navigateToHomePage();
         WaitUtils.untilPageLoadComplete();
@@ -109,7 +109,7 @@ public class EPIC_07_TC_01_AQA_Dnads_Productdetails extends BaseTest {
         ExtentReportManager.getTest().pass("Verify product details ( Protection Plan Section ) on D&S page for French Door Refrigerator");
     }
 
-    @Test(groups = {"smoke", "regression", "fg2"}, description = "Verify product details ( Instore Pick Up ) on D&S page for French Door Refrigerator")
+    @Test(groups = {"smoke", "regression"}, description = "Verify product details ( Instore Pick Up ) on D&S page for French Door Refrigerator")
     public void EPIC_07_DandS_TC_01_verifyInstorePickupSectionForFrenchDoorRefrigerator() {
         homePage.navigateToHomePage();
         WaitUtils.untilPageLoadComplete();

@@ -27,7 +27,7 @@ public class EPIC_07_TC_03_DS_Installation_AddOnService_Frig extends BaseTest {
         installationAndAddOnServices.clickProductBySKU("FRFG1723AV");
     }
 
-    @Test(groups = {"smoke", "regression", "fg2"}, priority = 1)
+    @Test(groups = {"smoke", "regression"}, priority = 1)
     public void  EPIC_04_PLP_TC_03_testForDelivery() throws InterruptedException {
         navigateToDSPage();
         installationAndAddOnServices.validateDeliveryOnlyIsAvailable();
@@ -35,35 +35,35 @@ public class EPIC_07_TC_03_DS_Installation_AddOnService_Frig extends BaseTest {
         installationAndAddOnServices.selectCheckBoxRequired();
         ExtentReportManager.getTest().pass("Verified Delivery only is available");
     }
-    @Test(groups = {"smoke", "regression", "fg2"}, priority = 2)
+    @Test(groups = {"smoke", "regression"}, priority = 2)
     public void  EPIC_04_PLP_TC_03_testForDeliveryInstallation() throws InterruptedException {
         navigateToDSPage();
         installationAndAddOnServices.deliveryInstallation();
         ExtentReportManager.getTest().pass("Verified Delivery Installation is available");
     }
 
-    @Test(groups = {"smoke", "regression", "fg2"}, priority = 3)
+    @Test(groups = {"smoke", "regression"}, priority = 3)
     public void  EPIC_04_PLP_TC_03_testForAddOnService() throws InterruptedException {
         navigateToDSPage();
         installationAndAddOnServices.validateAddOnServicesAreAvailable();
         ExtentReportManager.getTest().pass("Verified Add on service is available");
     }
 
-    @Test(groups = {"smoke", "regression", "fg2"}, priority = 4)
+    @Test(groups = {"smoke", "regression"}, priority = 4)
     public void  EPIC_04_PLP_TC_03_testForHaul() throws InterruptedException {
         navigateToDSPage();
         installationAndAddOnServices.selectHaul();
         ExtentReportManager.getTest().pass("Verify that the Add-on service 'haul' is selected and check if the total price changes accordingly.");
     }
 
-    @Test(groups = {"smoke", "regression", "fg2"}, priority = 5)
+    @Test(groups = {"smoke", "regression"}, priority = 5)
     public void  EPIC_04_PLP_TC_03_testForMove() throws InterruptedException {
         navigateToDSPage();
         installationAndAddOnServices.moveOld();
         ExtentReportManager.getTest().pass("Verify that the Add-on service 'move' is selected and check if the total price changes accordingly.");
     }
 
-    @Test(groups = {"smoke", "regression", "fg2"}, priority = 6)
+    @Test(groups = {"smoke", "regression"}, priority = 6)
     public void  EPIC_04_PLP_TC_03_testForHaulAndMove() throws InterruptedException {
         navigateToDSPage();
         installationAndAddOnServices.haulAndMove();
