@@ -19,7 +19,7 @@ public class EPIC_07_TC_01_AQA_Dnads_Productdetails extends BaseTest {
     private final DAndSPageActionsFrig dnsPage = new DAndSPageActionsFrig();
 
 
-    @Test(groups = {"smoke", "regression", "fg2"}, description = "Verify product details on D&S page for French Door Refrigerator")
+    @Test(groups = {"smoke", "regression"}, description = "Verify product details on D&S page for French Door Refrigerator")
     public void EPIC_07_DandS_TC_01_verifyProductDetailsOnDeliveryAndServicePageForFrenchDoorRefrigerator() {
         homePage.navigateToHomePage();
         WaitUtils.untilPageLoadComplete();
@@ -43,7 +43,7 @@ public class EPIC_07_TC_01_AQA_Dnads_Productdetails extends BaseTest {
         ExtentReportManager.getTest().pass("Verify product details on D&S page for French Door Refrigerator");
     }
 
-    @Test(groups = {"smoke", "regression", "fg2"}, description = "Verify product details ( Delivery and Services Section ) on D&S page for French Door Refrigerator")
+    @Test(groups = {"smoke", "regression"}, description = "Verify product details ( Delivery and Services Section ) on D&S page for French Door Refrigerator")
     public void EPIC_07_DandS_TC_01_verifyDeliveryAndInstallationServicesSectionForFrenchDoorRefrigerator() {
         homePage.navigateToHomePage();
         WaitUtils.untilPageLoadComplete();
@@ -72,7 +72,7 @@ public class EPIC_07_TC_01_AQA_Dnads_Productdetails extends BaseTest {
         ExtentReportManager.getTest().pass("Verify product details ( Delivery and Services Section ) on D&S page for French Door Refrigerator");
     }
 
-    @Test(groups = {"smoke", "regression", "fg2"}, description = "Verify product details ( Add-on Services Section ) on D&S page for French Door Refrigerator")
+    @Test(groups = {"smoke", "regression"}, description = "Verify product details ( Add-on Services Section ) on D&S page for French Door Refrigerator")
     public void EPIC_07_DandS_TC_01_verifyAddonServicesSectionForFrenchDoorRefrigerator() {
         homePage.navigateToHomePage();
         WaitUtils.untilPageLoadComplete();
