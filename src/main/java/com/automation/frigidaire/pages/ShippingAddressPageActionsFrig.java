@@ -107,6 +107,20 @@ public class ShippingAddressPageActionsFrig {
     	return this;
     }
     
+    public ShippingAddressPageActionsFrig enterShippingAddressDetails(ShippingAddressData addressData, String zipCode) {
+    	enterEmailAddress(addressData.emailAddress())
+    	.enterFirstName(addressData.firstName())
+    	.enterLastName(addressData.lastName())
+    	.clickManuallyEnterAddressLink()
+    	.enterAddressLine1(addressData.addressLine1())
+    	.enterCity( addressData.city())
+    	.selectState(addressData.state())
+    	.enterZipCode(zipCode)
+    	.enterPhoneNumber(addressData.phoneNumber());
+    	WaitUtils.sleep(2000);
+    	return this;
+    }
+    
     public ShippingAddressPageActionsFrig enterEmailAddress(String email) {
     	WebElementUtil.scrollIntoView(shipping_Locator.EMAIL_ADDRESS_TXT_FIELD);
     	WebElementUtil.sendKeys(shipping_Locator.EMAIL_ADDRESS_TXT_FIELD,email);

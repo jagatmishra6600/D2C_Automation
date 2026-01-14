@@ -3,6 +3,7 @@ package com.automation.frigidaire.pages;
 import static org.testng.Assert.assertTrue;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.openqa.selenium.By;
 
@@ -51,6 +52,9 @@ public class ReviewAndPayPageActionsFrig {
 	
 	public Boolean isCreditCardNumberFieldDisplayed() {
 		By cardNumberIframeLocator = By.xpath("//iframe[contains(@title,'card number')]");
+		if(!WebElementUtil.isDisplayed(cardNumberIframeLocator)) {
+			return false;
+		}
 		return WebElementUtil.performInFrame(cardNumberIframeLocator, () -> 
 	       WebElementUtil.isDisplayed(reviewAndPayLocators.cardNumberField)
 	    );
@@ -65,6 +69,9 @@ public class ReviewAndPayPageActionsFrig {
 	
 	public Boolean isCreditCardExpiryFieldDisplayed() {
 		By cardExpiryIframeLocator = By.xpath("//iframe[contains(@title,'expiry date')]");
+		if(!WebElementUtil.isDisplayed(cardExpiryIframeLocator)) {
+			return false;
+		}
 		return WebElementUtil.performInFrame(cardExpiryIframeLocator, () -> 
 	       WebElementUtil.isDisplayed(reviewAndPayLocators.expiryDateField)
 	    );
@@ -79,6 +86,9 @@ public class ReviewAndPayPageActionsFrig {
 	
 	public Boolean isCreditCardSecurityCodeFieldDisplayed() {
 		By securityCodeIframeLocator = By.xpath("//iframe[contains(@title,'security code')]");
+		if(!WebElementUtil.isDisplayed(securityCodeIframeLocator)) {
+			return false;
+		}
 		return WebElementUtil.performInFrame(securityCodeIframeLocator, () -> 
 	       WebElementUtil.isDisplayed(reviewAndPayLocators.securityCodeField)
 	    );
