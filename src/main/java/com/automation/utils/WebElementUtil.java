@@ -582,5 +582,20 @@ public class WebElementUtil {
         return converStringToFloat(value);
 
     }
+    
+    public static void performInFrame(String frameXpathLocator, Runnable action) {
+        WebDriver driver = DriverManager.getDriver();
+        try {
+            WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(10));
+            WebDriver frameElement = wait.until(
+                ExpectedConditions.frameToBeAvailableAndSwitchToIt(
+                    By.xpath(frameXpathLocator)
+                )
+            );
+            action.run();
+        } finally {
+        	DriverManager.getDriver().switchTo().defaultContent();
+        }
+    }
 
 }

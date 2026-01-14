@@ -604,5 +604,17 @@ public class DeliveryDatePageActionsFrig {
 
         return actualText.contains(expectedText);
     }
+    
+    public DeliveryDatePageActionsFrig selectFirstAvailableDeliveryDate() {
+    	WebElementUtil.scrollIntoView(locators.firstAvailableDeliveryDate);
+    	WebElementUtil.clickElement(locators.firstAvailableDeliveryDate);
+    	return this;
+    }
+    
+    public ReviewAndPayPageActionsFrig clickContinueToBillingButton() {
+    	WebElementUtil.scrollIntoView(locators.continueToBillingButton);
+    	WebElementUtil.clickElement(locators.continueToBillingButton);
+    	return new ReviewAndPayPageActionsFrig();
+    }
 
 }

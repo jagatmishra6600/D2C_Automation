@@ -190,6 +190,7 @@ public class DAndSPageActionsFrig {
     }
 
     public CartPageActionsFrig clickSaveAndViewCartButton() {
+    	WebElementUtil.isDisplayed(dandsPage_Locator.saveAndViewCartButton);
         for (int attempt = 1; attempt <= 2; attempt++) {
             WebElementUtil.clickElement(dandsPage_Locator.saveAndViewCartButton);
 

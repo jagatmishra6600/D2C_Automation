@@ -1,7 +1,15 @@
 package com.automation.utils;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
 import com.automation.models.CreateAccountData;
 import com.automation.models.FSCreateAccountData;
+import com.automation.models.ShippingAddressData;
+import com.github.javafaker.Faker;
 
 public class UserTestData {
 
@@ -11,6 +19,8 @@ public class UserTestData {
     public static final String PASSWORD = ConfigReader.getProperty("user.password");
     public static final String FS_USERNAME = ConfigReader.getProperty("user.emailfamilystore");
     public static final String ZIPCODE = "40001";
+    public static final String INVALID_CREDIT_CARD = "3782-822463-10005";
+    public static final String INVALID_CREDIT_CARD_CVV = "1234";
     
     // Generate a new email EVERY TIME someone calls the method
     public static String getDisposableYopmailEmailAddress() {
@@ -60,5 +70,43 @@ public class UserTestData {
     
     private static int generateRandomNumber() {
     	return WebElementUtil.getRandomNumber(10000);
+    }
+    
+    public static ShippingAddressData getRandomUSAddressData() {
+    	Faker randomAddressData = new Faker(Locale.US);
+    	return generateRandomAddress(randomAddressData);
+    	
+    }
+    
+    public static ShippingAddressData getRandomCanadaAddressData() {
+    	Faker randomAddressData = new Faker(Locale.CANADA);
+    	return generateRandomAddress(randomAddressData);
+    }
+    
+    private static ShippingAddressData generateRandomAddress(Faker randomAddressData) {
+    	return new ShippingAddressData(getDisposableMailDropEmailAddress()
+    			,randomAddressData.name().firstName()
+				,randomAddressData.name().lastName()
+				,randomAddressData.address().buildingNumber()
+				,randomAddressData.address().streetAddressNumber()
+				,randomAddressData.address().city()
+				,randomAddressData.address().state()
+				,randomAddressData.address().zipCode()
+				,randomAddressData.phoneNumber().phoneNumber());
+    }
+    
+    public static List<String> getCreditCardDetailsList() {
+        return new ArrayList<>(List.of(
+        		INVALID_CREDIT_CARD, //card Number
+                getFutureExpiryDate(), //Future Expiry Date in MM/YY
+                INVALID_CREDIT_CARD_CVV, //CVV
+                FIRST_NAME //Name On Card
+        ));
+    }
+    
+    private static String getFutureExpiryDate() {
+    	return LocalDate.now()
+        .plusMonths(6)                    
+        .format(DateTimeFormatter.ofPattern("MM/yy"));
     }
 }
