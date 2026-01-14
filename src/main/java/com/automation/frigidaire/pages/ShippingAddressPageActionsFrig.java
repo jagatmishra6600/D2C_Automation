@@ -1,6 +1,8 @@
 package com.automation.frigidaire.pages;
 
 import com.automation.frigidaire.locators.ShippingAddressLocatorsFrig;
+import com.automation.models.ShippingAddressData;
+import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
 
 public class ShippingAddressPageActionsFrig {
@@ -89,21 +91,105 @@ public class ShippingAddressPageActionsFrig {
         Thread.sleep(4000);
         WebElementUtil.waitForElementToBeVisible(shipping_Locator.CONTINUE_TO_DELIVERY_BTN,10);
         WebElementUtil.clickElement(shipping_Locator.CONTINUE_TO_DELIVERY_BTN);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    }
+    
+    public ShippingAddressPageActionsFrig enterShippingAddressDetails(ShippingAddressData addressData) {
+    	enterEmailAddress(addressData.emailAddress())
+    	.enterFirstName(addressData.firstName())
+    	.enterLastName(addressData.lastName())
+    	.clickManuallyEnterAddressLink()
+    	.enterAddressLine1(addressData.addressLine1())
+    	.enterCity( addressData.city())
+    	.selectState(addressData.state())
+    	.enterZipCode("28088")
+    	.enterPhoneNumber(addressData.phoneNumber());
+    	WaitUtils.sleep(2000);
+    	return this;
+    }
+    
+    public ShippingAddressPageActionsFrig enterShippingAddressDetails(ShippingAddressData addressData, String zipCode) {
+    	enterEmailAddress(addressData.emailAddress())
+    	.enterFirstName(addressData.firstName())
+    	.enterLastName(addressData.lastName())
+    	.clickManuallyEnterAddressLink()
+    	.enterAddressLine1(addressData.addressLine1())
+    	.enterCity( addressData.city())
+    	.selectState(addressData.state())
+    	.enterZipCode(zipCode)
+    	.enterPhoneNumber(addressData.phoneNumber());
+    	WaitUtils.sleep(2000);
+    	return this;
+    }
+    
+    public ShippingAddressPageActionsFrig enterEmailAddress(String email) {
+    	WebElementUtil.scrollIntoView(shipping_Locator.EMAIL_ADDRESS_TXT_FIELD);
+    	WebElementUtil.sendKeys(shipping_Locator.EMAIL_ADDRESS_TXT_FIELD,email);
+    	return this;
+    }
+    
+    public ShippingAddressPageActionsFrig enterFirstName(String firstName) {
+    	WebElementUtil.scrollIntoView(shipping_Locator.FIRST_NAME);
+    	WebElementUtil.sendKeys(shipping_Locator.FIRST_NAME,firstName);
+    	return this;
+    }
+    
+    public ShippingAddressPageActionsFrig enterLastName(String lastName) {
+    	WebElementUtil.scrollIntoView(shipping_Locator.LAST_NAME);
+    	WebElementUtil.sendKeys(shipping_Locator.LAST_NAME,lastName);
+    	return this;
+    }
+    
+    public ShippingAddressPageActionsFrig clickManuallyEnterAddressLink() {
+    	WebElementUtil.scrollIntoView(shipping_Locator.MANUALLY_ENTER_ADDRESS_LINK);
+    	WebElementUtil.clickElement(shipping_Locator.MANUALLY_ENTER_ADDRESS_LINK);
+    	return this;
+    }
+    
+    public ShippingAddressPageActionsFrig enterCity(String city) {
+    	WebElementUtil.scrollIntoView(shipping_Locator.CITY);	
+    	WebElementUtil.sendKeys(shipping_Locator.CITY,city);
+    	return this;
+    }
+    
+    public ShippingAddressPageActionsFrig selectState(String state) {
+    	WebElementUtil.scrollIntoView(shipping_Locator.STATE_TXTFIELD);	
+    	WebElementUtil.clickElement(shipping_Locator.STATE_TXTFIELD);
+    	WebElementUtil.sendKeys(shipping_Locator.STATE_TXTFIELD,state);
+    	WebElementUtil.clickElement(shipping_Locator.selectState(state));
+    	return this;
+    }
+    
+    public ShippingAddressPageActionsFrig enterZipCode(String zipCode) {
+    	WebElementUtil.scrollIntoView(shipping_Locator.ZIPCODE);	
+    	WebElementUtil.sendKeys(shipping_Locator.ZIPCODE,zipCode);
+    	return this;
+    }
+    
+    public ShippingAddressPageActionsFrig enterPhoneNumber(String phoneNumber) {
+    	WebElementUtil.scrollIntoView(shipping_Locator.PHONE_NUMBER);
+    	WebElementUtil.sendKeys(shipping_Locator.PHONE_NUMBER,phoneNumber);
+    	return this;
+    }
+    
+    public DeliveryDatePageActionsFrig clickContinueToDeliveryButton() {
+    	WebElementUtil.scrollIntoView(shipping_Locator.CONTINUE_TO_DELIVERY_BTN);
+    	WebElementUtil.clickElement(shipping_Locator.CONTINUE_TO_DELIVERY_BTN);
+    	if(WebElementUtil.isDisplayed(shipping_Locator.SAVE_AND_CONTINUE_BTN)) {
+    		clickSaveAndContinueButton();
+    	}
+    	return new DeliveryDatePageActionsFrig();
+    }
+    
+    public DeliveryDatePageActionsFrig clickSaveAndContinueButton() {
+    	WebElementUtil.scrollIntoView(shipping_Locator.SAVE_AND_CONTINUE_BTN);
+    	WebElementUtil.clickElement(shipping_Locator.SAVE_AND_CONTINUE_BTN);
+    	return new DeliveryDatePageActionsFrig();
+    }
+    
+    public ShippingAddressPageActionsFrig enterAddressLine1(String addressLine1) {
+    	WebElementUtil.scrollIntoView(shipping_Locator.ADRESS_LINE1);
+    	WebElementUtil.sendKeys(shipping_Locator.ADRESS_LINE1,addressLine1);
+    	return this;
     }
 
 

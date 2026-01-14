@@ -38,6 +38,7 @@ public class DeliveryDatesLocatorsFrig {
     public final By parcelItemsColor = By.xpath("//div[@class='cx-item-list-items']//div[contains(@class,'checkout-cart-block')]//div[contains(@class,'product-color')]");
     public final By parcelItemsQty = By.xpath("//div[@class='cx-item-list-items']//div[contains(@class,'checkout-cart-block')]//p");
     public final By checkoutMessage = By.xpath("//div[contains(@class,'H4H4_Desktop')]");
+    public final By firstAvailableDeliveryDate = By.xpath("(//div[contains(@class,'cx-date-container')]//label[contains(@class,'avaliableDates')])[1]");
 
 
 
