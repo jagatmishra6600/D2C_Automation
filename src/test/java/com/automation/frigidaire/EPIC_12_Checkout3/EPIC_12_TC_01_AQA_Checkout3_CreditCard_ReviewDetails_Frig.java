@@ -16,7 +16,7 @@ public class EPIC_12_TC_01_AQA_Checkout3_CreditCard_ReviewDetails_Frig extends B
 	HomePageActionsFrig homePage = new HomePageActionsFrig();
 	ReviewAndPayPageActionsFrig reviewAndPayPage = new ReviewAndPayPageActionsFrig();
 
-	@Test(groups = { "smoke","regression" }, description = "Verify credit card payment details section on the Review and Pay page and validate the error message when an invalid credit card is used during checkout.")
+	@Test(groups = { "smoke","regression" }, description = "Verify credit card payment details section on the Review and Pay page and validate the error message when placing order with invalid credit card details.")
 	public void EPIC_12_Checkout3_TC_01_VerifyCreditCardDetailsSectionAndErrorMessageForInvalidCard() {
 		var cardType = "American Express";
 		var expectedCheckCreditCardInfoMessage = "We were unable to process your payment for this order. Please check your credit card information or contact your card issuer to verify.";
@@ -27,11 +27,11 @@ public class EPIC_12_TC_01_AQA_Checkout3_CreditCard_ReviewDetails_Frig extends B
 						.enterCreditCardDetails(UserTestData.getCreditCardDetailsList());
 		assertEquals(reviewAndPayPage.getCreditCardType(),cardType,"Card Type is not identified correctly in the Card Number Field");
 		reviewAndPayPage.clickPlaceOrderButton();
-		assertTrue(reviewAndPayPage.isCheckCreditCardInformationMessageDisplayed(),"Check your Credit Card Information Message is not appeared after entering invalid card details");
+		assertTrue(reviewAndPayPage.isCheckCreditCardInformationMessageDisplayed(),"Check your Credit Card Information Message is not appeared after placing order with invalid card details");
 		assertEquals(reviewAndPayPage.getCheckCreditCardInformationMessage(),expectedCheckCreditCardInfoMessage,"Check your card information message is not correct");
 		
 		ExtentReportManager.getTest().pass("Successfully validated credit card details section on the Review and Pay page, "
-			  + "including card type identification and appropriate error message for invalid credit card information.");
+			  + "including card type identification and appropriate error message for placing order with invalid credit card details.");
 	}
 
 	private void navigateToReviewAndPayPage() {
