@@ -17,7 +17,7 @@ public class EPIC_12_TC_01_AQA_Checkout3_CreditCard_ReviewDetails_Frig extends B
 	ReviewAndPayPageActionsFrig reviewAndPayPage = new ReviewAndPayPageActionsFrig();
 
 	@Test(groups = { "smoke","regression" }, description = "Verify credit card payment details section on the Review and Pay page and validate the error message when placing order with invalid credit card details.")
-	public void EPIC_12_Checkout3_TC_01_VerifyCreditCardDetailsSectionAndErrorMessageForInvalidCard() {
+	public void EPIC_12_Checkout3_TC_01_VerifyCreditCardDetailsSectionAndErrorMessageForInvalidCard_Frig() {
 		var cardType = "American Express";
 		var expectedCheckCreditCardInfoMessage = "We were unable to process your payment for this order. Please check your credit card information or contact your card issuer to verify.";
 		navigateToReviewAndPayPage();
