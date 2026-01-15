@@ -5,7 +5,8 @@ import org.openqa.selenium.By;
 
 public class DeliveryDatesLocatorsElux {
     public final By searchBox = By.xpath("//input[@aria-label=\"search\"]");
-    public final By productPDP = By.xpath("//div[contains(@class,'Appliance-Card')]  | //div[contains(@class,'accessories-product')]//div[contains(@class,'Product-Name')]");
+    public final By productPDP = By.xpath("//div[contains(@class,'Product-title')]");
+//    public final By productPDP = By.xpath("//div[contains(@class,'Appliance-Card')]  | //div[contains(@class,'accessories-product')]//div[contains(@class,'Product-Name')]"); //div[contains(@class,'Product-title')]
     public final By addToCartButton = By.xpath("//span[normalize-space()='Add to cart']/ancestor::button | //span[normalize-space()='Add to cart']/ancestor::a");
     public final By viewCartButton = By.xpath("//a[normalize-space()='View cart'] | //button[normalize-space()='Save and view cart']");
     public final By deliveryInstallationRadio = By.id("Refrigerators_Large_WaterLine_Install");
@@ -19,8 +20,8 @@ public class DeliveryDatesLocatorsElux {
     public final By shippingAddressLine1 = By.xpath("//input[@formcontrolname='line1' or @id='address-1' or contains(@placeholder,'Address')]");
     public final By shippingPhone = By.id("phone");
     public final By addressSuggestionOption = By.xpath("//ngb-typeahead-window//button[@role='option']");
-    public final By deliveryCalendarHeader = By.xpath("//p[contains(text(),'Delivery and installation items')]");
-    public final By deliveryDateAvailable = By.cssSelector("cx-delivery-label avaliableDates");
+    public final By deliveryCalendarHeader = By.xpath("//div[contains(@class,'item-group--label-checkout') and contains(normalize-space(),'Delivery & installation items')]");
+    public final By deliveryDateAvailable = By.xpath("//label[contains(@class,'cx-delivery-label') and not(contains(@class,'disabled'))]");
 
     public final By currentMonth = By.xpath("(//h2[contains(@class,'cx-month-year')]//span)[1]");
     public final By nextMonth = By.xpath("(//h2[contains(@class,'cx-month-year')]//span)[2]");

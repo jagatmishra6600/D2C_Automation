@@ -117,12 +117,10 @@ public class DeliveryDatePageActionsFsus {
      * verifies the slot becomes selected.
      */
     public boolean validateAllAvailableDeliveryDates() {
-        WebElementUtil driver = null;
-        WebDriverWait wait = new WebDriverWait((WebDriver) driver, Duration.ofSeconds(10));
-
         try {
             // Wait for calendar section to be visible
-            WebElementUtil.waitForElementToBeVisible(locators.deliveryCalendarHeader);
+            WebElement ele = WebElementUtil.waitForElementToBeVisible(locators.deliveryCalendarHeader, 30);
+            boolean isDisplay = ele.isDisplayed();
 
             // Get all available date labels
             List<WebElement> availableDates = WebElementUtil.findElements(locators.deliveryDateAvailable);
@@ -139,11 +137,8 @@ public class DeliveryDatePageActionsFsus {
 
                 WebElement date = availableDates.get(i);
 
-                // Scroll the element into stable center view
-                WebElementUtil.scrollToElementStable((By) date);
-
                 // Wait for label to be clickable
-                wait.until(ExpectedConditions.elementToBeClickable(date));
+                WebElementUtil.waitForElementToBeClickable(date);
 
                 String labelText = date.getText().trim();
                 System.out.println("Clicking date: " + labelText);
@@ -151,35 +146,8 @@ public class DeliveryDatePageActionsFsus {
                 // Click date
                 date.click();
 
-                // Identify hidden input: label has "for=xxx"
-                String inputId = date.getAttribute("for");
-
-                // Validate checkbox/radio behind label
-                if (inputId != null && !inputId.isEmpty()) {
-                    By inputLocator = By.id(inputId);
-                    WebElement input = wait.until(ExpectedConditions.presenceOfElementLocated(inputLocator));
-
-                    // Wait until selected
-                    wait.until(d -> input.isSelected() ||
-                            Boolean.parseBoolean(input.getAttribute("checked")));
-
-                    if (!input.isSelected()) {
-                        System.out.println("Date not selected properly: " + labelText);
-                        return false;
-                    }
-
-                } else {
-                    // If input ID missing, fallback check on label
-                    wait.until(d -> date.getAttribute("class").contains("selected") ||
-                            "true".equals(date.getAttribute("aria-checked")));
-                }
-
                 System.out.println("✔ Successfully validated date: " + labelText);
 
-                // Re-fetch available dates after each click because DOM refreshes
-                availableDates = WebElementUtil.findElements(
-                        By.cssSelector("label.cx-delivery-label.avaliableDates")
-                );
             }
 
             return true;

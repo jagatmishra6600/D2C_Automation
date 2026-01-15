@@ -1,52 +1,48 @@
 package com.automation.electrolux.pages;
 
-import com.automation.electrolux.locators.DeliveryDatesLocatorsElux;
+import com.automation.electrolux.locators.PayPalLocatorsElux;
 import com.automation.utils.DriverManager;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-public class DeliveryDatePageActionsElux {
-    DeliveryDatesLocatorsElux locators = new DeliveryDatesLocatorsElux();
+public class PayPalPageActionsElux {
+    PayPalLocatorsElux locators = new PayPalLocatorsElux();
 
     public void searchProduct(String productName) {
-        WaitUtils.waitForPageLoad();
         WebElementUtil.waitForElementToBeClickable(locators.searchBox, 20);
         WebElementUtil.sendKeys(locators.searchBox, productName + Keys.ENTER);
+        WaitUtils.waitForPageLoad();
     }
 
     public void selectProductFromPLP() {
         WaitUtils.waitForPageLoad();
         WebElementUtil.waitForElementToBeVisible(locators.productPDP, 20);
-        WebElementUtil.waitForElementToBeClickable(locators.productPDP, 20);
+        WebElementUtil.waitForElementToBeClickable(locators.productPDP, 10);
         WebElementUtil.scrollIntoView(locators.productPDP);
         WebElementUtil.clickElement(locators.productPDP);
     }
 
+    public void clickAddToCart() {
+        WebElementUtil.waitForElementToBeVisible(locators.addToCartButton, 20);
+        WebElementUtil.scrollToElementStable(locators.addToCartButton);
+        WebElementUtil.waitForElementToBeClickable(locators.addToCartButton, 10);
+        WebElementUtil.clickElement(locators.addToCartButton);
+    }
+
     public void clickSaveAndViewCart() {
-        WaitUtils.waitForPageLoad();
-        WebElementUtil.waitForElementToBeVisible(locators.saveAndViewCartButton, 30);
+        WebElementUtil.waitForElementToBeVisible(locators.saveAndViewCartButton, 20);
         WebElementUtil.scrollToElementStable(locators.saveAndViewCartButton);
-        WebElementUtil.waitForElementToBeClickable(locators.saveAndViewCartButton, 10);
+        WebElementUtil.waitForElementToBeClickable(locators.saveAndViewCartButton, 20);
         WebElementUtil.clickElement(locators.saveAndViewCartButton);
     }
 
-    public void clickAddToCart() {
-        WaitUtils.waitForPageLoad();
-        WebElementUtil.waitForElementToBeVisible(locators.addToCartButton, 30);
-        WebElementUtil.scrollToElementStable(locators.addToCartButton);
-        WebElementUtil.waitForElementToBeClickable(locators.addToCartButton, 20);
-        WebElementUtil.clickElement(locators.addToCartButton);
-        WaitUtils.waitForPageLoad();
-        WebElementUtil.waitForElementToBeVisible(locators.viewCartButton, 20);
-//        WebElementUtil.scrollToElementStable(locators.addToCartButton);
-        WebElementUtil.clickElement(locators.viewCartButton);
-    }
     public void selectDeliveryAndSaveAndViewCart() {
         // Select delivery & installation radio
         WebElementUtil.waitForElementToBeVisible(locators.deliveryInstallationRadio, 30);
@@ -56,22 +52,23 @@ public class DeliveryDatePageActionsElux {
 
         // Click Save and view cart
         WebElementUtil.scrollToElementStable(locators.saveAndViewCartButton);
-        WebElementUtil.waitForElementToBeClickable(locators.saveAndViewCartButton, 20);
+        WebElementUtil.waitForElementToBeClickable(locators.saveAndViewCartButton, 30);
         WebElementUtil.clickElement(locators.saveAndViewCartButton);
     }
 
     public void clickProceedToCheckout() {
-        WaitUtils.waitForPageLoad();
         WebElementUtil.waitForElementToBeVisible(locators.proceedToCheckoutButton, 30);
         WebElementUtil.waitForElementToBeClickable(locators.proceedToCheckoutButton);
         WebElementUtil.clickElement(locators.proceedToCheckoutButton);
         WebElementUtil.waitForElementToBeVisible(locators.shippingAddressForm, 20);
     }
 
+    //     * Clicks the "Continue to delivery" button after shipping details are entered.
+//            * Returns true if the click succeeded, false otherwise.
+//     */
+    public void clickContinueToDelivery() {
 
-    public boolean clickContinueToDelivery() {
-
-        return clickContinueToDelivery(
+        clickContinueToDelivery(
                 "pandey.devishankar@knacksystems.com",
                 "Bhavani",
                 "Pandey",
@@ -80,7 +77,10 @@ public class DeliveryDatePageActionsElux {
         );
     }
 
-
+    /**
+     * Fills shipping form fields then clicks Continue to delivery.
+     * Returns true if the click succeeded and no exception was thrown.
+     */
     public boolean clickContinueToDelivery(String email, String firstName, String lastName, String addressLine1, String phone) {
 
         try {
@@ -123,7 +123,22 @@ public class DeliveryDatePageActionsElux {
         }
     }
 
+    public void selectDeliverDate() {
+        WebElementUtil.waitForElementToBeVisible(locators.deliveryDateAvailable, 30);
+        List<WebElement> dateOptions = WebElementUtil.findElements(locators.deliveryDateAvailable);
+        if (!dateOptions.isEmpty()) {
+            WebElement firstAvailableDate = dateOptions.get(0);
+            WebElementUtil.scrollToElementStable(firstAvailableDate);
+            firstAvailableDate.click();
+        } else {
+            throw new NoSuchElementException("No available delivery dates found.");
+        }
+    }
+
     public boolean validateAllAvailableDeliveryDates() {
+        WebElementUtil driver = null;
+        WebDriverWait wait = new WebDriverWait((WebDriver) driver, Duration.ofSeconds(20));
+
         try {
             // Wait for calendar section to be visible
             WebElement ele = WebElementUtil.waitForElementToBeVisible(locators.deliveryCalendarHeader, 30);
@@ -153,8 +168,13 @@ public class DeliveryDatePageActionsElux {
                 // Click date
                 date.click();
 
+
                 System.out.println("✔ Successfully validated date: " + labelText);
 
+                // Re-fetch available dates after each click because DOM refreshes
+                availableDates = WebElementUtil.findElements(
+                        By.cssSelector("label.cx-delivery-label.avaliableDates")
+                );
             }
 
             return true;
@@ -165,6 +185,7 @@ public class DeliveryDatePageActionsElux {
             return false;
         }
     }
+
 
     public boolean validateCurrentDeliveryMonths() {
         java.time.LocalDate now = java.time.LocalDate.now();
@@ -541,10 +562,6 @@ public class DeliveryDatePageActionsElux {
                 return false;
             }
 
-            // Optional: numeric check (only if needed)
-            // if (!qtyText.matches(".*\\d+.*")) {
-            //     return false;
-            // }
         }
 
         return true;
@@ -570,6 +587,85 @@ public class DeliveryDatePageActionsElux {
 
         return actualText.contains(expectedText);
     }
+
+    public void clickOnContinueToBilling() {
+        WebElementUtil.waitForElementToBeVisible(locators.continueBillingButton, 30);
+        WebElementUtil.scrollToElementStable(locators.continueBillingButton);
+        WebElementUtil.waitForElementToBeClickable(locators.continueBillingButton, 10);
+        WebElementUtil.clickElement(locators.continueBillingButton);
+    }
+
+    public void clickPayWithPayPal() {
+        WebElementUtil.waitForElementToBeVisible(locators.selectPayPayPal, 30);
+        WebElementUtil.scrollToElementStable(locators.selectPayPayPal);
+        WebElementUtil.waitForElementToBeClickable(locators.selectPayPayPal, 10);
+        WebElementUtil.clickElement(locators.selectPayPayPal);
+    }
+
+    public void clickOnPayPalButton() {
+        WebElementUtil.waitForElementToBeVisible(locators.payPalButton, 30);
+        WebElementUtil.scrollToElementStable(locators.payPalButton);
+        WebElementUtil.waitForElementToBeClickable(locators.payPalButton, 10);
+        WebElementUtil.clickElement(locators.payPalButton);
+    }
+
+    public void switchToPayPalWindow() {
+        String parentWindow = DriverManager.getDriver().getWindowHandle();
+        for (String handle : DriverManager.getDriver().getWindowHandles()) {
+            if (!handle.equals(parentWindow)) {
+                DriverManager.getDriver().switchTo().window(handle);
+                break;
+            }
+        }
+    }
+
+    public boolean validatePayPalWindowOpened() {
+        WebDriver driver = DriverManager.getDriver();
+        String parentWindow = driver.getWindowHandle();
+
+        // CLONE the handles (IMPORTANT)
+        Set<String> handlesBefore = new HashSet<>(driver.getWindowHandles());
+
+        try {
+            // Click PayPal
+            WebElementUtil.waitForElementToBeClickable(locators.payPalButton);
+            WebElementUtil.clickElement(locators.payPalButton);
+
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+            // Wait until window count increases
+            wait.until(d -> d.getWindowHandles().size() > handlesBefore.size());
+
+            // CLONE again (IMPORTANT)
+            Set<String> handlesAfter = new HashSet<>(driver.getWindowHandles());
+            handlesAfter.removeAll(handlesBefore);
+
+            if (handlesAfter.isEmpty()) {
+                return false;
+            }
+
+            String newWindow = handlesAfter.iterator().next();
+
+            // Switch to PayPal window
+            driver.switchTo().window(newWindow);
+
+            // Optional strong validation
+            // wait.until(ExpectedConditions.urlContains("paypal"));
+
+            // Switch back
+            driver.switchTo().window(parentWindow);
+
+            return true;
+
+        } catch (Exception e) {
+            System.err.println("PayPal window validation failed: " + e.getMessage());
+            try {
+                driver.switchTo().window(parentWindow);
+            } catch (Exception ignored) {}
+            return false;
+        }
+    }
+
 
 
 }

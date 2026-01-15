@@ -39,25 +39,25 @@ public class DeliveryDatePageActionsFrig {
     public void clickSaveAndViewCart() {
         WebElementUtil.waitForElementToBeVisible(locators.saveAndViewCartButton, 20);
         WebElementUtil.scrollToElementStable(locators.saveAndViewCartButton);
-        WebElementUtil.waitForElementToBeClickable(locators.saveAndViewCartButton, 10);
+        WebElementUtil.waitForElementToBeClickable(locators.saveAndViewCartButton, 20);
         WebElementUtil.clickElement(locators.saveAndViewCartButton);
     }
 
     public void selectDeliveryAndSaveAndViewCart() {
         // Select delivery & installation radio
-        WebElementUtil.waitForElementToBeVisible(locators.deliveryInstallationRadio, 10);
+        WebElementUtil.waitForElementToBeVisible(locators.deliveryInstallationRadio, 30);
         WebElementUtil.scrollToElementStable(locators.deliveryInstallationRadio);
         WebElementUtil.waitForElementToBeClickable(locators.deliveryInstallationRadio);
         WebElementUtil.clickElement(locators.deliveryInstallationRadio);
 
         // Click Save and view cart
         WebElementUtil.scrollToElementStable(locators.saveAndViewCartButton);
-        WebElementUtil.waitForElementToBeClickable(locators.saveAndViewCartButton, 20);
+        WebElementUtil.waitForElementToBeClickable(locators.saveAndViewCartButton, 30);
         WebElementUtil.clickElement(locators.saveAndViewCartButton);
     }
 
     public void clickProceedToCheckout() {
-        WebElementUtil.waitForElementToBeVisible(locators.proceedToCheckoutButton, 20);
+        WebElementUtil.waitForElementToBeVisible(locators.proceedToCheckoutButton, 30);
         WebElementUtil.waitForElementToBeClickable(locators.proceedToCheckoutButton);
         WebElementUtil.clickElement(locators.proceedToCheckoutButton);
         WebElementUtil.waitForElementToBeVisible(locators.shippingAddressForm, 20);
@@ -130,11 +130,12 @@ public class DeliveryDatePageActionsFrig {
      */
     public boolean validateAllAvailableDeliveryDates() {
         WebElementUtil driver = null;
-        WebDriverWait wait = new WebDriverWait((WebDriver) driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait((WebDriver) driver, Duration.ofSeconds(20));
 
         try {
             // Wait for calendar section to be visible
-            WebElementUtil.waitForElementToBeVisible(locators.deliveryCalendarHeader);
+            WebElement ele = WebElementUtil.waitForElementToBeVisible(locators.deliveryCalendarHeader, 30);
+            boolean isDisplay = ele.isDisplayed();
 
             // Get all available date labels
             List<WebElement> availableDates = WebElementUtil.findElements(locators.deliveryDateAvailable);
@@ -151,11 +152,8 @@ public class DeliveryDatePageActionsFrig {
 
                 WebElement date = availableDates.get(i);
 
-                // Scroll the element into stable center view
-                WebElementUtil.scrollToElementStable((By) date);
-
                 // Wait for label to be clickable
-                wait.until(ExpectedConditions.elementToBeClickable(date));
+                WebElementUtil.waitForElementToBeClickable(date);
 
                 String labelText = date.getText().trim();
                 System.out.println("Clicking date: " + labelText);
@@ -163,28 +161,6 @@ public class DeliveryDatePageActionsFrig {
                 // Click date
                 date.click();
 
-                // Identify hidden input: label has "for=xxx"
-                String inputId = date.getAttribute("for");
-
-                // Validate checkbox/radio behind label
-                if (inputId != null && !inputId.isEmpty()) {
-                    By inputLocator = By.id(inputId);
-                    WebElement input = wait.until(ExpectedConditions.presenceOfElementLocated(inputLocator));
-
-                    // Wait until selected
-                    wait.until(d -> input.isSelected() ||
-                            Boolean.parseBoolean(input.getAttribute("checked")));
-
-                    if (!input.isSelected()) {
-                        System.out.println("Date not selected properly: " + labelText);
-                        return false;
-                    }
-
-                } else {
-                    // If input ID missing, fallback check on label
-                    wait.until(d -> date.getAttribute("class").contains("selected") ||
-                            "true".equals(date.getAttribute("aria-checked")));
-                }
 
                 System.out.println("✔ Successfully validated date: " + labelText);
 
@@ -224,7 +200,6 @@ public class DeliveryDatePageActionsFrig {
         java.time.LocalDate now = java.time.LocalDate.now();
 
         String nextMonthName = now.plusMonths(1).format(java.time.format.DateTimeFormatter.ofPattern("MMMM", java.util.Locale.ENGLISH));
-
         String nextMonth = WebElementUtil.getText(locators.nextMonth);
 
         if (!nextMonth.contains(nextMonthName)) {

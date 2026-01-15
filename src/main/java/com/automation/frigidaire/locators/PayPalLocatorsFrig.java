@@ -2,8 +2,8 @@ package com.automation.frigidaire.locators;
 
 import org.openqa.selenium.By;
 
+public class PayPalLocatorsFrig {
 
-public class DeliveryDatesLocatorsFrig {
     public final By searchBox = By.xpath("//input[@aria-label=\"search\"]");
     public final By productPDP = By.xpath("//div[contains(@class,'accessories-product')]//div[contains(@class,'Product-Name')]");
     public final By addToCartButton = By.xpath("//span[normalize-space()='Add to cart']/ancestor::a | //span[normalize-space()='Add to cart']/ancestor::button");
@@ -39,8 +39,8 @@ public class DeliveryDatesLocatorsFrig {
     public final By parcelItemsColor = By.xpath("//div[@class='cx-item-list-items']//div[contains(@class,'checkout-cart-block')]//div[contains(@class,'product-color')]");
     public final By parcelItemsQty = By.xpath("//div[@class='cx-item-list-items']//div[contains(@class,'checkout-cart-block')]//p");
     public final By checkoutMessage = By.xpath("//div[contains(@class,'H4H4_Desktop')]");
-    public final By firstAvailableDeliveryDate = By.xpath("(//div[contains(@class,'cx-date-container')]//label[contains(@class,'avaliableDates')])[1]");
-
-
+    public final By continueBillingButton = By.xpath("//button[normalize-space()='Continue to billing']");
+    public final By selectPayPayPal = By.xpath("//img[@alt='PayPal']//preceding-sibling::input");
+    public final By payPalButton = By.xpath("//div[contains(@class,'adyen-checkout__paypal__button--paypal')]");
 
 }
