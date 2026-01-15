@@ -9,7 +9,7 @@ public class COPS_orderSummaryLocatorsFsus {
     public By clickOnProductLink = By.xpath("//a[@class=\"text-decoration-none\"]");
 
     public By addToCart = By.xpath("//span[text()=' Add to cart ']");
-    public By viewOrSaveCartButton = By.xpath("//a[normalize-space()='View cart']\n");
+    public By viewOrSaveCartButton = By.xpath("//a[contains(normalize-space(.),'View cart')] | //button[contains(normalize-space(.),'Save and view cart')]");
     public By proceedToCheckoutButton = By.xpath("//button[@class='proceedToCheckout btn btn-orange btn-block']");
     public By newAddress = By.xpath("//button[text()=\" Add New Address \"]");
 
