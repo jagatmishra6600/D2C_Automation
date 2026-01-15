@@ -569,6 +569,17 @@ public class WebElementUtil {
         }
     }
 
+    public static void switchToLatestTab() {
+        WebDriver driver = DriverManager.getDriver();
+        String currentHandle = driver.getWindowHandle();
+        Set<String> handles = driver.getWindowHandles();
+        if (handles.size() > 1) {
+            for (String handle : handles) { if (!handle.equals(currentHandle)) {
+                driver.switchTo().window(handle); break; }
+            }
+        }
+    }
+
     public static float getValueOfDom (By locator){
         WebDriver driver = DriverManager.getDriver();
         WebElement element = driver.findElement(locator);
