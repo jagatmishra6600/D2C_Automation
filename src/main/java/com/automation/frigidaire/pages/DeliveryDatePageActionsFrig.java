@@ -200,7 +200,6 @@ public class DeliveryDatePageActionsFrig {
         java.time.LocalDate now = java.time.LocalDate.now();
 
         String nextMonthName = now.plusMonths(1).format(java.time.format.DateTimeFormatter.ofPattern("MMMM", java.util.Locale.ENGLISH));
-
         String nextMonth = WebElementUtil.getText(locators.nextMonth);
 
         if (!nextMonth.contains(nextMonthName)) {

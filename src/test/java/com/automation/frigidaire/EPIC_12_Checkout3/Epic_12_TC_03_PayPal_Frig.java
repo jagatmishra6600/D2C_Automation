@@ -15,7 +15,7 @@ public class Epic_12_TC_03_PayPal_Frig extends BaseTest {
 
 
     @Test(groups = {"regression"}, description = "Verify Paypal Payment option on checkout page")
-    public void verifyDeliveryDates() {
+    public void verifyPayPalOption() {
         homePage.navigateToHomePage();
         pdpPage.searchProduct("GRMC2273CF-C1");
         pdpPage.selectProductFromPLP();

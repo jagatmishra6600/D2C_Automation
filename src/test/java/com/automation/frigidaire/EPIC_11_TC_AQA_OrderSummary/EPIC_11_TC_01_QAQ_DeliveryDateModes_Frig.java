@@ -15,7 +15,7 @@ public class EPIC_11_TC_01_QAQ_DeliveryDateModes_Frig extends BaseTest {
 
 
     @Test(groups = {"regression"}, description = "Verify Delivery Dates and Shipping modes on checkout page 2")
-    public void verifyDeliveryDates() {
+    public void verifyDeliveryDatesModes() {
         homePage.navigateToHomePage();
         pdpPage.searchProduct("GRMC2273CF-C1");
         pdpPage.selectProductFromPLP();
@@ -28,12 +28,11 @@ public class EPIC_11_TC_01_QAQ_DeliveryDateModes_Frig extends BaseTest {
         pdpPage.clickAddToCart();
         pdpPage.clickSaveAndViewCart();
         homePage.navigateToHomePage();
-        pdpPage.searchProduct("FHWW184WE2");
+        pdpPage.searchProduct("FHTE083WA1");
         pdpPage.selectProductFromPLP();
         plpPage.closePopupModel();
         pdpPage.clickAddToCart();
         pdpPage.clickSaveAndViewCart();
-        pdpPage.selectDeliveryAndSaveAndViewCart();
         pdpPage.clickProceedToCheckout();
         pdpPage.clickContinueToDelivery();
         Assert.assertTrue(pdpPage.validateCurrentDeliveryMonths(), "Current Month is not available");

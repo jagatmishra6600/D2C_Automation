@@ -15,7 +15,7 @@ public class Epic_12_TC_03_PayPal_Elux extends BaseTest {
 
 
     @Test(groups = {"regression"}, description = "Verify Paypal Payment option on checkout page")
-    public void verifyDeliveryDates() {
+    public void verifyPayPalOption() {
         homePage.navigateToHomePage();
         pdpPage.searchProduct("ELFW7537AW");
         pdpPage.selectProductFromPLP();
