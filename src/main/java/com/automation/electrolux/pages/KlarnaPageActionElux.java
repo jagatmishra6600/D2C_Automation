@@ -1,32 +1,16 @@
 package com.automation.electrolux.pages;
 
 import com.automation.electrolux.locators.COPS_OrderSummaryLocatorsElux;
-import com.automation.utils.DriverManager;
+import com.automation.electrolux.locators.KlarnaLocatorsElux;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
-import java.util.Set;
 
 public class KlarnaPageActionElux {
 
     COPS_OrderSummaryLocatorsElux orderSummaryLocators = new COPS_OrderSummaryLocatorsElux();
-
-    public final By selectDate =
-            By.xpath("(//label[@class='cx-delivery-label'])[1]");
-
-    public final By continueToBillingButton =
-            By.xpath("//button[normalize-space(text())='Continue to billing']");
-
-    public final By klarnaPaymentOption =
-            By.xpath("//img[@alt=\"Klarna\"]/parent::label//input[@name=\"paymentOption\"]\n");
-
-    public final By continueWithKlarnaButton =
-            By.xpath("//button[normalize-space(text())='Continue with Klarna']");
-
-    public final By klarnaTitle =
-            By.xpath("//h1[@id=\"title\"]");
+    KlarnaLocatorsElux klarnaLocatorsElux = new KlarnaLocatorsElux();
 
     private void scrollAndClick(By element) {
         WaitUtils.sleep(3000);
@@ -47,13 +31,13 @@ public class KlarnaPageActionElux {
     }
 
     public void checkoutPage() {
-        scrollAndClick(selectDate);
-        scrollAndClick(continueToBillingButton);
-        scrollAndClick(klarnaPaymentOption);
+        scrollAndClick(klarnaLocatorsElux.selectDate);
+        scrollAndClick(klarnaLocatorsElux.continueToBillingButton);
+        scrollAndClick(klarnaLocatorsElux.klarnaPaymentOption);
     }
 
     public void navigateToKlarnaWindow() {
-        WebElementUtil.findElement(continueWithKlarnaButton).click();
+        WebElementUtil.findElement(klarnaLocatorsElux.continueWithKlarnaButton).click();
         WaitUtils.sleep(5000);
         WebElementUtil.switchToLatestTab();
     }
@@ -61,8 +45,8 @@ public class KlarnaPageActionElux {
     public boolean isTitleVisible(){
         WaitUtils.untilPageLoadComplete();
         try {
-            WebElementUtil.waitForElementToBeVisible(klarnaTitle,10);
-            return WebElementUtil.isDisplayed(klarnaTitle);
+            WebElementUtil.waitForElementToBeVisible(klarnaLocatorsElux.klarnaTitle,10);
+            return WebElementUtil.isDisplayed(klarnaLocatorsElux.klarnaTitle);
         } catch (Exception e) {
             return false;
         }

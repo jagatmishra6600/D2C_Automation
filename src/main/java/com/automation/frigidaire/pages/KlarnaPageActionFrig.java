@@ -1,6 +1,7 @@
 package com.automation.frigidaire.pages;
 
 import com.automation.frigidaire.locators.COPS_OrderSummaryLocatorsFrig;
+import com.automation.frigidaire.locators.KlarnaLocatorsFrig;
 import com.automation.utils.WaitUtils;
 import com.automation.utils.WebElementUtil;
 import org.openqa.selenium.By;
@@ -8,21 +9,7 @@ import org.openqa.selenium.By;
 public class KlarnaPageActionFrig {
 
     COPS_OrderSummaryLocatorsFrig orderSummary = new COPS_OrderSummaryLocatorsFrig();
-
-    public final By selectDate =
-            By.xpath("(//label[@class=\"cx-delivery-label avaliableDates\"])[1]");
-
-    public final By continueToBillingButton =
-            By.xpath("//button[normalize-space(text())='Continue to billing']");
-
-    public final By klarnaPaymentOption =
-            By.xpath("//img[@alt=\"Klarna\"]/parent::label//input[@name=\"paymentOption\"]\n");
-
-    public final By continueWithKlarnaButton =
-            By.xpath("//button[normalize-space(text())='Continue with Klarna']");
-
-    public final By klarnaTitle =
-            By.xpath("//h1[@id=\"title\"]");
+    KlarnaLocatorsFrig klarnaLocatorsFrig = new KlarnaLocatorsFrig();
 
 
     public void clickProduct() {
@@ -43,13 +30,13 @@ public class KlarnaPageActionFrig {
 
     public void checkoutPage(){
         WaitUtils.untilPageLoadComplete(5);
-        waitAndClick(selectDate);
-        waitAndClick(continueToBillingButton);
-        waitAndClick(klarnaPaymentOption);
+        waitAndClick(klarnaLocatorsFrig.selectDate);
+        waitAndClick(klarnaLocatorsFrig.continueToBillingButton);
+        waitAndClick(klarnaLocatorsFrig.klarnaPaymentOption);
     }
 
     public void openKlarnaWindow() {
-        WebElementUtil.findElement(continueWithKlarnaButton).click();
+        WebElementUtil.findElement(klarnaLocatorsFrig.continueWithKlarnaButton).click();
         WaitUtils.sleep(5000);
         WebElementUtil.switchToLatestTab();
     }
@@ -57,8 +44,8 @@ public class KlarnaPageActionFrig {
     public boolean isTitleVisible(){
         WaitUtils.untilPageLoadComplete();
             try {
-                WebElementUtil.waitForElementToBeVisible(klarnaTitle,10);
-                return WebElementUtil.isDisplayed(klarnaTitle);
+                WebElementUtil.waitForElementToBeVisible(klarnaLocatorsFrig.klarnaTitle,10);
+                return WebElementUtil.isDisplayed(klarnaLocatorsFrig.klarnaTitle);
             } catch (Exception e) {
                 return false;
             }

@@ -16,7 +16,7 @@ public class EPIC_12_TC_Klarna extends BaseTest {
     KlarnaPageActionFsus klarnaFsus = new KlarnaPageActionFsus();
 
     @Test(groups = {"smoke", "regression"}, description = "Verify Klarna payment page")
-    public void EPIC_04_PLP_TC_03_testKlarnaPayment() {
+    public void testKlarnaPayment() {
         loginPage.loginWithDefaultCredentials();
         loginPage.acceptCookies();
         orderSummaryPage.searchProducts("GRMC2273CF-C1");
