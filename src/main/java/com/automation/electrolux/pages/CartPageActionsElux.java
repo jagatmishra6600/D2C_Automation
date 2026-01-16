@@ -69,11 +69,11 @@ public class CartPageActionsElux {
         return actualText.toLowerCase().contains(expectedText.toLowerCase());
     }
 
-    public CartPageActionsElux clickProceedToCheckOutButton() {
+    public ShippingAddressPageActionsElux clickProceedToCheckOutButton() {
     	WebElementUtil.scrollToElementCenter(cartPage_Locator.proceedToCheckOutButton);
         WebElementUtil.waitForElementToBeClickable(cartPage_Locator.proceedToCheckOutButton,15);
         WebElementUtil.clickElement(cartPage_Locator.proceedToCheckOutButton);
-        return this;
+        return new ShippingAddressPageActionsElux();
     }
 
     public CartPageActionsElux clickEmptyCartButton() {

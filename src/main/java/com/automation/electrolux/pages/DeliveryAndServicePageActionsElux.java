@@ -170,6 +170,8 @@ public class DeliveryAndServicePageActionsElux {
     }
 
     public CartPageActionsElux clickSaveAndViewCartButton() {
+    	WebElementUtil.isDisplayed(dns_Locator.saveAndViewCartButton);
+    	WebElementUtil.scrollIntoView(dns_Locator.saveAndViewCartButton);
         for (int attempt = 1; attempt <= 2; attempt++) {
             WebElementUtil.clickElement(dns_Locator.saveAndViewCartButton);
 
