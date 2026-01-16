@@ -570,6 +570,18 @@ public class DeliveryDatePageActionsElux {
 
         return actualText.contains(expectedText);
     }
+    
+    public DeliveryDatePageActionsElux selectFirstAvailableDeliveryDate() {
+    	WebElementUtil.scrollIntoView(locators.firstAvailableDeliveryDate);
+    	WebElementUtil.clickElement(locators.firstAvailableDeliveryDate);
+    	return this;
+    }
+    
+    public ReviewAndPayPageActionsElux clickContinueToBillingButton() {
+    	WebElementUtil.scrollIntoView(locators.continueToBillingButton);
+    	WebElementUtil.clickElement(locators.continueToBillingButton);
+    	return new ReviewAndPayPageActionsElux();
+    }
 
 
 }

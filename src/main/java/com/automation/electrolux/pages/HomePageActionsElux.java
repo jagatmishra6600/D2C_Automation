@@ -21,11 +21,12 @@ public class HomePageActionsElux {
     private static String providedProductId;
     private static String providedProductTitle;
     private static String providedProductPrice;
+    private static final int DEFAULT_WAIT_TIMEOUT_SECONDS = 30;
     
     public HomePageActionsElux navigateToHomePage() {
         WebElementUtil.navigateTo(ConfigReader.getAppUrl());
         try {
-            WebElement acceptBtn = untilClickable(homePage_Locator.acceptButtonLocator, 15);
+            WebElement acceptBtn = untilClickable(homePage_Locator.acceptButtonLocator, DEFAULT_WAIT_TIMEOUT_SECONDS);
             if (acceptBtn != null) {
                 acceptBtn.click();
             }
